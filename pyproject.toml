@@ -1,0 +1,34 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "code-as-memory"
+version = "0.1.0"
+description = "Code-as-Memory: learn reusable Python programs from demonstrations and interaction"
+readme = "README.md"
+requires-python = ">=3.11,<3.12"
+license = "Apache-2.0"
+license-files = ["LICENSE", "NOTICE"]
+dependencies = ["numpy>=1.26,<2", "scipy>=1.11", "h5py>=3.10", "Pillow>=10", "imageio[ffmpeg]>=2.34", "opencv-python>=4.9,<4.12"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "matplotlib>=3.8"]
+robomme = ["robomme"]
+
+[tool.uv.sources]
+robomme = {path = "third_party/robomme_benchmark"}
+mani-skill = {git = "https://github.com/YinpeiDai/ManiSkill.git", rev = "07be6fbc66350ddca200abfb0a11b692f078f7fd"}
+
+[project.scripts]
+cam = "cam.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+cam = ["prompts/*.md", "prompts/modes/*.md", "benchmarks/*.md", "web/*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = ["gpu: real benchmark simulator checks", "isolation: Linux bubblewrap checks"]

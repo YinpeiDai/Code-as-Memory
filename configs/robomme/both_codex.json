@@ -1,0 +1,18 @@
+{
+  "benchmark": "robomme",
+  "mode": "both",
+  "budget": 20,
+  "depth": true,
+  "builtin_demo": true,
+  "max_decisions": 40,
+  "max_action_steps": 1500,
+  "policy_timeout": 1800,
+  "coding": {
+    "agent": "codex",
+    "model": "gpt-6.1-sol",
+    "provider": "openai",
+    "reasoning_effort": "high",
+    "timeout": 21600
+  },
+  "training_seed_count": 3
+}

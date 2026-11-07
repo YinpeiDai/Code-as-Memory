@@ -1,0 +1,14 @@
+Code-as-Memory (CaM)
+
+The Python policy interface, restricted execution, streamed observation transport,
+and development accounting are adapted from the existing Code-as-Policies
+implementation developed for RoboMME and RoboMME-Plus, distributed under the
+Apache License 2.0. Modified source files identify this adaptation.
+
+The official RoboMME benchmark is a pinned, unmodified Git submodule at
+third_party/robomme_benchmark. Its own LICENSE and notices apply. Benchmark
+assets and separately downloaded datasets retain their upstream terms.
+
+Historical experiment references retain their original method labels, prompt
+hashes, benchmark revisions, policies and results. Renaming this implementation
+does not retroactively change those measurements.

@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Code-as-Memory · Experiments</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header>
+      <a class="brand" href="#results">CaM <span>Code-as-Memory</span></a>
+      <nav aria-label="Sections">
+        <a href="#development">Development logs</a><a href="#success">Success</a
+        ><a href="#efficiency">Efficiency</a><a href="#tasks">Task statistics</a
+        ><a href="#behavior">Behavior</a
+        ><a href="#results">All model results ↗</a>
+      </nav>
+    </header>
+    <main>
+      <div class="eyebrow">LEARNING REUSABLE PYTHON PROGRAMS</div>
+      <h1>Code-as-Memory experiments</h1>
+      <p class="lead">
+        Demonstrations, interaction, and their combination. Shared protocols,
+        recorded evidence, and exact held-out evaluation results.
+      </p>
+      <div id="updated" class="muted"></div>
+      <div id="filters">
+        <label
+          >Benchmark
+          <select id="benchmark"></select></label
+        ><label
+          >Run / coding model
+          <select id="run"></select
+        ></label>
+      </div>
+      <div id="notice"></div>
+      <section id="results">
+        <h2>All model results</h2>
+        <div id="result-table"></div>
+      </section>
+      <section id="success">
+        <h2>Success</h2>
+        <p>
+          Each point is the success rate of one complete held-out evaluation. No
+          uncertainty bands or repeated-run estimates.
+        </p>
+        <div id="success-plot" class="plot"></div>
+      </section>
+      <section id="efficiency">
+        <h2>Efficiency</h2>
+        <p>
+          Mean native execution steps on successful episodes. The paired table
+          compares exactly the same successful episodes.
+        </p>
+        <div id="efficiency-plot" class="plot"></div>
+        <div id="paired"></div>
+      </section>
+      <section id="tasks">
+        <h2>Task statistics</h2>
+        <div id="task-table"></div>
+        <h3>Difficulty</h3>
+        <div id="difficulty-table"></div>
+      </section>
+      <section id="behavior">
+        <h2>Behavior</h2>
+        <div id="behavior-table"></div>
+      </section>
+      <section id="development">
+        <h2>Development logs</h2>
+        <p>
+          Exact prompts, model messages, tool calls, code revisions, costs, and
+          training rollouts.
+        </p>
+        <div id="development-table"></div>
+        <div id="development-detail"></div>
+      </section>
+      <section id="rollouts">
+        <h2>Evaluation rollouts</h2>
+        <label
+          >Task
+          <select id="rollout-task"></select
+        ></label>
+        <label
+          >Budget
+          <select id="rollout-budget"></select
+        ></label>
+        <div id="rollout-table"></div>
+        <div id="player"></div>
+      </section>
+      <section id="demonstrations">
+        <h2>Selected demonstrations</h2>
+        <p>
+          Fresh extracts from raw training H5, with native training-seed
+          validation.
+        </p>
+        <div id="demo-list"></div>
+      </section>
+    </main>
+    <footer>
+      Code-as-Memory · Frozen Python policies make zero model calls during
+      evaluation.
+    </footer>
+    <script src="app.js"></script>
+  </body>
+</html>

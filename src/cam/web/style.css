@@ -1,0 +1,271 @@
+:root {
+  font-family: Inter, system-ui, sans-serif;
+  color: #182332;
+  background: #f7f8fb;
+  font-size: 15px;
+  --blue: #285acb;
+  --border: #e2e6ee;
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+}
+header {
+  position: sticky;
+  top: 0;
+  background: #ffffffed;
+  backdrop-filter: blur(10px);
+  padding: 18px 4%;
+  display: flex;
+  gap: 30px;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--border);
+  z-index: 2;
+}
+.brand {
+  font-size: 23px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+.brand span {
+  font-size: 14px;
+  font-weight: 500;
+  margin-left: 10px;
+  color: #697688;
+}
+a {
+  color: var(--blue);
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+nav {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  flex-wrap: wrap;
+  font-size: 13px;
+}
+main {
+  max-width: 1380px;
+  margin: auto;
+  padding: 60px 36px;
+}
+.eyebrow {
+  font-size: 12px;
+  letter-spacing: 0.16em;
+  font-weight: 700;
+  color: var(--blue);
+}
+h1 {
+  font-size: 44px;
+  letter-spacing: -0.04em;
+  margin: 14px 0;
+}
+h2 {
+  font-size: 26px;
+  letter-spacing: -0.02em;
+}
+h3 {
+  margin-top: 30px;
+}
+.lead {
+  font-size: 18px;
+  line-height: 1.7;
+  max-width: 900px;
+  color: #526177;
+}
+.muted {
+  color: #748095;
+  font-size: 13px;
+}
+section {
+  scroll-margin-top: 130px;
+  margin: 50px 0;
+  background: white;
+  padding: 28px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+section > p {
+  color: #637086;
+  line-height: 1.7;
+}
+#filters {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+  margin: 32px 0;
+}
+#filters label {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  max-width: 100%;
+}
+#filters select {
+  margin: 8px 0;
+}
+label {
+  font-size: 13px;
+  font-weight: 600;
+}
+select {
+  margin: 8px;
+  padding: 10px;
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  background: #fff;
+  max-width: 100%;
+}
+.table-wrap {
+  overflow: auto;
+}
+table {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 13px;
+}
+th {
+  text-align: left;
+  white-space: nowrap;
+  background: #f5f7fb;
+  color: #56627a;
+}
+td,
+th {
+  padding: 13px 15px;
+  border-bottom: 1px solid var(--border);
+}
+td {
+  vertical-align: top;
+}
+td.number,
+th.number {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+.good {
+  color: #147b5b;
+}
+.partial {
+  color: #956b0f;
+}
+.badge {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 5px;
+  background: #eef2f9;
+  font-size: 12px;
+  white-space: nowrap;
+}
+.plot svg {
+  width: 100%;
+  max-height: 400px;
+}
+.plot .legend {
+  display: flex;
+  gap: 18px;
+  flex-wrap: wrap;
+  font-size: 12px;
+  margin: 12px 0;
+}
+.plot .legend span:before {
+  content: "●";
+  color: var(--series);
+  margin-right: 6px;
+}
+.plot .legend span {
+  overflow-wrap: anywhere;
+  min-width: 0;
+}
+.empty {
+  background: #f6f8fc;
+  padding: 26px;
+  border-radius: 8px;
+  color: #748095;
+}
+.note {
+  padding: 15px;
+  background: #f0f4ff;
+  border-left: 3px solid var(--blue);
+}
+pre {
+  overflow: auto;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  max-height: 560px;
+  padding: 20px;
+  background: #111c2e;
+  color: #e4e9f1;
+  border-radius: 8px;
+  font-size: 12px;
+  line-height: 1.6;
+}
+details {
+  margin: 12px 0;
+  border: 1px solid var(--border);
+  padding: 12px;
+  border-radius: 8px;
+}
+summary {
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 13px;
+}
+button,
+.button {
+  display: inline-block;
+  padding: 8px 12px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: #f8faff;
+  color: var(--blue);
+  cursor: pointer;
+  margin: 3px;
+}
+video {
+  max-width: 100%;
+  display: block;
+  margin: 20px auto;
+  background: #101723;
+}
+footer {
+  text-align: center;
+  padding: 40px;
+  color: #748095;
+  font-size: 12px;
+}
+@media (max-width: 800px) {
+  header {
+    position: static;
+    display: block;
+  }
+  nav {
+    margin-top: 16px;
+    gap: 12px;
+  }
+  .brand span {
+    display: inline;
+  }
+  main {
+    padding: 30px 14px;
+  }
+  h1 {
+    font-size: 32px;
+  }
+  section {
+    padding: 16px;
+    margin: 28px 0;
+  }
+  #filters {
+    display: block;
+  }
+  td,
+  th {
+    padding: 10px;
+  }
+}
