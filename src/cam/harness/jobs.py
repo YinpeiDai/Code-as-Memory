@@ -123,6 +123,10 @@ def learn_task(root, task, gpu, resume=False):
         status, detail, code = "failed", None, None
         started = time.monotonic()
         try:
+            if coding.agent == "claude_code":
+                from cam.providers.probe import probe_cam
+
+                probe_cam(session / "mcp.json", session / "mcp_probe")
             with (
                 (session / "events.jsonl").open("wb") as output,
                 (session / "stderr.txt").open("wb") as errors,
@@ -186,7 +190,7 @@ def learn_task(root, task, gpu, resume=False):
                     service.public,
                     service.runtime,
                     ["python3.11", "-m", "cam.runtime.policy_worker", "--validate"],
-                    timeout=30,
+                    timeout=120,
                     readonly=True,
                 )
                 if valid:

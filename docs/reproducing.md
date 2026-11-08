@@ -21,6 +21,17 @@ model versions shortened; variant/date suffixes remain. Unsafe path characters
 are percent-encoded. Full client, provider, and model IDs remain in `run.json`
 and the run README. A short name never overrides the configured model.
 
+For the MIKASA second-machine experiment, the checkout's `runs/`, `outputs/`,
+`data/`, and `sites/` link to matching directories under
+`/nfs/turbo/coe-chaijy-unreplicated/daiyp/CaM/mikasa_robo`. This places development
+batches, task workspaces, policies, logs, training/test rollouts, reports,
+generated data and dashboard caches on NFS. The existing replay pool remains
+at its original shared NFS location. Preparation resolves the links and records
+absolute NFS run paths in manifests and generated READMEs; sandbox access stays
+limited to the assigned task. See the [storage setup](mikasa_v2_setup.md#experiment-storage-on-nfs).
+Configure storage before preparation; preserve historical run paths and pinned
+snapshots when setting up another checkout.
+
 | Directory setting | Config `mode` | Demonstrations | Training attempts |
 |---|---|---|---|
 | `demo_only` | `demos` | Assigned H5 | Zero |
@@ -109,6 +120,15 @@ those ten tasks and points directly at the completed NFS replay pool:
 `/nfs/turbo/coe-chaijy-unreplicated/daiyp/CaM/data/mikasa_robo_v2_50`.
 New runs use the concise MIKASA supplement; the active ten-task batch retains
 its earlier pinned wording. See [setup and launch instructions](mikasa_v2_setup.md).
+The latest second-machine request uses **ten coding jobs** for the remaining 80
+tasks and `--evaluate-on-freeze --evaluation-workers-per-gpu 2 --gpus 0 1`.
+The batch host queues full 50-episode testing only after that task's learning
+finishes, all 50 training attempts are consumed, and its frozen policy and R050
+checkpoint pass integrity checks. One task is evaluated at a time with four
+episode workers, two per GPU, alongside at most one training simulator per GPU.
+Other tasks may still be learning; none receive held-out feedback. Track actual
+scored/expected counts and infrastructure failures separately. Without the
+opt-in flag, the development launcher retains its development-only behavior.
 
 ## Demonstration validation
 
@@ -203,6 +223,15 @@ The host may inspect the repository and repair infrastructure, but must not give
 the learner simulator internals, hidden state, old solutions, or test feedback.
 Do not edit pinned snapshots to bypass integrity checks. Changes to the harness,
 configuration, prompt, or data require a fresh preparation and timetag.
+
+Before each paid Claude session, the host verifies the pinned MCP server with
+initialization, all six tool schemas and a read-only `usage` call. This probe
+is recorded separately in `logs/session_*/mcp_probe/` and consumes no training
+attempts. Claude initialization must also expose exactly the six CaM tools and
+report the server connected; missing tools fail the session. A model-only
+connectivity check is insufficient. The process watcher falls back to checking
+the parent relationship when Python lacks `os.pidfd_open`, preserving client
+lifetime cleanup without depending on the spawning thread.
 
 ## Development evaluation and guide changes
 

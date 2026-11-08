@@ -115,9 +115,24 @@ coding-agent filesystem access, and the separation of learning from held-out tes
   `/nfs/turbo/coe-chaijy-unreplicated/daiyp/CaM/data/mikasa_robo_v2_50`:
   `manifest.json` and `h5/record_dataset_<Task-ID>.h5`, 90 tasks / 4,500 episodes.
   Keep CPU physics, 50 demos and one rollout per demo seed, Claude Code / Opus
-  5.5 and eight coding jobs. New preparations use the concise MIKASA prompt;
+  5.5. The latest user request assigns ten concurrent coding jobs to these 80
+  tasks and automatic full held-out evaluation after each task finishes learning
+  and freezes at R050. Use `--evaluate-on-freeze --evaluation-workers-per-gpu 2`
+  with GPUs 0 and 1: four evaluation episode workers total, one task's test
+  evaluation at a time, alongside at most one training simulator per GPU.
+  Evaluate all 50 test episodes per task (4,000 total); keep test feedback out
+  of every learner. New preparations use the concise MIKASA prompt;
   the active ten-task batch retains its original prompt. Record the second
   machine's batch tag in `docs/mikasa_v2_progress.md`; do not launch duplicates here.
+- User-requested MIKASA artifact storage: this checkout's `runs/`, `outputs/`,
+  `data/`, and `sites/` link to matching directories under
+  `/nfs/turbo/coe-chaijy-unreplicated/daiyp/CaM/mikasa_robo`.
+  Keep new development batches, workspaces, policies, logs, rollouts, evaluation
+  outputs, generated data and dashboard caches there. Preserve the existing
+  replay pool at `/nfs/turbo/coe-chaijy-unreplicated/daiyp/CaM/data/mikasa_robo_v2_50`.
+  Source code and Python environments stay local. See the setup guide for the
+  storage layout; do not replace existing artifact directories when configuring
+  another checkout.
 - Avoid GPU oversubscription: one RMBench evaluation per GPU (≤6 workers), not
   alongside MIKASA GPU-simulation workers. Archive resulting infrastructure
   failures with `cam recover-test` and retry identically.

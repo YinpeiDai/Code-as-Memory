@@ -262,7 +262,7 @@ class Service:
                 self.public,
                 self.runtime,
                 ["python3.11", "-m", "cam.runtime.policy_worker", "--validate"],
-                timeout=30,
+                timeout=120,
                 readonly=True,
             )
             if not code:
@@ -290,7 +290,7 @@ class Service:
                 self.public,
                 self.runtime,
                 ["python3.11", "-m", "cam.runtime.policy_worker", "--validate"],
-                timeout=30,
+                timeout=120,
                 readonly=True,
             )
             if code:

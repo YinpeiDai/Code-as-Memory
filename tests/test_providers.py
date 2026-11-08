@@ -5,8 +5,62 @@ import shutil
 import pytest
 from cam.config import CodingConfig
 from cam.io import read
-from cam.providers.clients import invocation
+from cam.providers.clients import TOOL_NAMES, invocation, unexpected_tool
 from cam.providers.usage import summarize_sessions
+
+
+@pytest.mark.parametrize("status", ["pending", "failed", "connected"])
+def test_claude_rejects_empty_tools_even_when_server_claims_connected(status):
+    assert "missing" in unexpected_tool("claude_code", {
+        "type": "system", "subtype": "init", "tools": [],
+        "mcp_servers": [{"name": "cam", "status": status}],
+    })
+
+
+@pytest.mark.parametrize("status", ["pending", "failed", "connected"])
+def test_claude_requires_six_tools_and_connected_server(status):
+    event = {
+        "type": "system", "subtype": "init",
+        "tools": ["mcp__cam__" + name for name in TOOL_NAMES],
+        "mcp_servers": [{"name": "cam", "status": status}],
+    }
+    assert (unexpected_tool("claude_code", event) is None) == (status == "connected")
+    event["tools"].append("mcp__cam__shell")
+    assert "Unexpected" in unexpected_tool("claude_code", event)
+
+
+def test_real_cam_probe_calls_usage_without_training(run_factory, tmp_path):
+    from cam.providers.probe import probe_cam
+
+    root = run_factory()
+    session = tmp_path / "claude_session"
+    session.mkdir()
+    call = invocation(CodingConfig(agent="claude_code"), root, "BinFill", 0, session)
+    assert call.environment["MCP_CONNECTION_NONBLOCKING"] == "0"
+    report = probe_cam(session / "mcp.json", session / "mcp_probe")
+    assert report["passed"] and report["api_calls"] == report["training_attempts"] == 0
+    calls = list((root / "tasks/BinFill/audit").glob("call_*.json"))
+    assert len(calls) == 1 and read(calls[0])["tool"] == "usage"
+
+
+def test_failed_cam_probe_prevents_paid_client(run_factory, monkeypatch):
+    from cam.harness.jobs import learn_task
+    import cam.providers.probe as probe
+
+    root = run_factory(coding=CodingConfig(agent="claude_code"))
+
+    def fail(*args):
+        raise RuntimeError("MCP startup failed")
+
+    monkeypatch.setattr(probe, "probe_cam", fail)
+    monkeypatch.setattr("cam.harness.jobs.subprocess.check_output", lambda *a, **kw: "test")
+
+    def no_launch(*args, **kwargs):
+        pytest.fail("Paid client must not launch after an MCP probe failure")
+
+    monkeypatch.setattr("cam.harness.jobs.subprocess.Popen", no_launch)
+    result = learn_task(root, "BinFill", 0)
+    assert result["status"] == "failed" and result["error"] == "MCP startup failed"
 
 
 def test_usage_preserves_unknown_cost_and_deduplicates(tmp_path):

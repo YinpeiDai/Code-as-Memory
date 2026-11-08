@@ -64,6 +64,10 @@ def invocation(config, root, task, gpu, session):
     if config.agent == "claude_code":
         write(session / "mcp.json", {"mcpServers": {"cam": server}})
         env["MCP_TOOL_TIMEOUT"] = str(max(2200000, config.timeout * 1000))
+        # All six tools are required before inference; NFS imports can be slow.
+        env["MCP_CONNECTION_NONBLOCKING"] = "0"
+        env["MCP_TIMEOUT"] = "120000"
+        env["MCP_CONNECT_TIMEOUT_MS"] = "120000"
         if config.provider == "bedrock":
             env.update(
                 CLAUDE_CODE_USE_BEDROCK="1",
@@ -189,11 +193,20 @@ def unexpected_tool(agent, event):
         and event.get("type") == "system"
         and event.get("subtype") == "init"
     ):
-        extra = [
-            name for name in event.get("tools", []) if not name.startswith("mcp__cam__")
-        ]
+        expected = {"mcp__cam__" + name for name in TOOL_NAMES}
+        offered = set(event.get("tools", []))
+        extra = sorted(offered - expected)
         if extra:
             return "Unexpected coding tools: " + ", ".join(extra)
+        missing = sorted(expected - offered)
+        if missing:
+            return (
+                "Required CaM tools missing at client initialization: "
+                + ", ".join(missing)
+            )
+        servers = [s for s in event.get("mcp_servers", []) if s.get("name") == "cam"]
+        if len(servers) != 1 or servers[0].get("status") != "connected":
+            return "Required CaM MCP server is not connected at client initialization"
     if agent == "codex":
         item = event.get("item", {})
         if item.get("type") in ("command_execution", "web_search", "file_change"):

@@ -147,3 +147,109 @@ def test_mikasa_demo_only_followup_has_fifty_demos_and_no_rollouts(tmp_path):
     prompt = render(RunConfig.from_dict(config), task, [{"episode": i} for i in range(50)], [], adapter, adapter.interface(task, True))
     for text in ("Assigned expert demonstrations: 50", "Zero simulator attempts are allowed", "Derive the memory representation", "candidate completion conditions", "safety_check", "pure offline"):
         assert text in prompt
+
+
+@pytest.mark.parametrize("fault", [None, "unfinished", "early_freeze", "changed_policy", "changed_checkpoint"])
+def test_automatic_evaluation_requires_finished_full_budget_and_intact_policy(run_factory, fault):
+    from cam.core.budget import Ledger
+    from cam.core.history import freeze
+    from cam.io import read, write
+
+    root = run_factory("both", 3, both_protocol="v2")
+    folder = root / "tasks/BinFill"
+    config = read(folder / "state/config.json")
+    ledger = Ledger(config["ledger"])
+    count = 2 if fault == "early_freeze" else 3
+    for episode in config["train_episodes"][:count]:
+        attempt = ledger.reserve(config, episode)
+        ledger.update(attempt, status="fail", steps=1, step_calls=1)
+    final = freeze(config)
+    write(folder / "logs/completion.json", {"status": "failed" if fault == "unfinished" else "finished"})
+    if fault == "changed_policy":
+        (folder / "policy/policy.md").write_text("changed after freeze")
+    if fault == "changed_checkpoint":
+        (folder / "checkpoints/R003/policy.md").write_text("changed after freeze")
+    if fault:
+        with pytest.raises(ValueError):
+            batch.frozen_evaluation(root, "BinFill")
+    else:
+        assert batch.frozen_evaluation(root, "BinFill") == {
+            "budget": 3, "expected": 3, "program_hash": final["program_hash"]}
+
+
+@pytest.mark.parametrize("evaluation_failure", [False, True])
+def test_evaluation_starts_while_other_tasks_learn_with_four_episode_workers(tmp_path, monkeypatch, evaluation_failure):
+    import threading
+    import cam.benchmarks.base
+    import cam.benchmarks.registry
+    import cam.reporting.report
+    from cam.io import read, tree_hash, write
+
+    root = tmp_path / "batch"
+    harness = root / "inputs/checkout/src/cam"
+    harness.mkdir(parents=True)
+    names = ("Fast", "Slow")
+    runs = {task: tmp_path / "runs" / task for task in names}
+    plan = {"workers": 2, "gpus": [0, 1], "python": "python", "runs": str(tmp_path / "runs"),
+            "tag": "test", "environment": {}, "harness_hash": tree_hash(harness),
+            "evaluation": {"enabled": True, "workers_per_gpu": 2, "task_concurrency": 1},
+            "benchmarks": {"mikasa_robo_v2": {"tasks": list(names), "source": "fake", "source_hash": "source",
+                "asset_hashes": {}, "existing": {"dataset": list(names)}, "missing": [],
+                "config": "config.json", "demo_count": 50}}}
+    write(root / "plan.json", plan)
+    monkeypatch.setattr(cam.benchmarks.registry, "get_adapter", lambda *args: object())
+    monkeypatch.setattr(cam.benchmarks.base, "source_hash", lambda *args: "source")
+    monkeypatch.setattr(batch, "boundary_check", lambda *args: None)
+    monkeypatch.setattr(batch, "frozen_evaluation", lambda *args: {"budget": 50, "expected": 50, "program_hash": "hash"})
+    def report(run):
+        failed = evaluation_failure and Path(run).name == "Fast"
+        return {"settings": [{"budget": 50, "scored": 2 if failed else 50, "expected": 50,
+            "successes": 1 if failed else 30, "success_rate": None if failed else 0.6,
+            "infrastructure_errors": int(failed)}]}
+
+    monkeypatch.setattr(cam.reporting.report, "build", report)
+    slow_learning, first_evaluation = threading.Event(), threading.Event()
+    evaluated = []
+
+    class Process:
+        pid = 123
+
+        def __init__(self, argv, **kwargs):
+            self.argv, self.log = argv, kwargs["stdout"]
+
+        def wait(self):
+            argv = self.argv
+            if "prepare" in argv:
+                self.log.write(json.dumps({"runs": [{"root": str(runs[t]), "task": t} for t in names]}).encode())
+            elif "learn" in argv:
+                task = Path(argv[argv.index("learn") + 1]).name
+                if task == "Slow":
+                    slow_learning.set()
+                    assert first_evaluation.wait(5), "Evaluation waited for every learner to finish"
+                write(runs[task] / "tasks" / task / "logs/completion.json", {"status": "finished"})
+            elif "evaluate" in argv:
+                assert argv[argv.index("--budgets") + 1] == "50"
+                assert argv[argv.index("--gpus") + 1:argv.index("--workers-per-gpu")] == ["0", "1"]
+                assert argv[argv.index("--workers-per-gpu") + 1] == "2"
+                task = Path(argv[argv.index("evaluate") + 1]).name
+                if task == "Fast":
+                    assert slow_learning.wait(5)
+                    assert not (runs["Slow"] / "tasks/Slow/logs/completion.json").exists()
+                    first_evaluation.set()
+                evaluated.append(task)
+                if evaluation_failure and task == "Fast":
+                    return 1
+            return 0
+
+    monkeypatch.setattr(batch.subprocess, "Popen", Process)
+    batch.worker(root)
+    status = read(root / "status.json")
+    assert status["status"] == ("needs_attention" if evaluation_failure else "finished")
+    assert evaluated == list(names)
+    for row in status["tasks"].values():
+        assert row["status"] == "finished"
+        if evaluation_failure and row["task"] == "Fast":
+            assert row["evaluation_status"] == "failed"
+            assert row["evaluation"]["scored"] == 2 and row["evaluation"]["infrastructure_errors"] == 1
+        else:
+            assert row["evaluation_status"] == "finished" and row["evaluation"]["scored"] == 50

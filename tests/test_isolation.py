@@ -69,15 +69,20 @@ def test_analysis_python_aliases_use_pinned_interpreter(run_factory):
         assert b"ready" in out
 
 
-def test_mcp_lifetime_follows_process_not_spawning_thread():
+@pytest.mark.parametrize("without_pidfd", [False, True])
+def test_mcp_lifetime_follows_process_not_spawning_thread(without_pidfd):
     import os
     import select
     import signal
     import subprocess
     import sys
+    import time
+    from pathlib import Path
 
     child_code = (
-        "from cam.harness.isolation import watch_parent_process; import time; "
+        "import os; "
+        + ("os.__dict__.pop('pidfd_open', None); " if without_pidfd else "")
+        + "from cam.harness.isolation import watch_parent_process; import time; "
         "watch_parent_process(); print('ready',flush=True); time.sleep(60)"
     )
     parent_code = f"""import subprocess,sys,threading
@@ -97,18 +102,25 @@ sys.stdin.read(1)
         stdout=subprocess.PIPE,
         text=True,
     )
-    child = descriptor = None
+    child = None
     try:
+        assert select.select([parent.stdout], [], [], 10)[0], "MCP startup stalled"
         child = int(parent.stdout.readline())
-        descriptor = os.pidfd_open(child)
-        assert not select.select([descriptor], [], [], 0.2)[0], (
-            "launch thread exit killed MCP"
-        )
+
+        def running():
+            try:
+                return Path(f"/proc/{child}/stat").read_text().rsplit(")", 1)[1].split()[0] != "Z"
+            except FileNotFoundError:
+                return False
+
+        time.sleep(0.2)
+        assert running(), "launch thread exit killed MCP"
         parent.stdin.close()
         parent.wait(timeout=5)
-        assert select.select([descriptor], [], [], 5)[0], (
-            "MCP outlived its client process"
-        )
+        deadline = time.monotonic() + 5
+        while running() and time.monotonic() < deadline:
+            time.sleep(0.05)
+        assert not running(), "MCP outlived its client process"
     finally:
         if parent.poll() is None:
             parent.kill()
@@ -118,8 +130,6 @@ sys.stdin.read(1)
                 os.kill(child, signal.SIGKILL)
             except ProcessLookupError:
                 pass
-        if descriptor is not None:
-            os.close(descriptor)
 
 
 @pytest.mark.isolation

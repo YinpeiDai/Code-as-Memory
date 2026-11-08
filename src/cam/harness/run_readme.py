@@ -72,6 +72,14 @@ The host client authenticates to the provider. Model-accessible I/O uses only
 shell/file/browser/delegation tools are disabled. Commands run in Bubblewrap with
 private mount, PID, and network namespaces, without host credentials or network.
 
+Before paid Claude inference, the host probes the pinned MCP server with
+initialization, all six tool schemas and a read-only `usage` call. Evidence is
+in `tasks/<Task>/logs/session_NNN/mcp_probe/`; this host check consumes no
+training attempt. Client initialization must also expose exactly the six tools
+and report CaM connected, or the session fails. Startup and isolated interface
+validation allow up to 120 seconds for NFS imports without changing simulator
+budgets or policy execution limits.
+
 | Agent-visible path | Host source relative to this run | Access during development |
 |---|---|---|
 | `/workspace` | `tasks/<Task>/workspace/` | Read/write: `task.json`, `policy.md`, `tools/*.py`, analysis notes, `scratch/`, `PROTOCOL.md`, and `api_reference/` |

@@ -192,9 +192,9 @@ def act_observe(robot):
             timer.start()
             with selectors.DefaultSelector() as selector:
                 selector.register(process.stdout, selectors.EVENT_READ)
-                if not selector.select(timeout=20):
+                if not selector.select(timeout=timeout):
                     raise TimeoutError(
-                        "Worker did not send streamed-v1 readiness; legacy runtime may be installed"
+                        "Worker did not send streamed-v1 readiness within the preflight time limit"
                     )
             response = receive(process.stdout, 2 * 1024**2)
             if response != {"kind": "ready"}:

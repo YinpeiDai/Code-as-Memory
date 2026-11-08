@@ -10,6 +10,7 @@ import sys
 import ctypes
 import threading
 import select
+import time
 
 PYTHON = Path(sys.executable).resolve().parent.parent
 PACKAGES = Path(sys.prefix) / "lib/python3.11/site-packages"
@@ -163,22 +164,32 @@ def watch_parent_process():
     """Keep an MCP server tied to its client process, not a short-lived launch thread.
 
     Linux PR_SET_PDEATHSIG follows the spawning thread. Coding clients can retire
-    that thread while remaining alive, so the MCP service watches a process pidfd.
-    Call after exec, never from a subprocess preexec_fn.
+    that thread while remaining alive, so the MCP service watches a process pidfd
+    or polls its parent relationship when Python lacks pidfd_open. Call after
+    exec, never from a subprocess preexec_fn.
     """
     parent = os.getppid()
     if parent == 1:
         os._exit(125)
     try:
         descriptor = os.pidfd_open(parent)
+    except AttributeError:
+        # Some Python builds omit pidfd_open even on a supported Linux kernel.
+        # getppid tracks the actual parent relationship, so PID reuse cannot
+        # mistake another process for the client after reparenting.
+        descriptor = None
     except ProcessLookupError:
         os._exit(125)
 
     def watch():
-        try:
-            select.select([descriptor], [], [])
-        finally:
-            os.close(descriptor)
+        if descriptor is None:
+            while os.getppid() == parent:
+                time.sleep(0.1)
+        else:
+            try:
+                select.select([descriptor], [], [])
+            finally:
+                os.close(descriptor)
         os.kill(os.getpid(), signal.SIGKILL)
 
     threading.Thread(target=watch, name="cam-client-lifetime", daemon=True).start()

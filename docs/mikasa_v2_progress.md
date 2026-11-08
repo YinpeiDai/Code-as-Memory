@@ -2,16 +2,92 @@
 
 ## Current CPU demo + interaction assignment
 
+The [MCP startup incident report](mikasa_v2_mcp_startup_incident.md) explains
+the two infrastructure bugs, their impact, the repair and verification evidence.
+
+**Replacement launched, 2026-11-08 14:22 UTC:** batch
+`20261108T142219_066189Z`, supervisor PID `2356076`, has the repaired MCP startup
+and required-tool checks. All 80 tasks get fresh policies and snapshots; the
+50-demo/50-demo-seed assignment, ten coding jobs and four evaluation workers
+(two per GPU) are unchanged. At launch, four tasks were preparing and 76 waiting;
+no replacement learning or evaluation result is claimed yet. Relevant tests:
+37 passed. A second real Claude smoke check, including blocking MCP startup,
+passed with all six tools connected and one actual `usage` call (reported cost
+$0.0042206), recorded in `live_claude_smoke_003/result.json` under the fixture
+diagnostic directory below. The failed batch is superseded, not resumed.
+
+**Failed batch snapshot, 2026-11-08 14:06 UTC:** batch
+`20261108T044922_221919Z` has produced no valid learning or test results:
+0 actual CaM tool calls, 0 counted training attempts, 0 frozen policies and
+0/4,000 scored test episodes across the 41 run directories checked. Batch state
+was 37 failed, four in the learning stage, four preparing and 35 waiting.
+Recorded model cost was approximately $44.28 (CLI estimates from completed
+sessions, excluding compute). Client initialization records show empty tool
+lists and the CaM MCP connection pending or failed; some runs also failed
+preflight or isolated validation. Transcript claims of rollouts are unsupported
+and must not be reported as results.
+
+The supervisor and active learner process trees were suspended with `SIGSTOP`
+to prevent further failed launches/model charges; existing preparation children
+were left running. All original evidence and snapshots remain intact. See
+`outputs/diagnostics/status_20261108T1403Z.json` and the batch's
+`orchestration/learning_suspension.json` under the NFS artifact root for counts,
+process identities and the suspension record. After verifying the repair, those
+same suspended processes were terminated after checking their PID start times;
+`orchestration/learning_termination.json` records this. All logs and snapshots
+remain intact. The changed harness uses the fresh replacement timetag above.
+
+**Confirmed cause:** both the pinned service and local source crashed before
+MCP initialization with `AttributeError: module 'os' has no attribute
+'pidfd_open'`. This machine's CaM Python 3.11.11 build lacks that wrapper. The
+client guard rejected extra tools but accepted an empty tool list, allowing
+paid sessions to continue without CaM. Reproduction traces are in
+`outputs/diagnostics/mcp_startup_20261108T141644Z/measurements.json`. The later
+unchanged-starter errors are consequences; NFS-related readiness/validation
+timeouts are separate infrastructure failures. The repair adds a compatible
+parent watcher, a pre-inference MCP probe and mandatory connected-tool checks.
+A real Claude/Opus 5.5 smoke test on a fresh synthetic fixture connected all six
+tools and completed one actual `usage` call with no simulator activity (reported
+model cost $0.0045406). Evidence is under
+`outputs/diagnostics/mcp_repair_fixture_20261108T1430Z/live_claude_smoke_002/`.
+
 The original machine is developing the same ten tasks listed below in batch
 `20261108T040959_138834Z`: 50 demos and 50 rollouts on the same demo seeds,
 CPU physics, Claude Code / Opus 5.5, eight coding jobs. These are new policies,
 separate from the completed demo-only batch.
 
 The [CPU remaining-80 plan](../configs/experiments/mikasa_v2_cpu_50_demoseeds_remaining80.json)
-contains the other 80 official tasks and is ready for the second machine; it has
-not been launched here. It uses the same assignment and CPU settings, with the
-concise MIKASA prompt. The running ten-task batch retains its original longer
-prompt. Record the second machine's batch tag before making further assignments.
+contains the other 80 official tasks. They are assigned on `sled-aspen.eecs.umich.edu`
+to replacement batch **`20261108T142219_066189Z`**, launched at 14:22 UTC.
+Do not launch duplicate learners. This batch uses the same demo/seed
+assignment and CPU settings, with the concise MIKASA prompt; the original
+ten-task batch retains its earlier longer prompt.
+
+The second machine runs **10 coding jobs**, four concurrent task preparations,
+and automatic evaluation after each task finishes and freezes at R050. One task
+is tested at a time with **four episode workers, two per GPU** (GPUs 0 and 1),
+alongside at most one training simulator per GPU. Expected held-out coverage is
+**80 × 50 = 4,000 episodes**; actual scored counts and infrastructure failures
+must be read from the run reports and batch status, not inferred from launch.
+
+Artifacts are under
+`/nfs/turbo/coe-chaijy-unreplicated/daiyp/CaM/mikasa_robo/`:
+
+- Current batch: `outputs/development_batches/20261108T142219_066189Z/`.
+- Current runs: `runs/mikasa_robo_v2/<task>/cc-opus5.5/demo_interaction_v2/20261108T142219_066189Z/`.
+- Preserved failed batch and runs: timetag `20261108T044922_221919Z`.
+- Input partitions: `data/mikasa_v2_task_partitions_20261108T044730_506152Z/`.
+- Setup evidence: `outputs/setup/20261108T044638_191819Z/`.
+- Repair evidence: `outputs/diagnostics/mcp_repair_20261108T1422Z/`.
+
+The replacement uses `local/mikasa_cpu_80_mcp_repair_plan.json` (also preserved
+as `launch_plan.json` under the repair evidence directory) with
+`--workers 10 --prepare-workers 4 --gpus 0 1
+--evaluate-on-freeze --evaluation-workers-per-gpu 2`. Each per-task dataset keeps
+the original H5 bytes, hashes, all 50 episode identities, and manifest provenance;
+preparation validates each before admitting its learner. The original replay
+pool is unchanged. At launch, four tasks were preparing and 76 were waiting;
+no test episodes had yet been scored. Check the live `status.json` for progress.
 
 Replay data: `/nfs/turbo/coe-chaijy-unreplicated/daiyp/CaM/data/mikasa_robo_v2_50`
 (`manifest.json` plus `h5/record_dataset_<Task-ID>.h5`). All 90 tasks have 50

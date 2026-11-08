@@ -1,10 +1,106 @@
-"""Offline compatibility gate: the real CLI talks only to a local fake model endpoint."""
+"""Pre-inference MCP checks and offline coding-client compatibility probes."""
 
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 import json
+import os
+from pathlib import Path
+import selectors
 import subprocess
 import threading
-from cam.io import write
+import time
+from cam.io import read, write
+
+
+def probe_cam(config_path, session, timeout=120):
+    """Exercise the exact CaM stdio server before paying for Claude inference.
+
+    Only initialization, tool discovery and the read-only usage tool are called;
+    no policy, demonstration or simulator is involved.
+    """
+    from cam.harness.isolation import terminate
+    from cam.providers.clients import TOOL_NAMES
+
+    session = Path(session)
+    session.mkdir()
+    server = read(config_path)["mcpServers"]["cam"]
+    env = os.environ.copy()
+    env.update(server.get("env", {}))
+    started = time.monotonic()
+    report = {
+        "passed": False,
+        "api_calls": 0,
+        "simulator_resets": 0,
+        "training_attempts": 0,
+    }
+    proc = None
+    try:
+        with (session / "stderr.txt").open("wb") as errors:
+            proc = subprocess.Popen(
+                [server["command"], *server.get("args", [])],
+                env=env,
+                stdin=subprocess.PIPE,
+                stdout=subprocess.PIPE,
+                stderr=errors,
+                start_new_session=True,
+            )
+            with selectors.DefaultSelector() as selector:
+                selector.register(proc.stdout, selectors.EVENT_READ)
+
+                def request(ident, method, params):
+                    message = {
+                        "jsonrpc": "2.0", "id": ident,
+                        "method": method, "params": params,
+                    }
+                    proc.stdin.write((json.dumps(message) + "\n").encode())
+                    proc.stdin.flush()
+                    remaining = max(0, timeout - (time.monotonic() - started))
+                    if not selector.select(remaining):
+                        raise TimeoutError("CaM MCP probe timed out during " + method)
+                    line = proc.stdout.readline()
+                    if not line:
+                        raise RuntimeError(
+                            "CaM MCP server exited during " + method
+                            + "; inspect " + str(session / "stderr.txt")
+                        )
+                    reply = json.loads(line)
+                    if (
+                        reply.get("id") != ident
+                        or "error" in reply or "result" not in reply
+                    ):
+                        raise RuntimeError(
+                            "Invalid CaM MCP response during " + method + ": " + repr(reply)
+                        )
+                    return reply["result"]
+
+                report["initialize"] = request(1, "initialize", {
+                    "protocolVersion": "2024-11-05", "capabilities": {},
+                    "clientInfo": {"name": "cam-host-startup-probe", "version": "1"},
+                })
+                proc.stdin.write(b'{"jsonrpc":"2.0","method":"notifications/initialized"}\n')
+                proc.stdin.flush()
+                tools = request(2, "tools/list", {})["tools"]
+                report["tools"] = [tool["name"] for tool in tools]
+                if sorted(report["tools"]) != sorted(TOOL_NAMES):
+                    raise RuntimeError(
+                        "CaM MCP probe did not expose exactly the six required tools"
+                    )
+                usage = request(3, "tools/call", {"name": "usage", "arguments": {}})
+                if usage.get("isError") or not usage.get("content"):
+                    raise RuntimeError("CaM MCP usage probe failed: " + repr(usage))
+                report["usage"] = usage
+                proc.stdin.close()
+                if proc.wait(timeout=5):
+                    raise RuntimeError("CaM MCP server failed after usage probe")
+                report["passed"] = True
+    except Exception as exc:
+        report["error"] = str(exc)
+        raise
+    finally:
+        if proc is not None:
+            terminate(proc)
+        report["seconds"] = time.monotonic() - started
+        write(session / "probe.json", report)
+    return report
 
 
 def probe_codex(call, session):

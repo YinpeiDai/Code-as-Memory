@@ -4,7 +4,8 @@ Usage: .venv/bin/python scripts/develop_batch.py start PLAN --workers 8 --gpus 0
        .venv/bin/python scripts/develop_batch.py status BATCH
 PLAN declares tasks, demo counts, datasets and raw-data roots. Existing plans
 default to 25 demos. MIKASA v2 requires completed, separately rendered data.
-Missing demos for other benchmarks may be extracted. No held-out tests.
+Missing demos for other benchmarks may be extracted. --evaluate-on-freeze opts
+into a separate host evaluation queue after each task finishes and freezes.
 """
 
 import argparse
@@ -22,6 +23,31 @@ import threading
 import time
 
 ROOT = Path(__file__).resolve().parents[1]
+
+
+def frozen_evaluation(root, task):
+    """Require completed learning and an intact final checkpoint before testing."""
+    from cam.core.budget import program_hash
+    from cam.core.history import select_checkpoint
+    from cam.io import read
+
+    root = Path(root)
+    plan = read(root / "run.json")
+    folder = root / "tasks" / task
+    if read(folder / "logs/completion.json")["status"] != "finished":
+        raise ValueError("Evaluation requires successful learning completion")
+    final = read(folder / "policy/freeze.json")
+    budget = plan["config"]["budget"]
+    if final["checkpoint"] != budget or final["training"]["attempts"] != budget:
+        raise ValueError("Automatic evaluation requires the full assigned training budget")
+    _, checkpoint = select_checkpoint(folder, budget)
+    if (program_hash(folder / "policy") != final["program_hash"]
+            or checkpoint["program_hash"] != final["program_hash"]):
+        raise ValueError("Frozen policy and final checkpoint integrity mismatch")
+    episodes = plan["test_episodes"][task]
+    if not episodes or len(set(episodes)) != len(episodes):
+        raise ValueError("Evaluation requires distinct assigned held-out episodes")
+    return {"budget": budget, "expected": len(episodes), "program_hash": final["program_hash"]}
 
 
 def data_assignment(name, item, config):
@@ -125,10 +151,15 @@ def start(args):
                          "config": str(batch / "inputs" / f"{name}.json"),
                          "training_seed_policy": config.get("training_seed_policy", "demo_cycle"),
                          "new_data": str(data / name), "depth": config["depth"]}
+    evaluation = {"enabled": getattr(args, "evaluate_on_freeze", False),
+                  "workers_per_gpu": getattr(args, "evaluation_workers_per_gpu", 2),
+                  "task_concurrency": 1}
     plan = {"created": time.time(), "tag": tag, "workers": args.workers, "gpus": args.gpus,
+            "prepare_workers": getattr(args, "prepare_workers", 1),
             "selection_reason": spec["selection_reason"], "benchmarks": benches,
             "environment": env, "python": sys.executable, "runs": str((ROOT / "runs").resolve()),
-            "harness_hash": tree_hash(checkout / "src/cam"), "held_out_evaluation": False}
+            "harness_hash": tree_hash(checkout / "src/cam"),
+            "held_out_evaluation": evaluation["enabled"], "evaluation": evaluation}
     write(batch / "plan.json", plan)
     shutil.copy2(Path(__file__), batch / "driver.py")
     (batch / "runner.py").write_text(
@@ -155,8 +186,14 @@ def start(args):
         "RoboMemArena demo preparation reserves one whole GPU while its replay workers run. "
         "Waiting for a GPU does not consume attempts. Missing demos are prepared before launching "
         "that task; data failures are reported, never silently replaced with another task. "
-        "No held-out evaluation is started.\n\n"
-        "Inspect: `.venv/bin/python scripts/develop_batch.py status BATCH`. "
+        + ("A separate host queue evaluates each completed, verified frozen policy on all held-out "
+           "episodes at its final budget. One task is evaluated at a time with "
+           f"{evaluation['workers_per_gpu']} episode workers per GPU ({len(args.gpus) * evaluation['workers_per_gpu']} total). "
+           "Training keeps its one-simulator-per-GPU lease; evaluation workers run alongside it. "
+           "Test results never enter learner feedback. Evaluation status and scored/expected counts "
+           "are recorded separately from learning. Infrastructure failures retain evidence for recovery.\n\n"
+           if evaluation["enabled"] else "No held-out evaluation is started.\n\n")
+        + "Inspect: `.venv/bin/python scripts/develop_batch.py status BATCH`. "
         "Completed sessions are frozen automatically; failures retain evidence for explicit recovery.\n"
     )
     with (batch / "supervisor.log").open("ab") as log:
@@ -253,6 +290,8 @@ def worker(batch):
         tasks = {f"{name}/{task}": {"benchmark": name, "task": task, "status": "waiting_data"}
                  for name, cfg in plan["benchmarks"].items() for task in cfg["tasks"]}
         guard, ready, preparing = threading.Lock(), queue.Queue(), threading.Event()
+        testing, learned = queue.Queue(), threading.Event()
+        evaluation = plan.get("evaluation", {"enabled": False})
 
         def save(key=None, **changes):
             with guard:
@@ -285,13 +324,18 @@ def worker(batch):
                 ready.put((name, task, root))
 
         def prepare_benchmark(name, cfg):
-            for dataset, group in cfg["existing"].items():
+            def existing_group(dataset, group):
                 try:
                     prepare_group(name, cfg, dataset, group)
                 except Exception as exc:
                     for task in group:
                         if tasks[f"{name}/{task}"]["status"] == "preparing":
                             save(f"{name}/{task}", status="preparation_failed", error=str(exc))
+
+            with ThreadPoolExecutor(max_workers=plan.get("prepare_workers", 1)) as pool:
+                futures = [pool.submit(existing_group, dataset, group) for dataset, group in cfg["existing"].items()]
+                for future in as_completed(futures):
+                    future.result()
             group = cfg["missing"]
             if not group:
                 return
@@ -330,25 +374,82 @@ def worker(batch):
                             "--gpus", str(gpu), "--workers-per-gpu", "1"])
                     completion = read(root / "tasks" / task / "logs/completion.json")
                     save(key, status=completion["status"], completion=completion)
-                    command(f"audit_{name}_{task}", [plan["python"], str(batch / "audit_run.py"), str(root), "--task", task])
+                    if completion["status"] == "finished" and evaluation["enabled"]:
+                        try:
+                            assignment = frozen_evaluation(root, task)
+                            save(key, evaluation_status="queued", evaluation=assignment)
+                            testing.put((name, task, root, assignment))
+                        except Exception as exc:
+                            save(key, evaluation_status="failed", evaluation_error=str(exc))
+                    try:
+                        command(f"audit_{name}_{task}", [plan["python"], str(batch / "audit_run.py"), str(root), "--task", task])
+                        save(key, audit_status="finished")
+                    except Exception as exc:
+                        save(key, audit_status="failed", audit_error=str(exc))
                 except Exception as exc:
                     save(key, status="failed", error=str(exc))
                 finally:
                     ready.task_done()
 
+        def evaluate():
+            from cam.reporting.report import build
+
+            while not learned.is_set() or not testing.empty():
+                try:
+                    name, task, root, assignment = testing.get(timeout=1)
+                except queue.Empty:
+                    continue
+                key = f"{name}/{task}"
+                try:
+                    if frozen_evaluation(root, task) != assignment:
+                        raise ValueError("Frozen assignment changed while queued")
+                    save(key, evaluation_status="running", evaluation_started=time.time())
+                    command(f"evaluate_{name}_{task}", [plan["python"], str(root / "runner.py"),
+                            "evaluate", str(root), "--budgets", str(assignment["budget"]),
+                            "--gpus", *map(str, plan["gpus"]), "--workers-per-gpu",
+                            str(evaluation["workers_per_gpu"])])
+                    summary = next(row for row in build(root)["settings"] if row["budget"] == assignment["budget"])
+                    counts = {field: summary[field] for field in (
+                        "scored", "expected", "successes", "success_rate", "infrastructure_errors")}
+                    complete = counts["scored"] == counts["expected"] == assignment["expected"] and not counts["infrastructure_errors"]
+                    save(key, evaluation_status="finished" if complete else "needs_attention",
+                         evaluation={**assignment, **counts}, evaluation_finished=time.time())
+                except Exception as exc:
+                    save(key, evaluation_status="failed", evaluation_error=str(exc))
+                    # Keep partial counts, including infrastructure failures, separate from learning.
+                    try:
+                        summary = next(row for row in build(root)["settings"] if row["budget"] == assignment["budget"])
+                        save(key, evaluation={**assignment, **{field: summary[field] for field in (
+                            "scored", "expected", "successes", "success_rate", "infrastructure_errors")}})
+                    except Exception as report_error:
+                        save(key, evaluation_report_error=str(report_error))
+                finally:
+                    testing.task_done()
+
         save()
-        with ThreadPoolExecutor(max_workers=plan["workers"]) as learners:
-            learning = [learners.submit(develop, index) for index in range(plan["workers"])]
-            try:
-                with ThreadPoolExecutor(max_workers=len(plan["benchmarks"])) as preparers:
-                    futures = [preparers.submit(prepare_benchmark, name, cfg) for name, cfg in plan["benchmarks"].items()]
-                    for future in as_completed(futures):
-                        future.result()
-            finally:
-                preparing.set()
-            for future in learning:
-                future.result()
-        write(batch / "status.json", {"status": "finished" if all(t["status"] == "finished" for t in tasks.values()) else "needs_attention",
+        tester = threading.Thread(target=evaluate, name="held-out-evaluation") if evaluation["enabled"] else None
+        if tester:
+            tester.start()
+        try:
+            with ThreadPoolExecutor(max_workers=plan["workers"]) as learners:
+                learning = [learners.submit(develop, index) for index in range(plan["workers"])]
+                try:
+                    with ThreadPoolExecutor(max_workers=len(plan["benchmarks"])) as preparers:
+                        futures = [preparers.submit(prepare_benchmark, name, cfg) for name, cfg in plan["benchmarks"].items()]
+                        for future in as_completed(futures):
+                            future.result()
+                finally:
+                    preparing.set()
+                for future in learning:
+                    future.result()
+        finally:
+            learned.set()
+            if tester:
+                tester.join()
+        complete = all(t["status"] == "finished" and t.get("audit_status") == "finished"
+                       and (not evaluation["enabled"] or t.get("evaluation_status") == "finished")
+                       for t in tasks.values())
+        write(batch / "status.json", {"status": "finished" if complete else "needs_attention",
               "finished": time.time(), "workers": plan["workers"], "tasks": tasks})
 
 
@@ -358,7 +459,12 @@ def main():
     p = commands.add_parser("start")
     p.add_argument("plan", type=Path)
     p.add_argument("--workers", type=int, default=8)
+    p.add_argument("--prepare-workers", type=int, default=1,
+                   help="Concurrent dataset preparations; use per-task datasets to start learning progressively")
     p.add_argument("--gpus", type=int, nargs="+", default=[0, 1])
+    p.add_argument("--evaluate-on-freeze", action="store_true",
+                   help="Evaluate completed frozen policies in a separate host queue")
+    p.add_argument("--evaluation-workers-per-gpu", type=int, default=2)
     for name in ("_worker", "status"):
         commands.add_parser(name).add_argument("batch", type=Path)
     args = parser.parse_args()
@@ -366,7 +472,7 @@ def main():
     source = ROOT / "src" if args.command == "start" else args.batch.resolve() / "inputs/checkout/src"
     sys.path.insert(0, str(source))
     if args.command == "start":
-        if args.workers < 1 or min(args.gpus) < 0 or len(set(args.gpus)) != len(args.gpus):
+        if min(args.workers, args.prepare_workers, args.evaluation_workers_per_gpu) < 1 or min(args.gpus) < 0 or len(set(args.gpus)) != len(args.gpus):
             parser.error("Use positive workers and distinct nonnegative GPUs")
         print(json.dumps(start(args), indent=2))
     elif args.command == "_worker":
