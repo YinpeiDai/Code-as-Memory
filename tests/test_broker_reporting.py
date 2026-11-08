@@ -106,6 +106,26 @@ def test_broker_saves_observations_and_native_score(run_factory, tmp_path):
     assert "GPU" not in bad["error"]
 
 
+@pytest.mark.isolation
+@pytest.mark.parametrize("split", ["train", "test"])
+def test_cpu_backend_is_forwarded_and_recorded_for_both_splits(run_factory, tmp_path, split):
+    class CPUAdapter(Adapter):
+        name = "mikasa_robo_v2"
+
+        def make_environment(self, metadata, task, episode, actual_split, depth, *, physics_backend):
+            assert actual_split == split and physics_backend == "cpu"
+            env = Environment()
+            env.physics_backend = physics_backend
+            return env
+
+    root = run_factory()
+    config = {**read(root / "run.json")["config"], "physics_backend": "cpu"}
+    result = execute(CPUAdapter(), tmp_path, "BinFill", 0, split,
+                     root / "tasks/BinFill/program", root / "runtime", tmp_path / "episode", config)
+    assert result["status"] == "success"
+    assert result["physics_backend"] == "cpu"
+
+
 def test_exact_rates_partial_denominators_and_paired_efficiency():
     rows = [
         {

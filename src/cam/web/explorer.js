@@ -246,6 +246,7 @@ const Explorer = {
     this.frame = -1;
     this.title.innerHTML =
       `<span class="badge ${X.outcomeClass(item.status)}">${X.esc(item.status || "—")}</span> ` +
+      (item.physics ? `<span class="badge">${X.esc(item.physics.toUpperCase())} physics</span> ` : "") +
       `<strong>${X.esc(item.task)}</strong> · ${X.esc(item.kind)} ${X.esc(item.label)} <span class="muted">· ${X.esc(item.run)} · ${index + 1}/${this.items.length}</span>`;
     this.strip.innerHTML = this.items
       .map((it, i) => `<button class="chip ${X.outcomeClass(it.status)}${i === index ? " current" : ""}" data-ep="${i}" title="${X.esc(it.kind + " " + it.label + ": " + it.status)}">${X.esc(it.short ?? it.label)}</button>`)
@@ -743,6 +744,7 @@ function trainItems(task, run) {
     short: `R${r.attempt}`,
     task: task.task,
     run: run?.name || "",
+    physics: run?.config?.physics_backend || (run?.benchmark === "mikasa_robo_v2" ? "gpu" : null),
     episode: r.episode,
     attempt: r.attempt,
     status: r.status,
@@ -762,6 +764,7 @@ function testItems(run, episodes) {
     short: String(e.episode),
     task: e.task,
     run: run.name,
+    physics: run.config?.physics_backend || (run.benchmark === "mikasa_robo_v2" ? "gpu" : null),
     episode: e.episode,
     status: e.status,
     steps: e.steps,

@@ -22,6 +22,18 @@ SOURCE = ROOT / "third_party/mikasa_robo"
 TASK = "TakeItBack-VLA-v0"
 
 
+def test_physics_backend_is_explicit_and_mikasa_v2_only():
+    default = RunConfig(benchmark="mikasa_robo_v2", mode="demos")
+    assert default.physics_backend is None
+    assert v2.MAKE_KWARGS_V2["sim_backend"] == "gpu"
+    for backend in ("cpu", "gpu"):
+        cfg = RunConfig(benchmark="mikasa_robo_v2", mode="demos", physics_backend=backend)
+        assert RunConfig.from_dict(cfg.to_dict()).physics_backend == backend
+    for benchmark, backend in (("robomme", "cpu"), ("mikasa_robo", "cpu"), ("mikasa_robo_v2", "auto")):
+        with pytest.raises(ValueError, match="physics_backend"):
+            RunConfig(benchmark=benchmark, mode="demos", physics_backend=backend)
+
+
 @pytest.fixture
 def adapter():
     if not (SOURCE / "mikasa_robo_suite/vla").is_dir():

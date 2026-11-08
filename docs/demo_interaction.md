@@ -35,6 +35,37 @@ infers success conditions and unobserved task variables from assigned demos,
 allowed sensor history, action outcomes, and terminal training feedback. Hidden
 state, private stage scores, benchmark source, and test feedback stay inaccessible.
 
+### MIKASA motion-verification supplement
+
+New `mikasa_robo` and `mikasa_robo_v2` runs with `both_protocol: "v2"`
+automatically add the [MIKASA-specific prompt](../src/cam/prompts/benchmarks/mikasa_robo_both_v2.md).
+It keeps demo-first development, then uses counted training rollouts to verify
+control response and revise the policy. It covers offline `safety_check`, live
+`robot.dry_run`, rotation-command oscillation, and measured settling. Joint-limit
+or estimated torque checks cannot establish dynamic stability or task success.
+The guidance is task-independent and supplies no scorer thresholds or prior
+rollout findings. Shared core/mode prompts and other learning settings are unchanged.
+
+Preparation pins its exact text and source in `run.json` under
+`benchmark_mode_guidance`, includes it in `prompt.md` / `workspace/PROTOCOL.md`,
+and links it from the generated README. This is a user-requested prompt revision
+within v2, with unchanged tools and budgets; report this supplement when comparing
+protocols. Use a fresh timetag. Historical runs retain their original prompts.
+
+The current ten-task MIKASA run uses
+`configs/experiments/mikasa_v2_cpu_50_demoseeds_10tasks.json`: 50 RGB-D demos and
+50 attempts on those same 50 demo identities with CPU physics for development and later
+evaluation. GPU rendering remains enabled. The learner may reread and analyze
+assigned demos without an access-count limit; only simulator attempts consume
+the 50-attempt budget. Use every remaining attempt even if the code seems ready.
+The supplement asks the learner to explore release/lift and timing hypotheses,
+verify intermediate motion and joint margins, and avoid unchecked large commands.
+Any inferred completion parameter must come from its own allowed evidence.
+`demo_cycle` with count 50 and budget 50 gives one pass through the demo seeds,
+without repeats or new training seeds. The host enforces this schedule: rollout
+arguments cannot override seeds, and the ledger rejects unassigned/out-of-order
+identities and attempts after the cap. Test seeds stay excluded.
+
 ## Choose the version
 
 Use a versioned configuration in `configs/<benchmark>/`:
@@ -95,21 +126,24 @@ learning simulators on each GPU. Replay data preparation reserves one whole GPU.
 Logs, per-task status and run paths are under `outputs/development_batches/TIMETAG/`.
 Data/preparation failures remain explicit; tasks are never silently substituted.
 
-After `data/mikasa_robo_v2_50/manifest.json` is finalized, start the requested
-256x256 RGB-D follow-up on the same ten MIKASA tasks:
+With the completed 50-demo RGB-D pool, start the current CPU-physics follow-up
+on the same ten MIKASA tasks (use a local copy of this plan for different dataset paths):
 
 ```bash
 .venv/bin/python scripts/develop_batch.py start \
-  configs/experiments/mikasa_v2_50_newseeds_10tasks.json --workers 8 --gpus 0 1
+  configs/experiments/mikasa_v2_cpu_50_demoseeds_10tasks.json --workers 8 --gpus 1
 ```
 
-This plan requires exactly 50 prepared demos per task and allows 50 distinct
-training interactions. It fails before launching if the dataset is incomplete
+This plan requires exactly 50 prepared demos per task and uses those same 50
+identities for training interactions, once each. GPU IDs select rendering devices;
+choose available devices on the host. It fails before launching if the dataset is incomplete
 or has a shortfall; it never starts another rerender or pads the demos. Each task
 gets a new timetag, the dry-run API reference, and the same learner access boundary.
 This command launches paid learning and freezes completed policies, without
 starting held-out evaluation. Existing sessions must be stopped before replacing
 an active batch; interruption preserves evidence and requires explicit recovery.
+The earlier `mikasa_v2_50_newseeds_10tasks.json` plan remains available separately
+for the GPU/new-seed comparison and is not the current assignment.
 
 New runs use `demo_interaction_v1/` or `demo_interaction_v2/` in their directory
 hierarchy. The version is saved in `run.json`, the task's `state/config.json`

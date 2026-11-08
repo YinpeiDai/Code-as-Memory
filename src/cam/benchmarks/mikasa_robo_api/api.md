@@ -21,6 +21,9 @@ request becomes **one bounded step toward the pose** using base-frame translatio
 and rotation error. Use the returned `command` to execute that checked step;
 check again after moving. Gripper position is supplied separately to `step`.
 
+The query uses the active native IK implementation: GPU by default, CPU for an
+explicit MIKASA v2 CPU-physics comparison. Rendering can use the GPU in both cases.
+
 The result includes `within_joint_limits`, `violating_joints` (Panda joint names),
 `joint_target_rad`, `joint_limits_rad`, signed `joint_margins_rad`,
 `min_joint_margin_rad`, `max_joint_change_rad`, the measured `current_joints_rad`,

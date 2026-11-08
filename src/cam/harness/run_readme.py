@@ -172,10 +172,10 @@ def write_run_readme(root, manifest):
     if (
         cfg["mode"] == "both"
         and cfg.get("both_protocol") == "v2"
-        and cfg.get("training_seed_policy") == "disjoint_once"
+        and (cfg.get("training_seed_policy") == "disjoint_once" or manifest.get("benchmark_mode_guidance"))
     ):
         attempt_guidance = (
-            "The v2 prompt requires using all remaining attempts on the assigned distinct "
+            "The v2 prompt requires using all remaining attempts on the assigned "
             "training seeds to verify and strengthen the solution, even when it seems ready "
             "for testing. Successful verification does not require a code change."
         )
@@ -189,6 +189,17 @@ def write_run_readme(root, manifest):
         f"`inputs/harness/{value['source']}`. The exact text is also recorded "
         "in `run.json` under `task_clarifications` and in the learner prompt.\n\n"
         for task, value in manifest.get("task_clarifications", {}).items()
+    )
+    guidance = manifest.get("benchmark_mode_guidance")
+    guidance_note = (
+        "## Benchmark-specific development guidance\n\n"
+        f"Pinned supplement: [{guidance['source']}](inputs/harness/{guidance['source']}). "
+        "The exact text and source are recorded in `run.json` under "
+        "`benchmark_mode_guidance` and included in each task's `prompt.md` and "
+        "`workspace/PROTOCOL.md`. It supplements shared v2 with demo-first "
+        "motion verification and the public robot safety APIs. It does not change "
+        "the tools, attempt accounting or native scoring.\n\n"
+        if guidance else ""
     )
     (root / "README.md").write_text(
         f"""# {manifest["config"]["benchmark"]} / {tasks}
@@ -205,6 +216,7 @@ def write_run_readme(root, manifest):
 | Maximum training simulator attempts | `{cfg["budget"]}` |
 | Interaction seed schedule | `{cfg.get("training_seed_policy", "demo_cycle")}`; `{cfg.get("training_seed_count")}` identities |
 | Depth / task-provided reset video | `{cfg["depth"]}` / `{cfg["builtin_demo"]}` |
+| Physics backend | `{cfg.get("physics_backend") or "benchmark default"}` (independent of GPU rendering) |
 | Expected test episodes | `{sum(len(v) for v in manifest["test_episodes"].values())}` |
 
 {attempt_guidance} Logs and freeze metadata record the number actually used.
@@ -212,11 +224,13 @@ Ending learning freezes the final
 validated policy without automatically starting held-out evaluation.
 `disjoint_once` assigns distinct training seeds outside the demonstrations and
 held-out tests, used once each in the pinned order. `demo_cycle` is the historical
-schedule that repeats selected demonstration identities. With a host GPU pool,
+schedule that cycles through selected demonstration identities; a budget equal
+to the identity count makes one pass without repeats. The host enforces the next
+identity and budget; `rollout` accepts no seed or episode override. With a host GPU pool,
 rollouts wait for a free simulator slot before consuming an attempt; coding and
 offline analysis continue independently in other sessions.
 
-{clarifications}## Commands
+{clarifications}{guidance_note}## Commands
 
 ```bash
 cam learn {run} --gpus 0 --workers-per-gpu 1
@@ -251,7 +265,12 @@ reports/                          aggregate JSON and CSV results
 
 """
         + HISTORY
-        + (MIKASA_RGBD if cfg["benchmark"] == "mikasa_robo_v2" else "")
+        + (MIKASA_RGBD + (
+            "CPU physics is an explicit comparison variant, not the official GPU evaluation. "
+            "The controller uses native CPU IK; rendering still uses the GPU. "
+            "Keep CPU and GPU scores separate.\n\n"
+            if cfg.get("physics_backend") == "cpu" else ""
+        ) if cfg["benchmark"] == "mikasa_robo_v2" else "")
         + (MIKASA_DRY_RUN if cfg["benchmark"] in ("mikasa_robo", "mikasa_robo_v2") else "")
         + ACCESS.replace("BENCHMARK", manifest["config"]["benchmark"]).replace(
             "PACKAGE", manifest["benchmark_package"]

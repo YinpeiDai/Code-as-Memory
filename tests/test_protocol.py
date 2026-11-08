@@ -114,3 +114,53 @@ def test_demo_count_does_not_expand_allowed_interaction_seeds(raw, tmp_path):
     prompt = (root / "tasks/BinFill/prompt.md").read_text()
     assert "Assigned expert demonstrations: 9" in prompt
     assert "Allowed simulator training episode IDs: [0, 3, 6]" in prompt
+
+
+def test_rollout_rejects_learner_seed_overrides_before_any_attempt(run_factory, monkeypatch):
+    root = run_factory("both", 3, both_protocol="v2")
+    service = Service(root, "BinFill", 0)
+    monkeypatch.setattr(service, "sync", lambda *args: pytest.fail("Must reject before code validation or rollout"))
+    try:
+        for args in ({"seed": 999}, {"episode": 0}, {"split": "test"}, {"budget": 100}, [1]):
+            result = service.call("rollout", args)
+            assert result["isError"]
+            assert "accepts no arguments" in result["content"][0]["text"]
+        assert not service.ledger.rows()
+        assert not (root / "tasks/BinFill/rollouts").exists()
+    finally:
+        service.lock.close()
+
+
+def test_demo_seed_schedule_enforces_one_pass_and_no_extra_resets(raw, tmp_path):
+    from cam.config import RunConfig
+    from cam.core.budget import next_episode
+    from cam.data.extract import extract
+    from cam.harness.prepare import prepare
+
+    data, source = raw
+    dataset = tmp_path / "all_demos"
+    extract(data, dataset, count=9, benchmark_source=source, workers=1, videos=False)
+    root = tmp_path / "demo_seed_run"
+    prepare(root, dataset, RunConfig(benchmark="robomme", mode="both", both_protocol="v2",
+                                    budget=9, training_seed_count=9, training_seed_policy="demo_cycle"),
+            benchmark_source=source)
+    task = root / "tasks/BinFill"
+    cfg = read(task / "state/config.json")
+    demos = read(root / "inputs/dataset.json")["tasks"]["BinFill"]["episodes"]
+    identities = lambda rows: {(r["episode"], r["seed"]) for r in rows}
+    assert identities(cfg["train_records"]) == identities(demos)
+    pinned = read(root / "inputs/metadata/train/record_dataset_BinFill_metadata.json")["records"]
+    assert identities(pinned) == identities(demos)
+    assert "exactly once within this budget" in (task / "prompt.md").read_text()
+    ledger = Ledger(cfg["ledger"])
+    for index, episode in enumerate(cfg["train_episodes"]):
+        assert next_episode(cfg, index) == episode
+        for forbidden in [999, cfg["train_episodes"][(index + 1) % 9]]:
+            with pytest.raises(ValueError, match="next assigned"):
+                ledger.reserve(cfg, forbidden)
+        attempt = ledger.reserve(cfg, episode)
+        ledger.update(attempt, steps=0, step_calls=0, status="harness_error" if index == 0 else "fail")
+    assert next_episode(cfg, 9) is None
+    assert len(ledger.rows()) == 9
+    with pytest.raises(ValueError, match="exhausted"):
+        ledger.reserve(cfg, cfg["train_episodes"][0])

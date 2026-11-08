@@ -12,8 +12,17 @@ const Studio = {
     if (view) params.set("view", view);
     return "?" + params + "#development";
   },
-  bench: (name) => ({ mikasa_robo: "MIKASA-Robo", rmbench: "RMBench", robomemarena: "RoboMemArena", robomme: "RoboMME" })[name] || name,
+  bench: (name) => ({ mikasa_robo: "MIKASA-Robo", mikasa_robo_v2: "MIKASA-Robo v2", rmbench: "RMBench", robomemarena: "RoboMemArena", robomme: "RoboMME" })[name] || name,
   short: (name) => name.replace(/-VLA-v\d+$/, ""),
+  benchmarkLabel(row) {
+    const backend = row.run?.config.physics_backend;
+    return this.bench(row.benchmark) + (backend ? ` · ${backend.toUpperCase()} physics` : "");
+  },
+  evaluations(row) { return (row?.run?.episodes || []).filter((e) => e.task === row.name); },
+  evaluationUrl(row) {
+    const episodes = this.evaluations(row), episode = episodes.find((e) => e.video) || episodes[0];
+    return episode ? "./#rollout=" + encodeURIComponent(`test|${row.run.id}|${row.name}|${episode.maximum_rollouts}|${episode.episode}`) : null;
+  },
   status(row) {
     if (row.task?.frozen || row.task?.status === "finished") return "Policy frozen";
     if (row.task?.status === "running") return "Developing";
@@ -72,8 +81,9 @@ const Studio = {
     const frozen = this.rows.filter((r) => r.task?.frozen).length;
     const active = this.rows.filter((r) => r.task?.status === "running").length;
     const videos = this.rows.reduce((n, r) => n + (r.task?.rollouts.filter((a) => a.video).length || 0), 0);
+    const testVideos = this.rows.reduce((n, r) => n + this.evaluations(r).filter((e) => e.video).length, 0);
     document.getElementById("studio-summary").innerHTML = [
-      [this.rows.length, "tasks"], [frozen, "policies frozen"], [active, "developing"], [videos, "rollout videos"],
+      [this.rows.length, "tasks"], [frozen, "policies frozen"], [active, "developing"], [videos, "training videos"], [testVideos, "evaluation videos"],
     ].map(([n, label]) => `<div><b>${n}</b><span>${label}</span></div>`).join("") +
       '<p><span class="status-dot"></span>Training development <span class="muted">· refreshes automatically</span></p>';
     Demos.library(this.rows);
@@ -94,17 +104,19 @@ const Studio = {
   renderGallery() {
     const query = document.getElementById("gallery-search").value.toLowerCase();
     const failures = document.getElementById("gallery-failures").checked;
-    const rows = this.rows.filter((r) => `${r.name} ${r.benchmark}`.toLowerCase().includes(query) && (!failures || r.task?.rollouts.some((a) => a.status !== "success")));
+    const rows = this.rows.filter((r) => `${r.name} ${r.benchmark}`.toLowerCase().includes(query) && (!failures || [...(r.task?.rollouts || []), ...this.evaluations(r)].some((a) => a.status !== "success")));
     document.getElementById("studio-gallery").innerHTML = rows.map((row) => {
       const attempts = row.task?.rollouts || [], latest = [...attempts].reverse().find((a) => a.video);
+      const evaluations = this.evaluations(row), demoOnly = row.run?.config.mode === "demos";
       const success = attempts.filter((a) => a.status === "success").length;
       const goal = latest?.goal || row.task?.reference_demos?.[0]?.goal;
       return `<article class="replay-card">
-        <div class="replay-preview">${latest?.poster ? `<img src="${X.esc(latest.poster)}" alt="Recorded camera views for ${X.esc(row.name)}" loading="lazy">` : '<div class="preview-placeholder">◇<span>No recorded rollout yet</span></div>'}
+        <div class="replay-preview">${latest?.poster ? `<img src="${X.esc(latest.poster)}" alt="Recorded camera views for ${X.esc(row.name)}" loading="lazy">` : `<div class="preview-placeholder">◇<span>${demoOnly ? "Demo-only development" : "No recorded training rollout yet"}</span></div>`}
         ${latest ? `<span class="preview-play">▶</span><span class="preview-attempt">R${latest.attempt} · ${latest.steps} steps</span><span class="preview-status ${X.outcomeClass(latest.status)}">${X.esc(latest.status.replace(/_/g, " "))}</span>` : ""}</div>
-        <div class="replay-card-body"><div class="eyebrow">${X.esc(this.bench(row.benchmark))}<span>${X.esc(this.status(row))}</span></div>
-        <h3>${X.esc(this.short(row.name))}</h3><p>${attempts.length ? `<b>${attempts.length}</b> attempts · <span class="good">${success} successful</span> · <span class="failure-text">${attempts.length - success} failed</span>` : "Development video will appear here."}</p>
+        <div class="replay-card-body"><div class="eyebrow">${X.esc(this.benchmarkLabel(row))}<span>${X.esc(this.status(row))}</span></div>
+        <h3>${X.esc(this.short(row.name))}</h3><p>${attempts.length ? `<b>${attempts.length}</b> training attempts · <span class="good">${success} successful</span> · <span class="failure-text">${attempts.length - success} failed</span>` : demoOnly ? "Demo-only · no training rollouts" : "Development video will appear here."}</p>
         ${goal ? `<p class="card-goal" title="${X.esc(goal)}"><b>Task goal</b> ${X.esc(goal)}</p>` : ""}
+        ${evaluations.length ? `<div class="card-evaluation"><a href="${X.esc(this.evaluationUrl(row))}" target="_blank" rel="noopener">Watch evaluation (${evaluations.length} episodes) ↗</a><span>${evaluations.filter((e) => e.status === "success").length} successful</span></div>` : ""}
         ${row.task?.reference_demos?.length ? `<div class="card-reference"><a href="${X.esc(Demos.url(row))}" target="_blank" rel="noopener">${row.task.reference_demos.length} reference demos ↗</a></div>` : ""}
         <a class="card-open" href="${X.esc(this.url(row, latest?.attempt))}" target="_blank" rel="noopener" aria-label="Open ${X.esc(row.name)} in a new tab"><span>${latest ? "Watch rollout" : "Task details"} ↗</span></a>
         <div class="card-attempts" aria-label="Recorded attempts">${attempts.map((r) => `<a class="mini-attempt ${X.outcomeClass(r.status)}" href="${X.esc(this.url(row, r.attempt))}" target="_blank" rel="noopener" title="R${r.attempt}: ${X.esc(r.status)} · ${r.steps} steps">R${r.attempt}</a>`).join("")}</div></div></article>`;
@@ -115,9 +127,10 @@ const Studio = {
     if (!row) { document.getElementById("studio-task-header").innerHTML = ""; return; }
     const selected = row.task?.rollouts.find((a) => a.attempt === this.attempt);
     const hasCode = Object.keys(selected?.policy_files || {}).length;
+    const evaluations = this.evaluations(row);
     document.title = `${this.short(row.name)} · ${this.demoView ? "Reference demos" : this.query.get("view") === "log" ? "Agent log" : this.query.get("view") === "code" ? "Code" : "R" + (this.attempt ?? "—")} · CaM`;
-    document.getElementById("studio-task-header").innerHTML = `<div class="studio-task-title"><a class="back-link" href="./#development">← Rollout library</a><div class="eyebrow">${X.esc(this.bench(row.benchmark))} <span> / ${X.esc(this.demoView ? "Reference demonstrations" : this.status(row))}</span></div><h2 title="${X.esc(row.name)}">${X.esc(this.short(row.name))}</h2><p>${row.task ? this.demoView ? `${row.task.reference_demos?.length || 0} assigned training demonstrations · reference behavior` : `${row.task.demonstrations} offline demos · ${row.task.attempts.length}/${row.run.config.budget} interactions` : "Demonstrations are being prepared for this task."}</p></div>
-      <div class="studio-actions">${this.demoView ? `<a class="button" href="${X.esc(this.url(row))}" target="_blank" rel="noopener">Policy rollouts ↗</a>` : `<button class="reference-link" data-studio-action="demos"${row.task?.reference_demos?.length ? "" : " disabled"}>Reference demos (${row.task?.reference_demos?.length || 0}) ↗</button><button data-studio-action="log"${row.task ? "" : " disabled"}>Agent log</button><button data-studio-action="code"${hasCode ? "" : " disabled"}>Executed code${selected ? ` · R${selected.attempt}` : ""}</button><button data-studio-action="expand"${selected?.video ? "" : " disabled"} aria-label="Expand video player">⛶ Expand</button>`}</div>`;
+    document.getElementById("studio-task-header").innerHTML = `<div class="studio-task-title"><a class="back-link" href="./#development">← Rollout library</a><div class="eyebrow">${X.esc(this.benchmarkLabel(row))} <span> / ${X.esc(this.demoView ? "Reference demonstrations" : this.status(row))}</span></div><h2 title="${X.esc(row.name)}">${X.esc(this.short(row.name))}</h2><p>${row.task ? this.demoView ? `${row.task.reference_demos?.length || 0} assigned training demonstrations · reference behavior` : `${row.task.demonstrations} offline demos · ${row.task.attempts.length}/${row.run.config.budget} interactions` : "Demonstrations are being prepared for this task."}</p></div>
+      <div class="studio-actions">${evaluations.length ? `<a class="button evaluation-link" href="${X.esc(this.evaluationUrl(row))}" target="_blank" rel="noopener">Evaluation (${evaluations.length} episodes) ↗</a>` : ""}${this.demoView ? `<a class="button" href="${X.esc(this.url(row))}" target="_blank" rel="noopener">Policy rollouts ↗</a>` : `<button class="reference-link" data-studio-action="demos"${row.task?.reference_demos?.length ? "" : " disabled"}>Reference demos (${row.task?.reference_demos?.length || 0}) ↗</button><button data-studio-action="log"${row.task ? "" : " disabled"}>Agent log</button><button data-studio-action="code"${hasCode ? "" : " disabled"}>Executed code${selected ? ` · R${selected.attempt}` : ""}</button><button data-studio-action="expand"${selected?.video ? "" : " disabled"} aria-label="Expand video player">⛶ Expand</button>`}</div>`;
   },
   renderWorkspace(reset) {
     const row = this.current(), attempts = row?.task?.rollouts || [];
@@ -131,7 +144,8 @@ const Studio = {
     if (!attempts.length) {
       const player = window.CaMExplorer.Explorer;
       if (player.embedded && player.root) { player.video.pause(); player.root.hidden = true; player.root.remove(); }
-      document.getElementById("studio-player").innerHTML = `<div class="studio-empty"><span>▷</span><h3>${row?.batch?.status === "preparation_failed" ? "Demo preparation needs attention" : "Waiting for the first rollout"}</h3><p>${row?.task ? "The agent's development log is available above. A video will appear here when its first attempt finishes." : "This task has no development rollout yet."}</p>${row?.batch?.error ? `<details><summary>Preparation details</summary><pre>${X.esc(row.batch.error)}</pre></details>` : ""}</div>`;
+      const demoOnly = row?.run?.config.mode === "demos", evaluations = this.evaluations(row);
+      document.getElementById("studio-player").innerHTML = `<div class="studio-empty"><span>▷</span><h3>${row?.batch?.status === "preparation_failed" ? "Demo preparation needs attention" : demoOnly ? "Demo-only development" : "Waiting for the first rollout"}</h3><p>${demoOnly ? "This run uses demonstrations without training rollouts. The agent log and reference demos are available above." : row?.task ? "The agent's development log is available above. A video will appear here when its first attempt finishes." : "This task has no development rollout yet."}</p>${evaluations.length ? `<a class="button evaluation-link" href="${X.esc(this.evaluationUrl(row))}" target="_blank" rel="noopener">Watch evaluation (${evaluations.length} episodes) ↗</a>` : ""}${row?.batch?.error ? `<details><summary>Preparation details</summary><pre>${X.esc(row.batch.error)}</pre></details>` : ""}</div>`;
     } else if (reset) this.play(this.attempt);
     else {
       const player = window.CaMExplorer.Explorer;

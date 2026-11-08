@@ -1,4 +1,4 @@
-"""Read-only prediction of MIKASA's actual next GPU arm-controller target.
+"""Read-only prediction of MIKASA's actual next arm-controller target.
 
 No environment reset/step/evaluate, actor writes, controller.set_action, or
 drive-target writes. Only the robot's measured pose/joints, controller and URDF
@@ -71,12 +71,11 @@ def preview(native, values, mode):
     ctrl = native.agent.controller.controllers["arm"]
     cfg = ctrl.config
     if not (
-        native.num_envs == 1 and native.gpu_sim_enabled
+        native.num_envs == 1
         and cfg.use_delta and not cfg.use_target and cfg.normalize_action
         and cfg.frame == "root_translation:root_aligned_body_rotation"
-        and ctrl.kinematics.use_gpu_ik
     ):
-        raise ValueError("Motion preview requires MIKASA's native single-environment GPU delta-pose controller")
+        raise ValueError("Motion preview requires MIKASA's native single-environment delta-pose controller")
 
     def array(value):
         return value.detach().cpu().numpy()

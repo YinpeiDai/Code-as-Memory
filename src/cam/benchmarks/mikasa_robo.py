@@ -372,10 +372,14 @@ class MikasaRobo:
             "One native pd_ee_delta_pose command for one 20 Hz control step. "
             "Translation 0.1*(dx, dy, dz) m along the robot-base axes (parallel to the "
             "scene x, y, z). With r = (drx, dry, drz) scaled to unit norm if |r| > 1, "
-            "the rotation is the rotation vector -0.1*r rad about the base axes "
-            "(e.g. +drz lowers yaw). Both form a first-order joint target from the "
-            "measured arm state (q + pinv(J) * offset); one step covers only part of "
-            "it. gripper is an absolute finger target: -1 closed, +1 open. "
+            "the signed angular offset is -0.1*r rad. The default GPU controller "
+            "uses this as a rotation-vector offset about the base axes in its "
+            "first-order joint target (q + pinv(J) * offset). With explicit CPU "
+            "physics, native iterative IK instead targets a pose whose rotation "
+            "is Rx(-0.1*r[0]) Ry(-0.1*r[1]) Rz(-0.1*r[2]) left-multiplied onto the "
+            "measured orientation. These agree to first order for small offsets. "
+            "Both use the measured arm state; one step covers only part of the "
+            "commanded offset. gripper is an absolute finger target: -1 closed, +1 open. "
             f"Native step limit for this task: {self.max_episode_steps(task)}.",
             low=[-1.0] * 7,
             high=[1.0] * 7,

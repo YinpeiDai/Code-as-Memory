@@ -67,8 +67,13 @@ class RunConfig:
     policy_timeout: int = 1800
     coding: CodingConfig = field(default_factory=CodingConfig)
     both_protocol: str | None = None
+    physics_backend: str | None = None
 
     def __post_init__(self):
+        if self.physics_backend is not None and (
+            self.benchmark != "mikasa_robo_v2" or self.physics_backend not in ("cpu", "gpu")
+        ):
+            raise ValueError("physics_backend is a MIKASA-Robo v2 override: cpu or gpu")
         if self.mode not in MODES or self.budget < 0:
             raise ValueError(
                 "Choose demos, interaction or both and a nonnegative budget"

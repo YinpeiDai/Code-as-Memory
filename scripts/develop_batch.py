@@ -38,9 +38,9 @@ def data_assignment(name, item, config):
     if cfg.mode == "demos":
         if cfg.budget != 0:
             raise ValueError("Demo-only batches require zero simulator attempts")
-    elif (cfg.mode, cfg.both_protocol, cfg.training_seed_policy) != (
-        "both", "v2", "disjoint_once"
-    ) or cfg.budget < 1 or cfg.budget != cfg.training_seed_count:
+    elif (cfg.mode != "both" or cfg.both_protocol != "v2"
+          or cfg.training_seed_policy not in ("disjoint_once", "demo_cycle")
+          or cfg.budget < 1 or cfg.budget != cfg.training_seed_count):
         raise ValueError("Batch requires demo-only or v2 with one distinct training seed per allowed attempt")
     datasets = {}
     for path in item["datasets"]:
@@ -58,8 +58,11 @@ def data_assignment(name, item, config):
             missing.append(task)
             continue
         records = datasets[dataset]["tasks"][task]["episodes"]
-        if len(records) != count:
-            raise ValueError(f"Expected exactly {count} demos: {name}/{task}, found {len(records)}")
+        expected = count
+        if len(records) != expected:
+            raise ValueError(f"Expected exactly {expected} demos: {name}/{task}, found {len(records)}")
+        if cfg.mode == "both" and cfg.training_seed_policy == "demo_cycle" and expected != cfg.budget:
+            raise ValueError("Demo-seed batches require one attempt for every assigned demonstration")
         existing.setdefault(dataset, []).append(task)
     if missing and (name == "mikasa_robo_v2" or item.get("require_prepared_data", False)):
         raise ValueError(f"Complete the prepared demonstrations first: {name}: {', '.join(missing)}")
@@ -120,6 +123,7 @@ def start(args):
                          "raw": str((ROOT / item["raw"]).resolve()), "source": str(target),
                          "source_hash": source_hash(adapter), "asset_hashes": assets,
                          "config": str(batch / "inputs" / f"{name}.json"),
+                         "training_seed_policy": config.get("training_seed_policy", "demo_cycle"),
                          "new_data": str(data / name), "depth": config["depth"]}
     plan = {"created": time.time(), "tag": tag, "workers": args.workers, "gpus": args.gpus,
             "selection_reason": spec["selection_reason"], "benchmarks": benches,
@@ -138,7 +142,8 @@ def start(args):
         f"{sum(len(b['tasks']) for b in benches.values())} tasks, {args.workers} concurrent coding sessions; "
         "Exact clients/models are pinned in the per-benchmark configurations. Each task gets the "
         "demo and interaction counts below. Demo-only tasks allow no simulator attempts. "
-        "For v2 tasks, interaction seeds are distinct and disjoint from demos and tests; "
+        "For v2 tasks, the pinned seed policy chooses either new identities or the "
+        "assigned demo identities; all exclude held-out tests. "
         "use the remaining attempts for verification even when the solution seems ready.\n\n"
         + spec["selection_reason"] + "\n\n| Benchmark | Demos/task | Max interactions/task | Selected tasks |\n|---|---|---|---|\n" + "\n".join(rows)
         + "\n\n`plan.json` pins selection, configs, sources and data locations. "
@@ -183,9 +188,17 @@ def boundary_check(root, task, demo_count=25):
         interaction_count = plan["config"]["training_seed_count"]
         assert len(train) == plan["config"]["budget"] == interaction_count
         assert len({r["seed"] for r in train}) == interaction_count
-        assert {r["seed"] for r in train}.isdisjoint(r["seed"] for r in demos + tests)
-        assert {r["episode"] for r in train}.isdisjoint(r["episode"] for r in demos)
-        assert "disjoint from the assigned demonstrations; no repeats" in prompt
+        assert {r["seed"] for r in train}.isdisjoint(r["seed"] for r in tests)
+        if plan["config"]["training_seed_policy"] == "disjoint_once":
+            assert {r["seed"] for r in train}.isdisjoint(r["seed"] for r in demos)
+            assert {r["episode"] for r in train}.isdisjoint(r["episode"] for r in demos)
+            assert "disjoint from the assigned demonstrations; no repeats" in prompt
+        else:
+            assert plan["config"]["training_seed_policy"] == "demo_cycle"
+            assert len(train) == len(demos)
+            assert {(r["episode"], r["seed"]) for r in train} == {
+                (r["episode"], r["seed"]) for r in demos
+            }
     assert "Task-specific contract" not in prompt and "Success criterion" not in prompt
     private = [str(root), str(root / "inputs"), str(ROOT), plan["raw_data_reference"],
                "/runtime/cam/benchmarks", "/runtime/cam/harness", "/feedback/../inputs"]
@@ -208,7 +221,13 @@ print(json.dumps({'passed': True, 'public_demo_episodes': DEMO_COUNT, 'private_p
     if code:
         raise RuntimeError("Boundary preflight failed: " + (out + err).decode(errors="replace"))
     result = json.loads(out)
-    result.update(disjoint_interaction_identities=interaction_count, zero_test_overlap=True, simulator_attempts=0)
+    result.update(
+        training_seed_policy=plan["config"]["training_seed_policy"],
+        interaction_identities=interaction_count,
+        disjoint_interaction_identities=(interaction_count if plan["config"]["training_seed_policy"] == "disjoint_once" else 0),
+        demo_seed_identities=(interaction_count if plan["config"]["mode"] == "both" and plan["config"]["training_seed_policy"] == "demo_cycle" else 0),
+        zero_test_overlap=True, simulator_attempts=0,
+    )
     write(root / "orchestration/boundary_preflight.json", result)
 
 

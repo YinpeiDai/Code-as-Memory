@@ -85,6 +85,49 @@ def test_start_rejects_partial_data_before_creating_batch_or_launching(tmp_path,
     assert not (tmp_path / "outputs").exists()
 
 
+def test_cpu_interaction_plan_retains_assignment_and_pins_backend():
+    from cam.config import RunConfig
+
+    old = json.loads((ROOT / "configs/experiments/mikasa_v2_50_newseeds_10tasks.json").read_text())
+    plan = json.loads((ROOT / "configs/experiments/mikasa_v2_cpu_50_demoseeds_10tasks.json").read_text())
+    item = plan["benchmarks"]["mikasa_robo_v2"]
+    original = old["benchmarks"]["mikasa_robo_v2"]
+    assert {k: v for k, v in item.items() if k != "config"} == {
+        k: v for k, v in original.items() if k != "config"
+    }
+    config = json.loads((ROOT / item["config"]).read_text())
+    assert RunConfig.from_dict(config).physics_backend == "cpu"
+    assert config["training_seed_policy"] == "demo_cycle"
+    assert config["training_seed_count"] == config["budget"] == item["demo_count"] == 50
+    previous = json.loads((ROOT / original["config"]).read_text())
+    changed = {"physics_backend", "training_seed_policy"}
+    assert {k: v for k, v in config.items() if k not in changed} == {
+        k: v for k, v in previous.items() if k not in changed
+    }
+
+
+def test_demo_seed_batch_requires_full_demo_assignment(tmp_path):
+    config, item, _, _ = setup_dataset(tmp_path)
+    config.update(training_seed_policy="demo_cycle", physics_backend="cpu")
+    assert batch.data_assignment("mikasa_robo_v2", item, config)["missing"] == []
+    config.update(training_seed_count=25, budget=25)
+    with pytest.raises(ValueError, match="every assigned demonstration"):
+        batch.data_assignment("mikasa_robo_v2", item, config)
+
+
+def test_cpu_remaining_eighty_completes_task_set_without_duplicates():
+    from cam.benchmarks.registry import get_adapter
+
+    ten = json.loads((ROOT / "configs/experiments/mikasa_v2_cpu_50_demoseeds_10tasks.json").read_text())["benchmarks"]["mikasa_robo_v2"]
+    remaining = json.loads((ROOT / "configs/experiments/mikasa_v2_cpu_50_demoseeds_remaining80.json").read_text())["benchmarks"]["mikasa_robo_v2"]
+    assert len(remaining["tasks"]) == len(set(remaining["tasks"])) == 80
+    assert set(remaining["tasks"]).isdisjoint(ten["tasks"])
+    assert set(remaining["tasks"]) | set(ten["tasks"]) == set(get_adapter("mikasa_robo_v2").tasks())
+    assert remaining["config"] == ten["config"]
+    assert remaining["demo_count"] == 50 and remaining["require_prepared_data"]
+    assert remaining["datasets"] == ["/nfs/turbo/coe-chaijy-unreplicated/daiyp/CaM/data/mikasa_robo_v2_50"]
+
+
 def test_mikasa_demo_only_followup_has_fifty_demos_and_no_rollouts(tmp_path):
     from cam.benchmarks.registry import get_adapter
     from cam.config import RunConfig

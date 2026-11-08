@@ -20,7 +20,7 @@ from cam.core.budget import Ledger
 from cam.core.history import materialize, snapshot
 from cam.data.extract import validate_dataset
 from cam.io import copy_tree, read, sha256, tree_hash, write
-from cam.prompts import render, task_clarification
+from cam.prompts import benchmark_mode_guidance, render, task_clarification
 from cam.harness.run_readme import write_run_readme, write_runs_readme
 from cam.harness.isolation import policy_python
 
@@ -125,7 +125,14 @@ def training_schedule(adapter, task, demonstrations, config):
     if config.training_seed_policy == "demo_cycle":
         if config.training_seed_count is not None and config.training_seed_count > len(demonstrations):
             raise ValueError(f"Cannot select {config.training_seed_count} training seeds from {len(demonstrations)} demos for {task}")
-        return adapter.select_training(demonstrations, config.training_seed_count)
+        selected = adapter.select_training(demonstrations, config.training_seed_count)
+        allowed = {(int(row["episode"]), int(row["seed"])) for row in demonstrations}
+        identities = [(int(row["episode"]), int(row["seed"])) for row in selected]
+        expected = len(demonstrations) if config.training_seed_count is None else config.training_seed_count
+        if (len(identities) != expected or len(set(identities)) != expected
+                or not set(identities) <= allowed):
+            raise ValueError(f"demo_cycle must select distinct identities only from assigned demos: {task}")
+        return selected
     from cam.data.demonstrations import random_select
 
     native = adapter.records(task, "train")
@@ -374,6 +381,7 @@ if __name__ == "__main__":
         "config": config.to_dict(),
         "tasks": tasks,
         "demonstrations_per_task": counts,
+        "benchmark_mode_guidance": benchmark_mode_guidance(config),
         "task_clarifications": {
             task: value for task in tasks
             if (value := task_clarification(config.benchmark, task)) is not None

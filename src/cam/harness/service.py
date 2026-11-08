@@ -275,6 +275,11 @@ class Service:
                 }
             )
         if name == "rollout":
+            if not isinstance(args, dict) or args:
+                raise ValueError(
+                    "rollout accepts no arguments; the host selects the next pinned "
+                    "training episode. Seed, episode, split and budget overrides are forbidden."
+                )
             usage = self.usage()
             if usage["remaining"] <= 0:
                 raise ValueError(

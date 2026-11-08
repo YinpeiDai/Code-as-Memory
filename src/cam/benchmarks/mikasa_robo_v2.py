@@ -1,13 +1,14 @@
 """MIKASA-Robo v2: the official 90-task MIKASA-Robo-VLA protocol with a RoboMME-style
 observation interface.
 
-Environment, wrappers, control mode, seeds, step limits and scoring are exactly the
+By default, environment, wrappers, control mode, seeds, step limits and scoring are the
 v1 adapter's (``mikasa_robo.py``: ``mikasa_robo_suite.vla.benchmarking`` settings and
 ``apply_mikasa_vla_wrappers(include_overlays=False)``). Only the sensors differ:
 ``obs_mode="rgbd"`` with both cameras rendered at 256x256 (ManiSkill
 ``sensor_configs``), and the raw observation is read beneath the canonical wrappers
 (which drop depth, calibration and joints) by a pass-through recorder. Rendering
-settings do not touch physics: released demonstrations replay identically.
+settings do not touch physics. An explicit physics_backend="cpu" uses native CPU
+physics and CPU IK for a separate comparison; it is not the official GPU protocol.
 
 Policy frames carry RoboMME's names: ``front_*`` (MIKASA ``base_camera``) and
 ``wrist_*`` (``hand_camera``) RGB, int16 optical-axis depth in millimetres, 3x3
@@ -91,6 +92,7 @@ class NativeEnvironmentV2(NativeEnvironment):
         super().__init__(env, seed, horizon, device)
         self.recorder = recorder
         self.kinematics = None
+        self.physics_backend = "gpu" if env.unwrapped.gpu_sim_enabled else "cpu"
 
     @property
     def unwrapped(self):
@@ -180,9 +182,11 @@ class MikasaRoboV2(MikasaRobo):
             env.kinematics = ArmKinematics(env.unwrapped)
         return env.kinematics.dry_run(pose)
 
-    def make_environment(self, metadata, task, episode, split, depth):
-        """Same identity, asset and source checks as v1; only sensors differ."""
+    def make_environment(self, metadata, task, episode, split, depth, *, physics_backend=None):
+        """Official GPU backend by default; CPU is an explicitly recorded variant."""
         require_rgbd(depth)
+        if physics_backend not in (None, "cpu", "gpu"):
+            raise ValueError("physics_backend must be cpu, gpu, or null")
         import importlib
         import os
         from pathlib import Path
@@ -221,7 +225,10 @@ class MikasaRoboV2(MikasaRobo):
         wrappers = importlib.import_module("mikasa_robo_suite.vla.utils.apply_wrappers")
         if not Path(wrappers.__file__).resolve().is_relative_to(self.source):
             raise ValueError("Canonical wrappers were not loaded from the pinned source")
-        recorder = recorder_class()(gym.make(task, **MAKE_KWARGS_V2))
+        kwargs = dict(MAKE_KWARGS_V2)
+        if physics_backend is not None:
+            kwargs["sim_backend"] = physics_backend
+        recorder = recorder_class()(gym.make(task, **kwargs))
         env = wrappers.apply_mikasa_vla_wrappers(recorder, include_overlays=False)
         if int(env.max_episode_steps) != horizon:
             env.close()

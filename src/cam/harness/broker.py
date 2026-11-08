@@ -61,7 +61,12 @@ def execute(
     goal = error = None
     stage = "environment_creation"
     try:
-        env = adapter.make_environment(metadata, task, episode, split, config["depth"])
+        environment_options = {}
+        if config.get("physics_backend") is not None:
+            if adapter.name != "mikasa_robo_v2":
+                raise ValueError("A physics backend override requires MIKASA-Robo v2")
+            environment_options["physics_backend"] = config["physics_backend"]
+        env = adapter.make_environment(metadata, task, episode, split, config["depth"], **environment_options)
         stage = "environment_reset"
         initial = adapter.begin(
             env, builtin_demo=config["builtin_demo"], depth=config["depth"]
@@ -323,6 +328,8 @@ def execute(
                 result["native_metrics"] = metrics
             else:
                 write(folder / "private_native_metrics.json", metrics)
+        if adapter.name == "mikasa_robo_v2":
+            result["physics_backend"] = getattr(env, "physics_backend", None)
         np.save(
             folder / "actions.npy",
             np.asarray(actions, dtype=float).reshape(-1, len(spec["names"])),

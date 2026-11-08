@@ -29,6 +29,11 @@ remaining distinct training seeds to verify and strengthen the solution. Both sh
 the same six tools and checkpoint behavior; v2 has no extra candidate system or
 enforced phase gate. See [protocol details](demo_interaction.md).
 
+MIKASA's v2 protocol also includes the static, task-independent
+`prompts/benchmarks/mikasa_robo_both_v2.md` supplement for public safety APIs and
+motion verification. Preparation records its source and exact text under
+`benchmark_mode_guidance` in `run.json` and links it from the run README.
+
 The learner receives `workspace/api_reference/{core,runtime}/`, containing only
 public policy, memory, observation, action, and trajectory interfaces. Six CaM
 tools provide model-accessible I/O. Commands run inside Bubblewrap; generated

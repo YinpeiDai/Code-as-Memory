@@ -55,10 +55,21 @@ This v2 stopping instruction was revised on 2026-11-07. Earlier prepared runs
 retain their early-stopping prompts and results. Use fresh timetags for the
 revised prompt and identify the prompt revision when comparing runs.
 
-The MIKASA-Robo v2 (`mikasa_robo_v2`) interaction comparison is an explicit **50-demo +
+New MIKASA v2-protocol runs also receive a task-independent
+[motion-verification supplement](../src/cam/prompts/benchmarks/mikasa_robo_both_v2.md):
+demos first, then counted rollouts to check control response and guide revisions,
+with public safety-API limits and rotation/settling checks. This applies to both
+MIKASA adapters only in `mode: "both", both_protocol: "v2"`. Shared core/mode
+prompts remain unchanged. Its text/source are pinned in `run.json` as
+`benchmark_mode_guidance`, included in each learner prompt, and linked from the
+run README. Use a fresh timetag and report this prompt revision; do not add
+private diagnostic findings, scorer thresholds or tuned task-specific gains.
+
+The original MIKASA-Robo v2 (`mikasa_robo_v2`) interaction plan is an explicit **50-demo +
 50-interaction** variant: 256x256 RGB-D, the same ten MIKASA tasks, Claude Code /
 Opus 5.5, eight coding jobs, demo-first v2 and `disjoint_once` seeds. Use
-`configs/experiments/mikasa_v2_50_newseeds_10tasks.json` after the rerender finishes.
+`configs/experiments/mikasa_v2_50_newseeds_10tasks.json` for that GPU/new-seed variant;
+the current CPU/demo-seed assignment is below.
 The launcher requires a final dataset manifest and exactly 50 demos per selected
 task; preparation validates data and seed separation before learning. Rendered
 depth is derived sensor data. Preserve the earlier 25+25 runs and use fresh timetags.
@@ -68,7 +79,7 @@ evaluation: front and wrist RGB are `uint8[256,256,3]`, with aligned
 frame. The same adapter/broker path handles both splits, without image resizing
 or frame subsampling. Historical `mikasa_robo` runs keep their 128x128 RGB interface.
 
-The current user-requested follow-up is **demo-only**, using the same ten tasks,
+The completed **demo-only** follow-up used the same ten tasks,
 50 RGB-D demos each, Claude Code / Opus 5.5 and eight coding jobs. Launch with
 `scripts/develop_batch.py start configs/experiments/mikasa_v2_demos50_10tasks.json
 --workers 8 --gpus 0 1`. Training-rollout budget is zero. The shared demo-only
@@ -77,6 +88,27 @@ conditions from recordings, documenting uncertainty rather than assuming the
 exact hidden scorer is identifiable from successful examples.
 For another machine, follow the [MIKASA-Robo v2 setup guide](mikasa_v2_setup.md),
 including code availability, separate environments and dataset transfer.
+
+The current development uses **50 demos + all 50 training attempts with CPU
+physics** on those same ten tasks. Use
+`configs/experiments/mikasa_v2_cpu_50_demoseeds_10tasks.json`; its dedicated CPU
+config pins the backend for both training and later evaluation, while cameras
+still use GPU rendering. The MIKASA supplement permits unlimited rereading of
+assigned demos and requires using remaining attempts even when the policy seems
+ready. Release/lift distances and cautious motion are hypotheses to investigate
+from demos and counted rollouts, with no supplied scorer thresholds. Keep CPU
+results separate from prior GPU runs and freeze before held-out evaluation.
+The latest seed assignment uses the **same 50 identities/seeds as the demos**,
+once each (`demo_cycle`, `training_seed_count: 50`, `budget: 50`). Preparation
+verifies exact identity equality and test-seed exclusion. The argument-free
+`rollout` API selects the next pinned identity; the ledger rejects a different
+identity or attempt 51. No new training seeds are admitted in this follow-up.
+The other machine should use
+`configs/experiments/mikasa_v2_cpu_50_demoseeds_remaining80.json`, which excludes
+those ten tasks and points directly at the completed NFS replay pool:
+`/nfs/turbo/coe-chaijy-unreplicated/daiyp/CaM/data/mikasa_robo_v2_50`.
+New runs use the concise MIKASA supplement; the active ten-task batch retains
+its earlier pinned wording. See [setup and launch instructions](mikasa_v2_setup.md).
 
 ## Demonstration validation
 

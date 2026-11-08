@@ -1,31 +1,47 @@
 # MIKASA-Robo v2 on another machine
 
-Read [the reproduction rules](reproducing.md) first. The current experiment uses
-the same ten selected tasks, 50 replay-derived 256x256 RGB-D demos per task,
-Claude Code / Opus 5.5, eight coding jobs and zero training rollouts.
-`mikasa_robo_v2` is the CaM adapter name; the official simulator and scoring
-remain unchanged.
+The current follow-up is **demo + interaction v2 with CPU physics**: 50 replayed
+256x256 RGB-D demos and 50 rollouts per task, Claude Code / Opus 5.5, eight coding
+jobs. Rollouts use exactly the assigned demo identities/seeds, once each.
+The host selects the next identity and rejects overrides and attempts beyond 50.
+The prompt permits unlimited offline demo review and requires every remaining
+rollout for exploration or verification, even after success.
 
-The original ten-task batch is complete. See the [development inventory](mikasa_v2_progress.md)
-for the exact **80 remaining tasks** and their separate launch plan. To develop
-those tasks, use `configs/experiments/mikasa_v2_demos50_remaining80.json` wherever
-this guide copies the ten-task plan below.
+Use [the remaining-80 plan](../configs/experiments/mikasa_v2_cpu_50_demoseeds_remaining80.json).
+It excludes the ten tasks already assigned to the original machine. See the
+[task inventory](mikasa_v2_progress.md) and [reproduction rules](reproducing.md).
+New preparations use the concise MIKASA supplement; the running ten-task batch
+retains its earlier, longer prompt. Record that prompt difference in comparisons.
 
-## Code and environments
+## Exact replay-data location
 
-Clone or update the repository, including the pinned MIKASA submodule:
-
-```bash
-git clone --recurse-submodules https://github.com/YinpeiDai/Code-as-Memory.git
-cd Code-as-Memory
-# Existing checkout: git pull --ff-only, then update submodules below.
+```text
+/nfs/turbo/coe-chaijy-unreplicated/daiyp/CaM/data/mikasa_robo_v2_50/
+  manifest.json
+  h5/record_dataset_<Task-ID>.h5
 ```
 
-On Linux, install `uv`, Bubblewrap (`bwrap`), `strace`, `ffmpeg`, and `xz`.
-Install and authenticate Claude Code separately. From the checkout:
+This is the completed **90-task / 4,500-episode** pool, with 50 RGB-D demos per
+task. For example, the remaining-80 selection starts with:
+
+```text
+/nfs/turbo/coe-chaijy-unreplicated/daiyp/CaM/data/mikasa_robo_v2_50/h5/record_dataset_BatteriesCheckerEasy-6-VLA-v0.h5
+```
+
+The plan already points at this NFS directory. The new machine must mount it;
+otherwise update `datasets` in a local copy of the plan. You need the manifest
+and referenced H5 files, not raw RLDS. A local copy must preserve relative paths,
+file contents and manifests. Preparation validates hashes and identities before
+learning, which can take time over NFS. Each learner receives only its task's
+50-demo H5. Data, runs, logs and credentials are excluded from Git.
+
+## Install code and environments
+
+For an existing checkout:
 
 ```bash
-git submodule update --init --recursive
+git pull --ff-only
+git submodule update --init --recursive third_party/mikasa_robo
 uv sync --locked --extra dev
 UV_PROJECT_ENVIRONMENT=$PWD/envs/mikasa_robo/.venv \
   uv sync --frozen --no-dev --project third_party/mikasa_robo --python 3.11
@@ -33,75 +49,65 @@ MS_ASSET_DIR=$PWD/data/raw/mikasa_robo/maniskill_data \
   envs/mikasa_robo/.venv/bin/python -I scripts/download_mikasa_robo_assets.py
 ```
 
-Both MIKASA adapters share this simulator environment. For a custom installation,
-set `CAM_MIKASA_ROBO_V2_PYTHON` to its Python executable and
-`CAM_MIKASA_ROBO_ASSETS` to the asset directory. Keep simulator dependencies
-separate from the root CaM environment. GPU/Vulkan is needed for native replay
-and evaluation; demo-only coding performs no native simulator rollouts.
-See [the environment guide](../envs/mikasa_robo/README.md) for pinned versions.
+For a fresh checkout, first clone
+`https://github.com/YinpeiDai/Code-as-Memory.git`. On Linux, install `uv`,
+Bubblewrap (`bwrap`), `strace`, `ffmpeg`, and `xz`, plus working GPU/Vulkan drivers.
+CPU physics still needs a GPU for rendering. Keep CaM's and the simulator's
+Python environments separate; see [environment details](../envs/mikasa_robo/README.md).
+Custom installations may set `CAM_MIKASA_ROBO_V2_PYTHON` and
+`CAM_MIKASA_ROBO_ASSETS`.
 
-## Demonstrations and account settings
-
-The completed replay dataset is already on shared NFS:
-
-```text
-/nfs/turbo/coe-chaijy-unreplicated/daiyp/CaM/data/mikasa_robo_v2_50
-```
-
-Point the new machine's plan directly at that directory if it mounts the same
-NFS. It contains 90 tasks with 50 demos each (4,500 episodes); the plan exposes
-only the selected task's 50 demos to each learner. Keep new runs and outputs
-under the new checkout. Do not reuse old prepared run directories or copy virtual
-environments. Data, credentials, logs and runs stay outside Git.
-The prepared data already contain rendered depth; raw RLDS is needed only to
-regenerate demonstrations. Preparation verifies hashes and training identities.
-
-With a different NFS mount, use its local absolute path. For a local copy,
-preserve `manifest.json`, referenced H5 files, relative paths and bytes. Copy
-actual files if the original directory is a storage symlink.
-
-For a smaller transfer, use the existing ten per-task dataset directories under
-`/data/daiyp/CaM/datasets/mikasa_v2_demos50_local_20261108/` on the original machine.
-Each has its own manifest and exactly 50 assigned demos. List their new locations
-in the local plan's `datasets` array; this also avoids validating the entire
-90-task pool for a ten-task experiment. Preserve the original manifests.
-
-```bash
-mkdir -p local
-cp configs/mikasa_robo_v2/demos_claude_code.json local/mikasa_demos50.json
-cp configs/experiments/mikasa_v2_demos50_10tasks.json local/mikasa_demos50_plan.json
-```
-
-In the local plan, set `benchmarks.mikasa_robo_v2.config` to
-`local/mikasa_demos50.json` and set `datasets` to the shared NFS path above (or
-your local dataset paths). Reading and hashing the full 90-task pool over NFS
-can make preparation slow; the per-task copies avoid that full-pool scan.
-In the local config, set `coding.aws_profile` and `coding.aws_region` for your
-Bedrock account. Keep the requested client/model, `mode: "demos"`, `budget: 0`,
-`depth: true` and `builtin_demo: false`. Credentials belong in the client's
-authentication setup, never in the plan or learner workspace.
+Install and authenticate Claude Code. The supplied
+[CPU config](../configs/mikasa_robo_v2/cpu/both_v2_claude_code.json) uses Bedrock
+profile `sagemaker` in `us-east-1`. If your account differs, copy the config and
+plan into `local/`, edit `coding.aws_profile` / `coding.aws_region`, and point the
+plan's `benchmarks.mikasa_robo_v2.config` at that local config. Keep the model,
+`physics_backend: "cpu"`, `budget: 50`, `training_seed_count: 50`,
+`training_seed_policy: "demo_cycle"`, and RGB-D settings unchanged. Credentials
+belong in client authentication, never in the plan or learner workspace.
 
 ## Launch and inspect
 
 ```bash
-.venv/bin/python scripts/develop_batch.py start local/mikasa_demos50_plan.json \
+.venv/bin/python scripts/develop_batch.py start \
+  configs/experiments/mikasa_v2_cpu_50_demoseeds_remaining80.json \
   --workers 8 --gpus 0 1
 ```
 
-Use the GPU IDs present on the new machine. The command prints a new batch path
-and launches development in the background. Each task is prepared under a fresh
-timetag and gets its own README, isolated workspace, logs and code revisions.
-Policies freeze to R000 on completion. The learner may use the pure offline
-`safety_check` API; live training rollouts are disabled. Evaluation is a separate
-host action after policy freeze and is not launched by this command.
+Use available rendering GPU IDs on the new machine. Eight coding sessions run
+concurrently, with one live simulator per selected GPU. Each task gets a fresh
+run, blank policy, exact prompt, access-boundary check, command audit, revisions
+and rollout videos. The supervisor continues through all 80 tasks and freezes
+completed policies; it does not launch held-out evaluation. Record the new batch
+tag and machine in the inventory to avoid duplicate assignments.
 
 Replace `BATCH` with the printed batch path:
 
 ```bash
 .venv/bin/python scripts/develop_batch.py status BATCH
-.venv/bin/cam site --batch BATCH --output sites/mikasa_demos50
-.venv/bin/cam serve sites/mikasa_demos50 --host 127.0.0.1 --port 8914
+.venv/bin/cam site --batch BATCH --output sites/mikasa_cpu_both50
+.venv/bin/cam serve sites/mikasa_cpu_both50 --host 127.0.0.1 --port 8916
 ```
 
-Forward port 8914 over SSH and open `http://127.0.0.1:8914/#development` for
-agent logs, source revisions and reference demo videos.
+Forward port 8916 over SSH for the development logs, reference demos, code and
+rollout videos. After a policy is frozen, evaluate its final checkpoint with:
+
+```bash
+.venv/bin/python RUN/runner.py evaluate RUN --budgets 50 --gpus 0 --workers-per-gpu 1
+```
+
+The pinned run config selects CPU physics for both development and testing;
+each result records its actual backend. GPU rendering stays 256x256 RGB-D.
+Native scoring is unchanged. Keep CPU results separate from the default GPU
+protocol: backend changes also change IK and may change scenes for the same seed.
+The offline `safety_check` remains an approximation; live `robot.dry_run` uses
+the active native controller.
+
+## Earlier protocols
+
+The demo-only plans `mikasa_v2_demos50_10tasks.json` and
+`mikasa_v2_demos50_remaining80.json` retain zero training attempts and checkpoint
+R000. The GPU/new-seed plan is `mikasa_v2_50_newseeds_10tasks.json`.
+To prepare a separate CPU evaluation of an unchanged frozen demo-only policy, use
+`scripts/prepare_mikasa_cpu_evaluation.py SOURCE_RUN`, then evaluate its printed
+new run with `--budgets 0`. Preserve original policies, prompts and scored results.

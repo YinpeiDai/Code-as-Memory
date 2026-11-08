@@ -74,7 +74,7 @@ coding-agent filesystem access, and the separation of learning from held-out tes
   strategy paragraph (hypothesis families, no thresholds) is the one sanctioned
   exception to the no-scorer-hints rule; keep it task-agnostic. `robot.dry_run` is
   a shared opt-in kinematic query (no step, no collisions).
-- Current MIKASA follow-up: the same ten selected tasks, demo-only with 50 RGB-D
+- Earlier MIKASA follow-up: the same ten selected tasks, demo-only with 50 RGB-D
   demos each, Claude Code / Opus 5.5, eight coding jobs, zero training rollouts.
   Ask the learner to infer memory representation and candidate completion
   conditions from demos, documenting uncertainty. The MIKASA-only offline
@@ -83,6 +83,41 @@ coding-agent filesystem access, and the separation of learning from held-out tes
   supplied torques or estimate initial PD demand from joint state, velocity and
   action; distinguish URDF effort limits from simulator drive caps. It must not
   create a simulator, use hidden state, or claim actual future torque safety.
+- User-requested MIKASA demo+interaction guidance (2026-11-07): new v2-protocol
+  runs for both MIKASA adapters include the task-independent supplement
+  `src/cam/prompts/benchmarks/mikasa_robo_both_v2.md`. Build from demos first,
+  then use counted training rollouts for motion verification and further
+  revisions, including rotation-command oscillation and settling checks.
+  Explain offline `safety_check` versus live `robot.dry_run` without claiming
+  dynamic safety. Keep shared core/mode prompts identical across benchmarks;
+  supply no scorer thresholds, prior diagnostic feedback or task-specific
+  controller gains. Pin the supplement in the manifest, prompt and run README;
+  use fresh timetags and preserve historical prompts and policies.
+- Current MIKASA development (2026-11-07): the same ten selected tasks, 50 RGB-D
+  demos plus all 50 training attempts on those exact demo identities, Claude Code / Opus 5.5,
+  eight coding jobs, and CPU physics for both development and later evaluation.
+  Use `configs/experiments/mikasa_v2_cpu_50_demoseeds_10tasks.json` with
+  `training_seed_policy: "demo_cycle"`, count 50 and budget 50 (one pass, no repeats).
+  The harness selects the next identity, rejects seed/episode overrides and
+  blocks attempt 51; preparation checks exact demo/rollout identity equality and
+  excludes test seeds. This supersedes new-seed selection for this follow-up.
+  GPU rendering
+  stays 256x256 RGB-D. Assigned demos may be reread/analyzed without an access
+  count limit or simulator charge. Use every remaining rollout for verification
+  even when the policy appears ready. Explore release/lift, timing and motion
+  hypotheses using assigned evidence only; keep paths within checked joint
+  margins without prescribing hidden thresholds. Start fresh blank policies;
+  keep previous demo-only and GPU results separate. The development launcher
+  does not start held-out evaluation.
+- Remaining MIKASA tasks on another machine: use
+  `configs/experiments/mikasa_v2_cpu_50_demoseeds_remaining80.json` (exactly the
+  other 80 tasks). Replay data are at
+  `/nfs/turbo/coe-chaijy-unreplicated/daiyp/CaM/data/mikasa_robo_v2_50`:
+  `manifest.json` and `h5/record_dataset_<Task-ID>.h5`, 90 tasks / 4,500 episodes.
+  Keep CPU physics, 50 demos and one rollout per demo seed, Claude Code / Opus
+  5.5 and eight coding jobs. New preparations use the concise MIKASA prompt;
+  the active ten-task batch retains its original prompt. Record the second
+  machine's batch tag in `docs/mikasa_v2_progress.md`; do not launch duplicates here.
 - Avoid GPU oversubscription: one RMBench evaluation per GPU (≤6 workers), not
   alongside MIKASA GPU-simulation workers. Archive resulting infrastructure
   failures with `cam recover-test` and retry identically.

@@ -1,5 +1,25 @@
 # MIKASA-Robo v2 development inventory
 
+## Current CPU demo + interaction assignment
+
+The original machine is developing the same ten tasks listed below in batch
+`20261108T040959_138834Z`: 50 demos and 50 rollouts on the same demo seeds,
+CPU physics, Claude Code / Opus 5.5, eight coding jobs. These are new policies,
+separate from the completed demo-only batch.
+
+The [CPU remaining-80 plan](../configs/experiments/mikasa_v2_cpu_50_demoseeds_remaining80.json)
+contains the other 80 official tasks and is ready for the second machine; it has
+not been launched here. It uses the same assignment and CPU settings, with the
+concise MIKASA prompt. The running ten-task batch retains its original longer
+prompt. Record the second machine's batch tag before making further assignments.
+
+Replay data: `/nfs/turbo/coe-chaijy-unreplicated/daiyp/CaM/data/mikasa_robo_v2_50`
+(`manifest.json` plus `h5/record_dataset_<Task-ID>.h5`). All 90 tasks have 50
+episodes; all files referenced by the remaining-80 plan were present at this check.
+Follow the [current setup and launch guide](mikasa_v2_setup.md).
+
+## Historical demo-only snapshot
+
 Snapshot: **2026-11-08 01:58 UTC**. Scope: canonical `runs/mikasa_robo_v2/`
 on the original development machine. Historical `mikasa_robo` runs do not count
 as v2 development. Update this inventory when another machine starts tasks.
@@ -128,9 +148,9 @@ TraceShapeSeqHard-VLA-v0
 TraceShapeSeqMedium-VLA-v0
 ```
 
-## Start on the other machine
+## Historical demo-only launch
 
-Follow the [setup guide](mikasa_v2_setup.md), but copy
+For the earlier zero-rollout protocol only, copy
 `configs/experiments/mikasa_v2_demos50_remaining80.json` as your local plan instead
 of the ten-task plan. It already points at:
 

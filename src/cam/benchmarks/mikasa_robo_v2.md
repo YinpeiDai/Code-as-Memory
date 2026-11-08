@@ -18,7 +18,8 @@ reads frame `t`. Frame t is the observation after t commands; `action[t]` was
 issued after frame t. Recordings end at the first native success; the final
 observation is not recorded. Expert H5 is absent during policy execution. The
 assignment lists the demonstration IDs and, separately, the simulator training
-identities; they are disjoint.
+identities and seed schedule. They may be the same identities or disjoint,
+according to the pinned assignment; the learner cannot select or override seeds.
 
 Online `obs.frames` contains all frames since the previous action, one per native
 control step; `obs.current` is latest. `front_*` is a fixed camera viewing the

@@ -1,4 +1,4 @@
-"""Compose one shared instruction, one learning mode and one benchmark guide."""
+"""Compose shared instructions, a learning mode and public benchmark guidance."""
 
 from pathlib import Path
 
@@ -11,6 +11,21 @@ TASK_CLARIFICATIONS = {
     ("mikasa_robo", "SeqOfColors3-VLA-v0"): "clarifications/mikasa_robo_seq_of_colors3.md",
     ("mikasa_robo_v2", "SeqOfColors3-VLA-v0"): "clarifications/mikasa_robo_seq_of_colors3.md",
 }
+
+# Static, task-independent public-interface guidance; no diagnostic input.
+BENCHMARK_MODE_GUIDANCE = {
+    ("mikasa_robo", "both", "v2"): "benchmarks/mikasa_robo_both_v2.md",
+    ("mikasa_robo_v2", "both", "v2"): "benchmarks/mikasa_robo_both_v2.md",
+}
+
+
+def benchmark_mode_guidance(config):
+    relative = BENCHMARK_MODE_GUIDANCE.get(
+        (config.benchmark, config.mode, config.both_protocol)
+    )
+    if relative is None:
+        return None
+    return {"source": f"cam/prompts/{relative}", "text": (ROOT / relative).read_text()}
 
 
 def task_clarification(benchmark, task):
@@ -78,6 +93,19 @@ def render(config, task, episodes, training_episodes=None, adapter=None, interfa
         if config.training_seed_policy == "disjoint_once"
         else "Attempts cycle automatically through these assigned training IDs."
     )
+    if (config.training_seed_policy == "demo_cycle" and config.mode == "both"
+            and len(training_ids) == count == config.budget
+            and len(set(training_ids)) == count and set(training_ids) == set(ids)):
+        schedule = (
+            "Each attempt uses the next assigned demonstration identity and its recorded seed, "
+            "exactly once within this budget. No new training seeds or retries. "
+            "The host selects the identity; rollout accepts no seed or episode override."
+        )
+    physics = (
+        f"Physics backend: {config.physics_backend or 'gpu'} for both training and held-out execution; "
+        "host-selected and fixed for this run. Rendering uses the GPU independently.\n"
+        if config.benchmark == "mikasa_robo_v2" else ""
+    )
     assignment = f"""Task: {task}
 Method: Code-as-Memory. Start from the supplied blank Python policy.
 Benchmark: {config.benchmark}; learning mode: {config.mode}.
@@ -85,7 +113,7 @@ Benchmark: {config.benchmark}; learning mode: {config.mode}.
 Allowed simulator training episode IDs: {training_ids}.
 Maximum simulator attempts: {config.budget} total. {schedule}
 Sensors: {sensors}; task-provided reset video: {config.builtin_demo}.
-Limits: {config.max_decisions} decisions per episode; {config.max_action_steps} step calls per action.
+{physics}Limits: {config.max_decisions} decisions per episode; {config.max_action_steps} step calls per action.
 Use only the CaM tools: command, read_image, usage, snapshot, validate, rollout.
 The writable directory is /workspace; save analysis files in /workspace/scratch.
 Read the supplied api_reference before implementing the policy.
@@ -96,15 +124,17 @@ Read the supplied api_reference before implementing the policy.
         benchmark += "\n" + (ROOT.parent / "benchmarks/robomme_plus.md").read_text()
     if interface is not None and getattr(adapter, "describe_interface", False):
         benchmark += "\n" + describe_interface(interface)
-    # Only the static, explicitly authorized correction above may supplement
-    # task evidence. Never read source-derived task guides or scorer contracts.
+    # Static public guidance and authorized corrections only. Never read
+    # source-derived task guides, scorer contracts or diagnostic outcomes.
     clarification = task_clarification(config.benchmark, task)
+    guidance = benchmark_mode_guidance(config)
     return "\n\n".join(
         [
             assignment,
             *([clarification["text"]] if clarification else []),
             (ROOT / "core.md").read_text(),
             (ROOT / "modes" / f"{mode_file}.md").read_text(),
+            *([guidance["text"]] if guidance else []),
             benchmark,
         ]
     )
