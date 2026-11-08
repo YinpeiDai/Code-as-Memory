@@ -6,6 +6,11 @@ Claude Code / Opus 5.5, eight coding jobs and zero training rollouts.
 `mikasa_robo_v2` is the CaM adapter name; the official simulator and scoring
 remain unchanged.
 
+The original ten-task batch is complete. See the [development inventory](mikasa_v2_progress.md)
+for the exact **80 remaining tasks** and their separate launch plan. To develop
+those tasks, use `configs/experiments/mikasa_v2_demos50_remaining80.json` wherever
+this guide copies the ten-task plan below.
+
 ## Code and environments
 
 Clone or update the repository, including the pinned MIKASA submodule:
