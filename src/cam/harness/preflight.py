@@ -1,43 +1,58 @@
-"""Synthetic 600-frame transport check through the real isolated Python worker."""
+"""Synthetic long-reset transport check through the real isolated Python worker."""
 
 # Adapted from the CAP streamed observation check; see NOTICE.
 import json
+import math
 from pathlib import Path
 import selectors
 import subprocess
 import tempfile
 import threading
 import time
-import numpy as np
+from cam.benchmarks.base import synthetic_value, zero_action
 from cam.harness.isolation import command, limits, terminate
 from cam.runtime.wire import observation_fields, pack, send, receive
 
 PROTOCOL = "streamed-v1"
 FRAME_COUNT = 600
+MINIMUM_BYTES = 256 * 1024**2
 
 
-def synthetic_frame(include_depth=False):
-    values = {
-        "front_rgb": np.full((256, 256, 3), 23, dtype=np.uint8),
-        "wrist_rgb": np.full((256, 256, 3), 71, dtype=np.uint8),
-        "front_K": np.eye(3, dtype=np.float32),
-        "wrist_K": np.eye(3, dtype=np.float32),
-        "front_extrinsic": np.zeros((3, 4), dtype=np.float32),
-        "wrist_extrinsic": np.zeros((3, 4), dtype=np.float32),
-        "tcp": np.zeros(6, dtype=np.float64),
-        "joints": np.zeros(7, dtype=np.float32),
-        "fingers": np.zeros(2, dtype=np.float32),
+def legacy_interface(include_depth=False):
+    """RoboMME's 256x256 sensor set, used when no benchmark interface is given."""
+    from cam.benchmarks.base import action, sensor
+
+    sensors = {
+        "front_rgb": sensor("uint8", (256, 256, 3), "front RGB"),
+        "wrist_rgb": sensor("uint8", (256, 256, 3), "wrist RGB"),
+        "front_K": sensor("float32", (3, 3), "front intrinsics"),
+        "wrist_K": sensor("float32", (3, 3), "wrist intrinsics"),
+        "front_extrinsic": sensor("float32", (3, 4), "front extrinsics"),
+        "wrist_extrinsic": sensor("float32", (3, 4), "wrist extrinsics"),
+        "tcp": sensor("float64", (6,), "TCP"),
+        "joints": sensor("float32", (7,), "joints"),
+        "fingers": sensor("float32", (2,), "fingers"),
     }
     if include_depth:
-        values.update(
-            front_depth=np.full((256, 256), 1234, dtype=np.int16),
-            wrist_depth=np.full((256, 256), 567, dtype=np.int16),
-        )
-    assert set(values) == set(observation_fields(include_depth))
+        sensors["front_depth"] = sensor("int16", (256, 256), "front depth")
+        sensors["wrist_depth"] = sensor("int16", (256, 256), "wrist depth")
+    assert set(sensors) == set(observation_fields(include_depth))
     return {
-        "phase": "demo",
-        "step": 0,
-        **{key: pack(value) for key, value in values.items()},
+        "sensors": sensors,
+        "action": action(
+            ("x", "y", "z", "roll", "pitch", "yaw", "gripper"),
+            "absolute TCP",
+            low=[None] * 6 + [-1.0],
+            high=[None] * 6 + [1.0],
+        ),
+    }
+
+
+def synthetic_values(interface):
+    """Distinct constant per sensor: (name, array) in declared order."""
+    return {
+        name: synthetic_value(spec, 23 + 48 * index)
+        for index, (name, spec) in enumerate(interface["sensors"].items())
     }
 
 
@@ -69,22 +84,39 @@ def stream_initial(writer, goal, frames, frame_count, limits=None, action_spec=N
         raise ValueError("Missing initial observation frames")
 
 
-def transport_preflight(runtime, parent=None, timeout=45, include_depth=False):
+def transport_preflight(
+    runtime, parent=None, timeout=45, include_depth=False, interface=None, python=None
+):
     """Transfer >256 MiB through the real isolated worker using bounded messages."""
     runtime = Path(runtime).resolve()
     started = time.monotonic()
-    frame = synthetic_frame(include_depth)
-    message = {"kind": "frame", "index": FRAME_COUNT - 1, "frame": frame}
-    message_bytes = len(json.dumps(message, separators=(",", ":")).encode()) + 1
+    interface = interface or legacy_interface(include_depth)
+    values = synthetic_values(interface)
+    packed = {key: pack(value) for key, value in values.items()}
+    frame = {"phase": "demo", "step": 0, **packed}
+    message_bytes = (
+        len(
+            json.dumps(
+                {"kind": "frame", "index": FRAME_COUNT - 1, "frame": frame},
+                separators=(",", ":"),
+            ).encode()
+        )
+        + 1
+    )
     # The old one-message reset would exceed the decoder's 256 MiB limit.
-    aggregate_bytes = FRAME_COUNT * message_bytes
-    assert aggregate_bytes > 256 * 1024**2
+    frame_count = min(100000, max(FRAME_COUNT, math.ceil(MINIMUM_BYTES / message_bytes) + 1))
+    aggregate_bytes = frame_count * message_bytes
+    expected = {
+        name: [list(value.shape), value.reshape(-1)[0].item()]
+        for name, value in values.items()
+    }
+    spec = interface["action"]
     report = {
-        "schema": "cam-transport-preflight/1",
+        "schema": "cam-transport-preflight/2",
         "passed": False,
         "protocol": PROTOCOL,
-        "frames": FRAME_COUNT,
-        "image_shape": [256, 256, 3],
+        "frames": frame_count,
+        "sensors": {name: shape for name, (shape, _) in expected.items()},
         "encoded_frame_message_bytes": message_bytes,
         "aggregate_frame_message_bytes": aggregate_bytes,
         "simulator_resets": 0,
@@ -102,42 +134,37 @@ def transport_preflight(runtime, parent=None, timeout=45, include_depth=False):
         workspace = Path(name)
         (workspace / "tools").mkdir()
         (workspace / "task.json").write_text(
-            json.dumps({"task": "BinFill", "runtime": "python", "memory": []})
+            json.dumps({"task": "TransportPreflight", "runtime": "python", "memory": []})
         )
         (workspace / "policy.md").write_text(
             "Synthetic transport check, no task policy.\n"
         )
-        depth_check = (
-            """        if frame.front_depth.shape != (256,256) or frame.wrist_depth.shape != (256,256):
-            raise ValueError('Aligned depth resolution changed')
-        if frame.front_depth.dtype != np.dtype('int16') or frame.wrist_depth.dtype != np.dtype('int16'):
-            raise ValueError('Depth units/storage changed')
-        if frame.front_depth[0,0] != 1234 or frame.wrist_depth[0,0] != 567:
-            raise ValueError('Depth values changed')
-"""
-            if include_depth
-            else ""
-        )
-        (
-            workspace / "tools/policy.py"
-        ).write_text(f'''def perceive_decide(obs, goal, memory, last):
+        (workspace / "tools/policy.py").write_text(f'''EXPECTED = {expected!r}
+ZERO = {zero_action(spec)!r}
+
+
+def perceive_decide(obs, goal, memory, last):
     """Verify complete reset observations cross the isolation boundary."""
-    if len(obs.frames) != {FRAME_COUNT}:
+    if len(obs.frames) != {frame_count}:
         raise ValueError('Reset frames were dropped')
     for index, frame in enumerate(obs.frames):
-        final = index == {FRAME_COUNT - 1}
+        final = index == {frame_count - 1}
         if frame.phase != ('exec' if final else 'demo') or frame.step != (0 if final else index):
             raise ValueError('Reset frames were changed or reordered')
-        if frame.front_rgb.shape != (256,256,3) or frame.wrist_rgb.shape != (256,256,3):
-            raise ValueError('RGB resolution was changed')
-        if frame.front_rgb[0,0,0] != 23 or frame.wrist_rgb[0,0,0] != 71:
-            raise ValueError('Camera observations were changed')
-{depth_check}\
+        if sorted(frame.sensors) != sorted(EXPECTED):
+            raise ValueError('Sensor set changed')
+        for name in EXPECTED:
+            value = getattr(frame, name)
+            if list(value.shape) != EXPECTED[name][0]:
+                raise ValueError('Sensor shape changed: ' + name)
+            if value.reshape(-1)[0] != EXPECTED[name][1]:
+                raise ValueError('Sensor values changed: ' + name)
     return {{"memory": {{}}, "act": {{"tool": "act_observe", "args": {{}}}}}}
+
 
 def act_observe(robot):
     """Send one synthetic action, never a simulator action."""
-    robot.step(*robot.now().tcp, 1.0)
+    robot.step(*ZERO)
 ''')
         try:
             process = subprocess.Popen(
@@ -146,6 +173,7 @@ def act_observe(robot):
                     runtime,
                     ["python3.11", "-m", "cam.runtime.policy_worker"],
                     readonly=True,
+                    python=python,
                 ),
                 stdin=subprocess.PIPE,
                 stdout=subprocess.PIPE,
@@ -175,13 +203,17 @@ def act_observe(robot):
             stage = "initial_observation_transfer"
 
             def initial_frames():
-                for index in range(FRAME_COUNT):
-                    frame["phase"] = "exec" if index == FRAME_COUNT - 1 else "demo"
+                for index in range(frame_count):
+                    frame["phase"] = "exec" if index == frame_count - 1 else "demo"
                     frame["step"] = 0 if frame["phase"] == "exec" else index
                     yield frame
 
             stream_initial(
-                process.stdin, "synthetic transport test", initial_frames(), FRAME_COUNT
+                process.stdin,
+                "synthetic transport test",
+                initial_frames(),
+                frame_count,
+                action_spec=spec,
             )
             stage = "policy_response"
             response = receive(process.stdout, 2 * 1024**2)
@@ -191,7 +223,9 @@ def act_observe(robot):
                     "Worker did not accept the complete reset observations"
                 )
             action = receive(process.stdout, 2 * 1024**2)
-            if action.get("kind") != "step" or len(action.get("action", [])) != 7:
+            if action.get("kind") != "step" or len(action.get("action", [])) != len(
+                spec["names"]
+            ):
                 raise ValueError("Worker did not return a valid synthetic action")
             send(process.stdin, {"frames": [frame], "status": "success"})
             if receive(process.stdout, 2 * 1024**2) != {

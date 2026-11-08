@@ -1,5 +1,9 @@
 # Adapted for Code-as-Memory from the Apache-2.0 CAP implementation; see NOTICE.
-"""Explicit array transport. Never deserialize pickle across the policy boundary."""
+"""Explicit array transport. Never deserialize pickle across the policy boundary.
+
+Frames carry ``phase``, ``step`` and the benchmark's declared sensor arrays. The
+RoboMME field names below remain for that adapter; other benchmarks declare theirs.
+"""
 
 import base64
 import json
@@ -20,12 +24,18 @@ DEPTH_FIELDS = ("front_depth", "wrist_depth")
 
 
 def observation_fields(include_depth=False):
-    """Missing depth configuration preserves the historical RGB contract."""
+    """RoboMME's fields; missing depth configuration preserves its RGB contract."""
     return FIELDS + (DEPTH_FIELDS if include_depth else ())
 
 
+def is_packed(value):
+    return isinstance(value, dict) and set(value) == {"dtype", "shape", "data"}
+
+
 def pack(array):
-    a = np.ascontiguousarray(array)
+    a = np.asarray(array)
+    if not a.flags.c_contiguous:
+        a = np.ascontiguousarray(a)
     return {
         "dtype": a.dtype.str,
         "shape": list(a.shape),
@@ -36,7 +46,7 @@ def pack(array):
 def encoded(frames):
     return [
         {
-            key: pack(value) if key in FIELDS + DEPTH_FIELDS else value
+            key: pack(value) if isinstance(value, np.ndarray) else value
             for key, value in frame.items()
         }
         for frame in frames

@@ -1,0 +1,110 @@
+{
+ "source": "third_party/mikasa_robo @ 509b875f3d207c287497c0a897661062de928bb0",
+ "digest": "sha256 of every evaluate() in the class chain, then the first step() and __init__ overrides, joined by '\\n#--\\n'",
+ "classes": {
+  "BlinkCountButtonPressVLABaseEnv": {
+   "sha256": "950779ceb83ca60d0946afb4b3b3f76fe8ce33acf2118078680727e26821096d",
+   "text": "Official success test (from the environment's evaluation code): button contacts are judged from the TCP position and count only once the phase lamp has turned green. A press registers when the TCP is within {BUTTON_PRESS_XY_RADIUS} m horizontally of the button's centre and no more than {BUTTON_PRESS_Z_MARGIN - BUTTON_CAP_TRAVEL * BUTTON_PRESS_EVENT_RATIO} m above the top of its unpressed cap; the button is released when the TCP is again at least {BUTTON_PRESS_Z_MARGIN - BUTTON_CAP_TRAVEL * BUTTON_RELEASE_READY_RATIO} m above the cap top or leaves that radius. A red press is counted only after the button has been released and the TCP has risen at least {REQUIRED_LIFT_HEIGHT - LIFT_CONFIRM_TOL} m above its height when the press registered; no new red press registers until the previous one is counted. Registering more red presses than there were blinks fails the episode at once. The first black press ends the episode: success if the counted red presses equal the number of blinks, failure otherwise."
+  },
+  "RememberColorVLABaseEnv": {
+   "sha256": "7fe0a179d9c4e1f77518d8b7f17ac34b0e983bf9a9cedbc13230d31f61e45717",
+   "text": "Official success test (from the environment's evaluation code): success at the first step where the TCP is within {GOAL_THRESH} m of the centre of the cube whose colour matches the cue (cube centres rest {CUBE_HALFSIZE} m above the table) while the arm is static (every arm joint speed at most 0.2 rad/s). There is no failure condition; otherwise the episode times out."
+  },
+  "FindImposterColorVLABaseEnv": {
+   "sha256": "f4f9c217a36726b1f95ddc5057caf769e18133a797acecbac0208671e0312c03",
+   "text": "Official success test (from the environment's evaluation code): after all cubes reappear, success at the first step where the TCP is within {GOAL_THRESH} m of the centre of the cube whose colour was absent from the cue (cube centres rest {CUBE_HALFSIZE} m above the table) while the arm is static (every arm joint speed at most 0.2 rad/s). There is no failure condition; otherwise the episode times out."
+  },
+  "ShellGameTouchVLABaseEnv": {
+   "sha256": "5172a21c1dd429f41a2f32383d913c922b038ccb74cf0e33e3dfa5bdccc66187",
+   "text": "Official success test (from the environment's evaluation code): after the cups are lowered, success at the first step where the TCP is within {GOAL_THRESH} m of the reference point of the cup hiding the ball (about 0.053 m above the table) while the arm is static (every arm joint speed at most 0.2 rad/s) and no cup has moved more than {MUG_DISPLACEMENT_SUCCESS_THRESH} m horizontally since the cups were lowered. There is no failure condition; otherwise the episode times out."
+  },
+  "BunchOfColorsVLABaseEnv": {
+   "sha256": "f77c81bb2f288024f42e6fc9a1fa90109ae0558bde4432a2e0f135db082068fb",
+   "text": "Official success test (from the environment's evaluation code): checked only after all cubes have reappeared. A cube is marked touched when the TCP comes within {CUBE_HALFSIZE} m of the point {CUBE_HALFSIZE + 0.005} m above the cube's centre while the arm is static (every arm joint speed at most 0.2 rad/s); marks are permanent. The button responds only while every cue cube and no other cube is marked and no cube is more than {MAX_ALLOWED_CUBE_DISPLACEMENT} m horizontally from where it reappeared. A press registers when the TCP is within {BUTTON_PRESS_XY_RADIUS} m horizontally of the button's centre and no more than {BUTTON_PRESS_Z_MARGIN - BUTTON_CAP_TRAVEL * BUTTON_PRESS_EVENT_RATIO} m above the top of its unpressed cap; the button is released when the TCP is again at least {BUTTON_PRESS_Z_MARGIN - BUTTON_CAP_TRAVEL * BUTTON_RELEASE_READY_RATIO} m above the cap top or leaves that radius. The press counts only after the button has been released and the TCP has risen at least {REQUIRED_LIFT_HEIGHT - LIFT_CONFIRM_TOL} m above its height when the press registered. Success at the first step with a counted press, exactly the cue cubes marked, no cube displaced beyond that limit and a static arm. Touching a non-cue cube makes success impossible; there is no early failure, so the episode then runs to its step limit."
+  },
+  "RememberShapeVLABaseEnv": {
+   "sha256": "5e8991f85fc49f229373ff592f69f63fd0b53c9517dd1597c5c9d09175bad184",
+   "text": "Official success test (from the environment's evaluation code): success at the first step where the TCP is within {GOAL_THRESH} m of the reference point of the object whose shape matches the cue while the arm is static (every arm joint speed at most 0.2 rad/s). There is no failure condition; otherwise the episode times out."
+  },
+  "RememberShapeAndColorVLABaseEnv": {
+   "sha256": "42e1964b3b488c45930175a523df4fd545c3a9677a022a73d6b95143f9390769",
+   "text": "Official success test (from the environment's evaluation code): success at the first step where the TCP is within {GOAL_THRESH} m of the reference point of the object whose shape and colour both match the cue while the arm is static (every arm joint speed at most 0.2 rad/s). There is no failure condition; otherwise the episode times out."
+  },
+  "FindImposterShapeVLABaseEnv": {
+   "sha256": "b3d86ef58e1fd8a2873e0b25bd93f317e546cc647b61271a3783c37038e06a4c",
+   "text": "Official success test (from the environment's evaluation code): after all objects reappear, success at the first step where the TCP is within {GOAL_THRESH} m of the reference point of the object whose shape was absent from the cue while the arm is static (every arm joint speed at most 0.2 rad/s). There is no failure condition; otherwise the episode times out."
+  },
+  "FindImposterShapeAndColorVLABaseEnv": {
+   "sha256": "869ba2d04cac5e08852a40bbb84a44a9051f78261b35a91d3e875876322024de",
+   "text": "Official success test (from the environment's evaluation code): after all objects reappear, success at the first step where the TCP is within {GOAL_THRESH} m of the reference point of the object whose shape-and-colour combination was absent from the cue while the arm is static (every arm joint speed at most 0.2 rad/s). There is no failure condition; otherwise the episode times out."
+  },
+  "ShellGameColorLampTouchVLABaseEnv": {
+   "sha256": "93dd17bc7d0d9ca9ec44cbcbf49fdd52ec3a3b3d371d443c62712d050f57120e",
+   "text": "Official success test (from the environment's evaluation code): after the coloured lamp lights up, success at the first step where the TCP is within {GOAL_THRESH} m of the reference point of the cup covering the ball whose colour matches the lamp (about 0.053 m above the table; the cups stay fixed in place) while the arm is static (every arm joint speed at most 0.2 rad/s). There is no failure condition; otherwise the episode times out."
+  },
+  "ShellGameShuffleTouchVLABaseEnv": {
+   "sha256": "4b1166d171ec5a06ab322829624ea9e342e54d1bfe45a034903d03072dcbe6f2",
+   "text": "Official success test (from the environment's evaluation code): success at the first step where the TCP is within {GOAL_THRESH} m of the reference point of the cup hiding the ball (about 0.053 m above the table) while the arm is static (every arm joint speed at most 0.2 rad/s) and no cup has moved more than {MUG_DISPLACEMENT_SUCCESS_THRESH} m horizontally since the shuffle ended. There is no failure condition; otherwise the episode times out."
+  },
+  "ShellGameShuffleColorLampTouchVLABaseEnv": {
+   "sha256": "b360a398ff08a3a76440b61aafb25297341c89e1b266d3bd39f29093ce957b8e",
+   "text": "Official success test (from the environment's evaluation code): after the shuffle, success at the first step where the TCP is within {GOAL_THRESH} m of the reference point of the cup covering the ball whose colour matches the lamp (about 0.053 m above the table; the cups stay fixed in place) while the arm is static (every arm joint speed at most 0.2 rad/s). There is no failure condition; otherwise the episode times out."
+  },
+  "ShellGamePushVLABaseEnv": {
+   "sha256": "e76a5588690a3bc9b1a3746a1797cbb23f5139dfa82183a7bb56f3584759ddb9",
+   "text": "Official success test (from the environment's evaluation code): success at the first step where the reference point of the cup hiding the ball is within {GOAL_THRESH * 1.6} m (straight-line distance) of an unseen goal point 0.1 m further along +x (away from the robot base) than the ball's starting centre and {GOAL_THRESH / 2} m higher, while the arm is static (every arm joint speed at most 0.3 rad/s). There is no failure condition; otherwise the episode times out."
+  },
+  "InterceptVLABaseEnv": {
+   "sha256": "1a320d03fcb7f792b91511ca9b253aeb27fb97d9cc422509443852fad8277757",
+   "text": "Official success test (from the environment's evaluation code): success at the first step where the ball's centre is within {GOAL_RADIUS} m horizontally of the target's centre. There is no failure condition; otherwise the episode times out."
+  },
+  "InterceptGrabVLABaseEnv": {
+   "sha256": "fb50dfeaa0178029edb4300422f2090f22f358cb82c744571a1a196852d28cc6",
+   "text": "Official success test (from the environment's evaluation code): success at the first step where the gripper grasps the ball (each finger pushes on it with at least 0.5 N, within 85 degrees of that finger's closing direction) while the arm is static (every arm joint speed at most 0.2 rad/s). There is no failure condition; otherwise the episode times out."
+  },
+  "RotateLenientVLABaseEnv": {
+   "sha256": "c4ab4e0a90fdb413629310a74363dcfc04287d3cf265843d92f7885d7a01dee9",
+   "text": "Official success test (from the environment's evaluation code): success at the first step where the peg's rotation about the vertical axis since the start (the Z angle of its XYZ Euler decomposition, wrapped to +/-180 degrees; positive is counter-clockwise seen from above) is within 0.1 rad of the instructed angle while the arm is static (every arm joint speed at most 0.2 rad/s). There is no failure condition; otherwise the episode times out."
+  },
+  "RotateStrictVLABaseEnv": {
+   "sha256": "eb573f31dd5216106a006937d3d8a4b539cc48894c11befabd43725c6cc7800f",
+   "text": "Official success test (from the environment's evaluation code): success at the first step where the peg's rotation about the vertical axis since the start (the Z angle of its XYZ Euler decomposition, wrapped to +/-180 degrees; positive is counter-clockwise seen from above) is within 0.1 rad of the instructed angle, the peg's centre is within 0.05 m of its starting position along both x and y, and the arm is static (every arm joint speed at most 0.2 rad/s). There is no failure condition; otherwise the episode times out."
+  },
+  "TakeItBackVLABaseEnv": {
+   "sha256": "c673c9e13763b6b5c75ffa525def89a01badf6d3e8e78581a4bb28e09989411a",
+   "text": "Official success test (from the environment's evaluation code): the goal counts as reached once the cube's centre is within {GOAL_RADIUS} m horizontally of the first target's centre, and this is remembered. Success at the first later step where the cube's centre is within {GOAL_RADIUS} m horizontally of the centre of the region it started on. There is no failure condition; otherwise the episode times out."
+  },
+  "SeqOfColorsVLABaseEnv": {
+   "sha256": "9015ee3ea40d6625682b78499ab7f55a3b8970ab3d101875988eb19ec0dd133a",
+   "text": "Official success test (from the environment's evaluation code): checked only after all cubes have reappeared. A cube is marked touched when the TCP comes within {CUBE_HALFSIZE} m of the point {CUBE_HALFSIZE + 0.005} m above the cube's centre while the arm is static (every arm joint speed at most 0.2 rad/s); marks are permanent and their order is recorded. The button responds only while exactly the cue cubes are marked, in the order they were shown in the cue, and no cube is more than {MAX_ALLOWED_CUBE_DISPLACEMENT} m horizontally from where it reappeared. A press registers when the TCP is within {BUTTON_PRESS_XY_RADIUS} m horizontally of the button's centre and no more than {BUTTON_PRESS_Z_MARGIN - BUTTON_CAP_TRAVEL * BUTTON_PRESS_EVENT_RATIO} m above the top of its unpressed cap; the button is released when the TCP is again at least {BUTTON_PRESS_Z_MARGIN - BUTTON_CAP_TRAVEL * BUTTON_RELEASE_READY_RATIO} m above the cap top or leaves that radius. The press counts only after the button has been released and the TCP has risen at least {REQUIRED_LIFT_HEIGHT - LIFT_CONFIRM_TOL} m above its height when the press registered. Success at the first step with a counted press, those marks, no cube displaced beyond that limit and a static arm. Touching a non-cue cube, or cue cubes out of cue order, makes success impossible; there is no early failure, so the episode then runs to its step limit."
+  },
+  "ChainOfColorsVLABaseEnv": {
+   "sha256": "7e8f0a816ac4270403de39001bf0c9bd07338ba4fa5304a6ed60f973ed799e0c",
+   "text": "Official success test (from the environment's evaluation code): checked only after all cubes have reappeared. A cube is marked touched when the TCP comes within {CUBE_HALFSIZE} m of the point {CUBE_HALFSIZE + 0.005} m above the cube's centre while the arm is static (every arm joint speed at most 0.2 rad/s); marks are permanent and their order is recorded. The button responds only while exactly the cue cubes are marked, in the order they were shown in the cue, and no cube is more than {MAX_ALLOWED_CUBE_DISPLACEMENT} m horizontally from where it reappeared. A press registers when the TCP is within {BUTTON_PRESS_XY_RADIUS} m horizontally of the button's centre and no more than {BUTTON_PRESS_Z_MARGIN - BUTTON_CAP_TRAVEL * BUTTON_PRESS_EVENT_RATIO} m above the top of its unpressed cap; the button is released when the TCP is again at least {BUTTON_PRESS_Z_MARGIN - BUTTON_CAP_TRAVEL * BUTTON_RELEASE_READY_RATIO} m above the cap top or leaves that radius. The press counts only after the button has been released and the TCP has risen at least {REQUIRED_LIFT_HEIGHT - LIFT_CONFIRM_TOL} m above its height when the press registered. Success at the first step with a counted press, those marks, no cube displaced beyond that limit and a static arm. Touching a non-cue cube, or cue cubes out of cue order, makes success impossible; there is no early failure, so the episode then runs to its step limit."
+  },
+  "GatherAndRecallVLABaseEnv": {
+   "sha256": "fd54e26befc2233b13938074cfb927aaf78fd2bc56617fc1ceb0d2e582bf610d",
+   "text": "Official success test (from the environment's evaluation code): a cube is on the disc while its centre is within {DISC_ON_THRESH} m horizontally of the disc's centre and lower than 0.5 m, and it moves slower than {CUBE_VEL_THRESH} m/s. A button press registers when the TCP is within {BUTTON_PRESS_XY_RADIUS} m horizontally of a button's centre and no more than {BUTTON_PRESS_Z_MARGIN - BUTTON_CAP_TRAVEL * BUTTON_PRESS_EVENT_RATIO} m above its unpressed cap top, and only while every cube is on the disc. The first registered press ends the episode: success if that button's colour matches the lamp flash, failure otherwise."
+  },
+  "TimedTransferVLABaseEnv": {
+   "sha256": "65804178262713cb478ea6a8809dae10765bcf8945ca21c47b24225b8c043660",
+   "text": "Official success test (from the environment's evaluation code): the cube is on the red disc while its centre is within {GOAL_THRESH} m horizontally of the red disc's centre and less than {DISC_HALF_HEIGHT * 2 + CUBE_HALF_SIZE * 3} m above the table. Counting control steps from the step the lamp turns green, success at the first step from {int(DELAY_STEPS * (1 - TOLERANCE_FRAC))} to {int(DELAY_STEPS * (1 + TOLERANCE_FRAC))} (inclusive) on which the cube is on the red disc. The cube on the red disc earlier (after the lamp turned green) fails the episode at once, and so does reaching step {int(DELAY_STEPS * (1 + TOLERANCE_FRAC)) + 1} without success."
+  },
+  "BatteriesCheckerVLABaseEnv": {
+   "sha256": "3ab44e7049066fbfb2ce3da193935a2a9f96d6b5ee07696b613c0cfda368333a",
+   "text": "Official success test (from the environment's evaluation code): each check is a cycle of three events, in this order. Insert: a battery that the gripper is not grasping rests with its centre within {SOCKET_INSERT_XY_TOL} m horizontally and {SOCKET_INSERT_Z_TOL} m vertically of the socket slot. Return: that battery, not grasped and out of the socket, is within {SLOT_RETURN_XY_TOL} m horizontally and {SLOT_RETURN_Z_TOL} m vertically of its own tray slot. Confirm: the button is pressed: the TCP is within {BUTTON_PRESS_XY_RADIUS} m horizontally of the button's centre and no more than {BUTTON_PRESS_Z_MARGIN - BUTTON_CAP_TRAVEL * BUTTON_PRESS_EVENT_RATIO} m above its unpressed cap top, after the TCP was at least {BUTTON_PRESS_Z_MARGIN - BUTTON_CAP_TRAVEL * BUTTON_RELEASE_READY_RATIO} m above the cap top or outside that radius since the previous press. Success at the first step where every battery has completed a cycle and every checked battery is within {SLOT_RETURN_XY_TOL * 3} m horizontally and {SLOT_RETURN_Z_TOL * 3} m vertically of its own tray slot. There is no failure condition; otherwise the episode times out."
+  },
+  "BatteriesCheckerEasyVLABaseEnv": {
+   "sha256": "3ec7ad89c7013366881c345002009c188335841a47f7ab75df6d069c99a469d1",
+   "text": "Official success test (from the environment's evaluation code): each check is a cycle of two events, in this order. Insert: a battery that the gripper is not grasping rests with its centre within {SOCKET_INSERT_XY_TOL} m horizontally and {SOCKET_INSERT_Z_TOL} m vertically of the socket slot; the environment then returns that battery to its tray slot. Confirm: the button is pressed: the TCP is within {BUTTON_PRESS_XY_RADIUS} m horizontally of the button's centre and no more than {BUTTON_PRESS_Z_MARGIN - BUTTON_CAP_TRAVEL * BUTTON_PRESS_EVENT_RATIO} m above its unpressed cap top, after the TCP was at least {BUTTON_PRESS_Z_MARGIN - BUTTON_CAP_TRAVEL * BUTTON_RELEASE_READY_RATIO} m above the cap top or outside that radius since the previous press. Success at the first step where every battery has completed a cycle and every checked battery is within {SLOT_RETURN_XY_TOL * 3} m horizontally and {SLOT_RETURN_Z_TOL * 3} m vertically of its own tray slot. There is no failure condition; otherwise the episode times out."
+  },
+  "TraceShapeVLABaseEnv": {
+   "sha256": "75bf47e3a3b89ff39ec9541b3c9f19d2bc12dffd4cab6d140557efa0a2f3ffe1",
+   "text": "Official success test (from the environment's evaluation code): only after the lamp turns green. The demonstrated contour carries {NUM_CHECKPOINTS} checkpoints spaced along the red cube's path, the first at its starting point. A checkpoint is visited when the green cube's centre comes within {CHECKPOINT_THRESH} m of it horizontally (any order; visits are remembered). Success at the first step where every checkpoint has been visited and the green cube's centre is within {CHECKPOINT_THRESH} m horizontally of the first checkpoint. There is no failure condition; otherwise the episode times out."
+  },
+  "TraceShapeSeqVLABaseEnv": {
+   "sha256": "c3f3cded4373009e42d1391eec960448e6f921355c26a0abea9578bf8ce28040",
+   "text": "Official success test (from the environment's evaluation code): only after the lamp turns green. Each demonstrated contour carries {NUM_CHECKPOINTS} checkpoints spaced along the red cube's path, the first at its starting point. Contours are checked one at a time in demonstration order: a checkpoint of the current contour is visited when the green cube's centre comes within {CHECKPOINT_THRESH} m of it horizontally (any order), and the contour is closed when all its checkpoints are visited and the green cube's centre is within {CHECKPOINT_THRESH} m of its first checkpoint; then the next contour starts. A button press registers when the TCP is within {BUTTON_PRESS_XY_RADIUS} m horizontally of the button's centre and no more than {BUTTON_PRESS_Z_MARGIN - BUTTON_CAP_TRAVEL * BUTTON_PRESS_EVENT_RATIO} m above its unpressed cap top. The first press ends the episode: success if every contour has been closed, failure otherwise."
+  }
+ }
+}

@@ -96,7 +96,7 @@ def test_demo_count_does_not_expand_allowed_interaction_seeds(raw, tmp_path):
     prepare(
         root,
         dataset,
-        RunConfig(benchmark="robomme", mode="both", budget=20),
+        RunConfig(benchmark="robomme", mode="both", budget=20, both_protocol="v1"),
         benchmark_source=source,
     )
     cfg = read(root / "tasks/BinFill/state/config.json")

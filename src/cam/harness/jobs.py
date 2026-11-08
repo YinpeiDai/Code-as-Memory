@@ -12,11 +12,11 @@ import sys
 import threading
 import time
 
-from cam.config import CodingConfig
+from cam.config import CodingConfig, default_evaluation_budgets
 from cam.core.history import freeze, select_checkpoint
 from cam.harness.isolation import run, terminate
 from cam.harness.preflight import transport_preflight
-from cam.harness.prepare import STARTER, pinned_environment, validate_run
+from cam.harness.prepare import STARTER, pinned_environment, starter, validate_run
 from cam.io import read, sha256, write
 from cam.providers.clients import invocation, unexpected_tool
 from cam.providers.usage import summarize_sessions
@@ -32,21 +32,41 @@ def locked(path):
 
 
 def preflight(root):
+    """Stream a long synthetic reset for every distinct declared task interface."""
     root = Path(root)
     plan = validate_run(root, full_data=True)
     path = root / "preflight.json"
+    interfaces = plan.get("interfaces") or {None: None}
+    key = json.dumps(sorted(interfaces.items(), key=lambda item: str(item[0])), sort_keys=True)
+    digest = __import__("hashlib").sha256(key.encode()).hexdigest()
     with locked(root / "locks/preflight.lock"):
         if path.exists():
             result = read(path)
-            if result["runtime_hash"] == plan["runtime_hash"] and result["passed"]:
+            if (
+                result["runtime_hash"] == plan["runtime_hash"]
+                and result.get("interfaces_sha256", digest) == digest
+                and result["passed"]
+            ):
                 return result
-        result = transport_preflight(
-            root / "runtime",
-            parent=root,
-            include_depth=plan["config"]["depth"],
-            timeout=120,
-        )
-        result["runtime_hash"] = plan["runtime_hash"]
+        checks, seen = {}, {}
+        for task, interface in interfaces.items():
+            signature = json.dumps(interface, sort_keys=True)
+            if signature not in seen:
+                seen[signature] = transport_preflight(
+                    root / "runtime",
+                    parent=root,
+                    include_depth=plan["config"]["depth"],
+                    timeout=120,
+                    interface=interface,
+                    python=plan.get("policy_python"),
+                )
+            checks[str(task)] = seen[signature]
+        result = {
+            "passed": all(check["passed"] for check in checks.values()),
+            "runtime_hash": plan["runtime_hash"],
+            "interfaces_sha256": digest,
+            "checks": checks,
+        }
         write(path, result)
         if not result["passed"]:
             raise RuntimeError("Transport preflight failed; inspect " + str(path))
@@ -174,8 +194,13 @@ def learn_task(root, task, gpu, resume=False):
                         "Final isolated validation failed: "
                         + (out + err).decode(errors="replace")[-4000:]
                     )
-                starter = task_root / "program/tools/policy.py"
-                if starter.exists() and starter.read_text() == STARTER:
+                blank = (
+                    starter(plan["interfaces"][task])
+                    if "interfaces" in plan
+                    else STARTER
+                )
+                policy_file = task_root / "program/tools/policy.py"
+                if policy_file.exists() and policy_file.read_text() == blank:
                     raise ValueError("Agent left the starter policy unchanged")
                 freeze(service.cfg)
             finally:
@@ -265,14 +290,14 @@ def run_queue(root, name, jobs, slots, worker, resume=False):
         return state
 
 
-def subprocess_job(root, argv, log, gpu, timeout):
+def subprocess_job(root, argv, log, gpu, timeout, python=None):
     env = pinned_environment(root)
     env.update(
         CUDA_VISIBLE_DEVICES=str(gpu), OMP_NUM_THREADS="1", OPENBLAS_NUM_THREADS="1"
     )
     with log.open("xb") as stream:
         proc = subprocess.Popen(
-            [sys.executable, str(root / "runner.py"), *argv],
+            [python or sys.executable, str(root / "runner.py"), *argv],
             env=env,
             stdout=stream,
             stderr=subprocess.STDOUT,
@@ -339,7 +364,7 @@ def evaluate(
     budgets = (
         budgets
         if budgets is not None
-        else ([0] if plan["config"]["mode"] == "demos" else [1, 5, 10, 20])
+        else default_evaluation_budgets(plan["config"])
     )
     if (
         len(set(budgets)) != len(budgets)
@@ -413,6 +438,7 @@ def evaluate(
             queue_folder / f"{key}_{time.time_ns()}.log",
             gpu,
             plan["config"]["policy_timeout"] + 600,
+            python=plan.get("simulator_python"),
         )
         path = folder / "result.json"
         if code or not path.exists():

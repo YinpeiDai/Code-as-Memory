@@ -13,6 +13,15 @@ import select
 
 PYTHON = Path(sys.executable).resolve().parent.parent
 PACKAGES = Path(sys.prefix) / "lib/python3.11/site-packages"
+
+
+def policy_python():
+    """This interpreter's sandbox mounts; recorded at preparation for all later workers.
+
+    Benchmark simulators may run in their own environments, but coding commands and
+    generated policies always use the CaM Python 3.11 environment that prepared the run.
+    """
+    return {"base": str(PYTHON), "packages": str(PACKAGES), "prefix": sys.prefix}
 DEPENDENCIES = (
     "numpy",
     "numpy.libs",
@@ -31,9 +40,17 @@ DEPENDENCIES = (
 
 
 def command(
-    workspace, runtime, argv, feedback=None, readonly=False, demonstrations=None
+    workspace,
+    runtime,
+    argv,
+    feedback=None,
+    readonly=False,
+    demonstrations=None,
+    python=None,
 ):
     """Private PID/network/mount namespaces, zero inherited credentials or sockets."""
+    base = Path(python["base"]) if python else PYTHON
+    packages = Path(python["packages"]) if python else PACKAGES
     args = [
         "/usr/bin/bwrap",
         "--unshare-all",
@@ -56,7 +73,7 @@ def command(
         "--tmpfs",
         "/home",
         "--ro-bind",
-        str(PYTHON),
+        str(base),
         "/python",
         "--dir",
         "/packages",
@@ -66,8 +83,8 @@ def command(
     for name in ("python", "python3", "python3.11"):
         args += ["--symlink", "/python/bin/python3.11", "/tools/" + name]
     for name in DEPENDENCIES:
-        if (PACKAGES / name).exists():
-            args += ["--ro-bind", str(PACKAGES / name), "/packages/" + name]
+        if (packages / name).exists():
+            args += ["--ro-bind", str(packages / name), "/packages/" + name]
     args += [
         "--ro-bind",
         str(runtime),

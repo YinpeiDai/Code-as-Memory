@@ -1,14 +1,33 @@
-"""Lossless allowed-observation H5 and paired-camera rollout video."""
+"""Lossless allowed-observation H5 and tiled-camera rollout video."""
 
 # Adapted from the Apache-2.0 CAP broker; see NOTICE.
+import json
+
 import numpy as np
 import h5py
 import imageio.v2 as imageio
-from cam.runtime.wire import observation_fields, DEPTH_FIELDS
+
+
+def tile(frame, names):
+    """Side-by-side RGB tiles; shorter tiles are zero-padded, never resampled."""
+    images = []
+    for name in names:
+        image = np.asarray(frame[name])
+        if image.ndim == 2:
+            image = np.repeat(image[..., None], 3, axis=-1)
+        images.append(image.astype(np.uint8))
+    height = max(image.shape[0] for image in images)
+    padded = [
+        np.pad(image, ((0, height - image.shape[0]), (0, 0), (0, 0)))
+        for image in images
+    ]
+    tiled = np.hstack(padded)
+    # H.264 needs even dimensions.
+    return np.pad(tiled, ((0, tiled.shape[0] % 2), (0, tiled.shape[1] % 2), (0, 0)))
 
 
 class Capture:
-    def __init__(self, out):
+    def __init__(self, out, sensors=None, video=("front_rgb", "wrist_rgb")):
         self.h5 = h5py.File(out / "observations.h5", "w")
         self.n = 0
         self.h5.attrs.update(
@@ -16,7 +35,10 @@ class Capture:
             phase_encoding="0=demo, 1=exec",
             depth_units="millimetres",
         )
-        self.fields = None
+        if sensors:
+            self.h5.attrs["sensors"] = json.dumps(sensors)
+        self.fields = list(sensors) if sensors else None
+        self.video_fields = list(video)
         self.video = imageio.get_writer(
             out / "episode.mp4",
             fps=20,
@@ -29,11 +51,10 @@ class Capture:
     def append(self, frames):
         for frame in frames:
             if not self.n:
-                self.fields = observation_fields(
-                    any(key in frame for key in DEPTH_FIELDS)
-                )
+                if self.fields is None:
+                    self.fields = [k for k in frame if k not in ("phase", "step")]
                 for key in self.fields:
-                    a = frame[key]
+                    a = np.asarray(frame[key])
                     self.h5.create_dataset(
                         key,
                         shape=(0, *a.shape),
@@ -60,7 +81,7 @@ class Capture:
                 d = self.h5[key]
                 d.resize(self.n + 1, axis=0)
                 d[self.n] = value
-            self.video.append_data(np.hstack([frame["front_rgb"], frame["wrist_rgb"]]))
+            self.video.append_data(tile(frame, self.video_fields))
             self.n += 1
         self.h5.flush()
 

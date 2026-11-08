@@ -13,33 +13,86 @@ import re
 from urllib.parse import quote
 
 from cam import __file__ as package_file
-from cam.benchmarks.registry import get_adapter
+from cam.benchmarks.base import pin_source, source_hash
+from cam.benchmarks.registry import checkout, get_adapter, simulator_python
 from cam.config import RunConfig
 from cam.core.budget import Ledger
 from cam.core.history import materialize, snapshot
 from cam.data.extract import validate_dataset
 from cam.io import copy_tree, read, sha256, tree_hash, write
-from cam.prompts import render
+from cam.prompts import render, task_clarification
 from cam.harness.run_readme import write_run_readme, write_runs_readme
+from cam.harness.isolation import policy_python
 
-SETTINGS = {
-    "demos": "demo_only",
-    "interaction": "interaction_only",
-    "both": "demo_interaction",
-}
-
-STARTER = '''def perceive_decide(obs, goal, memory, last):
+STARTER_TEMPLATE = '''def perceive_decide(obs, goal, memory, last):
     """Replace this observation-only template with a general task program."""
     return {"memory": {}, "act": {"tool": "act_observe", "args": {}}}
 
 def act_observe(robot):
     """Observe one native step; this template does not solve the task."""
-    robot.step(*robot.now().tcp, 1.0)
+    STEP
     return {"observed": True}
 '''
+STARTER = STARTER_TEMPLATE.replace("STEP", "robot.step(*robot.now().tcp, 1.0)")
+SNAPSHOT = (
+    "import importlib.metadata as m, json, sys\n"
+    "import numpy, h5py, imageio, imageio_ffmpeg\n"
+    "print(json.dumps({'python': sys.version, 'executable': sys.executable, "
+    "'prefix': sys.prefix, 'packages': {d.metadata['Name']: d.version "
+    "for d in m.distributions() if d.metadata['Name']}}))"
+)
 
 
-def make_runtime(output, demonstrations=True):
+def starter(interface):
+    """The blank policy: one observation step using the benchmark's declared action."""
+    return STARTER_TEMPLATE.replace("STEP", interface["starter"])
+
+
+def environment_snapshot():
+    return {
+        "python": sys.version,
+        "executable": sys.executable,
+        "prefix": sys.prefix,
+        "packages": {
+            d.metadata["Name"]: d.version
+            for d in importlib.metadata.distributions()
+            if d.metadata["Name"]
+        },
+    }
+
+
+def simulator_snapshot(python):
+    """Pin a dedicated benchmark interpreter; it must also run the trusted broker."""
+    result = subprocess.run(
+        [str(python), "-I", "-c", SNAPSHOT], capture_output=True, text=True, timeout=300
+    )
+    if result.returncode:
+        raise ValueError(
+            f"Benchmark interpreter {python} is unusable (needs numpy, h5py, imageio, imageio-ffmpeg): "
+            + result.stderr[-2000:]
+        )
+    value = json.loads(result.stdout.strip().splitlines()[-1])
+    value["executable"] = str(python)
+    return value
+
+
+def simulator_build_files(adapter):
+    """Preserve the simulator's own dependency lock and installation recipe."""
+    if adapter.name in ("mikasa_robo", "mikasa_robo_v2"):
+        folder = adapter.source
+    else:
+        root = checkout()
+        if root is None:
+            return []
+        folder = root / "envs" / adapter.name
+    return [
+        folder / name
+        for name in ("pyproject.toml", "uv.lock", "install.sh", "install_record.txt")
+        if (folder / name).is_file()
+    ]
+
+
+def make_runtime(output, demonstrations=True, mikasa_motion_preview=False):
     source = Path(package_file).parent
     package = output / "cam"
     for folder in ("", "core", "runtime"):
@@ -57,7 +110,34 @@ def make_runtime(output, demonstrations=True):
             shutil.copy2(
                 source / folder / (name + ".py"), package / folder / (name + ".py")
             )
+    if mikasa_motion_preview:
+        target = package / "runtime/mikasa_robo/dry_run.md"
+        target.parent.mkdir()
+        shutil.copy2(source / "benchmarks/mikasa_robo_api/api.md", target)
+        (target.parent / "__init__.py").write_text('"""Public MIKASA robot-only offline API."""\nfrom .offline import safety_check\n')
+        for name in ("offline.py", "panda_model.json", "safety_check.md"):
+            shutil.copy2(source / "benchmarks/mikasa_robo_api" / name, target.parent / name)
     return output
+
+
+def training_schedule(adapter, task, demonstrations, config):
+    """Select private interaction identities without using outcomes or test feedback."""
+    if config.training_seed_policy == "demo_cycle":
+        if config.training_seed_count is not None and config.training_seed_count > len(demonstrations):
+            raise ValueError(f"Cannot select {config.training_seed_count} training seeds from {len(demonstrations)} demos for {task}")
+        return adapter.select_training(demonstrations, config.training_seed_count)
+    from cam.data.demonstrations import random_select
+
+    native = adapter.records(task, "train")
+    demo_ids = {int(r["episode"]) for r in demonstrations}
+    demo_seeds = {int(r["seed"]) for r in demonstrations}
+    test_seeds = {int(r["seed"]) for r in adapter.records(task, "test")}
+    if len({int(r["episode"]) for r in native}) != len(native) or len({int(r["seed"]) for r in native}) != len(native):
+        raise ValueError(f"Duplicate native training identities: {task}")
+    candidates = [r for r in native if int(r["episode"]) not in demo_ids and int(r["seed"]) not in demo_seeds | test_seeds]
+    if len(candidates) < config.training_seed_count:
+        raise ValueError(f"{task}: only {len(candidates)} disjoint training seeds for {config.training_seed_count} attempts")
+    return random_select(candidates, config.training_seed_count, config.benchmark + "/interaction-disjoint-v1", task)
 
 
 def preparation_inputs(dataset, config, tasks=None, benchmark_source=None):
@@ -71,7 +151,7 @@ def preparation_inputs(dataset, config, tasks=None, benchmark_source=None):
     selected = validate_dataset(dataset)
     if selected["benchmark"] != config.benchmark or selected[
         "benchmark_hash"
-    ] != tree_hash(adapter.source):
+    ] != source_hash(adapter):
         raise ValueError("Dataset and benchmark snapshot do not match")
     if selected["depth"] != config.depth:
         raise ValueError("Extraction and policy sensor settings must agree")
@@ -82,6 +162,22 @@ def preparation_inputs(dataset, config, tasks=None, benchmark_source=None):
         or set(tasks) - set(selected["tasks"])
     ):
         raise ValueError("Choose distinct extracted tasks")
+    if config.builtin_demo and not getattr(adapter, "supports_builtin_demo", True):
+        raise ValueError(f"{config.benchmark} has no reset video; set builtin_demo=false")
+    for task in tasks:
+        adapter.interface(task, config.depth)
+        for split in ("train", "test"):
+            try:
+                rows = adapter.records(task, split)
+            except FileNotFoundError as exc:
+                raise ValueError(
+                    f"{config.benchmark}/{task}: pinned {split} metadata is missing; "
+                    "complete metadata preparation before preparing a run"
+                ) from exc
+            if not rows:
+                raise ValueError(f"{config.benchmark}/{task}: empty {split} metadata")
+        records = selected["tasks"][task]["episodes"]
+        training_schedule(adapter, task, records, config)
     return dataset, config, tasks, adapter, selected
 
 
@@ -120,7 +216,7 @@ def prepare_runs(
     base = Path(base).resolve()
     client = coding_run_name(config.coding)
     roots = [
-        base / config.benchmark / task / client / SETTINGS[config.mode] / timetag
+        base / config.benchmark / task / client / config.setting / timetag
         for task in tasks
     ]
     for root in roots:
@@ -135,7 +231,7 @@ def prepare_runs(
     return {
         "schema": "cam-preparation/1",
         "benchmark": config.benchmark,
-        "setting": SETTINGS[config.mode],
+        "setting": config.setting,
         "timetag": timetag,
         "runs": results,
     }
@@ -148,28 +244,32 @@ def _prepare(root, dataset, config, tasks, adapter, selected):
         )
     root.mkdir(parents=True)
     benchmark = root / "inputs/benchmark" / adapter.package
-    copy_tree(adapter.source, benchmark)
+    assets = pin_source(adapter, benchmark)
     package = root / "inputs/harness/cam"
     copy_tree(Path(package_file).parent, package)
     runtime = make_runtime(
-        root / "runtime", demonstrations=config.mode != "interaction"
+        root / "runtime", demonstrations=config.mode != "interaction",
+        mikasa_motion_preview=adapter.name in ("mikasa_robo", "mikasa_robo_v2"),
     )
     write(root / "inputs/dataset.json", selected)
-    environment = {
-        "python": sys.version,
-        "executable": sys.executable,
-        "packages": {
-            d.metadata["Name"]: d.version
-            for d in importlib.metadata.distributions()
-            if d.metadata["Name"]
-        },
-    }
-    write(root / "inputs/environment.json", environment)
+    write(root / "inputs/environment.json", environment_snapshot())
     metadata = root / "inputs/metadata"
     inputs = {
         name: sha256(root / name)
         for name in ("inputs/dataset.json", "inputs/environment.json")
     }
+    simulator = simulator_python(adapter)
+    if simulator is not None:
+        write(root / "inputs/simulator_environment.json", simulator_snapshot(simulator))
+        inputs["inputs/simulator_environment.json"] = sha256(
+            root / "inputs/simulator_environment.json"
+        )
+        for source in simulator_build_files(adapter):
+            target = root / "inputs/simulator_build" / source.name
+            target.parent.mkdir(exist_ok=True)
+            shutil.copy2(source, target)
+            inputs[target.relative_to(root).as_posix()] = sha256(target)
+    interfaces = {task: adapter.interface(task, config.depth) for task in tasks}
     for parent in Path(package_file).resolve().parents:
         lock = parent / "uv.lock"
         if lock.is_file():
@@ -180,7 +280,7 @@ def _prepare(root, dataset, config, tasks, adapter, selected):
     for task in tasks:
         item = selected["tasks"][task]
         records = item["episodes"]
-        training_records = adapter.select_training(records, config.training_seed_count)
+        training_records = training_schedule(adapter, task, records, config)
         counts[task] = len(records) if config.mode != "interaction" else 0
         train = {int(row["episode"]): row for row in adapter.records(task, "train")}
         test = adapter.records(task, "test")
@@ -188,7 +288,7 @@ def _prepare(root, dataset, config, tasks, adapter, selected):
             native = train[int(row["episode"])]
             if (
                 int(native["seed"]) != int(row["seed"])
-                or native["difficulty"] != row["difficulty"]
+                or native.get("difficulty") != row.get("difficulty")
             ):
                 raise ValueError("Selected training identity changed")
         if {int(row["seed"]) for row in test} & {int(row["seed"]) for row in records}:
@@ -209,14 +309,16 @@ def _prepare(root, dataset, config, tasks, adapter, selected):
                 + ', "runtime": "python", "memory": []}\n'
             ).encode(),
             "policy.md": b"Document the generated task policy and its evidence.\n",
-            "tools/policy.py": STARTER.encode(),
+            "tools/policy.py": starter(interfaces[task]).encode(),
         }
         materialize(workspace, files)
         materialize(task_root / "program", files)
         (workspace / "scratch").mkdir()
         (task_root / "feedback").mkdir()
         (task_root / "logs").mkdir()
-        prompt = render(config, task, records, training_records)
+        prompt = render(
+            config, task, records, training_records, adapter, interfaces[task]
+        )
         (workspace / "PROTOCOL.md").write_text(prompt)
         (task_root / "prompt.md").write_text(prompt)
         inputs[(task_root / "prompt.md").relative_to(root).as_posix()] = sha256(
@@ -226,11 +328,13 @@ def _prepare(root, dataset, config, tasks, adapter, selected):
         cfg = {
             "task": task,
             "mode": config.mode,
+            "both_protocol": config.both_protocol,
             "budget": config.budget,
             "task_root": str(task_root),
             "ledger": str(task_root / "state/ledger.sqlite"),
             "train_episodes": [int(row["episode"]) for row in training_records],
             "train_records": training_records,
+            "training_seed_policy": config.training_seed_policy,
             "depth": config.depth,
         }
         write(task_root / "state/config.json", cfg)
@@ -247,11 +351,16 @@ def _prepare(root, dataset, config, tasks, adapter, selected):
             except OSError:
                 shutil.copy2(dataset / item["file"], target)
             inputs[target.relative_to(root).as_posix()] = item["sha256"]
+    # The guard matters: simulators that start multiprocessing "spawn" children
+    # (e.g. RMBench's CuRobo planners) re-import the main script in each child.
     (root / "runner.py").write_text("""from pathlib import Path
 import sys
 sys.path.insert(0, str(Path(__file__).resolve().parent / 'inputs/harness'))
-from cam.cli import main
-raise SystemExit(main())
+
+if __name__ == "__main__":
+    from cam.cli import main
+
+    raise SystemExit(main())
 """)
     revision = subprocess.run(
         ["git", "-C", str(adapter.source), "rev-parse", "HEAD"],
@@ -265,6 +374,10 @@ raise SystemExit(main())
         "config": config.to_dict(),
         "tasks": tasks,
         "demonstrations_per_task": counts,
+        "task_clarifications": {
+            task: value for task in tasks
+            if (value := task_clarification(config.benchmark, task)) is not None
+        },
         "dataset_reference": str(dataset / "manifest.json"),
         "raw_data_reference": selected["raw_data"],
         "benchmark_package": adapter.package,
@@ -275,6 +388,10 @@ raise SystemExit(main())
         else None,
         "harness_hash": tree_hash(package),
         "runtime_hash": tree_hash(runtime),
+        "interfaces": interfaces,
+        "policy_python": policy_python(),
+        "simulator_python": str(simulator) if simulator is not None else sys.executable,
+        "benchmark_assets": assets,
         "inputs": inputs,
         "test_episodes": {
             task: [int(row["episode"]) for row in adapter.records(task, "test")]
@@ -296,7 +413,21 @@ def validate_run(root, full_data=False):
     plan = read(root / "run.json")
     if plan.get("schema") != "cam-run/1" or not (root / "prepared.json").is_file():
         raise ValueError("Expected a prepared Code-as-Memory run")
-    expected = read(root / "inputs/environment.json")["packages"]
+    snapshots = [("coding", read(root / "inputs/environment.json"))]
+    if (root / "inputs/simulator_environment.json").exists():
+        snapshots.append(
+            ("simulator", read(root / "inputs/simulator_environment.json"))
+        )
+    current = Path(sys.prefix).resolve()
+    matches = [
+        (role, value)
+        for role, value in snapshots
+        if Path(value.get("prefix", sys.prefix)).resolve() == current
+    ]
+    if not matches:
+        raise ValueError(f"Interpreter {sys.executable} is not pinned for this run")
+    role, snapshot = matches[-1] if len(matches) > 1 else matches[0]
+    expected = snapshot["packages"]
     runtime_packages = {
         "numpy",
         "scipy",
@@ -316,7 +447,7 @@ def validate_run(root, full_data=False):
         "fast-kinematics",
     }
     for name, version in expected.items():
-        if name.lower().replace("_", "-") in runtime_packages:
+        if role == "simulator" or name.lower().replace("_", "-") in runtime_packages:
             try:
                 actual = importlib.metadata.version(name)
             except importlib.metadata.PackageNotFoundError:
@@ -332,6 +463,11 @@ def validate_run(root, full_data=False):
     ]:
         if tree_hash(root / relative) != plan[key]:
             raise ValueError(f"Pinned source changed: {relative}")
+    if full_data:
+        for link, expected in plan.get("benchmark_assets", {}).items():
+            path = root / "inputs/benchmark" / plan["benchmark_package"] / link
+            if tree_hash(path.resolve()) != expected:
+                raise ValueError(f"Pinned benchmark assets changed: {link}")
     for relative, expected in plan["inputs"].items():
         if relative.endswith(".h5") and not full_data:
             continue

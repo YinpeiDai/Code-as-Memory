@@ -1,0 +1,24 @@
+{
+  "selection_reason": "Original ten-task MIKASA selection: 25 offline demos and 25 distinct training interactions with the v2 protocol. RGB-only historical comparison; use the separate mikasa_v2_demos50_10tasks plan for the current RGB-D demo-only experiment.",
+  "benchmarks": {
+    "mikasa_robo": {
+      "config": "configs/mikasa_robo/both_v2_claude_code.json",
+      "datasets": [
+        "data/mikasa_robo_25"
+      ],
+      "raw": "data/raw/mikasa_robo/rlds",
+      "tasks": [
+        "BatteriesCheckerEasy-3-VLA-v0",
+        "BlinkCountButtonPressEasy-VLA-v0",
+        "BunchOfColors3-VLA-v0",
+        "ChainOfColors3-VLA-v0",
+        "FindImposterColor3-VLA-v0",
+        "RememberColor3-VLA-v0",
+        "SeqOfColors3-VLA-v0",
+        "ShellGameTouch-VLA-v0",
+        "TakeItBack-VLA-v0",
+        "TimedTransferEasy-VLA-v0"
+      ]
+    }
+  }
+}

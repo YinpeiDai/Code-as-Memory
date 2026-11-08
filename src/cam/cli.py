@@ -28,6 +28,13 @@ def main(argv=None):
     data.add_argument("--no-videos", action="store_true")
     data.add_argument("--workers", type=int, default=2)
     data.add_argument("--resume", action="store_true")
+    subset = sub.add_parser("subset", help="Assign demos from a validated pool to a new standalone dataset")
+    subset.add_argument("--dataset", type=Path, required=True)
+    subset.add_argument("--output", type=Path, required=True)
+    subset.add_argument("--count", type=int, default=25)
+    subset.add_argument("--tasks", nargs="+")
+    subset.add_argument("--allow-fewer", action="store_true", help="Record the actual count when fewer demos are available; never pad")
+    subset.add_argument("--resume", action="store_true")
     prep = sub.add_parser(
         "prepare",
         help="Create task runs in benchmark/task/client-model/setting/timetag folders",
@@ -81,6 +88,7 @@ def main(argv=None):
     site.add_argument("--runs", type=Path, nargs="*", default=[])
     site.add_argument("--datasets", type=Path, nargs="*", default=[])
     site.add_argument("--output", type=Path, required=True)
+    site.add_argument("--batch", type=Path, help="Follow a development batch and add its runs as they become ready")
     serve = sub.add_parser(
         "serve", help="Serve an exported CaM site, including video byte ranges"
     )
@@ -163,6 +171,10 @@ def main(argv=None):
             args.benchmark_source,
             args.resume,
         )
+    elif args.command == "subset":
+        from cam.data.subset import subset
+
+        result = subset(args.dataset, args.output, args.count, args.tasks, args.allow_fewer, args.resume)
     elif args.command == "prepare":
         from cam.harness.prepare import prepare_runs
 
@@ -241,7 +253,7 @@ def main(argv=None):
     elif args.command == "site":
         from cam.reporting.site import build_site
 
-        result = build_site(args.runs, args.datasets, args.output)
+        result = build_site(args.runs, args.datasets, args.output, args.batch)
     elif args.command == "serve":
         from cam.reporting.site import serve
 

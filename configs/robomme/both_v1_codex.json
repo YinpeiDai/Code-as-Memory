@@ -1,20 +1,19 @@
 {
   "benchmark": "robomme",
   "mode": "both",
-  "budget": 20,
+  "both_protocol": "v1",
+  "budget": 25,
   "depth": true,
   "builtin_demo": true,
   "max_decisions": 40,
   "max_action_steps": 1500,
   "policy_timeout": 1800,
   "coding": {
-    "agent": "claude_code",
-    "model": "us.anthropic.claude-opus-5-5",
-    "provider": "bedrock",
+    "agent": "codex",
+    "model": "gpt-6.1-sol",
+    "provider": "openai",
     "reasoning_effort": "high",
-    "timeout": 21600,
-    "aws_profile": "sagemaker",
-    "aws_region": "us-east-1"
+    "timeout": 21600
   },
   "training_seed_count": 3
 }

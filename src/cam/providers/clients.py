@@ -63,7 +63,7 @@ def invocation(config, root, task, gpu, session):
     }
     if config.agent == "claude_code":
         write(session / "mcp.json", {"mcpServers": {"cam": server}})
-        env["MCP_TOOL_TIMEOUT"] = "2200000"
+        env["MCP_TOOL_TIMEOUT"] = str(max(2200000, config.timeout * 1000))
         if config.provider == "bedrock":
             env.update(
                 CLAUDE_CODE_USE_BEDROCK="1",

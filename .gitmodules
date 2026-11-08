@@ -1,3 +1,6 @@
 [submodule "third_party/robomme_benchmark"]
 	path = third_party/robomme_benchmark
 	url = https://github.com/RoboMME/robomme_benchmark.git
+[submodule "third_party/mikasa_robo"]
+	path = third_party/mikasa_robo
+	url = https://github.com/CognitiveAISystems/MIKASA-Robo

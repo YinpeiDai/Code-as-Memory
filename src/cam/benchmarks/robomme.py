@@ -7,7 +7,9 @@ import sys
 
 from cam.io import read, task_name
 from .robomme_observations import array, observations
-from .base import EpisodeStart, StepResult
+from .base import EpisodeStart, StepResult, action, sensor
+
+STICK_TASKS = ("PatternLock", "RouteStick")
 
 
 def default_source():
@@ -54,6 +56,8 @@ class NativeEnvironment:
 class RoboMME:
     name = "robomme"
     package = "robomme"
+    guide = "robomme.md"
+    simulator = None  # the CaM environment's `robomme` extra serves the simulator
     observations = staticmethod(observations)
 
     def __init__(self, source=None):
@@ -87,11 +91,46 @@ class RoboMME:
         return records
 
     def action_spec(self, task):
+        gripper = task not in STICK_TASKS
+        return action(
+            ("x", "y", "z", "roll", "pitch", "yaw", "gripper"),
+            "One absolute world TCP target (metres, XYZ roll/pitch/yaw radians) for one "
+            "native control step; gripper -1 closes and +1 opens"
+            + ("." if gripper else "; ignored for stick tasks."),
+            low=[None] * 6 + [-1.0],
+            high=[None] * 6 + [1.0],
+            ignored=() if gripper else ("gripper",),
+            type="absolute_world_tcp_rpy",
+            gripper=gripper,
+            control_frequency=20,
+            native_max_steps_argument=1300,
+        )
+
+    def interface(self, task, depth):
+        sensors = {
+            "front_rgb": sensor("uint8", (None, None, 3), "front camera RGB"),
+            "wrist_rgb": sensor("uint8", (None, None, 3), "wrist camera RGB"),
+            "front_K": sensor("float", (3, 3), "front camera 3x3 intrinsics"),
+            "wrist_K": sensor("float", (3, 3), "wrist camera 3x3 intrinsics"),
+            "front_extrinsic": sensor("float", (3, 4), "front camera 3x4 world-to-camera extrinsics"),
+            "wrist_extrinsic": sensor("float", (3, 4), "wrist camera 3x4 world-to-camera extrinsics"),
+            "tcp": sensor("float", (6,), "measured native TCP XYZ metres and roll/pitch/yaw radians"),
+            "joints": sensor("float", (None,), "arm joint positions"),
+            "fingers": sensor("float", (None,), "gripper finger widths"),
+        }
+        if depth:
+            for camera in ("front", "wrist"):
+                sensors[camera + "_depth"] = sensor(
+                    "int16",
+                    (None, None),
+                    camera + " depth, int16 optical-axis millimetres, 0 unknown",
+                    aligned_with=camera + "_rgb",
+                )
         return {
-            "type": "absolute_world_tcp_rpy",
-            "gripper": task not in ("PatternLock", "RouteStick"),
-            "control_frequency": 20,
-            "native_max_steps_argument": 1300,
+            "sensors": sensors,
+            "action": self.action_spec(task),
+            "video": ["front_rgb", "wrist_rgb"],
+            "starter": "robot.step(*robot.now().tcp, 1.0)",
         }
 
     def begin(self, env, *, builtin_demo, depth):

@@ -5,9 +5,13 @@ __pycache__/
 .pytest_cache/
 /build/
 /dist/
+/runs
 /runs/
+/data
 /data/
 /sites/
+/outputs
+/outputs/
 /local/
 .ruff_cache/
 *.log
@@ -31,3 +35,8 @@ __pycache__/
 *.strace
 /docs/robomme_25_demo_selection.csv
 /docs/robomme_25_demo_selection.json
+
+# Local simulator builds and downloaded assets; retain environment recipes/locks.
+/envs/*/assets/
+/envs/*/curobo/
+/envs/*/install_record.txt

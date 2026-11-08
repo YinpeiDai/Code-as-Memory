@@ -2,6 +2,8 @@
 
 import shlex
 
+from cam.config import BOTH_PROTOCOLS, learning_setting
+
 
 HISTORY = """## Development history versus checkpoints
 
@@ -22,6 +24,47 @@ checkpoints are immutable code for evaluation.
 
 """
 
+MIKASA_DRY_RUN = """## MIKASA robot motion preview
+
+Inside an episode, `robot.dry_run(..., mode="absolute" or "delta")` checks the
+next requested arm joint target against robot joint limits. It does not step
+physics, expose task state, or check collisions. Absolute inputs become one
+bounded command toward a world XYZ/RPY pose; delta inputs use `robot.step` units.
+This is robot RPC inside an action routine, not an additional coding-agent tool.
+Queries are capped at `max_action_steps` per action routine by the host.
+
+The public reference is `api_reference/runtime/mikasa_robo/dry_run.md` in the
+coding workspace. The live-query implementation stays private. Each rollout
+records requests/results in `dry_runs.jsonl`;
+only counted training attempts copy this log to `/feedback`. Queries consume
+no native steps or extra attempts; their containing training rollout is counted.
+Earlier prepared runs retain their original API; changing it requires a new timetag.
+
+For simulator-free development, `from cam.runtime.mikasa_robo import safety_check`
+provides a pure offline API on supplied robot state and optional actions. It
+reports position margins, supplied torque versus URDF effort limits, and an
+initial PD-demand estimate versus drive caps when velocities and a target are
+supplied. Missing inputs produce unavailable torque feedback. The public module
+`offline.py`, sanitized `panda_model.json`, and `safety_check.md` are mounted in
+`runtime/cam/runtime/mikasa_robo/` and mirrored in the coding API reference.
+They contain no task, object, scorer or simulator implementation. This API is
+allowed in demo-only mode, uses no simulator or attempt, and its command output
+is preserved in the normal audit. `robot.safety_check(...)` exposes the same pure
+calculation to generated action routines.
+
+"""
+
+MIKASA_RGBD = """## MIKASA v2 observation interface
+
+Development and held-out evaluation both render native 256x256 RGB-D from the
+front (scene) and wrist cameras on every control step. `front_rgb`/`wrist_rgb`
+are `uint8[256,256,3]`; aligned `front_depth`/`wrist_depth` are `int16[256,256]`
+optical-axis millimetres (0 unknown). Camera intrinsics and world-to-camera
+extrinsics accompany every frame. `depth: true` is required; CaM does not resize
+or subsample these observations. The same interface is used by the assigned demos.
+
+"""
+
 ACCESS = """## What the coding agent can access
 
 The host client authenticates to the provider. Model-accessible I/O uses only
@@ -32,7 +75,7 @@ private mount, PID, and network namespaces, without host credentials or network.
 | Agent-visible path | Host source relative to this run | Access during development |
 |---|---|---|
 | `/workspace` | `tasks/<Task>/workspace/` | Read/write: `task.json`, `policy.md`, `tools/*.py`, analysis notes, `scratch/`, `PROTOCOL.md`, and `api_reference/` |
-| `/demonstrations` | `tasks/<Task>/demonstrations/` | Read-only assigned extracted H5; present only in `demo_only` and `demo_interaction` |
+| `/demonstrations` | `tasks/<Task>/demonstrations/` | Read-only assigned extracted H5; present in demo-only and both demo-plus-interaction versions |
 | `/feedback` | `tasks/<Task>/feedback/` | Read-only feedback from this task's counted training attempts; empty in `demo_only` |
 | `/runtime` | `runtime/` | Read-only public CaM Python API |
 | `/packages` | Allowlisted analysis packages from the host environment | Read-only NumPy, SciPy, Pillow, OpenCV, h5py, imageio, and their required libraries |
@@ -45,10 +88,18 @@ private mount, PID, and network namespaces, without host credentials or network.
 denied at zero budget. Held-out evaluation requires a separate host `cam evaluate`
 after freeze; neither `cam learn` nor a coding-agent tool can launch it.
 
-**The RoboMME simulator source is not copied into the coding workspace.**
-`inputs/benchmark/robomme/` serves the trusted simulator. `api_reference/` contains
-only public policy/memory, sensor, robot RPC, and enabled demo-reader interfaces,
+**The BENCHMARK simulator source is not copied into the coding workspace.**
+`inputs/benchmark/PACKAGE/` serves the trusted simulator, run by the pinned
+interpreter in `run.json` (`simulator_python`). `api_reference/` contains only
+public policy/memory, sensor, robot RPC, and enabled demo-reader interfaces,
 without task implementations, scoring logic, or hidden state.
+Prompts include public sensor/action semantics, without scorer-derived task
+contracts or success thresholds. The learner infers task conditions from its
+assigned evidence and counted training feedback. Any user-authorized task
+instruction correction is listed above and recorded in `run.json` and the prompt.
+Large simulator assets may be linked under that private snapshot; their hashes
+are recorded in `run.json`. Coding commands and policies use the pinned CaM
+Python 3.11 sandbox even when the simulator needs its own Python environment.
 
 Other host run paths are not mounted: `inputs/`, run manifests, `runner.py`,
 `state/`, `program/`, `history/`, `checkpoints/`, `policy/`, `logs/`, `audit/`,
@@ -86,8 +137,10 @@ Each new experiment has its own task-specific leaf:
 runs/<benchmark>/<task>/<agent-model>/<setting>/<timetag>/
 ```
 
-Settings are `demo_only`, `interaction_only`, and `demo_interaction`, corresponding
-to modes `demos`, `interaction`, and `both`. Short folders use `cc` for Claude Code
+Settings are `demo_only`, `interaction_only`, `demo_interaction_v1`, and
+`demo_interaction_v2`. Mode `both` requires `both_protocol: "v1"` (free evidence
+choice) or `"v2"` (demos first, interaction for verification). Both use the same
+six-tool harness. Short folders use `cc` for Claude Code
 and `cx` for Codex, e.g. `cc-opus5.5` or `cx-gpt6.1-sol`. Provider prefixes are
 omitted from standard model names; variant suffixes are retained and unsafe
 characters percent-encoded. Exact client/provider/model IDs remain in `run.json`.
@@ -105,14 +158,38 @@ is not mounted into coding tools. Existing legacy run paths remain usable.
 def write_run_readme(root, manifest):
     cfg = manifest["config"]
     coding = cfg["coding"]
-    settings = {
-        "demos": "demo_only",
-        "interaction": "interaction_only",
-        "both": "demo_interaction",
-    }
+    setting = learning_setting(cfg["mode"], cfg.get("both_protocol"))
+    protocol = "Not applicable"
+    if cfg["mode"] == "both":
+        version = cfg.get("both_protocol")
+        protocol = (
+            f"{version}: {BOTH_PROTOCOLS[version]} (prompt instructions; shared harness)"
+            if version else "Historical unversioned prompt"
+        )
     run = shlex.quote(str(root))
     budgets = "0" if cfg["mode"] == "demos" else str(cfg["budget"])
     tasks = ", ".join(manifest["tasks"])
+    if (
+        cfg["mode"] == "both"
+        and cfg.get("both_protocol") == "v2"
+        and cfg.get("training_seed_policy") == "disjoint_once"
+    ):
+        attempt_guidance = (
+            "The v2 prompt requires using all remaining attempts on the assigned distinct "
+            "training seeds to verify and strengthen the solution, even when it seems ready "
+            "for testing. Successful verification does not require a code change."
+        )
+    elif cfg["mode"] == "demos":
+        attempt_guidance = "No training simulator attempts are allowed in demo-only learning."
+    else:
+        attempt_guidance = "The attempt limit is a ceiling. The agent may stop early."
+    clarifications = "".join(
+        f"{value['text'].rstrip()}\n\n"
+        f"User-authorized correction for `{task}`; pinned source: "
+        f"`inputs/harness/{value['source']}`. The exact text is also recorded "
+        "in `run.json` under `task_clarifications` and in the learner prompt.\n\n"
+        for task, value in manifest.get("task_clarifications", {}).items()
+    )
     (root / "README.md").write_text(
         f"""# {manifest["config"]["benchmark"]} / {tasks}
 
@@ -122,13 +199,24 @@ def write_run_readme(root, manifest):
 | Model | `{coding["model"]}` |
 | Provider | `{coding["provider"]}` |
 | Reasoning effort | `{coding["reasoning_effort"]}` |
-| Learning setting | `{settings[cfg["mode"]]}` |
+| Learning setting | `{setting}` |
+| Demo + interaction protocol | {protocol} |
 | Demonstrations per task | `{manifest["demonstrations_per_task"]}` |
 | Maximum training simulator attempts | `{cfg["budget"]}` |
+| Interaction seed schedule | `{cfg.get("training_seed_policy", "demo_cycle")}`; `{cfg.get("training_seed_count")}` identities |
 | Depth / task-provided reset video | `{cfg["depth"]}` / `{cfg["builtin_demo"]}` |
 | Expected test episodes | `{sum(len(v) for v in manifest["test_episodes"].values())}` |
 
-## Commands
+{attempt_guidance} Logs and freeze metadata record the number actually used.
+Ending learning freezes the final
+validated policy without automatically starting held-out evaluation.
+`disjoint_once` assigns distinct training seeds outside the demonstrations and
+held-out tests, used once each in the pinned order. `demo_cycle` is the historical
+schedule that repeats selected demonstration identities. With a host GPU pool,
+rollouts wait for a free simulator slot before consuming an attempt; coding and
+offline analysis continue independently in other sessions.
+
+{clarifications}## Commands
 
 ```bash
 cam learn {run} --gpus 0 --workers-per-gpu 1
@@ -163,5 +251,9 @@ reports/                          aggregate JSON and CSV results
 
 """
         + HISTORY
-        + ACCESS
+        + (MIKASA_RGBD if cfg["benchmark"] == "mikasa_robo_v2" else "")
+        + (MIKASA_DRY_RUN if cfg["benchmark"] in ("mikasa_robo", "mikasa_robo_v2") else "")
+        + ACCESS.replace("BENCHMARK", manifest["config"]["benchmark"]).replace(
+            "PACKAGE", manifest["benchmark_package"]
+        )
     )

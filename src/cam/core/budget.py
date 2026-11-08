@@ -27,6 +27,17 @@ def program_hash(root):
     return value.hexdigest()
 
 
+def next_episode(config, used):
+    if used >= config["budget"]:
+        return None
+    episodes = config["train_episodes"]
+    if config.get("training_seed_policy", "demo_cycle") == "disjoint_once":
+        if used >= len(episodes) or len(set(episodes)) != len(episodes):
+            raise ValueError("Distinct training episode schedule exhausted or duplicated")
+        return episodes[used]
+    return episodes[used % len(episodes)]
+
+
 class Ledger:
     def __init__(self, path):
         self.path = Path(path)
@@ -87,6 +98,8 @@ class Ledger:
             for key in ("task", "mode", "budget", "train_episodes", "task_root"):
                 if saved[key] != config[key]:
                     raise ValueError(f"Attempt configuration changed: {key}")
+            if saved.get("training_seed_policy", "demo_cycle") != config.get("training_seed_policy", "demo_cycle"):
+                raise ValueError("Attempt configuration changed: training_seed_policy")
             used = db.execute("SELECT COUNT(*) FROM attempts").fetchone()[0]
             if used >= saved["budget"]:
                 raise ValueError("Attempt budget exhausted; simulator reset denied")
@@ -94,7 +107,7 @@ class Ledger:
                 "SELECT COUNT(*) FROM attempts WHERE status='running'"
             ).fetchone()[0]:
                 raise ValueError("An attempt is already running")
-            if episode != saved["train_episodes"][used % len(saved["train_episodes"])]:
+            if episode != next_episode(saved, used):
                 raise ValueError("Only the next assigned training episode is allowed")
             checkpoint_locked(config, db)
             now = time.time()

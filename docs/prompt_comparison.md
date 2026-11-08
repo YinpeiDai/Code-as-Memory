@@ -9,7 +9,8 @@ over time. Archives never initialize new coding sessions.
 | Plus Python core/demo | Released demos; RGB-D/calibration described | Inspect all demos; synthetic/static checks |
 | Regular legacy three-demo | One easy/medium/hard; no depth or calibration; older end-effector frame | Generic legacy assignment |
 | Regular modern demo-only | Modern RGB-D, native TCP, calibration, expert commands | Per-episode perception and geometry checks; zero attempts |
-| Current CaM | Manifest-derived counts/IDs; RGB-D by default | Shared core + mode + benchmark guide; same isolated tools for both clients |
+| CaM both v1 | Manifest-derived evidence and training identities | Free choice of demo analysis, offline checks, and interaction |
+| CaM both v2 | Same evidence, tools, seeds, and 25-attempt ceiling as v1 | Demo-derived solution first; resolve uncertainties through rollouts, then use remaining distinct training seeds for verification |
 
 The old extractor used `robot_endeffector_p/q`; modern data provides measured TCP
 in `obs/eef_state`. These frames are not interchangeable. CaM reads native TCP
@@ -21,9 +22,14 @@ not isolate depth or diversity as the cause. Controlled comparisons need fresh
 runs holding other factors fixed.
 
 The historical regular modern assignment was hard-coded to demonstration-only
-learning. CaM renders all three modes from the validated configuration. Plus's
-later `both_v2` adds candidate IDs, reviews, and repeated verification; CaM's
-simple demo-first/counted-feedback protocol does not claim equivalence.
+learning. CaM renders all three modes from the validated configuration; `both`
+requires an explicit `both_protocol: "v1"` or `"v2"`. The original simplified
+CaM `both.md` has been removed. Both new strategies use the same six-tool harness
+and differ through prompt instructions. The historical Plus `both_v2` also adds
+candidate IDs, mandatory reviews, selection safeguards, and a reserved final
+confirmation cycle. Those mechanisms are not part of CaM's prompt comparison;
+CaM v2 does not claim exact historical protocol equivalence. See
+[version selection and historical compatibility](demo_interaction.md).
 
 At migration, pinned official regular RoboMME Python files matched the local
 regular implementation. The official Plus package differed from completed local

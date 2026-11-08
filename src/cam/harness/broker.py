@@ -1,5 +1,6 @@
 """One trusted simulator episode; the generated policy sees sensors only."""
 
+import math
 import ctypes
 from pathlib import Path
 import selectors
@@ -11,6 +12,7 @@ import traceback
 
 import numpy as np
 
+from cam.benchmarks.base import check_frames, normalize_action
 from cam.benchmarks.registry import get_adapter
 from cam.core.budget import Ledger, program_hash
 from cam.core.history import select_checkpoint
@@ -18,7 +20,7 @@ from cam.harness.capture import Capture
 from cam.harness.isolation import command, limits, terminate
 from cam.harness.preflight import stream_initial
 from cam.io import read, write
-from cam.runtime.wire import observation_fields, receive, send, encoded
+from cam.runtime.wire import receive, send, encoded
 
 TERMINAL = ("success", "fail", "timeout", "error")
 
@@ -43,14 +45,19 @@ def execute(
     folder,
     config,
     progress=None,
+    policy_python=None,
 ):
     """Same execution and recording path for training and held-out testing."""
     folder = Path(folder)
     folder.mkdir(parents=True, exist_ok=False)
     started = time.time()
+    interface = adapter.interface(task, config["depth"])
+    sensors, spec = interface["sensors"], interface["action"]
     env = worker = capture = stderr = timer = None
     expired = threading.Event()
     status, steps, calls, rows, actions = "harness_error", 0, 0, [], []
+    dry_runs = dry_runs_in_action = 0
+    metrics = None
     goal = error = None
     stage = "environment_creation"
     try:
@@ -60,7 +67,10 @@ def execute(
             env, builtin_demo=config["builtin_demo"], depth=config["depth"]
         )
         goal, frames, context = initial.goal, initial.frames, initial.context
-        capture = Capture(folder)
+        check_frames(frames, sensors)
+        if not frames:
+            raise ValueError("The benchmark returned no initial observation")
+        capture = Capture(folder, sensors, interface["video"])
         capture.append(frames)
         stage = "worker_initialization"
         stderr = (folder / "policy_stderr.txt").open("wb")
@@ -78,6 +88,7 @@ def execute(
                     runtime,
                     ["python3.11", "-m", "cam.runtime.policy_worker"],
                     readonly=True,
+                    python=policy_python,
                 ),
             ],
             stdin=subprocess.PIPE,
@@ -111,13 +122,14 @@ def execute(
             (encoded([f])[0] for f in frames),
             len(frames),
             limits={key: config[key] for key in ("max_decisions", "max_action_steps")},
-            action_spec=adapter.action_spec(task),
+            action_spec=spec,
         )
         del initial, frames
         stage, status = "policy_execution", "running"
         with (
             (folder / "actions.jsonl").open("w") as action_log,
             (folder / "decisions.jsonl").open("w") as decision_log,
+            (folder / "dry_runs.jsonl").open("w") as dry_run_log,
         ):
             import json
 
@@ -133,6 +145,7 @@ def execute(
                     if len(rows) >= config["max_decisions"]:
                         raise PolicyError("Decision limit violated")
                     rows.append(message["row"])
+                    dry_runs_in_action = 0
                     decision_log.write(json.dumps(message) + "\n")
                     decision_log.flush()
                     continue
@@ -149,16 +162,61 @@ def execute(
                             )
                     error = message.get("error")
                     break
+                if kind == "dry_run" and status not in TERMINAL:
+                    # Kinematic query only: no step, no frames, no score; adapters opt in.
+                    pose = message.get("pose")
+                    if not hasattr(adapter, "dry_run"):
+                        reply = {"error": "robot.dry_run is not available for this benchmark"}
+                    elif (
+                        not isinstance(pose, list)
+                        or len(pose) != 6
+                        or not all(isinstance(v, (int, float)) and math.isfinite(v) for v in pose)
+                    ):
+                        raise PolicyError("Invalid dry_run pose")
+                    else:
+                        dry_runs_in_action += 1
+                        if dry_runs_in_action > config["max_action_steps"]:
+                            raise PolicyError("Action-tool dry_run limit exceeded")
+                        dry_runs += 1
+                        reply = {"dry_run": adapter.dry_run(env, [float(v) for v in pose], context)}
+                        dry_run_log.write(json.dumps({"call": calls, "dry_run": dry_runs, "pose": pose, "result": reply["dry_run"]}) + "\n")
+                        dry_run_log.flush()
+                    send(worker.stdin, reply)
+                    continue
+                if kind == "motion_preview" and status not in TERMINAL:
+                    # MIKASA robot-only query, never a task-state or scoring query.
+                    if (
+                        adapter.name not in ("mikasa_robo", "mikasa_robo_v2")
+                        or not spec.get("motion_preview") or not hasattr(adapter, "preview_motion")
+                    ):
+                        send(worker.stdin, {"error": "Motion dry-run is not available for this benchmark"})
+                        continue
+                    values, mode = message.get("values"), message.get("mode")
+                    if (
+                        mode not in ("absolute", "delta") or not isinstance(values, list)
+                        or len(values) != 6 or not all(
+                            type(v) in (int, float) and math.isfinite(v) for v in values
+                        )
+                    ):
+                        raise PolicyError("Invalid motion dry-run request")
+                    dry_runs_in_action += 1
+                    if dry_runs_in_action > config["max_action_steps"]:
+                        raise PolicyError("Action-tool dry_run limit exceeded")
+                    dry_runs += 1
+                    result = adapter.preview_motion(env, values, mode, context)
+                    dry_run_log.write(json.dumps({
+                        "call": calls, "dry_run": dry_runs, "step": steps,
+                        "mode": mode, "values": values, "result": result,
+                    }, allow_nan=False) + "\n")
+                    dry_run_log.flush()
+                    send(worker.stdin, {"dry_run": result})
+                    continue
                 if kind != "step" or status in TERMINAL:
                     raise PolicyError("Unsupported simulator request")
-                action = np.asarray(message.get("action"), dtype=float)
-                if action.shape != (7,) or not np.isfinite(action).all():
-                    raise PolicyError("Invalid action")
-                action[6] = (
-                    np.clip(action[6], -1, 1)
-                    if adapter.action_spec(task)["gripper"]
-                    else 0
-                )
+                try:
+                    action = normalize_action(spec, message.get("action"))
+                except (TypeError, ValueError) as exc:
+                    raise PolicyError("Invalid action: " + str(exc)) from None
                 calls += 1
                 actions.append(action.tolist())
                 action_log.write(
@@ -170,6 +228,7 @@ def execute(
                 action_log.flush()
                 stage = "simulator_step"
                 result = adapter.advance(env, action, context, depth=config["depth"])
+                check_frames(result.frames, sensors)
                 steps, status, frames = (
                     max(steps, result.steps),
                     result.status,
@@ -177,6 +236,8 @@ def execute(
                 )
                 if result.private_error:
                     write(folder / "private_native_error.json", result.private_error)
+                if result.metrics is not None:
+                    metrics = result.metrics
                 if calls % 20 == 0 or status in TERMINAL:
                     write(
                         folder / "progress.json",
@@ -243,6 +304,7 @@ def execute(
             "scorable": status != "harness_error",
             "steps": steps,
             "step_calls": calls,
+            "dry_run_calls": dry_runs,
             "decisions": len(rows),
             "goal": goal,
             "seconds": time.time() - started,
@@ -252,11 +314,19 @@ def execute(
             else error,
             "api_calls": 0,
             "api_cost_usd": 0,
-            "observation_fields": list(observation_fields(config["depth"])),
+            "observation_fields": list(sensors),
             "video_frames": capture.n if capture else 0,
             "program_hash": program_hash(program),
         }
-        np.save(folder / "actions.npy", np.asarray(actions, dtype=float).reshape(-1, 7))
+        if metrics is not None:
+            if split == "test":
+                result["native_metrics"] = metrics
+            else:
+                write(folder / "private_native_metrics.json", metrics)
+        np.save(
+            folder / "actions.npy",
+            np.asarray(actions, dtype=float).reshape(-1, len(spec["names"])),
+        )
         write(folder / "result.json", result)
     return result
 
@@ -307,6 +377,7 @@ def run_episode(root, task, episode, split, maximum=0):
         )
         if attempt
         else None,
+        policy_python=plan.get("policy_python"),
     )
     result.update(
         mode=plan["config"]["mode"],
@@ -323,7 +394,7 @@ def run_episode(root, task, episode, split, maximum=0):
     identity = next(row for row in records if int(row["episode"]) == episode)
     # Privileged seed metadata is stored separately and never copied into training feedback.
     write(folder / "private_metadata.json", identity)
-    result["difficulty"] = identity["difficulty"]
+    result["difficulty"] = identity.get("difficulty")
     write(folder / "result.json", result)
     if attempt:
         ledger.update(

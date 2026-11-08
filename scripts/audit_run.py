@@ -15,15 +15,30 @@ import time
 from cam.io import read, sha256, write
 
 
-def trace_summary(path):
-    rows = []
-    children = {}
-    roots = set()
+def trace_events(path):
+    """Join strace's interleaved unfinished/resumed syscall lines by PID."""
+    pending = {}
     for line in path.read_text(errors="replace").splitlines():
         match = re.match(r"(\d+)\s+(.*)", line)
         if not match:
             continue
         pid, event = int(match[1]), match[2]
+        if event.endswith("<unfinished ...>"):
+            pending[pid] = event.removesuffix("<unfinished ...>").rstrip()
+            continue
+        resumed = re.match(r"<\.\.\. (\w+) resumed>(.*)", event)
+        if resumed:
+            start = pending.pop(pid, None)
+            if start and start.startswith(resumed[1] + "("):
+                event = start + resumed[2]
+        yield pid, event
+
+
+def trace_summary(path):
+    rows = []
+    children = {}
+    roots = set()
+    for pid, event in trace_events(path):
         rows.append((pid, event))
         if "execve(" in event and '"--noprofile"' in event and event.endswith("= 0"):
             roots.add(pid)
@@ -40,6 +55,7 @@ def trace_summary(path):
             break
         pids |= more
     internet, private, unix, opened = [], [], Counter(), Counter()
+    relative, directories, unresolved = Counter(), Counter(), []
     started = set()
     for pid, event in rows:
         if (
@@ -55,6 +71,8 @@ def trace_summary(path):
             internet.append(event)
         if "connect(" in event and "AF_UNIX" in event:
             unix[event] += 1
+        if re.match(r"(?:chdir|fchdir)\(", event) and event.endswith("= 0"):
+            directories[event] += 1
         if not re.match(r"(?:open|openat|openat2)\(", event) or not re.search(
             r"= \d+$", event
         ):
@@ -69,6 +87,10 @@ def trace_summary(path):
                 ("/data/", "/home/daiyp/", "/root/", "/inputs/", "/rollouts/")
             ):
                 private.append(event)
+        else:
+            relative[name] += 1
+            if not event.startswith("open(") and not re.match(r"openat2?\(AT_FDCWD,", event):
+                unresolved.append(event)
     return {
         "file": path.name,
         "sha256": sha256(path),
@@ -78,6 +100,9 @@ def trace_summary(path):
         "successful_absolute_private_path_opens": private,
         "local_socket_connects": dict(unix),
         "successful_absolute_open_prefixes": dict(opened),
+        "successful_relative_open_names": dict(relative),
+        "successful_directory_changes": dict(directories),
+        "relative_opens_with_directory_fd": unresolved,
     }
 
 
@@ -87,7 +112,10 @@ def audit(root, task):
     if task not in plan["tasks"]:
         raise ValueError("Task is not assigned to this run")
     folder = root / "tasks" / task
-    calls = [read(f) for f in sorted((folder / "audit").glob("call_*.json"))]
+    # GPU lease sidecars share the prefix but are host scheduling metadata,
+    # not model tool calls. Preserve them without parsing them as calls.
+    calls = [read(f) for f in sorted((folder / "audit").glob("call_*.json"))
+             if f.stem.removeprefix("call_").isdigit()]
     listing, traces, suspicious = [], [], []
     review = re.compile(
         r"https?://|\b(?:curl|wget|ssh|scp|git|pip|requests|urllib|socket)\b|"

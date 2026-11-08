@@ -1,0 +1,13 @@
+{
+  "selection_reason": "Reuse the same ten MIKASA tasks from v2_25_newseeds_30tasks.json, as requested. New blank-policy development with 256x256 RGB-D, 50 assigned replay demonstrations and up to 50 distinct new training interactions per task. Demo-first v2; dry-run API available; no held-out evaluation during development.",
+  "benchmarks": {
+    "mikasa_robo_v2": {
+      "config": "configs/mikasa_robo_v2/both_v2_claude_code.json",
+      "demo_count": 50,
+      "require_prepared_data": true,
+      "datasets": ["data/mikasa_robo_v2_50"],
+      "raw": "data/raw/mikasa_robo/rlds",
+      "tasks": ["BatteriesCheckerEasy-3-VLA-v0", "BlinkCountButtonPressEasy-VLA-v0", "BunchOfColors3-VLA-v0", "ChainOfColors3-VLA-v0", "FindImposterColor3-VLA-v0", "RememberColor3-VLA-v0", "SeqOfColors3-VLA-v0", "ShellGameTouch-VLA-v0", "TakeItBack-VLA-v0", "TimedTransferEasy-VLA-v0"]
+    }
+  }
+}

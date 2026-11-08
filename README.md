@@ -4,11 +4,14 @@ Learn reusable Python programs from demonstrations, interaction, or both.
 A coding agent develops the program; the frozen program performs perception,
 decisions, and control with **zero model calls during evaluation**.
 
-RoboMME is the first runnable benchmark. Claude Code and Codex use the same task
+RoboMME and MIKASA-Robo have runnable adapters with pinned simulator environments. `mikasa_robo_v2` runs the official MIKASA-Robo
+protocol with RoboMME-style 256x256 RGB-D, calibration and joint observations,
+replayed 50-demo datasets, and the opt-in `robot.dry_run` kinematic check (see
+[benchmarks](docs/benchmarks.md#mikasa-robo-v2)). Claude Code and Codex use the same task
 prompt, six isolated CaM tools, attempt accounting, and result format.
 
 ```text
-Raw training H5 → validated demonstrations → isolated coding agent
+Raw training data → validated demonstrations → isolated coding agent
   → frozen Python policy → held-out evaluation → logs, videos, reports, website
 ```
 
@@ -53,16 +56,23 @@ runs/<benchmark>/<task>/<agent-model>/<setting>/<timetag>/
 ```
 
 Short names include `cc-opus5.5` (Claude Code) and `cx-gpt6.1-sol` (Codex).
-Settings are `demo_only`, `interaction_only`, and `demo_interaction`. Every run
+Settings are `demo_only`, `interaction_only`, `demo_interaction_v1`, and
+`demo_interaction_v2`. For mode `both`, choose `both_protocol: "v1"` for free use
+of demos and interaction, or `"v2"` for demos first and interaction to verify
+uncertainties. Both use the same six-tool harness. See the
+[two prompt versions and example commands](docs/demo_interaction.md). Every run
 gets a README with its settings, artifact paths, commands, and filesystem access.
 Datasets, runs, logs, and generated sites stay outside version control.
 
 | Guide | Contents |
 |---|---|
 | [First run](docs/getting_started.md) | Install, download, develop, evaluate, view the website |
+| [MIKASA-Robo v2 setup](docs/mikasa_v2_setup.md) | Run the 50-demo RGB-D experiment on another machine |
 | [Reproducing experiments](docs/reproducing.md) | Selection, settings, learner access, held-out test rules |
+| [Demo + interaction v1/v2](docs/demo_interaction.md) | Free evidence choice versus demos first; same harness |
 | [Run layout and recovery](docs/run_layout.md) | Logs, every code version, checkpoints, resume and retries |
 | [Statistics](docs/statistics.md) | Complete/partial rates, efficiency, development cost |
+| [Benchmark protocols](docs/benchmarks.md) | Sensors, actions, data selection, simulator builds |
 | [Architecture](docs/architecture.md) | Components, client isolation, adding benchmarks |
 | [Validation](docs/validation.md) | Tests, native checks, completed ButtonUnmaskSwap experiment |
 | [Historical selection](docs/ROBOMME_25_DEMO_SEEDS.md) | The 25-demo sampling rule and original provenance |
@@ -72,10 +82,13 @@ The historical regular RoboMME result was **795/800 (99.375%)**, from the origin
 runner. Its [logs and rollouts](https://huggingface.co/datasets/Yinpei/robomme-CaM-log-rollout)
 are reference evidence; they do not initialize new policies. The current CaM
 runner has completed **50/50 ButtonUnmaskSwap test episodes** with Claude Code /
-Opus 5.5; a full 800-episode reproduction remains outstanding.
+Opus 5.5; a full 800-episode reproduction remains outstanding. Demo-only pilots
+on 13 further tasks (5 MIKASA-Robo, 4 RMBench, 4 RoboMemArena) are listed in
+[validation](docs/validation.md#multi-benchmark-pilots-2026-11-07).
 
-RoboMME-Plus is a protocol draft; other adapters are planned. Run `cam benchmarks`
-for status. Website code is in `src/cam/web/`, with its builder and server in
-`src/cam/reporting/site.py`.
+RoboMME-Plus is a protocol draft; ReMemBench and ActiveArena are planned. Run `cam benchmarks`
+for status. Website code is in `src/cam/web/` (`explorer.js`: annotated rollout explorer and
+development log), with its builder and server in `src/cam/reporting/site.py`
+(`trace.py`, `devlog.py`).
 
 Apache-2.0. See [NOTICE](NOTICE) and [source provenance](docs/migration_sources.json).

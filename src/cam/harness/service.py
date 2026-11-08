@@ -23,6 +23,7 @@ from cam.harness.isolation import (
 )
 from cam.core import budget, history
 from cam.harness.prepare import pinned_environment
+from cam.harness.gpu import simulator_slot
 from cam.io import read
 
 
@@ -125,9 +126,7 @@ class Service:
             "maximum": self.cfg["budget"],
             "remaining": self.cfg["budget"] - used,
             "per_seed": {str(e): sum(r["episode"] == e for r in rows) for e in seeds},
-            "next_episode": seeds[used % len(seeds)]
-            if used < self.cfg["budget"]
-            else None,
+            "next_episode": budget.next_episode(self.cfg, used),
             "attempts": [
                 {k: r[k] for k in ("id", "episode", "status", "steps")} for r in rows
             ],
@@ -310,10 +309,14 @@ class Service:
                 OMP_NUM_THREADS="1",
                 OPENBLAS_NUM_THREADS="1",
             )
-            with (self.audit / (ident + "_broker.log")).open("wb") as log:
+            with simulator_slot(self.gpu) as gpu, (self.audit / (ident + "_broker.log")).open("wb") as log:
+                env["CUDA_VISIBLE_DEVICES"] = str(gpu)
+                write(self.audit / (ident + "_gpu.json"), {"gpu": gpu, "acquired": time.time()})
                 proc = subprocess.Popen(
                     [
-                        sys.executable,
+                        read(self.root / "run.json").get(
+                            "simulator_python", sys.executable
+                        ),
                         str(self.root / "runner.py"),
                         "_episode",
                         str(self.root),
@@ -357,6 +360,7 @@ class Service:
                 "observations.h5",
                 "episode.mp4",
                 "actions.npy",
+                "dry_runs.jsonl",
                 "policy_stderr.txt",
             ):
                 if (private / file).exists():
@@ -422,7 +426,7 @@ TOOLS = [
             ),
             (
                 "rollout",
-                "Run the current policy on its next assigned extracted training seed. Every attempt counts toward the fixed budget, including failures and early stops. Disabled in demos mode. Saves allowed RGB/depth/calibration/robot-state H5, video, actions and results.",
+                "Run the current policy on its next assigned training episode, following the pinned seed schedule. Every attempt counts toward the fixed budget, including failures and early stops. Disabled in demos mode. Saves allowed RGB/depth/calibration/robot-state H5, video, actions and results.",
             ),
         ]
     ],

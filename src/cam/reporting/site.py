@@ -11,8 +11,46 @@ import threading
 import time
 from urllib.parse import unquote, urlsplit
 
+from cam.core.budget import program_hash
 from cam.io import read, write
+from cam.reporting.devlog import build_timeline
 from cam.reporting.report import build, matched_efficiency
+from cam.reporting.reference import encode_video, references
+from cam.reporting.trace import cached_poster, cached_trace
+
+
+def task_interface(benchmark, task, depth):
+    """The adapter's declared policy interface (sensors and action), if available."""
+    try:
+        from cam.benchmarks.registry import get_adapter
+
+        return get_adapter(benchmark).interface(task, depth)
+    except Exception:  # an unavailable adapter must not break the site
+        return None
+
+
+def recorded_fields(manifest, path):
+    """Recorded demonstration arrays: the v2 declaration, else read from the H5."""
+    declared = manifest.get("fields")
+    if declared and "frame" in declared:
+        return {
+            "frame": {k: v for k, v in declared["frame"].items()},
+            "static": declared.get("static", {}),
+        }
+    try:
+        import h5py
+
+        with h5py.File(path, "r") as h5:
+            group = h5[next(iter(h5))]
+            length = len(group["step"])
+            frame, static = {}, {}
+            for name, data in group.items():
+                target = frame if data.shape[:1] == (length,) and name not in ("front_K", "wrist_K") else static
+                shape = list(data.shape[1:] if target is frame else data.shape)
+                target[name] = {"dtype": str(data.dtype), "shape": shape, "description": ""}
+            return {"frame": frame, "static": static}
+    except Exception:
+        return None
 
 
 def messages(logs):
@@ -49,24 +87,53 @@ def messages(logs):
     return result
 
 
-def build_site(runs, datasets, output):
+def build_site(runs, datasets, output, batch=None, demo_limits=None):
+    """``demo_limits`` maps a dataset path to the number of demos shown per task."""
+    demo_limits = {str(Path(k).resolve()): int(v) for k, v in (demo_limits or {}).items()}
     output = Path(output).resolve()
     output.mkdir(parents=True, exist_ok=True)
     artifacts = {}
+    demo_sources = {}
+    batch_state = None
+    if batch:
+        batch = Path(batch).resolve()
+        state = read(batch / "status.json")
+        batch_state = {
+            "name": batch.name, "status": state["status"], "workers": state.get("workers"),
+            "tasks": [{k: row[k] for k in ("benchmark", "task", "status", "error") if k in row}
+                      for row in state["tasks"].values()],
+        }
+        for item, row in zip(batch_state["tasks"], state["tasks"].values()):
+            item["policy_frozen"] = bool(row.get("run")) and (
+                Path(row["run"]) / "tasks" / row["task"] / "policy/freeze.json"
+            ).is_file()
+        # Append newly prepared tasks without changing existing browser run IDs.
+        ready = [str(Path(row["run"]).resolve()) for row in state["tasks"].values()
+                 if row.get("run") and (Path(row["run"]) / "prepared.json").is_file()]
+        runs = list(dict.fromkeys([*(str(Path(r).resolve()) for r in runs), *ready]))
 
-    def asset(path):
+    def asset(path, suffix=None):
         path = Path(path).resolve()
         if not path.is_file():
             return None
-        key = hashlib.sha256(str(path).encode()).hexdigest()[:24] + path.suffix
+        key = hashlib.sha256(str(path).encode()).hexdigest()[:24] + (suffix or path.suffix)
         artifacts[key] = str(path)
         return "artifact/" + key
+
+    def trace_url(folder, interface):
+        path = cached_trace(folder, output, interface)
+        return path.relative_to(output).as_posix() if path else None
+
+    def poster_url(folder, interface):
+        path = cached_poster(folder, output, interface)
+        return path.relative_to(output).as_posix() if path else None
 
     content = {
         "schema": "cam-site/1",
         "updated": time.time(),
         "runs": [],
         "datasets": [],
+        "batch": batch_state,
     }
     for index, source in enumerate(runs):
         root = Path(source).resolve()
@@ -79,8 +146,12 @@ def build_site(runs, datasets, output):
                 "summary": asset(root / "reports/summary.json"),
             },
         }
+        plan = read(root / "run.json")
+        interfaces = plan.get("interfaces") or {}
         for task in run["development"]:
             folder = root / "tasks" / task["task"]
+            interface = interfaces.get(task["task"])
+            task["reference_demos"] = references(root, plan, task["task"], output, asset, demo_sources)
             revisions = []
             for path in sorted((folder / "history/revisions").glob("*.json")):
                 row = read(path)
@@ -101,6 +172,8 @@ def build_site(runs, datasets, output):
                 )
             calls = []
             for path in sorted((folder / "audit").glob("call_*.json")):
+                if not path.stem.removeprefix("call_").isdigit():
+                    continue
                 event = read(path)
                 # Binary model images remain artifacts; avoid duplicating base64 in page JSON.
                 response = event.get("result", {})
@@ -138,26 +211,57 @@ def build_site(runs, datasets, output):
             task["development_url"] = destination.relative_to(output).as_posix()
             task["rollouts"] = []
             for path in sorted((folder / "rollouts/train").glob("R*/result.json")):
+                result = read(path)
+                if "attempt" not in result:  # broker has not published its final provenance yet
+                    continue
+                checkpoint = folder / "checkpoints" / f"R{int(result['attempt']) - 1:03d}"
+                frozen = read(checkpoint / "freeze.json") if (checkpoint / "freeze.json").exists() else {}
+                matched = bool(frozen.get("program_hash")) and frozen["program_hash"] == result.get("program_hash")
+                if matched:
+                    try:
+                        matched = program_hash(checkpoint) == result["program_hash"]
+                    except (OSError, ValueError):
+                        matched = False
                 task["rollouts"].append(
                     {
-                        **read(path),
+                        **result,
                         "video": asset(path.parent / "episode.mp4"),
+                        "poster": poster_url(path.parent, interface),
                         "observations": asset(path.parent / "observations.h5"),
                         "actions": asset(path.parent / "actions.npy"),
+                        "decisions_log": asset(path.parent / "decisions.jsonl"),
+                        "trace": trace_url(path.parent, interface),
+                        "result_file": asset(path),
+                        "policy_stderr": asset(path.parent / "policy_stderr.txt"),
+                        "policy_files": {
+                            p.relative_to(checkpoint).as_posix(): asset(p)
+                            for p in sorted(checkpoint.rglob("*"))
+                            if matched and p.is_file() and not p.is_symlink() and p.name != "freeze.json"
+                        },
+                        "policy_hash_verified": matched,
                     }
                 )
+            development["rollouts"] = task["rollouts"]
+            development["timeline"] = build_timeline(folder, asset, task["rollouts"])
+            write(destination, development)
         for row in run["episodes"]:
             folder = root / row["directory"]
             row.update(
                 video=asset(folder / "episode.mp4"),
+                poster=poster_url(folder, interfaces.get(row["task"])),
                 observations=asset(folder / "observations.h5"),
                 actions=asset(folder / "actions.npy"),
                 decisions_log=asset(folder / "decisions.jsonl"),
+                result_file=asset(folder / "result.json"),
+                trace=trace_url(folder, interfaces.get(row["task"])),
             )
         content["runs"].append(run)
     for source in datasets:
         root = Path(source).resolve()
-        manifest = read(root / "manifest.json")
+        # A dataset still being built shows its committed tasks (manifest.partial.json).
+        in_progress = not (root / "manifest.json").exists() and (root / "manifest.partial.json").exists()
+        manifest = read(root / ("manifest.partial.json" if in_progress else "manifest.json"))
+        limit = demo_limits.get(str(root))
         if manifest["schema"] != "cam-dataset/1":
             raise ValueError("Only fresh CaM extractions are accepted")
         dataset = {
@@ -165,12 +269,16 @@ def build_site(runs, datasets, output):
             "benchmark": manifest["benchmark"],
             "depth": manifest["depth"],
             "selection": manifest["selection"],
+            "in_progress": in_progress,
+            "shown_per_task": limit,
             "tasks": [],
         }
         for name, item in manifest["tasks"].items():
             dataset["tasks"].append(
                 {
                     "task": name,
+                    "interface": task_interface(manifest["benchmark"], name, manifest["depth"]),
+                    "recorded": recorded_fields(manifest, root / item["file"]),
                     "h5": asset(root / item["file"]),
                     "episodes": [
                         {
@@ -179,8 +287,9 @@ def build_site(runs, datasets, output):
                             if row.get("video")
                             else None,
                         }
-                        for row in item["episodes"]
+                        for row in item["episodes"][:limit]
                     ],
+                    "episodes_total": len(item["episodes"]),
                 }
             )
         content["datasets"].append(dataset)
@@ -212,11 +321,14 @@ def build_site(runs, datasets, output):
             shutil.copy2(path, output / path.name)
     write(output / "data.json", content)
     write(output / ".artifacts.json", artifacts)
+    write(output / ".demo_sources.json", demo_sources)
     write(
         output / ".sources.json",
         {
             "runs": [str(Path(p).resolve()) for p in runs],
             "datasets": [str(Path(p).resolve()) for p in datasets],
+            "demo_limits": demo_limits,
+            "batch": str(batch) if batch else None,
         },
     )
     return {
@@ -230,24 +342,53 @@ def build_site(runs, datasets, output):
 def serve(site, host="127.0.0.1", port=8910):
     site = Path(site).resolve()
     mutex = threading.Lock()
-    refreshed = [0.0]
+    demo_slots = threading.BoundedSemaphore(2)
+    demo_guard = threading.Lock()
+    demo_locks = {}
+    # The exported site is current at startup; later refreshes run in the
+    # background so large sites never block a page load (writes are atomic).
+    refreshed = [time.monotonic()]
+
+    def refresh():
+        try:
+            sources = read(site / ".sources.json")
+            build_site(sources["runs"], sources["datasets"], site, sources.get("batch"), sources.get("demo_limits"))
+        finally:
+            refreshed[0] = time.monotonic()
+            mutex.release()
 
     class Handler(SimpleHTTPRequestHandler):
         def do_GET(self):
             route = unquote(urlsplit(self.path).path)
-            if route == "/data.json" and time.monotonic() - refreshed[0] > 20:
-                with mutex:
-                    if time.monotonic() - refreshed[0] > 20:
-                        sources = read(site / ".sources.json")
-                        build_site(sources["runs"], sources["datasets"], site)
-                        refreshed[0] = time.monotonic()
+            if (
+                route == "/data.json"
+                and time.monotonic() - refreshed[0] > 20
+                and mutex.acquire(blocking=False)
+            ):
+                threading.Thread(target=refresh, daemon=True).start()
             self.serve_route(route, head=False)
 
         def do_HEAD(self):
             self.serve_route(unquote(urlsplit(self.path).path), head=True)
 
         def serve_route(self, route, head):
-            if route.startswith("/artifact/"):
+            if route.startswith("/demo-video/"):
+                key = route.removeprefix("/demo-video/").removesuffix(".mp4")
+                registry = site / ".demo_sources.json"
+                spec = read(registry).get(key) if registry.is_file() else None
+                if not spec or not route.endswith(".mp4"):
+                    self.send_error(404)
+                    return
+                with demo_guard:
+                    lock = demo_locks.setdefault(key, threading.Lock())
+                try:
+                    with lock, demo_slots:
+                        path = encode_video(spec, site, key)
+                except Exception as error:
+                    self.log_error("Demo preview %s: %s", key, error)
+                    self.send_error(503, "Unable to prepare demonstration video")
+                    return
+            elif route.startswith("/artifact/"):
                 key = route.removeprefix("/artifact/")
                 value = read(site / ".artifacts.json").get(key)
                 if not value:
@@ -284,7 +425,9 @@ def serve(site, host="127.0.0.1", port=8910):
             self.send_response(code)
             self.send_header(
                 "Content-Type",
-                mimetypes.guess_type(path.name)[0] or "application/octet-stream",
+                mimetypes.guess_type(route.rsplit("/", 1)[-1])[0]
+                or mimetypes.guess_type(path.name)[0]
+                or "application/octet-stream",
             )
             self.send_header("Content-Length", str(max(0, end - start + 1)))
             self.send_header("Accept-Ranges", "bytes")

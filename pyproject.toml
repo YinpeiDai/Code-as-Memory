@@ -27,7 +27,7 @@ cam = "cam.cli:main"
 where = ["src"]
 
 [tool.setuptools.package-data]
-cam = ["prompts/*.md", "prompts/modes/*.md", "benchmarks/*.md", "web/*"]
+cam = ["prompts/*.md", "prompts/modes/*.md", "prompts/clarifications/*.md", "benchmarks/*.md", "benchmarks/mikasa_robo_api/*.md", "benchmarks/mikasa_robo_api/*.json", "benchmarks/metadata/**/*.json", "web/*"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

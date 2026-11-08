@@ -8,32 +8,42 @@
   </head>
   <body>
     <header>
-      <a class="brand" href="#results">CaM <span>Code-as-Memory</span></a>
+      <a class="brand" href="./#development">CaM <span>Code-as-Memory</span></a>
       <nav aria-label="Sections">
-        <a href="#development">Development logs</a><a href="#success">Success</a
-        ><a href="#efficiency">Efficiency</a><a href="#tasks">Task statistics</a
-        ><a href="#behavior">Behavior</a
-        ><a href="#results">All model results ↗</a>
+        <a href="./#development">Development studio</a>
+        <a href="./#demonstrations">Demonstrations</a>
+        <a href="./#results">Held-out evaluation</a>
       </nav>
+      <div class="live-indicator"><span></span><span id="updated">Connecting…</span></div>
     </header>
     <main>
-      <div class="eyebrow">LEARNING REUSABLE PYTHON PROGRAMS</div>
-      <h1>Code-as-Memory experiments</h1>
-      <p class="lead">
-        Demonstrations, interaction, and their combination. Shared protocols,
-        recorded evidence, and exact held-out evaluation results.
-      </p>
-      <div id="updated" class="muted"></div>
-      <div id="filters">
-        <label
-          >Benchmark
-          <select id="benchmark"></select></label
-        ><label
-          >Run / coding model
-          <select id="run"></select
-        ></label>
+      <div class="page-heading">
+        <div><div class="eyebrow">EXPERIMENT WORKSPACE</div><h1>Development studio</h1>
+        <p class="lead">Watch each attempt. Follow the decisions. Inspect the code.</p></div>
+        <div id="filters">
+          <label>Benchmark<select id="benchmark"></select></label>
+          <label>Run<select id="run"></select></label>
+        </div>
       </div>
       <div id="notice"></div>
+      <section id="development">
+        <div id="studio-summary" class="studio-summary"></div>
+        <div id="gallery-toolbar"><h2>Rollout library</h2><p>Open a task or attempt in a new tab to watch its video and follow the policy's decisions.</p><input id="gallery-search" type="search" placeholder="Find a task…" aria-label="Search rollout library"><label><input id="gallery-failures" type="checkbox"> Tasks with failed attempts</label></div>
+        <div id="studio-gallery" class="studio-gallery"></div>
+        <div class="studio-layout">
+          <div class="studio-workspace">
+            <div id="studio-task-header"></div>
+            <div id="studio-demo-view" hidden></div>
+            <div class="attempt-heading"><strong>Training attempts</strong><label>Show <select id="studio-outcome" aria-label="Filter attempts"><option value="all">All outcomes</option><option value="failed">Failed attempts</option><option value="success">Successful attempts</option></select></label></div>
+            <div id="studio-attempts" class="studio-attempts"></div>
+            <div id="studio-player"></div>
+            <p class="label-source">Stage labels show the policy's recorded actions and memory. Task success is recorded at the end of the episode.</p>
+            <div id="studio-reference-demos"></div>
+          </div>
+        </div>
+        <details class="studio-records"><summary>Batch queue and detailed run records</summary><div id="batch-status"></div><div id="development-table"></div></details>
+      </section>
+      <div id="evaluation-view" hidden>
       <section id="results">
         <h2>All model results</h2>
         <div id="result-table"></div>
@@ -65,17 +75,17 @@
         <h2>Behavior</h2>
         <div id="behavior-table"></div>
       </section>
-      <section id="development">
-        <h2>Development logs</h2>
-        <p>
-          Exact prompts, model messages, tool calls, code revisions, costs, and
-          training rollouts.
-        </p>
-        <div id="development-table"></div>
-        <div id="development-detail"></div>
-      </section>
       <section id="rollouts">
         <h2>Evaluation rollouts</h2>
+        <p>
+          Held-out episodes, one chip per episode coloured by outcome
+          (<span class="chip ok mini"></span> success,
+          <span class="chip bad mini"></span> failure,
+          <span class="chip infra mini"></span> infrastructure). Click a chip to
+          open the annotated rollout explorer: large video with camera labels,
+          projected end-effector markers and trail, the active decision, and
+          the frame-aligned command and robot state.
+        </p>
         <label
           >Task
           <select id="rollout-task"></select
@@ -87,12 +97,15 @@
         <div id="rollout-table"></div>
         <div id="player"></div>
       </section>
-      <section id="demonstrations">
-        <h2>Selected demonstrations</h2>
+      </div>
+      <section id="demonstrations" hidden>
+        <h2>Reference demonstrations</h2>
         <p>
-          Fresh extracts from raw training H5, with native training-seed
-          validation.
+          Watch the assigned training demonstrations as a reference for the learned
+          policies. Task and demo cards open in separate tabs.
         </p>
+        <div id="assigned-demo-library" class="studio-gallery"></div>
+        <div id="demo-player"></div>
         <div id="demo-list"></div>
       </section>
     </main>
@@ -100,6 +113,9 @@
       Code-as-Memory · Frozen Python policies make zero model calls during
       evaluation.
     </footer>
+    <script src="explorer.js"></script>
+    <script src="studio.js"></script>
+    <script src="demos.js"></script>
     <script src="app.js"></script>
   </body>
 </html>

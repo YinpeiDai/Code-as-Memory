@@ -1,30 +1,30 @@
 # Adapted for Code-as-Memory from the Apache-2.0 CAP implementation; see NOTICE.
-"""RGB, optional aligned depth, calibration and robot proprioception.
+"""One observation frame: phase, step and the benchmark's declared sensors.
 
-Depth-enabled studies provide front_depth/wrist_depth: HxW int16 millimetres
-along the camera optical axis, with 0 indicating unknown depth. RGB-only
-historical studies do not expose these attributes. No object truth is forwarded.
+Each declared sensor is a read-only NumPy attribute, e.g. ``frame.front_rgb``;
+``frame.sensors`` lists the names. The benchmark guide and assignment describe
+the sensors, units and frames. No object truth or simulator state is forwarded.
 """
 
 from dataclasses import dataclass
-from cam.runtime.wire import FIELDS, DEPTH_FIELDS, unpack
+import re
+from cam.runtime.wire import is_packed, unpack
+
+NAME = re.compile(r"[A-Za-z][A-Za-z0-9_]*")
 
 
 class Frame:
     def __init__(self, record):
         self.phase, self.step = record["phase"], record["step"]
-        for name in FIELDS:
-            setattr(self, name, unpack(record[name]))
-        if any(name in record for name in DEPTH_FIELDS):
-            for name in DEPTH_FIELDS:
-                value = unpack(record[name])
-                if (
-                    value.dtype.name != "int16"
-                    or value.shape
-                    != getattr(self, name.replace("depth", "rgb")).shape[:2]
-                ):
-                    raise ValueError("Depth must be aligned HxW int16 millimetres")
-                setattr(self, name, value)
+        names = []
+        for name, value in record.items():
+            if name in ("phase", "step"):
+                continue
+            if not NAME.fullmatch(name) or name in ("label", "sensors") or not is_packed(value):
+                raise ValueError(f"Invalid observation field: {name!r}")
+            setattr(self, name, unpack(value))
+            names.append(name)
+        self.sensors = tuple(names)
 
     @property
     def label(self):

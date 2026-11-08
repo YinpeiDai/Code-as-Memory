@@ -63,7 +63,7 @@ def main():
                 obs.current,
                 reader,
                 writer,
-                stick=not action_spec.get("gripper", True),
+                action_spec=action_spec,
                 max_steps=limits.get("max_action_steps", 1500),
             )
             result = outcome(

@@ -8,6 +8,7 @@ import time
 import os
 
 from cam.core.budget import Ledger
+from cam.config import default_evaluation_budgets, learning_setting
 from cam.core.history import select_checkpoint
 from cam.io import read, write
 from cam.providers.usage import summarize_sessions
@@ -146,8 +147,7 @@ def build(root):
     if config_path.exists():
         budgets = sorted(set(budgets) | set(read(config_path)["budgets"]))
     if not budgets:
-        budgets = [0] if plan["config"]["mode"] == "demos" else [1, 5, 10, 20]
-        budgets = [n for n in budgets if n <= plan["config"]["budget"]]
+        budgets = default_evaluation_budgets(plan["config"])
     expected = sum(len(plan["test_episodes"][task]) for task in plan["tasks"])
     groups = {
         f"R{n:03d}": [r for r in results if r["maximum_rollouts"] == n] for n in budgets
@@ -161,22 +161,29 @@ def build(root):
             )
             for task in plan["tasks"]
         }
-        difficulty = {}
-        for level in ("easy", "medium", "hard"):
-            count = sum(
-                sum(
-                    r["difficulty"] == level
-                    for r in read(
-                        root
-                        / "inputs/metadata/test"
-                        / f"record_dataset_{task}_metadata.json"
-                    )["records"]
-                )
-                for task in plan["tasks"]
+        test_records = [
+            r
+            for task in plan["tasks"]
+            for r in read(
+                root / "inputs/metadata/test" / f"record_dataset_{task}_metadata.json"
+            )["records"]
+        ]
+        levels = [
+            level
+            for level in ("easy", "medium", "hard")
+            if any(r.get("difficulty") == level for r in test_records)
+        ]
+        levels += sorted(
+            {str(r["difficulty"]) for r in test_records if r.get("difficulty")}
+            - set(levels)
+        )
+        difficulty = {
+            level: metrics(
+                [r for r in rows if r.get("difficulty") == level],
+                sum(r.get("difficulty") == level for r in test_records),
             )
-            difficulty[level] = metrics(
-                [r for r in rows if r["difficulty"] == level], count
-            )
+            for level in levels
+        }
         settings.append(
             {
                 "budget": n,
@@ -196,11 +203,17 @@ def build(root):
         # Organized runs share a timetag across tasks/settings. Keep the full
         # experiment identity in display and paired-comparison keys.
         "name": "/".join(root.parts[-5:])
-        if root.parent.name in ("demo_only", "interaction_only", "demo_interaction")
+        if root.parent.name in (
+            "demo_only", "interaction_only", "demo_interaction",
+            "demo_interaction_v1", "demo_interaction_v2",
+        )
         else root.name,
         "benchmark": plan["config"]["benchmark"],
         "benchmark_hash": plan["benchmark_hash"],
         "config": plan["config"],
+        "learning_setting": learning_setting(
+            plan["config"]["mode"], plan["config"].get("both_protocol")
+        ),
         "tasks": plan["tasks"],
         "expected_episodes_per_setting": expected,
         "settings": settings,

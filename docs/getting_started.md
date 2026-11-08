@@ -96,8 +96,14 @@ cam site --runs "$run_dir" --datasets data/first_25_rgbd --output sites/first_ru
 cam serve sites/first_run --host 127.0.0.1 --port 8910
 ```
 
-Open <http://127.0.0.1:8910/#development>. The server refreshes linked logs,
-demonstrations, rollouts, and statistics. On a remote machine, forward port 8910.
+Open <http://127.0.0.1:8910/#development>. Camera previews and colored attempt links
+open separate replay tabs. Each page shows the video with synchronized action
+stages, policy labels, frame stepping, and robot commands. **Executed code** and
+**Agent log** open the matching checkpoint and chronological transcript in new
+tabs. Automatic updates preserve playback. Held-out results have their own
+navigation tab. On a remote machine, forward port 8910.
+**Reference demos** shows the examples assigned to the selected learner, with
+their own video pages. Missing previews are generated on first viewing by `cam serve`.
 The frontend is `src/cam/web/`; the builder/server is `src/cam/reporting/site.py`.
 
 ## More tasks or settings
@@ -111,13 +117,27 @@ give **800 test episodes per setting and evaluation budget**.
 |---|---|---|
 | `demo_only` | `demos_<client>.json` | `0` |
 | `interaction_only` | `interaction_<client>.json` | `1 5 10 20` |
-| `demo_interaction` | `both_<client>.json` | `1 5 10 20` |
+| `demo_interaction_v1` | `both_v1_<client>.json` | `1 5 10 20 25` |
+| `demo_interaction_v2` | `both_v2_<client>.json` | `1 5 10 20 25` |
 
-Interaction templates allow 20 attempts across three fixed training seeds.
-R1/R5/R10/R20 are checkpoints from one development run; see the
+V1 allows free choice between demos and interaction; v2 instructs the agent to
+work from demos first and use interaction to verify and explore uncertainties.
+Use v2 for current demo-plus-interaction experiments. Both versions use the
+same tools and limits. See [version selection and examples](demo_interaction.md).
+
+Demo-plus-interaction templates allow at most 25 attempts; v2 uses the remaining
+distinct training seeds for verification even when the solution seems ready.
+V1 and repeating seed schedules permit justified early stopping.
+Interaction-only templates allow 20. RoboMME templates cycle three fixed
+demonstration seeds. MIKASA-Robo demo-plus-interaction templates use 25 distinct training seeds
+outside the assigned demos and tests; the RGB-D v2 comparison uses 50.
+R1/R5/R10/R20/R25 are checkpoints from one development run; see the
 [protocol](reproducing.md). Each command owns its worker pool, so concurrent
 commands add their GPU workloads.
 
 If setup fails, inspect `cam doctor --simulator` and
 `RUN/tasks/<Task>/logs/session_NNN/`. Resume only unchanged unfinished runs;
 preserve failures using the [recovery commands](run_layout.md#resume-and-recovery).
+
+For the current 50-demo MIKASA-Robo v2 experiment, follow the
+[shared-NFS setup guide](mikasa_v2_setup.md).

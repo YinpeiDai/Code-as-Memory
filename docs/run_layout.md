@@ -9,6 +9,10 @@ runs/<benchmark>/<task>/<agent-model>/<setting>/<timetag>/
 `cam prepare` prints one leaf per task; pass those leaves to subsequent commands.
 Settings and access rules are in [reproducing.md](reproducing.md) and each run's
 README. Data, runs, local files, and generated sites are ignored by Git.
+Demo-plus-interaction runs use `demo_interaction_v1` or `demo_interaction_v2` as
+their setting; the exact version also appears in the config, prompt, and reports.
+See [version selection](demo_interaction.md). Historical unversioned runs keep
+their original `demo_interaction` paths and pinned evidence.
 
 ## Saved artifacts
 
@@ -24,11 +28,13 @@ RUN/
   run.json, prepared.json            configuration and provenance
   runner.py                         pinned harness entry point
   inputs/harness/cam/                harness snapshot
-  inputs/benchmark/robomme/          private official simulator snapshot
+  inputs/benchmark/<package>/        private official simulator snapshot
   inputs/metadata/{train,test}/      private episode identities
   inputs/environment.json, uv.lock   dependency provenance
+  inputs/simulator_environment.json dedicated simulator interpreter/packages, if used
+  inputs/simulator_build/            available simulator locks and install recipes
   runtime/cam/                      public policy API
-  preflight.json                    RGB-D transport check
+  preflight.json                    declared sensor transport check
   queues/{learning,evaluation}/     worker logs and queue status
   tasks/<Task>/
     prompt.md                       composed assignment
@@ -95,7 +101,38 @@ Infrastructure errors stop new evaluation dispatch; running jobs finish and keep
 their evidence. Archive interrupted outputs through recovery instead of deleting
 them. Workers follow their parent process lifetime to prevent orphaned attempts.
 
-`cam serve` refreshes linked records every 20 seconds on data requests and serves
-only registered artifacts. Sites reference media in the original run/dataset
+`cam serve` refreshes linked records in the background at most every 20 seconds (a page load never waits for the rebuild) and serves
+only registered artifacts.
+
+The website opens with a visual rollout library. Task cards and attempt links
+open independent replay tabs; the dashboard and other videos stay in place.
+
+- **Rollout replay** (click a task card or an attempt). Each
+  camera is drawn as its own tile from `episode.mp4`. The tiles carry camera
+  labels, projected TCP/end-effector markers with a short trail (only cameras
+  with recorded `<camera>_K`/`<camera>_extrinsic`), the active decision, and
+  the outcome on the last frame. Alongside them are a decision timeline,
+  labeled action stages, decision cards (arguments, memory changes, outcome),
+  and the frame-aligned command and robot state. Phase/stage/note labels use
+  recorded policy memory; they do not assert intermediate simulator success.
+  Click a stage to seek, or expand the player to fill the window.
+  - Frame 0 is the reset observation; frame i ≥ 1 is the observation after command i−1.
+  - The overlays are built by `reporting/trace.py`, only from the rollout's
+    `observations.h5`, `actions.jsonl`, `decisions.jsonl` and `result.json`
+    (`dry_runs.jsonl` lists `robot.dry_run` queries where a benchmark supports them)
+    (no simulator state).
+  - Traces and camera previews are cached under `<site>/traces/` and
+    `<site>/previews/` by source modification time.
+  - `#rollout=<key>` links reopen the same rollout.
+- **Development log** (`reporting/devlog.py`). A chronological transcript of
+  each coding session, in order: agent messages, thinking (when the client
+  records it), every CaM tool call with arguments, output and duration,
+  images passed to `read_image` (from `audit/objects`), code revisions with
+  inline diffs, checkpoint markers, rollout cards that open the explorer, and
+  each session's cost/turn summary. Tabs show the exact prompt, training rollouts,
+  and code versions: latest revision, final frozen policy, and the checkpoint
+  actually executed in each rollout (verified against its program hash).
+  **Refresh log** reloads an open task. Use `cam site --batch BATCH --output SITE`
+  to include newly prepared runs automatically. Sites reference media in the original run/dataset
 paths; they are not self-contained exports. Preserve those paths or regenerate
 the site after moving the artifacts.

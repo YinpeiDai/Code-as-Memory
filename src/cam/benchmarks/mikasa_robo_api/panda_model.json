@@ -1,0 +1,266 @@
+{
+  "schema": "cam-mikasa-robot-model/1",
+  "robot": "Panda",
+  "tcp_link": "panda_hand_tcp",
+  "urdf_sha256": "524c6986dbbabe244e05801f262862205e880834d01459b06ee273016d0579ba",
+  "chain": [
+    {
+      "name": "panda_joint1",
+      "type": "revolute",
+      "xyz": [
+        0.0,
+        0.0,
+        0.333
+      ],
+      "rpy": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "axis": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "limits": {
+        "effort": 87.0,
+        "lower": -2.8973,
+        "upper": 2.8973,
+        "velocity": 2.175
+      }
+    },
+    {
+      "name": "panda_joint2",
+      "type": "revolute",
+      "xyz": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rpy": [
+        -1.5707963267948966,
+        0.0,
+        0.0
+      ],
+      "axis": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "limits": {
+        "effort": 87.0,
+        "lower": -1.7628,
+        "upper": 1.7628,
+        "velocity": 2.175
+      }
+    },
+    {
+      "name": "panda_joint3",
+      "type": "revolute",
+      "xyz": [
+        0.0,
+        -0.316,
+        0.0
+      ],
+      "rpy": [
+        1.5707963267948966,
+        0.0,
+        0.0
+      ],
+      "axis": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "limits": {
+        "effort": 87.0,
+        "lower": -2.8973,
+        "upper": 2.8973,
+        "velocity": 2.175
+      }
+    },
+    {
+      "name": "panda_joint4",
+      "type": "revolute",
+      "xyz": [
+        0.0825,
+        0.0,
+        0.0
+      ],
+      "rpy": [
+        1.5707963267948966,
+        0.0,
+        0.0
+      ],
+      "axis": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "limits": {
+        "effort": 87.0,
+        "lower": -3.0718,
+        "upper": -0.0698,
+        "velocity": 2.175
+      }
+    },
+    {
+      "name": "panda_joint5",
+      "type": "revolute",
+      "xyz": [
+        -0.0825,
+        0.384,
+        0.0
+      ],
+      "rpy": [
+        -1.5707963267948966,
+        0.0,
+        0.0
+      ],
+      "axis": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "limits": {
+        "effort": 12.0,
+        "lower": -2.8973,
+        "upper": 2.8973,
+        "velocity": 2.61
+      }
+    },
+    {
+      "name": "panda_joint6",
+      "type": "revolute",
+      "xyz": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rpy": [
+        1.5707963267948966,
+        0.0,
+        0.0
+      ],
+      "axis": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "limits": {
+        "effort": 12.0,
+        "lower": -0.0175,
+        "upper": 3.7525,
+        "velocity": 2.61
+      }
+    },
+    {
+      "name": "panda_joint7",
+      "type": "revolute",
+      "xyz": [
+        0.088,
+        0.0,
+        0.0
+      ],
+      "rpy": [
+        1.5707963267948966,
+        0.0,
+        0.0
+      ],
+      "axis": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "limits": {
+        "effort": 12.0,
+        "lower": -2.8973,
+        "upper": 2.8973,
+        "velocity": 2.61
+      }
+    },
+    {
+      "name": "panda_joint8",
+      "type": "fixed",
+      "xyz": [
+        0.0,
+        0.0,
+        0.107
+      ],
+      "rpy": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "name": "panda_hand_joint",
+      "type": "fixed",
+      "xyz": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rpy": [
+        0.0,
+        0.0,
+        -0.7853981633974483
+      ]
+    },
+    {
+      "name": "panda_hand_tcp_joint",
+      "type": "fixed",
+      "xyz": [
+        0.0,
+        0.0,
+        0.1034
+      ],
+      "rpy": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    }
+  ],
+  "controller": {
+    "position_scale_m": 0.1,
+    "rotation_scale_rad": -0.1,
+    "stiffness_nm_per_rad": [
+      1000.0,
+      1000.0,
+      1000.0,
+      1000.0,
+      1000.0,
+      1000.0,
+      1000.0
+    ],
+    "damping_nm_s_per_rad": [
+      100.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ],
+    "drive_force_limit_nm": [
+      100.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ],
+    "interpolate": false,
+    "target_velocity_rad_s": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ]
+  }
+}

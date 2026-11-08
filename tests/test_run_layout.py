@@ -10,19 +10,23 @@ from cam.reporting.report import build
 
 
 @pytest.mark.parametrize(
-    "mode,setting,budget",
+    "mode,setting,budget,both_protocol",
     [
-        ("demos", "demo_only", 0),
-        ("interaction", "interaction_only", 2),
-        ("both", "demo_interaction", 2),
+        ("demos", "demo_only", 0, None),
+        ("interaction", "interaction_only", 2, None),
+        ("both", "demo_interaction_v1", 2, "v1"),
+        ("both", "demo_interaction_v2", 2, "v2"),
     ],
 )
-def test_organized_run_and_access_readme(dataset, tmp_path, mode, setting, budget):
+def test_organized_run_and_access_readme(
+    dataset, tmp_path, mode, setting, budget, both_protocol
+):
     dataset, source = dataset
     config = RunConfig(
         benchmark="robomme",
         mode=mode,
         budget=budget,
+        both_protocol=both_protocol,
         coding=CodingConfig(model="us.anthropic.claude-opus-5-5"),
     )
     base = tmp_path / "runs"

@@ -5,6 +5,7 @@ import hashlib
 import json
 
 from cam.io import read, write
+from cam.config import learning_setting
 
 
 def export_figures(reports, output):
@@ -15,6 +16,9 @@ def export_figures(reports, output):
             "name": r["name"],
             "benchmark": r["benchmark"],
             "mode": r["config"]["mode"],
+            "learning_setting": learning_setting(
+                r["config"]["mode"], r["config"].get("both_protocol")
+            ),
             "model": r["config"]["coding"]["model"],
             "settings": [s for s in r["settings"] if s["complete"]],
         }
@@ -52,7 +56,7 @@ def export_figures(reports, output):
                         *zip(*points),
                         marker="o",
                         linewidth=1.8,
-                        label=f"{run['name']} · {run['model']}",
+                        label=f"{run['name']} · {run['learning_setting']} · {run['model']}",
                     )
             ax.set_xlabel("Maximum training interactions")
             ax.set_ylabel(ylabel)

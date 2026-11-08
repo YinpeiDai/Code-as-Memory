@@ -17,9 +17,6 @@ class Adapter(RoboMME):
     def __init__(self, failure=False):
         self.failure = failure
 
-    def action_spec(self, task):
-        return {"gripper": True}
-
     def make_environment(self, *args):
         if self.failure:
             raise RuntimeError("Synthetic GPU initialization failure")
