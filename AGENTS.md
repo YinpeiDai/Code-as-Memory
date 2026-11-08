@@ -141,3 +141,57 @@ coding-agent filesystem access, and the separation of learning from held-out tes
   two per GPU), sharing existing workloads after checking free memory before
   each new job. Preserve captures and active workers when resizing under a new
   scheduler timetag. This exception is for dataset generation.
+- Current RMBench follow-up (user-requested, 2026-11-07 local): use up to 50
+  successful regenerated RGB-D demos per task across all ten tasks, with the
+  shared demo-only prompt and zero training rollouts. This replaces the proposed
+  25-demo assignment for this follow-up. Preserve the actual shortfalls: 49 for
+  battery_try, 49 for blocks_ranking_try, 48 for observe_and_pickup, and 50 for
+  each of the other seven tasks (496 total). Use fresh RGB-D preparations and
+  keep earlier RGB experiments and the separate 25-demo subset intact.
+  Latest user-authorized held-out follow-up: as soon as a task's own learner
+  finishes and its policy is frozen, evaluate all 100 test episodes for that
+  task; do not wait for the other learners (1,000 episodes total across ten tasks).
+  Use one RMBench evaluation per GPU with at most six episode workers, avoiding
+  MIKASA GPU simulation. Preserve scored outcomes, archive infrastructure
+  failures with `cam recover-test` before identical retries, and report complete
+  scored/expected coverage. Never send test feedback back to a learner.
+  User-requested local-storage/progressive follow-up: assemble the new task H5s
+  on the local `/data` SSD, preserving original NFS captures and interrupted
+  assembly evidence; copy finished data to NFS later with the user. Start each
+  task once its own assigned demos are ready instead of waiting for all ten.
+  Inspect five seeded random successful episodes per task in detail, retaining
+  file hashes, schema, success and train/test identity checks for every demo.
+  Do not repeat native simulator replay just for these file inspections.
+- User-requested RMBench comparison (2026-11-07 local): after all ten current
+  up-to-50-demo RGB-D demo-only learners finish and all 1,000 held-out tests are
+  scored, automatically start a separate 25-demo demo-only experiment on all
+  ten tasks, then evaluate the same 100 test episodes per task. Use deterministic
+  25-demo subsets of the same successful RGB-D assignments (250 total), local
+  SSD H5s, the identical pinned harness/simulator/config/shared prompts and
+  Claude Code / Opus 5.5, eight coding slots and zero training rollouts. Start
+  fresh policies and timetags; expose only the assigned 25 demos. Preserve the
+  496-demo baseline, original captures and results. Keep test outcomes and prior
+  solutions out of learners. Queue with scripts/queue_rmbench_comparison.py;
+  record subset identities before launch and report actual baseline shortfalls
+  (49/49/48), full scored coverage and per-task comparison results.
+- User-requested repair and prompt revision (2026-11-08): call Claude Code /
+  Opus 5.5 once more to repair the existing 50-demo RMBench swap_blocks policy.
+  This explicitly permits reuse of that same policy in a fresh demo-only run,
+  with identical assigned demos/configuration and zero simulator training
+  attempts. Use `cam prepare --initial-policy-run SOURCE_RUN` to pin the copied
+  program and provenance before learning. Do not copy test feedback or another
+  task's solution. Preserve the original 0/100 score and report the repair as a
+  separate user-requested follow-up. The shared demo-only prompt now requires
+  a final offline code review and execution checks, including first-decision
+  memory fields and `last` initialized to None. Apply this task-independent
+  wording to future preparations across benchmarks; never edit old prompts.
+- Latest RMBench swap_blocks revision (2026-11-08): rerun from scratch using
+  the same 50 RGB-D demos, Claude Code / Opus 5.5, the revised shared demo-only
+  prompt, zero training rollouts and a blank initial policy; do not import the
+  old or repaired solution. Evaluate all 100 held-out episodes after freezing.
+  After complete scoring, make this new development/rollout run the website's
+  default replacement regardless of score. Latest display revision: remove the
+  original and repair swap_blocks development/rollout entries from the website,
+  including its historical selector; use the fresh run as the 50-demo entry.
+  Preserve original files and scored outcomes on disk. Keep the 25-demo task
+  entry and original 25-versus-50 comparison; record the revised current selection.

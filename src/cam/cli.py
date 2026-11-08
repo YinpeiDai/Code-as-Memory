@@ -50,6 +50,8 @@ def main(argv=None):
     prep.add_argument("--config", type=Path, required=True)
     prep.add_argument("--benchmark-source", type=Path)
     prep.add_argument("--tasks", nargs="+")
+    prep.add_argument("--initial-policy-run", type=Path,
+                      help="Explicit repair: initialize one demo-only task from its frozen prior policy with identical config and demos")
     prep.add_argument(
         "--timetag", help="Explicit leaf tag; defaults to a unique UTC timestamp"
     )
@@ -185,6 +187,7 @@ def main(argv=None):
             args.tasks,
             args.benchmark_source,
             args.timetag,
+            initial_policy_run=args.initial_policy_run,
         )
     elif args.command in ("learn", "evaluate", "preflight", "_learn-task"):
         from cam.harness import jobs

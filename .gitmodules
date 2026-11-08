@@ -4,3 +4,6 @@
 [submodule "third_party/mikasa_robo"]
 	path = third_party/mikasa_robo
 	url = https://github.com/CognitiveAISystems/MIKASA-Robo
+[submodule "third_party/rmbench"]
+	path = third_party/rmbench
+	url = https://github.com/robotwin-Platform/rmbench

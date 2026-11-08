@@ -1,14 +1,15 @@
 # Benchmark adapters
 
-RoboMME and MIKASA-Robo share the isolated coding harness, logs and frozen-policy
-evaluation. MIKASA uses a separate simulator environment. Other registered
-benchmarks remain planned in this release.
+RoboMME, MIKASA-Robo and RMBench share the isolated coding harness, logs and
+frozen-policy evaluation. MIKASA and RMBench use separate pinned simulator
+environments. Other registered benchmarks remain planned in this release.
 
 | Benchmark | Tasks / held-out episodes per task | Evidence and selection | Policy action | Setup |
 |---|---|---|---|---|
 | RoboMME | 16 / 50 | Modern H5; 25 demos balanced 9/8/8 by difficulty; RGB-D | Absolute TCP XYZ/RPY + gripper | [First run](getting_started.md) |
 | MIKASA-Robo | 90 / 50 | Lossless RLDS; 25 uniformly sampled identities; RGB + proprioception | 7-D normalized delta pose + gripper | [Environment](../envs/mikasa_robo/README.md) |
 | MIKASA-Robo v2 (`mikasa_robo_v2`) | 90 / 50 (same official env, seeds, limits, scoring) | Released expert commands replayed under each collector's simulator setup, recorded with the v2 sensors; 50 per task in seeded random order, native-success replays only; RoboMME-style 256x256 RGB-D, calibration, TCP, joints, fingers; `robot.dry_run` | 7-D normalized delta pose + gripper | [MIKASA-Robo v2](#mikasa-robo-v2) |
+| RMBench | 10 / 100 (pinned from the official expert seed search) | Released RGB or regenerated four-camera RGB-D; 25 or up to 50 demos; calibration and dual-arm state | 16-D absolute world poses (wxyz quaternions) + two grippers | [Environment](../envs/rmbench/README.md) |
 | Benchmark | Required raw downloads | Extracted tasks | Dataset |
 |---|---|---|---|
 | MIKASA-Robo | 3,665/3,665 pinned files | 90/90 | `data/mikasa_robo_25` |
@@ -16,6 +17,34 @@ benchmarks remain planned in this release.
 |---|---:|---|---|
 | RoboMME | 100 | Existing balanced 25-demo protocol | 25 |
 | MIKASA-Robo | 250 | 100 | 25 |
+
+### RMBench RGB-D collection
+
+`scripts/prepare_rmbench_rgbd.py start --gpus 0 1 --workers 10 --allow-gpu-sharing` snapshots the preparation
+code, native benchmark, and environment provenance, then queues all 500 released
+training identities (10 tasks × 50). This requested allocation runs five workers
+per GPU, ten total, with explicit workload sharing after a free-memory check.
+Without `--allow-gpu-sharing`, it waits for idle GPUs. It verifies one successful
+native RGB-D collection before bulk dispatch, and overlaps later input validation
+with collection. Check progress with `status JOB`; logs and per-episode
+outcomes are retained under the timestamped job and dataset directories.
+`scripts/resize_rmbench_rgbd.py start JOB --workers-per-gpu 5` changes an active
+collection's scheduler under a new timetag, preserving its data directory,
+completed attempts, active captures and original acquisition snapshot.
+
+The release does not include `_traj_data` dense paths. The official expert is
+therefore **regenerated on the original training seeds**, not replayed from the
+sampled HDF5 state rows. Native collection and success checks are unchanged.
+Successful collections provide new, synchronous RGB and depth, four 320x240
+cameras, calibration, end-effector poses, joint targets, and gripper values.
+Depth is optical-axis distance in int16 millimetres; 0 denotes invalid or
+out-of-range values. Newly generated native paths remain private for provenance.
+Only successful collections enter the public pool H5; failures and actual
+shortfalls are recorded. A separate deterministic up-to-25 subset is created.
+
+`depth: true` enables the same four depth streams online while preserving the
+existing end-effector action mode. Use a fresh `cam prepare` for RGB-D learning.
+The original RGB extraction remains available with `--rgb-only`.
 
 ## MIKASA-Robo v2
 

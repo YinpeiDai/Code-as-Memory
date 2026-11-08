@@ -1,0 +1,812 @@
+{
+  "env_id": "swap_blocks",
+  "split": "test",
+  "records": [
+    {
+      "episode": 0,
+      "seed": 100001
+    },
+    {
+      "episode": 1,
+      "seed": 100002
+    },
+    {
+      "episode": 2,
+      "seed": 100008
+    },
+    {
+      "episode": 3,
+      "seed": 100009
+    },
+    {
+      "episode": 4,
+      "seed": 100012
+    },
+    {
+      "episode": 5,
+      "seed": 100013
+    },
+    {
+      "episode": 6,
+      "seed": 100014
+    },
+    {
+      "episode": 7,
+      "seed": 100015
+    },
+    {
+      "episode": 8,
+      "seed": 100016
+    },
+    {
+      "episode": 9,
+      "seed": 100018
+    },
+    {
+      "episode": 10,
+      "seed": 100022
+    },
+    {
+      "episode": 11,
+      "seed": 100023
+    },
+    {
+      "episode": 12,
+      "seed": 100024
+    },
+    {
+      "episode": 13,
+      "seed": 100027
+    },
+    {
+      "episode": 14,
+      "seed": 100028
+    },
+    {
+      "episode": 15,
+      "seed": 100030
+    },
+    {
+      "episode": 16,
+      "seed": 100031
+    },
+    {
+      "episode": 17,
+      "seed": 100038
+    },
+    {
+      "episode": 18,
+      "seed": 100039
+    },
+    {
+      "episode": 19,
+      "seed": 100041
+    },
+    {
+      "episode": 20,
+      "seed": 100042
+    },
+    {
+      "episode": 21,
+      "seed": 100043
+    },
+    {
+      "episode": 22,
+      "seed": 100044
+    },
+    {
+      "episode": 23,
+      "seed": 100048
+    },
+    {
+      "episode": 24,
+      "seed": 100051
+    },
+    {
+      "episode": 25,
+      "seed": 100052
+    },
+    {
+      "episode": 26,
+      "seed": 100053
+    },
+    {
+      "episode": 27,
+      "seed": 100054
+    },
+    {
+      "episode": 28,
+      "seed": 100055
+    },
+    {
+      "episode": 29,
+      "seed": 100057
+    },
+    {
+      "episode": 30,
+      "seed": 100058
+    },
+    {
+      "episode": 31,
+      "seed": 100059
+    },
+    {
+      "episode": 32,
+      "seed": 100061
+    },
+    {
+      "episode": 33,
+      "seed": 100062
+    },
+    {
+      "episode": 34,
+      "seed": 100063
+    },
+    {
+      "episode": 35,
+      "seed": 100066
+    },
+    {
+      "episode": 36,
+      "seed": 100067
+    },
+    {
+      "episode": 37,
+      "seed": 100068
+    },
+    {
+      "episode": 38,
+      "seed": 100071
+    },
+    {
+      "episode": 39,
+      "seed": 100073
+    },
+    {
+      "episode": 40,
+      "seed": 100076
+    },
+    {
+      "episode": 41,
+      "seed": 100079
+    },
+    {
+      "episode": 42,
+      "seed": 100083
+    },
+    {
+      "episode": 43,
+      "seed": 100084
+    },
+    {
+      "episode": 44,
+      "seed": 100085
+    },
+    {
+      "episode": 45,
+      "seed": 100086
+    },
+    {
+      "episode": 46,
+      "seed": 100088
+    },
+    {
+      "episode": 47,
+      "seed": 100089
+    },
+    {
+      "episode": 48,
+      "seed": 100090
+    },
+    {
+      "episode": 49,
+      "seed": 100093
+    },
+    {
+      "episode": 50,
+      "seed": 100094
+    },
+    {
+      "episode": 51,
+      "seed": 100095
+    },
+    {
+      "episode": 52,
+      "seed": 100097
+    },
+    {
+      "episode": 53,
+      "seed": 100102
+    },
+    {
+      "episode": 54,
+      "seed": 100103
+    },
+    {
+      "episode": 55,
+      "seed": 100104
+    },
+    {
+      "episode": 56,
+      "seed": 100106
+    },
+    {
+      "episode": 57,
+      "seed": 100112
+    },
+    {
+      "episode": 58,
+      "seed": 100113
+    },
+    {
+      "episode": 59,
+      "seed": 100114
+    },
+    {
+      "episode": 60,
+      "seed": 100115
+    },
+    {
+      "episode": 61,
+      "seed": 100119
+    },
+    {
+      "episode": 62,
+      "seed": 100127
+    },
+    {
+      "episode": 63,
+      "seed": 100128
+    },
+    {
+      "episode": 64,
+      "seed": 100129
+    },
+    {
+      "episode": 65,
+      "seed": 100132
+    },
+    {
+      "episode": 66,
+      "seed": 100133
+    },
+    {
+      "episode": 67,
+      "seed": 100134
+    },
+    {
+      "episode": 68,
+      "seed": 100136
+    },
+    {
+      "episode": 69,
+      "seed": 100137
+    },
+    {
+      "episode": 70,
+      "seed": 100138
+    },
+    {
+      "episode": 71,
+      "seed": 100139
+    },
+    {
+      "episode": 72,
+      "seed": 100142
+    },
+    {
+      "episode": 73,
+      "seed": 100143
+    },
+    {
+      "episode": 74,
+      "seed": 100145
+    },
+    {
+      "episode": 75,
+      "seed": 100146
+    },
+    {
+      "episode": 76,
+      "seed": 100147
+    },
+    {
+      "episode": 77,
+      "seed": 100148
+    },
+    {
+      "episode": 78,
+      "seed": 100149
+    },
+    {
+      "episode": 79,
+      "seed": 100150
+    },
+    {
+      "episode": 80,
+      "seed": 100151
+    },
+    {
+      "episode": 81,
+      "seed": 100154
+    },
+    {
+      "episode": 82,
+      "seed": 100156
+    },
+    {
+      "episode": 83,
+      "seed": 100157
+    },
+    {
+      "episode": 84,
+      "seed": 100158
+    },
+    {
+      "episode": 85,
+      "seed": 100162
+    },
+    {
+      "episode": 86,
+      "seed": 100163
+    },
+    {
+      "episode": 87,
+      "seed": 100165
+    },
+    {
+      "episode": 88,
+      "seed": 100166
+    },
+    {
+      "episode": 89,
+      "seed": 100169
+    },
+    {
+      "episode": 90,
+      "seed": 100170
+    },
+    {
+      "episode": 91,
+      "seed": 100171
+    },
+    {
+      "episode": 92,
+      "seed": 100173
+    },
+    {
+      "episode": 93,
+      "seed": 100175
+    },
+    {
+      "episode": 94,
+      "seed": 100176
+    },
+    {
+      "episode": 95,
+      "seed": 100177
+    },
+    {
+      "episode": 96,
+      "seed": 100178
+    },
+    {
+      "episode": 97,
+      "seed": 100179
+    },
+    {
+      "episode": 98,
+      "seed": 100182
+    },
+    {
+      "episode": 99,
+      "seed": 100185
+    }
+  ],
+  "provenance": {
+    "rule": "official eval_policy_xpolicylab.py seed search: start 100000*(1+seed) with seed=0, keep seeds that are stable, whose play_once expert plans and check_success() holds, and whose evaluation setup_demo succeeds",
+    "benchmark": "rmbench",
+    "rmbench_commit": "7d1cdfc7661c273a7a5c5f6126e2d1a7f0a3f4b7",
+    "benchmark_hash": "01a2b42f86e6308a3bc847c6225c1b8c049111510158443c6d50721a1a39bb45",
+    "task_config": "demo_clean",
+    "embodiment": "aloha-agilex",
+    "expert_check": true,
+    "start_seed": 100000,
+    "last_seed_tried": 100185,
+    "skipped": [
+      {
+        "seed": 100000,
+        "reason": "expert_failed"
+      },
+      {
+        "seed": 100003,
+        "reason": "expert_failed"
+      },
+      {
+        "seed": 100004,
+        "reason": "expert_failed"
+      },
+      {
+        "seed": 100005,
+        "reason": "expert_failed"
+      },
+      {
+        "seed": 100006,
+        "reason": "expert_failed"
+      },
+      {
+        "seed": 100007,
+        "reason": "expert_failed"
+      },
+      {
+        "seed": 100010,
+        "reason": "expert_failed"
+      },
+      {
+        "seed": 100011,
+        "reason": "expert_failed"
+      },
+      {
+        "seed": 100017,
+        "reason": "expert_failed"
+      },
+      {
+        "seed": 100019,
+        "reason": "expert_failed"
+      },
+      {
+        "seed": 100020,
+        "reason": "expert_failed"
+      },
+      {
+        "seed": 100021,
+        "reason": "expert_failed"
+      },
+      {
+        "seed": 100025,
+        "reason": "expert_failed"
+      },
+      {
+        "seed": 100026,
+        "reason": "expert_failed"
+      },
+      {
+        "seed": 100029,
+        "reason": "expert_failed"
+      },
+      {
+        "seed": 100032,
+        "reason": "expert_failed"
+      },
+      {
+        "seed": 100033,
+        "reason": "expert_error",
+        "error": "AssertionError: target_pose cannot be None for move action."
+      },
+      {
+        "seed": 100034,
+        "reason": "expert_failed"
+      },
+      {
+        "seed": 100035,
+        "reason": "expert_failed"
+      },
+      {
+        "seed": 100036,
+        "reason": "expert_failed"
+      },
+      {
+        "seed": 100037,
+        "reason": "expert_failed"
+      },
+      {
+        "seed": 100040,
+        "reason": "expert_failed"
+      },
+      {
+        "seed": 100045,
+        "reason": "expert_failed"
+      },
+      {
+        "seed": 100046,
+        "reason": "expert_failed"
+      },
+      {
+        "seed": 100047,
+        "reason": "expert_failed"
+      },
+      {
+        "seed": 100049,
+        "reason": "expert_failed"
+      },
+      {
+        "seed": 100050,
+        "reason": "expert_failed"
+      },
+      {
+        "seed": 100056,
+        "reason": "expert_failed"
+      },
+      {
+        "seed": 100060,
+        "reason": "expert_failed"
+      },
+      {
+        "seed": 100064,
+        "reason": "expert_failed"
+      },
+      {
+        "seed": 100065,
+        "reason": "expert_failed"
+      },
+      {
+        "seed": 100069,
+        "reason": "expert_failed"
+      },
+      {
+        "seed": 100070,
+        "reason": "expert_failed"
+      },
+      {
+        "seed": 100072,
+        "reason": "expert_failed"
+      },
+      {
+        "seed": 100074,
+        "reason": "expert_failed"
+      },
+      {
+        "seed": 100075,
+        "reason": "expert_failed"
+      },
+      {
+        "seed": 100077,
+        "reason": "expert_failed"
+      },
+      {
+        "seed": 100078,
+        "reason": "expert_failed"
+      },
+      {
+        "seed": 100080,
+        "reason": "expert_failed"
+      },
+      {
+        "seed": 100081,
+        "reason": "expert_failed"
+      },
+      {
+        "seed": 100082,
+        "reason": "expert_failed"
+      },
+      {
+        "seed": 100087,
+        "reason": "expert_failed"
+      },
+      {
+        "seed": 100091,
+        "reason": "expert_failed"
+      },
+      {
+        "seed": 100092,
+        "reason": "expert_failed"
+      },
+      {
+        "seed": 100096,
+        "reason": "expert_failed"
+      },
+      {
+        "seed": 100098,
+        "reason": "expert_failed"
+      },
+      {
+        "seed": 100099,
+        "reason": "expert_failed"
+      },
+      {
+        "seed": 100100,
+        "reason": "expert_failed"
+      },
+      {
+        "seed": 100101,
+        "reason": "expert_failed"
+      },
+      {
+        "seed": 100105,
+        "reason": "expert_failed"
+      },
+      {
+        "seed": 100107,
+        "reason": "expert_failed"
+      },
+      {
+        "seed": 100108,
+        "reason": "expert_failed"
+      },
+      {
+        "seed": 100109,
+        "reason": "expert_failed"
+      },
+      {
+        "seed": 100110,
+        "reason": "expert_failed"
+      },
+      {
+        "seed": 100111,
+        "reason": "expert_failed"
+      },
+      {
+        "seed": 100116,
+        "reason": "expert_failed"
+      },
+      {
+        "seed": 100117,
+        "reason": "expert_failed"
+      },
+      {
+        "seed": 100118,
+        "reason": "expert_failed"
+      },
+      {
+        "seed": 100120,
+        "reason": "expert_failed"
+      },
+      {
+        "seed": 100121,
+        "reason": "expert_failed"
+      },
+      {
+        "seed": 100122,
+        "reason": "expert_failed"
+      },
+      {
+        "seed": 100123,
+        "reason": "expert_failed"
+      },
+      {
+        "seed": 100124,
+        "reason": "expert_failed"
+      },
+      {
+        "seed": 100125,
+        "reason": "expert_failed"
+      },
+      {
+        "seed": 100126,
+        "reason": "expert_failed"
+      },
+      {
+        "seed": 100130,
+        "reason": "expert_failed"
+      },
+      {
+        "seed": 100131,
+        "reason": "expert_failed"
+      },
+      {
+        "seed": 100135,
+        "reason": "expert_failed"
+      },
+      {
+        "seed": 100140,
+        "reason": "expert_failed"
+      },
+      {
+        "seed": 100141,
+        "reason": "expert_failed"
+      },
+      {
+        "seed": 100144,
+        "reason": "expert_failed"
+      },
+      {
+        "seed": 100152,
+        "reason": "expert_failed"
+      },
+      {
+        "seed": 100153,
+        "reason": "expert_failed"
+      },
+      {
+        "seed": 100155,
+        "reason": "expert_failed"
+      },
+      {
+        "seed": 100159,
+        "reason": "expert_failed"
+      },
+      {
+        "seed": 100160,
+        "reason": "expert_failed"
+      },
+      {
+        "seed": 100161,
+        "reason": "expert_failed"
+      },
+      {
+        "seed": 100164,
+        "reason": "expert_failed"
+      },
+      {
+        "seed": 100167,
+        "reason": "expert_failed"
+      },
+      {
+        "seed": 100168,
+        "reason": "expert_failed"
+      },
+      {
+        "seed": 100172,
+        "reason": "expert_failed"
+      },
+      {
+        "seed": 100174,
+        "reason": "expert_failed"
+      },
+      {
+        "seed": 100180,
+        "reason": "expert_failed"
+      },
+      {
+        "seed": 100181,
+        "reason": "expert_failed"
+      },
+      {
+        "seed": 100183,
+        "reason": "expert_failed"
+      },
+      {
+        "seed": 100184,
+        "reason": "expert_failed"
+      }
+    ],
+    "gpu": {
+      "name": "NVIDIA RTX 6000 Ada Generation",
+      "driver": "570.211.01",
+      "cuda_visible_devices": "1"
+    },
+    "host": "sled-vail",
+    "python": "3.10.16",
+    "packages": {
+      "torch": "2.4.1",
+      "sapien": "3.0.0b1",
+      "mplib": "0.2.1",
+      "nvidia-curobo": "0.7.8",
+      "numpy": "1.26.4",
+      "warp-lang": "1.12.0"
+    },
+    "seconds": 2610.2720720767975,
+    "created": "2026-11-07T05:28:22Z",
+    "agreement": {
+      "repeat_run": {
+        "log": "outputs/rmbench/seed_search_repeat/swap_blocks.jsonl",
+        "seeds_compared": 186,
+        "decisions_agree": 183,
+        "flipped_seeds": [
+          100033,
+          100068,
+          100146
+        ],
+        "repeat_kept": 100,
+        "identical_list": false,
+        "shared_seeds": 98
+      },
+      "mem0_published": {
+        "source": "hf://qiuly/Mem-0-m1mix-RMBench/eval_results/swap_blocks/eval_log.txt",
+        "count": 100,
+        "identical_list": false,
+        "shared_seeds": 97,
+        "only_pinned": [
+          100002,
+          100068,
+          100149
+        ],
+        "only_mem0": [
+          100187,
+          100190,
+          100194
+        ]
+      }
+    }
+  }
+}

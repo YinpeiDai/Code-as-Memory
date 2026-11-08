@@ -1,0 +1,219 @@
+{
+  "env_id": "battery_try",
+  "split": "train",
+  "records": [
+    {
+      "episode": 0,
+      "seed": 1
+    },
+    {
+      "episode": 1,
+      "seed": 2
+    },
+    {
+      "episode": 2,
+      "seed": 5
+    },
+    {
+      "episode": 3,
+      "seed": 6
+    },
+    {
+      "episode": 4,
+      "seed": 7
+    },
+    {
+      "episode": 5,
+      "seed": 10
+    },
+    {
+      "episode": 6,
+      "seed": 14
+    },
+    {
+      "episode": 7,
+      "seed": 15
+    },
+    {
+      "episode": 8,
+      "seed": 18
+    },
+    {
+      "episode": 9,
+      "seed": 19
+    },
+    {
+      "episode": 10,
+      "seed": 22
+    },
+    {
+      "episode": 11,
+      "seed": 23
+    },
+    {
+      "episode": 12,
+      "seed": 27
+    },
+    {
+      "episode": 13,
+      "seed": 30
+    },
+    {
+      "episode": 14,
+      "seed": 32
+    },
+    {
+      "episode": 15,
+      "seed": 36
+    },
+    {
+      "episode": 16,
+      "seed": 40
+    },
+    {
+      "episode": 17,
+      "seed": 49
+    },
+    {
+      "episode": 18,
+      "seed": 53
+    },
+    {
+      "episode": 19,
+      "seed": 57
+    },
+    {
+      "episode": 20,
+      "seed": 58
+    },
+    {
+      "episode": 21,
+      "seed": 62
+    },
+    {
+      "episode": 22,
+      "seed": 64
+    },
+    {
+      "episode": 23,
+      "seed": 66
+    },
+    {
+      "episode": 24,
+      "seed": 72
+    },
+    {
+      "episode": 25,
+      "seed": 74
+    },
+    {
+      "episode": 26,
+      "seed": 78
+    },
+    {
+      "episode": 27,
+      "seed": 82
+    },
+    {
+      "episode": 28,
+      "seed": 83
+    },
+    {
+      "episode": 29,
+      "seed": 85
+    },
+    {
+      "episode": 30,
+      "seed": 86
+    },
+    {
+      "episode": 31,
+      "seed": 146
+    },
+    {
+      "episode": 32,
+      "seed": 92
+    },
+    {
+      "episode": 33,
+      "seed": 101
+    },
+    {
+      "episode": 34,
+      "seed": 103
+    },
+    {
+      "episode": 35,
+      "seed": 112
+    },
+    {
+      "episode": 36,
+      "seed": 113
+    },
+    {
+      "episode": 37,
+      "seed": 117
+    },
+    {
+      "episode": 38,
+      "seed": 118
+    },
+    {
+      "episode": 39,
+      "seed": 119
+    },
+    {
+      "episode": 40,
+      "seed": 126
+    },
+    {
+      "episode": 41,
+      "seed": 130
+    },
+    {
+      "episode": 42,
+      "seed": 132
+    },
+    {
+      "episode": 43,
+      "seed": 135
+    },
+    {
+      "episode": 44,
+      "seed": 136
+    },
+    {
+      "episode": 45,
+      "seed": 138
+    },
+    {
+      "episode": 46,
+      "seed": 139
+    },
+    {
+      "episode": 47,
+      "seed": 140
+    },
+    {
+      "episode": 48,
+      "seed": 142
+    },
+    {
+      "episode": 49,
+      "seed": 145
+    }
+  ],
+  "provenance": {
+    "rule": "released demo_clean zip; episode_%07d.hdf5 index i has seed seed.txt[i]",
+    "repo": "TianxingChen/RMBench",
+    "repo_type": "dataset",
+    "revision": "5d8ff21038fba32ea549e9eee8497aaba9aab5cf",
+    "path": "data/battery_try/demo_clean.zip",
+    "zip_sha256": "b3c0413ec4319e804842a79bc53b14aa34b0a753d25188b7d43fad3f651fcdb6",
+    "hf_lfs_sha256": "b3c0413ec4319e804842a79bc53b14aa34b0a753d25188b7d43fad3f651fcdb6",
+    "zip_size": 1491905241,
+    "task_config": "demo_clean",
+    "embodiment": "aloha_agilex",
+    "created": "2026-11-07T05:03:35Z"
+  }
+}

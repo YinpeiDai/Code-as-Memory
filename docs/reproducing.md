@@ -153,6 +153,145 @@ hashes, copy only permitted fields without changing values, and record provenanc
 Changing a schema label alone is not a conversion. See the
 [historical selection rule](ROBOMME_25_DEMO_SEEDS.md).
 
+## RMBench RGB-D workflow
+
+RMBench also supports the user-requested RGB-D collection at 320x240 from all
+four cameras. Its release contains sampled states, but omits the dense native
+trajectory files, so exact replay of the original recording is unavailable.
+`scripts/prepare_rmbench_rgbd.py` regenerates the official expert on the same
+500 released training identities (50 per task), records RGB and depth together,
+and retains only native successful collections. It labels this as regenerated
+data, saves failure/trajectory evidence privately, and creates a separate
+up-to-25-demo subset. Counts and shortfalls are explicit; test seeds are excluded.
+The job normally waits for idle GPUs. For the user-requested five-per-GPU collection,
+use `start --gpus 0 1 --workers 10 --allow-gpu-sharing`; this explicitly permits
+sharing existing workloads after checking free GPU memory, with separate five-worker
+queues on each device. Capture starts as source episodes pass verification.
+To resize an active collection, run `scripts/resize_rmbench_rgbd.py start JOB
+--workers-per-gpu 5`. It creates a new scheduler timetag, preserves the original
+acquisition snapshot and data directory, adopts active captures, and runs only
+missing attempts. It checks free memory before each launch and reserves memory
+for workers still starting. The original collection settings remain in the
+manifest, with the scheduling transition recorded in `collection_history.json`
+and the final manifest. The background monitor follows the new scheduler.
+`--reuse-captures POOL` preserves completed attempts from an earlier preparation
+after checking source configuration, identities and observation hashes; reuse is
+recorded in each result. New experiments using these
+datasets require `depth: true` and fresh preparation; historical RGB runs remain
+unchanged. No state row from the released HDF5 is treated as a control command.
+
+The current user-requested RMBench follow-up assigns **up to 50 RGB-D demos per
+task, demo-only**, across all ten tasks with Claude Code / Opus 5.5. Use
+`configs/experiments/rmbench_rgbd_demos50_all10.json` and eight coding workers.
+The full successful pool supplies 496 demos: 49 each for `battery_try` and
+`blocks_ranking_try`, 48 for `observe_and_pickup`, and 50 for the other seven
+tasks. The plan declares these shortfalls through explicit `demo_counts`;
+preparation and the learner boundary check require the exact declared count for
+each task. Defaults remain strict, with no automatic acceptance of fewer demos.
+This follow-up uses `depth: true`, the shared demo-only prompt, and zero training
+rollouts. Preserve the separate 25-demo subset and all historical RGB results.
+
+While assembly is still running, queue the follow-up with
+`.venv/bin/python scripts/queue_rmbench_development.py start
+configs/experiments/rmbench_rgbd_demos50_all10.json --producer
+outputs/rmbench_rgbd_preparation/20261108T003437_459008Z --workers 8`.
+The queue copies its experiment, config and launcher under a fresh
+`outputs/rmbench_development_queue/` timetag. It waits for the producer's final
+pool manifest and removal of the partial manifest, which occurs only after pool
+validation. It need not wait for the separate 25-demo subset. The new development
+batch then pins the current harness and simulator source, validates the data
+again through `cam prepare`, creates fresh per-task runs, and checks learner
+access before starting development. Queue `status.json` records errors or launch;
+`batch.json` points to the development batch. Held-out testing remains separate
+and follows frozen policies.
+
+The same live dashboard can follow this queue before development starts:
+`cam site --batch outputs/rmbench_development_queue/QUEUE_TAG --output
+sites/rmbench_rgbd_demos50`, then
+`cam serve sites/rmbench_rgbd_demos50 --port 8915`.
+Open `http://localhost:8915/#development` (forward port 8915 over SSH when
+needed). It displays tasks waiting for RGB-D validation, then discovers the
+launched batch, prepared runs, development logs and frozen policies on refresh.
+
+The user initially authorized full RMBench testing after **all ten** demo-only learners
+finish and freeze their policies. Queue this separately with
+`.venv/bin/python scripts/queue_rmbench_evaluation.py start
+outputs/rmbench_development_queue/QUEUE_TAG --gpus 0 1 --workers-per-gpu 6`.
+The new `outputs/rmbench_evaluation_queue/` job checks every completed learner,
+zero training attempts, frozen policy hashes, and 100 assigned test episodes per
+task before starting any test. It evaluates 1,000 episodes using each run's
+unchanged pinned runner. One task occupies each GPU, with at most six episode
+workers; strict admission waits for idle GPU compute and queued MIKASA simulation.
+Only unscorable infrastructure episodes may be archived with `cam recover-test`
+and retried with the same policy, seed and limits (up to three evaluation passes
+per task). Scored failures remain scored. The job's `results.json` reports actual
+scored/expected counts and only reports a final success rate at full coverage.
+The existing dashboard's Evaluation tab follows the same prepared runs and shows
+their test performance. Test outcomes never trigger new learner work.
+
+The RMBench user subsequently requested local SSD storage and per-task startup
+instead of waiting for the entire pool. Use
+`.venv/bin/python scripts/develop_rmbench_progressively.py start OLD_QUEUE`.
+This creates a fresh `outputs/rmbench_progressive_development/TAG` with pinned
+code and unchanged acquisition data, retires only the waiting development and
+evaluation schedulers and the completed-capture NFS assembler/monitor, and keeps
+all original captures, partial H5s, manifests and logs. The new H5s live on the
+local `/data` SSD at `JOB/datasets/TASK/h5/record_dataset_TASK.h5`; the user will
+copy them to NFS later. Two assembly slots perform sequential capture reads and
+local HDF5 copying. Every capture hash and every output schema/training identity
+is checked. Five seeded random successful episodes per task additionally receive
+first/middle/last-frame checks across all four RGB-D cameras, with an audit JSON
+and contact sheet. These are offline file inspections, not simulator replays.
+Each task starts through fresh `cam prepare` and the same eight-slot demo-only
+development schedule when its own dataset is ready. Point the dashboard at this
+new job with `cam site --batch JOB --output sites/rmbench_rgbd_demos50`; its status
+has the same task/run structure as a development batch. Queue a new
+`queue_rmbench_evaluation.py start JOB` follow-up; the all-ten-frozen barrier and
+1,000 held-out test assignment remain unchanged. The original 25-demo subset
+preparation plan is preserved and not relabeled as this full-pool assignment.
+
+**Latest RMBench evaluation scheduling revision:** start each task's 100 held-out
+episodes as soon as its own learner has finished and its policy is frozen; other
+tasks may continue offline development. Launch with
+`scripts/queue_rmbench_evaluation.py start DEVELOPMENT_JOB --as-ready --gpus 0 1
+--workers-per-gpu 6 --supersedes OLD_WAITING_EVALUATION_JOB`.
+This writes a fresh scheduler timetag and preserves the old waiting scheduler's
+plan, status history and snapshots. It changes no prepared learner or policy.
+Each admission still checks successful learner completion, zero training
+attempts, the frozen program hash, RGB-D configuration and all 100 assigned test
+identities. GPU admission, infrastructure-only retries and the prohibition on
+test feedback to any learner remain unchanged. Per-task complete success rates
+appear as tasks finish testing; the overall rate remains incomplete until all
+1,000 tests are scored. The historical default without `--as-ready` retains the
+all-task barrier for reproduction.
+
+**Queued RMBench demo-count comparison (user-requested):** after all ten current
+up-to-50-demo learners and all 1,000 baseline tests finish, run a separate
+25-demo RGB-D demo-only experiment across all ten tasks. Queue it with
+`.venv/bin/python scripts/queue_rmbench_comparison.py start BASELINE_DEVELOPMENT`.
+The queue copies the baseline's exact harness, benchmark source, configuration,
+shared prompts and launcher, and records deterministic subset identities before
+launch. It waits for complete scored coverage, irrespective of success rate.
+Then the baseline's `cam subset` creates self-contained local SSD task H5s with
+exactly 25 demos each (250 total). Fresh `cam prepare` runs use eight coding
+slots, Claude Code / Opus 5.5 and zero training rollouts. Larger pools, previous
+solutions and test feedback are unavailable to learners. The separate evaluator
+admits each new frozen policy using the same 100 test identities, one task per
+GPU and at most six workers per GPU. Existing infrastructure-only recovery rules
+apply. `outputs/rmbench_comparison_queue/TAG/` contains selection.json, plan.json,
+status.json, datasets/TASK, batch.json and evaluation_followup.json. After both
+arms have complete coverage, comparison.json and comparison.md report per-task
+and overall results, with the baseline's actual 48/49/50 counts. All original
+datasets and run evidence remain intact; no NFS transfer happens automatically.
+
+Existing extractions use `cam-demonstrations/1` for RoboMME or
+`cam-demonstrations/2` for the three additional adapters. An old
+`cap-regular-fewshot/2` or `data_1206` file needs re-extraction from verified raw
+recordings or an audited conversion. Preserve originals, verify identities and
+hashes, copy only permitted fields without changing values, and record provenance.
+Changing a schema label alone is not a conversion. See the
+[historical selection rule](ROBOMME_25_DEMO_SEEDS.md).
+
 ## Learner access
 
 The host runs the simulator and authenticates the coding client. Model-accessible
@@ -211,6 +350,46 @@ is explicitly unavailable; contacts and actual future torques are not predicted.
 Calls/results are retained in the normal command audit, not counted as rollouts.
 
 ## Learning and held-out evaluation
+
+The shared demo-only prompt was revised at the user's request on 2026-11-08 to
+require a final code review and offline execution checks after the last edit.
+Check the first decision with every declared memory field and `last` set to
+`None`, later memory transitions, types, empty detections and action arguments.
+`validate` checks interfaces; it does not execute the policy. These checks use
+assigned demo observations or synthetic inputs and permit no simulator calls.
+All benchmarks use the same wording; old prepared prompts stay intact.
+
+The user also authorized one additional Opus 5.5 repair session for the existing
+50-demo RMBench `swap_blocks` policy. For this explicit continuation, run
+`cam prepare runs --dataset SAME_DATA --config SAME_CONFIG --tasks swap_blocks
+--initial-policy-run SOURCE_RUN`. This option requires one demo-only task,
+identical configuration and assigned demos, an intact frozen source policy,
+and the same native benchmark snapshot. It imports only policy files and their
+pre-evaluation notes, pins them in `inputs/initial_policy/`, records lineage in
+`run.json` and the README, and initializes a fresh code history. No scored
+results, evaluation traces, learner transcript or test feedback are imported.
+The prompt identifies a user-requested repair instead of a blank-policy start.
+Use this option only when the user explicitly authorizes continuing an existing
+solution. Preserve the original policy and scored result; any later evaluation
+of the repair is a separate follow-up, not a replacement of the original
+25-versus-50-demo comparison.
+
+The subsequent user request supersedes reuse for the next `swap_blocks` run:
+start from the blank policy with the same 50 RGB-D demos and revised shared
+demo-only prompt, then evaluate all 100 tests. Do not pass `--initial-policy-run`.
+After complete scored coverage, make the new development and rollout selection
+current on the website regardless of success rate. The user's latest display
+revision removes the original and repair entries from the website entirely,
+including the Historical selector, while preserving their source files on disk.
+The 25-demo swap_blocks entry remains part of its separate experiment.
+The host-only `scripts/publish_rmbench_rerun.py` records `.run_visibility.json`
+in the website directory and writes `current_results.json` beside the new job;
+it does not change old logs, policies, scores or the original comparison. The
+current selection explicitly records this task's revised prompt and new run ID.
+The site-local `.excluded_runs.json` lists the retired run paths and takes
+precedence over historical visibility metadata. Excluded runs contribute no
+development logs, rollout entries, downloads or aggregate statistics to the
+generated dashboard. Source indices remain reserved so other run links stay stable.
 
 Finish learning and freeze the policy before invoking `cam evaluate` on the host.
 `cam learn` does not launch evaluation. The coding agent has no evaluation tool;

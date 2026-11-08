@@ -86,10 +86,11 @@ const selected = () =>
   DATA.runs.filter(
     (r) =>
       (!$("benchmark").value || r.benchmark === $("benchmark").value) &&
-      (!$("run").value || r.id === $("run").value),
+      ($("run").value ? r.id === $("run").value : !r.superseded),
   );
 const settingLabel = (r) => r.learning_setting || r.config.mode;
-const label = (r) => r.name + " · " + settingLabel(r) + " · " + r.config.coding.model;
+const label = (r) => (r.superseded ? "Historical · " : "") + r.name + " · " + settingLabel(r) + " · " + r.config.coding.model;
+const runSelectionLabel = () => DATA.runs.some((r) => r.superseded) ? "Current runs" : "All runs";
 function options(id, values, first) {
   const previous = $(id).value;
   $(id).innerHTML =
@@ -177,7 +178,14 @@ function render() {
     $(id).hidden = demosOnly;
   $("run").closest("label").hidden = demosOnly;
   $("notice").innerHTML = runs.length
-    ? ""
+    ? runs.some((r) => r.superseded)
+      ? `<div class="note">Historical run. ${runs.filter((r) => r.superseded).map((r) =>
+          esc(r.superseded_reason) + (r.replacement_run_id != null
+            ? " " + link(`?run=${encodeURIComponent(r.replacement_run_id)}#results`, "Open current run") : "")
+        ).join(" ")}</div>`
+      : DATA.runs.some((r) => r.superseded)
+        ? '<div class="note">Showing current runs. Earlier development logs and scored rollouts remain available under Historical entries in the Run selector.</div>'
+        : ""
     : demosOnly
       ? `<div class="note">Demonstration browser: ${DATA.datasets.length} extracted dataset(s) across ${new Set(DATA.datasets.map((d) => d.benchmark)).size} benchmark(s). No runs are linked to this site.</div>`
       : '<div class="note">Fresh CaM workspace. No historical results are imported. Extract raw training data, prepare a run, then develop and evaluate policies.</div>';
@@ -533,7 +541,7 @@ $("benchmark").addEventListener("change", () => {
         (r) => !$("benchmark").value || r.benchmark === $("benchmark").value,
       )
       .map((r) => [r.id, label(r)]),
-    "All runs",
+    runSelectionLabel(),
   );
   render();
 });
@@ -555,8 +563,13 @@ async function refresh() {
   options(
     "run",
     DATA.runs.map((r) => [r.id, label(r)]),
-    "All runs",
+    runSelectionLabel(),
   );
+  if (!refresh.initialSelectionApplied) {
+    const requested = new URLSearchParams(location.search).get("run");
+    if (DATA.runs.some((r) => r.id === requested)) $("run").value = requested;
+    refresh.initialSelectionApplied = true;
+  }
   render();
 }
 function openDeepLink() {
@@ -568,6 +581,10 @@ function openDeepLink() {
   if (parts[0] === "test") {
     const run = DATA.runs.find((r) => r.id === parts[1]);
     if (!run) return;
+    if (run.superseded && $("run").value !== run.id) {
+      $("run").value = run.id;
+      render();
+    }
     const episodes = run.episodes.filter((e) => e.task === parts[2] && String(e.maximum_rollouts) === parts[3]);
     const i = episodes.findIndex((e) => String(e.episode) === parts[4]);
     if (i >= 0) Explorer.open(testItems(run, episodes), i);

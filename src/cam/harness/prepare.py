@@ -16,8 +16,8 @@ from cam import __file__ as package_file
 from cam.benchmarks.base import pin_source, source_hash
 from cam.benchmarks.registry import checkout, get_adapter, simulator_python
 from cam.config import RunConfig
-from cam.core.budget import Ledger
-from cam.core.history import materialize, snapshot
+from cam.core.budget import Ledger, program_hash
+from cam.core.history import materialize, payload, snapshot
 from cam.data.extract import validate_dataset
 from cam.io import copy_tree, read, sha256, tree_hash, write
 from cam.prompts import benchmark_mode_guidance, render, task_clarification
@@ -188,12 +188,43 @@ def preparation_inputs(dataset, config, tasks=None, benchmark_source=None):
     return dataset, config, tasks, adapter, selected
 
 
-def prepare(root, dataset, config, tasks=None, benchmark_source=None):
+def initial_policy_input(source, config, tasks, selected):
+    """Explicit same-task repair; never import feedback, rollouts or another task."""
+    if source is None:
+        return None
+    if config.mode != "demos" or config.budget != 0 or len(tasks) != 1:
+        raise ValueError("Initial-policy repairs require one demo-only task and zero rollouts")
+    source = Path(source).resolve()
+    prior = validate_run(source)
+    task = tasks[0]
+    if prior["tasks"] != tasks or RunConfig.from_dict(prior["config"]) != config:
+        raise ValueError("Initial-policy repair must keep the same task and configuration")
+    original = read(source / "inputs/dataset.json")["tasks"][task]
+    assigned = selected["tasks"][task]
+    if original["sha256"] != assigned["sha256"] or original["episodes"] != assigned["episodes"]:
+        raise ValueError("Initial-policy repair must keep identical assigned demonstrations")
+    folder = source / "tasks" / task
+    if read(folder / "logs/completion.json")["status"] != "finished":
+        raise ValueError("Initial policy learner has not finished")
+    policy = folder / "policy"
+    frozen = read(policy / "freeze.json")
+    if frozen["training"]["attempts"] != 0 or program_hash(policy) != frozen["program_hash"]:
+        raise ValueError("Initial policy is not an intact frozen demo-only policy")
+    return {
+        "provenance": {"source_run": str(source), "task": task,
+                       "program_hash": frozen["program_hash"],
+                       "source_freeze_sha256": sha256(policy / "freeze.json"),
+                       "benchmark_hash": prior["benchmark_hash"],
+                       "kind": "user_requested_code_repair", "test_feedback_imported": False},
+        "files": payload(policy),
+    }
+
+
+def prepare(root, dataset, config, tasks=None, benchmark_source=None, initial_policy_run=None):
     """Prepare an exact run path; retained for embedded callers and old runs."""
-    return _prepare(
-        Path(root).resolve(),
-        *preparation_inputs(dataset, config, tasks, benchmark_source),
-    )
+    dataset, config, tasks, adapter, selected = preparation_inputs(dataset, config, tasks, benchmark_source)
+    initial = initial_policy_input(initial_policy_run, config, tasks, selected)
+    return _prepare(Path(root).resolve(), dataset, config, tasks, adapter, selected, initial)
 
 
 def coding_run_name(coding):
@@ -211,12 +242,13 @@ def coding_run_name(coding):
 
 
 def prepare_runs(
-    base, dataset, config, tasks=None, benchmark_source=None, timetag=None
+    base, dataset, config, tasks=None, benchmark_source=None, timetag=None, initial_policy_run=None
 ):
     """Create one task per benchmark/task/client-model/setting/timetag leaf."""
     dataset, config, tasks, adapter, selected = preparation_inputs(
         dataset, config, tasks, benchmark_source
     )
+    initial = initial_policy_input(initial_policy_run, config, tasks, selected)
     timetag = timetag or datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%S_%fZ")
     if timetag in (".", "..") or not re.fullmatch(r"[A-Za-z0-9_.-]+", timetag):
         raise ValueError("Timetag must be a single alphanumeric path component")
@@ -233,7 +265,7 @@ def prepare_runs(
     write_runs_readme(base)
     results = []
     for task, root in zip(tasks, roots):
-        _prepare(root, dataset, config, [task], adapter, selected)
+        _prepare(root, dataset, config, [task], adapter, selected, initial)
         results.append({"task": task, "root": str(root)})
     return {
         "schema": "cam-preparation/1",
@@ -244,7 +276,7 @@ def prepare_runs(
     }
 
 
-def _prepare(root, dataset, config, tasks, adapter, selected):
+def _prepare(root, dataset, config, tasks, adapter, selected, initial=None):
     if root.exists():
         raise FileExistsError(
             "Use a new run directory; existing logs and budgets cannot be reset"
@@ -252,6 +284,8 @@ def _prepare(root, dataset, config, tasks, adapter, selected):
     root.mkdir(parents=True)
     benchmark = root / "inputs/benchmark" / adapter.package
     assets = pin_source(adapter, benchmark)
+    if initial and tree_hash(benchmark) != initial["provenance"]["benchmark_hash"]:
+        raise ValueError("Initial-policy repair must keep the same native benchmark snapshot")
     package = root / "inputs/harness/cam"
     copy_tree(Path(package_file).parent, package)
     runtime = make_runtime(
@@ -265,6 +299,12 @@ def _prepare(root, dataset, config, tasks, adapter, selected):
         name: sha256(root / name)
         for name in ("inputs/dataset.json", "inputs/environment.json")
     }
+    if initial:
+        saved = root / "inputs/initial_policy"
+        materialize(saved, initial["files"])
+        for name in initial["files"]:
+            path = saved / name
+            inputs[path.relative_to(root).as_posix()] = sha256(path)
     simulator = simulator_python(adapter)
     if simulator is not None:
         write(root / "inputs/simulator_environment.json", simulator_snapshot(simulator))
@@ -318,13 +358,16 @@ def _prepare(root, dataset, config, tasks, adapter, selected):
             "policy.md": b"Document the generated task policy and its evidence.\n",
             "tools/policy.py": starter(interfaces[task]).encode(),
         }
+        if initial:
+            files = initial["files"]
         materialize(workspace, files)
         materialize(task_root / "program", files)
         (workspace / "scratch").mkdir()
         (task_root / "feedback").mkdir()
         (task_root / "logs").mkdir()
         prompt = render(
-            config, task, records, training_records, adapter, interfaces[task]
+            config, task, records, training_records, adapter, interfaces[task],
+            initial_policy=initial["provenance"] if initial else None,
         )
         (workspace / "PROTOCOL.md").write_text(prompt)
         (task_root / "prompt.md").write_text(prompt)
@@ -349,7 +392,7 @@ def _prepare(root, dataset, config, tasks, adapter, selected):
             task_root / "state/config.json"
         )
         Ledger(cfg["ledger"]).initialize(cfg)
-        snapshot(cfg, "initialized")
+        snapshot(cfg, "initialized from user-authorized prior policy" if initial else "initialized")
         if config.mode != "interaction":
             target = task_root / "demonstrations" / Path(item["file"]).name
             target.parent.mkdir()
@@ -407,7 +450,8 @@ if __name__ == "__main__":
         },
         "evaluation_api_calls": 0,
         "test_feedback_to_coding": False,
-        "fresh_policy": True,
+        "fresh_policy": initial is None,
+        "initial_policy": initial["provenance"] if initial else None,
         "checkpoint_rule": "R_N is saved before attempt N+1; final code is saved at early stop",
     }
     write(root / "run.json", manifest)

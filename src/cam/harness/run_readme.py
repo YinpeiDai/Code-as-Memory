@@ -209,6 +209,19 @@ def write_run_readme(root, manifest):
         "the tools, attempt accounting or native scoring.\n\n"
         if guidance else ""
     )
+    initial = manifest.get("initial_policy")
+    initial_note = (
+        "## User-requested code repair\n\n"
+        f"Initialized from the same task's frozen policy in `{initial['source_run']}` "
+        f"(program hash `{initial['program_hash']}`). The configuration, assigned demos "
+        "and native benchmark snapshot match that source run. This is a separate repair "
+        "follow-up, not a fresh-policy comparison or replacement of the original scored run. "
+        "Only policy files and pre-evaluation policy notes were imported; no test feedback, "
+        "rollouts, evaluator logs or other task policies were supplied. The imported files "
+        "are pinned under `inputs/initial_policy/` and retained in the initial code revision. "
+        "The learner prompt explicitly requests a code review and repair using offline evidence.\n\n"
+        if initial else ""
+    )
     (root / "README.md").write_text(
         f"""# {manifest["config"]["benchmark"]} / {tasks}
 
@@ -238,7 +251,7 @@ identity and budget; `rollout` accepts no seed or episode override. With a host 
 rollouts wait for a free simulator slot before consuming an attempt; coding and
 offline analysis continue independently in other sessions.
 
-{clarifications}{guidance_note}## Commands
+{clarifications}{guidance_note}{initial_note}## Commands
 
 ```bash
 cam learn {run} --gpus 0 --workers-per-gpu 1

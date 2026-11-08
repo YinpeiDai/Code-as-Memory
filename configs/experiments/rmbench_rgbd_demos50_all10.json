@@ -1,0 +1,29 @@
+{
+  "selection_reason": "User-requested RMBench demo-only follow-up using up to 50 regenerated native-expert RGB-D demos per task across all ten tasks. Assign every successful capture: seven tasks have 50, battery_try and blocks_ranking_try have 49, and observe_and_pickup has 48 (496 total). Preserve and report the four capture failures; never pad counts. Claude Code / Opus 5.5 uses the shared demo-only prompt with zero training rollouts. Four synchronized 320x240 RGB-D cameras. Fresh runs preserve the historical RGB results; held-out evaluation follows frozen policies separately.",
+  "benchmarks": {
+    "rmbench": {
+      "config": "configs/rmbench/demos_rgbd_claude_code.json",
+      "demo_count": 50,
+      "demo_counts": {
+        "battery_try": 49,
+        "blocks_ranking_try": 49,
+        "observe_and_pickup": 48
+      },
+      "require_prepared_data": true,
+      "datasets": ["data/rmbench_rgbd/20261107T213111_682479Z/pool"],
+      "raw": "data/raw/rmbench",
+      "tasks": [
+        "battery_try",
+        "blocks_ranking_try",
+        "cover_blocks",
+        "observe_and_pickup",
+        "place_block_mat",
+        "press_button",
+        "put_back_block",
+        "rearrange_blocks",
+        "swap_T",
+        "swap_blocks"
+      ]
+    }
+  }
+}

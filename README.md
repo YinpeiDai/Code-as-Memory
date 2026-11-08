@@ -4,7 +4,7 @@ Learn reusable Python programs from demonstrations, interaction, or both.
 A coding agent develops the program; the frozen program performs perception,
 decisions, and control with **zero model calls during evaluation**.
 
-RoboMME and MIKASA-Robo have runnable adapters with pinned simulator environments. `mikasa_robo_v2` runs the official MIKASA-Robo
+RoboMME, MIKASA-Robo, and RMBench have runnable adapters with pinned simulator environments. `mikasa_robo_v2` runs the official MIKASA-Robo
 protocol with RoboMME-style 256x256 RGB-D, calibration and joint observations,
 replayed 50-demo datasets, and the opt-in `robot.dry_run` kinematic check (see
 [benchmarks](docs/benchmarks.md#mikasa-robo-v2)). Claude Code and Codex use the same task

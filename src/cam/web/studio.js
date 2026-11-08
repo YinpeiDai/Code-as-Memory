@@ -28,6 +28,7 @@ const Studio = {
     if (row.task?.status === "running") return "Developing";
     if (row.batch?.status === "preparation_failed") return "Preparation blocked";
     if (row.batch?.status === "failed") return "Needs attention";
+    if (row.batch?.status === "waiting_for_validated_pool") return "Waiting for RGB-D validation";
     return row.batch?.status === "extracting" ? "Preparing demos" : "Waiting to start";
   },
   init() {

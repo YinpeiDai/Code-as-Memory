@@ -69,7 +69,7 @@ def describe_interface(interface):
     return "\n".join(lines) + "\n"
 
 
-def render(config, task, episodes, training_episodes=None, adapter=None, interface=None):
+def render(config, task, episodes, training_episodes=None, adapter=None, interface=None, initial_policy=None):
     if adapter is not None and hasattr(adapter, "sensor_summary"):
         sensors = adapter.sensor_summary(task, config.depth)
     else:
@@ -106,8 +106,14 @@ def render(config, task, episodes, training_episodes=None, adapter=None, interfa
         "host-selected and fixed for this run. Rendering uses the GPU independently.\n"
         if config.benchmark == "mikasa_robo_v2" else ""
     )
+    initialization = (
+        "Continue the supplied existing Python policy for this same task in a user-requested repair. "
+        "Review and fix code bugs, keeping its task strategy unless a code bug requires a change. "
+        "Use only the assigned demos, public API and offline checks. Prior evaluation feedback is not supplied."
+        if initial_policy else "Start from the supplied blank Python policy."
+    )
     assignment = f"""Task: {task}
-Method: Code-as-Memory. Start from the supplied blank Python policy.
+Method: Code-as-Memory. {initialization}
 Benchmark: {config.benchmark}; learning mode: {config.mode}.
 {protocol}Assigned expert demonstrations: {count}; demonstration IDs: {ids if count else []}.
 Allowed simulator training episode IDs: {training_ids}.

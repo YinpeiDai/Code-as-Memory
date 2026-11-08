@@ -87,6 +87,28 @@ def messages(logs):
     return result
 
 
+def batch_status(batch):
+    """Follow a queued experiment into its development batch without a new URL."""
+    state = read(batch / "status.json")
+    if "tasks" in state:
+        return state
+    launched = batch / "batch.json"
+    if launched.is_file():
+        target = Path(read(launched)["batch"]) / "status.json"
+        if target.is_file():
+            return read(target)
+    experiment = read(batch / "experiment.json")
+    plan = read(batch / "plan.json")
+    status = "preparation_failed" if state["status"] == "needs_attention" else state["status"]
+    tasks = {}
+    for name, item in experiment["benchmarks"].items():
+        for task in item["tasks"]:
+            tasks[f"{name}/{task}"] = {"benchmark": name, "task": task, "status": status}
+            if state.get("error"):
+                tasks[f"{name}/{task}"]["error"] = state["error"]
+    return {**state, "tasks": tasks, "workers": plan["workers"]}
+
+
 def build_site(runs, datasets, output, batch=None, demo_limits=None):
     """``demo_limits`` maps a dataset path to the number of demos shown per task."""
     demo_limits = {str(Path(k).resolve()): int(v) for k, v in (demo_limits or {}).items()}
@@ -97,7 +119,7 @@ def build_site(runs, datasets, output, batch=None, demo_limits=None):
     batch_state = None
     if batch:
         batch = Path(batch).resolve()
-        state = read(batch / "status.json")
+        state = batch_status(batch)
         batch_state = {
             "name": batch.name, "status": state["status"], "workers": state.get("workers"),
             "tasks": [{k: row[k] for k in ("benchmark", "task", "status", "error") if k in row}
@@ -135,8 +157,16 @@ def build_site(runs, datasets, output, batch=None, demo_limits=None):
         "datasets": [],
         "batch": batch_state,
     }
+    visibility_path = output / ".run_visibility.json"
+    visibility = read(visibility_path) if visibility_path.is_file() else {}
+    excluded_path = output / ".excluded_runs.json"
+    excluded = {str(Path(source).resolve()) for source in read(excluded_path)} if excluded_path.is_file() else set()
+    run_ids = {str(Path(source).resolve()): str(index) for index, source in enumerate(runs)}
     for index, source in enumerate(runs):
         root = Path(source).resolve()
+        # Keep source indices stable while removing retired entries from the site.
+        if str(root) in excluded:
+            continue
         report = build(root)
         run = {
             "id": str(index),
@@ -146,6 +176,10 @@ def build_site(runs, datasets, output, batch=None, demo_limits=None):
                 "summary": asset(root / "reports/summary.json"),
             },
         }
+        if str(root) in visibility:
+            entry = visibility[str(root)]
+            run.update(superseded=True, superseded_reason=entry["reason"],
+                       replacement_run_id=run_ids.get(str(Path(entry["replacement"]).resolve())))
         plan = read(root / "run.json")
         interfaces = plan.get("interfaces") or {}
         for task in run["development"]:
@@ -295,9 +329,10 @@ def build_site(runs, datasets, output, batch=None, demo_limits=None):
         content["datasets"].append(dataset)
     content["paired_comparisons"] = []
     # Cross-run comparisons require the identical native benchmark snapshot.
-    for identity in {r["benchmark_hash"] for r in content["runs"]}:
+    current_runs = [run for run in content["runs"] if not run.get("superseded")]
+    for identity in {r["benchmark_hash"] for r in current_runs}:
         groups = {}
-        for run in content["runs"]:
+        for run in current_runs:
             if run["benchmark_hash"] != identity:
                 continue
             for setting in run["settings"]:
@@ -311,7 +346,7 @@ def build_site(runs, datasets, output, batch=None, demo_limits=None):
     try:
         from cam.reporting.figures import export_figures
 
-        figures = export_figures(content["runs"], output / "figures")
+        figures = export_figures(current_runs, output / "figures")
         content["figures"] = ["figures/" + name for name in figures["files"]]
     except ImportError:
         content["figures"] = []  # Optional plotting extra; browser SVGs still work.
@@ -333,7 +368,7 @@ def build_site(runs, datasets, output, batch=None, demo_limits=None):
     )
     return {
         "site": str(output),
-        "runs": len(runs),
+        "runs": len(content["runs"]),
         "datasets": len(datasets),
         "artifacts": len(artifacts),
     }

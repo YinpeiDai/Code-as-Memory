@@ -59,6 +59,11 @@ def data_assignment(name, item, config):
     count = item.get("demo_count", 25)
     if type(count) is not int or count < 1:
         raise ValueError("demo_count must be a positive integer")
+    counts = item.get("demo_counts", {})
+    if not isinstance(counts, dict) or set(counts) - set(item["tasks"]):
+        raise ValueError("demo_counts must map selected tasks to explicit counts")
+    if any(type(value) is not int or value < 1 or value > count for value in counts.values()):
+        raise ValueError("Per-task demo counts must be positive and no larger than demo_count")
     if cfg.benchmark != name:
         raise ValueError("Batch benchmark differs from configuration")
     if cfg.mode == "demos":
@@ -84,7 +89,7 @@ def data_assignment(name, item, config):
             missing.append(task)
             continue
         records = datasets[dataset]["tasks"][task]["episodes"]
-        expected = count
+        expected = counts.get(task, count)
         if len(records) != expected:
             raise ValueError(f"Expected exactly {expected} demos: {name}/{task}, found {len(records)}")
         if cfg.mode == "both" and cfg.training_seed_policy == "demo_cycle" and expected != cfg.budget:
@@ -92,7 +97,12 @@ def data_assignment(name, item, config):
         existing.setdefault(dataset, []).append(task)
     if missing and (name == "mikasa_robo_v2" or item.get("require_prepared_data", False)):
         raise ValueError(f"Complete the prepared demonstrations first: {name}: {', '.join(missing)}")
-    return {"demo_count": count, "existing": existing, "missing": missing}
+    if any(task in counts for task in missing):
+        raise ValueError("Explicit per-task counts require already prepared demonstrations")
+    assignment = {"demo_count": count, "existing": existing, "missing": missing}
+    if counts:
+        assignment["demo_counts"] = {task: counts.get(task, count) for task in item["tasks"]}
+    return assignment
 
 
 def start(args):
@@ -168,6 +178,8 @@ def start(args):
         "if __name__ == '__main__':\n    from cam.cli import main\n    raise SystemExit(main())\n"
     )
     rows = [f"| {name} | {cfg['demo_count']} | {cfg['interaction_count']} | {', '.join(cfg['tasks'])} |" for name, cfg in benches.items()]
+    actual_counts = [f"- {name}/{task}: {count} assigned demos (target {cfg['demo_count']})."
+                     for name, cfg in benches.items() for task, count in cfg.get("demo_counts", {}).items()]
     (batch / "README.md").write_text(
         f"# Coding development batch: {tag}\n\n"
         f"{sum(len(b['tasks']) for b in benches.values())} tasks, {args.workers} concurrent coding sessions; "
@@ -177,6 +189,7 @@ def start(args):
         "assigned demo identities; all exclude held-out tests. "
         "use the remaining attempts for verification even when the solution seems ready.\n\n"
         + spec["selection_reason"] + "\n\n| Benchmark | Demos/task | Max interactions/task | Selected tasks |\n|---|---|---|---|\n" + "\n".join(rows)
+        + ("\n\nExplicit per-task assignments:\n\n" + "\n".join(actual_counts) if actual_counts else "")
         + "\n\n`plan.json` pins selection, configs, sources and data locations. "
         "`status.json` lists every task and run path; `logs/` retains exact commands and output. "
         "Each run has its own README, transcript, command audit, source history and checkpoints. "
@@ -319,7 +332,7 @@ def worker(batch):
                           "--timetag", plan["tag"], "--tasks", *group])
             for row in json.loads(log.read_text())["runs"]:
                 root, task = Path(row["root"]), row["task"]
-                boundary_check(root, task, cfg.get("demo_count", 25))
+                boundary_check(root, task, cfg.get("demo_counts", {}).get(task, cfg.get("demo_count", 25)))
                 save(f"{name}/{task}", status="queued", run=str(root))
                 ready.put((name, task, root))
 

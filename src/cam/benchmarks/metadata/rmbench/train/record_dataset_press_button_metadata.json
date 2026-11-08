@@ -1,0 +1,219 @@
+{
+  "env_id": "press_button",
+  "split": "train",
+  "records": [
+    {
+      "episode": 0,
+      "seed": 0
+    },
+    {
+      "episode": 1,
+      "seed": 1
+    },
+    {
+      "episode": 2,
+      "seed": 2
+    },
+    {
+      "episode": 3,
+      "seed": 3
+    },
+    {
+      "episode": 4,
+      "seed": 4
+    },
+    {
+      "episode": 5,
+      "seed": 5
+    },
+    {
+      "episode": 6,
+      "seed": 6
+    },
+    {
+      "episode": 7,
+      "seed": 7
+    },
+    {
+      "episode": 8,
+      "seed": 8
+    },
+    {
+      "episode": 9,
+      "seed": 9
+    },
+    {
+      "episode": 10,
+      "seed": 10
+    },
+    {
+      "episode": 11,
+      "seed": 11
+    },
+    {
+      "episode": 12,
+      "seed": 12
+    },
+    {
+      "episode": 13,
+      "seed": 13
+    },
+    {
+      "episode": 14,
+      "seed": 14
+    },
+    {
+      "episode": 15,
+      "seed": 15
+    },
+    {
+      "episode": 16,
+      "seed": 16
+    },
+    {
+      "episode": 17,
+      "seed": 17
+    },
+    {
+      "episode": 18,
+      "seed": 18
+    },
+    {
+      "episode": 19,
+      "seed": 19
+    },
+    {
+      "episode": 20,
+      "seed": 20
+    },
+    {
+      "episode": 21,
+      "seed": 21
+    },
+    {
+      "episode": 22,
+      "seed": 22
+    },
+    {
+      "episode": 23,
+      "seed": 23
+    },
+    {
+      "episode": 24,
+      "seed": 24
+    },
+    {
+      "episode": 25,
+      "seed": 25
+    },
+    {
+      "episode": 26,
+      "seed": 26
+    },
+    {
+      "episode": 27,
+      "seed": 27
+    },
+    {
+      "episode": 28,
+      "seed": 28
+    },
+    {
+      "episode": 29,
+      "seed": 29
+    },
+    {
+      "episode": 30,
+      "seed": 30
+    },
+    {
+      "episode": 31,
+      "seed": 31
+    },
+    {
+      "episode": 32,
+      "seed": 32
+    },
+    {
+      "episode": 33,
+      "seed": 33
+    },
+    {
+      "episode": 34,
+      "seed": 34
+    },
+    {
+      "episode": 35,
+      "seed": 35
+    },
+    {
+      "episode": 36,
+      "seed": 36
+    },
+    {
+      "episode": 37,
+      "seed": 37
+    },
+    {
+      "episode": 38,
+      "seed": 38
+    },
+    {
+      "episode": 39,
+      "seed": 39
+    },
+    {
+      "episode": 40,
+      "seed": 40
+    },
+    {
+      "episode": 41,
+      "seed": 41
+    },
+    {
+      "episode": 42,
+      "seed": 42
+    },
+    {
+      "episode": 43,
+      "seed": 43
+    },
+    {
+      "episode": 44,
+      "seed": 44
+    },
+    {
+      "episode": 45,
+      "seed": 45
+    },
+    {
+      "episode": 46,
+      "seed": 46
+    },
+    {
+      "episode": 47,
+      "seed": 47
+    },
+    {
+      "episode": 48,
+      "seed": 48
+    },
+    {
+      "episode": 49,
+      "seed": 49
+    }
+  ],
+  "provenance": {
+    "rule": "released demo_clean zip; episode_%07d.hdf5 index i has seed seed.txt[i]",
+    "repo": "TianxingChen/RMBench",
+    "repo_type": "dataset",
+    "revision": "5d8ff21038fba32ea549e9eee8497aaba9aab5cf",
+    "path": "data/press_button/demo_clean.zip",
+    "zip_sha256": "3305ff9e3c3fc85d58cb280e7897ec761d60f5226ad2394364284001ca1f8cab",
+    "hf_lfs_sha256": "3305ff9e3c3fc85d58cb280e7897ec761d60f5226ad2394364284001ca1f8cab",
+    "zip_size": 1269869836,
+    "task_config": "demo_clean",
+    "embodiment": "aloha_agilex",
+    "created": "2026-11-07T06:00:16Z"
+  }
+}

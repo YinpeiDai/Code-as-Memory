@@ -18,3 +18,13 @@ An explicitly supplied pure offline robot-model API may be used on recorded or
 synthetic robot states; it must not create, reset or step a simulator.
 `rollout` is disabled. Reuse the assigned recordings without limit, then validate
 and submit the general program with its checks and remaining uncertainties.
+
+Before finishing, review the complete code once more for bugs and fix what you
+find. Exercise the first decision and later memory transitions offline using
+assigned demo observations or synthetic inputs. Every declared memory field
+starts as `None`, and `last` is initially `None`; a dictionary default such as
+`memory.get("count", 0)` does not replace an existing `None` value. Check explicit
+initialization, types, empty detections, indexing and action arguments. Run these
+checks after the final edit, then call `validate`; interface validation alone
+does not execute the policy or establish runtime correctness. Record the checks
+and remaining uncertainties without making simulator calls.

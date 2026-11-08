@@ -49,6 +49,35 @@ Run data, transcripts, policies, and media remain local under `runs/` and are no
 included in this code repository. This single-task result does not reproduce the
 historical full 800-episode study. Other models and Plus remain unvalidated here.
 
+## RMBench RGB-D demo-only runs (2026-11-08)
+
+All ten tasks used Claude Code / Opus 5.5, zero simulator training rollouts, and
+100 held-out episodes per task. The up-to-50 assignment contains 496 regenerated
+successful RGB-D demos: 49 for battery_try, 49 for blocks_ranking_try, 48 for
+observe_and_pickup, and 50 for each other task. The separate 25-demo assignment
+uses deterministic nested subsets (250 total).
+
+| Selection | Successes / scored / expected | Notes |
+|---|---|---|
+| Original up-to-50 baseline | 900 / 1,000 / 1,000 | swap_blocks 0/100 from a first-decision None initialization error; other nine tasks 100/100 |
+| Original matched 25-demo comparison | 927 / 1,000 / 1,000 | cover_blocks 28/100, observe_and_pickup 99/100, other eight tasks 100/100 |
+| Updated up-to-50 dashboard selection | 1,000 / 1,000 / 1,000 | Replaces swap_blocks with the user-requested fresh-policy rerun, 100/100 |
+
+The original comparison uses the identical pinned harness and prompts. The new
+swap_blocks run starts from a blank policy with the same 50 demos and the revised
+shared prompt requiring final offline execution checks; it imports no prior
+solution or test feedback. The earlier explicitly authorized inherited-policy
+repair also scored 100/100, but is a separate run. These are single runs, and the
+updated selection is not a demo-count-only ablation. There are no unresolved
+infrastructure errors in these completed evaluations.
+
+Baseline run tag: `20261108T032001_064494Z`; 25-demo tag:
+`20261108T055619_235514Z`; fresh replacement:
+`20261108T150726_925267Z_swap_blocks_fresh`. The original policies, logs, scores
+and comparison report remain on disk. The dashboard removes the original and
+repair swap_blocks entries and displays only the fresh 50-demo run alongside
+the separate 25-demo experiment. See [reproduction instructions](reproducing.md).
+
 ## Repeat checks
 
 ```bash

@@ -35,8 +35,11 @@ BENCHMARKS = {
         "environment": "envs/mikasa_robo/.venv",
     },
     "rmbench": {
-        "status": "planned",
+        "status": "implemented",
         "url": "https://github.com/robotwin-Platform/rmbench",
+        "adapter": "cam.benchmarks.rmbench:RMBench",
+        "data": "cam.benchmarks.rmbench_data",
+        "environment": "envs/rmbench/.venv",
     },
     "robomemarena": {
         "status": "planned",
