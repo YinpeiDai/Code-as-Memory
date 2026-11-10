@@ -3,6 +3,285 @@
   "retrieved_at": "2026-11-10T15:51:49.360976+00:00",
   "panels": [
     {
+      "benchmark": "rmbench",
+      "title": "RMBench",
+      "task_count": 9,
+      "metric": "Success (%)",
+      "methods": [
+        {
+          "method": "Mem-0",
+          "success_percent": 42.0,
+          "task_count": 9,
+          "source": "simplemem_v2",
+          "reported_per_task": {
+            "observe_and_pickup": 4,
+            "rearrange_blocks": 89,
+            "put_back_block": 90,
+            "swap_blocks": 67,
+            "swap_T": 14,
+            "battery_try": 28,
+            "blocks_ranking_try": 18,
+            "cover_blocks": 68,
+            "press_button": 0
+          }
+        },
+        {
+          "method": "EventVLA",
+          "success_percent": 67.8,
+          "task_count": 9,
+          "source": "simplemem_v2",
+          "reported_per_task": {
+            "observe_and_pickup": 21,
+            "rearrange_blocks": 96,
+            "put_back_block": 95,
+            "swap_blocks": 96,
+            "swap_T": 87,
+            "battery_try": 35,
+            "blocks_ranking_try": 81,
+            "cover_blocks": 97,
+            "press_button": 3
+          },
+          "aggregation_note": "Paper-reported overall is 67.8%; the nine displayed integer per-task values average to 67.8889%. The figure retains the reported overall."
+        },
+        {
+          "method": "DIM-WAM",
+          "success_percent": 69.8,
+          "task_count": 9,
+          "source": "simplemem_v2",
+          "reported_per_task": {
+            "observe_and_pickup": 13,
+            "rearrange_blocks": 99,
+            "put_back_block": 98,
+            "swap_blocks": 96,
+            "swap_T": 97,
+            "battery_try": 48,
+            "blocks_ranking_try": 87,
+            "cover_blocks": 56,
+            "press_button": 34
+          }
+        },
+        {
+          "method": "MemoryWAM",
+          "success_percent": 83.0,
+          "task_count": 9,
+          "source": "simplemem_v2",
+          "reported_per_task": {
+            "observe_and_pickup": 27,
+            "rearrange_blocks": 100,
+            "put_back_block": 100,
+            "swap_blocks": 100,
+            "swap_T": 94,
+            "battery_try": 41,
+            "blocks_ranking_try": 100,
+            "cover_blocks": 98,
+            "press_button": 87
+          }
+        },
+        {
+          "method": "SimpleMemVLA",
+          "success_percent": 94.0,
+          "task_count": 9,
+          "source": "simplemem_v2",
+          "reported_per_task": {
+            "observe_and_pickup": 65,
+            "rearrange_blocks": 100,
+            "put_back_block": 100,
+            "swap_blocks": 100,
+            "swap_T": 93,
+            "battery_try": 90,
+            "blocks_ranking_try": 100,
+            "cover_blocks": 98,
+            "press_button": 100
+          }
+        },
+        {
+          "method": "CaM",
+          "success_percent": 100.0,
+          "successes": 900,
+          "episodes": 900,
+          "task_count": 9,
+          "source": "cam_published_archive",
+          "setting": "demo_only_50",
+          "per_task": {
+            "battery_try": {
+              "successes": 100,
+              "episodes": 100
+            },
+            "blocks_ranking_try": {
+              "successes": 100,
+              "episodes": 100
+            },
+            "cover_blocks": {
+              "successes": 100,
+              "episodes": 100
+            },
+            "observe_and_pickup": {
+              "successes": 100,
+              "episodes": 100
+            },
+            "press_button": {
+              "successes": 100,
+              "episodes": 100
+            },
+            "put_back_block": {
+              "successes": 100,
+              "episodes": 100
+            },
+            "rearrange_blocks": {
+              "successes": 100,
+              "episodes": 100
+            },
+            "swap_T": {
+              "successes": 100,
+              "episodes": 100
+            },
+            "swap_blocks": {
+              "successes": 100,
+              "episodes": 100
+            }
+          }
+        }
+      ]
+    },
+    {
+      "benchmark": "mikasa_robo",
+      "title": "MIKASA-robo",
+      "task_count": 5,
+      "metric": "Success (%)",
+      "methods": [
+        {
+          "method": "\u03c0\u2080",
+          "success_percent": 29.4,
+          "task_count": 5,
+          "source": "simplemem_v2",
+          "reported_per_task": {
+            "ShellGameTouch-VLA-v0": 33,
+            "InterceptMedium-VLA-v0": 42,
+            "RememberColor3-VLA-v0": 35,
+            "RememberColor5-VLA-v0": 22,
+            "RememberColor9-VLA-v0": 15
+          }
+        },
+        {
+          "method": "MemoryVLA",
+          "success_percent": 41.2,
+          "task_count": 5,
+          "source": "simplemem_v2",
+          "reported_per_task": {
+            "ShellGameTouch-VLA-v0": 88,
+            "InterceptMedium-VLA-v0": 24,
+            "RememberColor3-VLA-v0": 44,
+            "RememberColor5-VLA-v0": 30,
+            "RememberColor9-VLA-v0": 20
+          }
+        },
+        {
+          "method": "MemoryVLA++",
+          "success_percent": 44.4,
+          "task_count": 5,
+          "source": "simplemem_v2",
+          "reported_per_task": {
+            "ShellGameTouch-VLA-v0": 97,
+            "InterceptMedium-VLA-v0": 40,
+            "RememberColor3-VLA-v0": 50,
+            "RememberColor5-VLA-v0": 19,
+            "RememberColor9-VLA-v0": 16
+          }
+        },
+        {
+          "method": "GMP",
+          "success_percent": 67.8,
+          "task_count": 5,
+          "source": "simplemem_v2",
+          "reported_per_task": {
+            "ShellGameTouch-VLA-v0": 98,
+            "InterceptMedium-VLA-v0": 83,
+            "RememberColor3-VLA-v0": 80,
+            "RememberColor5-VLA-v0": 61,
+            "RememberColor9-VLA-v0": 17
+          }
+        },
+        {
+          "method": "SimpleMemVLA",
+          "success_percent": 74.0,
+          "task_count": 5,
+          "source": "simplemem_v2",
+          "reported_per_task": {
+            "ShellGameTouch-VLA-v0": 99,
+            "InterceptMedium-VLA-v0": 83,
+            "RememberColor3-VLA-v0": 71,
+            "RememberColor5-VLA-v0": 58,
+            "RememberColor9-VLA-v0": 59
+          }
+        },
+        {
+          "method": "CaM",
+          "task_count": 5,
+          "setting": "demo_interaction_50",
+          "archived_result": {
+            "success_percent": 90.0,
+            "successes": 225,
+            "episodes": 250,
+            "source": "cam_published_archive",
+            "per_task": {
+              "RememberColor3-VLA-v0": {
+                "successes": 50,
+                "episodes": 50
+              },
+              "ShellGameTouch-VLA-v0": {
+                "successes": 25,
+                "episodes": 50
+              },
+              "InterceptMedium-VLA-v0": {
+                "successes": 50,
+                "episodes": 50
+              },
+              "RememberColor5-VLA-v0": {
+                "successes": 50,
+                "episodes": 50
+              },
+              "RememberColor9-VLA-v0": {
+                "successes": 50,
+                "episodes": 50
+              }
+            }
+          },
+          "success_percent": 100.0,
+          "source": "cam_mikasa_vla_suite",
+          "result_note": "Five-task VLA suite: 50 held-out episodes per task. ShellGameTouch uses GPU physics; the other four tasks use CPU physics. Earlier scores are retained separately.",
+          "successes": 250,
+          "episodes": 250,
+          "per_task": {
+            "InterceptMedium-VLA-v0": {
+              "successes": 50,
+              "episodes": 50,
+              "physics_backend": "cpu"
+            },
+            "RememberColor3-VLA-v0": {
+              "successes": 50,
+              "episodes": 50,
+              "physics_backend": "cpu"
+            },
+            "RememberColor5-VLA-v0": {
+              "successes": 50,
+              "episodes": 50,
+              "physics_backend": "cpu"
+            },
+            "RememberColor9-VLA-v0": {
+              "successes": 50,
+              "episodes": 50,
+              "physics_backend": "cpu"
+            },
+            "ShellGameTouch-VLA-v0": {
+              "successes": 50,
+              "episodes": 50,
+              "physics_backend": "gpu"
+            }
+          }
+        }
+      ]
+    },
+    {
       "benchmark": "robomme",
       "title": "RoboMME",
       "task_count": 16,
@@ -178,256 +457,6 @@
               "episodes": 50
             }
           }
-        }
-      ]
-    },
-    {
-      "benchmark": "rmbench",
-      "title": "RMBench",
-      "task_count": 9,
-      "metric": "Success (%)",
-      "methods": [
-        {
-          "method": "Mem-0",
-          "success_percent": 42.0,
-          "task_count": 9,
-          "source": "simplemem_v2",
-          "reported_per_task": {
-            "observe_and_pickup": 4,
-            "rearrange_blocks": 89,
-            "put_back_block": 90,
-            "swap_blocks": 67,
-            "swap_T": 14,
-            "battery_try": 28,
-            "blocks_ranking_try": 18,
-            "cover_blocks": 68,
-            "press_button": 0
-          }
-        },
-        {
-          "method": "EventVLA",
-          "success_percent": 67.8,
-          "task_count": 9,
-          "source": "simplemem_v2",
-          "reported_per_task": {
-            "observe_and_pickup": 21,
-            "rearrange_blocks": 96,
-            "put_back_block": 95,
-            "swap_blocks": 96,
-            "swap_T": 87,
-            "battery_try": 35,
-            "blocks_ranking_try": 81,
-            "cover_blocks": 97,
-            "press_button": 3
-          },
-          "aggregation_note": "Paper-reported overall is 67.8%; the nine displayed integer per-task values average to 67.8889%. The figure retains the reported overall."
-        },
-        {
-          "method": "DIM-WAM",
-          "success_percent": 69.8,
-          "task_count": 9,
-          "source": "simplemem_v2",
-          "reported_per_task": {
-            "observe_and_pickup": 13,
-            "rearrange_blocks": 99,
-            "put_back_block": 98,
-            "swap_blocks": 96,
-            "swap_T": 97,
-            "battery_try": 48,
-            "blocks_ranking_try": 87,
-            "cover_blocks": 56,
-            "press_button": 34
-          }
-        },
-        {
-          "method": "MemoryWAM",
-          "success_percent": 83.0,
-          "task_count": 9,
-          "source": "simplemem_v2",
-          "reported_per_task": {
-            "observe_and_pickup": 27,
-            "rearrange_blocks": 100,
-            "put_back_block": 100,
-            "swap_blocks": 100,
-            "swap_T": 94,
-            "battery_try": 41,
-            "blocks_ranking_try": 100,
-            "cover_blocks": 98,
-            "press_button": 87
-          }
-        },
-        {
-          "method": "SimpleMemVLA",
-          "success_percent": 94.0,
-          "task_count": 9,
-          "source": "simplemem_v2",
-          "reported_per_task": {
-            "observe_and_pickup": 65,
-            "rearrange_blocks": 100,
-            "put_back_block": 100,
-            "swap_blocks": 100,
-            "swap_T": 93,
-            "battery_try": 90,
-            "blocks_ranking_try": 100,
-            "cover_blocks": 98,
-            "press_button": 100
-          }
-        },
-        {
-          "method": "CaM",
-          "success_percent": 100.0,
-          "successes": 900,
-          "episodes": 900,
-          "task_count": 9,
-          "source": "cam_published_archive",
-          "setting": "demo_only_50",
-          "per_task": {
-            "battery_try": {
-              "successes": 100,
-              "episodes": 100
-            },
-            "blocks_ranking_try": {
-              "successes": 100,
-              "episodes": 100
-            },
-            "cover_blocks": {
-              "successes": 100,
-              "episodes": 100
-            },
-            "observe_and_pickup": {
-              "successes": 100,
-              "episodes": 100
-            },
-            "press_button": {
-              "successes": 100,
-              "episodes": 100
-            },
-            "put_back_block": {
-              "successes": 100,
-              "episodes": 100
-            },
-            "rearrange_blocks": {
-              "successes": 100,
-              "episodes": 100
-            },
-            "swap_T": {
-              "successes": 100,
-              "episodes": 100
-            },
-            "swap_blocks": {
-              "successes": 100,
-              "episodes": 100
-            }
-          }
-        }
-      ]
-    },
-    {
-      "benchmark": "mikasa_robo",
-      "title": "MIKASA-Robo",
-      "task_count": 5,
-      "metric": "Success (%)",
-      "methods": [
-        {
-          "method": "π₀",
-          "success_percent": 29.4,
-          "task_count": 5,
-          "source": "simplemem_v2",
-          "reported_per_task": {
-            "ShellGameTouch-VLA-v0": 33,
-            "InterceptMedium-VLA-v0": 42,
-            "RememberColor3-VLA-v0": 35,
-            "RememberColor5-VLA-v0": 22,
-            "RememberColor9-VLA-v0": 15
-          }
-        },
-        {
-          "method": "MemoryVLA",
-          "success_percent": 41.2,
-          "task_count": 5,
-          "source": "simplemem_v2",
-          "reported_per_task": {
-            "ShellGameTouch-VLA-v0": 88,
-            "InterceptMedium-VLA-v0": 24,
-            "RememberColor3-VLA-v0": 44,
-            "RememberColor5-VLA-v0": 30,
-            "RememberColor9-VLA-v0": 20
-          }
-        },
-        {
-          "method": "MemoryVLA++",
-          "success_percent": 44.4,
-          "task_count": 5,
-          "source": "simplemem_v2",
-          "reported_per_task": {
-            "ShellGameTouch-VLA-v0": 97,
-            "InterceptMedium-VLA-v0": 40,
-            "RememberColor3-VLA-v0": 50,
-            "RememberColor5-VLA-v0": 19,
-            "RememberColor9-VLA-v0": 16
-          }
-        },
-        {
-          "method": "GMP",
-          "success_percent": 67.8,
-          "task_count": 5,
-          "source": "simplemem_v2",
-          "reported_per_task": {
-            "ShellGameTouch-VLA-v0": 98,
-            "InterceptMedium-VLA-v0": 83,
-            "RememberColor3-VLA-v0": 80,
-            "RememberColor5-VLA-v0": 61,
-            "RememberColor9-VLA-v0": 17
-          }
-        },
-        {
-          "method": "SimpleMemVLA",
-          "success_percent": 74.0,
-          "task_count": 5,
-          "source": "simplemem_v2",
-          "reported_per_task": {
-            "ShellGameTouch-VLA-v0": 99,
-            "InterceptMedium-VLA-v0": 83,
-            "RememberColor3-VLA-v0": 71,
-            "RememberColor5-VLA-v0": 58,
-            "RememberColor9-VLA-v0": 59
-          }
-        },
-        {
-          "method": "CaM",
-          "task_count": 5,
-          "setting": "demo_interaction_50",
-          "archived_result": {
-            "success_percent": 90.0,
-            "successes": 225,
-            "episodes": 250,
-            "source": "cam_published_archive",
-            "per_task": {
-              "RememberColor3-VLA-v0": {
-                "successes": 50,
-                "episodes": 50
-              },
-              "ShellGameTouch-VLA-v0": {
-                "successes": 25,
-                "episodes": 50
-              },
-              "InterceptMedium-VLA-v0": {
-                "successes": 50,
-                "episodes": 50
-              },
-              "RememberColor5-VLA-v0": {
-                "successes": 50,
-                "episodes": 50
-              },
-              "RememberColor9-VLA-v0": {
-                "successes": 50,
-                "episodes": 50
-              }
-            }
-          },
-          "success_percent": 100.0,
-          "source": "cam_author_cpu_physics_correction",
-          "result_note": "Author-reported correction for the five-task comparison after identifying a CPU physics issue. Corrected episode counts and rerun artifacts were not supplied with the README update; archived results are retained separately."
         }
       ]
     },
@@ -620,6 +649,17 @@
       "scope": "MIKASA-Robo five-task comparison",
       "success_percent": 100.0,
       "note": "Repository author reports 100% after identifying a CPU physics issue and requests updating the README figure. This report does not replace archived episode records or establish a new 90-task aggregate."
+    },
+    "cam_mikasa_vla_suite": {
+      "path": "public_runs/dev_logs/mikasa_robo_vla_suite/demo_interaction_50",
+      "run_timestamp": "20261110T190926_055654Z",
+      "evidence": "benchmark_costs.json",
+      "note": "Original result JSONs checked against frozen program hashes; exact per-task report, session and evaluation hashes are retained in the cost manifest. This separate 250-episode evaluation does not replace the historical 90-task aggregate."
+    },
+    "cam_api_costs": {
+      "path": "docs/figures/benchmark_costs.json",
+      "sha256": "dd38a84c219074c4d8a7742681addad016195d2e4f87cc62a38eb55c05c4c613",
+      "note": "Total final session estimates across the selected development setting. RMBench cost includes all ten tasks; the success-rate panel uses nine shared tasks."
     }
   }
 }

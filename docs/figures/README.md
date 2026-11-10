@@ -21,9 +21,9 @@ CaM's exact success/episode counts. Sources were checked on November 10, 2026.
 
 | Benchmark | CaM figure coverage | Baseline source |
 |---|---|---|
-| RoboMME | 795/800; 16 tasks | [Official leaderboard](https://robomme.github.io/leaderboard.html), mean of 16 per-task values |
 | RMBench | 900/900; nine tasks | [SimpleMemVLA v2](https://arxiv.org/pdf/2609.05533v2), Figure 3 and Table 1 |
-| MIKASA-Robo | 100%; five task identities, author-reported CPU-physics correction | [SimpleMemVLA v2](https://arxiv.org/pdf/2609.05533v2), Figure 3 and Table 3 |
+| MIKASA-robo | 250/250; five VLA-suite tasks | [SimpleMemVLA v2](https://arxiv.org/pdf/2609.05533v2), Figure 3 and Table 3 |
+| RoboMME | 795/800; 16 tasks | [Official leaderboard](https://robomme.github.io/leaderboard.html), mean of 16 per-task values |
 | RoboMemArena | 1,271/1,300; 26 tasks | [Official leaderboard](https://robomemarena.github.io/leaderboard.html), reported TSR |
 
 **RoboMME:** MEMI is the **MEMI-Astra-Act** variant. The separate
@@ -36,13 +36,13 @@ CaM's full ten-task suite is 1,000/1,000. EventVLA retains the paper's reported
 67.8% overall; its displayed integer per-task values average to 67.89%.
 
 **MIKASA-Robo:** The shared identities are ShellGameTouch, InterceptMedium,
-RememberColor3, RememberColor5, and RememberColor9. The figure uses the author's
-reported 100% correction after identifying a CPU physics issue. Corrected episode
-counts and rerun artifacts have not been attached; the JSON retains the original
-225/250 result separately as `archived_result`. The archived experiment evaluates their current
-`-VLA-v0` implementations with 50 episodes each, 50 assigned demonstrations plus
-50 training interactions, CPU physics, and its public observation/action
-interface. The paper quotes VLA baselines from MemoryVLA++ and GMP from its
+RememberColor3, RememberColor5, and RememberColor9. The figure uses **250/250**
+from `public_runs/dev_logs/mikasa_robo_vla_suite/demo_interaction_50/`, with
+50 held-out episodes per task. These runs use their current `-VLA-v0`
+implementations, 50 assigned demonstrations and 50 training interactions per
+task, and the public observation/action interface. ShellGameTouch uses GPU
+physics; the other four use CPU physics. The JSON preserves the earlier
+225/250 result as `archived_result`. The paper quotes VLA baselines from MemoryVLA++ and GMP from its
 per-task training with tuned horizons. Task identities match across legacy and
 current releases, but simulator versions, sensing and training budgets do not.
 CaM's full 90-task
@@ -57,6 +57,40 @@ Across all panels, these are selected published reports rather than a controlled
 comparison: demonstrations, interaction budgets, sensing, action interfaces,
 simulator revisions and evaluation counts differ. See [results and provenance](../results.md)
 for CaM's historical evidence and imported MIKASA results.
+
+## Development and inference API costs
+
+The main figure includes CaM's total API cost for each selected development
+setting. Costs are final Claude CLI session estimates in USD, excluding local
+compute, demonstration preparation, and other experiment settings. They are not
+audited bills. Inference makes no model calls; every selected evaluation result
+records zero API calls and **$0** API cost.
+
+| Benchmark | Development scope | Development API cost | Inference API cost |
+|---|---|---:|---:|
+| RMBench | All ten tasks, `demo_only_50` | $22.72 | $0 |
+| MIKASA-robo | Five-task VLA suite, `demo_interaction_50` | $33.81 | $0 |
+| RoboMME | All 16 tasks, `demo_only_25` | $29.44 | $0 |
+| RoboMemArena | All 26 tasks, `demo_interaction_50` | $278.57 | $0 |
+
+RMBench's development total includes `place_block_mat`, while the success-rate
+comparison uses the nine tasks shared with the paper. MIKASA's cost is for the
+five-task VLA suite, not the historical 90-task collection.
+
+[The cost manifest](benchmark_costs.json) retains exact totals, per-task costs,
+source paths, hashes and evaluation coverage. Each development report was checked
+against its original session events; all **3,350** selected evaluation records
+were checked. MIKASA's development-only archive retains its original held-out
+artifact locations in `ARCHIVE.md`; the collector follows those locations and
+checks that the original and archived reports match exactly.
+
+To repeat the read-only audit with the public archive and its referenced
+held-out artifacts available:
+
+```bash
+python scripts/collect_figure_costs.py --archive public_runs \
+  --output "public_runs/website/cache/figure_costs/$(date -u +%Y%m%dT%H%M%SZ).json"
+```
 
 ## RoboMME performance, latency and API cost
 

@@ -45,9 +45,11 @@ def save(fig, name):
 
 def benchmark_comparison():
     data = json.loads((OUT / "benchmark_results.json").read_text())
-    fig = plt.figure(figsize=(17, 5.2))
+    costs = json.loads((OUT / "benchmark_costs.json").read_text())["benchmarks"]
+    fig = plt.figure(figsize=(17, 6.4))
     for i, panel in enumerate(data["panels"]):
-        ax = fig.add_axes([.025 + i * .245, .07, .215, .80])
+        left, width = .025 + i * .245, .215
+        ax = fig.add_axes([left, .25, width, .65])
         ax.set_xlim(0, 100)
         ax.set_ylim(-.4, 5.7)
         ax.set_title(panel["title"], loc="left", fontsize=23, weight="bold", pad=18)
@@ -61,6 +63,18 @@ def benchmark_comparison():
             ax.text(100, y + .27, rounded(row["success_percent"]) + "%", ha="right", va="bottom",
                     fontsize=18, color=ACCENT if cam else INK, weight="bold" if cam else "normal")
         ax.set_axis_off()
+        cost = costs[panel["benchmark"]]
+        footer = fig.add_axes([left, .035, width, .17])
+        footer.set_xlim(0, 1)
+        footer.set_ylim(0, 1)
+        footer.plot([0, 1], [1, 1], color=LINE, lw=1.5)
+        footer.text(0, .73, "CaM API cost", fontsize=18, weight="bold", color=ACCENT)
+        for y, label, value in ((.38, "Development", cost["development_api_cost_usd"]),
+                                (.02, "Inference", cost["inference_api_cost_usd"])):
+            footer.text(0, y, label, fontsize=18, color=INK)
+            footer.text(1, y, "$0" if value == 0 else f"${value:.2f}",
+                        ha="right", fontsize=20, weight="bold", color=ACCENT)
+        footer.set_axis_off()
     save(fig, "benchmark_comparison")
 
 

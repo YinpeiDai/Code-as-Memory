@@ -1,41 +1,23 @@
-### Code-as-Memory (CaM)
+# 🧠 Code-as-Memory (CaM): Robots That Remember with Code!
 
-**Code-as-Memory (CaM)** uses a coding agent to translate demonstrations directly into an executable Python program that **remembers, decides, and acts**.
+**What if robot memory could just be an executable Python program?**
 
-The program maintains explicit memory through Python variables (e.g., `dict`, `list`), which can be initialized and updated in place using built-in functions.
+**Code-as-Memory (CaM)** introduces **executable code as explicit, persistent robot memory**. A coding agent distills demonstrations into a Python program that maintains and updates memory through structured variables (e.g., `dict`, `list`), enabling robots to **remember, reason, and act** without relying on neural memory mechanisms.
 
-Once generated, the program operates autonomously across observations, requiring:
-- **Zero gradient-based optimization during development**
-- **Zero model or API calls during inference**
-- **Near-zero inference latency**, with only lightweight Python code execution
+⚡ **No Training. No Model Calls. Near-Zero Latency.**
+- **No model training** during development
+- **Zero model/API calls** during inference
+- **<5 ms inference latency** through lightweight Python execution
 
-CaM achieves near-perfect performance across four robot memory benchmarks, outperforming prior approaches with significantly lower computational cost and near-zero inference latency.
- 
-![CaM and selected published baselines across RoboMME, RMBench, MIKASA-Robo, and RoboMemArena](docs/figures/benchmark_comparison.png)
+CaM achieves **near-perfect performance across four robot memory benchmarks**, outperforming prior approaches at a fraction of the **computational cost, financial expense, and inference latency**.
 
-![RoboMME success rates, policy computation per control step, and development/evaluation API costs](docs/figures/robomme_efficiency.png)
-
-[RoboMME comparison: measurement scope and sources](docs/figures/README.md#robomme-performance-latency-and-api-cost).
+![CaM success rates and API costs across RMBench, MIKASA-robo, RoboMME, and RoboMemArena](docs/figures/benchmark_comparison.png)
 
 
 [More results can be found here →](docs/results.md)
 
 
 ## Successful Evaluation Examples
-
-### RoboMME
-
-**PatternLock**
-
-> watch the video carefully, then use the stick attached to the robot to retrace the same pattern
-
-[![Play PatternLock: recorded memory, positions and end-effector trail](docs/media/robomme-pattern-lock.jpg)](docs/media/robomme-pattern-lock.mp4)
-
-**VideoUnmaskSwap**
-
-> watch the video carefully, then pick up the container hiding the green cube, finally pick up another container hiding the blue cube
-
-[![Play VideoUnmaskSwap: recorded memory, positions and end-effector trail](docs/media/robomme-hidden-objects.jpg)](docs/media/robomme-hidden-objects.mp4)
 
 ### RMBench
 
@@ -65,6 +47,20 @@ CaM achieves near-perfect performance across four robot memory benchmarks, outpe
 
 [![Play SeqOfColors3-VLA-v0: recorded memory, positions and end-effector trail](docs/media/mikasa-color-sequence.jpg)](docs/media/mikasa-color-sequence.mp4)
 
+### RoboMME
+
+**PatternLock**
+
+> watch the video carefully, then use the stick attached to the robot to retrace the same pattern
+
+[![Play PatternLock: recorded memory, positions and end-effector trail](docs/media/robomme-pattern-lock.jpg)](docs/media/robomme-pattern-lock.mp4)
+
+**VideoUnmaskSwap**
+
+> watch the video carefully, then pick up the container hiding the green cube, finally pick up another container hiding the blue cube
+
+[![Play VideoUnmaskSwap: recorded memory, positions and end-effector trail](docs/media/robomme-hidden-objects.jpg)](docs/media/robomme-hidden-objects.mp4)
+
 ### RoboMemArena
 
 **T04_ButterNonEmptyDrawer**
@@ -93,9 +89,9 @@ python scripts/evaluate_solutions.py solutions/robomme/demo_only_25 \
 
 | Benchmark | Published memory programs | Run and reproduce |
 |---|---|---|
-| RoboMME | [25 demonstrations](solutions/robomme/demo_only_25/) | [Guide](docs/benchmarks/robomme/README.md) |
 | RMBench | [50 demonstrations](solutions/rmbench/demo_only_50/) | [Guide](docs/benchmarks/rmbench/README.md) |
 | MIKASA-Robo | [50 demonstrations + interaction](solutions/mikasa_robo/demo_interaction_50/) | [Guide](docs/benchmarks/mikasa_robo/README.md) |
+| RoboMME | [25 demonstrations](solutions/robomme/demo_only_25/) | [Guide](docs/benchmarks/robomme/README.md) |
 | RoboMemArena | [50 demonstrations + interaction](solutions/robomemarena/demo_interaction_50/) | [Guide](docs/benchmarks/robomemarena/README.md) |
 
 ## Reproduce development
