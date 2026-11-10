@@ -32,47 +32,49 @@ action-tool execution and simulation. [Measurement details and figure sources](d
 
 ## Robot memory in action
 
-Selected successful held-out episodes. Click an animation for the full recording.
-Previews adjust playback speed and camera framing; [episode sources and details](docs/media/README.md).
+Selected successful held-out episodes, with the robot's recorded memory beside the
+front view. Highlighted fields show what changes; scene markers connect remembered
+locations to actions. [How the GIFs are made](docs/media/README.md).
 
-<table>
-  <tr><th colspan="2">RoboMME</th></tr>
-  <tr>
-    <td width="50%"><a href="docs/media/robomme-pattern-lock.mp4"><img src="docs/media/robomme-pattern-lock.gif" width="100%" alt="RoboMME: the robot retraces a previously shown pattern"></a></td>
-    <td width="50%"><a href="docs/media/robomme-hidden-objects.mp4"><img src="docs/media/robomme-hidden-objects.gif" width="100%" alt="RoboMME: the robot uncovers remembered objects after their containers move"></a></td>
-  </tr>
-  <tr>
-    <td><b>Remember a pattern</b><br>Watch, remember, and retrace.<br><sub>PatternLock</sub></td>
-    <td><b>Track hidden objects</b><br>Find the right objects after they disappear from view.<br><sub>VideoUnmaskSwap</sub></td>
-  </tr>
-  <tr><th colspan="2">RMBench</th></tr>
-  <tr>
-    <td><a href="docs/media/rmbench-swap-blocks.mp4"><img src="docs/media/rmbench-swap-blocks.gif" width="100%" alt="RMBench: the robot swaps two blocks through an empty tray"></a></td>
-    <td><a href="docs/media/rmbench-cover-blocks.mp4"><img src="docs/media/rmbench-cover-blocks.gif" width="100%" alt="RMBench: the robot covers blocks and uncovers them in color order"></a></td>
-  </tr>
-  <tr>
-    <td><b>Keep track of a swap</b><br>Move one block at a time through an empty tray.<br><sub>swap_blocks</sub></td>
-    <td><b>Remember what is covered</b><br>Uncover hidden blocks in the requested color order.<br><sub>cover_blocks</sub></td>
-  </tr>
-  <tr><th colspan="2">MIKASA-Robo</th></tr>
-  <tr>
-    <td><a href="docs/media/mikasa-batteries.mp4"><img src="docs/media/mikasa-batteries.gif" width="100%" alt="MIKASA-Robo: the robot tests batteries and remembers the working ones"></a></td>
-    <td><a href="docs/media/mikasa-color-sequence.mp4"><img src="docs/media/mikasa-color-sequence.gif" width="100%" alt="MIKASA-Robo: the robot recalls a sequence of colored cubes"></a></td>
-  </tr>
-  <tr>
-    <td><b>Remember which batteries work</b><br>Test, observe, and retain each result.<br><sub>BatteriesCheckerEasy-3</sub></td>
-    <td><b>Recall a color sequence</b><br>Use an earlier cue to guide later actions.<br><sub>SeqOfColors3</sub></td>
-  </tr>
-  <tr><th colspan="2">RoboMemArena</th></tr>
-  <tr>
-    <td><a href="docs/media/robomemarena-drawers.mp4"><img src="docs/media/robomemarena-drawers.gif" width="100%" alt="RoboMemArena: the robot inspects drawers and returns to the occupied drawer"></a></td>
-    <td><a href="docs/media/robomemarena-pour-twice.mp4"><img src="docs/media/robomemarena-pour-twice.gif" width="100%" alt="RoboMemArena: the robot pours sauce twice and puts the bottle away"></a></td>
-  </tr>
-  <tr>
-    <td><b>Remember what is inside</b><br>Inspect the drawers, then return to the right one.<br><sub>T04 · ButterNonEmptyDrawer</sub></td>
-    <td><b>Count completed pours</b><br>Pour twice, then put the bottle away.<br><sub>T07 · PourSauceFrypanTwice</sub></td>
-  </tr>
-</table>
+### RoboMME
+
+**Remember a pattern** · Store the path, then retrace it.
+
+[![PatternLock: annotated front view beside the remembered path](docs/media/robomme-pattern-lock.gif)](docs/media/robomme-pattern-lock.gif)
+
+**Track hidden objects** · Recall the targets after their containers move.
+
+[![VideoUnmaskSwap: annotated targets beside the remembered colors and next target index](docs/media/robomme-hidden-objects.gif)](docs/media/robomme-hidden-objects.gif)
+
+### RMBench
+
+**Keep track of a swap** · Follow a three-move plan through an empty tray.
+
+[![swap_blocks: annotated workspace beside the move list and current move index](docs/media/rmbench-swap-blocks.gif)](docs/media/rmbench-swap-blocks.gif)
+
+**Remember what is covered** · Retain the colors, then uncover them in order.
+
+[![cover_blocks: annotated workspace beside the remembered color order](docs/media/rmbench-cover-blocks.gif)](docs/media/rmbench-cover-blocks.gif)
+
+### MIKASA-Robo
+
+**Remember which batteries work** · Keep each lamp result as testing continues.
+
+[![BatteriesChecker: annotated front view beside the battery results and remaining queue](docs/media/mikasa-batteries.gif)](docs/media/mikasa-batteries.gif)
+
+**Recall a color sequence** · Turn an earlier cue into an ordered sequence of touches.
+
+[![SeqOfColors3: annotated color targets beside the remembered sequence and touch count](docs/media/mikasa-color-sequence.gif)](docs/media/mikasa-color-sequence.gif)
+
+### RoboMemArena
+
+**Remember what is inside** · Keep drawer observations and return to the occupied one.
+
+[![ButterNonEmptyDrawer: annotated front view beside drawer observations and the selected target](docs/media/robomemarena-drawers.gif)](docs/media/robomemarena-drawers.gif)
+
+**Count completed pours** · Update the remembered count between pours.
+
+[![PourSauceFrypanTwice: annotated front view beside the pour count and current phase](docs/media/robomemarena-pour-twice.gif)](docs/media/robomemarena-pour-twice.gif)
 
 ## Try it
 
