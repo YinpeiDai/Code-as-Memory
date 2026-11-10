@@ -46,10 +46,10 @@ def save(fig, name):
 def benchmark_comparison():
     data = json.loads((OUT / "benchmark_results.json").read_text())
     costs = json.loads((OUT / "benchmark_costs.json").read_text())["benchmarks"]
-    fig = plt.figure(figsize=(17, 6.4))
+    fig = plt.figure(figsize=(17, 6.8))
     for i, panel in enumerate(data["panels"]):
         left, width = .025 + i * .245, .215
-        ax = fig.add_axes([left, .25, width, .65])
+        ax = fig.add_axes([left, .29, width, .612])
         ax.set_xlim(0, 100)
         ax.set_ylim(-.4, 5.7)
         ax.set_title(panel["title"], loc="left", fontsize=23, weight="bold", pad=18)
@@ -63,8 +63,14 @@ def benchmark_comparison():
             ax.text(100, y + .27, rounded(row["success_percent"]) + "%", ha="right", va="bottom",
                     fontsize=18, color=ACCENT if cam else INK, weight="bold" if cam else "normal")
         ax.set_axis_off()
+        cam_row = next(row for row in panel["methods"] if row["method"] == "CaM")
+        demo_counts = {task["demonstrations"] for task in cam_row["per_task"].values()}
+        demo_label = f"{max(demo_counts)} demos / task"
+        if len(demo_counts) > 1:
+            demo_label = "Up to " + demo_label
+        fig.text(left, .235, demo_label, fontsize=18, color=INK)
         cost = costs[panel["benchmark"]]
-        footer = fig.add_axes([left, .035, width, .17])
+        footer = fig.add_axes([left, .035, width, .16])
         footer.set_xlim(0, 1)
         footer.set_ylim(0, 1)
         footer.plot([0, 1], [1, 1], color=LINE, lw=1.5)

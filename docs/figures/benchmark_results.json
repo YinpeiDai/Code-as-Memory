@@ -105,39 +105,48 @@
           "per_task": {
             "battery_try": {
               "successes": 100,
-              "episodes": 100
+              "episodes": 100,
+              "demonstrations": 49
             },
             "blocks_ranking_try": {
               "successes": 100,
-              "episodes": 100
+              "episodes": 100,
+              "demonstrations": 49
             },
             "cover_blocks": {
               "successes": 100,
-              "episodes": 100
+              "episodes": 100,
+              "demonstrations": 50
             },
             "observe_and_pickup": {
               "successes": 100,
-              "episodes": 100
+              "episodes": 100,
+              "demonstrations": 48
             },
             "press_button": {
               "successes": 100,
-              "episodes": 100
+              "episodes": 100,
+              "demonstrations": 50
             },
             "put_back_block": {
               "successes": 100,
-              "episodes": 100
+              "episodes": 100,
+              "demonstrations": 50
             },
             "rearrange_blocks": {
               "successes": 100,
-              "episodes": 100
+              "episodes": 100,
+              "demonstrations": 50
             },
             "swap_T": {
               "successes": 100,
-              "episodes": 100
+              "episodes": 100,
+              "demonstrations": 50
             },
             "swap_blocks": {
               "successes": 100,
-              "episodes": 100
+              "episodes": 100,
+              "demonstrations": 50
             }
           }
         }
@@ -255,27 +264,32 @@
             "InterceptMedium-VLA-v0": {
               "successes": 50,
               "episodes": 50,
-              "physics_backend": "cpu"
+              "physics_backend": "cpu",
+              "demonstrations": 50
             },
             "RememberColor3-VLA-v0": {
               "successes": 50,
               "episodes": 50,
-              "physics_backend": "cpu"
+              "physics_backend": "cpu",
+              "demonstrations": 50
             },
             "RememberColor5-VLA-v0": {
               "successes": 50,
               "episodes": 50,
-              "physics_backend": "cpu"
+              "physics_backend": "cpu",
+              "demonstrations": 50
             },
             "RememberColor9-VLA-v0": {
               "successes": 50,
               "episodes": 50,
-              "physics_backend": "cpu"
+              "physics_backend": "cpu",
+              "demonstrations": 50
             },
             "ShellGameTouch-VLA-v0": {
               "successes": 50,
               "episodes": 50,
-              "physics_backend": "gpu"
+              "physics_backend": "gpu",
+              "demonstrations": 50
             }
           }
         }
@@ -394,67 +408,83 @@
           "per_task": {
             "BinFill": {
               "successes": 50,
-              "episodes": 50
+              "episodes": 50,
+              "demonstrations": 25
             },
             "ButtonUnmask": {
               "successes": 50,
-              "episodes": 50
+              "episodes": 50,
+              "demonstrations": 25
             },
             "ButtonUnmaskSwap": {
               "successes": 50,
-              "episodes": 50
+              "episodes": 50,
+              "demonstrations": 25
             },
             "InsertPeg": {
               "successes": 50,
-              "episodes": 50
+              "episodes": 50,
+              "demonstrations": 25
             },
             "MoveCube": {
               "successes": 50,
-              "episodes": 50
+              "episodes": 50,
+              "demonstrations": 25
             },
             "PatternLock": {
               "successes": 50,
-              "episodes": 50
+              "episodes": 50,
+              "demonstrations": 25
             },
             "PickHighlight": {
               "successes": 50,
-              "episodes": 50
+              "episodes": 50,
+              "demonstrations": 25
             },
             "PickXtimes": {
               "successes": 50,
-              "episodes": 50
+              "episodes": 50,
+              "demonstrations": 25
             },
             "RouteStick": {
               "successes": 50,
-              "episodes": 50
+              "episodes": 50,
+              "demonstrations": 25
             },
             "StopCube": {
               "successes": 47,
-              "episodes": 50
+              "episodes": 50,
+              "demonstrations": 25
             },
             "SwingXtimes": {
               "successes": 50,
-              "episodes": 50
+              "episodes": 50,
+              "demonstrations": 25
             },
             "VideoPlaceButton": {
               "successes": 50,
-              "episodes": 50
+              "episodes": 50,
+              "demonstrations": 25
             },
             "VideoPlaceOrder": {
               "successes": 48,
-              "episodes": 50
+              "episodes": 50,
+              "demonstrations": 25
             },
             "VideoRepick": {
               "successes": 50,
-              "episodes": 50
+              "episodes": 50,
+              "demonstrations": 25
             },
             "VideoUnmask": {
               "successes": 50,
-              "episodes": 50
+              "episodes": 50,
+              "demonstrations": 25
             },
             "VideoUnmaskSwap": {
               "successes": 50,
-              "episodes": 50
+              "episodes": 50,
+              "demonstrations": 25
             }
           }
         }
@@ -512,107 +542,133 @@
           "per_task": {
             "T01_CookiesTomatoBasket": {
               "successes": 50,
-              "episodes": 50
+              "episodes": 50,
+              "demonstrations": 50
             },
             "T02_ButterPopcornBasket": {
               "successes": 50,
-              "episodes": 50
+              "episodes": 50,
+              "demonstrations": 50
             },
             "T03_CreamPuddingBasket": {
               "successes": 50,
-              "episodes": 50
+              "episodes": 50,
+              "demonstrations": 50
             },
             "T04_ButterNonEmptyDrawer": {
               "successes": 50,
-              "episodes": 50
+              "episodes": 50,
+              "demonstrations": 32
             },
             "T05_ButterEmptyDrawer": {
               "successes": 50,
-              "episodes": 50
+              "episodes": 50,
+              "demonstrations": 50
             },
             "T06_PourSauceCookiesTwice": {
               "successes": 50,
-              "episodes": 50
+              "episodes": 50,
+              "demonstrations": 50
             },
             "T07_PourSauceFrypanTwice": {
               "successes": 50,
-              "episodes": 50
+              "episodes": 50,
+              "demonstrations": 50
             },
             "T08_ChocolateFrypanPourSauceTwice": {
               "successes": 50,
-              "episodes": 50
+              "episodes": 50,
+              "demonstrations": 50
             },
             "T09_ButterFrypanPourSauceTwice": {
               "successes": 50,
-              "episodes": 50
+              "episodes": 50,
+              "demonstrations": 50
             },
             "T10_PourWineMugTwice": {
               "successes": 50,
-              "episodes": 50
+              "episodes": 50,
+              "demonstrations": 50
             },
             "T11_CookiesTopButterMiddle": {
               "successes": 50,
-              "episodes": 50
+              "episodes": 50,
+              "demonstrations": 50
             },
             "T12_CookiesChocolateMiddleDrawer": {
               "successes": 50,
-              "episodes": 50
+              "episodes": 50,
+              "demonstrations": 50
             },
             "T13_CookiesButterMiddleDrawer": {
               "successes": 50,
-              "episodes": 50
+              "episodes": 50,
+              "demonstrations": 50
             },
             "T14_CookiesChocolateDrawers": {
               "successes": 50,
-              "episodes": 50
+              "episodes": 50,
+              "demonstrations": 50
             },
             "T15_ButterFrypanPourMilkTwice": {
               "successes": 50,
-              "episodes": 50
+              "episodes": 50,
+              "demonstrations": 50
             },
             "T16_PourMilkMugTwice": {
               "successes": 50,
-              "episodes": 50
+              "episodes": 50,
+              "demonstrations": 50
             },
             "T17_ButterChocolateMiddleDrawer": {
               "successes": 50,
-              "episodes": 50
+              "episodes": 50,
+              "demonstrations": 50
             },
             "T18_ChocolateButterCabinet": {
               "successes": 48,
-              "episodes": 50
+              "episodes": 50,
+              "demonstrations": 50
             },
             "T19_SauceMilkJuiceCabinet": {
               "successes": 25,
-              "episodes": 50
+              "episodes": 50,
+              "demonstrations": 50
             },
             "T20_CookiesChocolateMicrowave": {
               "successes": 50,
-              "episodes": 50
+              "episodes": 50,
+              "demonstrations": 50
             },
             "T21_ButterChocolateMicrowave": {
               "successes": 50,
-              "episodes": 50
+              "episodes": 50,
+              "demonstrations": 50
             },
             "T22_PourSauceCookiesMicrowave": {
               "successes": 50,
-              "episodes": 50
+              "episodes": 50,
+              "demonstrations": 50
             },
             "T23_CreamPopcornMicrowave": {
               "successes": 50,
-              "episodes": 50
+              "episodes": 50,
+              "demonstrations": 50
             },
             "T24_CookiesPopcornMicrowave": {
               "successes": 50,
-              "episodes": 50
+              "episodes": 50,
+              "demonstrations": 50
             },
             "T25_ButterCreamPlate": {
               "successes": 48,
-              "episodes": 50
+              "episodes": 50,
+              "demonstrations": 50
             },
             "T26_ChocolateCreamPlate": {
               "successes": 50,
-              "episodes": 50
+              "episodes": 50,
+              "demonstrations": 50
             }
           }
         }

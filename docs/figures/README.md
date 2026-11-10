@@ -19,6 +19,12 @@ CaM setting for each benchmark. Values are rounded to one decimal for display.
 The JSON retains source URLs, snapshot hashes, available per-task values, and
 CaM's exact success/episode counts. Sources were checked on November 10, 2026.
 
+Labels below the CaM bars show assigned demonstrations **per task**: 25 for
+RoboMME, 50 for the MIKASA VLA suite, and up to 50 for RMBench and RoboMemArena.
+RMBench has 49 for `battery_try` and `blocks_ranking_try`, and 48 for
+`observe_and_pickup`; RoboMemArena T04 has 32. All other tasks in those settings
+have 50. Exact counts are retained in each CaM row's `per_task` JSON records.
+
 | Benchmark | CaM figure coverage | Baseline source |
 |---|---|---|
 | RMBench | 900/900; nine tasks | [SimpleMemVLA v2](https://arxiv.org/pdf/2609.05533v2), Figure 3 and Table 1 |
