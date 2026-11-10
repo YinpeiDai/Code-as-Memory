@@ -68,7 +68,7 @@ def benchmark_comparison():
         footer.set_xlim(0, 1)
         footer.set_ylim(0, 1)
         footer.plot([0, 1], [1, 1], color=LINE, lw=1.5)
-        footer.text(0, .73, "CaM API cost", fontsize=18, weight="bold", color=ACCENT)
+        footer.text(0, .73, "API cost (Opus 5.5)", fontsize=18, weight="bold", color=ACCENT)
         for y, label, value in ((.38, "Development", cost["development_api_cost_usd"]),
                                 (.02, "Inference", cost["inference_api_cost_usd"])):
             footer.text(0, y, label, fontsize=18, color=INK)

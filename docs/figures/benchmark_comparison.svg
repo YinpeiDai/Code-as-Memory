@@ -171,7 +171,7 @@ L 293.76 366.336
 " clip-path="url(#p72447cd17d)" style="fill: none; stroke: #e5ebf3; stroke-width: 1.5; stroke-linecap: square"/>
    </g>
    <g id="text_14">
-    <text style="font-weight: 700; font-size: 18px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #008d7f" x="30.6" y="387.48672" transform="rotate(-0 30.6 387.48672)">CaM API cost</text>
+    <text style="font-weight: 700; font-size: 18px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #008d7f" x="30.6" y="387.48672" transform="rotate(-0 30.6 387.48672)">API cost (Opus 5.5)</text>
    </g>
    <g id="text_15">
     <text style="font-size: 18px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #18273b" x="30.6" y="414.90432" transform="rotate(-0 30.6 414.90432)">Development</text>
@@ -330,7 +330,7 @@ L 593.64 366.336
 " clip-path="url(#p1a639425ba)" style="fill: none; stroke: #e5ebf3; stroke-width: 1.5; stroke-linecap: square"/>
    </g>
    <g id="text_32">
-    <text style="font-weight: 700; font-size: 18px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #008d7f" x="330.48" y="387.48672" transform="rotate(-0 330.48 387.48672)">CaM API cost</text>
+    <text style="font-weight: 700; font-size: 18px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #008d7f" x="330.48" y="387.48672" transform="rotate(-0 330.48 387.48672)">API cost (Opus 5.5)</text>
    </g>
    <g id="text_33">
     <text style="font-size: 18px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #18273b" x="330.48" y="414.90432" transform="rotate(-0 330.48 414.90432)">Development</text>
@@ -467,7 +467,7 @@ L 893.52 366.336
 " clip-path="url(#p6215723b63)" style="fill: none; stroke: #e5ebf3; stroke-width: 1.5; stroke-linecap: square"/>
    </g>
    <g id="text_48">
-    <text style="font-weight: 700; font-size: 18px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #008d7f" x="630.36" y="387.48672" transform="rotate(-0 630.36 387.48672)">CaM API cost</text>
+    <text style="font-weight: 700; font-size: 18px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #008d7f" x="630.36" y="387.48672" transform="rotate(-0 630.36 387.48672)">API cost (Opus 5.5)</text>
    </g>
    <g id="text_49">
     <text style="font-size: 18px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #18273b" x="630.36" y="414.90432" transform="rotate(-0 630.36 414.90432)">Development</text>
@@ -626,7 +626,7 @@ L 1193.4 366.336
 " clip-path="url(#pf91fc28ad8)" style="fill: none; stroke: #e5ebf3; stroke-width: 1.5; stroke-linecap: square"/>
    </g>
    <g id="text_66">
-    <text style="font-weight: 700; font-size: 18px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #008d7f" x="930.24" y="387.48672" transform="rotate(-0 930.24 387.48672)">CaM API cost</text>
+    <text style="font-weight: 700; font-size: 18px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #008d7f" x="930.24" y="387.48672" transform="rotate(-0 930.24 387.48672)">API cost (Opus 5.5)</text>
    </g>
    <g id="text_67">
     <text style="font-size: 18px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #18273b" x="930.24" y="414.90432" transform="rotate(-0 930.24 414.90432)">Development</text>
