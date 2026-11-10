@@ -27,11 +27,12 @@ ROOT = Path(__file__).resolve().parents[1]
 ARCHIVE = ROOT / "public_runs"
 OUTPUT = ROOT / "docs/media"
 CACHE = ARCHIVE / "website/cache/readme_memory"
-WIDTH, HEIGHT, VIEW, HEADER, BODY_BOTTOM, FPS = 1080, 554, 480, 48, 554, 10
+WIDTH, HEIGHT, VIEW, HEADER, BODY_BOTTOM, FPS = 1080, 650, 480, 48, 650, 10
 INK, MUTED, TEAL, GOLD = "#E5EDF6", "#91A3B8", "#55DDC1", "#F2C879"
 BG, PANEL, HIGHLIGHT = "#101B2B", "#142235", "#21473F"
 FONT_ROOT = Path("/usr/share/fonts/truetype/dejavu")
 CODE = ImageFont.truetype(str(FONT_ROOT / "DejaVuSansMono.ttf"), 32)
+OUTPUT_CODE = ImageFont.truetype(str(FONT_ROOT / "DejaVuSansMono.ttf"), 26)
 LABEL = ImageFont.truetype(str(FONT_ROOT / "DejaVuSans.ttf"), 22)
 SMALL = ImageFont.truetype(str(FONT_ROOT / "DejaVuSans.ttf"), 18)
 BOLD = ImageFont.truetype(str(FONT_ROOT / "DejaVuSans-Bold.ttf"), 23)
@@ -59,6 +60,22 @@ def decisions(path):
             if item["kind"] == "decision"]
 
 
+def decision_trace(path):
+    """Pair each saved action result with its preceding decision, without replay."""
+    rows, outcomes = [], []
+    for item in map(json.loads, path.read_text().splitlines()):
+        if item["kind"] == "decision":
+            rows.append(item["row"])
+            outcomes.append(None)
+        elif item["kind"] == "outcome":
+            assert rows and outcomes[-1] is None
+            outcomes[-1] = json.loads(item["output"])
+        else:
+            raise ValueError(f"Unknown decision trace record: {item['kind']}")
+    assert all(a["memory_written"] == b["memory_in"] for a, b in zip(rows, rows[1:]))
+    return rows, outcomes
+
+
 def selected_memory(task, memory):
     """Display excerpts only; no inferred outcomes or future memory writes."""
     m = memory or {}
@@ -77,8 +94,8 @@ def selected_memory(task, memory):
     if task.startswith("SeqOfColors"):
         return {k: m.get(k) for k in ("cue_colors", "touched", "pending")}
     if task.startswith("T04"):
-        scores = m.get("scores") or [None] * 3
-        colored = {key: None if score is None else score[0]
+        scores = m.get("scores")
+        colored = None if scores is None else {key: None if score is None else score[0]
                    for key, score in zip(("top", "middle", "bottom"), scores)}
         return {"colored": colored, "target": m.get("target"), "pending": m.get("pending")}
     if task.startswith("T07"):
@@ -102,7 +119,7 @@ def perceived_position(task, memory):
     if task.startswith("BatteriesChecker"):
         return {"batteries[queue[0]] (x, y, z)": m["batteries"][int(m["queue"][0])] if m.get("queue") else None}
     if task.startswith("SeqOfColors"):
-        if m.get("pending", "").startswith("touch:"):
+        if (m.get("pending") or "").startswith("touch:"):
             color = m["pending"].split(":")[1]
             return {"cube_xy[target] (x, y)": m["cube_xy"][m["cube_colors"].index(color)]}
         return {"button_xy (x, y)": m.get("button_xy") or None}
@@ -128,7 +145,7 @@ def code_lines(fields):
     lines = []
     for key, value in fields.items():
         single = f"{key} = {literal(value)}"
-        if isinstance(value, dict):
+        if isinstance(value, dict) and value:
             lines.append((key, f"{key} = {{"))
             for i, (name, val) in enumerate(value.items()):
                 lines.append((key, f"  {literal(name)}: {literal(val)}" + ("," if i < len(value) - 1 else "")))
@@ -187,6 +204,56 @@ def action_caption(task, row):
     raise ValueError(task)
 
 
+def function_card(row=None, outcome=None, prior_tool=None, stage="execute"):
+    """Only recorded return values and action arguments; long values are excerpts."""
+    if stage in ("demo", "initial"):
+        return {"label": "BEFORE THE FIRST DECISION", "lines": ["perceive_decide(...)", "Memory is not updated yet"],
+                "source": "decision[0].memory_in"}
+    if stage == "reveal":
+        return {"label": "RECORDED RETURN · LINE BY LINE", "lines": ["perceive_decide(...)", "→ memory_written"],
+                "source": "memory_written"}
+    if outcome is not None:
+        fields = {}
+        if "error" in outcome:
+            fields["error"] = outcome["error"]
+        else:
+            for key in ("lamp_lit", "grasped", "pulled", "closed_y", "array_seen", "ok", "pressed_to_z",
+                        "fingers_open", "fingers_grasp", "fingers_lift", "put_back", "left_gripper", "right_gripper"):
+                if key in outcome:
+                    fields[key] = outcome[key]
+                if len(fields) == 2:
+                    break
+            if not fields and isinstance(outcome.get("hand"), dict):
+                fields = {"hand." + key: outcome["hand"][key] for key in ("held", "tilt_deg") if key in outcome["hand"]}
+            if not fields and outcome.get("done"):
+                fields["done[-1]"] = outcome["done"][-1]
+        assert fields, (prior_tool, outcome)
+        label, source = f"{prior_tool}() → result", "preceding_action_outcome"
+        lines = [f"{key} = {literal(value)}" for key, value in fields.items()][:2]
+    else:
+        args = row["act"]["args"]
+        fields = {key: args[key] for key in ("x", "y") if key in args}
+        if fields:
+            detail = ", ".join(f"{key}={literal(value)}" for key, value in fields.items())
+        elif "nodes" in args:
+            fields = {"nodes[0]": args["nodes"][0]}
+            detail = "nodes[0] = " + literal(args["nodes"][0])
+        else:
+            key = next((key for key in ("handle", "place", "pick", "max_steps", "label", "arm") if key in args), None)
+            fields = {key: args[key]} if key else {}
+            detail = f"{key} = {literal(args[key])}" if key else "No arguments"
+        lines = [row["act"]["tool"] + "(...)", detail]
+        label, source = "perceive_decide() → action", "act"
+    limit = WIDTH - VIEW - 48
+    for i, line in enumerate(lines):
+        if OUTPUT_CODE.getlength(line) > limit:
+            while OUTPUT_CODE.getlength(line + "…") > limit:
+                line = line[:-1]
+            lines[i] = line + "…"
+    assert all(OUTPUT_CODE.getlength(line) <= limit for line in lines)
+    return {"label": label, "lines": lines, "source": source, "selected_values": fields}
+
+
 def markers(task, row):
     """Targets/remembered locations, not ground-truth object trackers."""
     if row is None:
@@ -231,17 +298,17 @@ def markers(task, row):
     return [], False
 
 
-def syntax(draw, position, text):
+def syntax(draw, position, text, font=CODE):
     x, y = position
-    draw.text((x, y), text, fill=INK, font=CODE)
+    draw.text((x, y), text, fill=INK, font=font)
     try:
         tokens = tokenize.generate_tokens(io.StringIO(text.strip()).readline)
         indent = len(text) - len(text.lstrip())
         for token in tokens:
             color = GOLD if token.type == tokenize.STRING else TEAL if token.type == tokenize.NUMBER or token.string in ("None", "True", "False") else None
             if color:
-                px = x + CODE.getlength(text[:token.start[1] + indent])
-                draw.text((px, y), token.string, fill=color, font=CODE)
+                px = x + font.getlength(text[:token.start[1] + indent])
+                draw.text((px, y), token.string, fill=color, font=font)
     except (tokenize.TokenError, IndentationError):
         pass  # Individual lines of a multiline list still get their token colors.
 
@@ -273,7 +340,8 @@ def draw_trails(canvas, poses, phase, index, K, E, scale, offset, size):
     canvas.paste(Image.alpha_composite(canvas.convert("RGBA"), overlay).convert("RGB"))
 
 
-def render(rgb, task, row, fields, position, changed, camera, h5, frame_index, success, poses, phases):
+def render(rgb, task, row, fields, position, changed, camera, h5, frame_index, success, poses, phases,
+           stage="execute", visible_lines=None, card=None):
     canvas = Image.new("RGB", (WIDTH, HEIGHT), BG)
     draw = ImageDraw.Draw(canvas)
     draw.rectangle((VIEW, 0, WIDTH, HEIGHT), fill=PANEL)
@@ -281,13 +349,17 @@ def render(rgb, task, row, fields, position, changed, camera, h5, frame_index, s
     phase_color = GOLD if demo else TEAL
     draw.text((18, 10), "Demo phase" if demo else "Execution phase", font=BOLD, fill=phase_color)
     draw.text((VIEW + 24, 10), "ROBOT MEMORY", font=LABEL, fill=TEAL)
+    subtitle = {"demo": "Before the first decision", "initial": "Initial memory · paused replay",
+                "reveal": "perceive_decide() → memory", "ready": "Memory → chosen action",
+                "execute": "Use memory to act", "complete": "Last recorded memory"}[stage]
+    draw.text((VIEW + 24, 43), subtitle, font=SMALL, fill=GOLD if stage in ("initial", "reveal", "ready") else MUTED)
     frame = Image.fromarray(rgb)
     scale = min((VIEW - 12) / frame.width, (BODY_BOTTOM - HEADER) / frame.height)
     size = (round(frame.width * scale), round(frame.height * scale))
     offset = ((VIEW - size[0]) // 2, HEADER + (BODY_BOTTOM - HEADER - size[1]) // 2)
     canvas.paste(frame.resize(size, Image.Resampling.LANCZOS), offset)
     caption, _ = action_caption(task, row)
-    points, connect = markers(task, row)
+    points, connect = markers(task, row if stage not in ("initial", "reveal") else None)
     projected = []
     K, E = h5[camera + "_K"][frame_index], h5[camera + "_extrinsic"][frame_index]
     draw_trails(canvas, poses, phases, frame_index, K, E, scale, offset, size)
@@ -295,6 +367,9 @@ def render(rgb, task, row, fields, position, changed, camera, h5, frame_index, s
     if demo:
         draw.rectangle((offset[0], offset[1], offset[0] + size[0] - 1, offset[1] + size[1] - 1), outline=GOLD, width=6)
         caption = "Watch the video"
+    elif stage in ("initial", "reveal", "ready"):
+        caption = {"initial": "Paused · initial memory", "reveal": "Paused · memory update",
+                   "ready": "Paused · chosen action"}[stage]
     for world, label in points:
         pc = E[:, :3] @ np.asarray(world) + E[:, 3]
         if pc[2] <= 0:
@@ -325,7 +400,7 @@ def render(rgb, task, row, fields, position, changed, camera, h5, frame_index, s
         draw.line((lx + 6, HEADER + 18, lx + 18, HEADER + 18), fill=TRAIL_COLORS[key], width=3)
         draw.text((lx + 23, HEADER + 7), text, font=SMALL, fill=INK)
         lx += SMALL.getlength(text) + 39
-    for i, (key, text) in enumerate(code_lines(fields)):
+    for i, (key, text) in enumerate(code_lines(fields)[:visible_lines]):
         y = 76 + i * 39
         if key in changed:
             draw.rounded_rectangle((VIEW + 13, y - 2, WIDTH - 12, y + 37), radius=5, fill=HIGHLIGHT)
@@ -335,6 +410,11 @@ def render(rgb, task, row, fields, position, changed, camera, h5, frame_index, s
         draw.text((VIEW + 24, 414), "PERCEIVED POSITION · METERS", font=SMALL, fill=MUTED)
         draw.text((VIEW + 24, 440), name, font=LABEL, fill=INK)
         syntax(draw, (VIEW + 24, 472), literal(value))
+    if card:
+        draw.line((VIEW + 24, 531, WIDTH - 24, 531), fill=MUTED, width=1)
+        draw.text((VIEW + 24, 542), card["label"], font=SMALL, fill=MUTED)
+        for i, text in enumerate(card["lines"]):
+            syntax(draw, (VIEW + 24, 573 + i * 33), text, font=OUTPUT_CODE)
     return canvas
 
 
@@ -345,7 +425,7 @@ def build(example, episodes):
     source = min(candidates, key=lambda row: int(row["episode"]))
     video, result = ARCHIVE / source["video"], ARCHIVE / source["result"]
     decision_path = result.parent / "decisions.jsonl"
-    rows = decisions(decision_path)
+    rows, action_outcomes = decision_trace(decision_path)
     outcome = json.loads(result.read_text())
     assert outcome["success"] and len(rows) == outcome["decisions"]
     camera = "head" if benchmark == "rmbench" else "agentview" if benchmark == "robomemarena" else "front"
@@ -368,7 +448,15 @@ def build(example, episodes):
         assert starts == sorted(set(starts))
         assert all(labels[index] == "E" + str(row["step"]) for index, row in zip(starts, rows))
         boundaries = sorted(set([0, *starts, frame_count]))
+        first_execution_frame = int(np.flatnonzero(phases)[0])
+        assert starts[0] == first_execution_frame
         previous = {}
+
+        def append_frame(index, row_index, fields, position, changed, stage, card, visible_lines=None):
+            schedule.append({"source_frame": int(index), "decision_index": row_index, "fields": fields,
+                             "perceived_position": position, "highlighted_fields": sorted(changed),
+                             "stage": stage, "visible_lines": visible_lines, "function_output": card})
+
         for a, b in zip(boundaries, boundaries[1:]):
             available = [i for i, start in enumerate(starts) if start <= a]
             row_index = available[-1] if available else -1
@@ -378,16 +466,46 @@ def build(example, episodes):
             position = perceived_position(task, memory)
             code_lines(fields)
             changed = {key for key, value in fields.items() if previous.get(key) != value}
+            if row_index == 0:
+                # Hold E0 while revealing one recorded return. This is a display
+                # animation, not an inferred order of internal memory writes.
+                initial_fields = selected_memory(task, rows[0]["memory_in"])
+                initial_position = perceived_position(task, rows[0]["memory_in"])
+                code_lines(initial_fields)
+                for _ in range(15):
+                    append_frame(a, 0, initial_fields, initial_position, set(), "initial", function_card(stage="initial"))
+                for visible in range(1, len(code_lines(fields)) + 1):
+                    for _ in range(3):
+                        append_frame(a, 0, fields, initial_position, changed, "reveal",
+                                     function_card(stage="reveal"), visible)
+                for _ in range(8):
+                    append_frame(a, 0, fields, position, changed, "reveal", function_card(stage="reveal"))
+                for _ in range(12):
+                    append_frame(a, 0, fields, position, set(), "ready", function_card(row))
             count = max(14 if changed else 1, math.ceil((b - a) / source_fps / speed * FPS))
-            timeline.append({"output_frame": len(schedule), "source_frame": a, "source_label": labels[a],
-                             "decision_index": row_index, "fields": fields, "perceived_position": position,
-                             "phase": "execution" if phases[a] else "demo", "highlighted_fields": sorted(changed)})
             for j, index in enumerate(np.linspace(a, b - 1, count).astype(int)):
-                schedule.append((int(index), row_index, fields, position, changed if j < 10 else set()))
+                if row is None:
+                    card = function_card(stage="demo")
+                elif row_index > 0 and j < 10 and action_outcomes[row_index - 1] is not None:
+                    card = function_card(outcome=action_outcomes[row_index - 1], prior_tool=rows[row_index - 1]["act"]["tool"])
+                else:
+                    card = function_card(row)
+                append_frame(index, row_index, fields, position, changed if j < 10 else set(),
+                             "execute" if row is not None else "demo", card)
             previous = fields
-        schedule.extend([(frame_count - 1, len(rows) - 1, previous, position, set())] * 14)
+        for _ in range(14):
+            append_frame(frame_count - 1, len(rows) - 1, previous, position, set(), "complete",
+                         {"label": "RECORDED EPISODE RESULT", "lines": ["success = True"],
+                          "source": "result.json.success", "selected_values": {"success": outcome["success"]}})
+        previous_signature = None
+        for i, item in enumerate(schedule):
+            signature = json.dumps({k: v for k, v in item.items() if k != "source_frame"}, sort_keys=True)
+            if signature != previous_signature:
+                timeline.append({"output_frame": i, **item, "source_label": labels[item["source_frame"]],
+                                 "phase": "execution" if phases[item["source_frame"]] else "demo"})
+            previous_signature = signature
         poster_row = min(len(rows) - 1, len(rows) * 2 // 3)
-        poster_index = next(e["output_frame"] for e in timeline if e["decision_index"] == poster_row) + 6
+        poster_index = next(e["output_frame"] for e in timeline if e["decision_index"] == poster_row and e["stage"] == "execute") + 6
         command = ["ffmpeg", "-v", "error", "-y", "-threads", "1", "-f", "rawvideo", "-pix_fmt", "rgb24",
                    "-s", f"{WIDTH}x{HEIGHT}", "-r", str(FPS), "-i", "-", "-c:v", "libx264",
                    "-preset", "medium", "-crf", "23", "-pix_fmt", "yuv420p", "-threads", "1",
@@ -398,7 +516,8 @@ def build(example, episodes):
             decoded_index, bgr = -1, None
             snapshots = {event["output_frame"] for event in timeline} | {len(schedule) - 1}
             try:
-                for output_index, (index, row_index, fields, position, changed) in enumerate(schedule):
+                for output_index, item in enumerate(schedule):
+                    index, row_index = item["source_frame"], item["decision_index"]
                     while decoded_index < index:
                         ok, bgr = capture.read()
                         if not ok:
@@ -406,9 +525,11 @@ def build(example, episodes):
                         decoded_index += 1
                     raw_width = h5[camera + "_rgb"].shape[2]
                     rgb = cv2.cvtColor(bgr[:, :raw_width], cv2.COLOR_BGR2RGB)
-                    row = rows[row_index] if row_index >= 0 else None
-                    frame = render(rgb, task, row, fields, position, changed, camera, h5, index,
-                                   index == frame_count - 1, poses, phases)
+                    row = rows[row_index] if row_index >= 0 and item["stage"] != "initial" else None
+                    frame = render(rgb, task, row, item["fields"], item["perceived_position"],
+                                   item["highlighted_fields"], camera, h5, index,
+                                   index == frame_count - 1 and item["stage"] in ("execute", "complete"), poses, phases,
+                                   stage=item["stage"], visible_lines=item["visible_lines"], card=item["function_output"])
                     process.stdin.write(frame.tobytes())
                     if output_index in snapshots:
                         frame.save(work / f"state_{output_index:04d}.png")
@@ -445,7 +566,10 @@ def build(example, episodes):
         "preview": preview.name, "preview_sha256": digest(preview), "preview_dimensions": [WIDTH, HEIGHT],
         "preview_format": "video/mp4", "poster": poster.name, "poster_sha256": digest(poster), "poster_output_frame": poster_index,
         "preview_fps": FPS, "nominal_playback_multiplier": speed, "preview_duration_seconds": len(schedule) / FPS,
-        "source_frames": frame_count, "sampled_source_frames": [r[0] for r in schedule], "memory_timeline": timeline,
+        "source_frames": frame_count, "sampled_source_frames": [r["source_frame"] for r in schedule], "memory_timeline": timeline,
+        "initial_memory": rows[0]["memory_in"], "first_execution_source_frame": first_execution_frame,
+        "initial_pause_output_frames": sum(r["stage"] in ("initial", "reveal", "ready") for r in schedule),
+        "recorded_action_outcomes": sum(value is not None for value in action_outcomes),
     }
     shutil.copyfile(preview, work / "presentation.mp4")
     shutil.copyfile(poster, work / "poster.jpg")
@@ -482,10 +606,11 @@ if __name__ == "__main__":
     if args.only:
         print("Partial render complete; run without --only to update the release manifest.")
     else:
-        manifest = {"schema": "cam-readme-media/3", "source_root": "public_runs",
+        manifest = {"schema": "cam-readme-media/4", "source_root": "public_runs",
                     "selection": "Lowest numbered successful held-out episode for each selected task.",
-                    "presentation": "H.264 MP4, front/overview video with recorded memory excerpts and perceived positions. Changed fields highlight for one second; changed states last at least 1.4 seconds. Final observation holds for 1.4 seconds. Timing is illustrative, not real-time robot latency.",
+                    "presentation": "H.264 MP4, front/overview video with recorded memory excerpts, perceived positions and function outputs. The first execution frame pauses for the recorded initial memory, a line-by-line reveal of the first returned memory snapshot, and the chosen action. The reveal illustrates one atomic recorded return, not internal assignment order or function timing. Changed fields highlight for one second; changed states last at least 1.4 seconds. Final observation holds for 1.4 seconds. Timing is illustrative, not real-time robot latency.",
                     "memory_format": "Original selected values; positions rounded to two decimals in world-frame meters. Position panels select retained estimates from logged memory, not hidden object state or newly executed perception. VideoUnmaskSwap colors are parsed from memory.note; T04 colored maps drawer names to the first component of memory.scores (colored-pixel counts). No memory is inferred between decisions or after episode termination.",
+                    "function_outputs": "Selected values from perceive_decide's recorded memory_written and act, plus the preceding recorded action outcome. Long values are excerpted with an ellipsis. Internal perception-helper returns are not separately recorded and are not reconstructed. Terminal success comes from result.json; no terminal action outcome is invented.",
                     "annotations": "Demo/execution labels follow recorded observation phase, with a gold border and Watch the video caption for demo frames. EEF trails project at most 160 past recorded poses and reset at phase boundaries; two-arm poses use separate colors. Point markers project remembered locations or action targets. Display surface heights: PatternLock 0.0m, VideoUnmaskSwap 0.04m, swap_blocks 0.778m, T07 bottle 0.48m and pan 0.43m. Goal text comes verbatim from the selected result.json and appears only in the surrounding README/gallery text, not in video frames.",
                     "builder_sha256": digest(Path(__file__)), "clips": clips}
         (OUTPUT / "manifest.json").write_text(json.dumps(manifest, indent=2) + "\n")

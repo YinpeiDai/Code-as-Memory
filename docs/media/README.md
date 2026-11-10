@@ -36,8 +36,14 @@ their official repositories at the pinned revisions:
 SeqOfColors3 also has the separately documented
 [cue-order clarification](../../src/cam/prompts/mikasa_robo/seq_of_colors3.md).
 
-Memory changes only at recorded decision boundaries, synchronized through the
-observation frame labels. The panels select relevant fields and round coordinates
+At the first execution frame, the camera pauses on the recorded initial memory
+(selected fields are `None` in these examples). The first returned memory is
+revealed line by line, followed by the chosen action, before motion resumes.
+This reveal presents one saved return; it does not reconstruct assignments inside
+the function or measure its runtime.
+
+Subsequent memory changes follow recorded decision boundaries, synchronized through
+the observation frame labels. The panels select relevant fields and round coordinates
 to two decimals. VideoUnmaskSwap's `colors` is extracted from its stored `note`;
 the drawer `colored` dictionary names the first component of each stored `scores`
 entry: colored-pixel counts, not simulator occupancy labels. No intermediate or
@@ -48,13 +54,22 @@ The position panel selects relevant estimates retained in recorded memory, label
 with their field names and coordinates in world-frame meters. No perception is
 rerun and no hidden object state is used. Missing estimates appear as `None`.
 
+The function-output panel shows selected action arguments returned by
+`perceive_decide()` and actual feedback from the preceding action, such as
+`grasped`, `lamp_lit`, or drawer movement. Long values use an ellipsis; full values
+remain in the logs. Internal perception-helper returns were not separately
+recorded. The terminal success label comes from the episode result.
+
 EEF trails project up to 160 past recorded poses through the camera calibration,
 resetting at phase boundaries. RMBench's two arms use separate colors; its sparse
 action-boundary recordings yield connecting segments. Teal markers show remembered
 positions or action targets. RMBench uses its wide head camera; RoboMME and MIKASA
 use `front`, and RoboMemArena uses `agentview`. The wrist view is replaced by memory.
 
-Videos are 1080×554 at 10 fps with 32-pixel code text. Changed fields highlight for
+Videos are 1080×650 at 10 fps with 32-pixel memory text and 26-pixel function-output
+text. The initial memory holds for 1.5 seconds; the first update reveals one line
+every 0.3 seconds, holds for 0.8 seconds, then shows its action for 1.2 seconds.
+Changed fields highlight for
 one second, each changed state stays visible for at least 1.4 seconds, and the
 terminal frame holds for 1.4 seconds. Playback speed varies for readability;
 RMBench's source records action boundaries. These are illustrations, not timing

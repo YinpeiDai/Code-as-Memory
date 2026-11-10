@@ -4,44 +4,44 @@
   "repository_id": 1448534599,
   "clips": {
     "robomme-pattern-lock.mp4": {
-      "url": "https://github.com/user-attachments/assets/2292461f-dd57-4521-8db6-99f427e4d449",
-      "sha256": "eb50416a47cd48bcef8120877edd550533082ba1e03018506e43dae62b5b246b",
-      "bytes": 200867
+      "url": "https://github.com/user-attachments/assets/ab737c73-8a91-4fd8-9b0d-ee3d25897a04",
+      "sha256": "b286205f00b4d13d61dcfb40eeeb80f34337dffe04b077e0a2ed88807a9f9c00",
+      "bytes": 258238
     },
     "robomme-hidden-objects.mp4": {
-      "url": "https://github.com/user-attachments/assets/c535af07-06f6-4fa2-8a74-d7a1595f0425",
-      "sha256": "60417072082b9d49de21189fe121b5e25c8d50d9c2cd5b2a48029a7d908ad9fb",
-      "bytes": 237299
+      "url": "https://github.com/user-attachments/assets/549ebd0c-9a4d-4802-b2fb-8c66f9871807",
+      "sha256": "e02f65a0d03dab5908d883516a7368c40da8c93d5aa7bf9d51812021782868ba",
+      "bytes": 299781
     },
     "rmbench-swap-blocks.mp4": {
-      "url": "https://github.com/user-attachments/assets/1e420cf9-cc9e-45bd-bab0-020dd7fbaa15",
-      "sha256": "5407ee6c9d94940e426143c7332a314f2151b8bdd8ae3a0a7eb3ec70b5366f2d",
-      "bytes": 240860
+      "url": "https://github.com/user-attachments/assets/02ce7f4e-5902-4bbe-9a5f-9abf006fd6e2",
+      "sha256": "d44888ffa4eaf3269d8157de83cfa80d3aee4cc387b677dbb868b153680e6dec",
+      "bytes": 317937
     },
     "rmbench-cover-blocks.mp4": {
-      "url": "https://github.com/user-attachments/assets/01af08e7-6f9c-444a-af09-63cfa6ce91b8",
-      "sha256": "3a7000e43e94aa5f4fb6fafc9aff6f92257427176f045aedf03d7accf8fe02ad",
-      "bytes": 307483
+      "url": "https://github.com/user-attachments/assets/8bc49f75-d240-40cf-b217-41bd53b903b4",
+      "sha256": "8945e0edc62817614c7e702a99d872f070034a8ca50c2f89c20f9308cc53f6eb",
+      "bytes": 405806
     },
     "mikasa-batteries.mp4": {
-      "url": "https://github.com/user-attachments/assets/1e8cb1f9-d766-495d-b78b-b522a689a100",
-      "sha256": "67ca73debc5b08f0c3692e96145cb7d9b804f2bd0f96ce30bd6a00022e6edf05",
-      "bytes": 455998
+      "url": "https://github.com/user-attachments/assets/fa3f70b0-4bc0-47fa-a284-8898e2bf3766",
+      "sha256": "09c704e9d1d01b52e1a07037ddc4dc0a3ebe2e00dc04b5954f8f814a36ece5e8",
+      "bytes": 551905
     },
     "mikasa-color-sequence.mp4": {
-      "url": "https://github.com/user-attachments/assets/dd791a43-1ff3-490f-a2fc-8ee6e420bce1",
-      "sha256": "0938bc47113824ba88ed8692b0cdd32ee3965a3ebdfa94d3222730b9f904d262",
-      "bytes": 265773
+      "url": "https://github.com/user-attachments/assets/92a7bc82-3ee9-4226-a126-daa0627414f2",
+      "sha256": "c2aaeaae5cdb8550c402813e8ada5178407d9cd418f8860a96801d979ca64216",
+      "bytes": 343347
     },
     "robomemarena-drawers.mp4": {
-      "url": "https://github.com/user-attachments/assets/77102ab7-a06a-40c5-a770-db522e6a6fb2",
-      "sha256": "768562322e3101f3b410a02b6c781d024d03d7a1a9fc50a551bc064dba0490b2",
-      "bytes": 300629
+      "url": "https://github.com/user-attachments/assets/145fa12c-932b-417a-b427-e35c7bcfc10f",
+      "sha256": "81898e24c1272a899ca868ee62413732048e323fd5adfa92008aa123416d93a2",
+      "bytes": 429627
     },
     "robomemarena-pour-twice.mp4": {
-      "url": "https://github.com/user-attachments/assets/d044e7d0-28ba-464c-9f66-5654e48bafb2",
-      "sha256": "6816858a3af1bc5c50ba2c0db914e501f7e4537832475f4303496605e12fce92",
-      "bytes": 142263
+      "url": "https://github.com/user-attachments/assets/f1019d46-e3c0-4bfb-9147-c4ff4dbbe232",
+      "sha256": "b29925eaa20c047e1b2bd8f13cef733be5d9f3603675a4dc15072a2ef77f4ea6",
+      "bytes": 213424
     }
   }
 }

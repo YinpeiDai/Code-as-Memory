@@ -1,11 +1,12 @@
 {
-  "schema": "cam-readme-media/3",
+  "schema": "cam-readme-media/4",
   "source_root": "public_runs",
   "selection": "Lowest numbered successful held-out episode for each selected task.",
-  "presentation": "H.264 MP4, front/overview video with recorded memory excerpts and perceived positions. Changed fields highlight for one second; changed states last at least 1.4 seconds. Final observation holds for 1.4 seconds. Timing is illustrative, not real-time robot latency.",
+  "presentation": "H.264 MP4, front/overview video with recorded memory excerpts, perceived positions and function outputs. The first execution frame pauses for the recorded initial memory, a line-by-line reveal of the first returned memory snapshot, and the chosen action. The reveal illustrates one atomic recorded return, not internal assignment order or function timing. Changed fields highlight for one second; changed states last at least 1.4 seconds. Final observation holds for 1.4 seconds. Timing is illustrative, not real-time robot latency.",
   "memory_format": "Original selected values; positions rounded to two decimals in world-frame meters. Position panels select retained estimates from logged memory, not hidden object state or newly executed perception. VideoUnmaskSwap colors are parsed from memory.note; T04 colored maps drawer names to the first component of memory.scores (colored-pixel counts). No memory is inferred between decisions or after episode termination.",
+  "function_outputs": "Selected values from perceive_decide's recorded memory_written and act, plus the preceding recorded action outcome. Long values are excerpted with an ellipsis. Internal perception-helper returns are not separately recorded and are not reconstructed. Terminal success comes from result.json; no terminal action outcome is invented.",
   "annotations": "Demo/execution labels follow recorded observation phase, with a gold border and Watch the video caption for demo frames. EEF trails project at most 160 past recorded poses and reset at phase boundaries; two-arm poses use separate colors. Point markers project remembered locations or action targets. Display surface heights: PatternLock 0.0m, VideoUnmaskSwap 0.04m, swap_blocks 0.778m, T07 bottle 0.48m and pan 0.43m. Goal text comes verbatim from the selected result.json and appears only in the surrounding README/gallery text, not in video frames.",
-  "builder_sha256": "9fb4507dc965120e7cafcec8342de095cddd065be420811993b078b144e9dc17",
+  "builder_sha256": "ad57887139f065922cb236d30e56f1efc15982aee472f071da5e1dd1b146da91",
   "clips": [
     {
       "benchmark": "robomme",
@@ -38,18 +39,18 @@
       ],
       "trail_history_frames": 160,
       "preview": "robomme-pattern-lock.mp4",
-      "preview_sha256": "eb50416a47cd48bcef8120877edd550533082ba1e03018506e43dae62b5b246b",
+      "preview_sha256": "b286205f00b4d13d61dcfb40eeeb80f34337dffe04b077e0a2ed88807a9f9c00",
       "preview_dimensions": [
         1080,
-        554
+        650
       ],
       "preview_format": "video/mp4",
       "poster": "robomme-pattern-lock.jpg",
-      "poster_sha256": "340751abf61b6f76907e0589d638dab25e220fafde0093751b63a29d1b824165",
-      "poster_output_frame": 49,
+      "poster_sha256": "62f7e1d5d9ddae51ea2f1f7067372e66529027f5f3cadfd2f85dc2a8f336de29",
+      "poster_output_frame": 105,
       "preview_fps": 10,
       "nominal_playback_multiplier": 1,
-      "preview_duration_seconds": 9.7,
+      "preview_duration_seconds": 15.3,
       "source_frames": 166,
       "sampled_source_frames": [
         0,
@@ -95,6 +96,62 @@
         80,
         82,
         85,
+        86,
+        86,
+        86,
+        86,
+        86,
+        86,
+        86,
+        86,
+        86,
+        86,
+        86,
+        86,
+        86,
+        86,
+        86,
+        86,
+        86,
+        86,
+        86,
+        86,
+        86,
+        86,
+        86,
+        86,
+        86,
+        86,
+        86,
+        86,
+        86,
+        86,
+        86,
+        86,
+        86,
+        86,
+        86,
+        86,
+        86,
+        86,
+        86,
+        86,
+        86,
+        86,
+        86,
+        86,
+        86,
+        86,
+        86,
+        86,
+        86,
+        86,
+        86,
+        86,
+        86,
+        86,
+        86,
+        86,
         86,
         88,
         90,
@@ -154,7 +211,6 @@
         {
           "output_frame": 0,
           "source_frame": 0,
-          "source_label": "D0",
           "decision_index": -1,
           "fields": {
             "plan": null,
@@ -163,13 +219,363 @@
           "perceived_position": {
             "vision_plan[0] (x, y)": null
           },
-          "phase": "demo",
-          "highlighted_fields": []
+          "highlighted_fields": [],
+          "stage": "demo",
+          "visible_lines": null,
+          "function_output": {
+            "label": "BEFORE THE FIRST DECISION",
+            "lines": [
+              "perceive_decide(...)",
+              "Memory is not updated yet"
+            ],
+            "source": "decision[0].memory_in"
+          },
+          "source_label": "D0",
+          "phase": "demo"
         },
         {
           "output_frame": 43,
           "source_frame": 86,
+          "decision_index": 0,
+          "fields": {
+            "plan": null,
+            "decisions": null
+          },
+          "perceived_position": {
+            "vision_plan[0] (x, y)": null
+          },
+          "highlighted_fields": [],
+          "stage": "initial",
+          "visible_lines": null,
+          "function_output": {
+            "label": "BEFORE THE FIRST DECISION",
+            "lines": [
+              "perceive_decide(...)",
+              "Memory is not updated yet"
+            ],
+            "source": "decision[0].memory_in"
+          },
           "source_label": "E0",
+          "phase": "execution"
+        },
+        {
+          "output_frame": 58,
+          "source_frame": 86,
+          "decision_index": 0,
+          "fields": {
+            "plan": [
+              [
+                -0.102312080562,
+                0.099992327392
+              ],
+              [
+                -0.102312080562,
+                -7.672608e-06
+              ],
+              [
+                -0.002312080562,
+                -0.100007672608
+              ],
+              [
+                -0.002312080562,
+                -7.672608e-06
+              ]
+            ],
+            "decisions": 1
+          },
+          "perceived_position": {
+            "vision_plan[0] (x, y)": null
+          },
+          "highlighted_fields": [
+            "decisions",
+            "plan"
+          ],
+          "stage": "reveal",
+          "visible_lines": 1,
+          "function_output": {
+            "label": "RECORDED RETURN \u00b7 LINE BY LINE",
+            "lines": [
+              "perceive_decide(...)",
+              "\u2192 memory_written"
+            ],
+            "source": "memory_written"
+          },
+          "source_label": "E0",
+          "phase": "execution"
+        },
+        {
+          "output_frame": 61,
+          "source_frame": 86,
+          "decision_index": 0,
+          "fields": {
+            "plan": [
+              [
+                -0.102312080562,
+                0.099992327392
+              ],
+              [
+                -0.102312080562,
+                -7.672608e-06
+              ],
+              [
+                -0.002312080562,
+                -0.100007672608
+              ],
+              [
+                -0.002312080562,
+                -7.672608e-06
+              ]
+            ],
+            "decisions": 1
+          },
+          "perceived_position": {
+            "vision_plan[0] (x, y)": null
+          },
+          "highlighted_fields": [
+            "decisions",
+            "plan"
+          ],
+          "stage": "reveal",
+          "visible_lines": 2,
+          "function_output": {
+            "label": "RECORDED RETURN \u00b7 LINE BY LINE",
+            "lines": [
+              "perceive_decide(...)",
+              "\u2192 memory_written"
+            ],
+            "source": "memory_written"
+          },
+          "source_label": "E0",
+          "phase": "execution"
+        },
+        {
+          "output_frame": 64,
+          "source_frame": 86,
+          "decision_index": 0,
+          "fields": {
+            "plan": [
+              [
+                -0.102312080562,
+                0.099992327392
+              ],
+              [
+                -0.102312080562,
+                -7.672608e-06
+              ],
+              [
+                -0.002312080562,
+                -0.100007672608
+              ],
+              [
+                -0.002312080562,
+                -7.672608e-06
+              ]
+            ],
+            "decisions": 1
+          },
+          "perceived_position": {
+            "vision_plan[0] (x, y)": null
+          },
+          "highlighted_fields": [
+            "decisions",
+            "plan"
+          ],
+          "stage": "reveal",
+          "visible_lines": 3,
+          "function_output": {
+            "label": "RECORDED RETURN \u00b7 LINE BY LINE",
+            "lines": [
+              "perceive_decide(...)",
+              "\u2192 memory_written"
+            ],
+            "source": "memory_written"
+          },
+          "source_label": "E0",
+          "phase": "execution"
+        },
+        {
+          "output_frame": 67,
+          "source_frame": 86,
+          "decision_index": 0,
+          "fields": {
+            "plan": [
+              [
+                -0.102312080562,
+                0.099992327392
+              ],
+              [
+                -0.102312080562,
+                -7.672608e-06
+              ],
+              [
+                -0.002312080562,
+                -0.100007672608
+              ],
+              [
+                -0.002312080562,
+                -7.672608e-06
+              ]
+            ],
+            "decisions": 1
+          },
+          "perceived_position": {
+            "vision_plan[0] (x, y)": null
+          },
+          "highlighted_fields": [
+            "decisions",
+            "plan"
+          ],
+          "stage": "reveal",
+          "visible_lines": 4,
+          "function_output": {
+            "label": "RECORDED RETURN \u00b7 LINE BY LINE",
+            "lines": [
+              "perceive_decide(...)",
+              "\u2192 memory_written"
+            ],
+            "source": "memory_written"
+          },
+          "source_label": "E0",
+          "phase": "execution"
+        },
+        {
+          "output_frame": 70,
+          "source_frame": 86,
+          "decision_index": 0,
+          "fields": {
+            "plan": [
+              [
+                -0.102312080562,
+                0.099992327392
+              ],
+              [
+                -0.102312080562,
+                -7.672608e-06
+              ],
+              [
+                -0.002312080562,
+                -0.100007672608
+              ],
+              [
+                -0.002312080562,
+                -7.672608e-06
+              ]
+            ],
+            "decisions": 1
+          },
+          "perceived_position": {
+            "vision_plan[0] (x, y)": null
+          },
+          "highlighted_fields": [
+            "decisions",
+            "plan"
+          ],
+          "stage": "reveal",
+          "visible_lines": 5,
+          "function_output": {
+            "label": "RECORDED RETURN \u00b7 LINE BY LINE",
+            "lines": [
+              "perceive_decide(...)",
+              "\u2192 memory_written"
+            ],
+            "source": "memory_written"
+          },
+          "source_label": "E0",
+          "phase": "execution"
+        },
+        {
+          "output_frame": 73,
+          "source_frame": 86,
+          "decision_index": 0,
+          "fields": {
+            "plan": [
+              [
+                -0.102312080562,
+                0.099992327392
+              ],
+              [
+                -0.102312080562,
+                -7.672608e-06
+              ],
+              [
+                -0.002312080562,
+                -0.100007672608
+              ],
+              [
+                -0.002312080562,
+                -7.672608e-06
+              ]
+            ],
+            "decisions": 1
+          },
+          "perceived_position": {
+            "vision_plan[0] (x, y)": null
+          },
+          "highlighted_fields": [
+            "decisions",
+            "plan"
+          ],
+          "stage": "reveal",
+          "visible_lines": 6,
+          "function_output": {
+            "label": "RECORDED RETURN \u00b7 LINE BY LINE",
+            "lines": [
+              "perceive_decide(...)",
+              "\u2192 memory_written"
+            ],
+            "source": "memory_written"
+          },
+          "source_label": "E0",
+          "phase": "execution"
+        },
+        {
+          "output_frame": 76,
+          "source_frame": 86,
+          "decision_index": 0,
+          "fields": {
+            "plan": [
+              [
+                -0.102312080562,
+                0.099992327392
+              ],
+              [
+                -0.102312080562,
+                -7.672608e-06
+              ],
+              [
+                -0.002312080562,
+                -0.100007672608
+              ],
+              [
+                -0.002312080562,
+                -7.672608e-06
+              ]
+            ],
+            "decisions": 1
+          },
+          "perceived_position": {
+            "vision_plan[0] (x, y)": null
+          },
+          "highlighted_fields": [
+            "decisions",
+            "plan"
+          ],
+          "stage": "reveal",
+          "visible_lines": 7,
+          "function_output": {
+            "label": "RECORDED RETURN \u00b7 LINE BY LINE",
+            "lines": [
+              "perceive_decide(...)",
+              "\u2192 memory_written"
+            ],
+            "source": "memory_written"
+          },
+          "source_label": "E0",
+          "phase": "execution"
+        },
+        {
+          "output_frame": 79,
+          "source_frame": 86,
           "decision_index": 0,
           "fields": {
             "plan": [
@@ -198,13 +604,236 @@
               0.100121356547
             ]
           },
-          "phase": "execution",
           "highlighted_fields": [
             "decisions",
             "plan"
-          ]
+          ],
+          "stage": "reveal",
+          "visible_lines": null,
+          "function_output": {
+            "label": "RECORDED RETURN \u00b7 LINE BY LINE",
+            "lines": [
+              "perceive_decide(...)",
+              "\u2192 memory_written"
+            ],
+            "source": "memory_written"
+          },
+          "source_label": "E0",
+          "phase": "execution"
+        },
+        {
+          "output_frame": 87,
+          "source_frame": 86,
+          "decision_index": 0,
+          "fields": {
+            "plan": [
+              [
+                -0.102312080562,
+                0.099992327392
+              ],
+              [
+                -0.102312080562,
+                -7.672608e-06
+              ],
+              [
+                -0.002312080562,
+                -0.100007672608
+              ],
+              [
+                -0.002312080562,
+                -7.672608e-06
+              ]
+            ],
+            "decisions": 1
+          },
+          "perceived_position": {
+            "vision_plan[0] (x, y)": [
+              -0.102303147316,
+              0.100121356547
+            ]
+          },
+          "highlighted_fields": [],
+          "stage": "ready",
+          "visible_lines": null,
+          "function_output": {
+            "label": "perceive_decide() \u2192 action",
+            "lines": [
+              "act_trace_pattern(...)",
+              "nodes[0] = [-0.10, 0.10]"
+            ],
+            "source": "act",
+            "selected_values": {
+              "nodes[0]": [
+                -0.10231208056211472,
+                0.09999232739210129
+              ]
+            }
+          },
+          "source_label": "E0",
+          "phase": "execution"
+        },
+        {
+          "output_frame": 99,
+          "source_frame": 86,
+          "decision_index": 0,
+          "fields": {
+            "plan": [
+              [
+                -0.102312080562,
+                0.099992327392
+              ],
+              [
+                -0.102312080562,
+                -7.672608e-06
+              ],
+              [
+                -0.002312080562,
+                -0.100007672608
+              ],
+              [
+                -0.002312080562,
+                -7.672608e-06
+              ]
+            ],
+            "decisions": 1
+          },
+          "perceived_position": {
+            "vision_plan[0] (x, y)": [
+              -0.102303147316,
+              0.100121356547
+            ]
+          },
+          "highlighted_fields": [
+            "decisions",
+            "plan"
+          ],
+          "stage": "execute",
+          "visible_lines": null,
+          "function_output": {
+            "label": "perceive_decide() \u2192 action",
+            "lines": [
+              "act_trace_pattern(...)",
+              "nodes[0] = [-0.10, 0.10]"
+            ],
+            "source": "act",
+            "selected_values": {
+              "nodes[0]": [
+                -0.10231208056211472,
+                0.09999232739210129
+              ]
+            }
+          },
+          "source_label": "E0",
+          "phase": "execution"
+        },
+        {
+          "output_frame": 109,
+          "source_frame": 106,
+          "decision_index": 0,
+          "fields": {
+            "plan": [
+              [
+                -0.102312080562,
+                0.099992327392
+              ],
+              [
+                -0.102312080562,
+                -7.672608e-06
+              ],
+              [
+                -0.002312080562,
+                -0.100007672608
+              ],
+              [
+                -0.002312080562,
+                -7.672608e-06
+              ]
+            ],
+            "decisions": 1
+          },
+          "perceived_position": {
+            "vision_plan[0] (x, y)": [
+              -0.102303147316,
+              0.100121356547
+            ]
+          },
+          "highlighted_fields": [],
+          "stage": "execute",
+          "visible_lines": null,
+          "function_output": {
+            "label": "perceive_decide() \u2192 action",
+            "lines": [
+              "act_trace_pattern(...)",
+              "nodes[0] = [-0.10, 0.10]"
+            ],
+            "source": "act",
+            "selected_values": {
+              "nodes[0]": [
+                -0.10231208056211472,
+                0.09999232739210129
+              ]
+            }
+          },
+          "source_label": "E20",
+          "phase": "execution"
+        },
+        {
+          "output_frame": 139,
+          "source_frame": 165,
+          "decision_index": 0,
+          "fields": {
+            "plan": [
+              [
+                -0.102312080562,
+                0.099992327392
+              ],
+              [
+                -0.102312080562,
+                -7.672608e-06
+              ],
+              [
+                -0.002312080562,
+                -0.100007672608
+              ],
+              [
+                -0.002312080562,
+                -7.672608e-06
+              ]
+            ],
+            "decisions": 1
+          },
+          "perceived_position": {
+            "vision_plan[0] (x, y)": [
+              -0.102303147316,
+              0.100121356547
+            ]
+          },
+          "highlighted_fields": [],
+          "stage": "complete",
+          "visible_lines": null,
+          "function_output": {
+            "label": "RECORDED EPISODE RESULT",
+            "lines": [
+              "success = True"
+            ],
+            "source": "result.json.success",
+            "selected_values": {
+              "success": true
+            }
+          },
+          "source_label": "E80",
+          "phase": "execution"
         }
-      ]
+      ],
+      "initial_memory": {
+        "plan": null,
+        "vision_plan": null,
+        "traced": null,
+        "decisions": null
+      },
+      "first_execution_source_frame": 86,
+      "initial_pause_output_frames": 56,
+      "recorded_action_outcomes": 0
     },
     {
       "benchmark": "robomme",
@@ -237,18 +866,18 @@
       ],
       "trail_history_frames": 160,
       "preview": "robomme-hidden-objects.mp4",
-      "preview_sha256": "60417072082b9d49de21189fe121b5e25c8d50d9c2cd5b2a48029a7d908ad9fb",
+      "preview_sha256": "e02f65a0d03dab5908d883516a7368c40da8c93d5aa7bf9d51812021782868ba",
       "preview_dimensions": [
         1080,
-        554
+        650
       ],
       "preview_format": "video/mp4",
       "poster": "robomme-hidden-objects.jpg",
-      "poster_sha256": "c7314d9371dd36a538d552c072d5a0f909f385f8c4959756871de021389862d3",
-      "poster_output_frame": 89,
+      "poster_sha256": "e3f486e4af2bc0ba4aa77584bd0903c97189c2ed9f5d712fa8a9e7545a74aaf3",
+      "poster_output_frame": 142,
       "preview_fps": 10,
       "nominal_playback_multiplier": 1.5,
-      "preview_duration_seconds": 12.1,
+      "preview_duration_seconds": 17.4,
       "source_frames": 320,
       "sampled_source_frames": [
         0,
@@ -289,6 +918,59 @@
         106,
         109,
         113,
+        114,
+        114,
+        114,
+        114,
+        114,
+        114,
+        114,
+        114,
+        114,
+        114,
+        114,
+        114,
+        114,
+        114,
+        114,
+        114,
+        114,
+        114,
+        114,
+        114,
+        114,
+        114,
+        114,
+        114,
+        114,
+        114,
+        114,
+        114,
+        114,
+        114,
+        114,
+        114,
+        114,
+        114,
+        114,
+        114,
+        114,
+        114,
+        114,
+        114,
+        114,
+        114,
+        114,
+        114,
+        114,
+        114,
+        114,
+        114,
+        114,
+        114,
+        114,
+        114,
+        114,
         114,
         117,
         120,
@@ -377,7 +1059,6 @@
         {
           "output_frame": 0,
           "source_frame": 0,
-          "source_label": "D0",
           "decision_index": -1,
           "fields": {
             "colors": null,
@@ -387,13 +1068,247 @@
           "perceived_position": {
             "targets[next_index] (x, y)": null
           },
-          "phase": "demo",
-          "highlighted_fields": []
+          "highlighted_fields": [],
+          "stage": "demo",
+          "visible_lines": null,
+          "function_output": {
+            "label": "BEFORE THE FIRST DECISION",
+            "lines": [
+              "perceive_decide(...)",
+              "Memory is not updated yet"
+            ],
+            "source": "decision[0].memory_in"
+          },
+          "source_label": "D0",
+          "phase": "demo"
         },
         {
           "output_frame": 38,
           "source_frame": 114,
+          "decision_index": 0,
+          "fields": {
+            "colors": null,
+            "next_index": null,
+            "pending": null
+          },
+          "perceived_position": {
+            "targets[next_index] (x, y)": null
+          },
+          "highlighted_fields": [],
+          "stage": "initial",
+          "visible_lines": null,
+          "function_output": {
+            "label": "BEFORE THE FIRST DECISION",
+            "lines": [
+              "perceive_decide(...)",
+              "Memory is not updated yet"
+            ],
+            "source": "decision[0].memory_in"
+          },
           "source_label": "E0",
+          "phase": "execution"
+        },
+        {
+          "output_frame": 53,
+          "source_frame": 114,
+          "decision_index": 0,
+          "fields": {
+            "colors": [
+              "green",
+              "blue"
+            ],
+            "next_index": 0,
+            "pending": "pick"
+          },
+          "perceived_position": {
+            "targets[next_index] (x, y)": null
+          },
+          "highlighted_fields": [
+            "colors",
+            "next_index",
+            "pending"
+          ],
+          "stage": "reveal",
+          "visible_lines": 1,
+          "function_output": {
+            "label": "RECORDED RETURN \u00b7 LINE BY LINE",
+            "lines": [
+              "perceive_decide(...)",
+              "\u2192 memory_written"
+            ],
+            "source": "memory_written"
+          },
+          "source_label": "E0",
+          "phase": "execution"
+        },
+        {
+          "output_frame": 56,
+          "source_frame": 114,
+          "decision_index": 0,
+          "fields": {
+            "colors": [
+              "green",
+              "blue"
+            ],
+            "next_index": 0,
+            "pending": "pick"
+          },
+          "perceived_position": {
+            "targets[next_index] (x, y)": null
+          },
+          "highlighted_fields": [
+            "colors",
+            "next_index",
+            "pending"
+          ],
+          "stage": "reveal",
+          "visible_lines": 2,
+          "function_output": {
+            "label": "RECORDED RETURN \u00b7 LINE BY LINE",
+            "lines": [
+              "perceive_decide(...)",
+              "\u2192 memory_written"
+            ],
+            "source": "memory_written"
+          },
+          "source_label": "E0",
+          "phase": "execution"
+        },
+        {
+          "output_frame": 59,
+          "source_frame": 114,
+          "decision_index": 0,
+          "fields": {
+            "colors": [
+              "green",
+              "blue"
+            ],
+            "next_index": 0,
+            "pending": "pick"
+          },
+          "perceived_position": {
+            "targets[next_index] (x, y)": null
+          },
+          "highlighted_fields": [
+            "colors",
+            "next_index",
+            "pending"
+          ],
+          "stage": "reveal",
+          "visible_lines": 3,
+          "function_output": {
+            "label": "RECORDED RETURN \u00b7 LINE BY LINE",
+            "lines": [
+              "perceive_decide(...)",
+              "\u2192 memory_written"
+            ],
+            "source": "memory_written"
+          },
+          "source_label": "E0",
+          "phase": "execution"
+        },
+        {
+          "output_frame": 62,
+          "source_frame": 114,
+          "decision_index": 0,
+          "fields": {
+            "colors": [
+              "green",
+              "blue"
+            ],
+            "next_index": 0,
+            "pending": "pick"
+          },
+          "perceived_position": {
+            "targets[next_index] (x, y)": null
+          },
+          "highlighted_fields": [
+            "colors",
+            "next_index",
+            "pending"
+          ],
+          "stage": "reveal",
+          "visible_lines": 4,
+          "function_output": {
+            "label": "RECORDED RETURN \u00b7 LINE BY LINE",
+            "lines": [
+              "perceive_decide(...)",
+              "\u2192 memory_written"
+            ],
+            "source": "memory_written"
+          },
+          "source_label": "E0",
+          "phase": "execution"
+        },
+        {
+          "output_frame": 65,
+          "source_frame": 114,
+          "decision_index": 0,
+          "fields": {
+            "colors": [
+              "green",
+              "blue"
+            ],
+            "next_index": 0,
+            "pending": "pick"
+          },
+          "perceived_position": {
+            "targets[next_index] (x, y)": null
+          },
+          "highlighted_fields": [
+            "colors",
+            "next_index",
+            "pending"
+          ],
+          "stage": "reveal",
+          "visible_lines": 5,
+          "function_output": {
+            "label": "RECORDED RETURN \u00b7 LINE BY LINE",
+            "lines": [
+              "perceive_decide(...)",
+              "\u2192 memory_written"
+            ],
+            "source": "memory_written"
+          },
+          "source_label": "E0",
+          "phase": "execution"
+        },
+        {
+          "output_frame": 68,
+          "source_frame": 114,
+          "decision_index": 0,
+          "fields": {
+            "colors": [
+              "green",
+              "blue"
+            ],
+            "next_index": 0,
+            "pending": "pick"
+          },
+          "perceived_position": {
+            "targets[next_index] (x, y)": null
+          },
+          "highlighted_fields": [
+            "colors",
+            "next_index",
+            "pending"
+          ],
+          "stage": "reveal",
+          "visible_lines": 6,
+          "function_output": {
+            "label": "RECORDED RETURN \u00b7 LINE BY LINE",
+            "lines": [
+              "perceive_decide(...)",
+              "\u2192 memory_written"
+            ],
+            "source": "memory_written"
+          },
+          "source_label": "E0",
+          "phase": "execution"
+        },
+        {
+          "output_frame": 71,
+          "source_frame": 114,
           "decision_index": 0,
           "fields": {
             "colors": [
@@ -409,17 +1324,139 @@
               -0.140049144665
             ]
           },
-          "phase": "execution",
           "highlighted_fields": [
             "colors",
             "next_index",
             "pending"
-          ]
+          ],
+          "stage": "reveal",
+          "visible_lines": null,
+          "function_output": {
+            "label": "RECORDED RETURN \u00b7 LINE BY LINE",
+            "lines": [
+              "perceive_decide(...)",
+              "\u2192 memory_written"
+            ],
+            "source": "memory_written"
+          },
+          "source_label": "E0",
+          "phase": "execution"
         },
         {
-          "output_frame": 83,
+          "output_frame": 79,
+          "source_frame": 114,
+          "decision_index": 0,
+          "fields": {
+            "colors": [
+              "green",
+              "blue"
+            ],
+            "next_index": 0,
+            "pending": "pick"
+          },
+          "perceived_position": {
+            "targets[next_index] (x, y)": [
+              0.031173004712,
+              -0.140049144665
+            ]
+          },
+          "highlighted_fields": [],
+          "stage": "ready",
+          "visible_lines": null,
+          "function_output": {
+            "label": "perceive_decide() \u2192 action",
+            "lines": [
+              "act_pick_container(...)",
+              "x=0.03, y=-0.14"
+            ],
+            "source": "act",
+            "selected_values": {
+              "x": 0.031173004711842252,
+              "y": -0.1400491446651157
+            }
+          },
+          "source_label": "E0",
+          "phase": "execution"
+        },
+        {
+          "output_frame": 91,
+          "source_frame": 114,
+          "decision_index": 0,
+          "fields": {
+            "colors": [
+              "green",
+              "blue"
+            ],
+            "next_index": 0,
+            "pending": "pick"
+          },
+          "perceived_position": {
+            "targets[next_index] (x, y)": [
+              0.031173004712,
+              -0.140049144665
+            ]
+          },
+          "highlighted_fields": [
+            "colors",
+            "next_index",
+            "pending"
+          ],
+          "stage": "execute",
+          "visible_lines": null,
+          "function_output": {
+            "label": "perceive_decide() \u2192 action",
+            "lines": [
+              "act_pick_container(...)",
+              "x=0.03, y=-0.14"
+            ],
+            "source": "act",
+            "selected_values": {
+              "x": 0.031173004711842252,
+              "y": -0.1400491446651157
+            }
+          },
+          "source_label": "E0",
+          "phase": "execution"
+        },
+        {
+          "output_frame": 101,
+          "source_frame": 144,
+          "decision_index": 0,
+          "fields": {
+            "colors": [
+              "green",
+              "blue"
+            ],
+            "next_index": 0,
+            "pending": "pick"
+          },
+          "perceived_position": {
+            "targets[next_index] (x, y)": [
+              0.031173004712,
+              -0.140049144665
+            ]
+          },
+          "highlighted_fields": [],
+          "stage": "execute",
+          "visible_lines": null,
+          "function_output": {
+            "label": "perceive_decide() \u2192 action",
+            "lines": [
+              "act_pick_container(...)",
+              "x=0.03, y=-0.14"
+            ],
+            "source": "act",
+            "selected_values": {
+              "x": 0.031173004711842252,
+              "y": -0.1400491446651157
+            }
+          },
+          "source_label": "E30",
+          "phase": "execution"
+        },
+        {
+          "output_frame": 136,
           "source_frame": 249,
-          "source_label": "E135",
           "decision_index": 1,
           "fields": {
             "colors": [
@@ -435,12 +1472,107 @@
               -0.022775342085
             ]
           },
-          "phase": "execution",
           "highlighted_fields": [
             "next_index"
-          ]
+          ],
+          "stage": "execute",
+          "visible_lines": null,
+          "function_output": {
+            "label": "act_pick_container() \u2192 result",
+            "lines": [
+              "grasped = True",
+              "put_back = True"
+            ],
+            "source": "preceding_action_outcome",
+            "selected_values": {
+              "grasped": true,
+              "put_back": true
+            }
+          },
+          "source_label": "E135",
+          "phase": "execution"
+        },
+        {
+          "output_frame": 146,
+          "source_frame": 279,
+          "decision_index": 1,
+          "fields": {
+            "colors": [
+              "green",
+              "blue"
+            ],
+            "next_index": 1,
+            "pending": "pick"
+          },
+          "perceived_position": {
+            "targets[next_index] (x, y)": [
+              -0.081995139104,
+              -0.022775342085
+            ]
+          },
+          "highlighted_fields": [],
+          "stage": "execute",
+          "visible_lines": null,
+          "function_output": {
+            "label": "perceive_decide() \u2192 action",
+            "lines": [
+              "act_pick_container(...)",
+              "x=-0.08, y=-0.02"
+            ],
+            "source": "act",
+            "selected_values": {
+              "x": -0.081995139104,
+              "y": -0.022775342085
+            }
+          },
+          "source_label": "E165",
+          "phase": "execution"
+        },
+        {
+          "output_frame": 160,
+          "source_frame": 319,
+          "decision_index": 1,
+          "fields": {
+            "colors": [
+              "green",
+              "blue"
+            ],
+            "next_index": 1,
+            "pending": "pick"
+          },
+          "perceived_position": {
+            "targets[next_index] (x, y)": [
+              -0.081995139104,
+              -0.022775342085
+            ]
+          },
+          "highlighted_fields": [],
+          "stage": "complete",
+          "visible_lines": null,
+          "function_output": {
+            "label": "RECORDED EPISODE RESULT",
+            "lines": [
+              "success = True"
+            ],
+            "source": "result.json.success",
+            "selected_values": {
+              "success": true
+            }
+          },
+          "source_label": "E206",
+          "phase": "execution"
         }
-      ]
+      ],
+      "initial_memory": {
+        "targets": null,
+        "next_index": null,
+        "attempts": null,
+        "pending": null,
+        "note": null
+      },
+      "first_execution_source_frame": 114,
+      "initial_pause_output_frames": 53,
+      "recorded_action_outcomes": 1
     },
     {
       "benchmark": "rmbench",
@@ -474,20 +1606,76 @@
       ],
       "trail_history_frames": 160,
       "preview": "rmbench-swap-blocks.mp4",
-      "preview_sha256": "5407ee6c9d94940e426143c7332a314f2151b8bdd8ae3a0a7eb3ec70b5366f2d",
+      "preview_sha256": "d44888ffa4eaf3269d8157de83cfa80d3aee4cc387b677dbb868b153680e6dec",
       "preview_dimensions": [
         1080,
-        554
+        650
       ],
       "preview_format": "video/mp4",
       "poster": "rmbench-swap-blocks.jpg",
-      "poster_sha256": "7ed0ed00333f13dbf68b01cc245d9993124ca4c7e838876a31c820f18512f698",
-      "poster_output_frame": 62,
+      "poster_sha256": "4872b5c4362f4aa282ba656947c9006109c29805873c008414b81bdd1d59c488",
+      "poster_output_frame": 118,
       "preview_fps": 10,
       "nominal_playback_multiplier": 0.25,
-      "preview_duration_seconds": 11.2,
+      "preview_duration_seconds": 16.8,
       "source_frames": 33,
       "sampled_source_frames": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
         0,
         0,
         0,
@@ -605,7 +1793,270 @@
         {
           "output_frame": 0,
           "source_frame": 0,
+          "decision_index": 0,
+          "fields": {
+            "plan": null,
+            "move_idx": null,
+            "phase": null
+          },
+          "perceived_position": {
+            "src_xy (x, y)": null
+          },
+          "highlighted_fields": [],
+          "stage": "initial",
+          "visible_lines": null,
+          "function_output": {
+            "label": "BEFORE THE FIRST DECISION",
+            "lines": [
+              "perceive_decide(...)",
+              "Memory is not updated yet"
+            ],
+            "source": "decision[0].memory_in"
+          },
           "source_label": "E0",
+          "phase": "execution"
+        },
+        {
+          "output_frame": 15,
+          "source_frame": 0,
+          "decision_index": 0,
+          "fields": {
+            "plan": [
+              "1>0",
+              "2>1",
+              "0>2"
+            ],
+            "move_idx": 0,
+            "phase": "check_pick"
+          },
+          "perceived_position": {
+            "src_xy (x, y)": null
+          },
+          "highlighted_fields": [
+            "move_idx",
+            "phase",
+            "plan"
+          ],
+          "stage": "reveal",
+          "visible_lines": 1,
+          "function_output": {
+            "label": "RECORDED RETURN \u00b7 LINE BY LINE",
+            "lines": [
+              "perceive_decide(...)",
+              "\u2192 memory_written"
+            ],
+            "source": "memory_written"
+          },
+          "source_label": "E0",
+          "phase": "execution"
+        },
+        {
+          "output_frame": 18,
+          "source_frame": 0,
+          "decision_index": 0,
+          "fields": {
+            "plan": [
+              "1>0",
+              "2>1",
+              "0>2"
+            ],
+            "move_idx": 0,
+            "phase": "check_pick"
+          },
+          "perceived_position": {
+            "src_xy (x, y)": null
+          },
+          "highlighted_fields": [
+            "move_idx",
+            "phase",
+            "plan"
+          ],
+          "stage": "reveal",
+          "visible_lines": 2,
+          "function_output": {
+            "label": "RECORDED RETURN \u00b7 LINE BY LINE",
+            "lines": [
+              "perceive_decide(...)",
+              "\u2192 memory_written"
+            ],
+            "source": "memory_written"
+          },
+          "source_label": "E0",
+          "phase": "execution"
+        },
+        {
+          "output_frame": 21,
+          "source_frame": 0,
+          "decision_index": 0,
+          "fields": {
+            "plan": [
+              "1>0",
+              "2>1",
+              "0>2"
+            ],
+            "move_idx": 0,
+            "phase": "check_pick"
+          },
+          "perceived_position": {
+            "src_xy (x, y)": null
+          },
+          "highlighted_fields": [
+            "move_idx",
+            "phase",
+            "plan"
+          ],
+          "stage": "reveal",
+          "visible_lines": 3,
+          "function_output": {
+            "label": "RECORDED RETURN \u00b7 LINE BY LINE",
+            "lines": [
+              "perceive_decide(...)",
+              "\u2192 memory_written"
+            ],
+            "source": "memory_written"
+          },
+          "source_label": "E0",
+          "phase": "execution"
+        },
+        {
+          "output_frame": 24,
+          "source_frame": 0,
+          "decision_index": 0,
+          "fields": {
+            "plan": [
+              "1>0",
+              "2>1",
+              "0>2"
+            ],
+            "move_idx": 0,
+            "phase": "check_pick"
+          },
+          "perceived_position": {
+            "src_xy (x, y)": null
+          },
+          "highlighted_fields": [
+            "move_idx",
+            "phase",
+            "plan"
+          ],
+          "stage": "reveal",
+          "visible_lines": 4,
+          "function_output": {
+            "label": "RECORDED RETURN \u00b7 LINE BY LINE",
+            "lines": [
+              "perceive_decide(...)",
+              "\u2192 memory_written"
+            ],
+            "source": "memory_written"
+          },
+          "source_label": "E0",
+          "phase": "execution"
+        },
+        {
+          "output_frame": 27,
+          "source_frame": 0,
+          "decision_index": 0,
+          "fields": {
+            "plan": [
+              "1>0",
+              "2>1",
+              "0>2"
+            ],
+            "move_idx": 0,
+            "phase": "check_pick"
+          },
+          "perceived_position": {
+            "src_xy (x, y)": null
+          },
+          "highlighted_fields": [
+            "move_idx",
+            "phase",
+            "plan"
+          ],
+          "stage": "reveal",
+          "visible_lines": 5,
+          "function_output": {
+            "label": "RECORDED RETURN \u00b7 LINE BY LINE",
+            "lines": [
+              "perceive_decide(...)",
+              "\u2192 memory_written"
+            ],
+            "source": "memory_written"
+          },
+          "source_label": "E0",
+          "phase": "execution"
+        },
+        {
+          "output_frame": 30,
+          "source_frame": 0,
+          "decision_index": 0,
+          "fields": {
+            "plan": [
+              "1>0",
+              "2>1",
+              "0>2"
+            ],
+            "move_idx": 0,
+            "phase": "check_pick"
+          },
+          "perceived_position": {
+            "src_xy (x, y)": null
+          },
+          "highlighted_fields": [
+            "move_idx",
+            "phase",
+            "plan"
+          ],
+          "stage": "reveal",
+          "visible_lines": 6,
+          "function_output": {
+            "label": "RECORDED RETURN \u00b7 LINE BY LINE",
+            "lines": [
+              "perceive_decide(...)",
+              "\u2192 memory_written"
+            ],
+            "source": "memory_written"
+          },
+          "source_label": "E0",
+          "phase": "execution"
+        },
+        {
+          "output_frame": 33,
+          "source_frame": 0,
+          "decision_index": 0,
+          "fields": {
+            "plan": [
+              "1>0",
+              "2>1",
+              "0>2"
+            ],
+            "move_idx": 0,
+            "phase": "check_pick"
+          },
+          "perceived_position": {
+            "src_xy (x, y)": null
+          },
+          "highlighted_fields": [
+            "move_idx",
+            "phase",
+            "plan"
+          ],
+          "stage": "reveal",
+          "visible_lines": 7,
+          "function_output": {
+            "label": "RECORDED RETURN \u00b7 LINE BY LINE",
+            "lines": [
+              "perceive_decide(...)",
+              "\u2192 memory_written"
+            ],
+            "source": "memory_written"
+          },
+          "source_label": "E0",
+          "phase": "execution"
+        },
+        {
+          "output_frame": 36,
+          "source_frame": 0,
           "decision_index": 0,
           "fields": {
             "plan": [
@@ -622,17 +2073,142 @@
               -0.144851488425
             ]
           },
-          "phase": "execution",
           "highlighted_fields": [
             "move_idx",
             "phase",
             "plan"
-          ]
+          ],
+          "stage": "reveal",
+          "visible_lines": null,
+          "function_output": {
+            "label": "RECORDED RETURN \u00b7 LINE BY LINE",
+            "lines": [
+              "perceive_decide(...)",
+              "\u2192 memory_written"
+            ],
+            "source": "memory_written"
+          },
+          "source_label": "E0",
+          "phase": "execution"
         },
         {
-          "output_frame": 14,
+          "output_frame": 44,
+          "source_frame": 0,
+          "decision_index": 0,
+          "fields": {
+            "plan": [
+              "1>0",
+              "2>1",
+              "0>2"
+            ],
+            "move_idx": 0,
+            "phase": "check_pick"
+          },
+          "perceived_position": {
+            "src_xy (x, y)": [
+              -0.004951562539,
+              -0.144851488425
+            ]
+          },
+          "highlighted_fields": [],
+          "stage": "ready",
+          "visible_lines": null,
+          "function_output": {
+            "label": "perceive_decide() \u2192 action",
+            "lines": [
+              "act_pick(...)",
+              "x=0.00, y=-0.14"
+            ],
+            "source": "act",
+            "selected_values": {
+              "x": -0.004951562539404818,
+              "y": -0.14485148842476253
+            }
+          },
+          "source_label": "E0",
+          "phase": "execution"
+        },
+        {
+          "output_frame": 56,
+          "source_frame": 0,
+          "decision_index": 0,
+          "fields": {
+            "plan": [
+              "1>0",
+              "2>1",
+              "0>2"
+            ],
+            "move_idx": 0,
+            "phase": "check_pick"
+          },
+          "perceived_position": {
+            "src_xy (x, y)": [
+              -0.004951562539,
+              -0.144851488425
+            ]
+          },
+          "highlighted_fields": [
+            "move_idx",
+            "phase",
+            "plan"
+          ],
+          "stage": "execute",
+          "visible_lines": null,
+          "function_output": {
+            "label": "perceive_decide() \u2192 action",
+            "lines": [
+              "act_pick(...)",
+              "x=0.00, y=-0.14"
+            ],
+            "source": "act",
+            "selected_values": {
+              "x": -0.004951562539404818,
+              "y": -0.14485148842476253
+            }
+          },
+          "source_label": "E0",
+          "phase": "execution"
+        },
+        {
+          "output_frame": 66,
+          "source_frame": 2,
+          "decision_index": 0,
+          "fields": {
+            "plan": [
+              "1>0",
+              "2>1",
+              "0>2"
+            ],
+            "move_idx": 0,
+            "phase": "check_pick"
+          },
+          "perceived_position": {
+            "src_xy (x, y)": [
+              -0.004951562539,
+              -0.144851488425
+            ]
+          },
+          "highlighted_fields": [],
+          "stage": "execute",
+          "visible_lines": null,
+          "function_output": {
+            "label": "perceive_decide() \u2192 action",
+            "lines": [
+              "act_pick(...)",
+              "x=0.00, y=-0.14"
+            ],
+            "source": "act",
+            "selected_values": {
+              "x": -0.004951562539404818,
+              "y": -0.14485148842476253
+            }
+          },
+          "source_label": "E2",
+          "phase": "execution"
+        },
+        {
+          "output_frame": 70,
           "source_frame": 4,
-          "source_label": "E4",
           "decision_index": 1,
           "fields": {
             "plan": [
@@ -649,15 +2225,64 @@
               -0.144851488425
             ]
           },
-          "phase": "execution",
           "highlighted_fields": [
             "phase"
-          ]
+          ],
+          "stage": "execute",
+          "visible_lines": null,
+          "function_output": {
+            "label": "act_pick() \u2192 result",
+            "lines": [
+              "ok = True"
+            ],
+            "source": "preceding_action_outcome",
+            "selected_values": {
+              "ok": true
+            }
+          },
+          "source_label": "E4",
+          "phase": "execution"
         },
         {
-          "output_frame": 28,
+          "output_frame": 80,
+          "source_frame": 7,
+          "decision_index": 1,
+          "fields": {
+            "plan": [
+              "1>0",
+              "2>1",
+              "0>2"
+            ],
+            "move_idx": 0,
+            "phase": "check_place"
+          },
+          "perceived_position": {
+            "src_xy (x, y)": [
+              -0.004951562539,
+              -0.144851488425
+            ]
+          },
+          "highlighted_fields": [],
+          "stage": "execute",
+          "visible_lines": null,
+          "function_output": {
+            "label": "perceive_decide() \u2192 action",
+            "lines": [
+              "act_place(...)",
+              "x=-0.14, y=-0.15"
+            ],
+            "source": "act",
+            "selected_values": {
+              "x": -0.138,
+              "y": -0.15
+            }
+          },
+          "source_label": "E7",
+          "phase": "execution"
+        },
+        {
+          "output_frame": 84,
           "source_frame": 9,
-          "source_label": "E9",
           "decision_index": 2,
           "fields": {
             "plan": [
@@ -674,16 +2299,65 @@
               -0.148842741448
             ]
           },
-          "phase": "execution",
           "highlighted_fields": [
             "move_idx",
             "phase"
-          ]
+          ],
+          "stage": "execute",
+          "visible_lines": null,
+          "function_output": {
+            "label": "act_place() \u2192 result",
+            "lines": [
+              "ok = True"
+            ],
+            "source": "preceding_action_outcome",
+            "selected_values": {
+              "ok": true
+            }
+          },
+          "source_label": "E9",
+          "phase": "execution"
         },
         {
-          "output_frame": 42,
+          "output_frame": 94,
+          "source_frame": 11,
+          "decision_index": 2,
+          "fields": {
+            "plan": [
+              "1>0",
+              "2>1",
+              "0>2"
+            ],
+            "move_idx": 1,
+            "phase": "check_pick"
+          },
+          "perceived_position": {
+            "src_xy (x, y)": [
+              0.135020296851,
+              -0.148842741448
+            ]
+          },
+          "highlighted_fields": [],
+          "stage": "execute",
+          "visible_lines": null,
+          "function_output": {
+            "label": "perceive_decide() \u2192 action",
+            "lines": [
+              "act_pick(...)",
+              "x=0.14, y=-0.15"
+            ],
+            "source": "act",
+            "selected_values": {
+              "x": 0.1350202968511903,
+              "y": -0.14884274144842266
+            }
+          },
+          "source_label": "E11",
+          "phase": "execution"
+        },
+        {
+          "output_frame": 98,
           "source_frame": 13,
-          "source_label": "E13",
           "decision_index": 3,
           "fields": {
             "plan": [
@@ -700,15 +2374,64 @@
               -0.148842741448
             ]
           },
-          "phase": "execution",
           "highlighted_fields": [
             "phase"
-          ]
+          ],
+          "stage": "execute",
+          "visible_lines": null,
+          "function_output": {
+            "label": "act_pick() \u2192 result",
+            "lines": [
+              "ok = True"
+            ],
+            "source": "preceding_action_outcome",
+            "selected_values": {
+              "ok": true
+            }
+          },
+          "source_label": "E13",
+          "phase": "execution"
         },
         {
-          "output_frame": 56,
+          "output_frame": 108,
+          "source_frame": 16,
+          "decision_index": 3,
+          "fields": {
+            "plan": [
+              "1>0",
+              "2>1",
+              "0>2"
+            ],
+            "move_idx": 1,
+            "phase": "check_place"
+          },
+          "perceived_position": {
+            "src_xy (x, y)": [
+              0.135020296851,
+              -0.148842741448
+            ]
+          },
+          "highlighted_fields": [],
+          "stage": "execute",
+          "visible_lines": null,
+          "function_output": {
+            "label": "perceive_decide() \u2192 action",
+            "lines": [
+              "act_place(...)",
+              "x=0.00, y=-0.15"
+            ],
+            "source": "act",
+            "selected_values": {
+              "x": 0.002,
+              "y": -0.148
+            }
+          },
+          "source_label": "E16",
+          "phase": "execution"
+        },
+        {
+          "output_frame": 112,
           "source_frame": 18,
-          "source_label": "E18",
           "decision_index": 4,
           "fields": {
             "plan": [
@@ -725,16 +2448,65 @@
               -0.14838602984
             ]
           },
-          "phase": "execution",
           "highlighted_fields": [
             "move_idx",
             "phase"
-          ]
+          ],
+          "stage": "execute",
+          "visible_lines": null,
+          "function_output": {
+            "label": "act_place() \u2192 result",
+            "lines": [
+              "ok = True"
+            ],
+            "source": "preceding_action_outcome",
+            "selected_values": {
+              "ok": true
+            }
+          },
+          "source_label": "E18",
+          "phase": "execution"
         },
         {
-          "output_frame": 70,
+          "output_frame": 122,
+          "source_frame": 20,
+          "decision_index": 4,
+          "fields": {
+            "plan": [
+              "1>0",
+              "2>1",
+              "0>2"
+            ],
+            "move_idx": 2,
+            "phase": "check_pick"
+          },
+          "perceived_position": {
+            "src_xy (x, y)": [
+              -0.138297542584,
+              -0.14838602984
+            ]
+          },
+          "highlighted_fields": [],
+          "stage": "execute",
+          "visible_lines": null,
+          "function_output": {
+            "label": "perceive_decide() \u2192 action",
+            "lines": [
+              "act_pick(...)",
+              "x=-0.14, y=-0.15"
+            ],
+            "source": "act",
+            "selected_values": {
+              "x": -0.1382975425837811,
+              "y": -0.1483860298402149
+            }
+          },
+          "source_label": "E20",
+          "phase": "execution"
+        },
+        {
+          "output_frame": 126,
           "source_frame": 22,
-          "source_label": "E22",
           "decision_index": 5,
           "fields": {
             "plan": [
@@ -751,15 +2523,64 @@
               -0.14838602984
             ]
           },
-          "phase": "execution",
           "highlighted_fields": [
             "phase"
-          ]
+          ],
+          "stage": "execute",
+          "visible_lines": null,
+          "function_output": {
+            "label": "act_pick() \u2192 result",
+            "lines": [
+              "ok = True"
+            ],
+            "source": "preceding_action_outcome",
+            "selected_values": {
+              "ok": true
+            }
+          },
+          "source_label": "E22",
+          "phase": "execution"
         },
         {
-          "output_frame": 84,
+          "output_frame": 136,
+          "source_frame": 25,
+          "decision_index": 5,
+          "fields": {
+            "plan": [
+              "1>0",
+              "2>1",
+              "0>2"
+            ],
+            "move_idx": 2,
+            "phase": "check_place"
+          },
+          "perceived_position": {
+            "src_xy (x, y)": [
+              -0.138297542584,
+              -0.14838602984
+            ]
+          },
+          "highlighted_fields": [],
+          "stage": "execute",
+          "visible_lines": null,
+          "function_output": {
+            "label": "perceive_decide() \u2192 action",
+            "lines": [
+              "act_place(...)",
+              "x=0.14, y=-0.15"
+            ],
+            "source": "act",
+            "selected_values": {
+              "x": 0.142,
+              "y": -0.151
+            }
+          },
+          "source_label": "E25",
+          "phase": "execution"
+        },
+        {
+          "output_frame": 140,
           "source_frame": 28,
-          "source_label": "E28",
           "decision_index": 6,
           "fields": {
             "plan": [
@@ -776,13 +2597,111 @@
               -0.14838602984
             ]
           },
-          "phase": "execution",
           "highlighted_fields": [
             "move_idx",
             "phase"
-          ]
+          ],
+          "stage": "execute",
+          "visible_lines": null,
+          "function_output": {
+            "label": "act_place() \u2192 result",
+            "lines": [
+              "ok = True"
+            ],
+            "source": "preceding_action_outcome",
+            "selected_values": {
+              "ok": true
+            }
+          },
+          "source_label": "E28",
+          "phase": "execution"
+        },
+        {
+          "output_frame": 150,
+          "source_frame": 31,
+          "decision_index": 6,
+          "fields": {
+            "plan": [
+              "1>0",
+              "2>1",
+              "0>2"
+            ],
+            "move_idx": 3,
+            "phase": "press"
+          },
+          "perceived_position": {
+            "src_xy (x, y)": [
+              -0.138297542584,
+              -0.14838602984
+            ]
+          },
+          "highlighted_fields": [],
+          "stage": "execute",
+          "visible_lines": null,
+          "function_output": {
+            "label": "perceive_decide() \u2192 action",
+            "lines": [
+              "act_press(...)",
+              "No arguments"
+            ],
+            "source": "act",
+            "selected_values": {}
+          },
+          "source_label": "E31",
+          "phase": "execution"
+        },
+        {
+          "output_frame": 154,
+          "source_frame": 32,
+          "decision_index": 6,
+          "fields": {
+            "plan": [
+              "1>0",
+              "2>1",
+              "0>2"
+            ],
+            "move_idx": 3,
+            "phase": "press"
+          },
+          "perceived_position": {
+            "src_xy (x, y)": [
+              -0.138297542584,
+              -0.14838602984
+            ]
+          },
+          "highlighted_fields": [],
+          "stage": "complete",
+          "visible_lines": null,
+          "function_output": {
+            "label": "RECORDED EPISODE RESULT",
+            "lines": [
+              "success = True"
+            ],
+            "source": "result.json.success",
+            "selected_values": {
+              "success": true
+            }
+          },
+          "source_label": "E32",
+          "phase": "execution"
         }
-      ]
+      ],
+      "initial_memory": {
+        "phase": null,
+        "plan": null,
+        "move_idx": null,
+        "retries": null,
+        "arm": null,
+        "grip_yaw": null,
+        "grip_tilt": null,
+        "src_xy": null,
+        "decisions": null,
+        "press_tries": null,
+        "notes": null
+      },
+      "first_execution_source_frame": 0,
+      "initial_pause_output_frames": 56,
+      "recorded_action_outcomes": 6
     },
     {
       "benchmark": "rmbench",
@@ -816,20 +2735,79 @@
       ],
       "trail_history_frames": 160,
       "preview": "rmbench-cover-blocks.mp4",
-      "preview_sha256": "3a7000e43e94aa5f4fb6fafc9aff6f92257427176f045aedf03d7accf8fe02ad",
+      "preview_sha256": "8945e0edc62817614c7e702a99d872f070034a8ca50c2f89c20f9308cc53f6eb",
       "preview_dimensions": [
         1080,
-        554
+        650
       ],
       "preview_format": "video/mp4",
       "poster": "rmbench-cover-blocks.jpg",
-      "poster_sha256": "9b6aae739066e86dcba215f405dce875b54a94634b56fb887c9b7ade6b883503",
-      "poster_output_frame": 62,
+      "poster_sha256": "52555523cd905a87d6ee821963c43b8c12fb16045614adc5f45f42e187cf845c",
+      "poster_output_frame": 121,
       "preview_fps": 10,
       "nominal_playback_multiplier": 0.5,
-      "preview_duration_seconds": 9.8,
+      "preview_duration_seconds": 15.7,
       "source_frames": 63,
       "sampled_source_frames": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
         0,
         0,
         1,
@@ -933,7 +2911,321 @@
         {
           "output_frame": 0,
           "source_frame": 0,
+          "decision_index": 0,
+          "fields": {
+            "colors": null,
+            "phase": null,
+            "index": null,
+            "pending": null
+          },
+          "perceived_position": {
+            "block_pos[slot] (x, y, z)": null
+          },
+          "highlighted_fields": [],
+          "stage": "initial",
+          "visible_lines": null,
+          "function_output": {
+            "label": "BEFORE THE FIRST DECISION",
+            "lines": [
+              "perceive_decide(...)",
+              "Memory is not updated yet"
+            ],
+            "source": "decision[0].memory_in"
+          },
           "source_label": "E0",
+          "phase": "execution"
+        },
+        {
+          "output_frame": 15,
+          "source_frame": 0,
+          "decision_index": 0,
+          "fields": {
+            "colors": [
+              "green",
+              "red",
+              "blue"
+            ],
+            "phase": "cover",
+            "index": 0,
+            "pending": "cover:0"
+          },
+          "perceived_position": {
+            "block_pos[slot] (x, y, z)": null
+          },
+          "highlighted_fields": [
+            "colors",
+            "index",
+            "pending",
+            "phase"
+          ],
+          "stage": "reveal",
+          "visible_lines": 1,
+          "function_output": {
+            "label": "RECORDED RETURN \u00b7 LINE BY LINE",
+            "lines": [
+              "perceive_decide(...)",
+              "\u2192 memory_written"
+            ],
+            "source": "memory_written"
+          },
+          "source_label": "E0",
+          "phase": "execution"
+        },
+        {
+          "output_frame": 18,
+          "source_frame": 0,
+          "decision_index": 0,
+          "fields": {
+            "colors": [
+              "green",
+              "red",
+              "blue"
+            ],
+            "phase": "cover",
+            "index": 0,
+            "pending": "cover:0"
+          },
+          "perceived_position": {
+            "block_pos[slot] (x, y, z)": null
+          },
+          "highlighted_fields": [
+            "colors",
+            "index",
+            "pending",
+            "phase"
+          ],
+          "stage": "reveal",
+          "visible_lines": 2,
+          "function_output": {
+            "label": "RECORDED RETURN \u00b7 LINE BY LINE",
+            "lines": [
+              "perceive_decide(...)",
+              "\u2192 memory_written"
+            ],
+            "source": "memory_written"
+          },
+          "source_label": "E0",
+          "phase": "execution"
+        },
+        {
+          "output_frame": 21,
+          "source_frame": 0,
+          "decision_index": 0,
+          "fields": {
+            "colors": [
+              "green",
+              "red",
+              "blue"
+            ],
+            "phase": "cover",
+            "index": 0,
+            "pending": "cover:0"
+          },
+          "perceived_position": {
+            "block_pos[slot] (x, y, z)": null
+          },
+          "highlighted_fields": [
+            "colors",
+            "index",
+            "pending",
+            "phase"
+          ],
+          "stage": "reveal",
+          "visible_lines": 3,
+          "function_output": {
+            "label": "RECORDED RETURN \u00b7 LINE BY LINE",
+            "lines": [
+              "perceive_decide(...)",
+              "\u2192 memory_written"
+            ],
+            "source": "memory_written"
+          },
+          "source_label": "E0",
+          "phase": "execution"
+        },
+        {
+          "output_frame": 24,
+          "source_frame": 0,
+          "decision_index": 0,
+          "fields": {
+            "colors": [
+              "green",
+              "red",
+              "blue"
+            ],
+            "phase": "cover",
+            "index": 0,
+            "pending": "cover:0"
+          },
+          "perceived_position": {
+            "block_pos[slot] (x, y, z)": null
+          },
+          "highlighted_fields": [
+            "colors",
+            "index",
+            "pending",
+            "phase"
+          ],
+          "stage": "reveal",
+          "visible_lines": 4,
+          "function_output": {
+            "label": "RECORDED RETURN \u00b7 LINE BY LINE",
+            "lines": [
+              "perceive_decide(...)",
+              "\u2192 memory_written"
+            ],
+            "source": "memory_written"
+          },
+          "source_label": "E0",
+          "phase": "execution"
+        },
+        {
+          "output_frame": 27,
+          "source_frame": 0,
+          "decision_index": 0,
+          "fields": {
+            "colors": [
+              "green",
+              "red",
+              "blue"
+            ],
+            "phase": "cover",
+            "index": 0,
+            "pending": "cover:0"
+          },
+          "perceived_position": {
+            "block_pos[slot] (x, y, z)": null
+          },
+          "highlighted_fields": [
+            "colors",
+            "index",
+            "pending",
+            "phase"
+          ],
+          "stage": "reveal",
+          "visible_lines": 5,
+          "function_output": {
+            "label": "RECORDED RETURN \u00b7 LINE BY LINE",
+            "lines": [
+              "perceive_decide(...)",
+              "\u2192 memory_written"
+            ],
+            "source": "memory_written"
+          },
+          "source_label": "E0",
+          "phase": "execution"
+        },
+        {
+          "output_frame": 30,
+          "source_frame": 0,
+          "decision_index": 0,
+          "fields": {
+            "colors": [
+              "green",
+              "red",
+              "blue"
+            ],
+            "phase": "cover",
+            "index": 0,
+            "pending": "cover:0"
+          },
+          "perceived_position": {
+            "block_pos[slot] (x, y, z)": null
+          },
+          "highlighted_fields": [
+            "colors",
+            "index",
+            "pending",
+            "phase"
+          ],
+          "stage": "reveal",
+          "visible_lines": 6,
+          "function_output": {
+            "label": "RECORDED RETURN \u00b7 LINE BY LINE",
+            "lines": [
+              "perceive_decide(...)",
+              "\u2192 memory_written"
+            ],
+            "source": "memory_written"
+          },
+          "source_label": "E0",
+          "phase": "execution"
+        },
+        {
+          "output_frame": 33,
+          "source_frame": 0,
+          "decision_index": 0,
+          "fields": {
+            "colors": [
+              "green",
+              "red",
+              "blue"
+            ],
+            "phase": "cover",
+            "index": 0,
+            "pending": "cover:0"
+          },
+          "perceived_position": {
+            "block_pos[slot] (x, y, z)": null
+          },
+          "highlighted_fields": [
+            "colors",
+            "index",
+            "pending",
+            "phase"
+          ],
+          "stage": "reveal",
+          "visible_lines": 7,
+          "function_output": {
+            "label": "RECORDED RETURN \u00b7 LINE BY LINE",
+            "lines": [
+              "perceive_decide(...)",
+              "\u2192 memory_written"
+            ],
+            "source": "memory_written"
+          },
+          "source_label": "E0",
+          "phase": "execution"
+        },
+        {
+          "output_frame": 36,
+          "source_frame": 0,
+          "decision_index": 0,
+          "fields": {
+            "colors": [
+              "green",
+              "red",
+              "blue"
+            ],
+            "phase": "cover",
+            "index": 0,
+            "pending": "cover:0"
+          },
+          "perceived_position": {
+            "block_pos[slot] (x, y, z)": null
+          },
+          "highlighted_fields": [
+            "colors",
+            "index",
+            "pending",
+            "phase"
+          ],
+          "stage": "reveal",
+          "visible_lines": 8,
+          "function_output": {
+            "label": "RECORDED RETURN \u00b7 LINE BY LINE",
+            "lines": [
+              "perceive_decide(...)",
+              "\u2192 memory_written"
+            ],
+            "source": "memory_written"
+          },
+          "source_label": "E0",
+          "phase": "execution"
+        },
+        {
+          "output_frame": 39,
+          "source_frame": 0,
           "decision_index": 0,
           "fields": {
             "colors": [
@@ -952,18 +3244,159 @@
               0.781079963256
             ]
           },
-          "phase": "execution",
           "highlighted_fields": [
             "colors",
             "index",
             "pending",
             "phase"
-          ]
+          ],
+          "stage": "reveal",
+          "visible_lines": null,
+          "function_output": {
+            "label": "RECORDED RETURN \u00b7 LINE BY LINE",
+            "lines": [
+              "perceive_decide(...)",
+              "\u2192 memory_written"
+            ],
+            "source": "memory_written"
+          },
+          "source_label": "E0",
+          "phase": "execution"
         },
         {
-          "output_frame": 14,
+          "output_frame": 47,
+          "source_frame": 0,
+          "decision_index": 0,
+          "fields": {
+            "colors": [
+              "green",
+              "red",
+              "blue"
+            ],
+            "phase": "cover",
+            "index": 0,
+            "pending": "cover:0"
+          },
+          "perceived_position": {
+            "block_pos[slot] (x, y, z)": [
+              -0.201269691831,
+              -0.179805918643,
+              0.781079963256
+            ]
+          },
+          "highlighted_fields": [],
+          "stage": "ready",
+          "visible_lines": null,
+          "function_output": {
+            "label": "perceive_decide() \u2192 action",
+            "lines": [
+              "act_move_lid(...)",
+              "place = [-0.20, -0.18, 0.98]"
+            ],
+            "source": "act",
+            "selected_values": {
+              "place": [
+                -0.20126969183089394,
+                -0.17980591864331974,
+                0.9825501173266106
+              ]
+            }
+          },
+          "source_label": "E0",
+          "phase": "execution"
+        },
+        {
+          "output_frame": 59,
+          "source_frame": 0,
+          "decision_index": 0,
+          "fields": {
+            "colors": [
+              "green",
+              "red",
+              "blue"
+            ],
+            "phase": "cover",
+            "index": 0,
+            "pending": "cover:0"
+          },
+          "perceived_position": {
+            "block_pos[slot] (x, y, z)": [
+              -0.201269691831,
+              -0.179805918643,
+              0.781079963256
+            ]
+          },
+          "highlighted_fields": [
+            "colors",
+            "index",
+            "pending",
+            "phase"
+          ],
+          "stage": "execute",
+          "visible_lines": null,
+          "function_output": {
+            "label": "perceive_decide() \u2192 action",
+            "lines": [
+              "act_move_lid(...)",
+              "place = [-0.20, -0.18, 0.98]"
+            ],
+            "source": "act",
+            "selected_values": {
+              "place": [
+                -0.20126969183089394,
+                -0.17980591864331974,
+                0.9825501173266106
+              ]
+            }
+          },
+          "source_label": "E0",
+          "phase": "execution"
+        },
+        {
+          "output_frame": 69,
+          "source_frame": 7,
+          "decision_index": 0,
+          "fields": {
+            "colors": [
+              "green",
+              "red",
+              "blue"
+            ],
+            "phase": "cover",
+            "index": 0,
+            "pending": "cover:0"
+          },
+          "perceived_position": {
+            "block_pos[slot] (x, y, z)": [
+              -0.201269691831,
+              -0.179805918643,
+              0.781079963256
+            ]
+          },
+          "highlighted_fields": [],
+          "stage": "execute",
+          "visible_lines": null,
+          "function_output": {
+            "label": "perceive_decide() \u2192 action",
+            "lines": [
+              "act_move_lid(...)",
+              "place = [-0.20, -0.18, 0.98]"
+            ],
+            "source": "act",
+            "selected_values": {
+              "place": [
+                -0.20126969183089394,
+                -0.17980591864331974,
+                0.9825501173266106
+              ]
+            }
+          },
+          "source_label": "E7",
+          "phase": "execution"
+        },
+        {
+          "output_frame": 73,
           "source_frame": 11,
-          "source_label": "E11",
           "decision_index": 1,
           "fields": {
             "colors": [
@@ -982,16 +3415,72 @@
               0.781079963256
             ]
           },
-          "phase": "execution",
           "highlighted_fields": [
             "index",
             "pending"
-          ]
+          ],
+          "stage": "execute",
+          "visible_lines": null,
+          "function_output": {
+            "label": "act_move_lid() \u2192 result",
+            "lines": [
+              "left_gripper = 1.00",
+              "right_gripper = 1.00"
+            ],
+            "source": "preceding_action_outcome",
+            "selected_values": {
+              "left_gripper": 1.0,
+              "right_gripper": 1.0
+            }
+          },
+          "source_label": "E11",
+          "phase": "execution"
         },
         {
-          "output_frame": 28,
+          "output_frame": 83,
+          "source_frame": 18,
+          "decision_index": 1,
+          "fields": {
+            "colors": [
+              "green",
+              "red",
+              "blue"
+            ],
+            "phase": "cover",
+            "index": 1,
+            "pending": "cover:1"
+          },
+          "perceived_position": {
+            "block_pos[slot] (x, y, z)": [
+              -0.001254785772,
+              -0.179805918643,
+              0.781079963256
+            ]
+          },
+          "highlighted_fields": [],
+          "stage": "execute",
+          "visible_lines": null,
+          "function_output": {
+            "label": "perceive_decide() \u2192 action",
+            "lines": [
+              "act_move_lid(...)",
+              "place = [0.00, -0.18, 0.98]"
+            ],
+            "source": "act",
+            "selected_values": {
+              "place": [
+                -0.001254785772,
+                -0.179805918643,
+                0.9825501173266106
+              ]
+            }
+          },
+          "source_label": "E18",
+          "phase": "execution"
+        },
+        {
+          "output_frame": 87,
           "source_frame": 22,
-          "source_label": "E22",
           "decision_index": 2,
           "fields": {
             "colors": [
@@ -1010,16 +3499,72 @@
               0.781079963256
             ]
           },
-          "phase": "execution",
           "highlighted_fields": [
             "index",
             "pending"
-          ]
+          ],
+          "stage": "execute",
+          "visible_lines": null,
+          "function_output": {
+            "label": "act_move_lid() \u2192 result",
+            "lines": [
+              "left_gripper = 1.00",
+              "right_gripper = 1.00"
+            ],
+            "source": "preceding_action_outcome",
+            "selected_values": {
+              "left_gripper": 1.0,
+              "right_gripper": 1.0
+            }
+          },
+          "source_label": "E22",
+          "phase": "execution"
         },
         {
-          "output_frame": 42,
+          "output_frame": 97,
+          "source_frame": 29,
+          "decision_index": 2,
+          "fields": {
+            "colors": [
+              "green",
+              "red",
+              "blue"
+            ],
+            "phase": "cover",
+            "index": 2,
+            "pending": "cover:2"
+          },
+          "perceived_position": {
+            "block_pos[slot] (x, y, z)": [
+              0.197621552377,
+              -0.179805918643,
+              0.781079963256
+            ]
+          },
+          "highlighted_fields": [],
+          "stage": "execute",
+          "visible_lines": null,
+          "function_output": {
+            "label": "perceive_decide() \u2192 action",
+            "lines": [
+              "act_move_lid(...)",
+              "place = [0.20, -0.18, 0.98]"
+            ],
+            "source": "act",
+            "selected_values": {
+              "place": [
+                0.197621552377,
+                -0.179805918643,
+                0.9825501173266106
+              ]
+            }
+          },
+          "source_label": "E29",
+          "phase": "execution"
+        },
+        {
+          "output_frame": 101,
           "source_frame": 33,
-          "source_label": "E33",
           "decision_index": 3,
           "fields": {
             "uncover_order": [
@@ -1038,18 +3583,74 @@
               0.781079963256
             ]
           },
-          "phase": "execution",
           "highlighted_fields": [
             "index",
             "pending",
             "phase",
             "uncover_order"
-          ]
+          ],
+          "stage": "execute",
+          "visible_lines": null,
+          "function_output": {
+            "label": "act_move_lid() \u2192 result",
+            "lines": [
+              "left_gripper = 1.00",
+              "right_gripper = 1.00"
+            ],
+            "source": "preceding_action_outcome",
+            "selected_values": {
+              "left_gripper": 1.0,
+              "right_gripper": 1.0
+            }
+          },
+          "source_label": "E33",
+          "phase": "execution"
         },
         {
-          "output_frame": 56,
+          "output_frame": 111,
+          "source_frame": 39,
+          "decision_index": 3,
+          "fields": {
+            "uncover_order": [
+              "red",
+              "green",
+              "blue"
+            ],
+            "phase": "uncover",
+            "index": 0,
+            "pending": "uncover:1"
+          },
+          "perceived_position": {
+            "block_pos[slot] (x, y, z)": [
+              -0.001254785772,
+              -0.179805918643,
+              0.781079963256
+            ]
+          },
+          "highlighted_fields": [],
+          "stage": "execute",
+          "visible_lines": null,
+          "function_output": {
+            "label": "perceive_decide() \u2192 action",
+            "lines": [
+              "act_move_lid(...)",
+              "place = [0.00, -0.05, 0.98]"
+            ],
+            "source": "act",
+            "selected_values": {
+              "place": [
+                -0.002327293428,
+                -0.049444462191,
+                0.9825686040689208
+              ]
+            }
+          },
+          "source_label": "E39",
+          "phase": "execution"
+        },
+        {
+          "output_frame": 115,
           "source_frame": 43,
-          "source_label": "E43",
           "decision_index": 4,
           "fields": {
             "uncover_order": [
@@ -1068,16 +3669,70 @@
               0.781079963256
             ]
           },
-          "phase": "execution",
           "highlighted_fields": [
             "index",
             "pending"
-          ]
+          ],
+          "stage": "execute",
+          "visible_lines": null,
+          "function_output": {
+            "label": "act_move_lid() \u2192 result",
+            "lines": [
+              "error = \"retreat: No motion plan r\u2026"
+            ],
+            "source": "preceding_action_outcome",
+            "selected_values": {
+              "error": "retreat: No motion plan reached the left arm target; that arm held still for 50 simulator steps (one counted action)."
+            }
+          },
+          "source_label": "E43",
+          "phase": "execution"
         },
         {
-          "output_frame": 70,
+          "output_frame": 125,
+          "source_frame": 50,
+          "decision_index": 4,
+          "fields": {
+            "uncover_order": [
+              "red",
+              "green",
+              "blue"
+            ],
+            "phase": "uncover",
+            "index": 1,
+            "pending": "uncover:0"
+          },
+          "perceived_position": {
+            "block_pos[slot] (x, y, z)": [
+              -0.201269691831,
+              -0.179805918643,
+              0.781079963256
+            ]
+          },
+          "highlighted_fields": [],
+          "stage": "execute",
+          "visible_lines": null,
+          "function_output": {
+            "label": "perceive_decide() \u2192 action",
+            "lines": [
+              "act_move_lid(...)",
+              "place = [-0.20, -0.05, 0.98]"
+            ],
+            "source": "act",
+            "selected_values": {
+              "place": [
+                -0.20223728026,
+                -0.049444462191,
+                0.9825686040689208
+              ]
+            }
+          },
+          "source_label": "E50",
+          "phase": "execution"
+        },
+        {
+          "output_frame": 129,
           "source_frame": 54,
-          "source_label": "E54",
           "decision_index": 5,
           "fields": {
             "uncover_order": [
@@ -1096,13 +3751,122 @@
               0.781079963256
             ]
           },
-          "phase": "execution",
           "highlighted_fields": [
             "index",
             "pending"
-          ]
+          ],
+          "stage": "execute",
+          "visible_lines": null,
+          "function_output": {
+            "label": "act_move_lid() \u2192 result",
+            "lines": [
+              "left_gripper = 1.00",
+              "right_gripper = 1.00"
+            ],
+            "source": "preceding_action_outcome",
+            "selected_values": {
+              "left_gripper": 1.0,
+              "right_gripper": 1.0
+            }
+          },
+          "source_label": "E54",
+          "phase": "execution"
+        },
+        {
+          "output_frame": 139,
+          "source_frame": 60,
+          "decision_index": 5,
+          "fields": {
+            "uncover_order": [
+              "red",
+              "green",
+              "blue"
+            ],
+            "phase": "uncover",
+            "index": 2,
+            "pending": "uncover:2"
+          },
+          "perceived_position": {
+            "block_pos[slot] (x, y, z)": [
+              0.197621552377,
+              -0.179805918643,
+              0.781079963256
+            ]
+          },
+          "highlighted_fields": [],
+          "stage": "execute",
+          "visible_lines": null,
+          "function_output": {
+            "label": "perceive_decide() \u2192 action",
+            "lines": [
+              "act_move_lid(...)",
+              "place = [0.20, -0.05, 0.98]"
+            ],
+            "source": "act",
+            "selected_values": {
+              "place": [
+                0.19751663315,
+                -0.049444462191,
+                0.9825686040689208
+              ]
+            }
+          },
+          "source_label": "E60",
+          "phase": "execution"
+        },
+        {
+          "output_frame": 143,
+          "source_frame": 62,
+          "decision_index": 5,
+          "fields": {
+            "uncover_order": [
+              "red",
+              "green",
+              "blue"
+            ],
+            "phase": "uncover",
+            "index": 2,
+            "pending": "uncover:2"
+          },
+          "perceived_position": {
+            "block_pos[slot] (x, y, z)": [
+              0.197621552377,
+              -0.179805918643,
+              0.781079963256
+            ]
+          },
+          "highlighted_fields": [],
+          "stage": "complete",
+          "visible_lines": null,
+          "function_output": {
+            "label": "RECORDED EPISODE RESULT",
+            "lines": [
+              "success = True"
+            ],
+            "source": "result.json.success",
+            "selected_values": {
+              "success": true
+            }
+          },
+          "source_label": "E62",
+          "phase": "execution"
         }
-      ]
+      ],
+      "initial_memory": {
+        "phase": null,
+        "colors": null,
+        "block_pos": null,
+        "lid_home": null,
+        "uncover_order": null,
+        "index": null,
+        "tries": null,
+        "pending": null,
+        "home_poses": null,
+        "log": null
+      },
+      "first_execution_source_frame": 0,
+      "initial_pause_output_frames": 59,
+      "recorded_action_outcomes": 5
     },
     {
       "benchmark": "mikasa_robo",
@@ -1135,20 +3899,64 @@
       ],
       "trail_history_frames": 160,
       "preview": "mikasa-batteries.mp4",
-      "preview_sha256": "67ca73debc5b08f0c3692e96145cb7d9b804f2bd0f96ce30bd6a00022e6edf05",
+      "preview_sha256": "09c704e9d1d01b52e1a07037ddc4dc0a3ebe2e00dc04b5954f8f814a36ece5e8",
       "preview_dimensions": [
         1080,
-        554
+        650
       ],
       "preview_format": "video/mp4",
       "poster": "mikasa-batteries.jpg",
-      "poster_sha256": "2931739eb1b8c16084d930e1b3e9d52f41722919f314b3f16dc031b8d50d4781",
-      "poster_output_frame": 90,
+      "poster_sha256": "51c62bab918709e237eb6bc69267710de46a3ae21c5979c0c3d42c47603c9d69",
+      "poster_output_frame": 134,
       "preview_fps": 10,
       "nominal_playback_multiplier": 1.25,
-      "preview_duration_seconds": 14.0,
+      "preview_duration_seconds": 18.4,
       "source_frames": 251,
       "sampled_source_frames": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
         0,
         2,
         4,
@@ -1294,7 +4102,134 @@
         {
           "output_frame": 0,
           "source_frame": 0,
+          "decision_index": 0,
+          "fields": {
+            "results": null,
+            "queue": null,
+            "stage": null
+          },
+          "perceived_position": {
+            "batteries[queue[0]] (x, y, z)": null
+          },
+          "highlighted_fields": [],
+          "stage": "initial",
+          "visible_lines": null,
+          "function_output": {
+            "label": "BEFORE THE FIRST DECISION",
+            "lines": [
+              "perceive_decide(...)",
+              "Memory is not updated yet"
+            ],
+            "source": "decision[0].memory_in"
+          },
           "source_label": "E0",
+          "phase": "execution"
+        },
+        {
+          "output_frame": 15,
+          "source_frame": 0,
+          "decision_index": 0,
+          "fields": {
+            "results": [],
+            "queue": [
+              "0",
+              "1",
+              "2"
+            ],
+            "stage": "pick"
+          },
+          "perceived_position": {
+            "batteries[queue[0]] (x, y, z)": null
+          },
+          "highlighted_fields": [
+            "queue",
+            "results",
+            "stage"
+          ],
+          "stage": "reveal",
+          "visible_lines": 1,
+          "function_output": {
+            "label": "RECORDED RETURN \u00b7 LINE BY LINE",
+            "lines": [
+              "perceive_decide(...)",
+              "\u2192 memory_written"
+            ],
+            "source": "memory_written"
+          },
+          "source_label": "E0",
+          "phase": "execution"
+        },
+        {
+          "output_frame": 18,
+          "source_frame": 0,
+          "decision_index": 0,
+          "fields": {
+            "results": [],
+            "queue": [
+              "0",
+              "1",
+              "2"
+            ],
+            "stage": "pick"
+          },
+          "perceived_position": {
+            "batteries[queue[0]] (x, y, z)": null
+          },
+          "highlighted_fields": [
+            "queue",
+            "results",
+            "stage"
+          ],
+          "stage": "reveal",
+          "visible_lines": 2,
+          "function_output": {
+            "label": "RECORDED RETURN \u00b7 LINE BY LINE",
+            "lines": [
+              "perceive_decide(...)",
+              "\u2192 memory_written"
+            ],
+            "source": "memory_written"
+          },
+          "source_label": "E0",
+          "phase": "execution"
+        },
+        {
+          "output_frame": 21,
+          "source_frame": 0,
+          "decision_index": 0,
+          "fields": {
+            "results": [],
+            "queue": [
+              "0",
+              "1",
+              "2"
+            ],
+            "stage": "pick"
+          },
+          "perceived_position": {
+            "batteries[queue[0]] (x, y, z)": null
+          },
+          "highlighted_fields": [
+            "queue",
+            "results",
+            "stage"
+          ],
+          "stage": "reveal",
+          "visible_lines": 3,
+          "function_output": {
+            "label": "RECORDED RETURN \u00b7 LINE BY LINE",
+            "lines": [
+              "perceive_decide(...)",
+              "\u2192 memory_written"
+            ],
+            "source": "memory_written"
+          },
+          "source_label": "E0",
+          "phase": "execution"
+        },
+        {
+          "output_frame": 24,
+          "source_frame": 0,
           "decision_index": 0,
           "fields": {
             "results": [],
@@ -1312,17 +4247,145 @@
               0.04
             ]
           },
-          "phase": "execution",
           "highlighted_fields": [
             "queue",
             "results",
             "stage"
-          ]
+          ],
+          "stage": "reveal",
+          "visible_lines": null,
+          "function_output": {
+            "label": "RECORDED RETURN \u00b7 LINE BY LINE",
+            "lines": [
+              "perceive_decide(...)",
+              "\u2192 memory_written"
+            ],
+            "source": "memory_written"
+          },
+          "source_label": "E0",
+          "phase": "execution"
         },
         {
-          "output_frame": 14,
+          "output_frame": 32,
+          "source_frame": 0,
+          "decision_index": 0,
+          "fields": {
+            "results": [],
+            "queue": [
+              "0",
+              "1",
+              "2"
+            ],
+            "stage": "pick"
+          },
+          "perceived_position": {
+            "batteries[queue[0]] (x, y, z)": [
+              -0.014716560397,
+              -0.146718546196,
+              0.04
+            ]
+          },
+          "highlighted_fields": [],
+          "stage": "ready",
+          "visible_lines": null,
+          "function_output": {
+            "label": "perceive_decide() \u2192 action",
+            "lines": [
+              "act_pick(...)",
+              "x=-0.01, y=-0.15"
+            ],
+            "source": "act",
+            "selected_values": {
+              "x": -0.014716560396622867,
+              "y": -0.14671854619565214
+            }
+          },
+          "source_label": "E0",
+          "phase": "execution"
+        },
+        {
+          "output_frame": 44,
+          "source_frame": 0,
+          "decision_index": 0,
+          "fields": {
+            "results": [],
+            "queue": [
+              "0",
+              "1",
+              "2"
+            ],
+            "stage": "pick"
+          },
+          "perceived_position": {
+            "batteries[queue[0]] (x, y, z)": [
+              -0.014716560397,
+              -0.146718546196,
+              0.04
+            ]
+          },
+          "highlighted_fields": [
+            "queue",
+            "results",
+            "stage"
+          ],
+          "stage": "execute",
+          "visible_lines": null,
+          "function_output": {
+            "label": "perceive_decide() \u2192 action",
+            "lines": [
+              "act_pick(...)",
+              "x=-0.01, y=-0.15"
+            ],
+            "source": "act",
+            "selected_values": {
+              "x": -0.014716560396622867,
+              "y": -0.14671854619565214
+            }
+          },
+          "source_label": "E0",
+          "phase": "execution"
+        },
+        {
+          "output_frame": 54,
+          "source_frame": 21,
+          "decision_index": 0,
+          "fields": {
+            "results": [],
+            "queue": [
+              "0",
+              "1",
+              "2"
+            ],
+            "stage": "pick"
+          },
+          "perceived_position": {
+            "batteries[queue[0]] (x, y, z)": [
+              -0.014716560397,
+              -0.146718546196,
+              0.04
+            ]
+          },
+          "highlighted_fields": [],
+          "stage": "execute",
+          "visible_lines": null,
+          "function_output": {
+            "label": "perceive_decide() \u2192 action",
+            "lines": [
+              "act_pick(...)",
+              "x=-0.01, y=-0.15"
+            ],
+            "source": "act",
+            "selected_values": {
+              "x": -0.014716560396622867,
+              "y": -0.14671854619565214
+            }
+          },
+          "source_label": "E21",
+          "phase": "execution"
+        },
+        {
+          "output_frame": 58,
           "source_frame": 29,
-          "source_label": "E29",
           "decision_index": 1,
           "fields": {
             "results": [],
@@ -1340,15 +4403,65 @@
               0.04
             ]
           },
-          "phase": "execution",
           "highlighted_fields": [
             "stage"
-          ]
+          ],
+          "stage": "execute",
+          "visible_lines": null,
+          "function_output": {
+            "label": "act_pick() \u2192 result",
+            "lines": [
+              "grasped = True"
+            ],
+            "source": "preceding_action_outcome",
+            "selected_values": {
+              "grasped": true
+            }
+          },
+          "source_label": "E29",
+          "phase": "execution"
         },
         {
-          "output_frame": 28,
+          "output_frame": 68,
+          "source_frame": 51,
+          "decision_index": 1,
+          "fields": {
+            "results": [],
+            "queue": [
+              "0",
+              "1",
+              "2"
+            ],
+            "stage": "insert"
+          },
+          "perceived_position": {
+            "batteries[queue[0]] (x, y, z)": [
+              -0.014716560397,
+              -0.146718546196,
+              0.04
+            ]
+          },
+          "highlighted_fields": [],
+          "stage": "execute",
+          "visible_lines": null,
+          "function_output": {
+            "label": "perceive_decide() \u2192 action",
+            "lines": [
+              "act_insert(...)",
+              "x=0.14, y=-0.04"
+            ],
+            "source": "act",
+            "selected_values": {
+              "x": 0.136026141001,
+              "y": -0.043100145133
+            }
+          },
+          "source_label": "E51",
+          "phase": "execution"
+        },
+        {
+          "output_frame": 72,
           "source_frame": 59,
-          "source_label": "E59",
           "decision_index": 2,
           "fields": {
             "results": [
@@ -1368,16 +4481,68 @@
               0.04
             ]
           },
-          "phase": "execution",
           "highlighted_fields": [
             "results",
             "stage"
-          ]
+          ],
+          "stage": "execute",
+          "visible_lines": null,
+          "function_output": {
+            "label": "act_insert() \u2192 result",
+            "lines": [
+              "lamp_lit = False"
+            ],
+            "source": "preceding_action_outcome",
+            "selected_values": {
+              "lamp_lit": false
+            }
+          },
+          "source_label": "E59",
+          "phase": "execution"
         },
         {
-          "output_frame": 42,
+          "output_frame": 82,
+          "source_frame": 76,
+          "decision_index": 2,
+          "fields": {
+            "results": [
+              "b0:dark"
+            ],
+            "queue": [
+              "0",
+              "1",
+              "2"
+            ],
+            "stage": "press"
+          },
+          "perceived_position": {
+            "batteries[queue[0]] (x, y, z)": [
+              -0.014716560397,
+              -0.146718546196,
+              0.04
+            ]
+          },
+          "highlighted_fields": [],
+          "stage": "execute",
+          "visible_lines": null,
+          "function_output": {
+            "label": "perceive_decide() \u2192 action",
+            "lines": [
+              "act_press(...)",
+              "x=-0.06, y=0.19"
+            ],
+            "source": "act",
+            "selected_values": {
+              "x": -0.059873858999,
+              "y": 0.191699854867
+            }
+          },
+          "source_label": "E76",
+          "phase": "execution"
+        },
+        {
+          "output_frame": 86,
           "source_frame": 83,
-          "source_label": "E83",
           "decision_index": 3,
           "fields": {
             "results": [
@@ -1396,16 +4561,67 @@
               0.04
             ]
           },
-          "phase": "execution",
           "highlighted_fields": [
             "queue",
             "stage"
-          ]
+          ],
+          "stage": "execute",
+          "visible_lines": null,
+          "function_output": {
+            "label": "act_press() \u2192 result",
+            "lines": [
+              "pressed_to_z = 0.05"
+            ],
+            "source": "preceding_action_outcome",
+            "selected_values": {
+              "pressed_to_z": 0.0538
+            }
+          },
+          "source_label": "E83",
+          "phase": "execution"
         },
         {
-          "output_frame": 56,
+          "output_frame": 96,
+          "source_frame": 107,
+          "decision_index": 3,
+          "fields": {
+            "results": [
+              "b0:dark"
+            ],
+            "queue": [
+              "1",
+              "2"
+            ],
+            "stage": "pick"
+          },
+          "perceived_position": {
+            "batteries[queue[0]] (x, y, z)": [
+              -0.065226724482,
+              -0.146757670455,
+              0.04
+            ]
+          },
+          "highlighted_fields": [],
+          "stage": "execute",
+          "visible_lines": null,
+          "function_output": {
+            "label": "perceive_decide() \u2192 action",
+            "lines": [
+              "act_pick(...)",
+              "x=-0.07, y=-0.15"
+            ],
+            "source": "act",
+            "selected_values": {
+              "x": -0.065226724482,
+              "y": -0.146757670455
+            }
+          },
+          "source_label": "E107",
+          "phase": "execution"
+        },
+        {
+          "output_frame": 100,
           "source_frame": 116,
-          "source_label": "E116",
           "decision_index": 4,
           "fields": {
             "results": [
@@ -1424,15 +4640,66 @@
               0.04
             ]
           },
-          "phase": "execution",
           "highlighted_fields": [
             "stage"
-          ]
+          ],
+          "stage": "execute",
+          "visible_lines": null,
+          "function_output": {
+            "label": "act_pick() \u2192 result",
+            "lines": [
+              "grasped = True"
+            ],
+            "source": "preceding_action_outcome",
+            "selected_values": {
+              "grasped": true
+            }
+          },
+          "source_label": "E116",
+          "phase": "execution"
         },
         {
-          "output_frame": 70,
+          "output_frame": 110,
+          "source_frame": 138,
+          "decision_index": 4,
+          "fields": {
+            "results": [
+              "b0:dark"
+            ],
+            "queue": [
+              "1",
+              "2"
+            ],
+            "stage": "insert"
+          },
+          "perceived_position": {
+            "batteries[queue[0]] (x, y, z)": [
+              -0.065226724482,
+              -0.146757670455,
+              0.04
+            ]
+          },
+          "highlighted_fields": [],
+          "stage": "execute",
+          "visible_lines": null,
+          "function_output": {
+            "label": "perceive_decide() \u2192 action",
+            "lines": [
+              "act_insert(...)",
+              "x=0.14, y=-0.04"
+            ],
+            "source": "act",
+            "selected_values": {
+              "x": 0.136026141001,
+              "y": -0.043100145133
+            }
+          },
+          "source_label": "E138",
+          "phase": "execution"
+        },
+        {
+          "output_frame": 114,
           "source_frame": 146,
-          "source_label": "E146",
           "decision_index": 5,
           "fields": {
             "results": [
@@ -1452,16 +4719,68 @@
               0.04
             ]
           },
-          "phase": "execution",
           "highlighted_fields": [
             "results",
             "stage"
-          ]
+          ],
+          "stage": "execute",
+          "visible_lines": null,
+          "function_output": {
+            "label": "act_insert() \u2192 result",
+            "lines": [
+              "lamp_lit = True"
+            ],
+            "source": "preceding_action_outcome",
+            "selected_values": {
+              "lamp_lit": true
+            }
+          },
+          "source_label": "E146",
+          "phase": "execution"
         },
         {
-          "output_frame": 84,
+          "output_frame": 124,
+          "source_frame": 163,
+          "decision_index": 5,
+          "fields": {
+            "results": [
+              "b0:dark",
+              "b1:lit"
+            ],
+            "queue": [
+              "1",
+              "2"
+            ],
+            "stage": "press"
+          },
+          "perceived_position": {
+            "batteries[queue[0]] (x, y, z)": [
+              -0.065226724482,
+              -0.146757670455,
+              0.04
+            ]
+          },
+          "highlighted_fields": [],
+          "stage": "execute",
+          "visible_lines": null,
+          "function_output": {
+            "label": "perceive_decide() \u2192 action",
+            "lines": [
+              "act_press(...)",
+              "x=-0.06, y=0.19"
+            ],
+            "source": "act",
+            "selected_values": {
+              "x": -0.059873858999,
+              "y": 0.191699854867
+            }
+          },
+          "source_label": "E163",
+          "phase": "execution"
+        },
+        {
+          "output_frame": 128,
           "source_frame": 170,
-          "source_label": "E170",
           "decision_index": 6,
           "fields": {
             "results": [
@@ -1480,16 +4799,67 @@
               0.04
             ]
           },
-          "phase": "execution",
           "highlighted_fields": [
             "queue",
             "stage"
-          ]
+          ],
+          "stage": "execute",
+          "visible_lines": null,
+          "function_output": {
+            "label": "act_press() \u2192 result",
+            "lines": [
+              "pressed_to_z = 0.05"
+            ],
+            "source": "preceding_action_outcome",
+            "selected_values": {
+              "pressed_to_z": 0.0539
+            }
+          },
+          "source_label": "E170",
+          "phase": "execution"
         },
         {
-          "output_frame": 98,
+          "output_frame": 138,
+          "source_frame": 193,
+          "decision_index": 6,
+          "fields": {
+            "results": [
+              "b0:dark",
+              "b1:lit"
+            ],
+            "queue": [
+              "2"
+            ],
+            "stage": "pick"
+          },
+          "perceived_position": {
+            "batteries[queue[0]] (x, y, z)": [
+              -0.11407829212,
+              -0.14692421875,
+              0.04
+            ]
+          },
+          "highlighted_fields": [],
+          "stage": "execute",
+          "visible_lines": null,
+          "function_output": {
+            "label": "perceive_decide() \u2192 action",
+            "lines": [
+              "act_pick(...)",
+              "x=-0.11, y=-0.15"
+            ],
+            "source": "act",
+            "selected_values": {
+              "x": -0.11407829212,
+              "y": -0.14692421875
+            }
+          },
+          "source_label": "E193",
+          "phase": "execution"
+        },
+        {
+          "output_frame": 142,
           "source_frame": 202,
-          "source_label": "E202",
           "decision_index": 7,
           "fields": {
             "results": [
@@ -1508,15 +4878,66 @@
               0.04
             ]
           },
-          "phase": "execution",
           "highlighted_fields": [
             "stage"
-          ]
+          ],
+          "stage": "execute",
+          "visible_lines": null,
+          "function_output": {
+            "label": "act_pick() \u2192 result",
+            "lines": [
+              "grasped = True"
+            ],
+            "source": "preceding_action_outcome",
+            "selected_values": {
+              "grasped": true
+            }
+          },
+          "source_label": "E202",
+          "phase": "execution"
         },
         {
-          "output_frame": 112,
+          "output_frame": 152,
+          "source_frame": 225,
+          "decision_index": 7,
+          "fields": {
+            "results": [
+              "b0:dark",
+              "b1:lit"
+            ],
+            "queue": [
+              "2"
+            ],
+            "stage": "insert"
+          },
+          "perceived_position": {
+            "batteries[queue[0]] (x, y, z)": [
+              -0.11407829212,
+              -0.14692421875,
+              0.04
+            ]
+          },
+          "highlighted_fields": [],
+          "stage": "execute",
+          "visible_lines": null,
+          "function_output": {
+            "label": "perceive_decide() \u2192 action",
+            "lines": [
+              "act_insert(...)",
+              "x=0.14, y=-0.04"
+            ],
+            "source": "act",
+            "selected_values": {
+              "x": 0.136026141001,
+              "y": -0.043100145133
+            }
+          },
+          "source_label": "E225",
+          "phase": "execution"
+        },
+        {
+          "output_frame": 156,
           "source_frame": 234,
-          "source_label": "E234",
           "decision_index": 8,
           "fields": {
             "results": [
@@ -1536,13 +4957,121 @@
               0.04
             ]
           },
-          "phase": "execution",
           "highlighted_fields": [
             "results",
             "stage"
-          ]
+          ],
+          "stage": "execute",
+          "visible_lines": null,
+          "function_output": {
+            "label": "act_insert() \u2192 result",
+            "lines": [
+              "lamp_lit = False"
+            ],
+            "source": "preceding_action_outcome",
+            "selected_values": {
+              "lamp_lit": false
+            }
+          },
+          "source_label": "E234",
+          "phase": "execution"
+        },
+        {
+          "output_frame": 166,
+          "source_frame": 246,
+          "decision_index": 8,
+          "fields": {
+            "results": [
+              "b0:dark",
+              "b1:lit",
+              "b2:dark"
+            ],
+            "queue": [
+              "2"
+            ],
+            "stage": "press"
+          },
+          "perceived_position": {
+            "batteries[queue[0]] (x, y, z)": [
+              -0.11407829212,
+              -0.14692421875,
+              0.04
+            ]
+          },
+          "highlighted_fields": [],
+          "stage": "execute",
+          "visible_lines": null,
+          "function_output": {
+            "label": "perceive_decide() \u2192 action",
+            "lines": [
+              "act_press(...)",
+              "x=-0.06, y=0.19"
+            ],
+            "source": "act",
+            "selected_values": {
+              "x": -0.059873858999,
+              "y": 0.191699854867
+            }
+          },
+          "source_label": "E246",
+          "phase": "execution"
+        },
+        {
+          "output_frame": 170,
+          "source_frame": 250,
+          "decision_index": 8,
+          "fields": {
+            "results": [
+              "b0:dark",
+              "b1:lit",
+              "b2:dark"
+            ],
+            "queue": [
+              "2"
+            ],
+            "stage": "press"
+          },
+          "perceived_position": {
+            "batteries[queue[0]] (x, y, z)": [
+              -0.11407829212,
+              -0.14692421875,
+              0.04
+            ]
+          },
+          "highlighted_fields": [],
+          "stage": "complete",
+          "visible_lines": null,
+          "function_output": {
+            "label": "RECORDED EPISODE RESULT",
+            "lines": [
+              "success = True"
+            ],
+            "source": "result.json.success",
+            "selected_values": {
+              "success": true
+            }
+          },
+          "source_label": "E250",
+          "phase": "execution"
         }
-      ]
+      ],
+      "initial_memory": {
+        "stage": null,
+        "idx": null,
+        "attempts": null,
+        "batteries": null,
+        "socket": null,
+        "button": null,
+        "lamp": null,
+        "hold_rpy": null,
+        "results": null,
+        "inserted": null,
+        "queue": null,
+        "notes": null
+      },
+      "first_execution_source_frame": 0,
+      "initial_pause_output_frames": 44,
+      "recorded_action_outcomes": 8
     },
     {
       "benchmark": "mikasa_robo",
@@ -1575,20 +5104,70 @@
       ],
       "trail_history_frames": 160,
       "preview": "mikasa-color-sequence.mp4",
-      "preview_sha256": "0938bc47113824ba88ed8692b0cdd32ee3965a3ebdfa94d3222730b9f904d262",
+      "preview_sha256": "c2aaeaae5cdb8550c402813e8ada5178407d9cd418f8860a96801d979ca64216",
       "preview_dimensions": [
         1080,
-        554
+        650
       ],
       "preview_format": "video/mp4",
       "poster": "mikasa-color-sequence.jpg",
-      "poster_sha256": "484b82b4c030c8c528120e3fa711579e1406972d6b7d65aba0bc533c4480a18d",
-      "poster_output_frame": 54,
+      "poster_sha256": "604bc23bcef31172c02f72432f2581cbccc351a0a2d4f6b8a206b641499c1524",
+      "poster_output_frame": 104,
       "preview_fps": 10,
       "nominal_playback_multiplier": 1,
-      "preview_duration_seconds": 9.7,
+      "preview_duration_seconds": 14.7,
       "source_frames": 144,
       "sampled_source_frames": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
         0,
         0,
         1,
@@ -1691,7 +5270,32 @@
         {
           "output_frame": 0,
           "source_frame": 0,
+          "decision_index": 0,
+          "fields": {
+            "cue_colors": null,
+            "touched": null,
+            "pending": null
+          },
+          "perceived_position": {
+            "button_xy (x, y)": null
+          },
+          "highlighted_fields": [],
+          "stage": "initial",
+          "visible_lines": null,
+          "function_output": {
+            "label": "BEFORE THE FIRST DECISION",
+            "lines": [
+              "perceive_decide(...)",
+              "Memory is not updated yet"
+            ],
+            "source": "decision[0].memory_in"
+          },
           "source_label": "E0",
+          "phase": "execution"
+        },
+        {
+          "output_frame": 15,
+          "source_frame": 0,
           "decision_index": 0,
           "fields": {
             "cue_colors": [
@@ -1703,17 +5307,284 @@
           "perceived_position": {
             "button_xy (x, y)": null
           },
-          "phase": "execution",
           "highlighted_fields": [
             "cue_colors",
             "pending",
             "touched"
-          ]
+          ],
+          "stage": "reveal",
+          "visible_lines": 1,
+          "function_output": {
+            "label": "RECORDED RETURN \u00b7 LINE BY LINE",
+            "lines": [
+              "perceive_decide(...)",
+              "\u2192 memory_written"
+            ],
+            "source": "memory_written"
+          },
+          "source_label": "E0",
+          "phase": "execution"
         },
         {
-          "output_frame": 14,
+          "output_frame": 18,
+          "source_frame": 0,
+          "decision_index": 0,
+          "fields": {
+            "cue_colors": [
+              "darkred"
+            ],
+            "touched": 0,
+            "pending": ""
+          },
+          "perceived_position": {
+            "button_xy (x, y)": null
+          },
+          "highlighted_fields": [
+            "cue_colors",
+            "pending",
+            "touched"
+          ],
+          "stage": "reveal",
+          "visible_lines": 2,
+          "function_output": {
+            "label": "RECORDED RETURN \u00b7 LINE BY LINE",
+            "lines": [
+              "perceive_decide(...)",
+              "\u2192 memory_written"
+            ],
+            "source": "memory_written"
+          },
+          "source_label": "E0",
+          "phase": "execution"
+        },
+        {
+          "output_frame": 21,
+          "source_frame": 0,
+          "decision_index": 0,
+          "fields": {
+            "cue_colors": [
+              "darkred"
+            ],
+            "touched": 0,
+            "pending": ""
+          },
+          "perceived_position": {
+            "button_xy (x, y)": null
+          },
+          "highlighted_fields": [
+            "cue_colors",
+            "pending",
+            "touched"
+          ],
+          "stage": "reveal",
+          "visible_lines": 3,
+          "function_output": {
+            "label": "RECORDED RETURN \u00b7 LINE BY LINE",
+            "lines": [
+              "perceive_decide(...)",
+              "\u2192 memory_written"
+            ],
+            "source": "memory_written"
+          },
+          "source_label": "E0",
+          "phase": "execution"
+        },
+        {
+          "output_frame": 24,
+          "source_frame": 0,
+          "decision_index": 0,
+          "fields": {
+            "cue_colors": [
+              "darkred"
+            ],
+            "touched": 0,
+            "pending": ""
+          },
+          "perceived_position": {
+            "button_xy (x, y)": null
+          },
+          "highlighted_fields": [
+            "cue_colors",
+            "pending",
+            "touched"
+          ],
+          "stage": "reveal",
+          "visible_lines": 4,
+          "function_output": {
+            "label": "RECORDED RETURN \u00b7 LINE BY LINE",
+            "lines": [
+              "perceive_decide(...)",
+              "\u2192 memory_written"
+            ],
+            "source": "memory_written"
+          },
+          "source_label": "E0",
+          "phase": "execution"
+        },
+        {
+          "output_frame": 27,
+          "source_frame": 0,
+          "decision_index": 0,
+          "fields": {
+            "cue_colors": [
+              "darkred"
+            ],
+            "touched": 0,
+            "pending": ""
+          },
+          "perceived_position": {
+            "button_xy (x, y)": null
+          },
+          "highlighted_fields": [
+            "cue_colors",
+            "pending",
+            "touched"
+          ],
+          "stage": "reveal",
+          "visible_lines": 5,
+          "function_output": {
+            "label": "RECORDED RETURN \u00b7 LINE BY LINE",
+            "lines": [
+              "perceive_decide(...)",
+              "\u2192 memory_written"
+            ],
+            "source": "memory_written"
+          },
+          "source_label": "E0",
+          "phase": "execution"
+        },
+        {
+          "output_frame": 30,
+          "source_frame": 0,
+          "decision_index": 0,
+          "fields": {
+            "cue_colors": [
+              "darkred"
+            ],
+            "touched": 0,
+            "pending": ""
+          },
+          "perceived_position": {
+            "button_xy (x, y)": null
+          },
+          "highlighted_fields": [
+            "cue_colors",
+            "pending",
+            "touched"
+          ],
+          "stage": "reveal",
+          "visible_lines": null,
+          "function_output": {
+            "label": "RECORDED RETURN \u00b7 LINE BY LINE",
+            "lines": [
+              "perceive_decide(...)",
+              "\u2192 memory_written"
+            ],
+            "source": "memory_written"
+          },
+          "source_label": "E0",
+          "phase": "execution"
+        },
+        {
+          "output_frame": 38,
+          "source_frame": 0,
+          "decision_index": 0,
+          "fields": {
+            "cue_colors": [
+              "darkred"
+            ],
+            "touched": 0,
+            "pending": ""
+          },
+          "perceived_position": {
+            "button_xy (x, y)": null
+          },
+          "highlighted_fields": [],
+          "stage": "ready",
+          "visible_lines": null,
+          "function_output": {
+            "label": "perceive_decide() \u2192 action",
+            "lines": [
+              "act_wait_for_array(...)",
+              "max_steps = 60"
+            ],
+            "source": "act",
+            "selected_values": {
+              "max_steps": 60
+            }
+          },
+          "source_label": "E0",
+          "phase": "execution"
+        },
+        {
+          "output_frame": 50,
+          "source_frame": 0,
+          "decision_index": 0,
+          "fields": {
+            "cue_colors": [
+              "darkred"
+            ],
+            "touched": 0,
+            "pending": ""
+          },
+          "perceived_position": {
+            "button_xy (x, y)": null
+          },
+          "highlighted_fields": [
+            "cue_colors",
+            "pending",
+            "touched"
+          ],
+          "stage": "execute",
+          "visible_lines": null,
+          "function_output": {
+            "label": "perceive_decide() \u2192 action",
+            "lines": [
+              "act_wait_for_array(...)",
+              "max_steps = 60"
+            ],
+            "source": "act",
+            "selected_values": {
+              "max_steps": 60
+            }
+          },
+          "source_label": "E0",
+          "phase": "execution"
+        },
+        {
+          "output_frame": 60,
+          "source_frame": 5,
+          "decision_index": 0,
+          "fields": {
+            "cue_colors": [
+              "darkred"
+            ],
+            "touched": 0,
+            "pending": ""
+          },
+          "perceived_position": {
+            "button_xy (x, y)": null
+          },
+          "highlighted_fields": [],
+          "stage": "execute",
+          "visible_lines": null,
+          "function_output": {
+            "label": "perceive_decide() \u2192 action",
+            "lines": [
+              "act_wait_for_array(...)",
+              "max_steps = 60"
+            ],
+            "source": "act",
+            "selected_values": {
+              "max_steps": 60
+            }
+          },
+          "source_label": "E5",
+          "phase": "execution"
+        },
+        {
+          "output_frame": 64,
           "source_frame": 8,
-          "source_label": "E8",
           "decision_index": 1,
           "fields": {
             "cue_colors": [
@@ -1730,16 +5601,67 @@
               -0.1648
             ]
           },
-          "phase": "execution",
           "highlighted_fields": [
             "cue_colors",
             "pending"
-          ]
+          ],
+          "stage": "execute",
+          "visible_lines": null,
+          "function_output": {
+            "label": "act_wait_for_array() \u2192 result",
+            "lines": [
+              "array_seen = True",
+              "ok = True"
+            ],
+            "source": "preceding_action_outcome",
+            "selected_values": {
+              "array_seen": true,
+              "ok": true
+            }
+          },
+          "source_label": "E8",
+          "phase": "execution"
         },
         {
-          "output_frame": 31,
+          "output_frame": 74,
+          "source_frame": 28,
+          "decision_index": 1,
+          "fields": {
+            "cue_colors": [
+              "darkred",
+              "yellow",
+              "blue"
+            ],
+            "touched": 0,
+            "pending": "touch:darkred"
+          },
+          "perceived_position": {
+            "cube_xy[target] (x, y)": [
+              0.0513,
+              -0.1648
+            ]
+          },
+          "highlighted_fields": [],
+          "stage": "execute",
+          "visible_lines": null,
+          "function_output": {
+            "label": "perceive_decide() \u2192 action",
+            "lines": [
+              "act_touch(...)",
+              "x=0.05, y=-0.16"
+            ],
+            "source": "act",
+            "selected_values": {
+              "x": 0.0463,
+              "y": -0.1648
+            }
+          },
+          "source_label": "E28",
+          "phase": "execution"
+        },
+        {
+          "output_frame": 81,
           "source_frame": 41,
-          "source_label": "E41",
           "decision_index": 2,
           "fields": {
             "cue_colors": [
@@ -1756,16 +5678,65 @@
               0.1377
             ]
           },
-          "phase": "execution",
           "highlighted_fields": [
             "pending",
             "touched"
-          ]
+          ],
+          "stage": "execute",
+          "visible_lines": null,
+          "function_output": {
+            "label": "act_touch() \u2192 result",
+            "lines": [
+              "ok = True"
+            ],
+            "source": "preceding_action_outcome",
+            "selected_values": {
+              "ok": true
+            }
+          },
+          "source_label": "E41",
+          "phase": "execution"
         },
         {
-          "output_frame": 48,
+          "output_frame": 91,
+          "source_frame": 61,
+          "decision_index": 2,
+          "fields": {
+            "cue_colors": [
+              "darkred",
+              "yellow",
+              "blue"
+            ],
+            "touched": 1,
+            "pending": "touch:yellow"
+          },
+          "perceived_position": {
+            "cube_xy[target] (x, y)": [
+              0.0387,
+              0.1377
+            ]
+          },
+          "highlighted_fields": [],
+          "stage": "execute",
+          "visible_lines": null,
+          "function_output": {
+            "label": "perceive_decide() \u2192 action",
+            "lines": [
+              "act_touch(...)",
+              "x=0.03, y=0.14"
+            ],
+            "source": "act",
+            "selected_values": {
+              "x": 0.0337,
+              "y": 0.1377
+            }
+          },
+          "source_label": "E61",
+          "phase": "execution"
+        },
+        {
+          "output_frame": 98,
           "source_frame": 75,
-          "source_label": "E75",
           "decision_index": 3,
           "fields": {
             "cue_colors": [
@@ -1782,16 +5753,65 @@
               0.2519
             ]
           },
-          "phase": "execution",
           "highlighted_fields": [
             "pending",
             "touched"
-          ]
+          ],
+          "stage": "execute",
+          "visible_lines": null,
+          "function_output": {
+            "label": "act_touch() \u2192 result",
+            "lines": [
+              "ok = True"
+            ],
+            "source": "preceding_action_outcome",
+            "selected_values": {
+              "ok": true
+            }
+          },
+          "source_label": "E75",
+          "phase": "execution"
         },
         {
-          "output_frame": 63,
+          "output_frame": 108,
+          "source_frame": 95,
+          "decision_index": 3,
+          "fields": {
+            "cue_colors": [
+              "darkred",
+              "yellow",
+              "blue"
+            ],
+            "touched": 2,
+            "pending": "touch:blue"
+          },
+          "perceived_position": {
+            "cube_xy[target] (x, y)": [
+              -0.0585,
+              0.2519
+            ]
+          },
+          "highlighted_fields": [],
+          "stage": "execute",
+          "visible_lines": null,
+          "function_output": {
+            "label": "perceive_decide() \u2192 action",
+            "lines": [
+              "act_touch(...)",
+              "x=-0.06, y=0.25"
+            ],
+            "source": "act",
+            "selected_values": {
+              "x": -0.0635,
+              "y": 0.2519
+            }
+          },
+          "source_label": "E95",
+          "phase": "execution"
+        },
+        {
+          "output_frame": 113,
           "source_frame": 105,
-          "source_label": "E105",
           "decision_index": 4,
           "fields": {
             "cue_colors": [
@@ -1808,13 +5828,115 @@
               -0.0067
             ]
           },
-          "phase": "execution",
           "highlighted_fields": [
             "pending",
             "touched"
-          ]
+          ],
+          "stage": "execute",
+          "visible_lines": null,
+          "function_output": {
+            "label": "act_touch() \u2192 result",
+            "lines": [
+              "ok = True"
+            ],
+            "source": "preceding_action_outcome",
+            "selected_values": {
+              "ok": true
+            }
+          },
+          "source_label": "E105",
+          "phase": "execution"
+        },
+        {
+          "output_frame": 123,
+          "source_frame": 125,
+          "decision_index": 4,
+          "fields": {
+            "cue_colors": [
+              "darkred",
+              "yellow",
+              "blue"
+            ],
+            "touched": 3,
+            "pending": "press"
+          },
+          "perceived_position": {
+            "button_xy (x, y)": [
+              -0.1253,
+              -0.0067
+            ]
+          },
+          "highlighted_fields": [],
+          "stage": "execute",
+          "visible_lines": null,
+          "function_output": {
+            "label": "perceive_decide() \u2192 action",
+            "lines": [
+              "act_press(...)",
+              "x=-0.12, y=-0.01"
+            ],
+            "source": "act",
+            "selected_values": {
+              "x": -0.11729999999999999,
+              "y": -0.0067
+            }
+          },
+          "source_label": "E125",
+          "phase": "execution"
+        },
+        {
+          "output_frame": 133,
+          "source_frame": 143,
+          "decision_index": 4,
+          "fields": {
+            "cue_colors": [
+              "darkred",
+              "yellow",
+              "blue"
+            ],
+            "touched": 3,
+            "pending": "press"
+          },
+          "perceived_position": {
+            "button_xy (x, y)": [
+              -0.1253,
+              -0.0067
+            ]
+          },
+          "highlighted_fields": [],
+          "stage": "complete",
+          "visible_lines": null,
+          "function_output": {
+            "label": "RECORDED EPISODE RESULT",
+            "lines": [
+              "success = True"
+            ],
+            "source": "result.json.success",
+            "selected_values": {
+              "success": true
+            }
+          },
+          "source_label": "E143",
+          "phase": "execution"
         }
-      ]
+      ],
+      "initial_memory": {
+        "stage": null,
+        "cue_colors": null,
+        "cue_log": null,
+        "cube_colors": null,
+        "cube_xy": null,
+        "button_xy": null,
+        "touched": null,
+        "presses": null,
+        "rounds": null,
+        "rot_ref": null,
+        "pending": null,
+        "log": null
+      },
+      "first_execution_source_frame": 0,
+      "initial_pause_output_frames": 50,
+      "recorded_action_outcomes": 4
     },
     {
       "benchmark": "robomemarena",
@@ -1847,20 +5969,76 @@
       ],
       "trail_history_frames": 160,
       "preview": "robomemarena-drawers.mp4",
-      "preview_sha256": "768562322e3101f3b410a02b6c781d024d03d7a1a9fc50a551bc064dba0490b2",
+      "preview_sha256": "81898e24c1272a899ca868ee62413732048e323fd5adfa92008aa123416d93a2",
       "preview_dimensions": [
         1080,
-        554
+        650
       ],
       "preview_format": "video/mp4",
       "poster": "robomemarena-drawers.jpg",
-      "poster_sha256": "ceb1961fc36eb905e01f66128770c8bdde91e18ecae5a75f4516f928cfe43a5e",
-      "poster_output_frame": 100,
+      "poster_sha256": "c789fe79fbea6589b107b23c5409f706d140f7cb1549b3cd04c5630344c48a50",
+      "poster_output_frame": 156,
       "preview_fps": 10,
       "nominal_playback_multiplier": 3,
-      "preview_duration_seconds": 17.1,
+      "preview_duration_seconds": 22.7,
       "source_frames": 830,
       "sampled_source_frames": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
         0,
         6,
         12,
@@ -2037,7 +6215,263 @@
         {
           "output_frame": 0,
           "source_frame": 0,
+          "decision_index": 0,
+          "fields": {
+            "colored": null,
+            "target": null,
+            "pending": null
+          },
+          "perceived_position": {
+            "cabinet (x, y, z)": null
+          },
+          "highlighted_fields": [],
+          "stage": "initial",
+          "visible_lines": null,
+          "function_output": {
+            "label": "BEFORE THE FIRST DECISION",
+            "lines": [
+              "perceive_decide(...)",
+              "Memory is not updated yet"
+            ],
+            "source": "decision[0].memory_in"
+          },
           "source_label": "E0",
+          "phase": "execution"
+        },
+        {
+          "output_frame": 15,
+          "source_frame": 0,
+          "decision_index": 0,
+          "fields": {
+            "colored": {
+              "top": null,
+              "middle": null,
+              "bottom": null
+            },
+            "target": null,
+            "pending": "open"
+          },
+          "perceived_position": {
+            "cabinet (x, y, z)": null
+          },
+          "highlighted_fields": [
+            "colored",
+            "pending"
+          ],
+          "stage": "reveal",
+          "visible_lines": 1,
+          "function_output": {
+            "label": "RECORDED RETURN \u00b7 LINE BY LINE",
+            "lines": [
+              "perceive_decide(...)",
+              "\u2192 memory_written"
+            ],
+            "source": "memory_written"
+          },
+          "source_label": "E0",
+          "phase": "execution"
+        },
+        {
+          "output_frame": 18,
+          "source_frame": 0,
+          "decision_index": 0,
+          "fields": {
+            "colored": {
+              "top": null,
+              "middle": null,
+              "bottom": null
+            },
+            "target": null,
+            "pending": "open"
+          },
+          "perceived_position": {
+            "cabinet (x, y, z)": null
+          },
+          "highlighted_fields": [
+            "colored",
+            "pending"
+          ],
+          "stage": "reveal",
+          "visible_lines": 2,
+          "function_output": {
+            "label": "RECORDED RETURN \u00b7 LINE BY LINE",
+            "lines": [
+              "perceive_decide(...)",
+              "\u2192 memory_written"
+            ],
+            "source": "memory_written"
+          },
+          "source_label": "E0",
+          "phase": "execution"
+        },
+        {
+          "output_frame": 21,
+          "source_frame": 0,
+          "decision_index": 0,
+          "fields": {
+            "colored": {
+              "top": null,
+              "middle": null,
+              "bottom": null
+            },
+            "target": null,
+            "pending": "open"
+          },
+          "perceived_position": {
+            "cabinet (x, y, z)": null
+          },
+          "highlighted_fields": [
+            "colored",
+            "pending"
+          ],
+          "stage": "reveal",
+          "visible_lines": 3,
+          "function_output": {
+            "label": "RECORDED RETURN \u00b7 LINE BY LINE",
+            "lines": [
+              "perceive_decide(...)",
+              "\u2192 memory_written"
+            ],
+            "source": "memory_written"
+          },
+          "source_label": "E0",
+          "phase": "execution"
+        },
+        {
+          "output_frame": 24,
+          "source_frame": 0,
+          "decision_index": 0,
+          "fields": {
+            "colored": {
+              "top": null,
+              "middle": null,
+              "bottom": null
+            },
+            "target": null,
+            "pending": "open"
+          },
+          "perceived_position": {
+            "cabinet (x, y, z)": null
+          },
+          "highlighted_fields": [
+            "colored",
+            "pending"
+          ],
+          "stage": "reveal",
+          "visible_lines": 4,
+          "function_output": {
+            "label": "RECORDED RETURN \u00b7 LINE BY LINE",
+            "lines": [
+              "perceive_decide(...)",
+              "\u2192 memory_written"
+            ],
+            "source": "memory_written"
+          },
+          "source_label": "E0",
+          "phase": "execution"
+        },
+        {
+          "output_frame": 27,
+          "source_frame": 0,
+          "decision_index": 0,
+          "fields": {
+            "colored": {
+              "top": null,
+              "middle": null,
+              "bottom": null
+            },
+            "target": null,
+            "pending": "open"
+          },
+          "perceived_position": {
+            "cabinet (x, y, z)": null
+          },
+          "highlighted_fields": [
+            "colored",
+            "pending"
+          ],
+          "stage": "reveal",
+          "visible_lines": 5,
+          "function_output": {
+            "label": "RECORDED RETURN \u00b7 LINE BY LINE",
+            "lines": [
+              "perceive_decide(...)",
+              "\u2192 memory_written"
+            ],
+            "source": "memory_written"
+          },
+          "source_label": "E0",
+          "phase": "execution"
+        },
+        {
+          "output_frame": 30,
+          "source_frame": 0,
+          "decision_index": 0,
+          "fields": {
+            "colored": {
+              "top": null,
+              "middle": null,
+              "bottom": null
+            },
+            "target": null,
+            "pending": "open"
+          },
+          "perceived_position": {
+            "cabinet (x, y, z)": null
+          },
+          "highlighted_fields": [
+            "colored",
+            "pending"
+          ],
+          "stage": "reveal",
+          "visible_lines": 6,
+          "function_output": {
+            "label": "RECORDED RETURN \u00b7 LINE BY LINE",
+            "lines": [
+              "perceive_decide(...)",
+              "\u2192 memory_written"
+            ],
+            "source": "memory_written"
+          },
+          "source_label": "E0",
+          "phase": "execution"
+        },
+        {
+          "output_frame": 33,
+          "source_frame": 0,
+          "decision_index": 0,
+          "fields": {
+            "colored": {
+              "top": null,
+              "middle": null,
+              "bottom": null
+            },
+            "target": null,
+            "pending": "open"
+          },
+          "perceived_position": {
+            "cabinet (x, y, z)": null
+          },
+          "highlighted_fields": [
+            "colored",
+            "pending"
+          ],
+          "stage": "reveal",
+          "visible_lines": 7,
+          "function_output": {
+            "label": "RECORDED RETURN \u00b7 LINE BY LINE",
+            "lines": [
+              "perceive_decide(...)",
+              "\u2192 memory_written"
+            ],
+            "source": "memory_written"
+          },
+          "source_label": "E0",
+          "phase": "execution"
+        },
+        {
+          "output_frame": 36,
+          "source_frame": 0,
           "decision_index": 0,
           "fields": {
             "colored": {
@@ -2055,16 +6489,152 @@
               0.713
             ]
           },
-          "phase": "execution",
           "highlighted_fields": [
             "colored",
             "pending"
-          ]
+          ],
+          "stage": "reveal",
+          "visible_lines": null,
+          "function_output": {
+            "label": "RECORDED RETURN \u00b7 LINE BY LINE",
+            "lines": [
+              "perceive_decide(...)",
+              "\u2192 memory_written"
+            ],
+            "source": "memory_written"
+          },
+          "source_label": "E0",
+          "phase": "execution"
         },
         {
-          "output_frame": 21,
+          "output_frame": 44,
+          "source_frame": 0,
+          "decision_index": 0,
+          "fields": {
+            "colored": {
+              "top": null,
+              "middle": null,
+              "bottom": null
+            },
+            "target": null,
+            "pending": "open"
+          },
+          "perceived_position": {
+            "cabinet (x, y, z)": [
+              0.2859,
+              0.4892,
+              0.713
+            ]
+          },
+          "highlighted_fields": [],
+          "stage": "ready",
+          "visible_lines": null,
+          "function_output": {
+            "label": "perceive_decide() \u2192 action",
+            "lines": [
+              "act_open_drawer(...)",
+              "handle = [0.16, 0.47, 0.69]"
+            ],
+            "source": "act",
+            "selected_values": {
+              "handle": [
+                0.15789999999999998,
+                0.4692,
+                0.695
+              ]
+            }
+          },
+          "source_label": "E0",
+          "phase": "execution"
+        },
+        {
+          "output_frame": 56,
+          "source_frame": 0,
+          "decision_index": 0,
+          "fields": {
+            "colored": {
+              "top": null,
+              "middle": null,
+              "bottom": null
+            },
+            "target": null,
+            "pending": "open"
+          },
+          "perceived_position": {
+            "cabinet (x, y, z)": [
+              0.2859,
+              0.4892,
+              0.713
+            ]
+          },
+          "highlighted_fields": [
+            "colored",
+            "pending"
+          ],
+          "stage": "execute",
+          "visible_lines": null,
+          "function_output": {
+            "label": "perceive_decide() \u2192 action",
+            "lines": [
+              "act_open_drawer(...)",
+              "handle = [0.16, 0.47, 0.69]"
+            ],
+            "source": "act",
+            "selected_values": {
+              "handle": [
+                0.15789999999999998,
+                0.4692,
+                0.695
+              ]
+            }
+          },
+          "source_label": "E0",
+          "phase": "execution"
+        },
+        {
+          "output_frame": 66,
+          "source_frame": 60,
+          "decision_index": 0,
+          "fields": {
+            "colored": {
+              "top": null,
+              "middle": null,
+              "bottom": null
+            },
+            "target": null,
+            "pending": "open"
+          },
+          "perceived_position": {
+            "cabinet (x, y, z)": [
+              0.2859,
+              0.4892,
+              0.713
+            ]
+          },
+          "highlighted_fields": [],
+          "stage": "execute",
+          "visible_lines": null,
+          "function_output": {
+            "label": "perceive_decide() \u2192 action",
+            "lines": [
+              "act_open_drawer(...)",
+              "handle = [0.16, 0.47, 0.69]"
+            ],
+            "source": "act",
+            "selected_values": {
+              "handle": [
+                0.15789999999999998,
+                0.4692,
+                0.695
+              ]
+            }
+          },
+          "source_label": "E60",
+          "phase": "execution"
+        },
+        {
+          "output_frame": 77,
           "source_frame": 121,
-          "source_label": "E121",
           "decision_index": 1,
           "fields": {
             "colored": {
@@ -2082,16 +6652,71 @@
               0.713
             ]
           },
-          "phase": "execution",
           "highlighted_fields": [
             "colored",
             "pending"
-          ]
+          ],
+          "stage": "execute",
+          "visible_lines": null,
+          "function_output": {
+            "label": "act_open_drawer() \u2192 result",
+            "lines": [
+              "pulled = 0.16",
+              "fingers_grasp = 0.01"
+            ],
+            "source": "preceding_action_outcome",
+            "selected_values": {
+              "pulled": 0.1603,
+              "fingers_grasp": 0.011
+            }
+          },
+          "source_label": "E121",
+          "phase": "execution"
         },
         {
-          "output_frame": 35,
+          "output_frame": 87,
+          "source_frame": 175,
+          "decision_index": 1,
+          "fields": {
+            "colored": {
+              "top": 54,
+              "middle": null,
+              "bottom": null
+            },
+            "target": null,
+            "pending": "close"
+          },
+          "perceived_position": {
+            "cabinet (x, y, z)": [
+              0.2859,
+              0.4892,
+              0.713
+            ]
+          },
+          "highlighted_fields": [],
+          "stage": "execute",
+          "visible_lines": null,
+          "function_output": {
+            "label": "perceive_decide() \u2192 action",
+            "lines": [
+              "act_close_drawer(...)",
+              "handle = [0.16, 0.47, 0.69]"
+            ],
+            "source": "act",
+            "selected_values": {
+              "handle": [
+                0.15789999999999998,
+                0.4692,
+                0.695
+              ]
+            }
+          },
+          "source_label": "E175",
+          "phase": "execution"
+        },
+        {
+          "output_frame": 91,
           "source_frame": 193,
-          "source_label": "E193",
           "decision_index": 2,
           "fields": {
             "colored": {
@@ -2109,15 +6734,70 @@
               0.713
             ]
           },
-          "phase": "execution",
           "highlighted_fields": [
             "pending"
-          ]
+          ],
+          "stage": "execute",
+          "visible_lines": null,
+          "function_output": {
+            "label": "act_close_drawer() \u2192 result",
+            "lines": [
+              "closed_y = 0.47",
+              "fingers_open = 0.04"
+            ],
+            "source": "preceding_action_outcome",
+            "selected_values": {
+              "closed_y": 0.4653,
+              "fingers_open": 0.0391
+            }
+          },
+          "source_label": "E193",
+          "phase": "execution"
         },
         {
-          "output_frame": 51,
+          "output_frame": 101,
+          "source_frame": 253,
+          "decision_index": 2,
+          "fields": {
+            "colored": {
+              "top": 54,
+              "middle": null,
+              "bottom": null
+            },
+            "target": null,
+            "pending": "open"
+          },
+          "perceived_position": {
+            "cabinet (x, y, z)": [
+              0.2859,
+              0.4892,
+              0.713
+            ]
+          },
+          "highlighted_fields": [],
+          "stage": "execute",
+          "visible_lines": null,
+          "function_output": {
+            "label": "perceive_decide() \u2192 action",
+            "lines": [
+              "act_open_drawer(...)",
+              "handle = [0.16, 0.46, 0.61]"
+            ],
+            "source": "act",
+            "selected_values": {
+              "handle": [
+                0.15789999999999998,
+                0.4632,
+                0.609
+              ]
+            }
+          },
+          "source_label": "E253",
+          "phase": "execution"
+        },
+        {
+          "output_frame": 107,
           "source_frame": 284,
-          "source_label": "E284",
           "decision_index": 3,
           "fields": {
             "colored": {
@@ -2135,16 +6815,71 @@
               0.713
             ]
           },
-          "phase": "execution",
           "highlighted_fields": [
             "colored",
             "pending"
-          ]
+          ],
+          "stage": "execute",
+          "visible_lines": null,
+          "function_output": {
+            "label": "act_open_drawer() \u2192 result",
+            "lines": [
+              "pulled = 0.16",
+              "fingers_grasp = 0.01"
+            ],
+            "source": "preceding_action_outcome",
+            "selected_values": {
+              "pulled": 0.1602,
+              "fingers_grasp": 0.011
+            }
+          },
+          "source_label": "E284",
+          "phase": "execution"
         },
         {
-          "output_frame": 65,
+          "output_frame": 117,
+          "source_frame": 337,
+          "decision_index": 3,
+          "fields": {
+            "colored": {
+              "top": 54,
+              "middle": 0,
+              "bottom": null
+            },
+            "target": null,
+            "pending": "close"
+          },
+          "perceived_position": {
+            "cabinet (x, y, z)": [
+              0.2859,
+              0.4892,
+              0.713
+            ]
+          },
+          "highlighted_fields": [],
+          "stage": "execute",
+          "visible_lines": null,
+          "function_output": {
+            "label": "perceive_decide() \u2192 action",
+            "lines": [
+              "act_close_drawer(...)",
+              "handle = [0.16, 0.46, 0.61]"
+            ],
+            "source": "act",
+            "selected_values": {
+              "handle": [
+                0.15789999999999998,
+                0.4632,
+                0.609
+              ]
+            }
+          },
+          "source_label": "E337",
+          "phase": "execution"
+        },
+        {
+          "output_frame": 121,
           "source_frame": 354,
-          "source_label": "E354",
           "decision_index": 4,
           "fields": {
             "colored": {
@@ -2162,15 +6897,70 @@
               0.713
             ]
           },
-          "phase": "execution",
           "highlighted_fields": [
             "pending"
-          ]
+          ],
+          "stage": "execute",
+          "visible_lines": null,
+          "function_output": {
+            "label": "act_close_drawer() \u2192 result",
+            "lines": [
+              "closed_y = 0.46",
+              "fingers_open = 0.04"
+            ],
+            "source": "preceding_action_outcome",
+            "selected_values": {
+              "closed_y": 0.4614,
+              "fingers_open": 0.0391
+            }
+          },
+          "source_label": "E354",
+          "phase": "execution"
         },
         {
-          "output_frame": 80,
+          "output_frame": 131,
+          "source_frame": 417,
+          "decision_index": 4,
+          "fields": {
+            "colored": {
+              "top": 54,
+              "middle": 0,
+              "bottom": null
+            },
+            "target": null,
+            "pending": "open"
+          },
+          "perceived_position": {
+            "cabinet (x, y, z)": [
+              0.2859,
+              0.4892,
+              0.713
+            ]
+          },
+          "highlighted_fields": [],
+          "stage": "execute",
+          "visible_lines": null,
+          "function_output": {
+            "label": "perceive_decide() \u2192 action",
+            "lines": [
+              "act_open_drawer(...)",
+              "handle = [0.16, 0.46, 0.53]"
+            ],
+            "source": "act",
+            "selected_values": {
+              "handle": [
+                0.15789999999999998,
+                0.4632,
+                0.53
+              ]
+            }
+          },
+          "source_label": "E417",
+          "phase": "execution"
+        },
+        {
+          "output_frame": 136,
           "source_frame": 444,
-          "source_label": "E444",
           "decision_index": 5,
           "fields": {
             "colored": {
@@ -2188,16 +6978,71 @@
               0.713
             ]
           },
-          "phase": "execution",
           "highlighted_fields": [
             "colored",
             "pending"
-          ]
+          ],
+          "stage": "execute",
+          "visible_lines": null,
+          "function_output": {
+            "label": "act_open_drawer() \u2192 result",
+            "lines": [
+              "pulled = 0.16",
+              "fingers_grasp = 0.01"
+            ],
+            "source": "preceding_action_outcome",
+            "selected_values": {
+              "pulled": 0.1604,
+              "fingers_grasp": 0.0084
+            }
+          },
+          "source_label": "E444",
+          "phase": "execution"
         },
         {
-          "output_frame": 94,
+          "output_frame": 146,
+          "source_frame": 488,
+          "decision_index": 5,
+          "fields": {
+            "colored": {
+              "top": 54,
+              "middle": 0,
+              "bottom": 0
+            },
+            "target": null,
+            "pending": "close"
+          },
+          "perceived_position": {
+            "cabinet (x, y, z)": [
+              0.2859,
+              0.4892,
+              0.713
+            ]
+          },
+          "highlighted_fields": [],
+          "stage": "execute",
+          "visible_lines": null,
+          "function_output": {
+            "label": "perceive_decide() \u2192 action",
+            "lines": [
+              "act_close_drawer(...)",
+              "handle = [0.16, 0.46, 0.53]"
+            ],
+            "source": "act",
+            "selected_values": {
+              "handle": [
+                0.15789999999999998,
+                0.4632,
+                0.53
+              ]
+            }
+          },
+          "source_label": "E488",
+          "phase": "execution"
+        },
+        {
+          "output_frame": 150,
           "source_frame": 503,
-          "source_label": "E503",
           "decision_index": 6,
           "fields": {
             "colored": {
@@ -2215,16 +7060,71 @@
               0.713
             ]
           },
-          "phase": "execution",
           "highlighted_fields": [
             "pending",
             "target"
-          ]
+          ],
+          "stage": "execute",
+          "visible_lines": null,
+          "function_output": {
+            "label": "act_close_drawer() \u2192 result",
+            "lines": [
+              "closed_y = 0.46",
+              "fingers_open = 0.04"
+            ],
+            "source": "preceding_action_outcome",
+            "selected_values": {
+              "closed_y": 0.4617,
+              "fingers_open": 0.0391
+            }
+          },
+          "source_label": "E503",
+          "phase": "execution"
         },
         {
-          "output_frame": 111,
+          "output_frame": 160,
+          "source_frame": 564,
+          "decision_index": 6,
+          "fields": {
+            "colored": {
+              "top": 54,
+              "middle": 0,
+              "bottom": 0
+            },
+            "target": "top",
+            "pending": "open"
+          },
+          "perceived_position": {
+            "cabinet (x, y, z)": [
+              0.2859,
+              0.4892,
+              0.713
+            ]
+          },
+          "highlighted_fields": [],
+          "stage": "execute",
+          "visible_lines": null,
+          "function_output": {
+            "label": "perceive_decide() \u2192 action",
+            "lines": [
+              "act_open_drawer(...)",
+              "handle = [0.16, 0.47, 0.69]"
+            ],
+            "source": "act",
+            "selected_values": {
+              "handle": [
+                0.15789999999999998,
+                0.4692,
+                0.695
+              ]
+            }
+          },
+          "source_label": "E564",
+          "phase": "execution"
+        },
+        {
+          "output_frame": 167,
           "source_frame": 603,
-          "source_label": "E603",
           "decision_index": 7,
           "fields": {
             "colored": {
@@ -2242,15 +7142,64 @@
               0.713
             ]
           },
-          "phase": "execution",
           "highlighted_fields": [
             "pending"
-          ]
+          ],
+          "stage": "execute",
+          "visible_lines": null,
+          "function_output": {
+            "label": "act_open_drawer() \u2192 result",
+            "lines": [
+              "pulled = 0.16",
+              "fingers_grasp = 0.01"
+            ],
+            "source": "preceding_action_outcome",
+            "selected_values": {
+              "pulled": 0.1591,
+              "fingers_grasp": 0.011
+            }
+          },
+          "source_label": "E603",
+          "phase": "execution"
         },
         {
-          "output_frame": 125,
+          "output_frame": 177,
+          "source_frame": 636,
+          "decision_index": 7,
+          "fields": {
+            "colored": {
+              "top": 54,
+              "middle": 0,
+              "bottom": 0
+            },
+            "target": "top",
+            "pending": "release"
+          },
+          "perceived_position": {
+            "cabinet (x, y, z)": [
+              0.2859,
+              0.4892,
+              0.713
+            ]
+          },
+          "highlighted_fields": [],
+          "stage": "execute",
+          "visible_lines": null,
+          "function_output": {
+            "label": "perceive_decide() \u2192 action",
+            "lines": [
+              "act_release_open(...)",
+              "No arguments"
+            ],
+            "source": "act",
+            "selected_values": {}
+          },
+          "source_label": "E636",
+          "phase": "execution"
+        },
+        {
+          "output_frame": 181,
           "source_frame": 648,
-          "source_label": "E648",
           "decision_index": 8,
           "fields": {
             "colored": {
@@ -2268,15 +7217,62 @@
               0.713
             ]
           },
-          "phase": "execution",
           "highlighted_fields": [
             "pending"
-          ]
+          ],
+          "stage": "execute",
+          "visible_lines": null,
+          "function_output": {
+            "label": "act_release_open() \u2192 result",
+            "lines": [
+              "fingers_open = 0.04"
+            ],
+            "source": "preceding_action_outcome",
+            "selected_values": {
+              "fingers_open": 0.0391
+            }
+          },
+          "source_label": "E648",
+          "phase": "execution"
         },
         {
-          "output_frame": 149,
+          "output_frame": 191,
+          "source_frame": 707,
+          "decision_index": 8,
+          "fields": {
+            "colored": {
+              "top": 54,
+              "middle": 0,
+              "bottom": 0
+            },
+            "target": "top",
+            "pending": "pick"
+          },
+          "perceived_position": {
+            "cabinet (x, y, z)": [
+              0.2859,
+              0.4892,
+              0.713
+            ]
+          },
+          "highlighted_fields": [],
+          "stage": "execute",
+          "visible_lines": null,
+          "function_output": {
+            "label": "perceive_decide() \u2192 action",
+            "lines": [
+              "act_pick_butter(...)",
+              "No arguments"
+            ],
+            "source": "act",
+            "selected_values": {}
+          },
+          "source_label": "E707",
+          "phase": "execution"
+        },
+        {
+          "output_frame": 205,
           "source_frame": 786,
-          "source_label": "E786",
           "decision_index": 9,
           "fields": {
             "colored": {
@@ -2294,10 +7290,77 @@
               0.713
             ]
           },
-          "phase": "execution",
-          "highlighted_fields": []
+          "highlighted_fields": [],
+          "stage": "execute",
+          "visible_lines": null,
+          "function_output": {
+            "label": "act_pick_butter() \u2192 result",
+            "lines": [
+              "fingers_grasp = 0.02",
+              "fingers_lift = 0.02"
+            ],
+            "source": "preceding_action_outcome",
+            "selected_values": {
+              "fingers_grasp": 0.0194,
+              "fingers_lift": 0.0195
+            }
+          },
+          "source_label": "E786",
+          "phase": "execution"
+        },
+        {
+          "output_frame": 213,
+          "source_frame": 829,
+          "decision_index": 9,
+          "fields": {
+            "colored": {
+              "top": 54,
+              "middle": 0,
+              "bottom": 0
+            },
+            "target": "top",
+            "pending": "pick"
+          },
+          "perceived_position": {
+            "cabinet (x, y, z)": [
+              0.2859,
+              0.4892,
+              0.713
+            ]
+          },
+          "highlighted_fields": [],
+          "stage": "complete",
+          "visible_lines": null,
+          "function_output": {
+            "label": "RECORDED EPISODE RESULT",
+            "lines": [
+              "success = True"
+            ],
+            "source": "result.json.success",
+            "selected_values": {
+              "success": true
+            }
+          },
+          "source_label": "E829",
+          "phase": "execution"
         }
-      ]
+      ],
+      "initial_memory": {
+        "stage": null,
+        "cabinet": null,
+        "butter": null,
+        "idx": null,
+        "scores": null,
+        "open_ok": null,
+        "grasp_y": null,
+        "retries": null,
+        "target": null,
+        "pending": null,
+        "log": null
+      },
+      "first_execution_source_frame": 0,
+      "initial_pause_output_frames": 56,
+      "recorded_action_outcomes": 9
     },
     {
       "benchmark": "robomemarena",
@@ -2330,20 +7393,64 @@
       ],
       "trail_history_frames": 160,
       "preview": "robomemarena-pour-twice.mp4",
-      "preview_sha256": "6816858a3af1bc5c50ba2c0db914e501f7e4537832475f4303496605e12fce92",
+      "preview_sha256": "b29925eaa20c047e1b2bd8f13cef733be5d9f3603675a4dc15072a2ef77f4ea6",
       "preview_dimensions": [
         1080,
-        554
+        650
       ],
       "preview_format": "video/mp4",
       "poster": "robomemarena-pour-twice.jpg",
-      "poster_sha256": "dee7b8448c89a7c7ae2b6461a1345480ade5c5f4db1dadbff96e1f373f75035e",
-      "poster_output_frame": 75,
+      "poster_sha256": "b81a803e754d459d67464500e0cc25f83657f3a02fc8601ecb395d3834fbc740",
+      "poster_output_frame": 119,
       "preview_fps": 10,
       "nominal_playback_multiplier": 2,
-      "preview_duration_seconds": 10.2,
+      "preview_duration_seconds": 14.6,
       "source_frames": 346,
       "sampled_source_frames": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
         0,
         4,
         8,
@@ -2451,7 +7558,131 @@
         {
           "output_frame": 0,
           "source_frame": 0,
+          "decision_index": 0,
+          "fields": {
+            "pours_done": null,
+            "phase": null,
+            "pour_xy": null
+          },
+          "perceived_position": {
+            "pour_xy (x, y)": null
+          },
+          "highlighted_fields": [],
+          "stage": "initial",
+          "visible_lines": null,
+          "function_output": {
+            "label": "BEFORE THE FIRST DECISION",
+            "lines": [
+              "perceive_decide(...)",
+              "Memory is not updated yet"
+            ],
+            "source": "decision[0].memory_in"
+          },
           "source_label": "E0",
+          "phase": "execution"
+        },
+        {
+          "output_frame": 15,
+          "source_frame": 0,
+          "decision_index": 0,
+          "fields": {
+            "pours_done": 0,
+            "phase": "pick",
+            "pour_xy": [
+              0.0002,
+              0.2147
+            ]
+          },
+          "perceived_position": {
+            "pour_xy (x, y)": null
+          },
+          "highlighted_fields": [
+            "phase",
+            "pour_xy",
+            "pours_done"
+          ],
+          "stage": "reveal",
+          "visible_lines": 1,
+          "function_output": {
+            "label": "RECORDED RETURN \u00b7 LINE BY LINE",
+            "lines": [
+              "perceive_decide(...)",
+              "\u2192 memory_written"
+            ],
+            "source": "memory_written"
+          },
+          "source_label": "E0",
+          "phase": "execution"
+        },
+        {
+          "output_frame": 18,
+          "source_frame": 0,
+          "decision_index": 0,
+          "fields": {
+            "pours_done": 0,
+            "phase": "pick",
+            "pour_xy": [
+              0.0002,
+              0.2147
+            ]
+          },
+          "perceived_position": {
+            "pour_xy (x, y)": null
+          },
+          "highlighted_fields": [
+            "phase",
+            "pour_xy",
+            "pours_done"
+          ],
+          "stage": "reveal",
+          "visible_lines": 2,
+          "function_output": {
+            "label": "RECORDED RETURN \u00b7 LINE BY LINE",
+            "lines": [
+              "perceive_decide(...)",
+              "\u2192 memory_written"
+            ],
+            "source": "memory_written"
+          },
+          "source_label": "E0",
+          "phase": "execution"
+        },
+        {
+          "output_frame": 21,
+          "source_frame": 0,
+          "decision_index": 0,
+          "fields": {
+            "pours_done": 0,
+            "phase": "pick",
+            "pour_xy": [
+              0.0002,
+              0.2147
+            ]
+          },
+          "perceived_position": {
+            "pour_xy (x, y)": null
+          },
+          "highlighted_fields": [
+            "phase",
+            "pour_xy",
+            "pours_done"
+          ],
+          "stage": "reveal",
+          "visible_lines": 3,
+          "function_output": {
+            "label": "RECORDED RETURN \u00b7 LINE BY LINE",
+            "lines": [
+              "perceive_decide(...)",
+              "\u2192 memory_written"
+            ],
+            "source": "memory_written"
+          },
+          "source_label": "E0",
+          "phase": "execution"
+        },
+        {
+          "output_frame": 24,
+          "source_frame": 0,
           "decision_index": 0,
           "fields": {
             "pours_done": 0,
@@ -2467,17 +7698,139 @@
               0.0192
             ]
           },
-          "phase": "execution",
           "highlighted_fields": [
             "phase",
             "pour_xy",
             "pours_done"
-          ]
+          ],
+          "stage": "reveal",
+          "visible_lines": null,
+          "function_output": {
+            "label": "RECORDED RETURN \u00b7 LINE BY LINE",
+            "lines": [
+              "perceive_decide(...)",
+              "\u2192 memory_written"
+            ],
+            "source": "memory_written"
+          },
+          "source_label": "E0",
+          "phase": "execution"
         },
         {
-          "output_frame": 36,
+          "output_frame": 32,
+          "source_frame": 0,
+          "decision_index": 0,
+          "fields": {
+            "pours_done": 0,
+            "phase": "pick",
+            "pour_xy": [
+              0.0002,
+              0.2147
+            ]
+          },
+          "perceived_position": {
+            "bottle_xy (x, y)": [
+              0.0207,
+              0.0192
+            ]
+          },
+          "highlighted_fields": [],
+          "stage": "ready",
+          "visible_lines": null,
+          "function_output": {
+            "label": "perceive_decide() \u2192 action",
+            "lines": [
+              "act_pick(...)",
+              "x=0.02, y=0.02"
+            ],
+            "source": "act",
+            "selected_values": {
+              "x": 0.0207,
+              "y": 0.0192
+            }
+          },
+          "source_label": "E0",
+          "phase": "execution"
+        },
+        {
+          "output_frame": 44,
+          "source_frame": 0,
+          "decision_index": 0,
+          "fields": {
+            "pours_done": 0,
+            "phase": "pick",
+            "pour_xy": [
+              0.0002,
+              0.2147
+            ]
+          },
+          "perceived_position": {
+            "bottle_xy (x, y)": [
+              0.0207,
+              0.0192
+            ]
+          },
+          "highlighted_fields": [
+            "phase",
+            "pour_xy",
+            "pours_done"
+          ],
+          "stage": "execute",
+          "visible_lines": null,
+          "function_output": {
+            "label": "perceive_decide() \u2192 action",
+            "lines": [
+              "act_pick(...)",
+              "x=0.02, y=0.02"
+            ],
+            "source": "act",
+            "selected_values": {
+              "x": 0.0207,
+              "y": 0.0192
+            }
+          },
+          "source_label": "E0",
+          "phase": "execution"
+        },
+        {
+          "output_frame": 54,
+          "source_frame": 40,
+          "decision_index": 0,
+          "fields": {
+            "pours_done": 0,
+            "phase": "pick",
+            "pour_xy": [
+              0.0002,
+              0.2147
+            ]
+          },
+          "perceived_position": {
+            "bottle_xy (x, y)": [
+              0.0207,
+              0.0192
+            ]
+          },
+          "highlighted_fields": [],
+          "stage": "execute",
+          "visible_lines": null,
+          "function_output": {
+            "label": "perceive_decide() \u2192 action",
+            "lines": [
+              "act_pick(...)",
+              "x=0.02, y=0.02"
+            ],
+            "source": "act",
+            "selected_values": {
+              "x": 0.0207,
+              "y": 0.0192
+            }
+          },
+          "source_label": "E40",
+          "phase": "execution"
+        },
+        {
+          "output_frame": 80,
           "source_frame": 141,
-          "source_label": "E141",
           "decision_index": 1,
           "fields": {
             "pours_done": 0,
@@ -2493,15 +7846,65 @@
               0.2147
             ]
           },
-          "phase": "execution",
           "highlighted_fields": [
             "phase"
-          ]
+          ],
+          "stage": "execute",
+          "visible_lines": null,
+          "function_output": {
+            "label": "act_pick() \u2192 result",
+            "lines": [
+              "hand.held = True",
+              "hand.tilt_deg = 0.30"
+            ],
+            "source": "preceding_action_outcome",
+            "selected_values": {
+              "hand.held": true,
+              "hand.tilt_deg": 0.3
+            }
+          },
+          "source_label": "E141",
+          "phase": "execution"
         },
         {
-          "output_frame": 69,
+          "output_frame": 90,
+          "source_frame": 181,
+          "decision_index": 1,
+          "fields": {
+            "pours_done": 0,
+            "phase": "pour",
+            "pour_xy": [
+              0.0002,
+              0.2147
+            ]
+          },
+          "perceived_position": {
+            "pour_xy (x, y)": [
+              0.0002,
+              0.2147
+            ]
+          },
+          "highlighted_fields": [],
+          "stage": "execute",
+          "visible_lines": null,
+          "function_output": {
+            "label": "perceive_decide() \u2192 action",
+            "lines": [
+              "act_pour(...)",
+              "x=0.00, y=0.21"
+            ],
+            "source": "act",
+            "selected_values": {
+              "x": 0.0002,
+              "y": 0.2147
+            }
+          },
+          "source_label": "E181",
+          "phase": "execution"
+        },
+        {
+          "output_frame": 113,
           "source_frame": 272,
-          "source_label": "E272",
           "decision_index": 2,
           "fields": {
             "pours_done": 1,
@@ -2517,12 +7920,110 @@
               0.2147
             ]
           },
-          "phase": "execution",
           "highlighted_fields": [
             "pours_done"
-          ]
+          ],
+          "stage": "execute",
+          "visible_lines": null,
+          "function_output": {
+            "label": "act_pour() \u2192 result",
+            "lines": [
+              "hand.held = True",
+              "hand.tilt_deg = 0.10"
+            ],
+            "source": "preceding_action_outcome",
+            "selected_values": {
+              "hand.held": true,
+              "hand.tilt_deg": 0.1
+            }
+          },
+          "source_label": "E272",
+          "phase": "execution"
+        },
+        {
+          "output_frame": 123,
+          "source_frame": 312,
+          "decision_index": 2,
+          "fields": {
+            "pours_done": 1,
+            "phase": "pour",
+            "pour_xy": [
+              0.0002,
+              0.2147
+            ]
+          },
+          "perceived_position": {
+            "pour_xy (x, y)": [
+              0.0002,
+              0.2147
+            ]
+          },
+          "highlighted_fields": [],
+          "stage": "execute",
+          "visible_lines": null,
+          "function_output": {
+            "label": "perceive_decide() \u2192 action",
+            "lines": [
+              "act_pour(...)",
+              "x=0.00, y=0.21"
+            ],
+            "source": "act",
+            "selected_values": {
+              "x": 0.0002,
+              "y": 0.2147
+            }
+          },
+          "source_label": "E312",
+          "phase": "execution"
+        },
+        {
+          "output_frame": 132,
+          "source_frame": 345,
+          "decision_index": 2,
+          "fields": {
+            "pours_done": 1,
+            "phase": "pour",
+            "pour_xy": [
+              0.0002,
+              0.2147
+            ]
+          },
+          "perceived_position": {
+            "pour_xy (x, y)": [
+              0.0002,
+              0.2147
+            ]
+          },
+          "highlighted_fields": [],
+          "stage": "complete",
+          "visible_lines": null,
+          "function_output": {
+            "label": "RECORDED EPISODE RESULT",
+            "lines": [
+              "success = True"
+            ],
+            "source": "result.json.success",
+            "selected_values": {
+              "success": true
+            }
+          },
+          "source_label": "E345",
+          "phase": "execution"
         }
-      ]
+      ],
+      "initial_memory": {
+        "phase": null,
+        "bottle_xy": null,
+        "pour_xy": null,
+        "drainer_xy": null,
+        "grasp_tries": null,
+        "pours_done": null,
+        "look_tries": null,
+        "log": null
+      },
+      "first_execution_source_frame": 0,
+      "initial_pause_output_frames": 44,
+      "recorded_action_outcomes": 2
     }
   ]
 }
