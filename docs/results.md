@@ -19,6 +19,38 @@ There are 10,400 held-out results across these seven settings. Rates use officia
 whole-task success (TSR for RoboMemArena). Do not pool different settings into a
 single benchmark headline or count repeated checks as new published evidence.
 
+## Figures and comparison scope
+
+The [four-benchmark figure](figures/benchmark_comparison.png) compares selected
+published reports with CaM on matching task lists. It uses all 16 RoboMME tasks,
+nine RMBench tasks (excluding `place_block_mat`), five MIKASA task identities,
+and all 26 RoboMemArena tasks. The figure now uses the author's reported
+**100%** MIKASA correction after identifying a CPU physics issue. Corrected rerun
+artifacts and episode counts have not been attached. The archived five-task result
+remains **225/250 = 90.0%**, with these original counts:
+
+| MIKASA task | CaM successful / evaluated |
+|---|---:|
+| ShellGameTouch | 25 / 50 |
+| InterceptMedium | 50 / 50 |
+| RememberColor3 | 50 / 50 |
+| RememberColor5 | 50 / 50 |
+| RememberColor9 | 50 / 50 |
+
+Sources are the [RoboMME leaderboard](https://robomme.github.io/leaderboard.html),
+[SimpleMemVLA v2, Figure 3 and Tables 1/3](https://arxiv.org/pdf/2609.05533v2),
+and the [RoboMemArena leaderboard](https://robomemarena.github.io/leaderboard.html).
+Training data, sensing, interaction budgets, simulator versions and evaluation
+counts differ; MIKASA matches task identities across legacy and current VLA
+releases. RoboMemArena baselines are listed as literature-reported/unverified by
+its maintainers. These are contextual comparisons, not controlled ablations.
+
+The [RoboMME study](figures/robomme_efficiency.png) reports **4.37 ms median**
+perception/memory decision time (**476.8 ms P95**) and **$29.44 development API
+cost**, with zero evaluation API cost. Timing excludes action-tool execution and
+simulation; cost excludes local compute and data preparation.
+[Exact measurements, sources, and figure reproduction](figures/README.md).
+
 ## How to interpret the settings
 
 **RoboMME.** The published 25-demo experiment used its original runner and prompt. A current-harness rerun is separate evidence. Development accepts the released 25-demo package through a metadata-checked compatibility reader, preserving every H5 byte.

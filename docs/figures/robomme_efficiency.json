@@ -1,0 +1,5015 @@
+{
+  "schema": "cam-offline-decision-profile/1",
+  "tasks": 16,
+  "episodes": 80,
+  "decisions": 225,
+  "repeats": 5,
+  "median_ms": 4.365912,
+  "p95_ms": 476.84869299999997,
+  "mean_ms": 79.7035238,
+  "development_api_cost_usd": 29.441281599999996,
+  "evaluation_api_cost_usd": 0,
+  "cost_basis": "Final Claude CLI session estimates; excludes local compute and data preparation; not a billing audit.",
+  "timing_scope": "Offline perception + memory decision; excludes act tools, I/O and simulator execution.",
+  "costs": [
+    {
+      "task": "BinFill",
+      "api_cost_usd": 2.3514518,
+      "source": "dev_logs/robomme/demo_only_25/BinFill/costs/api_cost.json",
+      "sha256": "fe0e963e38b0576eed534559efefc9942c6dfd504ae6b7417ffe1e141b348ac9"
+    },
+    {
+      "task": "ButtonUnmask",
+      "api_cost_usd": 1.5677842000000002,
+      "source": "dev_logs/robomme/demo_only_25/ButtonUnmask/costs/api_cost.json",
+      "sha256": "99b6e68bf969138a0e4e22db361770318fc8739440b873467857940ec9e30b77"
+    },
+    {
+      "task": "ButtonUnmaskSwap",
+      "api_cost_usd": 1.8305707999999998,
+      "source": "dev_logs/robomme/demo_only_25/ButtonUnmaskSwap/costs/api_cost.json",
+      "sha256": "f0ef91f5947fe21c12e4a04f93e67b6ab57f0c184abf42df86efd7621d193ad7"
+    },
+    {
+      "task": "InsertPeg",
+      "api_cost_usd": 1.2896792000000001,
+      "source": "dev_logs/robomme/demo_only_25/InsertPeg/costs/api_cost.json",
+      "sha256": "3c482a7e19cacdaeba2c7bb3e604726e4ab1543df4278fe0c9ab8cb6511b27df"
+    },
+    {
+      "task": "MoveCube",
+      "api_cost_usd": 2.3864398,
+      "source": "dev_logs/robomme/demo_only_25/MoveCube/costs/api_cost.json",
+      "sha256": "7c5d05ccf1fa0ea2bc50da0b2e4b7676759f6c845002615974680a40712149f5"
+    },
+    {
+      "task": "PatternLock",
+      "api_cost_usd": 1.0455785999999998,
+      "source": "dev_logs/robomme/demo_only_25/PatternLock/costs/api_cost.json",
+      "sha256": "d7145e6fece02e6b3ea770f74bca77dfeb2674e8fd14d6a645d915ec847502cd"
+    },
+    {
+      "task": "PickHighlight",
+      "api_cost_usd": 1.5818223999999996,
+      "source": "dev_logs/robomme/demo_only_25/PickHighlight/costs/api_cost.json",
+      "sha256": "482ae4925478a13b61dc4dea0e7802ff42bda8c362c988da1c910f5778d43f14"
+    },
+    {
+      "task": "PickXtimes",
+      "api_cost_usd": 1.4445144,
+      "source": "dev_logs/robomme/demo_only_25/PickXtimes/costs/api_cost.json",
+      "sha256": "aafb10b4d2a26d1ba0759ca3c2c66dd9c26e1f96ea043375d411d3ed88eac50a"
+    },
+    {
+      "task": "RouteStick",
+      "api_cost_usd": 1.4536827999999995,
+      "source": "dev_logs/robomme/demo_only_25/RouteStick/costs/api_cost.json",
+      "sha256": "c382624aec6f91b2d277a541f389b290a59b9800ee7f12b05e689676d8f3cf1f"
+    },
+    {
+      "task": "StopCube",
+      "api_cost_usd": 1.5553286,
+      "source": "dev_logs/robomme/demo_only_25/StopCube/costs/api_cost.json",
+      "sha256": "f18edd51be6b8cf4f85213e6ec05f72ea0b269730edebc6ea78977196d502457"
+    },
+    {
+      "task": "SwingXtimes",
+      "api_cost_usd": 1.5611568,
+      "source": "dev_logs/robomme/demo_only_25/SwingXtimes/costs/api_cost.json",
+      "sha256": "690d9217e31802600baca7b910d8f42f076a87368749aefcf6c93ffb43331050"
+    },
+    {
+      "task": "VideoPlaceButton",
+      "api_cost_usd": 3.879111599999999,
+      "source": "dev_logs/robomme/demo_only_25/VideoPlaceButton/costs/api_cost.json",
+      "sha256": "0cbfc3f208c6c51894c827fb0a90b55728a8ffa3f6f27fc24ef4a1bcde59c3dd"
+    },
+    {
+      "task": "VideoPlaceOrder",
+      "api_cost_usd": 2.1163925999999997,
+      "source": "dev_logs/robomme/demo_only_25/VideoPlaceOrder/costs/api_cost.json",
+      "sha256": "f64ab917751699fc85f6740a7256252f4b9d4973de5571c8e4349f14eb0391da"
+    },
+    {
+      "task": "VideoRepick",
+      "api_cost_usd": 2.0366709999999997,
+      "source": "dev_logs/robomme/demo_only_25/VideoRepick/costs/api_cost.json",
+      "sha256": "4bfcb213a7ee9e843e4bbba1518c58a18d4a341125bdde950d9ff98fcd62821e"
+    },
+    {
+      "task": "VideoUnmask",
+      "api_cost_usd": 1.3936412,
+      "source": "dev_logs/robomme/demo_only_25/VideoUnmask/costs/api_cost.json",
+      "sha256": "f4ea50e70c5a72e0dc96720828b9e18360d5db35d1295ac33403ccee321bc16f"
+    },
+    {
+      "task": "VideoUnmaskSwap",
+      "api_cost_usd": 1.9474558,
+      "source": "dev_logs/robomme/demo_only_25/VideoUnmaskSwap/costs/api_cost.json",
+      "sha256": "26433c13ed88adeea5ed1eee1efd823b6cd9c390d8c9b8f0c15d1bbace933469"
+    }
+  ],
+  "completed": 1794325873.7033584,
+  "study": {
+    "schema": "cam-offline-decision-profile/1",
+    "created": 1794325673.1783173,
+    "git_revision": "b7c4113b40de0b18654ca4aa2ddef894df3de20c",
+    "script_sha256": "f370e6f4443f9061b92526ff5fbddd9318b3b82a666f607956af70cc13ce6e50",
+    "python": "3.11.14",
+    "numpy": "1.26.4",
+    "platform": "Linux-6.8.0-1018-nvidia-lowlatency-x86_64-with-glibc2.39",
+    "thread_environment": {
+      "OMP_NUM_THREADS": "1",
+      "OPENBLAS_NUM_THREADS": "1",
+      "MKL_NUM_THREADS": "1"
+    },
+    "episodes_per_task": 5,
+    "repeats": 5,
+    "warmups": 1,
+    "selection": "First N recorded test episodes in numeric order, without filtering by outcome.",
+    "timing_scope": "Time frozen RoboMME perception/memory decisions on recorded observations.\n\nThis is an offline timing study, not a new simulator evaluation. It never learns,\nchanges a policy, executes act tools, or produces new success scores. Timing covers\ncode_policy.decide, including its validation and memory copies; it excludes H5\nloading, process startup, act-tool execution, rendering, simulation and robot I/O.",
+    "runtime_hashes": {
+      "src/cam/core/history.py": "85c20d0af2516fe6c30d4d6f10485f80cb6cfb9540f3a491ec5e8ba645668971",
+      "src/cam/core/code_policy.py": "66e1c36df482ef439a94a6356db1bb6fa733299882a8a4df6962218267213f84",
+      "src/cam/core/__init__.py": "a973eb2bde7faef0e443694e9f178ee440f89d9edd021d5982590ebcde4bba04",
+      "src/cam/core/budget.py": "b87f917fc67cb086ef1cde8922f3fc5a5b6077b9ecb50cc9ffd1b3582f2f8824",
+      "src/cam/core/workspace.py": "edc6907ae7f2fb837235dc1600b93756073d665aa5a745b379eb6f6827f769d6",
+      "src/cam/core/sandbox.py": "35e1cb61952416eff6021d9448172548e334fe981dab26a73395f0cb72a22e79",
+      "src/cam/core/tools.py": "94c9e432ea203e06bf1b717483904f30f6ffc18eca8b11bf8d1f3a66ba904572",
+      "src/cam/runtime/wire.py": "44f233c0239c7c50d40807de9dcf5c7732d83080ffd7d935ff19ec1461ee0fd8",
+      "src/cam/runtime/trajectory.py": "9e3318169d7977a23f159834ef5527f65608d1766869c7887f59a4f6ab0323a3",
+      "src/cam/runtime/policy_worker.py": "4a31c3b9a001f8e8c9a4d40402f8b98b469679ff7127025b520cc5e800be8e87",
+      "src/cam/runtime/__init__.py": "a973eb2bde7faef0e443694e9f178ee440f89d9edd021d5982590ebcde4bba04",
+      "src/cam/runtime/robot.py": "21ca078d39ae66150106b76d3e1a494f48e9f7b6f60f795cd82eb966490896ff",
+      "src/cam/runtime/observations.py": "43c624d8115bd05e5e64ea959723113a77d369be2a5b9ee402c7d49c2ff726da"
+    }
+  },
+  "cpu_model": "AMD EPYC 9334 32-Core Processor",
+  "per_task": [
+    {
+      "task": "BinFill",
+      "episodes": 5,
+      "decisions": 17,
+      "median_ms": 9.587387,
+      "p95_ms": 37.101220399999995,
+      "mean_ms": 14.05475017647059
+    },
+    {
+      "task": "ButtonUnmask",
+      "episodes": 5,
+      "decisions": 11,
+      "median_ms": 6.446904,
+      "p95_ms": 7.2016925,
+      "mean_ms": 6.633696727272727
+    },
+    {
+      "task": "ButtonUnmaskSwap",
+      "episodes": 5,
+      "decisions": 36,
+      "median_ms": 31.841058,
+      "p95_ms": 255.18007275,
+      "mean_ms": 73.35268966666666
+    },
+    {
+      "task": "InsertPeg",
+      "episodes": 5,
+      "decisions": 5,
+      "median_ms": 4.487645,
+      "p95_ms": 4.7627668,
+      "mean_ms": 4.4059296
+    },
+    {
+      "task": "MoveCube",
+      "episodes": 5,
+      "decisions": 5,
+      "median_ms": 5.256959,
+      "p95_ms": 5.5016466,
+      "mean_ms": 5.2909442
+    },
+    {
+      "task": "PatternLock",
+      "episodes": 5,
+      "decisions": 5,
+      "median_ms": 98.485714,
+      "p95_ms": 299.34402339999997,
+      "mean_ms": 150.4404872
+    },
+    {
+      "task": "PickHighlight",
+      "episodes": 5,
+      "decisions": 18,
+      "median_ms": 412.6416375,
+      "p95_ms": 556.0110012999999,
+      "mean_ms": 269.33493000000004
+    },
+    {
+      "task": "PickXtimes",
+      "episodes": 5,
+      "decisions": 27,
+      "median_ms": 3.042135,
+      "p95_ms": 8.4412398,
+      "mean_ms": 4.1617721111111114
+    },
+    {
+      "task": "RouteStick",
+      "episodes": 5,
+      "decisions": 5,
+      "median_ms": 1.553842,
+      "p95_ms": 1.9193044000000001,
+      "mean_ms": 1.5685478
+    },
+    {
+      "task": "StopCube",
+      "episodes": 5,
+      "decisions": 5,
+      "median_ms": 0.029284,
+      "p95_ms": 0.030395600000000002,
+      "mean_ms": 0.029332000000000004
+    },
+    {
+      "task": "SwingXtimes",
+      "episodes": 5,
+      "decisions": 46,
+      "median_ms": 0.0637955,
+      "p95_ms": 4.43190575,
+      "mean_ms": 1.003454847826087
+    },
+    {
+      "task": "VideoPlaceButton",
+      "episodes": 5,
+      "decisions": 5,
+      "median_ms": 361.555023,
+      "p95_ms": 371.2856434,
+      "mean_ms": 354.36599859999995
+    },
+    {
+      "task": "VideoPlaceOrder",
+      "episodes": 5,
+      "decisions": 10,
+      "median_ms": 227.704408,
+      "p95_ms": 559.2631279999998,
+      "mean_ms": 251.8849718
+    },
+    {
+      "task": "VideoRepick",
+      "episodes": 5,
+      "decisions": 16,
+      "median_ms": 0.051568,
+      "p95_ms": 507.7979085,
+      "mean_ms": 119.90273368749999
+    },
+    {
+      "task": "VideoUnmask",
+      "episodes": 5,
+      "decisions": 6,
+      "median_ms": 8.448253000000001,
+      "p95_ms": 13.40573025,
+      "mean_ms": 8.1152985
+    },
+    {
+      "task": "VideoUnmaskSwap",
+      "episodes": 5,
+      "decisions": 8,
+      "median_ms": 448.606972,
+      "p95_ms": 802.5368850999998,
+      "mean_ms": 363.45595687499997
+    }
+  ],
+  "decisions_data": [
+    {
+      "task": "BinFill",
+      "episode": 0,
+      "decision": 0,
+      "frames": [
+        "E0",
+        "E0"
+      ],
+      "frame_count": 1,
+      "milliseconds": [
+        39.16237,
+        38.911343,
+        39.14963,
+        38.858634,
+        39.290963
+      ],
+      "median_ms": 39.14963,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/BinFill/R000/ep0/result.json",
+      "source_sha256": "843155418e758cb208b681eae8ea66ed3a56a8bbc8b15a62a4b94fcf8ca20606"
+    },
+    {
+      "task": "BinFill",
+      "episode": 0,
+      "decision": 1,
+      "frames": [
+        "E1",
+        "E108"
+      ],
+      "frame_count": 108,
+      "milliseconds": [
+        0.06673,
+        0.049524,
+        0.045358,
+        0.044698,
+        0.043916
+      ],
+      "median_ms": 0.045358,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/BinFill/R000/ep0/result.json",
+      "source_sha256": "843155418e758cb208b681eae8ea66ed3a56a8bbc8b15a62a4b94fcf8ca20606"
+    },
+    {
+      "task": "BinFill",
+      "episode": 1,
+      "decision": 0,
+      "frames": [
+        "E0",
+        "E0"
+      ],
+      "frame_count": 1,
+      "milliseconds": [
+        35.930931,
+        35.845853,
+        35.985602,
+        35.880034,
+        36.099554
+      ],
+      "median_ms": 35.930931,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/BinFill/R000/ep1/result.json",
+      "source_sha256": "a31ced307878a91fb9c5c0842dc3abbd0d89d3af8a2f0fd1234eb5869d98b8c4"
+    },
+    {
+      "task": "BinFill",
+      "episode": 1,
+      "decision": 1,
+      "frames": [
+        "E1",
+        "E101"
+      ],
+      "frame_count": 101,
+      "milliseconds": [
+        0.056125,
+        0.047712,
+        0.044657,
+        0.041562,
+        0.047822
+      ],
+      "median_ms": 0.047712,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/BinFill/R000/ep1/result.json",
+      "source_sha256": "a31ced307878a91fb9c5c0842dc3abbd0d89d3af8a2f0fd1234eb5869d98b8c4"
+    },
+    {
+      "task": "BinFill",
+      "episode": 2,
+      "decision": 0,
+      "frames": [
+        "E0",
+        "E0"
+      ],
+      "frame_count": 1,
+      "milliseconds": [
+        30.511227,
+        30.511718,
+        30.32009,
+        30.806811,
+        30.761313
+      ],
+      "median_ms": 30.511718,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/BinFill/R000/ep2/result.json",
+      "source_sha256": "8afc2495e777de394ed8d56257336f244268c2af254823ed49d66125d983279d"
+    },
+    {
+      "task": "BinFill",
+      "episode": 2,
+      "decision": 1,
+      "frames": [
+        "E1",
+        "E97"
+      ],
+      "frame_count": 97,
+      "milliseconds": [
+        13.142943,
+        13.139128,
+        13.145648,
+        13.262483,
+        13.061291
+      ],
+      "median_ms": 13.142943,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/BinFill/R000/ep2/result.json",
+      "source_sha256": "8afc2495e777de394ed8d56257336f244268c2af254823ed49d66125d983279d"
+    },
+    {
+      "task": "BinFill",
+      "episode": 2,
+      "decision": 2,
+      "frames": [
+        "E98",
+        "E183"
+      ],
+      "frame_count": 86,
+      "milliseconds": [
+        10.258344,
+        10.032636,
+        9.970222,
+        10.24914,
+        10.352636
+      ],
+      "median_ms": 10.24914,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/BinFill/R000/ep2/result.json",
+      "source_sha256": "8afc2495e777de394ed8d56257336f244268c2af254823ed49d66125d983279d"
+    },
+    {
+      "task": "BinFill",
+      "episode": 2,
+      "decision": 3,
+      "frames": [
+        "E184",
+        "E296"
+      ],
+      "frame_count": 113,
+      "milliseconds": [
+        9.95543,
+        10.111363,
+        10.040747,
+        9.968389,
+        9.947327
+      ],
+      "median_ms": 9.968389,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/BinFill/R000/ep2/result.json",
+      "source_sha256": "8afc2495e777de394ed8d56257336f244268c2af254823ed49d66125d983279d"
+    },
+    {
+      "task": "BinFill",
+      "episode": 2,
+      "decision": 4,
+      "frames": [
+        "E297",
+        "E407"
+      ],
+      "frame_count": 111,
+      "milliseconds": [
+        0.058277,
+        0.048643,
+        0.04674,
+        0.044067,
+        0.045618
+      ],
+      "median_ms": 0.04674,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/BinFill/R000/ep2/result.json",
+      "source_sha256": "8afc2495e777de394ed8d56257336f244268c2af254823ed49d66125d983279d"
+    },
+    {
+      "task": "BinFill",
+      "episode": 3,
+      "decision": 0,
+      "frames": [
+        "E0",
+        "E0"
+      ],
+      "frame_count": 1,
+      "milliseconds": [
+        36.442298,
+        36.589118,
+        36.647175,
+        36.493164,
+        36.656719
+      ],
+      "median_ms": 36.589118,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/BinFill/R000/ep3/result.json",
+      "source_sha256": "2960cfa94c7c5f54c23c9c03f161dd8a3939a50db0deef92ca7f4df2c1e898e3"
+    },
+    {
+      "task": "BinFill",
+      "episode": 3,
+      "decision": 1,
+      "frames": [
+        "E1",
+        "E104"
+      ],
+      "frame_count": 104,
+      "milliseconds": [
+        6.105963,
+        6.05067,
+        6.032353,
+        5.996719,
+        6.119634
+      ],
+      "median_ms": 6.05067,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/BinFill/R000/ep3/result.json",
+      "source_sha256": "2960cfa94c7c5f54c23c9c03f161dd8a3939a50db0deef92ca7f4df2c1e898e3"
+    },
+    {
+      "task": "BinFill",
+      "episode": 3,
+      "decision": 2,
+      "frames": [
+        "E105",
+        "E193"
+      ],
+      "frame_count": 89,
+      "milliseconds": [
+        4.963348,
+        4.92477,
+        5.048547,
+        4.946463,
+        5.033283
+      ],
+      "median_ms": 4.963348,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/BinFill/R000/ep3/result.json",
+      "source_sha256": "2960cfa94c7c5f54c23c9c03f161dd8a3939a50db0deef92ca7f4df2c1e898e3"
+    },
+    {
+      "task": "BinFill",
+      "episode": 3,
+      "decision": 3,
+      "frames": [
+        "E194",
+        "E215"
+      ],
+      "frame_count": 22,
+      "milliseconds": [
+        9.601639,
+        9.471844,
+        9.474759,
+        9.587387,
+        9.648068
+      ],
+      "median_ms": 9.587387,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/BinFill/R000/ep3/result.json",
+      "source_sha256": "2960cfa94c7c5f54c23c9c03f161dd8a3939a50db0deef92ca7f4df2c1e898e3"
+    },
+    {
+      "task": "BinFill",
+      "episode": 3,
+      "decision": 4,
+      "frames": [
+        "E216",
+        "E311"
+      ],
+      "frame_count": 96,
+      "milliseconds": [
+        8.258513,
+        8.202619,
+        8.431753,
+        8.380837,
+        8.268508
+      ],
+      "median_ms": 8.268508,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/BinFill/R000/ep3/result.json",
+      "source_sha256": "2960cfa94c7c5f54c23c9c03f161dd8a3939a50db0deef92ca7f4df2c1e898e3"
+    },
+    {
+      "task": "BinFill",
+      "episode": 3,
+      "decision": 5,
+      "frames": [
+        "E312",
+        "E390"
+      ],
+      "frame_count": 79,
+      "milliseconds": [
+        0.057907,
+        0.050045,
+        0.045899,
+        0.043716,
+        0.043716
+      ],
+      "median_ms": 0.045899,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/BinFill/R000/ep3/result.json",
+      "source_sha256": "2960cfa94c7c5f54c23c9c03f161dd8a3939a50db0deef92ca7f4df2c1e898e3"
+    },
+    {
+      "task": "BinFill",
+      "episode": 4,
+      "decision": 0,
+      "frames": [
+        "E0",
+        "E0"
+      ],
+      "frame_count": 1,
+      "milliseconds": [
+        34.114604,
+        34.145721,
+        34.387644,
+        34.35801,
+        34.287584
+      ],
+      "median_ms": 34.287584,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/BinFill/R000/ep4/result.json",
+      "source_sha256": "516844d84e216507c65914302f7bccde8ec06c34bc104763715486a83f04392f"
+    },
+    {
+      "task": "BinFill",
+      "episode": 4,
+      "decision": 1,
+      "frames": [
+        "E1",
+        "E110"
+      ],
+      "frame_count": 110,
+      "milliseconds": [
+        0.055122,
+        0.047762,
+        0.045678,
+        0.043175,
+        0.04018
+      ],
+      "median_ms": 0.045678,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/BinFill/R000/ep4/result.json",
+      "source_sha256": "516844d84e216507c65914302f7bccde8ec06c34bc104763715486a83f04392f"
+    },
+    {
+      "task": "ButtonUnmask",
+      "episode": 0,
+      "decision": 0,
+      "frames": [
+        "E0",
+        "E0"
+      ],
+      "frame_count": 1,
+      "milliseconds": [
+        6.258763,
+        6.151391,
+        6.127015,
+        6.26417,
+        6.368206
+      ],
+      "median_ms": 6.258763,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/ButtonUnmask/R000/ep0/result.json",
+      "source_sha256": "804944e385f7bfe262d3f25bb0e14ff59a7c3e59008b65c5e58d35dbe16ff9c3"
+    },
+    {
+      "task": "ButtonUnmask",
+      "episode": 0,
+      "decision": 1,
+      "frames": [
+        "E1",
+        "E91"
+      ],
+      "frame_count": 91,
+      "milliseconds": [
+        7.068717,
+        7.572504,
+        7.194537,
+        7.193786,
+        7.122729
+      ],
+      "median_ms": 7.193786,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/ButtonUnmask/R000/ep0/result.json",
+      "source_sha256": "804944e385f7bfe262d3f25bb0e14ff59a7c3e59008b65c5e58d35dbe16ff9c3"
+    },
+    {
+      "task": "ButtonUnmask",
+      "episode": 1,
+      "decision": 0,
+      "frames": [
+        "E0",
+        "E0"
+      ],
+      "frame_count": 1,
+      "milliseconds": [
+        6.211361,
+        6.57036,
+        6.335898,
+        6.318041,
+        6.304651
+      ],
+      "median_ms": 6.318041,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/ButtonUnmask/R000/ep1/result.json",
+      "source_sha256": "d25800f45f60e5aff77af8edaac80b5393a33bdec0465c60833ad2dc6afe7616"
+    },
+    {
+      "task": "ButtonUnmask",
+      "episode": 1,
+      "decision": 1,
+      "frames": [
+        "E1",
+        "E90"
+      ],
+      "frame_count": 90,
+      "milliseconds": [
+        7.215869,
+        7.119283,
+        7.132463,
+        7.116019,
+        11.717504
+      ],
+      "median_ms": 7.132463,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/ButtonUnmask/R000/ep1/result.json",
+      "source_sha256": "d25800f45f60e5aff77af8edaac80b5393a33bdec0465c60833ad2dc6afe7616"
+    },
+    {
+      "task": "ButtonUnmask",
+      "episode": 2,
+      "decision": 0,
+      "frames": [
+        "E0",
+        "E0"
+      ],
+      "frame_count": 1,
+      "milliseconds": [
+        6.173284,
+        6.138131,
+        6.193915,
+        6.291651,
+        6.418262
+      ],
+      "median_ms": 6.193915,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/ButtonUnmask/R000/ep2/result.json",
+      "source_sha256": "4747158f5f093112e2f8ac3132fa2eacb68a4aed1a99913b7de6ec13439ead00"
+    },
+    {
+      "task": "ButtonUnmask",
+      "episode": 2,
+      "decision": 1,
+      "frames": [
+        "E1",
+        "E89"
+      ],
+      "frame_count": 89,
+      "milliseconds": [
+        6.950821,
+        6.896639,
+        6.900626,
+        6.854616,
+        6.944532
+      ],
+      "median_ms": 6.900626,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/ButtonUnmask/R000/ep2/result.json",
+      "source_sha256": "4747158f5f093112e2f8ac3132fa2eacb68a4aed1a99913b7de6ec13439ead00"
+    },
+    {
+      "task": "ButtonUnmask",
+      "episode": 3,
+      "decision": 0,
+      "frames": [
+        "E0",
+        "E0"
+      ],
+      "frame_count": 1,
+      "milliseconds": [
+        6.191642,
+        6.126414,
+        6.113985,
+        6.092883,
+        6.109208
+      ],
+      "median_ms": 6.113985,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/ButtonUnmask/R000/ep3/result.json",
+      "source_sha256": "07e2d3208817198ba4a0d64028bcd275c6b112ab29649523cb2da9ab28b277d6"
+    },
+    {
+      "task": "ButtonUnmask",
+      "episode": 3,
+      "decision": 1,
+      "frames": [
+        "E1",
+        "E90"
+      ],
+      "frame_count": 90,
+      "milliseconds": [
+        7.001046,
+        7.216349,
+        6.978402,
+        6.93015,
+        6.9906
+      ],
+      "median_ms": 6.9906,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/ButtonUnmask/R000/ep3/result.json",
+      "source_sha256": "07e2d3208817198ba4a0d64028bcd275c6b112ab29649523cb2da9ab28b277d6"
+    },
+    {
+      "task": "ButtonUnmask",
+      "episode": 3,
+      "decision": 2,
+      "frames": [
+        "E91",
+        "E207"
+      ],
+      "frame_count": 117,
+      "milliseconds": [
+        6.549459,
+        6.460174,
+        6.446904,
+        6.40439,
+        6.441727
+      ],
+      "median_ms": 6.446904,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/ButtonUnmask/R000/ep3/result.json",
+      "source_sha256": "07e2d3208817198ba4a0d64028bcd275c6b112ab29649523cb2da9ab28b277d6"
+    },
+    {
+      "task": "ButtonUnmask",
+      "episode": 4,
+      "decision": 0,
+      "frames": [
+        "E0",
+        "E0"
+      ],
+      "frame_count": 1,
+      "milliseconds": [
+        6.282278,
+        6.19061,
+        6.169338,
+        6.211982,
+        6.300665
+      ],
+      "median_ms": 6.211982,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/ButtonUnmask/R000/ep4/result.json",
+      "source_sha256": "d478d44394fa510ededc1b2ae1e5c405a4bfb2604f95a21b7bf90ad1dbb2789b"
+    },
+    {
+      "task": "ButtonUnmask",
+      "episode": 4,
+      "decision": 1,
+      "frames": [
+        "E1",
+        "E90"
+      ],
+      "frame_count": 90,
+      "milliseconds": [
+        7.209599,
+        7.146764,
+        7.257451,
+        7.237151,
+        7.155819
+      ],
+      "median_ms": 7.209599,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/ButtonUnmask/R000/ep4/result.json",
+      "source_sha256": "d478d44394fa510ededc1b2ae1e5c405a4bfb2604f95a21b7bf90ad1dbb2789b"
+    },
+    {
+      "task": "ButtonUnmaskSwap",
+      "episode": 0,
+      "decision": 0,
+      "frames": [
+        "E0",
+        "E0"
+      ],
+      "frame_count": 1,
+      "milliseconds": [
+        6.008938,
+        5.8772,
+        6.009809,
+        5.868867,
+        5.858933
+      ],
+      "median_ms": 5.8772,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/ButtonUnmaskSwap/R000/ep0/result.json",
+      "source_sha256": "82cdad7b84d0542e12ac35ffb3875938faa373bcf3c52336968ac09fd257b0af"
+    },
+    {
+      "task": "ButtonUnmaskSwap",
+      "episode": 0,
+      "decision": 1,
+      "frames": [
+        "E1",
+        "E96"
+      ],
+      "frame_count": 96,
+      "milliseconds": [
+        247.871472,
+        247.971883,
+        248.141718,
+        248.200616,
+        249.945695
+      ],
+      "median_ms": 248.141718,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/ButtonUnmaskSwap/R000/ep0/result.json",
+      "source_sha256": "82cdad7b84d0542e12ac35ffb3875938faa373bcf3c52336968ac09fd257b0af"
+    },
+    {
+      "task": "ButtonUnmaskSwap",
+      "episode": 0,
+      "decision": 2,
+      "frames": [
+        "E97",
+        "E171"
+      ],
+      "frame_count": 75,
+      "milliseconds": [
+        158.112875,
+        155.49082,
+        155.599333,
+        156.839414,
+        155.564891
+      ],
+      "median_ms": 155.599333,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/ButtonUnmaskSwap/R000/ep0/result.json",
+      "source_sha256": "82cdad7b84d0542e12ac35ffb3875938faa373bcf3c52336968ac09fd257b0af"
+    },
+    {
+      "task": "ButtonUnmaskSwap",
+      "episode": 0,
+      "decision": 3,
+      "frames": [
+        "E172",
+        "E186"
+      ],
+      "frame_count": 15,
+      "milliseconds": [
+        30.810306,
+        31.030877,
+        30.963235,
+        30.788073,
+        30.732269
+      ],
+      "median_ms": 30.810306,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/ButtonUnmaskSwap/R000/ep0/result.json",
+      "source_sha256": "82cdad7b84d0542e12ac35ffb3875938faa373bcf3c52336968ac09fd257b0af"
+    },
+    {
+      "task": "ButtonUnmaskSwap",
+      "episode": 0,
+      "decision": 4,
+      "frames": [
+        "E187",
+        "E201"
+      ],
+      "frame_count": 15,
+      "milliseconds": [
+        31.405419,
+        31.471479,
+        31.333171,
+        31.506421,
+        31.600952
+      ],
+      "median_ms": 31.471479,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/ButtonUnmaskSwap/R000/ep0/result.json",
+      "source_sha256": "82cdad7b84d0542e12ac35ffb3875938faa373bcf3c52336968ac09fd257b0af"
+    },
+    {
+      "task": "ButtonUnmaskSwap",
+      "episode": 0,
+      "decision": 5,
+      "frames": [
+        "E202",
+        "E216"
+      ],
+      "frame_count": 15,
+      "milliseconds": [
+        34.801305,
+        34.709798,
+        34.987735,
+        34.995958,
+        34.846773
+      ],
+      "median_ms": 34.846773,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/ButtonUnmaskSwap/R000/ep0/result.json",
+      "source_sha256": "82cdad7b84d0542e12ac35ffb3875938faa373bcf3c52336968ac09fd257b0af"
+    },
+    {
+      "task": "ButtonUnmaskSwap",
+      "episode": 0,
+      "decision": 6,
+      "frames": [
+        "E217",
+        "E311"
+      ],
+      "frame_count": 95,
+      "milliseconds": [
+        0.141442,
+        0.115854,
+        0.105729,
+        0.109204,
+        0.103436
+      ],
+      "median_ms": 0.109204,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/ButtonUnmaskSwap/R000/ep0/result.json",
+      "source_sha256": "82cdad7b84d0542e12ac35ffb3875938faa373bcf3c52336968ac09fd257b0af"
+    },
+    {
+      "task": "ButtonUnmaskSwap",
+      "episode": 0,
+      "decision": 7,
+      "frames": [
+        "E312",
+        "E352"
+      ],
+      "frame_count": 41,
+      "milliseconds": [
+        4.268014,
+        4.240654,
+        4.241846,
+        4.308345,
+        4.474064
+      ],
+      "median_ms": 4.268014,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/ButtonUnmaskSwap/R000/ep0/result.json",
+      "source_sha256": "82cdad7b84d0542e12ac35ffb3875938faa373bcf3c52336968ac09fd257b0af"
+    },
+    {
+      "task": "ButtonUnmaskSwap",
+      "episode": 1,
+      "decision": 0,
+      "frames": [
+        "E0",
+        "E0"
+      ],
+      "frame_count": 1,
+      "milliseconds": [
+        5.001395,
+        4.968927,
+        4.951741,
+        5.07721,
+        5.471681
+      ],
+      "median_ms": 5.001395,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/ButtonUnmaskSwap/R000/ep1/result.json",
+      "source_sha256": "e656aa2ca0ae5fa94c07c4a484b1d58c38f8db07237c9d4efc8b340b0cb43c02"
+    },
+    {
+      "task": "ButtonUnmaskSwap",
+      "episode": 1,
+      "decision": 1,
+      "frames": [
+        "E1",
+        "E96"
+      ],
+      "frame_count": 96,
+      "milliseconds": [
+        216.447025,
+        218.833796,
+        219.740407,
+        219.39587,
+        215.971191
+      ],
+      "median_ms": 218.833796,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/ButtonUnmaskSwap/R000/ep1/result.json",
+      "source_sha256": "e656aa2ca0ae5fa94c07c4a484b1d58c38f8db07237c9d4efc8b340b0cb43c02"
+    },
+    {
+      "task": "ButtonUnmaskSwap",
+      "episode": 1,
+      "decision": 2,
+      "frames": [
+        "E97",
+        "E173"
+      ],
+      "frame_count": 77,
+      "milliseconds": [
+        139.010158,
+        138.729477,
+        139.903338,
+        141.41052,
+        139.530028
+      ],
+      "median_ms": 139.530028,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/ButtonUnmaskSwap/R000/ep1/result.json",
+      "source_sha256": "e656aa2ca0ae5fa94c07c4a484b1d58c38f8db07237c9d4efc8b340b0cb43c02"
+    },
+    {
+      "task": "ButtonUnmaskSwap",
+      "episode": 1,
+      "decision": 3,
+      "frames": [
+        "E174",
+        "E188"
+      ],
+      "frame_count": 15,
+      "milliseconds": [
+        31.074753,
+        30.740611,
+        31.592961,
+        31.868544,
+        30.784667
+      ],
+      "median_ms": 31.074753,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/ButtonUnmaskSwap/R000/ep1/result.json",
+      "source_sha256": "e656aa2ca0ae5fa94c07c4a484b1d58c38f8db07237c9d4efc8b340b0cb43c02"
+    },
+    {
+      "task": "ButtonUnmaskSwap",
+      "episode": 1,
+      "decision": 4,
+      "frames": [
+        "E189",
+        "E203"
+      ],
+      "frame_count": 15,
+      "milliseconds": [
+        30.933331,
+        31.162154,
+        31.421523,
+        31.035494,
+        31.436655
+      ],
+      "median_ms": 31.162154,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/ButtonUnmaskSwap/R000/ep1/result.json",
+      "source_sha256": "e656aa2ca0ae5fa94c07c4a484b1d58c38f8db07237c9d4efc8b340b0cb43c02"
+    },
+    {
+      "task": "ButtonUnmaskSwap",
+      "episode": 1,
+      "decision": 5,
+      "frames": [
+        "E204",
+        "E218"
+      ],
+      "frame_count": 15,
+      "milliseconds": [
+        31.201453,
+        31.496396,
+        31.146761,
+        31.125289,
+        31.175544
+      ],
+      "median_ms": 31.175544,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/ButtonUnmaskSwap/R000/ep1/result.json",
+      "source_sha256": "e656aa2ca0ae5fa94c07c4a484b1d58c38f8db07237c9d4efc8b340b0cb43c02"
+    },
+    {
+      "task": "ButtonUnmaskSwap",
+      "episode": 1,
+      "decision": 6,
+      "frames": [
+        "E219",
+        "E313"
+      ],
+      "frame_count": 95,
+      "milliseconds": [
+        0.130836,
+        0.11321,
+        0.108053,
+        0.107942,
+        0.108082
+      ],
+      "median_ms": 0.108082,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/ButtonUnmaskSwap/R000/ep1/result.json",
+      "source_sha256": "e656aa2ca0ae5fa94c07c4a484b1d58c38f8db07237c9d4efc8b340b0cb43c02"
+    },
+    {
+      "task": "ButtonUnmaskSwap",
+      "episode": 1,
+      "decision": 7,
+      "frames": [
+        "E314",
+        "E354"
+      ],
+      "frame_count": 41,
+      "milliseconds": [
+        4.25775,
+        4.213653,
+        4.242477,
+        4.260253,
+        4.223568
+      ],
+      "median_ms": 4.242477,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/ButtonUnmaskSwap/R000/ep1/result.json",
+      "source_sha256": "e656aa2ca0ae5fa94c07c4a484b1d58c38f8db07237c9d4efc8b340b0cb43c02"
+    },
+    {
+      "task": "ButtonUnmaskSwap",
+      "episode": 2,
+      "decision": 0,
+      "frames": [
+        "E0",
+        "E0"
+      ],
+      "frame_count": 1,
+      "milliseconds": [
+        5.512072,
+        5.424791,
+        5.476549,
+        5.502077,
+        5.562697
+      ],
+      "median_ms": 5.502077,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/ButtonUnmaskSwap/R000/ep2/result.json",
+      "source_sha256": "6cb6c1ac93bb263793bf67f93b87ac76328e4618549f19ca9fe505fc3715817e"
+    },
+    {
+      "task": "ButtonUnmaskSwap",
+      "episode": 2,
+      "decision": 1,
+      "frames": [
+        "E1",
+        "E97"
+      ],
+      "frame_count": 97,
+      "milliseconds": [
+        275.320585,
+        278.518023,
+        276.295137,
+        276.707045,
+        275.729058
+      ],
+      "median_ms": 276.295137,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/ButtonUnmaskSwap/R000/ep2/result.json",
+      "source_sha256": "6cb6c1ac93bb263793bf67f93b87ac76328e4618549f19ca9fe505fc3715817e"
+    },
+    {
+      "task": "ButtonUnmaskSwap",
+      "episode": 2,
+      "decision": 2,
+      "frames": [
+        "E98",
+        "E173"
+      ],
+      "frame_count": 76,
+      "milliseconds": [
+        183.292962,
+        183.712371,
+        185.575167,
+        186.752844,
+        191.219817
+      ],
+      "median_ms": 185.575167,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/ButtonUnmaskSwap/R000/ep2/result.json",
+      "source_sha256": "6cb6c1ac93bb263793bf67f93b87ac76328e4618549f19ca9fe505fc3715817e"
+    },
+    {
+      "task": "ButtonUnmaskSwap",
+      "episode": 2,
+      "decision": 3,
+      "frames": [
+        "E174",
+        "E188"
+      ],
+      "frame_count": 15,
+      "milliseconds": [
+        33.415756,
+        33.427964,
+        33.370278,
+        33.436056,
+        33.525751
+      ],
+      "median_ms": 33.427964,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/ButtonUnmaskSwap/R000/ep2/result.json",
+      "source_sha256": "6cb6c1ac93bb263793bf67f93b87ac76328e4618549f19ca9fe505fc3715817e"
+    },
+    {
+      "task": "ButtonUnmaskSwap",
+      "episode": 2,
+      "decision": 4,
+      "frames": [
+        "E189",
+        "E203"
+      ],
+      "frame_count": 15,
+      "milliseconds": [
+        37.995108,
+        37.681698,
+        37.901027,
+        37.714026,
+        37.695929
+      ],
+      "median_ms": 37.714026,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/ButtonUnmaskSwap/R000/ep2/result.json",
+      "source_sha256": "6cb6c1ac93bb263793bf67f93b87ac76328e4618549f19ca9fe505fc3715817e"
+    },
+    {
+      "task": "ButtonUnmaskSwap",
+      "episode": 2,
+      "decision": 5,
+      "frames": [
+        "E204",
+        "E218"
+      ],
+      "frame_count": 15,
+      "milliseconds": [
+        37.946195,
+        37.898603,
+        40.37493,
+        38.469931,
+        37.980697
+      ],
+      "median_ms": 37.980697,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/ButtonUnmaskSwap/R000/ep2/result.json",
+      "source_sha256": "6cb6c1ac93bb263793bf67f93b87ac76328e4618549f19ca9fe505fc3715817e"
+    },
+    {
+      "task": "ButtonUnmaskSwap",
+      "episode": 3,
+      "decision": 0,
+      "frames": [
+        "E0",
+        "E0"
+      ],
+      "frame_count": 1,
+      "milliseconds": [
+        5.820574,
+        5.81766,
+        5.948166,
+        5.972873,
+        5.881096
+      ],
+      "median_ms": 5.881096,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/ButtonUnmaskSwap/R000/ep3/result.json",
+      "source_sha256": "9ef4beb98d105b9704265d8095b61060736553f9921e6a9dcaaad4d129cd5840"
+    },
+    {
+      "task": "ButtonUnmaskSwap",
+      "episode": 3,
+      "decision": 1,
+      "frames": [
+        "E1",
+        "E95"
+      ],
+      "frame_count": 95,
+      "milliseconds": [
+        277.351603,
+        277.940857,
+        277.094676,
+        278.785434,
+        279.076721
+      ],
+      "median_ms": 277.940857,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/ButtonUnmaskSwap/R000/ep3/result.json",
+      "source_sha256": "9ef4beb98d105b9704265d8095b61060736553f9921e6a9dcaaad4d129cd5840"
+    },
+    {
+      "task": "ButtonUnmaskSwap",
+      "episode": 3,
+      "decision": 2,
+      "frames": [
+        "E96",
+        "E170"
+      ],
+      "frame_count": 75,
+      "milliseconds": [
+        186.626885,
+        187.317421,
+        188.290291,
+        187.179974,
+        187.677872
+      ],
+      "median_ms": 187.317421,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/ButtonUnmaskSwap/R000/ep3/result.json",
+      "source_sha256": "9ef4beb98d105b9704265d8095b61060736553f9921e6a9dcaaad4d129cd5840"
+    },
+    {
+      "task": "ButtonUnmaskSwap",
+      "episode": 3,
+      "decision": 3,
+      "frames": [
+        "E171",
+        "E185"
+      ],
+      "frame_count": 15,
+      "milliseconds": [
+        34.680394,
+        34.669137,
+        34.568706,
+        34.59122,
+        34.848847
+      ],
+      "median_ms": 34.669137,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/ButtonUnmaskSwap/R000/ep3/result.json",
+      "source_sha256": "9ef4beb98d105b9704265d8095b61060736553f9921e6a9dcaaad4d129cd5840"
+    },
+    {
+      "task": "ButtonUnmaskSwap",
+      "episode": 3,
+      "decision": 4,
+      "frames": [
+        "E186",
+        "E200"
+      ],
+      "frame_count": 15,
+      "milliseconds": [
+        38.558053,
+        38.37636,
+        38.517382,
+        38.513666,
+        38.502659
+      ],
+      "median_ms": 38.513666,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/ButtonUnmaskSwap/R000/ep3/result.json",
+      "source_sha256": "9ef4beb98d105b9704265d8095b61060736553f9921e6a9dcaaad4d129cd5840"
+    },
+    {
+      "task": "ButtonUnmaskSwap",
+      "episode": 3,
+      "decision": 5,
+      "frames": [
+        "E201",
+        "E215"
+      ],
+      "frame_count": 15,
+      "milliseconds": [
+        40.671214,
+        42.60733,
+        40.750282,
+        40.40178,
+        40.534639
+      ],
+      "median_ms": 40.671214,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/ButtonUnmaskSwap/R000/ep3/result.json",
+      "source_sha256": "9ef4beb98d105b9704265d8095b61060736553f9921e6a9dcaaad4d129cd5840"
+    },
+    {
+      "task": "ButtonUnmaskSwap",
+      "episode": 3,
+      "decision": 6,
+      "frames": [
+        "E216",
+        "E316"
+      ],
+      "frame_count": 101,
+      "milliseconds": [
+        0.129024,
+        0.120541,
+        0.11322,
+        0.111107,
+        0.110856
+      ],
+      "median_ms": 0.11322,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/ButtonUnmaskSwap/R000/ep3/result.json",
+      "source_sha256": "9ef4beb98d105b9704265d8095b61060736553f9921e6a9dcaaad4d129cd5840"
+    },
+    {
+      "task": "ButtonUnmaskSwap",
+      "episode": 3,
+      "decision": 7,
+      "frames": [
+        "E317",
+        "E357"
+      ],
+      "frame_count": 41,
+      "milliseconds": [
+        4.283167,
+        4.255787,
+        4.248395,
+        4.21799,
+        4.239913
+      ],
+      "median_ms": 4.248395,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/ButtonUnmaskSwap/R000/ep3/result.json",
+      "source_sha256": "9ef4beb98d105b9704265d8095b61060736553f9921e6a9dcaaad4d129cd5840"
+    },
+    {
+      "task": "ButtonUnmaskSwap",
+      "episode": 4,
+      "decision": 0,
+      "frames": [
+        "E0",
+        "E0"
+      ],
+      "frame_count": 1,
+      "milliseconds": [
+        5.619953,
+        5.588537,
+        5.626474,
+        5.618702,
+        5.601316
+      ],
+      "median_ms": 5.618702,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/ButtonUnmaskSwap/R000/ep4/result.json",
+      "source_sha256": "dbe639ef83f8b1626b43925a130cfdadf8247ddeb430d2a13c7d8b4c3c8015be"
+    },
+    {
+      "task": "ButtonUnmaskSwap",
+      "episode": 4,
+      "decision": 1,
+      "frames": [
+        "E1",
+        "E96"
+      ],
+      "frame_count": 96,
+      "milliseconds": [
+        244.937359,
+        245.442868,
+        247.642479,
+        250.944464,
+        248.857553
+      ],
+      "median_ms": 247.642479,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/ButtonUnmaskSwap/R000/ep4/result.json",
+      "source_sha256": "dbe639ef83f8b1626b43925a130cfdadf8247ddeb430d2a13c7d8b4c3c8015be"
+    },
+    {
+      "task": "ButtonUnmaskSwap",
+      "episode": 4,
+      "decision": 2,
+      "frames": [
+        "E97",
+        "E173"
+      ],
+      "frame_count": 77,
+      "milliseconds": [
+        156.846334,
+        157.594357,
+        157.384592,
+        157.219154,
+        157.674166
+      ],
+      "median_ms": 157.384592,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/ButtonUnmaskSwap/R000/ep4/result.json",
+      "source_sha256": "dbe639ef83f8b1626b43925a130cfdadf8247ddeb430d2a13c7d8b4c3c8015be"
+    },
+    {
+      "task": "ButtonUnmaskSwap",
+      "episode": 4,
+      "decision": 3,
+      "frames": [
+        "E174",
+        "E188"
+      ],
+      "frame_count": 15,
+      "milliseconds": [
+        28.213899,
+        28.266609,
+        27.849163,
+        28.348462,
+        28.283484
+      ],
+      "median_ms": 28.266609,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/ButtonUnmaskSwap/R000/ep4/result.json",
+      "source_sha256": "dbe639ef83f8b1626b43925a130cfdadf8247ddeb430d2a13c7d8b4c3c8015be"
+    },
+    {
+      "task": "ButtonUnmaskSwap",
+      "episode": 4,
+      "decision": 4,
+      "frames": [
+        "E189",
+        "E203"
+      ],
+      "frame_count": 15,
+      "milliseconds": [
+        31.829165,
+        31.350456,
+        31.632029,
+        31.525199,
+        31.437978
+      ],
+      "median_ms": 31.525199,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/ButtonUnmaskSwap/R000/ep4/result.json",
+      "source_sha256": "dbe639ef83f8b1626b43925a130cfdadf8247ddeb430d2a13c7d8b4c3c8015be"
+    },
+    {
+      "task": "ButtonUnmaskSwap",
+      "episode": 4,
+      "decision": 5,
+      "frames": [
+        "E204",
+        "E218"
+      ],
+      "frame_count": 15,
+      "milliseconds": [
+        32.186691,
+        31.992681,
+        32.147152,
+        32.156917,
+        32.206382
+      ],
+      "median_ms": 32.156917,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/ButtonUnmaskSwap/R000/ep4/result.json",
+      "source_sha256": "dbe639ef83f8b1626b43925a130cfdadf8247ddeb430d2a13c7d8b4c3c8015be"
+    },
+    {
+      "task": "InsertPeg",
+      "episode": 0,
+      "decision": 0,
+      "frames": [
+        "D0",
+        "E0"
+      ],
+      "frame_count": 268,
+      "milliseconds": [
+        4.722106,
+        4.714815,
+        4.719382,
+        4.843469,
+        4.743609
+      ],
+      "median_ms": 4.722106,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/InsertPeg/R000/ep0/result.json",
+      "source_sha256": "ba8cdfcd608b6d208a2f8a37b0b49ebe738135a34415a24e6be15c02190273f8"
+    },
+    {
+      "task": "InsertPeg",
+      "episode": 1,
+      "decision": 0,
+      "frames": [
+        "D0",
+        "E0"
+      ],
+      "frame_count": 217,
+      "milliseconds": [
+        3.827804,
+        3.980613,
+        3.940353,
+        3.875095,
+        3.956457
+      ],
+      "median_ms": 3.940353,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/InsertPeg/R000/ep1/result.json",
+      "source_sha256": "2f8282b1b1193c1b27dc7cb2e470acfd88a32f897034603fc73dd1ed8fc07ee1"
+    },
+    {
+      "task": "InsertPeg",
+      "episode": 2,
+      "decision": 0,
+      "frames": [
+        "D0",
+        "E0"
+      ],
+      "frame_count": 266,
+      "milliseconds": [
+        4.7844,
+        4.845751,
+        4.758901,
+        4.772932,
+        4.76408
+      ],
+      "median_ms": 4.772932,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/InsertPeg/R000/ep2/result.json",
+      "source_sha256": "f85df1b47663f719219e3b5a36584986978f2415eed2dbd1a3b0b94c225ed670"
+    },
+    {
+      "task": "InsertPeg",
+      "episode": 3,
+      "decision": 0,
+      "frames": [
+        "D0",
+        "E0"
+      ],
+      "frame_count": 226,
+      "milliseconds": [
+        4.112572,
+        4.080934,
+        4.106612,
+        4.108756,
+        4.019092
+      ],
+      "median_ms": 4.106612,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/InsertPeg/R000/ep3/result.json",
+      "source_sha256": "847dc8f5d058006138908cb85a4cee55d50766057444353cd5a01a8e2f27dd7a"
+    },
+    {
+      "task": "InsertPeg",
+      "episode": 4,
+      "decision": 0,
+      "frames": [
+        "D0",
+        "E0"
+      ],
+      "frame_count": 252,
+      "milliseconds": [
+        4.437019,
+        4.467614,
+        4.508876,
+        4.487645,
+        4.522467
+      ],
+      "median_ms": 4.487645,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/InsertPeg/R000/ep4/result.json",
+      "source_sha256": "e8334ed9680fb46f05d3e1a70dcf58ec4cccea81515dc18bb5a30aa7225fac3a"
+    },
+    {
+      "task": "MoveCube",
+      "episode": 0,
+      "decision": 0,
+      "frames": [
+        "D0",
+        "E0"
+      ],
+      "frame_count": 247,
+      "milliseconds": [
+        5.26407,
+        5.19732,
+        5.162807,
+        5.189597,
+        5.305091
+      ],
+      "median_ms": 5.19732,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/MoveCube/R000/ep0/result.json",
+      "source_sha256": "ca39f9508db1806ec20bad025b3d3d604deafc7a8769ac3abc93a7d547f243e9"
+    },
+    {
+      "task": "MoveCube",
+      "episode": 1,
+      "decision": 0,
+      "frames": [
+        "D0",
+        "E0"
+      ],
+      "frame_count": 227,
+      "milliseconds": [
+        5.233414,
+        5.085101,
+        5.126143,
+        5.131601,
+        5.149728
+      ],
+      "median_ms": 5.131601,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/MoveCube/R000/ep1/result.json",
+      "source_sha256": "7879ba07606912e444ab81f795658fa9308bfacfe9308bf9592d6b9e2868f146"
+    },
+    {
+      "task": "MoveCube",
+      "episode": 2,
+      "decision": 0,
+      "frames": [
+        "D0",
+        "E0"
+      ],
+      "frame_count": 247,
+      "milliseconds": [
+        5.409608,
+        5.234686,
+        5.256959,
+        5.17141,
+        5.260524
+      ],
+      "median_ms": 5.256959,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/MoveCube/R000/ep2/result.json",
+      "source_sha256": "115293c2e56f9c89d511814bb1814bdd1979bde1143109544c56faa6d6312b48"
+    },
+    {
+      "task": "MoveCube",
+      "episode": 3,
+      "decision": 0,
+      "frames": [
+        "D0",
+        "E0"
+      ],
+      "frame_count": 284,
+      "milliseconds": [
+        5.829739,
+        5.546464,
+        5.551771,
+        5.408657,
+        5.348386
+      ],
+      "median_ms": 5.546464,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/MoveCube/R000/ep3/result.json",
+      "source_sha256": "ade59744ee422e5517d34f5bbd35aa0733e568681debb8cb8d9503917cc9ecec"
+    },
+    {
+      "task": "MoveCube",
+      "episode": 4,
+      "decision": 0,
+      "frames": [
+        "D0",
+        "E0"
+      ],
+      "frame_count": 259,
+      "milliseconds": [
+        5.322377,
+        5.414946,
+        5.47032,
+        5.31155,
+        5.296699
+      ],
+      "median_ms": 5.322377,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/MoveCube/R000/ep4/result.json",
+      "source_sha256": "c6a01350a0ae7d8bf29674740864c5e71e949806ca8e456cd4a7d79771c93bd5"
+    },
+    {
+      "task": "PatternLock",
+      "episode": 0,
+      "decision": 0,
+      "frames": [
+        "D0",
+        "E0"
+      ],
+      "frame_count": 87,
+      "milliseconds": [
+        94.787174,
+        94.599723,
+        95.33144,
+        95.007315,
+        95.468145
+      ],
+      "median_ms": 95.007315,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/PatternLock/R000/ep0/result.json",
+      "source_sha256": "e425c15ad59e208d3817f0677141c07afd299fd969b564815f2cb924c22df2ba"
+    },
+    {
+      "task": "PatternLock",
+      "episode": 1,
+      "decision": 0,
+      "frames": [
+        "D0",
+        "E0"
+      ],
+      "frame_count": 97,
+      "milliseconds": [
+        98.353135,
+        98.719534,
+        98.76985,
+        98.413766,
+        98.485714
+      ],
+      "median_ms": 98.485714,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/PatternLock/R000/ep1/result.json",
+      "source_sha256": "d8be0fb7fa7598fd1eb4916679a44b5254edf4fed998d9ed0bb9790be2e70b6e"
+    },
+    {
+      "task": "PatternLock",
+      "episode": 2,
+      "decision": 0,
+      "frames": [
+        "D0",
+        "E0"
+      ],
+      "frame_count": 124,
+      "milliseconds": [
+        139.011069,
+        138.679391,
+        139.739362,
+        139.061485,
+        139.57822
+      ],
+      "median_ms": 139.061485,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/PatternLock/R000/ep2/result.json",
+      "source_sha256": "8e2cad73365538594785c6b518f71af009446fb021f91138efcea5c2d4a71cf4"
+    },
+    {
+      "task": "PatternLock",
+      "episode": 3,
+      "decision": 0,
+      "frames": [
+        "D0",
+        "E0"
+      ],
+      "frame_count": 199,
+      "milliseconds": [
+        338.672935,
+        341.109021,
+        339.414658,
+        338.719795,
+        340.133617
+      ],
+      "median_ms": 339.414658,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/PatternLock/R000/ep3/result.json",
+      "source_sha256": "99d6e9dea5070c252b29720b1c0c86c1b14c9cfd8126847e22429fad76c32858"
+    },
+    {
+      "task": "PatternLock",
+      "episode": 4,
+      "decision": 0,
+      "frames": [
+        "D0",
+        "E0"
+      ],
+      "frame_count": 101,
+      "milliseconds": [
+        80.178531,
+        80.187975,
+        80.233264,
+        80.243448,
+        80.33128
+      ],
+      "median_ms": 80.233264,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/PatternLock/R000/ep4/result.json",
+      "source_sha256": "545c4ad9dac4a1a4d3a29592e6a342f045b1f9aa009d56193c1cdd8a6eaa25b7"
+    },
+    {
+      "task": "PickHighlight",
+      "episode": 0,
+      "decision": 0,
+      "frames": [
+        "E0",
+        "E0"
+      ],
+      "frame_count": 1,
+      "milliseconds": [
+        0.045138,
+        0.036324,
+        0.033981,
+        0.037707,
+        0.033491
+      ],
+      "median_ms": 0.036324,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/PickHighlight/R000/ep0/result.json",
+      "source_sha256": "243c51a9e9e867a9f2376bcf0c4fd2e863b1cdf99df08e3052f40664a459bd4c"
+    },
+    {
+      "task": "PickHighlight",
+      "episode": 0,
+      "decision": 1,
+      "frames": [
+        "E1",
+        "E28"
+      ],
+      "frame_count": 28,
+      "milliseconds": [
+        425.658772,
+        425.879052,
+        425.432692,
+        424.881185,
+        424.164289
+      ],
+      "median_ms": 425.432692,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/PickHighlight/R000/ep0/result.json",
+      "source_sha256": "243c51a9e9e867a9f2376bcf0c4fd2e863b1cdf99df08e3052f40664a459bd4c"
+    },
+    {
+      "task": "PickHighlight",
+      "episode": 0,
+      "decision": 2,
+      "frames": [
+        "E29",
+        "E144"
+      ],
+      "frame_count": 116,
+      "milliseconds": [
+        528.166932,
+        528.627624,
+        528.364649,
+        531.498641,
+        529.236978
+      ],
+      "median_ms": 528.627624,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/PickHighlight/R000/ep0/result.json",
+      "source_sha256": "243c51a9e9e867a9f2376bcf0c4fd2e863b1cdf99df08e3052f40664a459bd4c"
+    },
+    {
+      "task": "PickHighlight",
+      "episode": 1,
+      "decision": 0,
+      "frames": [
+        "E0",
+        "E0"
+      ],
+      "frame_count": 1,
+      "milliseconds": [
+        0.044186,
+        0.037877,
+        0.03339,
+        0.031407,
+        0.031107
+      ],
+      "median_ms": 0.03339,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/PickHighlight/R000/ep1/result.json",
+      "source_sha256": "38ea95a0b9045a577bdd1500e2e55609186204ba8e1c3448492e64caaa3ec974"
+    },
+    {
+      "task": "PickHighlight",
+      "episode": 1,
+      "decision": 1,
+      "frames": [
+        "E1",
+        "E28"
+      ],
+      "frame_count": 28,
+      "milliseconds": [
+        420.583014,
+        421.756545,
+        420.402093,
+        418.126558,
+        418.458526
+      ],
+      "median_ms": 420.402093,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/PickHighlight/R000/ep1/result.json",
+      "source_sha256": "38ea95a0b9045a577bdd1500e2e55609186204ba8e1c3448492e64caaa3ec974"
+    },
+    {
+      "task": "PickHighlight",
+      "episode": 1,
+      "decision": 2,
+      "frames": [
+        "E29",
+        "E146"
+      ],
+      "frame_count": 118,
+      "milliseconds": [
+        430.296772,
+        431.525425,
+        432.349632,
+        430.874739,
+        431.305675
+      ],
+      "median_ms": 431.305675,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/PickHighlight/R000/ep1/result.json",
+      "source_sha256": "38ea95a0b9045a577bdd1500e2e55609186204ba8e1c3448492e64caaa3ec974"
+    },
+    {
+      "task": "PickHighlight",
+      "episode": 2,
+      "decision": 0,
+      "frames": [
+        "E0",
+        "E0"
+      ],
+      "frame_count": 1,
+      "milliseconds": [
+        0.044066,
+        0.035523,
+        0.031967,
+        0.031277,
+        0.030055
+      ],
+      "median_ms": 0.031967,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/PickHighlight/R000/ep2/result.json",
+      "source_sha256": "20dc593a48ec4321ebced2cf32531814519f608b922851373323302b9b830b4c"
+    },
+    {
+      "task": "PickHighlight",
+      "episode": 2,
+      "decision": 1,
+      "frames": [
+        "E1",
+        "E28"
+      ],
+      "frame_count": 28,
+      "milliseconds": [
+        477.547779,
+        481.275984,
+        481.789155,
+        482.605729,
+        481.850126
+      ],
+      "median_ms": 481.789155,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/PickHighlight/R000/ep2/result.json",
+      "source_sha256": "20dc593a48ec4321ebced2cf32531814519f608b922851373323302b9b830b4c"
+    },
+    {
+      "task": "PickHighlight",
+      "episode": 2,
+      "decision": 2,
+      "frames": [
+        "E29",
+        "E143"
+      ],
+      "frame_count": 115,
+      "milliseconds": [
+        532.165943,
+        533.099194,
+        534.253115,
+        535.304934,
+        535.388319
+      ],
+      "median_ms": 534.253115,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/PickHighlight/R000/ep2/result.json",
+      "source_sha256": "20dc593a48ec4321ebced2cf32531814519f608b922851373323302b9b830b4c"
+    },
+    {
+      "task": "PickHighlight",
+      "episode": 2,
+      "decision": 3,
+      "frames": [
+        "E144",
+        "E275"
+      ],
+      "frame_count": 132,
+      "milliseconds": [
+        0.068713,
+        0.060481,
+        0.054311,
+        0.054151,
+        0.06016
+      ],
+      "median_ms": 0.06016,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/PickHighlight/R000/ep2/result.json",
+      "source_sha256": "20dc593a48ec4321ebced2cf32531814519f608b922851373323302b9b830b4c"
+    },
+    {
+      "task": "PickHighlight",
+      "episode": 3,
+      "decision": 0,
+      "frames": [
+        "E0",
+        "E0"
+      ],
+      "frame_count": 1,
+      "milliseconds": [
+        0.045499,
+        0.034642,
+        0.03316,
+        0.032128,
+        0.032719
+      ],
+      "median_ms": 0.03316,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/PickHighlight/R000/ep3/result.json",
+      "source_sha256": "ae90cb737f7f46e2c371dc465d2e9fcb7aecda411d0a37d1bc513191424ccdb3"
+    },
+    {
+      "task": "PickHighlight",
+      "episode": 3,
+      "decision": 1,
+      "frames": [
+        "E1",
+        "E28"
+      ],
+      "frame_count": 28,
+      "milliseconds": [
+        665.945752,
+        661.690696,
+        663.362625,
+        665.63804,
+        663.546101
+      ],
+      "median_ms": 663.546101,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/PickHighlight/R000/ep3/result.json",
+      "source_sha256": "ae90cb737f7f46e2c371dc465d2e9fcb7aecda411d0a37d1bc513191424ccdb3"
+    },
+    {
+      "task": "PickHighlight",
+      "episode": 3,
+      "decision": 2,
+      "frames": [
+        "E29",
+        "E147"
+      ],
+      "frame_count": 119,
+      "milliseconds": [
+        536.627749,
+        536.38875,
+        537.309061,
+        537.034219,
+        538.189342
+      ],
+      "median_ms": 537.034219,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/PickHighlight/R000/ep3/result.json",
+      "source_sha256": "ae90cb737f7f46e2c371dc465d2e9fcb7aecda411d0a37d1bc513191424ccdb3"
+    },
+    {
+      "task": "PickHighlight",
+      "episode": 3,
+      "decision": 3,
+      "frames": [
+        "E148",
+        "E273"
+      ],
+      "frame_count": 126,
+      "milliseconds": [
+        0.076695,
+        0.064237,
+        0.060591,
+        0.057687,
+        0.057537
+      ],
+      "median_ms": 0.060591,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/PickHighlight/R000/ep3/result.json",
+      "source_sha256": "ae90cb737f7f46e2c371dc465d2e9fcb7aecda411d0a37d1bc513191424ccdb3"
+    },
+    {
+      "task": "PickHighlight",
+      "episode": 3,
+      "decision": 4,
+      "frames": [
+        "E274",
+        "E397"
+      ],
+      "frame_count": 124,
+      "milliseconds": [
+        0.078698,
+        0.072659,
+        0.064077,
+        0.059289,
+        0.059138
+      ],
+      "median_ms": 0.064077,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/PickHighlight/R000/ep3/result.json",
+      "source_sha256": "ae90cb737f7f46e2c371dc465d2e9fcb7aecda411d0a37d1bc513191424ccdb3"
+    },
+    {
+      "task": "PickHighlight",
+      "episode": 4,
+      "decision": 0,
+      "frames": [
+        "E0",
+        "E0"
+      ],
+      "frame_count": 1,
+      "milliseconds": [
+        0.043846,
+        0.037156,
+        0.035122,
+        0.031427,
+        0.031918
+      ],
+      "median_ms": 0.035122,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/PickHighlight/R000/ep4/result.json",
+      "source_sha256": "ff517bff24483126dd1b76125480179b12943234c7b1964205d09050fb14e07d"
+    },
+    {
+      "task": "PickHighlight",
+      "episode": 4,
+      "decision": 1,
+      "frames": [
+        "E1",
+        "E28"
+      ],
+      "frame_count": 28,
+      "milliseconds": [
+        409.682266,
+        410.047584,
+        410.300584,
+        410.658231,
+        410.14432
+      ],
+      "median_ms": 410.14432,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/PickHighlight/R000/ep4/result.json",
+      "source_sha256": "ff517bff24483126dd1b76125480179b12943234c7b1964205d09050fb14e07d"
+    },
+    {
+      "task": "PickHighlight",
+      "episode": 4,
+      "decision": 2,
+      "frames": [
+        "E29",
+        "E146"
+      ],
+      "frame_count": 118,
+      "milliseconds": [
+        415.425494,
+        415.138955,
+        414.775259,
+        413.686025,
+        415.52858
+      ],
+      "median_ms": 415.138955,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/PickHighlight/R000/ep4/result.json",
+      "source_sha256": "ff517bff24483126dd1b76125480179b12943234c7b1964205d09050fb14e07d"
+    },
+    {
+      "task": "PickXtimes",
+      "episode": 0,
+      "decision": 0,
+      "frames": [
+        "E0",
+        "E0"
+      ],
+      "frame_count": 1,
+      "milliseconds": [
+        3.059701,
+        3.03853,
+        3.042135,
+        3.022446,
+        3.045711
+      ],
+      "median_ms": 3.042135,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/PickXtimes/R000/ep0/result.json",
+      "source_sha256": "29f3f3ff19541369d521804eca5faa2571a4811858d4236bda45f41bd75b1b4a"
+    },
+    {
+      "task": "PickXtimes",
+      "episode": 0,
+      "decision": 1,
+      "frames": [
+        "E1",
+        "E90"
+      ],
+      "frame_count": 90,
+      "milliseconds": [
+        2.224989,
+        2.189185,
+        2.192821,
+        2.195405,
+        2.203737
+      ],
+      "median_ms": 2.195405,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/PickXtimes/R000/ep0/result.json",
+      "source_sha256": "29f3f3ff19541369d521804eca5faa2571a4811858d4236bda45f41bd75b1b4a"
+    },
+    {
+      "task": "PickXtimes",
+      "episode": 0,
+      "decision": 2,
+      "frames": [
+        "E91",
+        "E171"
+      ],
+      "frame_count": 81,
+      "milliseconds": [
+        8.179835,
+        8.16263,
+        8.106715,
+        8.125214,
+        8.152024
+      ],
+      "median_ms": 8.152024,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/PickXtimes/R000/ep0/result.json",
+      "source_sha256": "29f3f3ff19541369d521804eca5faa2571a4811858d4236bda45f41bd75b1b4a"
+    },
+    {
+      "task": "PickXtimes",
+      "episode": 0,
+      "decision": 3,
+      "frames": [
+        "E172",
+        "E227"
+      ],
+      "frame_count": 56,
+      "milliseconds": [
+        2.350557,
+        2.321685,
+        2.306702,
+        2.335375,
+        2.307844
+      ],
+      "median_ms": 2.321685,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/PickXtimes/R000/ep0/result.json",
+      "source_sha256": "29f3f3ff19541369d521804eca5faa2571a4811858d4236bda45f41bd75b1b4a"
+    },
+    {
+      "task": "PickXtimes",
+      "episode": 0,
+      "decision": 4,
+      "frames": [
+        "E228",
+        "E294"
+      ],
+      "frame_count": 67,
+      "milliseconds": [
+        8.189529,
+        8.117682,
+        8.103531,
+        8.119434,
+        8.204202
+      ],
+      "median_ms": 8.119434,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/PickXtimes/R000/ep0/result.json",
+      "source_sha256": "29f3f3ff19541369d521804eca5faa2571a4811858d4236bda45f41bd75b1b4a"
+    },
+    {
+      "task": "PickXtimes",
+      "episode": 0,
+      "decision": 5,
+      "frames": [
+        "E295",
+        "E350"
+      ],
+      "frame_count": 56,
+      "milliseconds": [
+        2.424719,
+        2.370928,
+        2.375064,
+        2.364699,
+        2.368714
+      ],
+      "median_ms": 2.370928,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/PickXtimes/R000/ep0/result.json",
+      "source_sha256": "29f3f3ff19541369d521804eca5faa2571a4811858d4236bda45f41bd75b1b4a"
+    },
+    {
+      "task": "PickXtimes",
+      "episode": 0,
+      "decision": 6,
+      "frames": [
+        "E351",
+        "E417"
+      ],
+      "frame_count": 67,
+      "milliseconds": [
+        4.179082,
+        4.11849,
+        4.079381,
+        4.094374,
+        4.106613
+      ],
+      "median_ms": 4.106613,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/PickXtimes/R000/ep0/result.json",
+      "source_sha256": "29f3f3ff19541369d521804eca5faa2571a4811858d4236bda45f41bd75b1b4a"
+    },
+    {
+      "task": "PickXtimes",
+      "episode": 1,
+      "decision": 0,
+      "frames": [
+        "E0",
+        "E0"
+      ],
+      "frame_count": 1,
+      "milliseconds": [
+        3.049396,
+        3.05225,
+        3.01168,
+        3.017498,
+        3.013873
+      ],
+      "median_ms": 3.017498,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/PickXtimes/R000/ep1/result.json",
+      "source_sha256": "60a382abafd36aa69e833c7c91dab562996d538d8f88f22ffeeb0d757cfb7eeb"
+    },
+    {
+      "task": "PickXtimes",
+      "episode": 1,
+      "decision": 1,
+      "frames": [
+        "E1",
+        "E87"
+      ],
+      "frame_count": 87,
+      "milliseconds": [
+        2.164929,
+        2.147974,
+        2.141654,
+        2.118189,
+        2.118399
+      ],
+      "median_ms": 2.141654,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/PickXtimes/R000/ep1/result.json",
+      "source_sha256": "60a382abafd36aa69e833c7c91dab562996d538d8f88f22ffeeb0d757cfb7eeb"
+    },
+    {
+      "task": "PickXtimes",
+      "episode": 1,
+      "decision": 2,
+      "frames": [
+        "E88",
+        "E158"
+      ],
+      "frame_count": 71,
+      "milliseconds": [
+        3.99819,
+        4.068996,
+        4.023919,
+        3.97207,
+        3.974514
+      ],
+      "median_ms": 3.99819,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/PickXtimes/R000/ep1/result.json",
+      "source_sha256": "60a382abafd36aa69e833c7c91dab562996d538d8f88f22ffeeb0d757cfb7eeb"
+    },
+    {
+      "task": "PickXtimes",
+      "episode": 2,
+      "decision": 0,
+      "frames": [
+        "E0",
+        "E0"
+      ],
+      "frame_count": 1,
+      "milliseconds": [
+        3.058079,
+        3.048234,
+        3.046673,
+        3.053963,
+        3.070779
+      ],
+      "median_ms": 3.053963,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/PickXtimes/R000/ep2/result.json",
+      "source_sha256": "8ca8453c78f56c3d312d0df9f3e68bc5e13bae62aabf6f55474e18b40d849c00"
+    },
+    {
+      "task": "PickXtimes",
+      "episode": 2,
+      "decision": 1,
+      "frames": [
+        "E1",
+        "E89"
+      ],
+      "frame_count": 89,
+      "milliseconds": [
+        2.592801,
+        2.595635,
+        2.554914,
+        2.542074,
+        2.551559
+      ],
+      "median_ms": 2.554914,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/PickXtimes/R000/ep2/result.json",
+      "source_sha256": "8ca8453c78f56c3d312d0df9f3e68bc5e13bae62aabf6f55474e18b40d849c00"
+    },
+    {
+      "task": "PickXtimes",
+      "episode": 2,
+      "decision": 2,
+      "frames": [
+        "E90",
+        "E168"
+      ],
+      "frame_count": 79,
+      "milliseconds": [
+        4.242536,
+        4.246743,
+        4.220824,
+        4.161445,
+        4.179522
+      ],
+      "median_ms": 4.220824,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/PickXtimes/R000/ep2/result.json",
+      "source_sha256": "8ca8453c78f56c3d312d0df9f3e68bc5e13bae62aabf6f55474e18b40d849c00"
+    },
+    {
+      "task": "PickXtimes",
+      "episode": 3,
+      "decision": 0,
+      "frames": [
+        "E0",
+        "E0"
+      ],
+      "frame_count": 1,
+      "milliseconds": [
+        3.052812,
+        3.032851,
+        3.042847,
+        3.052821,
+        3.056687
+      ],
+      "median_ms": 3.052812,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/PickXtimes/R000/ep3/result.json",
+      "source_sha256": "db3be8b064b3bfe39a313b903c488139389f4b06fecbae4a3388552bea38bb79"
+    },
+    {
+      "task": "PickXtimes",
+      "episode": 3,
+      "decision": 1,
+      "frames": [
+        "E1",
+        "E92"
+      ],
+      "frame_count": 92,
+      "milliseconds": [
+        2.349075,
+        2.327052,
+        2.338148,
+        2.334273,
+        2.330678
+      ],
+      "median_ms": 2.334273,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/PickXtimes/R000/ep3/result.json",
+      "source_sha256": "db3be8b064b3bfe39a313b903c488139389f4b06fecbae4a3388552bea38bb79"
+    },
+    {
+      "task": "PickXtimes",
+      "episode": 3,
+      "decision": 2,
+      "frames": [
+        "E93",
+        "E184"
+      ],
+      "frame_count": 92,
+      "milliseconds": [
+        8.392595,
+        8.348198,
+        8.365554,
+        8.387256,
+        8.366986
+      ],
+      "median_ms": 8.366986,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/PickXtimes/R000/ep3/result.json",
+      "source_sha256": "db3be8b064b3bfe39a313b903c488139389f4b06fecbae4a3388552bea38bb79"
+    },
+    {
+      "task": "PickXtimes",
+      "episode": 3,
+      "decision": 3,
+      "frames": [
+        "E185",
+        "E240"
+      ],
+      "frame_count": 56,
+      "milliseconds": [
+        2.530007,
+        2.486191,
+        2.496036,
+        2.507613,
+        2.495595
+      ],
+      "median_ms": 2.496036,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/PickXtimes/R000/ep3/result.json",
+      "source_sha256": "db3be8b064b3bfe39a313b903c488139389f4b06fecbae4a3388552bea38bb79"
+    },
+    {
+      "task": "PickXtimes",
+      "episode": 3,
+      "decision": 4,
+      "frames": [
+        "E241",
+        "E307"
+      ],
+      "frame_count": 67,
+      "milliseconds": [
+        8.506966,
+        8.439144,
+        8.420407,
+        8.413175,
+        8.478584
+      ],
+      "median_ms": 8.439144,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/PickXtimes/R000/ep3/result.json",
+      "source_sha256": "db3be8b064b3bfe39a313b903c488139389f4b06fecbae4a3388552bea38bb79"
+    },
+    {
+      "task": "PickXtimes",
+      "episode": 3,
+      "decision": 5,
+      "frames": [
+        "E308",
+        "E363"
+      ],
+      "frame_count": 56,
+      "milliseconds": [
+        2.541014,
+        2.528544,
+        2.483487,
+        2.484408,
+        2.472972
+      ],
+      "median_ms": 2.484408,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/PickXtimes/R000/ep3/result.json",
+      "source_sha256": "db3be8b064b3bfe39a313b903c488139389f4b06fecbae4a3388552bea38bb79"
+    },
+    {
+      "task": "PickXtimes",
+      "episode": 3,
+      "decision": 6,
+      "frames": [
+        "E364",
+        "E430"
+      ],
+      "frame_count": 67,
+      "milliseconds": [
+        8.490141,
+        8.420927,
+        8.47624,
+        8.454137,
+        8.399285
+      ],
+      "median_ms": 8.454137,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/PickXtimes/R000/ep3/result.json",
+      "source_sha256": "db3be8b064b3bfe39a313b903c488139389f4b06fecbae4a3388552bea38bb79"
+    },
+    {
+      "task": "PickXtimes",
+      "episode": 3,
+      "decision": 7,
+      "frames": [
+        "E431",
+        "E486"
+      ],
+      "frame_count": 56,
+      "milliseconds": [
+        2.573441,
+        2.533772,
+        2.518048,
+        2.510929,
+        2.519751
+      ],
+      "median_ms": 2.519751,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/PickXtimes/R000/ep3/result.json",
+      "source_sha256": "db3be8b064b3bfe39a313b903c488139389f4b06fecbae4a3388552bea38bb79"
+    },
+    {
+      "task": "PickXtimes",
+      "episode": 3,
+      "decision": 8,
+      "frames": [
+        "E487",
+        "E552"
+      ],
+      "frame_count": 66,
+      "milliseconds": [
+        4.293813,
+        4.232472,
+        4.200543,
+        4.233112,
+        4.221646
+      ],
+      "median_ms": 4.232472,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/PickXtimes/R000/ep3/result.json",
+      "source_sha256": "db3be8b064b3bfe39a313b903c488139389f4b06fecbae4a3388552bea38bb79"
+    },
+    {
+      "task": "PickXtimes",
+      "episode": 4,
+      "decision": 0,
+      "frames": [
+        "E0",
+        "E0"
+      ],
+      "frame_count": 1,
+      "milliseconds": [
+        3.05135,
+        3.030187,
+        3.019151,
+        3.026632,
+        3.0188
+      ],
+      "median_ms": 3.026632,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/PickXtimes/R000/ep4/result.json",
+      "source_sha256": "e656dfb3667e7016db8d3d0be19e4801856ceedf6c8f6bfbc5995e9dba34f933"
+    },
+    {
+      "task": "PickXtimes",
+      "episode": 4,
+      "decision": 1,
+      "frames": [
+        "E1",
+        "E87"
+      ],
+      "frame_count": 87,
+      "milliseconds": [
+        2.58566,
+        2.50508,
+        2.447393,
+        2.453582,
+        2.463987
+      ],
+      "median_ms": 2.463987,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/PickXtimes/R000/ep4/result.json",
+      "source_sha256": "e656dfb3667e7016db8d3d0be19e4801856ceedf6c8f6bfbc5995e9dba34f933"
+    },
+    {
+      "task": "PickXtimes",
+      "episode": 4,
+      "decision": 2,
+      "frames": [
+        "E88",
+        "E175"
+      ],
+      "frame_count": 88,
+      "milliseconds": [
+        8.534888,
+        8.480176,
+        8.442138,
+        8.4162,
+        8.416711
+      ],
+      "median_ms": 8.442138,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/PickXtimes/R000/ep4/result.json",
+      "source_sha256": "e656dfb3667e7016db8d3d0be19e4801856ceedf6c8f6bfbc5995e9dba34f933"
+    },
+    {
+      "task": "PickXtimes",
+      "episode": 4,
+      "decision": 3,
+      "frames": [
+        "E176",
+        "E229"
+      ],
+      "frame_count": 54,
+      "milliseconds": [
+        2.557298,
+        2.550918,
+        2.52543,
+        2.513372,
+        2.52513
+      ],
+      "median_ms": 2.52543,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/PickXtimes/R000/ep4/result.json",
+      "source_sha256": "e656dfb3667e7016db8d3d0be19e4801856ceedf6c8f6bfbc5995e9dba34f933"
+    },
+    {
+      "task": "PickXtimes",
+      "episode": 4,
+      "decision": 4,
+      "frames": [
+        "E230",
+        "E294"
+      ],
+      "frame_count": 65,
+      "milliseconds": [
+        4.276468,
+        4.234374,
+        4.229357,
+        4.238751,
+        4.203077
+      ],
+      "median_ms": 4.234374,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/PickXtimes/R000/ep4/result.json",
+      "source_sha256": "e656dfb3667e7016db8d3d0be19e4801856ceedf6c8f6bfbc5995e9dba34f933"
+    },
+    {
+      "task": "RouteStick",
+      "episode": 0,
+      "decision": 0,
+      "frames": [
+        "D0",
+        "E0"
+      ],
+      "frame_count": 151,
+      "milliseconds": [
+        1.575385,
+        1.553842,
+        1.550497,
+        1.590377,
+        1.541293
+      ],
+      "median_ms": 1.553842,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/RouteStick/R000/ep0/result.json",
+      "source_sha256": "3cb808605409fa13eb622b08f4f3e28ee518a37deefdc7860a4799d41a74b010"
+    },
+    {
+      "task": "RouteStick",
+      "episode": 1,
+      "decision": 0,
+      "frames": [
+        "D0",
+        "E0"
+      ],
+      "frame_count": 101,
+      "milliseconds": [
+        1.114772,
+        1.029294,
+        1.004617,
+        1.00608,
+        1.007411
+      ],
+      "median_ms": 1.007411,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/RouteStick/R000/ep1/result.json",
+      "source_sha256": "45ffa65f01516b623c80ea786ce6e9a6c8a4aa04dcede0f23971baf6878e0f57"
+    },
+    {
+      "task": "RouteStick",
+      "episode": 2,
+      "decision": 0,
+      "frames": [
+        "D0",
+        "E0"
+      ],
+      "frame_count": 201,
+      "milliseconds": [
+        1.905409,
+        1.995915,
+        1.916896,
+        1.997728,
+        1.923046
+      ],
+      "median_ms": 1.923046,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/RouteStick/R000/ep2/result.json",
+      "source_sha256": "233bb6c676162481aae9a1fe9bbf0e28fe46696c832ce9c5bc8084d4f5044252"
+    },
+    {
+      "task": "RouteStick",
+      "episode": 3,
+      "decision": 0,
+      "frames": [
+        "D0",
+        "E0"
+      ],
+      "frame_count": 201,
+      "milliseconds": [
+        1.916376,
+        1.904338,
+        1.89905,
+        1.906061,
+        1.904238
+      ],
+      "median_ms": 1.904338,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/RouteStick/R000/ep3/result.json",
+      "source_sha256": "b0dcc2be032cc3940eb156a5e545ba8d8988c0a31c366734429508290a0dd512"
+    },
+    {
+      "task": "RouteStick",
+      "episode": 4,
+      "decision": 0,
+      "frames": [
+        "D0",
+        "E0"
+      ],
+      "frame_count": 151,
+      "milliseconds": [
+        1.467091,
+        1.450327,
+        1.454102,
+        1.450407,
+        1.469816
+      ],
+      "median_ms": 1.454102,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/RouteStick/R000/ep4/result.json",
+      "source_sha256": "a65fe075d91e89e362e4c5fc8f7054b74b3bef379b60e63bbcbd6b747b0afd1b"
+    },
+    {
+      "task": "StopCube",
+      "episode": 0,
+      "decision": 0,
+      "frames": [
+        "E0",
+        "E0"
+      ],
+      "frame_count": 1,
+      "milliseconds": [
+        0.041402,
+        0.032299,
+        0.028393,
+        0.02646,
+        0.024937
+      ],
+      "median_ms": 0.028393,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/StopCube/R000/ep0/result.json",
+      "source_sha256": "61a688666c4976f7e28132d6f384e605ff2d0b65e3802044e6be8b88fad3ff91"
+    },
+    {
+      "task": "StopCube",
+      "episode": 1,
+      "decision": 0,
+      "frames": [
+        "E0",
+        "E0"
+      ],
+      "frame_count": 1,
+      "milliseconds": [
+        0.039028,
+        0.031477,
+        0.029594,
+        0.025729,
+        0.024868
+      ],
+      "median_ms": 0.029594,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/StopCube/R000/ep1/result.json",
+      "source_sha256": "0e0059e78f52baedb20ade4a3ab1a77605bd19aaf5cebecb6cc609abd68808f2"
+    },
+    {
+      "task": "StopCube",
+      "episode": 2,
+      "decision": 0,
+      "frames": [
+        "E0",
+        "E0"
+      ],
+      "frame_count": 1,
+      "milliseconds": [
+        0.037477,
+        0.030876,
+        0.029284,
+        0.027221,
+        0.027111
+      ],
+      "median_ms": 0.029284,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/StopCube/R000/ep2/result.json",
+      "source_sha256": "9fe9707e011a646934c1e268259c47a6a668529dbe1073f442e7326fa2dcf1d0"
+    },
+    {
+      "task": "StopCube",
+      "episode": 3,
+      "decision": 0,
+      "frames": [
+        "E0",
+        "E0"
+      ],
+      "frame_count": 1,
+      "milliseconds": [
+        0.039419,
+        0.030596,
+        0.03369,
+        0.027031,
+        0.025228
+      ],
+      "median_ms": 0.030596,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/StopCube/R000/ep3/result.json",
+      "source_sha256": "943e176e50a4e472d85a6c9d7c725f767d99cccde8c019937fc071f4cdb53e29"
+    },
+    {
+      "task": "StopCube",
+      "episode": 4,
+      "decision": 0,
+      "frames": [
+        "E0",
+        "E0"
+      ],
+      "frame_count": 1,
+      "milliseconds": [
+        0.044677,
+        0.03289,
+        0.028793,
+        0.028262,
+        0.025338
+      ],
+      "median_ms": 0.028793,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/StopCube/R000/ep4/result.json",
+      "source_sha256": "aaf842eb3cabf942f330104b33342e92afb4c2aeffda26808e218f4e775accb9"
+    },
+    {
+      "task": "SwingXtimes",
+      "episode": 0,
+      "decision": 0,
+      "frames": [
+        "E0",
+        "E0"
+      ],
+      "frame_count": 1,
+      "milliseconds": [
+        4.403288,
+        4.406382,
+        4.45147,
+        4.38478,
+        4.363138
+      ],
+      "median_ms": 4.403288,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/SwingXtimes/R000/ep0/result.json",
+      "source_sha256": "9492f36d0f18410f075d89fbda6996b31bbee3b292432dbc04cd5a80f20a626f"
+    },
+    {
+      "task": "SwingXtimes",
+      "episode": 0,
+      "decision": 1,
+      "frames": [
+        "E1",
+        "E55"
+      ],
+      "frame_count": 55,
+      "milliseconds": [
+        4.333003,
+        4.320334,
+        4.304179,
+        4.360043,
+        4.32445
+      ],
+      "median_ms": 4.32445,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/SwingXtimes/R000/ep0/result.json",
+      "source_sha256": "9492f36d0f18410f075d89fbda6996b31bbee3b292432dbc04cd5a80f20a626f"
+    },
+    {
+      "task": "SwingXtimes",
+      "episode": 0,
+      "decision": 2,
+      "frames": [
+        "E56",
+        "E115"
+      ],
+      "frame_count": 60,
+      "milliseconds": [
+        0.076034,
+        0.069835,
+        0.063044,
+        0.059249,
+        0.200911
+      ],
+      "median_ms": 0.069835,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/SwingXtimes/R000/ep0/result.json",
+      "source_sha256": "9492f36d0f18410f075d89fbda6996b31bbee3b292432dbc04cd5a80f20a626f"
+    },
+    {
+      "task": "SwingXtimes",
+      "episode": 0,
+      "decision": 3,
+      "frames": [
+        "E116",
+        "E142"
+      ],
+      "frame_count": 27,
+      "milliseconds": [
+        0.077276,
+        0.065579,
+        0.061412,
+        0.058849,
+        0.058708
+      ],
+      "median_ms": 0.061412,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/SwingXtimes/R000/ep0/result.json",
+      "source_sha256": "9492f36d0f18410f075d89fbda6996b31bbee3b292432dbc04cd5a80f20a626f"
+    },
+    {
+      "task": "SwingXtimes",
+      "episode": 0,
+      "decision": 4,
+      "frames": [
+        "E143",
+        "E203"
+      ],
+      "frame_count": 61,
+      "milliseconds": [
+        0.083005,
+        0.06667,
+        0.061752,
+        0.058958,
+        0.062744
+      ],
+      "median_ms": 0.062744,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/SwingXtimes/R000/ep0/result.json",
+      "source_sha256": "9492f36d0f18410f075d89fbda6996b31bbee3b292432dbc04cd5a80f20a626f"
+    },
+    {
+      "task": "SwingXtimes",
+      "episode": 0,
+      "decision": 5,
+      "frames": [
+        "E204",
+        "E264"
+      ],
+      "frame_count": 61,
+      "milliseconds": [
+        0.075053,
+        0.071377,
+        0.063675,
+        0.058818,
+        0.06004
+      ],
+      "median_ms": 0.063675,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/SwingXtimes/R000/ep0/result.json",
+      "source_sha256": "9492f36d0f18410f075d89fbda6996b31bbee3b292432dbc04cd5a80f20a626f"
+    },
+    {
+      "task": "SwingXtimes",
+      "episode": 0,
+      "decision": 6,
+      "frames": [
+        "E265",
+        "E325"
+      ],
+      "frame_count": 61,
+      "milliseconds": [
+        0.077356,
+        0.067802,
+        0.062314,
+        0.059559,
+        0.061783
+      ],
+      "median_ms": 0.062314,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/SwingXtimes/R000/ep0/result.json",
+      "source_sha256": "9492f36d0f18410f075d89fbda6996b31bbee3b292432dbc04cd5a80f20a626f"
+    },
+    {
+      "task": "SwingXtimes",
+      "episode": 0,
+      "decision": 7,
+      "frames": [
+        "E326",
+        "E367"
+      ],
+      "frame_count": 42,
+      "milliseconds": [
+        0.075703,
+        0.060752,
+        0.056144,
+        0.05936,
+        0.056355
+      ],
+      "median_ms": 0.05936,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/SwingXtimes/R000/ep0/result.json",
+      "source_sha256": "9492f36d0f18410f075d89fbda6996b31bbee3b292432dbc04cd5a80f20a626f"
+    },
+    {
+      "task": "SwingXtimes",
+      "episode": 1,
+      "decision": 0,
+      "frames": [
+        "E0",
+        "E0"
+      ],
+      "frame_count": 1,
+      "milliseconds": [
+        4.37774,
+        4.318911,
+        4.394254,
+        4.387334,
+        4.390358
+      ],
+      "median_ms": 4.387334,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/SwingXtimes/R000/ep1/result.json",
+      "source_sha256": "317f92abac11c0dddb503de650d18751ae62e44bb7bec20a8870b1b17bc7302e"
+    },
+    {
+      "task": "SwingXtimes",
+      "episode": 1,
+      "decision": 1,
+      "frames": [
+        "E1",
+        "E58"
+      ],
+      "frame_count": 58,
+      "milliseconds": [
+        4.322867,
+        4.315937,
+        4.282757,
+        4.347174,
+        4.354465
+      ],
+      "median_ms": 4.322867,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/SwingXtimes/R000/ep1/result.json",
+      "source_sha256": "317f92abac11c0dddb503de650d18751ae62e44bb7bec20a8870b1b17bc7302e"
+    },
+    {
+      "task": "SwingXtimes",
+      "episode": 1,
+      "decision": 2,
+      "frames": [
+        "E59",
+        "E119"
+      ],
+      "frame_count": 61,
+      "milliseconds": [
+        0.075333,
+        0.065788,
+        0.062844,
+        0.059069,
+        0.059459
+      ],
+      "median_ms": 0.062844,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/SwingXtimes/R000/ep1/result.json",
+      "source_sha256": "317f92abac11c0dddb503de650d18751ae62e44bb7bec20a8870b1b17bc7302e"
+    },
+    {
+      "task": "SwingXtimes",
+      "episode": 1,
+      "decision": 3,
+      "frames": [
+        "E120",
+        "E139"
+      ],
+      "frame_count": 20,
+      "milliseconds": [
+        0.100641,
+        0.067692,
+        0.060041,
+        0.06651,
+        0.061633
+      ],
+      "median_ms": 0.06651,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/SwingXtimes/R000/ep1/result.json",
+      "source_sha256": "317f92abac11c0dddb503de650d18751ae62e44bb7bec20a8870b1b17bc7302e"
+    },
+    {
+      "task": "SwingXtimes",
+      "episode": 1,
+      "decision": 4,
+      "frames": [
+        "E140",
+        "E191"
+      ],
+      "frame_count": 52,
+      "milliseconds": [
+        0.075333,
+        0.06663,
+        0.067642,
+        0.059669,
+        0.058217
+      ],
+      "median_ms": 0.06663,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/SwingXtimes/R000/ep1/result.json",
+      "source_sha256": "317f92abac11c0dddb503de650d18751ae62e44bb7bec20a8870b1b17bc7302e"
+    },
+    {
+      "task": "SwingXtimes",
+      "episode": 1,
+      "decision": 5,
+      "frames": [
+        "E192",
+        "E243"
+      ],
+      "frame_count": 52,
+      "milliseconds": [
+        0.075664,
+        0.066189,
+        0.061262,
+        0.059049,
+        0.058588
+      ],
+      "median_ms": 0.061262,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/SwingXtimes/R000/ep1/result.json",
+      "source_sha256": "317f92abac11c0dddb503de650d18751ae62e44bb7bec20a8870b1b17bc7302e"
+    },
+    {
+      "task": "SwingXtimes",
+      "episode": 1,
+      "decision": 6,
+      "frames": [
+        "E244",
+        "E295"
+      ],
+      "frame_count": 52,
+      "milliseconds": [
+        0.076405,
+        0.077937,
+        0.062133,
+        0.058899,
+        0.063225
+      ],
+      "median_ms": 0.063225,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/SwingXtimes/R000/ep1/result.json",
+      "source_sha256": "317f92abac11c0dddb503de650d18751ae62e44bb7bec20a8870b1b17bc7302e"
+    },
+    {
+      "task": "SwingXtimes",
+      "episode": 1,
+      "decision": 7,
+      "frames": [
+        "E296",
+        "E347"
+      ],
+      "frame_count": 52,
+      "milliseconds": [
+        0.07336,
+        0.06636,
+        0.061463,
+        0.059539,
+        0.056796
+      ],
+      "median_ms": 0.061463,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/SwingXtimes/R000/ep1/result.json",
+      "source_sha256": "317f92abac11c0dddb503de650d18751ae62e44bb7bec20a8870b1b17bc7302e"
+    },
+    {
+      "task": "SwingXtimes",
+      "episode": 1,
+      "decision": 8,
+      "frames": [
+        "E348",
+        "E399"
+      ],
+      "frame_count": 52,
+      "milliseconds": [
+        0.077436,
+        0.064858,
+        0.064316,
+        0.060541,
+        0.058338
+      ],
+      "median_ms": 0.064316,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/SwingXtimes/R000/ep1/result.json",
+      "source_sha256": "317f92abac11c0dddb503de650d18751ae62e44bb7bec20a8870b1b17bc7302e"
+    },
+    {
+      "task": "SwingXtimes",
+      "episode": 1,
+      "decision": 9,
+      "frames": [
+        "E400",
+        "E441"
+      ],
+      "frame_count": 42,
+      "milliseconds": [
+        0.088743,
+        0.061292,
+        0.057967,
+        0.055824,
+        0.054472
+      ],
+      "median_ms": 0.057967,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/SwingXtimes/R000/ep1/result.json",
+      "source_sha256": "317f92abac11c0dddb503de650d18751ae62e44bb7bec20a8870b1b17bc7302e"
+    },
+    {
+      "task": "SwingXtimes",
+      "episode": 2,
+      "decision": 0,
+      "frames": [
+        "E0",
+        "E0"
+      ],
+      "frame_count": 1,
+      "milliseconds": [
+        4.500514,
+        4.527303,
+        4.473944,
+        4.53808,
+        4.472362
+      ],
+      "median_ms": 4.500514,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/SwingXtimes/R000/ep2/result.json",
+      "source_sha256": "1145075359e9d86d311a0d87fd44cd54c252cc1014a7d9212ad786b2d5e0ea2c"
+    },
+    {
+      "task": "SwingXtimes",
+      "episode": 2,
+      "decision": 1,
+      "frames": [
+        "E1",
+        "E55"
+      ],
+      "frame_count": 55,
+      "milliseconds": [
+        4.328495,
+        4.500183,
+        4.318841,
+        4.317249,
+        4.333613
+      ],
+      "median_ms": 4.328495,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/SwingXtimes/R000/ep2/result.json",
+      "source_sha256": "1145075359e9d86d311a0d87fd44cd54c252cc1014a7d9212ad786b2d5e0ea2c"
+    },
+    {
+      "task": "SwingXtimes",
+      "episode": 2,
+      "decision": 2,
+      "frames": [
+        "E56",
+        "E116"
+      ],
+      "frame_count": 61,
+      "milliseconds": [
+        0.074992,
+        0.064917,
+        0.061493,
+        0.062203,
+        0.057447
+      ],
+      "median_ms": 0.062203,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/SwingXtimes/R000/ep2/result.json",
+      "source_sha256": "1145075359e9d86d311a0d87fd44cd54c252cc1014a7d9212ad786b2d5e0ea2c"
+    },
+    {
+      "task": "SwingXtimes",
+      "episode": 2,
+      "decision": 3,
+      "frames": [
+        "E117",
+        "E159"
+      ],
+      "frame_count": 43,
+      "milliseconds": [
+        0.08023,
+        0.063636,
+        0.062985,
+        0.059659,
+        0.059089
+      ],
+      "median_ms": 0.062985,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/SwingXtimes/R000/ep2/result.json",
+      "source_sha256": "1145075359e9d86d311a0d87fd44cd54c252cc1014a7d9212ad786b2d5e0ea2c"
+    },
+    {
+      "task": "SwingXtimes",
+      "episode": 2,
+      "decision": 4,
+      "frames": [
+        "E160",
+        "E217"
+      ],
+      "frame_count": 58,
+      "milliseconds": [
+        0.075423,
+        0.064287,
+        0.065158,
+        0.062684,
+        0.059229
+      ],
+      "median_ms": 0.064287,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/SwingXtimes/R000/ep2/result.json",
+      "source_sha256": "1145075359e9d86d311a0d87fd44cd54c252cc1014a7d9212ad786b2d5e0ea2c"
+    },
+    {
+      "task": "SwingXtimes",
+      "episode": 2,
+      "decision": 5,
+      "frames": [
+        "E218",
+        "E275"
+      ],
+      "frame_count": 58,
+      "milliseconds": [
+        0.075823,
+        0.064186,
+        0.060892,
+        0.066439,
+        0.060211
+      ],
+      "median_ms": 0.064186,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/SwingXtimes/R000/ep2/result.json",
+      "source_sha256": "1145075359e9d86d311a0d87fd44cd54c252cc1014a7d9212ad786b2d5e0ea2c"
+    },
+    {
+      "task": "SwingXtimes",
+      "episode": 2,
+      "decision": 6,
+      "frames": [
+        "E276",
+        "E333"
+      ],
+      "frame_count": 58,
+      "milliseconds": [
+        0.075273,
+        0.064857,
+        0.061392,
+        0.061793,
+        0.05967
+      ],
+      "median_ms": 0.061793,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/SwingXtimes/R000/ep2/result.json",
+      "source_sha256": "1145075359e9d86d311a0d87fd44cd54c252cc1014a7d9212ad786b2d5e0ea2c"
+    },
+    {
+      "task": "SwingXtimes",
+      "episode": 2,
+      "decision": 7,
+      "frames": [
+        "E334",
+        "E375"
+      ],
+      "frame_count": 42,
+      "milliseconds": [
+        0.071437,
+        0.0601,
+        0.055433,
+        0.054572,
+        0.05381
+      ],
+      "median_ms": 0.055433,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/SwingXtimes/R000/ep2/result.json",
+      "source_sha256": "1145075359e9d86d311a0d87fd44cd54c252cc1014a7d9212ad786b2d5e0ea2c"
+    },
+    {
+      "task": "SwingXtimes",
+      "episode": 3,
+      "decision": 0,
+      "frames": [
+        "E0",
+        "E0"
+      ],
+      "frame_count": 1,
+      "milliseconds": [
+        4.439382,
+        4.529787,
+        4.506964,
+        4.422457,
+        4.479251
+      ],
+      "median_ms": 4.479251,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/SwingXtimes/R000/ep3/result.json",
+      "source_sha256": "aa4f0c240bbb994be7293821748e0b9d6488619d468e8ed0760d0ecded4ca631"
+    },
+    {
+      "task": "SwingXtimes",
+      "episode": 3,
+      "decision": 1,
+      "frames": [
+        "E1",
+        "E55"
+      ],
+      "frame_count": 55,
+      "milliseconds": [
+        4.335837,
+        4.33176,
+        4.317409,
+        4.341425,
+        4.334285
+      ],
+      "median_ms": 4.334285,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/SwingXtimes/R000/ep3/result.json",
+      "source_sha256": "aa4f0c240bbb994be7293821748e0b9d6488619d468e8ed0760d0ecded4ca631"
+    },
+    {
+      "task": "SwingXtimes",
+      "episode": 3,
+      "decision": 2,
+      "frames": [
+        "E56",
+        "E115"
+      ],
+      "frame_count": 60,
+      "milliseconds": [
+        0.074823,
+        0.0663,
+        0.065889,
+        0.058558,
+        0.059018
+      ],
+      "median_ms": 0.065889,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/SwingXtimes/R000/ep3/result.json",
+      "source_sha256": "aa4f0c240bbb994be7293821748e0b9d6488619d468e8ed0760d0ecded4ca631"
+    },
+    {
+      "task": "SwingXtimes",
+      "episode": 3,
+      "decision": 3,
+      "frames": [
+        "E116",
+        "E132"
+      ],
+      "frame_count": 17,
+      "milliseconds": [
+        0.074282,
+        0.065499,
+        0.059769,
+        0.05961,
+        0.059619
+      ],
+      "median_ms": 0.059769,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/SwingXtimes/R000/ep3/result.json",
+      "source_sha256": "aa4f0c240bbb994be7293821748e0b9d6488619d468e8ed0760d0ecded4ca631"
+    },
+    {
+      "task": "SwingXtimes",
+      "episode": 3,
+      "decision": 4,
+      "frames": [
+        "E133",
+        "E194"
+      ],
+      "frame_count": 62,
+      "milliseconds": [
+        0.076665,
+        0.06682,
+        0.060852,
+        0.057447,
+        0.06021
+      ],
+      "median_ms": 0.060852,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/SwingXtimes/R000/ep3/result.json",
+      "source_sha256": "aa4f0c240bbb994be7293821748e0b9d6488619d468e8ed0760d0ecded4ca631"
+    },
+    {
+      "task": "SwingXtimes",
+      "episode": 3,
+      "decision": 5,
+      "frames": [
+        "E195",
+        "E256"
+      ],
+      "frame_count": 62,
+      "milliseconds": [
+        0.076375,
+        0.067522,
+        0.063916,
+        0.061773,
+        0.058458
+      ],
+      "median_ms": 0.063916,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/SwingXtimes/R000/ep3/result.json",
+      "source_sha256": "aa4f0c240bbb994be7293821748e0b9d6488619d468e8ed0760d0ecded4ca631"
+    },
+    {
+      "task": "SwingXtimes",
+      "episode": 3,
+      "decision": 6,
+      "frames": [
+        "E257",
+        "E318"
+      ],
+      "frame_count": 62,
+      "milliseconds": [
+        0.075193,
+        0.065468,
+        0.05979,
+        0.059399,
+        0.062184
+      ],
+      "median_ms": 0.062184,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/SwingXtimes/R000/ep3/result.json",
+      "source_sha256": "aa4f0c240bbb994be7293821748e0b9d6488619d468e8ed0760d0ecded4ca631"
+    },
+    {
+      "task": "SwingXtimes",
+      "episode": 3,
+      "decision": 7,
+      "frames": [
+        "E319",
+        "E380"
+      ],
+      "frame_count": 62,
+      "milliseconds": [
+        0.075583,
+        0.065538,
+        0.064727,
+        0.05969,
+        0.059149
+      ],
+      "median_ms": 0.064727,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/SwingXtimes/R000/ep3/result.json",
+      "source_sha256": "aa4f0c240bbb994be7293821748e0b9d6488619d468e8ed0760d0ecded4ca631"
+    },
+    {
+      "task": "SwingXtimes",
+      "episode": 3,
+      "decision": 8,
+      "frames": [
+        "E381",
+        "E442"
+      ],
+      "frame_count": 62,
+      "milliseconds": [
+        0.075773,
+        0.065478,
+        0.060912,
+        0.063986,
+        0.0603
+      ],
+      "median_ms": 0.063986,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/SwingXtimes/R000/ep3/result.json",
+      "source_sha256": "aa4f0c240bbb994be7293821748e0b9d6488619d468e8ed0760d0ecded4ca631"
+    },
+    {
+      "task": "SwingXtimes",
+      "episode": 3,
+      "decision": 9,
+      "frames": [
+        "E443",
+        "E484"
+      ],
+      "frame_count": 42,
+      "milliseconds": [
+        0.068984,
+        0.061052,
+        0.057847,
+        0.062664,
+        0.055403
+      ],
+      "median_ms": 0.061052,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/SwingXtimes/R000/ep3/result.json",
+      "source_sha256": "aa4f0c240bbb994be7293821748e0b9d6488619d468e8ed0760d0ecded4ca631"
+    },
+    {
+      "task": "SwingXtimes",
+      "episode": 4,
+      "decision": 0,
+      "frames": [
+        "E0",
+        "E0"
+      ],
+      "frame_count": 1,
+      "milliseconds": [
+        4.440564,
+        4.368505,
+        4.441445,
+        4.497009,
+        4.447564
+      ],
+      "median_ms": 4.441445,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/SwingXtimes/R000/ep4/result.json",
+      "source_sha256": "fa03a87e5ff01f375c51d1d960e911d2bf2647dd615eb362250a57291a340afb"
+    },
+    {
+      "task": "SwingXtimes",
+      "episode": 4,
+      "decision": 1,
+      "frames": [
+        "E1",
+        "E53"
+      ],
+      "frame_count": 53,
+      "milliseconds": [
+        4.465601,
+        4.351911,
+        4.361155,
+        4.418741,
+        4.365912
+      ],
+      "median_ms": 4.365912,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/SwingXtimes/R000/ep4/result.json",
+      "source_sha256": "fa03a87e5ff01f375c51d1d960e911d2bf2647dd615eb362250a57291a340afb"
+    },
+    {
+      "task": "SwingXtimes",
+      "episode": 4,
+      "decision": 2,
+      "frames": [
+        "E54",
+        "E113"
+      ],
+      "frame_count": 60,
+      "milliseconds": [
+        0.074852,
+        0.063135,
+        0.063205,
+        0.059319,
+        0.057777
+      ],
+      "median_ms": 0.063135,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/SwingXtimes/R000/ep4/result.json",
+      "source_sha256": "fa03a87e5ff01f375c51d1d960e911d2bf2647dd615eb362250a57291a340afb"
+    },
+    {
+      "task": "SwingXtimes",
+      "episode": 4,
+      "decision": 3,
+      "frames": [
+        "E114",
+        "E130"
+      ],
+      "frame_count": 17,
+      "milliseconds": [
+        0.07377,
+        0.072589,
+        0.060101,
+        0.078498,
+        0.059229
+      ],
+      "median_ms": 0.072589,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/SwingXtimes/R000/ep4/result.json",
+      "source_sha256": "fa03a87e5ff01f375c51d1d960e911d2bf2647dd615eb362250a57291a340afb"
+    },
+    {
+      "task": "SwingXtimes",
+      "episode": 4,
+      "decision": 4,
+      "frames": [
+        "E131",
+        "E198"
+      ],
+      "frame_count": 68,
+      "milliseconds": [
+        0.076414,
+        0.065479,
+        0.061593,
+        0.058738,
+        0.058337
+      ],
+      "median_ms": 0.061593,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/SwingXtimes/R000/ep4/result.json",
+      "source_sha256": "fa03a87e5ff01f375c51d1d960e911d2bf2647dd615eb362250a57291a340afb"
+    },
+    {
+      "task": "SwingXtimes",
+      "episode": 4,
+      "decision": 5,
+      "frames": [
+        "E199",
+        "E266"
+      ],
+      "frame_count": 68,
+      "milliseconds": [
+        0.07347,
+        0.062574,
+        0.062814,
+        0.061842,
+        0.059759
+      ],
+      "median_ms": 0.062574,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/SwingXtimes/R000/ep4/result.json",
+      "source_sha256": "fa03a87e5ff01f375c51d1d960e911d2bf2647dd615eb362250a57291a340afb"
+    },
+    {
+      "task": "SwingXtimes",
+      "episode": 4,
+      "decision": 6,
+      "frames": [
+        "E267",
+        "E334"
+      ],
+      "frame_count": 68,
+      "milliseconds": [
+        0.075133,
+        0.065869,
+        0.070937,
+        0.060881,
+        0.06015
+      ],
+      "median_ms": 0.065869,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/SwingXtimes/R000/ep4/result.json",
+      "source_sha256": "fa03a87e5ff01f375c51d1d960e911d2bf2647dd615eb362250a57291a340afb"
+    },
+    {
+      "task": "SwingXtimes",
+      "episode": 4,
+      "decision": 7,
+      "frames": [
+        "E335",
+        "E402"
+      ],
+      "frame_count": 68,
+      "milliseconds": [
+        0.074392,
+        0.064757,
+        0.063575,
+        0.062324,
+        0.057967
+      ],
+      "median_ms": 0.063575,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/SwingXtimes/R000/ep4/result.json",
+      "source_sha256": "fa03a87e5ff01f375c51d1d960e911d2bf2647dd615eb362250a57291a340afb"
+    },
+    {
+      "task": "SwingXtimes",
+      "episode": 4,
+      "decision": 8,
+      "frames": [
+        "E403",
+        "E470"
+      ],
+      "frame_count": 68,
+      "milliseconds": [
+        0.077326,
+        0.066569,
+        0.064207,
+        0.061483,
+        0.061502
+      ],
+      "median_ms": 0.064207,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/SwingXtimes/R000/ep4/result.json",
+      "source_sha256": "fa03a87e5ff01f375c51d1d960e911d2bf2647dd615eb362250a57291a340afb"
+    },
+    {
+      "task": "SwingXtimes",
+      "episode": 4,
+      "decision": 9,
+      "frames": [
+        "E471",
+        "E512"
+      ],
+      "frame_count": 42,
+      "milliseconds": [
+        0.069575,
+        0.060721,
+        0.065999,
+        0.054662,
+        0.053931
+      ],
+      "median_ms": 0.060721,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/SwingXtimes/R000/ep4/result.json",
+      "source_sha256": "fa03a87e5ff01f375c51d1d960e911d2bf2647dd615eb362250a57291a340afb"
+    },
+    {
+      "task": "VideoPlaceButton",
+      "episode": 0,
+      "decision": 0,
+      "frames": [
+        "D0",
+        "E0"
+      ],
+      "frame_count": 749,
+      "milliseconds": [
+        336.785643,
+        335.335656,
+        333.507884,
+        333.844869,
+        332.543907
+      ],
+      "median_ms": 333.844869,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/VideoPlaceButton/R000/ep0/result.json",
+      "source_sha256": "b0d2eb68b5dd55f11d3349083ee75818d074d418764b0bcb28ef45dbc6d671a3"
+    },
+    {
+      "task": "VideoPlaceButton",
+      "episode": 1,
+      "decision": 0,
+      "frames": [
+        "D0",
+        "E0"
+      ],
+      "frame_count": 787,
+      "milliseconds": [
+        361.835974,
+        361.927011,
+        361.471728,
+        361.555023,
+        361.371067
+      ],
+      "median_ms": 361.555023,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/VideoPlaceButton/R000/ep1/result.json",
+      "source_sha256": "3a209d5c256d281d8bba818c03121137d75d3a30f30d396fe1ff987b24c56883"
+    },
+    {
+      "task": "VideoPlaceButton",
+      "episode": 2,
+      "decision": 0,
+      "frames": [
+        "D0",
+        "E0"
+      ],
+      "frame_count": 724,
+      "milliseconds": [
+        339.291493,
+        338.953446,
+        339.259074,
+        338.857782,
+        338.819594
+      ],
+      "median_ms": 338.953446,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/VideoPlaceButton/R000/ep2/result.json",
+      "source_sha256": "6ed7fbe5f4dee01a99a06d9ae88aa5e805f754c23195639843605c1bc6d29aad"
+    },
+    {
+      "task": "VideoPlaceButton",
+      "episode": 3,
+      "decision": 0,
+      "frames": [
+        "D0",
+        "E0"
+      ],
+      "frame_count": 758,
+      "milliseconds": [
+        363.973051,
+        364.104318,
+        367.742057,
+        364.492801,
+        365.460163
+      ],
+      "median_ms": 364.492801,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/VideoPlaceButton/R000/ep3/result.json",
+      "source_sha256": "3962e9536e4cd69e9e9dfee44808e28be84176aff5fac74215a20d4ed63ba187"
+    },
+    {
+      "task": "VideoPlaceButton",
+      "episode": 4,
+      "decision": 0,
+      "frames": [
+        "D0",
+        "E0"
+      ],
+      "frame_count": 813,
+      "milliseconds": [
+        374.36734,
+        372.689422,
+        375.608602,
+        372.983854,
+        372.886958
+      ],
+      "median_ms": 372.983854,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/VideoPlaceButton/R000/ep4/result.json",
+      "source_sha256": "9ab80059b651cfdef9679e511e44c0925bb8e466a16d03a60ac35911c19e09bd"
+    },
+    {
+      "task": "VideoPlaceOrder",
+      "episode": 0,
+      "decision": 0,
+      "frames": [
+        "D0",
+        "E0"
+      ],
+      "frame_count": 1078,
+      "milliseconds": [
+        600.171576,
+        600.371766,
+        600.902663,
+        600.905777,
+        601.35416
+      ],
+      "median_ms": 600.902663,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/VideoPlaceOrder/R000/ep0/result.json",
+      "source_sha256": "1fd9076a3a641e64f3c7122174921096a0d332a05e87c9a625fa75445ef3247e"
+    },
+    {
+      "task": "VideoPlaceOrder",
+      "episode": 0,
+      "decision": 1,
+      "frames": [
+        "E1",
+        "E92"
+      ],
+      "frame_count": 92,
+      "milliseconds": [
+        0.086039,
+        0.064567,
+        0.061272,
+        0.058027,
+        0.058518
+      ],
+      "median_ms": 0.061272,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/VideoPlaceOrder/R000/ep0/result.json",
+      "source_sha256": "1fd9076a3a641e64f3c7122174921096a0d332a05e87c9a625fa75445ef3247e"
+    },
+    {
+      "task": "VideoPlaceOrder",
+      "episode": 1,
+      "decision": 0,
+      "frames": [
+        "D0",
+        "E0"
+      ],
+      "frame_count": 895,
+      "milliseconds": [
+        479.169632,
+        480.91404,
+        480.686048,
+        480.30725,
+        480.641862
+      ],
+      "median_ms": 480.641862,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/VideoPlaceOrder/R000/ep1/result.json",
+      "source_sha256": "c464f03b492513db07ab81a934630e03227e2a06010995f4356823727e6c2e4f"
+    },
+    {
+      "task": "VideoPlaceOrder",
+      "episode": 1,
+      "decision": 1,
+      "frames": [
+        "E1",
+        "E105"
+      ],
+      "frame_count": 105,
+      "milliseconds": [
+        0.076485,
+        0.062964,
+        0.06008,
+        0.112169,
+        0.065639
+      ],
+      "median_ms": 0.065639,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/VideoPlaceOrder/R000/ep1/result.json",
+      "source_sha256": "c464f03b492513db07ab81a934630e03227e2a06010995f4356823727e6c2e4f"
+    },
+    {
+      "task": "VideoPlaceOrder",
+      "episode": 2,
+      "decision": 0,
+      "frames": [
+        "D0",
+        "E0"
+      ],
+      "frame_count": 935,
+      "milliseconds": [
+        508.370363,
+        508.184334,
+        507.89552,
+        508.97455,
+        509.470394
+      ],
+      "median_ms": 508.370363,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/VideoPlaceOrder/R000/ep2/result.json",
+      "source_sha256": "ab0f225954a6a26b12b5d6adacf9bb3dd46fc6d6d16e8e06a8d32eebe3c96e04"
+    },
+    {
+      "task": "VideoPlaceOrder",
+      "episode": 2,
+      "decision": 1,
+      "frames": [
+        "E1",
+        "E104"
+      ],
+      "frame_count": 104,
+      "milliseconds": [
+        0.075303,
+        0.063456,
+        0.061773,
+        0.059048,
+        0.081221
+      ],
+      "median_ms": 0.063456,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/VideoPlaceOrder/R000/ep2/result.json",
+      "source_sha256": "ab0f225954a6a26b12b5d6adacf9bb3dd46fc6d6d16e8e06a8d32eebe3c96e04"
+    },
+    {
+      "task": "VideoPlaceOrder",
+      "episode": 3,
+      "decision": 0,
+      "frames": [
+        "D0",
+        "E0"
+      ],
+      "frame_count": 779,
+      "milliseconds": [
+        453.902094,
+        454.643487,
+        456.588615,
+        455.343177,
+        457.134015
+      ],
+      "median_ms": 455.343177,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/VideoPlaceOrder/R000/ep3/result.json",
+      "source_sha256": "2d073e0cc021b697af6a7923f50dc6822ec10c3e0e5d245ecb74d52397693009"
+    },
+    {
+      "task": "VideoPlaceOrder",
+      "episode": 3,
+      "decision": 1,
+      "frames": [
+        "E1",
+        "E102"
+      ],
+      "frame_count": 102,
+      "milliseconds": [
+        0.074512,
+        0.063775,
+        0.067381,
+        0.057997,
+        0.056925
+      ],
+      "median_ms": 0.063775,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/VideoPlaceOrder/R000/ep3/result.json",
+      "source_sha256": "2d073e0cc021b697af6a7923f50dc6822ec10c3e0e5d245ecb74d52397693009"
+    },
+    {
+      "task": "VideoPlaceOrder",
+      "episode": 4,
+      "decision": 0,
+      "frames": [
+        "D0",
+        "E0"
+      ],
+      "frame_count": 876,
+      "milliseconds": [
+        472.315567,
+        472.738542,
+        473.27708,
+        474.140625,
+        473.698852
+      ],
+      "median_ms": 473.27708,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/VideoPlaceOrder/R000/ep4/result.json",
+      "source_sha256": "4a734198452e14aafc95792b6b745c1fd8c260c076d3cd5e6c10482b24eafa55"
+    },
+    {
+      "task": "VideoPlaceOrder",
+      "episode": 4,
+      "decision": 1,
+      "frames": [
+        "E1",
+        "E97"
+      ],
+      "frame_count": 97,
+      "milliseconds": [
+        0.08034,
+        0.063074,
+        0.060431,
+        0.058768,
+        0.056705
+      ],
+      "median_ms": 0.060431,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/VideoPlaceOrder/R000/ep4/result.json",
+      "source_sha256": "4a734198452e14aafc95792b6b745c1fd8c260c076d3cd5e6c10482b24eafa55"
+    },
+    {
+      "task": "VideoRepick",
+      "episode": 0,
+      "decision": 0,
+      "frames": [
+        "D0",
+        "E0"
+      ],
+      "frame_count": 258,
+      "milliseconds": [
+        336.107344,
+        338.581868,
+        340.666004,
+        337.273724,
+        334.11224
+      ],
+      "median_ms": 337.273724,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/VideoRepick/R000/ep0/result.json",
+      "source_sha256": "ae4fc2966919004449c5bf701850496db485ade6e8330f20f865002bc2c941de"
+    },
+    {
+      "task": "VideoRepick",
+      "episode": 0,
+      "decision": 1,
+      "frames": [
+        "E1",
+        "E153"
+      ],
+      "frame_count": 153,
+      "milliseconds": [
+        0.067261,
+        0.057937,
+        0.052038,
+        0.050947,
+        0.055884
+      ],
+      "median_ms": 0.055884,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/VideoRepick/R000/ep0/result.json",
+      "source_sha256": "ae4fc2966919004449c5bf701850496db485ade6e8330f20f865002bc2c941de"
+    },
+    {
+      "task": "VideoRepick",
+      "episode": 0,
+      "decision": 2,
+      "frames": [
+        "E154",
+        "E258"
+      ],
+      "frame_count": 105,
+      "milliseconds": [
+        0.096254,
+        0.055013,
+        0.050525,
+        0.049034,
+        0.045939
+      ],
+      "median_ms": 0.050525,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/VideoRepick/R000/ep0/result.json",
+      "source_sha256": "ae4fc2966919004449c5bf701850496db485ade6e8330f20f865002bc2c941de"
+    },
+    {
+      "task": "VideoRepick",
+      "episode": 0,
+      "decision": 3,
+      "frames": [
+        "E259",
+        "E363"
+      ],
+      "frame_count": 105,
+      "milliseconds": [
+        0.064026,
+        0.053821,
+        0.050837,
+        0.047511,
+        0.04699
+      ],
+      "median_ms": 0.050837,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/VideoRepick/R000/ep0/result.json",
+      "source_sha256": "ae4fc2966919004449c5bf701850496db485ade6e8330f20f865002bc2c941de"
+    },
+    {
+      "task": "VideoRepick",
+      "episode": 1,
+      "decision": 0,
+      "frames": [
+        "D0",
+        "E0"
+      ],
+      "frame_count": 256,
+      "milliseconds": [
+        331.14029,
+        324.534957,
+        323.442728,
+        324.211492,
+        323.971432
+      ],
+      "median_ms": 324.211492,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/VideoRepick/R000/ep1/result.json",
+      "source_sha256": "298ef3ce07e10d2712149c7cbe25ebb7d3318d080d28f95e98777cbc8bab0b84"
+    },
+    {
+      "task": "VideoRepick",
+      "episode": 1,
+      "decision": 1,
+      "frames": [
+        "E1",
+        "E158"
+      ],
+      "frame_count": 158,
+      "milliseconds": [
+        0.070656,
+        0.053571,
+        0.050076,
+        0.047872,
+        0.045378
+      ],
+      "median_ms": 0.050076,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/VideoRepick/R000/ep1/result.json",
+      "source_sha256": "298ef3ce07e10d2712149c7cbe25ebb7d3318d080d28f95e98777cbc8bab0b84"
+    },
+    {
+      "task": "VideoRepick",
+      "episode": 2,
+      "decision": 0,
+      "frames": [
+        "D0",
+        "E0"
+      ],
+      "frame_count": 372,
+      "milliseconds": [
+        623.738571,
+        604.909525,
+        603.692199,
+        601.583954,
+        602.66712
+      ],
+      "median_ms": 603.692199,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/VideoRepick/R000/ep2/result.json",
+      "source_sha256": "ba43c63cfc320fb9ae10fe6e18420e72207834abb4aba7cb3ae427056f53dd19"
+    },
+    {
+      "task": "VideoRepick",
+      "episode": 2,
+      "decision": 1,
+      "frames": [
+        "E1",
+        "E156"
+      ],
+      "frame_count": 156,
+      "milliseconds": [
+        0.091467,
+        0.053711,
+        0.051638,
+        0.048212,
+        0.046781
+      ],
+      "median_ms": 0.051638,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/VideoRepick/R000/ep2/result.json",
+      "source_sha256": "ba43c63cfc320fb9ae10fe6e18420e72207834abb4aba7cb3ae427056f53dd19"
+    },
+    {
+      "task": "VideoRepick",
+      "episode": 2,
+      "decision": 2,
+      "frames": [
+        "E157",
+        "E260"
+      ],
+      "frame_count": 104,
+      "milliseconds": [
+        0.065558,
+        0.057246,
+        0.051498,
+        0.047481,
+        0.044607
+      ],
+      "median_ms": 0.051498,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/VideoRepick/R000/ep2/result.json",
+      "source_sha256": "ba43c63cfc320fb9ae10fe6e18420e72207834abb4aba7cb3ae427056f53dd19"
+    },
+    {
+      "task": "VideoRepick",
+      "episode": 2,
+      "decision": 3,
+      "frames": [
+        "E261",
+        "E364"
+      ],
+      "frame_count": 104,
+      "milliseconds": [
+        0.062474,
+        0.05386,
+        0.048212,
+        0.045859,
+        0.043675
+      ],
+      "median_ms": 0.048212,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/VideoRepick/R000/ep2/result.json",
+      "source_sha256": "ba43c63cfc320fb9ae10fe6e18420e72207834abb4aba7cb3ae427056f53dd19"
+    },
+    {
+      "task": "VideoRepick",
+      "episode": 3,
+      "decision": 0,
+      "frames": [
+        "D0",
+        "E0"
+      ],
+      "frame_count": 200,
+      "milliseconds": [
+        178.326808,
+        176.573187,
+        176.814139,
+        177.237013,
+        176.87492
+      ],
+      "median_ms": 176.87492,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/VideoRepick/R000/ep3/result.json",
+      "source_sha256": "3683d650b6c58b60994eba260cdb1f2da4a6831b4612cadace45af20d6e07de5"
+    },
+    {
+      "task": "VideoRepick",
+      "episode": 3,
+      "decision": 1,
+      "frames": [
+        "E1",
+        "E163"
+      ],
+      "frame_count": 163,
+      "milliseconds": [
+        0.062804,
+        0.051477,
+        0.047301,
+        0.04722,
+        0.045819
+      ],
+      "median_ms": 0.047301,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/VideoRepick/R000/ep3/result.json",
+      "source_sha256": "3683d650b6c58b60994eba260cdb1f2da4a6831b4612cadace45af20d6e07de5"
+    },
+    {
+      "task": "VideoRepick",
+      "episode": 4,
+      "decision": 0,
+      "frames": [
+        "D0",
+        "E0"
+      ],
+      "frame_count": 307,
+      "milliseconds": [
+        473.212443,
+        472.022827,
+        475.833145,
+        477.314909,
+        476.12319
+      ],
+      "median_ms": 475.833145,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/VideoRepick/R000/ep4/result.json",
+      "source_sha256": "f1dbc32cc3bdb64bce2e72f6441e9e66b5d12a4bcbd2f3f08bb223b014c8ad0d"
+    },
+    {
+      "task": "VideoRepick",
+      "episode": 4,
+      "decision": 1,
+      "frames": [
+        "E1",
+        "E157"
+      ],
+      "frame_count": 157,
+      "milliseconds": [
+        0.090876,
+        0.055092,
+        0.050716,
+        0.049685,
+        0.048203
+      ],
+      "median_ms": 0.050716,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/VideoRepick/R000/ep4/result.json",
+      "source_sha256": "f1dbc32cc3bdb64bce2e72f6441e9e66b5d12a4bcbd2f3f08bb223b014c8ad0d"
+    },
+    {
+      "task": "VideoRepick",
+      "episode": 4,
+      "decision": 2,
+      "frames": [
+        "E158",
+        "E261"
+      ],
+      "frame_count": 104,
+      "milliseconds": [
+        0.064297,
+        0.055323,
+        0.049454,
+        0.047851,
+        0.047481
+      ],
+      "median_ms": 0.049454,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/VideoRepick/R000/ep4/result.json",
+      "source_sha256": "f1dbc32cc3bdb64bce2e72f6441e9e66b5d12a4bcbd2f3f08bb223b014c8ad0d"
+    },
+    {
+      "task": "VideoRepick",
+      "episode": 4,
+      "decision": 3,
+      "frames": [
+        "E262",
+        "E365"
+      ],
+      "frame_count": 104,
+      "milliseconds": [
+        0.063425,
+        0.052118,
+        0.049054,
+        0.05272,
+        0.04667
+      ],
+      "median_ms": 0.052118,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/VideoRepick/R000/ep4/result.json",
+      "source_sha256": "f1dbc32cc3bdb64bce2e72f6441e9e66b5d12a4bcbd2f3f08bb223b014c8ad0d"
+    },
+    {
+      "task": "VideoUnmask",
+      "episode": 0,
+      "decision": 0,
+      "frames": [
+        "D0",
+        "E0"
+      ],
+      "frame_count": 67,
+      "milliseconds": [
+        9.070913,
+        8.962099,
+        8.866736,
+        8.984383,
+        8.881057
+      ],
+      "median_ms": 8.962099,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/VideoUnmask/R000/ep0/result.json",
+      "source_sha256": "1165e9fec09139eb7b8b8352818b59d6a897695bf937aa6510b0196a0b57da8e"
+    },
+    {
+      "task": "VideoUnmask",
+      "episode": 1,
+      "decision": 0,
+      "frames": [
+        "D0",
+        "E0"
+      ],
+      "frame_count": 67,
+      "milliseconds": [
+        9.039415,
+        7.60979,
+        7.677612,
+        7.964182,
+        7.934407
+      ],
+      "median_ms": 7.934407,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/VideoUnmask/R000/ep1/result.json",
+      "source_sha256": "c3c8a1b704d7ba873df35888c51fcd91a8b184e9d179f323ba3e8936af3b3f43"
+    },
+    {
+      "task": "VideoUnmask",
+      "episode": 2,
+      "decision": 0,
+      "frames": [
+        "D0",
+        "E0"
+      ],
+      "frame_count": 67,
+      "milliseconds": [
+        9.688339,
+        9.600828,
+        9.600788,
+        9.583742,
+        9.721679
+      ],
+      "median_ms": 9.600828,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/VideoUnmask/R000/ep2/result.json",
+      "source_sha256": "7aecd58525ac36b6f7609a368023e1b0bc7e0c0b0ad30d200c6c0b6d84ce6bc6"
+    },
+    {
+      "task": "VideoUnmask",
+      "episode": 3,
+      "decision": 0,
+      "frames": [
+        "D0",
+        "E0"
+      ],
+      "frame_count": 67,
+      "milliseconds": [
+        14.817466,
+        14.674031,
+        14.605037,
+        14.78642,
+        14.670145
+      ],
+      "median_ms": 14.674031,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/VideoUnmask/R000/ep3/result.json",
+      "source_sha256": "7639157bb16e0ec28119cfbaa61a6fd408a84d96f340377d618a372ef8fd8268"
+    },
+    {
+      "task": "VideoUnmask",
+      "episode": 3,
+      "decision": 1,
+      "frames": [
+        "E1",
+        "E123"
+      ],
+      "frame_count": 123,
+      "milliseconds": [
+        0.061382,
+        0.052489,
+        0.047621,
+        0.045429,
+        0.042103
+      ],
+      "median_ms": 0.047621,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/VideoUnmask/R000/ep3/result.json",
+      "source_sha256": "7639157bb16e0ec28119cfbaa61a6fd408a84d96f340377d618a372ef8fd8268"
+    },
+    {
+      "task": "VideoUnmask",
+      "episode": 4,
+      "decision": 0,
+      "frames": [
+        "D0",
+        "E0"
+      ],
+      "frame_count": 67,
+      "milliseconds": [
+        7.48994,
+        7.6633,
+        7.445744,
+        7.472805,
+        7.419484
+      ],
+      "median_ms": 7.472805,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/VideoUnmask/R000/ep4/result.json",
+      "source_sha256": "c9123f64c3221dcf37a531e379506d145e567acc9668739443a1240e890ba159"
+    },
+    {
+      "task": "VideoUnmaskSwap",
+      "episode": 0,
+      "decision": 0,
+      "frames": [
+        "D0",
+        "E0"
+      ],
+      "frame_count": 115,
+      "milliseconds": [
+        446.666535,
+        446.886135,
+        448.674098,
+        448.299115,
+        449.219377
+      ],
+      "median_ms": 448.299115,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/VideoUnmaskSwap/R000/ep0/result.json",
+      "source_sha256": "4e095bf28b6f832a874d1f83cd25f05d6d82dceb54fd4be97a1a13c328797c0f"
+    },
+    {
+      "task": "VideoUnmaskSwap",
+      "episode": 0,
+      "decision": 1,
+      "frames": [
+        "E1",
+        "E135"
+      ],
+      "frame_count": 135,
+      "milliseconds": [
+        0.065098,
+        0.049535,
+        0.045358,
+        0.043335,
+        0.043665
+      ],
+      "median_ms": 0.045358,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/VideoUnmaskSwap/R000/ep0/result.json",
+      "source_sha256": "4e095bf28b6f832a874d1f83cd25f05d6d82dceb54fd4be97a1a13c328797c0f"
+    },
+    {
+      "task": "VideoUnmaskSwap",
+      "episode": 1,
+      "decision": 0,
+      "frames": [
+        "D0",
+        "E0"
+      ],
+      "frame_count": 169,
+      "milliseconds": [
+        646.189102,
+        646.827029,
+        646.828702,
+        646.811826,
+        646.528901
+      ],
+      "median_ms": 646.811826,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/VideoUnmaskSwap/R000/ep1/result.json",
+      "source_sha256": "7a109026447d3baf87cf1336443eb2de2c0f93875ed5299ad0e58ec5c972472e"
+    },
+    {
+      "task": "VideoUnmaskSwap",
+      "episode": 2,
+      "decision": 0,
+      "frames": [
+        "D0",
+        "E0"
+      ],
+      "frame_count": 115,
+      "milliseconds": [
+        477.10258,
+        477.61617,
+        477.084773,
+        477.960086,
+        476.374297
+      ],
+      "median_ms": 477.10258,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/VideoUnmaskSwap/R000/ep2/result.json",
+      "source_sha256": "674dbda3f6858371647c590b337bf275ac084a19b03f8dc2e26f69691f0f5113"
+    },
+    {
+      "task": "VideoUnmaskSwap",
+      "episode": 3,
+      "decision": 0,
+      "frames": [
+        "D0",
+        "E0"
+      ],
+      "frame_count": 217,
+      "milliseconds": [
+        887.551504,
+        886.38884,
+        888.542292,
+        884.69686,
+        882.185012
+      ],
+      "median_ms": 886.38884,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/VideoUnmaskSwap/R000/ep3/result.json",
+      "source_sha256": "f2ca6e2a378e77d3708627d2046eae9f7728bc92a847b3d1a9b627c0268cbaaa"
+    },
+    {
+      "task": "VideoUnmaskSwap",
+      "episode": 3,
+      "decision": 1,
+      "frames": [
+        "E1",
+        "E137"
+      ],
+      "frame_count": 137,
+      "milliseconds": [
+        0.057176,
+        0.047592,
+        0.042193,
+        0.041593,
+        0.039469
+      ],
+      "median_ms": 0.042193,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/VideoUnmaskSwap/R000/ep3/result.json",
+      "source_sha256": "f2ca6e2a378e77d3708627d2046eae9f7728bc92a847b3d1a9b627c0268cbaaa"
+    },
+    {
+      "task": "VideoUnmaskSwap",
+      "episode": 4,
+      "decision": 0,
+      "frames": [
+        "D0",
+        "E0"
+      ],
+      "frame_count": 115,
+      "milliseconds": [
+        448.248259,
+        450.836954,
+        449.523253,
+        448.914829,
+        448.26885
+      ],
+      "median_ms": 448.914829,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/VideoUnmaskSwap/R000/ep4/result.json",
+      "source_sha256": "959fb9a704f3282001845471bc16b820692c12191917230fa845f4d3d87fc140"
+    },
+    {
+      "task": "VideoUnmaskSwap",
+      "episode": 4,
+      "decision": 1,
+      "frames": [
+        "E1",
+        "E134"
+      ],
+      "frame_count": 134,
+      "milliseconds": [
+        0.056374,
+        0.04654,
+        0.042914,
+        0.041312,
+        0.042004
+      ],
+      "median_ms": 0.042914,
+      "matches_recorded_decision": true,
+      "source": "eval/robomme/demo_only_25/VideoUnmaskSwap/R000/ep4/result.json",
+      "source_sha256": "959fb9a704f3282001845471bc16b820692c12191917230fa845f4d3d87fc140"
+    }
+  ],
+  "raw_study": "validate_runs/figure_studies/robomme_efficiency/20261110T_public_figures",
+  "all_recorded_decisions_reproduced": true,
+  "evaluation_evidence": {
+    "episodes": 800,
+    "successes": 795,
+    "api_calls": 0,
+    "api_cost_usd": 0,
+    "verification": "Every original result.json was checked for zero api_calls and cost.",
+    "source_pattern": "public_runs/eval/robomme/demo_only_25/*/R000/ep*/result.json"
+  }
+}
