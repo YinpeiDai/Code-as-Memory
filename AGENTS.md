@@ -23,6 +23,9 @@ Read [docs/reproducing.md](docs/reproducing.md) before preparing or running an e
   artifacts in place.
 - Eight concurrent development jobs. Normal evaluation uses five episode workers
   per GPU, with GPU admission and unchanged episode scoring.
+- Queue full held-out evaluation as soon as each policy finishes development and
+  freezes; do not wait for the other policies or settings to finish. Evaluation
+  runs alongside continued development, subject to the shared GPU limits.
 - `mikasa_robo_vla_suite` is a separate five-task comparison namespace over the
   `mikasa_robo` simulator: ShellGameTouch, InterceptMedium, RememberColor3/5/9
   (standard `-VLA-v0` IDs). Develop fresh 25-demo-only, 50-demo-only and
