@@ -4,10 +4,10 @@
 
 | Benchmark | Tasks | Primary setting | Held-out episodes | Archived panel successes |
 |---|---:|---|---:|---:|
-| MIKASA-Robo | 20 | `demo_interaction_50` | 1,000 972/1,000 |
-| RoboMME | 6 | `demo_only_25` | 300 295/300 |
-| RoboMemArena | 12 | `demo_interaction_50` | 600 571/600 |
-| RMBench | 6 | `demo_only_50` | 600 600/600 |
+| MIKASA-Robo | 20 | `demo_interaction_50` | 1,000 | 972/1,000 |
+| RoboMME | 6 | `demo_only_25` | 300 | 295/300 |
+| RoboMemArena | 12 | `demo_interaction_50` | 600 | 571/600 |
+| RMBench | 6 | `demo_only_50` | 600 | 600/600 |
 
 Use the archived panel totals above when comparing this selected task set.
 
