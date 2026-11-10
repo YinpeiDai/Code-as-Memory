@@ -395,34 +395,39 @@
         },
         {
           "method": "CaM",
-          "success_percent": 90.0,
-          "successes": 225,
-          "episodes": 250,
           "task_count": 5,
-          "source": "cam_published_archive",
           "setting": "demo_interaction_50",
-          "per_task": {
-            "RememberColor3-VLA-v0": {
-              "successes": 50,
-              "episodes": 50
-            },
-            "ShellGameTouch-VLA-v0": {
-              "successes": 25,
-              "episodes": 50
-            },
-            "InterceptMedium-VLA-v0": {
-              "successes": 50,
-              "episodes": 50
-            },
-            "RememberColor5-VLA-v0": {
-              "successes": 50,
-              "episodes": 50
-            },
-            "RememberColor9-VLA-v0": {
-              "successes": 50,
-              "episodes": 50
+          "archived_result": {
+            "success_percent": 90.0,
+            "successes": 225,
+            "episodes": 250,
+            "source": "cam_published_archive",
+            "per_task": {
+              "RememberColor3-VLA-v0": {
+                "successes": 50,
+                "episodes": 50
+              },
+              "ShellGameTouch-VLA-v0": {
+                "successes": 25,
+                "episodes": 50
+              },
+              "InterceptMedium-VLA-v0": {
+                "successes": 50,
+                "episodes": 50
+              },
+              "RememberColor5-VLA-v0": {
+                "successes": 50,
+                "episodes": 50
+              },
+              "RememberColor9-VLA-v0": {
+                "successes": 50,
+                "episodes": 50
+              }
             }
-          }
+          },
+          "success_percent": 100.0,
+          "source": "cam_author_cpu_physics_correction",
+          "result_note": "Author-reported correction for the five-task comparison after identifying a CPU physics issue. Corrected episode counts and rerun artifacts were not supplied with the README update; archived results are retained separately."
         }
       ]
     },
@@ -608,6 +613,13 @@
       "path": "public_runs/dashboard/index.json",
       "snapshot_sha256": "5e89c945ae61388df15ba0db3e8c8d03475b4e59634f720928e87b5606705446",
       "note": "Historical frozen results; MIKASA initial ten full artifacts plus imported results for remaining 80. No new scores."
+    },
+    "cam_author_cpu_physics_correction": {
+      "type": "author_report",
+      "reported_date": "2026-11-10",
+      "scope": "MIKASA-Robo five-task comparison",
+      "success_percent": 100.0,
+      "note": "Repository author reports 100% after identifying a CPU physics issue and requests updating the README figure. This report does not replace archived episode records or establish a new 90-task aggregate."
     }
   }
 }

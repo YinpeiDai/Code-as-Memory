@@ -12,18 +12,11 @@ The learned program carries memory across observations and runs with
 
 ## Results
 
-| Benchmark | Best setting | Successful / evaluated | Success rate |
-|---|---|---:|---:|
-| RoboMME | 25 demonstrations | 795 / 800 | **99.38%** |
-| RMBench | Up to 50 demonstrations | 1,000 / 1,000 | **100.00%** |
-| MIKASA-Robo | 50 demonstrations + 50 interactions | 4,444 / 4,500 | **98.76%** |
-| RoboMemArena | Up to 50 demonstrations + matching interactions | 1,271 / 1,300 | **97.77%** |
-
 ![CaM and selected published baselines across RoboMME, RMBench, MIKASA-Robo, and RoboMemArena](docs/figures/benchmark_comparison.png)
 
 The comparison uses nine shared RMBench tasks and five shared MIKASA task identities
-(CaM: **90.0%**); the table above covers each full suite. Published methods use
-different training and evaluation protocols.
+(CaM: **100.0%**, with the CPU-physics correction). Published methods use different
+training and evaluation protocols; full-suite results and provenance are in the docs.
 
 [More results, coverage, and provenance →](docs/results.md)
 

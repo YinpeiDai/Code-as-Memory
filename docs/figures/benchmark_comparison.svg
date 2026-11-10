@@ -370,8 +370,8 @@ z
    </g>
    <g id="patch_35">
     <path d="M 630.36 336.407607
-L 867.204 336.407607
-L 867.204 320.695082
+L 893.52 336.407607
+L 893.52 320.695082
 L 630.36 320.695082
 z
 " clip-path="url(#p13d2c39199)" style="fill: #008d7f"/>
@@ -410,7 +410,7 @@ z
     <text style="font-weight: 700; font-size: 18px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #008d7f" x="630.36" y="310.969683" transform="rotate(-0 630.36 310.969683)">CaM</text>
    </g>
    <g id="text_36">
-    <text style="font-weight: 700; font-size: 18px; font-family: 'DejaVu Sans'; text-anchor: end; fill: #008d7f" x="893.52" y="310.969683" transform="rotate(-0 893.52 310.969683)">90.0%</text>
+    <text style="font-weight: 700; font-size: 18px; font-family: 'DejaVu Sans'; text-anchor: end; fill: #008d7f" x="893.52" y="310.969683" transform="rotate(-0 893.52 310.969683)">100.0%</text>
    </g>
    <g id="text_37">
     <text style="font-weight: 700; font-size: 23px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #18273b" x="630.36" y="30.672" transform="rotate(-0 630.36 30.672)">MIKASA-Robo</text>

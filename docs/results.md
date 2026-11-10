@@ -24,7 +24,10 @@ single benchmark headline or count repeated checks as new published evidence.
 The [four-benchmark figure](figures/benchmark_comparison.png) compares selected
 published reports with CaM on matching task lists. It uses all 16 RoboMME tasks,
 nine RMBench tasks (excluding `place_block_mat`), five MIKASA task identities,
-and all 26 RoboMemArena tasks. The MIKASA subset is **225/250 = 90.0%**:
+and all 26 RoboMemArena tasks. The figure now uses the author's reported
+**100%** MIKASA correction after identifying a CPU physics issue. Corrected rerun
+artifacts and episode counts have not been attached. The archived five-task result
+remains **225/250 = 90.0%**, with these original counts:
 
 | MIKASA task | CaM successful / evaluated |
 |---|---:|
