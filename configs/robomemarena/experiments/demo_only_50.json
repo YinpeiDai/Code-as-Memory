@@ -2,7 +2,7 @@
   "selection_reason": "All robomemarena tasks, 50-demonstration setting with actual released shortfalls, fresh policies and zero training rollouts.",
   "benchmarks": {
     "robomemarena": {
-      "config": "configs/robomemarena/demos_claude_code.json",
+      "config": "configs/robomemarena/demos.json",
       "datasets": [
         "public_runs/demos/robomemarena"
       ],

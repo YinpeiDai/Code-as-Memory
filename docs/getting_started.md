@@ -91,7 +91,7 @@ Use the [benchmark interface guides](benchmarks/) for observation formats.
 
 ```bash
 cam prepare validate_runs --dataset "$DATA" \
-  --config configs/robomme/demos_claude_code.json --tasks BinFill
+  --config configs/robomme/demos.json --tasks BinFill
 # RUN is the leaf path printed by prepare.
 cam learn "$RUN" --gpus 0 1
 cam evaluate "$RUN" --budgets 0 --gpus 0 1 --workers-per-gpu 5

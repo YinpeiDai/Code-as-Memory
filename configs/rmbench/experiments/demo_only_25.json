@@ -2,7 +2,7 @@
   "selection_reason": "All rmbench tasks using the exact published 25-demo assignment, materialized from the downloaded larger pool during preparation; fresh policies and zero training rollouts.",
   "benchmarks": {
     "rmbench": {
-      "config": "configs/rmbench/demos_claude_code.json",
+      "config": "configs/rmbench/demos.json",
       "datasets": [
         "public_runs/demos/rmbench"
       ],

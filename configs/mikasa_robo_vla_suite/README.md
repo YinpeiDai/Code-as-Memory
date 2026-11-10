@@ -7,15 +7,15 @@ These plans select ShellGameTouch, InterceptMedium and RememberColor3/5/9
 the subset supports comparison with prior publications without changing the
 full-benchmark denominator.
 
-| Plan | Client configuration | Demos/task | Training attempts/task |
+| Plan | Run configuration | Demos/task | Training attempts/task |
 |---|---|---:|---:|
-| [25 demos](experiments/demo_only_25.json) | [demos_claude_code.json](demos_claude_code.json) | 25 | 0 |
-| [50 demos](experiments/demo_only_50.json) | [demos_claude_code.json](demos_claude_code.json) | 50 | 0 |
-| [50 demos + interaction](experiments/demo_interaction_50.json) | [both_claude_code.json](both_claude_code.json) | 50 | 50 |
+| [25 demos](experiments/demo_only_25.json) | [demos.json](demos.json) | 25 | 0 |
+| [50 demos](experiments/demo_only_50.json) | [demos.json](demos.json) | 50 | 0 |
+| [50 demos + interaction](experiments/demo_interaction_50.json) | [both.json](both.json) | 50 | 50 |
 
 Every configuration uses `benchmark: "mikasa_robo"` and
 `suite: "mikasa_robo_vla_suite"`. The demo count belongs to the experiment plan;
-the client configuration defines the learning mode, interaction budget and model.
+the run configuration defines the learning mode, interaction budget and model.
 The 25-demo plan materializes the exact selected subset before learner admission.
 Interaction uses each assigned demo identity once. Policies start blank with
 Claude Code / Opus 5.5; held-out evaluation makes no model calls.

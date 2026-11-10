@@ -146,7 +146,8 @@ def test_changed_seed_rejected_before_native_import(tmp_path, monkeypatch):
         a.make_environment(tmp_path, TASK, records[0]["episode"], "train", False)
 
 
-def test_published_rgbd_configs_prepare_from_manifest_without_reading_h5(tmp_path, monkeypatch):
+@pytest.mark.parametrize("agent", ["claude_code", "codex"])
+def test_published_rgbd_configs_prepare_from_manifest_without_reading_h5(tmp_path, monkeypatch, agent):
     from cam.harness import prepare
     from cam.io import read, write
 
@@ -174,11 +175,13 @@ def test_published_rgbd_configs_prepare_from_manifest_without_reading_h5(tmp_pat
 
     monkeypatch.setattr(Path, "open", no_h5_open)
     monkeypatch.setattr(prepare, "validate_dataset", no_validation)
-    for name in ("demos_claude_code.json", "demos_codex.json"):
-        config = read(SOURCE.parents[1] / "configs/rmbench" / name)
-        _, cfg, tasks, _, selected = prepare.preparation_inputs(tmp_path, config)
-        assert cfg.depth and cfg.mode == "demos" and cfg.budget == 0
-        assert tasks == [TASK] and selected["tasks"][TASK]["sha256"] == "0" * 64
+    config = read(SOURCE.parents[1] / "configs/rmbench/demos.json")
+    if agent == "codex":
+        config["coding"] = {"agent": agent, "provider": "openai", "model": "test-model"}
+    _, cfg, tasks, _, selected = prepare.preparation_inputs(tmp_path, config)
+    assert cfg.coding.agent == agent
+    assert cfg.depth and cfg.mode == "demos" and cfg.budget == 0
+    assert tasks == [TASK] and selected["tasks"][TASK]["sha256"] == "0" * 64
 
 
 def test_raw_extraction_directs_users_to_published_data_without_creating_output(tmp_path):

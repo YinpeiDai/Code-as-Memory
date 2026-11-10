@@ -19,7 +19,7 @@ def batch_protocol(config):
 
 
 def setup_dataset(tmp_path, name="mikasa_robo", count=50):
-    config = json.loads((ROOT / f"configs/{name}/" / ("both_claude_code.json" if name in ("mikasa_robo", "robomemarena") else "both_v2_claude_code.json")).read_text())
+    config = json.loads((ROOT / f"configs/{name}/" / ("both.json" if name in ("mikasa_robo", "robomemarena") else "both_v2.json")).read_text())
     if name == "robomemarena" and count == 25:
         config.update(budget=25, training_seed_count=25, training_seed_policy="disjoint_once")
     path = tmp_path / "dataset"
@@ -135,7 +135,7 @@ def test_robomemarena_demo_seed_plan_uses_actual_demos_once_each():
 @pytest.mark.parametrize("count", [25, 50])
 def test_demo_only_accepts_assigned_count_without_interaction_identities(tmp_path, count):
     _, item, _, path = setup_dataset(tmp_path, "robomemarena", count)
-    config = json.loads((ROOT / "configs/robomemarena/demos_claude_code.json").read_text())
+    config = json.loads((ROOT / "configs/robomemarena/demos.json").read_text())
     item["require_prepared_data"] = True
     assert batch.data_assignment("robomemarena", item, config) == {
         "demo_count": count, "existing": {str(path): ["Example"]}, "missing": []}

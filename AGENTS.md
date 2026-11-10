@@ -6,7 +6,9 @@ Read [docs/reproducing.md](docs/reproducing.md) before preparing or running an e
 
 - The four simulator interfaces are `src/cam/interface/{robomme,mikasa_robo,rmbench,robomemarena}/`.
   Each has its own environment in `envs/`; the root environment is the shared harness.
-- Active plans and client configurations live in `configs/<benchmark>/`.
+- Active plans and mode-named run configurations live in `configs/<benchmark>/`.
+  Choose the coding client/model through the configuration's `coding` object;
+  do not duplicate run presets with client names in their filenames.
   `configs/solutions/` is required for immutable policy schemas, checksums and provenance.
 - Historical sources, plans and documentation are retained locally in `legacy/`.
   The full preceding instructions are preserved in

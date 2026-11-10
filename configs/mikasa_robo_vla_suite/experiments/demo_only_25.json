@@ -2,7 +2,7 @@
   "selection_reason": "mikasa_robo_vla_suite: the five MIKASA task identities used in prior VLA publications, 25 assigned demos, zero training simulator attempts. Fresh policies; GPU physics for ShellGameTouch, CPU for the other tasks.",
   "benchmarks": {
     "mikasa_robo": {
-      "config": "configs/mikasa_robo_vla_suite/demos_claude_code.json",
+      "config": "configs/mikasa_robo_vla_suite/demos.json",
       "demo_count": 25,
       "require_prepared_data": true,
       "datasets": [

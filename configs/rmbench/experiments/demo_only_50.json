@@ -2,7 +2,7 @@
   "selection_reason": "All rmbench tasks, 50-demonstration setting with actual released shortfalls, fresh policies and zero training rollouts.",
   "benchmarks": {
     "rmbench": {
-      "config": "configs/rmbench/demos_claude_code.json",
+      "config": "configs/rmbench/demos.json",
       "datasets": [
         "public_runs/demos/rmbench"
       ],

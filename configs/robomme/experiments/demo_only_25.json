@@ -2,7 +2,7 @@
   "selection_reason": "All robomme tasks, 25-demonstration setting with actual released shortfalls, fresh policies and zero training rollouts.",
   "benchmarks": {
     "robomme": {
-      "config": "configs/robomme/demos_claude_code.json",
+      "config": "configs/robomme/demos.json",
       "datasets": [
         "public_runs/demos/robomme"
       ],

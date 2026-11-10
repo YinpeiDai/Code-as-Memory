@@ -2,7 +2,7 @@
   "selection_reason": "All 26 tasks with released RGB-D demos and demo-first development. One attempt per assigned demo identity: 50 per task, except T04 uses its actual 32. Use every attempt; no new seeds. CPU policy execution, official simulator and scoring; no test feedback reaches learners.",
   "benchmarks": {
     "robomemarena": {
-      "config": "configs/robomemarena/both_claude_code.json",
+      "config": "configs/robomemarena/both.json",
       "datasets": [
         "public_runs/demos/robomemarena"
       ],

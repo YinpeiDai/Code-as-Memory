@@ -2,7 +2,7 @@
 
 Keep these files with the source: they are required for reproduction.
 
-- `<benchmark>/*_<client>.json`: coding client, learning mode, budgets, and runtime limits.
+- `<benchmark>/demos.json`, `both.json`, `interaction.json` (or versioned modes): run settings, budgets, runtime limits and the selected coding client.
 - `<benchmark>/experiments/`: portable all-task plans; `--dataset`, `--output`, and `--tasks` select local inputs and storage.
 - `solutions/<benchmark>/`: published policy memory schemas, checksums, interface identities, source provenance, and evaluation settings.
 - `mikasa_robo_vla_suite/`: five-task comparison plans for 25 demos, 50 demos,
@@ -26,6 +26,8 @@ Historical imports and catalog hashes remain unchanged. RMBench's
 catalogs remain provenance for historical scores. Superseded experimental plans
 are archived locally under ignored `legacy/`.
 
-The default coding plans use Claude Code / Opus 5.5. Configure the referenced
-client settings for your own account before development. Both clients share the
-same assigned evidence and isolated tool interface.
+Run configuration filenames describe the learning mode. Set the `coding` object
+inside a configuration to choose your client, model, provider and account settings;
+separate copies of every mode for each client are unnecessary. For a custom run,
+copy the configuration to a local JSON file and edit that object before preparation.
+Resolved client/model settings are still pinned in each run for reproducibility.

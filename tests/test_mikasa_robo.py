@@ -190,7 +190,7 @@ def test_demonstration_declaration_and_no_public_collector():
 
 
 def test_configs_and_prompt(adapter):
-    config = RunConfig.from_dict(json.loads((ROOT / "configs/mikasa_robo/both_claude_code.json").read_text()))
+    config = RunConfig.from_dict(json.loads((ROOT / "configs/mikasa_robo/both.json").read_text()))
     assert (config.benchmark, config.budget, config.training_seed_count, config.training_seed_policy, config.depth) == (
         "mikasa_robo", 50, 50, "demo_cycle", True
     )

@@ -118,6 +118,6 @@ def extract(raw_data, output, benchmark="rmbench", count=25, tasks=None, depth=F
     raise NotImplementedError(
         "RMBench collection/conversion is archived under legacy/rmbench/. "
         "Use the published RGB-D dataset with cam prepare --dataset DATA "
-        "--config configs/rmbench/demos_claude_code.json; no replay or dataset "
+        "--config configs/rmbench/demos.json; no replay or dataset "
         "revalidation is required. See docs/benchmarks/rmbench/README.md."
     )

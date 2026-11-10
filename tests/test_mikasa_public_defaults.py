@@ -25,7 +25,7 @@ def adapter():
 
 
 def test_default_prompt_and_assignment(adapter):
-    cfg = RunConfig.from_dict(read(ROOT / 'configs/mikasa_robo/both_claude_code.json'))
+    cfg = RunConfig.from_dict(read(ROOT / 'configs/mikasa_robo/both.json'))
     assert cfg.both_protocol == 'demo_first' and cfg.setting == 'demo_interaction'
     assert cfg.physics_backend == 'cpu' and cfg.depth and not cfg.builtin_demo
     assert cfg.budget == cfg.training_seed_count == 50
@@ -42,7 +42,7 @@ def test_default_prompt_and_assignment(adapter):
 
 @pytest.mark.parametrize('dataset_name', ['mikasa_robo', 'mikasa_robo_v2'])
 def test_existing_rgbd_manifest_prepares_without_opening_h5(tmp_path, adapter, dataset_name, monkeypatch):
-    cfg = RunConfig.from_dict(read(ROOT / 'configs/mikasa_robo/demos_claude_code.json'))
+    cfg = RunConfig.from_dict(read(ROOT / 'configs/mikasa_robo/demos.json'))
     filename = f'record_dataset_{TASK}.h5'
     # Invalid H5 bytes deliberately detect accidental full data reads in manifest-only preparation.
     (tmp_path / filename).write_bytes(b'not opened during preparation')
