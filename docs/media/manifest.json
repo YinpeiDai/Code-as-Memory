@@ -1,11 +1,11 @@
 {
-  "schema": "cam-readme-media/2",
+  "schema": "cam-readme-media/3",
   "source_root": "public_runs",
   "selection": "Lowest numbered successful held-out episode for each selected task.",
-  "presentation": "Front/overview video with recorded memory excerpts. Changed fields highlight for one second; changed states last at least 1.4 seconds. Final observation holds for 1.4 seconds. Timing is illustrative, not real-time robot latency.",
-  "memory_format": "Original selected values; positions rounded to two decimals. VideoUnmaskSwap colors are parsed from memory.note; T04 colored maps drawer names to the first component of memory.scores (colored-pixel counts). No memory is inferred between decisions or after episode termination.",
-  "annotations": "Projected remembered locations or action targets using recorded camera calibration. Markers are explanatory overlays, not simulator ground truth or a new object tracker. PatternLock, VideoUnmaskSwap, swap_blocks and T07 use documented display surface heights.",
-  "builder_sha256": "745e956b83b516e4e012356ce37a1083c68764f8fa165d83ca3898c3172c4327",
+  "presentation": "H.264 MP4, front/overview video with recorded memory excerpts and perceived positions. Changed fields highlight for one second; changed states last at least 1.4 seconds. Final observation holds for 1.4 seconds. Timing is illustrative, not real-time robot latency.",
+  "memory_format": "Original selected values; positions rounded to two decimals in world-frame meters. Position panels select retained estimates from logged memory, not hidden object state or newly executed perception. VideoUnmaskSwap colors are parsed from memory.note; T04 colored maps drawer names to the first component of memory.scores (colored-pixel counts). No memory is inferred between decisions or after episode termination.",
+  "annotations": "Demo/execution labels follow recorded observation phase, with a gold border and Watch the video caption for demo frames. EEF trails project at most 160 past recorded poses and reset at phase boundaries; two-arm poses use separate colors. Point markers project remembered locations or action targets. Display surface heights: PatternLock 0.0m, VideoUnmaskSwap 0.04m, swap_blocks 0.778m, T07 bottle 0.48m and pan 0.43m. Official goal text comes verbatim from the selected result.json.",
+  "builder_sha256": "83d8534c4756032535a697f12628d8cf2a629e5328d472488e083ac596a7d1c5",
   "clips": [
     {
       "benchmark": "robomme",
@@ -25,14 +25,28 @@
       "source_decisions": "eval/robomme/demo_only_25/PatternLock/R000/ep0/decisions.jsonl",
       "source_decisions_sha256": "54eb360faf38054ea1871732d6ba99539006f8988c7db16c1a0d0c61b4f44d9c",
       "source_observations": "eval/robomme/demo_only_25/PatternLock/R000/ep0/observations.h5",
-      "alignment_and_calibration_sha256": "f2c01ed4965ef1bce725656ee1e42d9395290ce3dd5c47651949c0fa721046da",
+      "alignment_calibration_and_pose_sha256": "6af59d9967bcc1c5e33a1a1815bef053bac93ed3a4d53fa4f3ec031b86014116",
       "camera": "front",
-      "preview": "robomme-pattern-lock.gif",
-      "preview_sha256": "d5cc1ee7a39f0a3c93f71ab7c78fa2a679bd48019b6061cf2ceb88e31ea1113a",
-      "preview_dimensions": [
-        960,
-        480
+      "goal": "watch the video carefully, then use the stick attached to the robot to retrace the same pattern",
+      "phase_labels": {
+        "0": "Demo phase",
+        "1": "Execution phase"
+      },
+      "demo_frames": 86,
+      "eef_pose_fields": [
+        "tcp"
       ],
+      "trail_history_frames": 160,
+      "preview": "robomme-pattern-lock.mp4",
+      "preview_sha256": "5fd2941d655480d78607aac45f00005cb0dafa937a81eaa3d52d28b59b68f912",
+      "preview_dimensions": [
+        1080,
+        650
+      ],
+      "preview_format": "video/mp4",
+      "poster": "robomme-pattern-lock.jpg",
+      "poster_sha256": "a558a326c4a08f2f949b770e40001caa2922f2104a6dbb57813621073062c181",
+      "poster_output_frame": 49,
       "preview_fps": 10,
       "nominal_playback_multiplier": 1,
       "preview_duration_seconds": 9.7,
@@ -146,6 +160,10 @@
             "plan": null,
             "decisions": null
           },
+          "perceived_position": {
+            "vision_plan[0] (x, y)": null
+          },
+          "phase": "demo",
           "highlighted_fields": []
         },
         {
@@ -174,6 +192,13 @@
             ],
             "decisions": 1
           },
+          "perceived_position": {
+            "vision_plan[0] (x, y)": [
+              -0.102303147316,
+              0.100121356547
+            ]
+          },
+          "phase": "execution",
           "highlighted_fields": [
             "decisions",
             "plan"
@@ -199,14 +224,28 @@
       "source_decisions": "eval/robomme/demo_only_25/VideoUnmaskSwap/R000/ep0/decisions.jsonl",
       "source_decisions_sha256": "89ea940b9bc3047e6d148338c134bc391136827ff3af832d1194f76899ea8d16",
       "source_observations": "eval/robomme/demo_only_25/VideoUnmaskSwap/R000/ep0/observations.h5",
-      "alignment_and_calibration_sha256": "5ebbf5105338d2dfef65ee6a047547e2a59fb1819a869374a715089e45dbd118",
+      "alignment_calibration_and_pose_sha256": "dbb71f08a9e08c0d8d45a1d1312eab582aecb48010c78f361e867826096fae21",
       "camera": "front",
-      "preview": "robomme-hidden-objects.gif",
-      "preview_sha256": "123d8afff850bb4f9e3701f8dd04b60acb0118653f3d893c0cb68f6fbb601f25",
-      "preview_dimensions": [
-        960,
-        480
+      "goal": "watch the video carefully, then pick up the container hiding the green cube, finally pick up another container hiding the blue cube",
+      "phase_labels": {
+        "0": "Demo phase",
+        "1": "Execution phase"
+      },
+      "demo_frames": 114,
+      "eef_pose_fields": [
+        "tcp"
       ],
+      "trail_history_frames": 160,
+      "preview": "robomme-hidden-objects.mp4",
+      "preview_sha256": "0b8a7162959e487ddbe1a31cdea765f277c92b5f6af4b6b933448c3499d26c25",
+      "preview_dimensions": [
+        1080,
+        650
+      ],
+      "preview_format": "video/mp4",
+      "poster": "robomme-hidden-objects.jpg",
+      "poster_sha256": "2552707c3b85b0ab912571a9fa106cbae1c2e0f5ba046e7c7fbd8372ea169589",
+      "poster_output_frame": 89,
       "preview_fps": 10,
       "nominal_playback_multiplier": 1.5,
       "preview_duration_seconds": 12.1,
@@ -345,6 +384,10 @@
             "next_index": null,
             "pending": null
           },
+          "perceived_position": {
+            "targets[next_index] (x, y)": null
+          },
+          "phase": "demo",
           "highlighted_fields": []
         },
         {
@@ -360,6 +403,13 @@
             "next_index": 0,
             "pending": "pick"
           },
+          "perceived_position": {
+            "targets[next_index] (x, y)": [
+              0.031173004712,
+              -0.140049144665
+            ]
+          },
+          "phase": "execution",
           "highlighted_fields": [
             "colors",
             "next_index",
@@ -379,6 +429,13 @@
             "next_index": 1,
             "pending": "pick"
           },
+          "perceived_position": {
+            "targets[next_index] (x, y)": [
+              -0.081995139104,
+              -0.022775342085
+            ]
+          },
+          "phase": "execution",
           "highlighted_fields": [
             "next_index"
           ]
@@ -403,14 +460,29 @@
       "source_decisions": "eval/rmbench/demo_only_50/swap_blocks/R000/ep000/decisions.jsonl",
       "source_decisions_sha256": "1302e0260659e3c03a1868dc75759ad3b8da7a9e2c0f13bc04d1dfee1c101472",
       "source_observations": "eval/rmbench/demo_only_50/swap_blocks/R000/ep000/observations.h5",
-      "alignment_and_calibration_sha256": "393e30ca24abd9da4fd74d40e4194bf2f8180cea4febc31c1587fe75fb3acbbb",
+      "alignment_calibration_and_pose_sha256": "0b03e5a39825995ec6c50d595901425feef8a72b6c25ef7c8bc3fa7a55040aa0",
       "camera": "head",
-      "preview": "rmbench-swap-blocks.gif",
-      "preview_sha256": "519843c800ea99d2db2d8fba744d107947bce2d33066b6754e6a070b6f5a307f",
-      "preview_dimensions": [
-        960,
-        480
+      "goal": "There are three traies on the table, and two blocks are placed in two different traies. You may move only one block at a time, and each tray can hold at most one block. Swap the positions of the two blocks. Finally press the button.",
+      "phase_labels": {
+        "0": "Demo phase",
+        "1": "Execution phase"
+      },
+      "demo_frames": 0,
+      "eef_pose_fields": [
+        "left_ee_pose",
+        "right_ee_pose"
       ],
+      "trail_history_frames": 160,
+      "preview": "rmbench-swap-blocks.mp4",
+      "preview_sha256": "9218f03364bbda65752e19bbab784f374b1788ba65552219949ff886bd06c927",
+      "preview_dimensions": [
+        1080,
+        650
+      ],
+      "preview_format": "video/mp4",
+      "poster": "rmbench-swap-blocks.jpg",
+      "poster_sha256": "e88bc2721e175f4b12ffceb85956d357a928ffb7d7b71196afc977bf5606ac30",
+      "poster_output_frame": 62,
       "preview_fps": 10,
       "nominal_playback_multiplier": 0.25,
       "preview_duration_seconds": 11.2,
@@ -544,6 +616,13 @@
             "move_idx": 0,
             "phase": "check_pick"
           },
+          "perceived_position": {
+            "src_xy (x, y)": [
+              -0.004951562539,
+              -0.144851488425
+            ]
+          },
+          "phase": "execution",
           "highlighted_fields": [
             "move_idx",
             "phase",
@@ -564,6 +643,13 @@
             "move_idx": 0,
             "phase": "check_place"
           },
+          "perceived_position": {
+            "src_xy (x, y)": [
+              -0.004951562539,
+              -0.144851488425
+            ]
+          },
+          "phase": "execution",
           "highlighted_fields": [
             "phase"
           ]
@@ -582,6 +668,13 @@
             "move_idx": 1,
             "phase": "check_pick"
           },
+          "perceived_position": {
+            "src_xy (x, y)": [
+              0.135020296851,
+              -0.148842741448
+            ]
+          },
+          "phase": "execution",
           "highlighted_fields": [
             "move_idx",
             "phase"
@@ -601,6 +694,13 @@
             "move_idx": 1,
             "phase": "check_place"
           },
+          "perceived_position": {
+            "src_xy (x, y)": [
+              0.135020296851,
+              -0.148842741448
+            ]
+          },
+          "phase": "execution",
           "highlighted_fields": [
             "phase"
           ]
@@ -619,6 +719,13 @@
             "move_idx": 2,
             "phase": "check_pick"
           },
+          "perceived_position": {
+            "src_xy (x, y)": [
+              -0.138297542584,
+              -0.14838602984
+            ]
+          },
+          "phase": "execution",
           "highlighted_fields": [
             "move_idx",
             "phase"
@@ -638,6 +745,13 @@
             "move_idx": 2,
             "phase": "check_place"
           },
+          "perceived_position": {
+            "src_xy (x, y)": [
+              -0.138297542584,
+              -0.14838602984
+            ]
+          },
+          "phase": "execution",
           "highlighted_fields": [
             "phase"
           ]
@@ -656,6 +770,13 @@
             "move_idx": 3,
             "phase": "press"
           },
+          "perceived_position": {
+            "src_xy (x, y)": [
+              -0.138297542584,
+              -0.14838602984
+            ]
+          },
+          "phase": "execution",
           "highlighted_fields": [
             "move_idx",
             "phase"
@@ -681,14 +802,29 @@
       "source_decisions": "eval/rmbench/demo_only_50/cover_blocks/R000/ep000/decisions.jsonl",
       "source_decisions_sha256": "b890843f00d9c8205b0eea6054c253cade9ba71c1a787e3a1207fac692458203",
       "source_observations": "eval/rmbench/demo_only_50/cover_blocks/R000/ep000/observations.h5",
-      "alignment_and_calibration_sha256": "15e533b94825159b6dfa3d3e65758e5e8d474df5c916d3d3258e9ef790dcef34",
+      "alignment_calibration_and_pose_sha256": "88113395f2eb99a36caf0fdc85c85dbc48814eb044c40556caeac631427b84e2",
       "camera": "head",
-      "preview": "rmbench-cover-blocks.gif",
-      "preview_sha256": "812bdbcba4ae1289f8747c0373a272096bc41a9c789e9866c6dc3bcf2d67dcf7",
-      "preview_dimensions": [
-        960,
-        480
+      "goal": "On the table, red, green, and blue blocks are arranged randomly along with three lids. From the current viewpoint, cover the blocks from left to right using the lids, and then uncover them again in the sequence red, green, and blue.",
+      "phase_labels": {
+        "0": "Demo phase",
+        "1": "Execution phase"
+      },
+      "demo_frames": 0,
+      "eef_pose_fields": [
+        "left_ee_pose",
+        "right_ee_pose"
       ],
+      "trail_history_frames": 160,
+      "preview": "rmbench-cover-blocks.mp4",
+      "preview_sha256": "4dcc8a4454fc89318620ebb31a6c89eabfd7f17a2e6d07ebca2e2fb2fb9ddf6b",
+      "preview_dimensions": [
+        1080,
+        650
+      ],
+      "preview_format": "video/mp4",
+      "poster": "rmbench-cover-blocks.jpg",
+      "poster_sha256": "c1dec8d06d4873120970222d6abb0a3b3a876663b997ca5ae301c5ccaac826a9",
+      "poster_output_frame": 62,
       "preview_fps": 10,
       "nominal_playback_multiplier": 0.5,
       "preview_duration_seconds": 9.8,
@@ -809,6 +945,14 @@
             "index": 0,
             "pending": "cover:0"
           },
+          "perceived_position": {
+            "block_pos[slot] (x, y, z)": [
+              -0.201269691831,
+              -0.179805918643,
+              0.781079963256
+            ]
+          },
+          "phase": "execution",
           "highlighted_fields": [
             "colors",
             "index",
@@ -831,6 +975,14 @@
             "index": 1,
             "pending": "cover:1"
           },
+          "perceived_position": {
+            "block_pos[slot] (x, y, z)": [
+              -0.001254785772,
+              -0.179805918643,
+              0.781079963256
+            ]
+          },
+          "phase": "execution",
           "highlighted_fields": [
             "index",
             "pending"
@@ -851,6 +1003,14 @@
             "index": 2,
             "pending": "cover:2"
           },
+          "perceived_position": {
+            "block_pos[slot] (x, y, z)": [
+              0.197621552377,
+              -0.179805918643,
+              0.781079963256
+            ]
+          },
+          "phase": "execution",
           "highlighted_fields": [
             "index",
             "pending"
@@ -871,6 +1031,14 @@
             "index": 0,
             "pending": "uncover:1"
           },
+          "perceived_position": {
+            "block_pos[slot] (x, y, z)": [
+              -0.001254785772,
+              -0.179805918643,
+              0.781079963256
+            ]
+          },
+          "phase": "execution",
           "highlighted_fields": [
             "index",
             "pending",
@@ -893,6 +1061,14 @@
             "index": 1,
             "pending": "uncover:0"
           },
+          "perceived_position": {
+            "block_pos[slot] (x, y, z)": [
+              -0.201269691831,
+              -0.179805918643,
+              0.781079963256
+            ]
+          },
+          "phase": "execution",
           "highlighted_fields": [
             "index",
             "pending"
@@ -913,6 +1089,14 @@
             "index": 2,
             "pending": "uncover:2"
           },
+          "perceived_position": {
+            "block_pos[slot] (x, y, z)": [
+              0.197621552377,
+              -0.179805918643,
+              0.781079963256
+            ]
+          },
+          "phase": "execution",
           "highlighted_fields": [
             "index",
             "pending"
@@ -938,14 +1122,28 @@
       "source_decisions": "eval/mikasa_robo/demo_interaction_50/BatteriesCheckerEasy-3-VLA-v0/20261108T040959_138834Z/R050/ep000/decisions.jsonl",
       "source_decisions_sha256": "a8b1ff4743524eca61e7b7c74cf9258c20c7c98bd2eebe3a61774ab18c05d0af",
       "source_observations": "eval/mikasa_robo/demo_interaction_50/BatteriesCheckerEasy-3-VLA-v0/20261108T040959_138834Z/R050/ep000/observations.h5",
-      "alignment_and_calibration_sha256": "5e19ce56144fd713f03f77331a53b5e40158ff2dfafbcdabccd49d3e6ed7600a",
+      "alignment_calibration_and_pose_sha256": "987d317744053653127a01fe9a4f27038a0f294c47fcc5f474534e52a1f339a6",
       "camera": "front",
-      "preview": "mikasa-batteries.gif",
-      "preview_sha256": "ad3c1f1b9a4005503b97fc2d66387537e372092aca987437ce0d11f973f5d7f0",
-      "preview_dimensions": [
-        960,
-        480
+      "goal": "Find all working batteries by inserting each one into the socket, observing the lamp result, and then pressing the button to confirm.",
+      "phase_labels": {
+        "0": "Demo phase",
+        "1": "Execution phase"
+      },
+      "demo_frames": 0,
+      "eef_pose_fields": [
+        "tcp"
       ],
+      "trail_history_frames": 160,
+      "preview": "mikasa-batteries.mp4",
+      "preview_sha256": "b4d191c41524151c15285e1d9fab7819217ca206045cccdafec592980bc0ee5b",
+      "preview_dimensions": [
+        1080,
+        650
+      ],
+      "preview_format": "video/mp4",
+      "poster": "mikasa-batteries.jpg",
+      "poster_sha256": "77a6fef40e897a8febccbe2ab97393c036d3503e5b17191f16448ff7355ca5c7",
+      "poster_output_frame": 90,
       "preview_fps": 10,
       "nominal_playback_multiplier": 1.25,
       "preview_duration_seconds": 14.0,
@@ -1107,6 +1305,14 @@
             ],
             "stage": "pick"
           },
+          "perceived_position": {
+            "batteries[queue[0]] (x, y, z)": [
+              -0.014716560397,
+              -0.146718546196,
+              0.04
+            ]
+          },
+          "phase": "execution",
           "highlighted_fields": [
             "queue",
             "results",
@@ -1127,6 +1333,14 @@
             ],
             "stage": "insert"
           },
+          "perceived_position": {
+            "batteries[queue[0]] (x, y, z)": [
+              -0.014716560397,
+              -0.146718546196,
+              0.04
+            ]
+          },
+          "phase": "execution",
           "highlighted_fields": [
             "stage"
           ]
@@ -1147,6 +1361,14 @@
             ],
             "stage": "press"
           },
+          "perceived_position": {
+            "batteries[queue[0]] (x, y, z)": [
+              -0.014716560397,
+              -0.146718546196,
+              0.04
+            ]
+          },
+          "phase": "execution",
           "highlighted_fields": [
             "results",
             "stage"
@@ -1167,6 +1389,14 @@
             ],
             "stage": "pick"
           },
+          "perceived_position": {
+            "batteries[queue[0]] (x, y, z)": [
+              -0.065226724482,
+              -0.146757670455,
+              0.04
+            ]
+          },
+          "phase": "execution",
           "highlighted_fields": [
             "queue",
             "stage"
@@ -1187,6 +1417,14 @@
             ],
             "stage": "insert"
           },
+          "perceived_position": {
+            "batteries[queue[0]] (x, y, z)": [
+              -0.065226724482,
+              -0.146757670455,
+              0.04
+            ]
+          },
+          "phase": "execution",
           "highlighted_fields": [
             "stage"
           ]
@@ -1207,6 +1445,14 @@
             ],
             "stage": "press"
           },
+          "perceived_position": {
+            "batteries[queue[0]] (x, y, z)": [
+              -0.065226724482,
+              -0.146757670455,
+              0.04
+            ]
+          },
+          "phase": "execution",
           "highlighted_fields": [
             "results",
             "stage"
@@ -1227,6 +1473,14 @@
             ],
             "stage": "pick"
           },
+          "perceived_position": {
+            "batteries[queue[0]] (x, y, z)": [
+              -0.11407829212,
+              -0.14692421875,
+              0.04
+            ]
+          },
+          "phase": "execution",
           "highlighted_fields": [
             "queue",
             "stage"
@@ -1247,6 +1501,14 @@
             ],
             "stage": "insert"
           },
+          "perceived_position": {
+            "batteries[queue[0]] (x, y, z)": [
+              -0.11407829212,
+              -0.14692421875,
+              0.04
+            ]
+          },
+          "phase": "execution",
           "highlighted_fields": [
             "stage"
           ]
@@ -1267,6 +1529,14 @@
             ],
             "stage": "press"
           },
+          "perceived_position": {
+            "batteries[queue[0]] (x, y, z)": [
+              -0.11407829212,
+              -0.14692421875,
+              0.04
+            ]
+          },
+          "phase": "execution",
           "highlighted_fields": [
             "results",
             "stage"
@@ -1292,14 +1562,28 @@
       "source_decisions": "eval/mikasa_robo/demo_interaction_50/SeqOfColors3-VLA-v0/20261108T040959_138834Z/R050/ep000/decisions.jsonl",
       "source_decisions_sha256": "81784b0af3605823cd44dff54dad066f241ea62f62cd9892f140c2c7343342b9",
       "source_observations": "eval/mikasa_robo/demo_interaction_50/SeqOfColors3-VLA-v0/20261108T040959_138834Z/R050/ep000/observations.h5",
-      "alignment_and_calibration_sha256": "c9839ff0a1fef669f3ec6a8d2b72591e4fbff002e1f1b6f36aacceb428e126a4",
+      "alignment_calibration_and_pose_sha256": "c8b44ef53a7b4b098ffb2b0cfbec3bec116174f5f2171de5c3d504a75c99a00a",
       "camera": "front",
-      "preview": "mikasa-color-sequence.gif",
-      "preview_sha256": "59dda49dded7be7ce99fa63687c68b927be71ba8acf95ed839b5c8b2bb4a9363",
-      "preview_dimensions": [
-        960,
-        480
+      "goal": "Observe which colored cubes appear during the cue, wait, then touch all of them in any order and press the center button.",
+      "phase_labels": {
+        "0": "Demo phase",
+        "1": "Execution phase"
+      },
+      "demo_frames": 0,
+      "eef_pose_fields": [
+        "tcp"
       ],
+      "trail_history_frames": 160,
+      "preview": "mikasa-color-sequence.mp4",
+      "preview_sha256": "5d8273b327428d41e53ba466f473c8d8ff19d7020541dd16468664eebfe6e665",
+      "preview_dimensions": [
+        1080,
+        650
+      ],
+      "preview_format": "video/mp4",
+      "poster": "mikasa-color-sequence.jpg",
+      "poster_sha256": "c452e052896e084233986a60a5c551900c5872054f30242da85363bcd38e0514",
+      "poster_output_frame": 54,
       "preview_fps": 10,
       "nominal_playback_multiplier": 1,
       "preview_duration_seconds": 9.7,
@@ -1416,6 +1700,10 @@
             "touched": 0,
             "pending": ""
           },
+          "perceived_position": {
+            "button_xy (x, y)": null
+          },
+          "phase": "execution",
           "highlighted_fields": [
             "cue_colors",
             "pending",
@@ -1436,6 +1724,13 @@
             "touched": 0,
             "pending": "touch:darkred"
           },
+          "perceived_position": {
+            "cube_xy[target] (x, y)": [
+              0.0513,
+              -0.1648
+            ]
+          },
+          "phase": "execution",
           "highlighted_fields": [
             "cue_colors",
             "pending"
@@ -1455,6 +1750,13 @@
             "touched": 1,
             "pending": "touch:yellow"
           },
+          "perceived_position": {
+            "cube_xy[target] (x, y)": [
+              0.0387,
+              0.1377
+            ]
+          },
+          "phase": "execution",
           "highlighted_fields": [
             "pending",
             "touched"
@@ -1474,6 +1776,13 @@
             "touched": 2,
             "pending": "touch:blue"
           },
+          "perceived_position": {
+            "cube_xy[target] (x, y)": [
+              -0.0585,
+              0.2519
+            ]
+          },
+          "phase": "execution",
           "highlighted_fields": [
             "pending",
             "touched"
@@ -1493,6 +1802,13 @@
             "touched": 3,
             "pending": "press"
           },
+          "perceived_position": {
+            "button_xy (x, y)": [
+              -0.1253,
+              -0.0067
+            ]
+          },
+          "phase": "execution",
           "highlighted_fields": [
             "pending",
             "touched"
@@ -1518,14 +1834,28 @@
       "source_decisions": "eval/robomemarena/demo_interaction_50/T04_ButterNonEmptyDrawer/R032/ep000/decisions.jsonl",
       "source_decisions_sha256": "384b24a72cd07f36c7e997ab6234507051a74910fc6da50b72576936a71d1426",
       "source_observations": "eval/robomemarena/demo_interaction_50/T04_ButterNonEmptyDrawer/R032/ep000/observations.h5",
-      "alignment_and_calibration_sha256": "f674492a5da76bb77ff8f640ed3473fe3e175f38be8bc55e7c6f254e5f376072",
+      "alignment_calibration_and_pose_sha256": "77b7543a378829fcb54fff77344338d60a3a6ac818eb2a2dba9989b34b9797cb",
       "camera": "agentview",
-      "preview": "robomemarena-drawers.gif",
-      "preview_sha256": "727ab4cfb5a2066de6eb5d2f9c3d94755387d7a8f3cf8a9af0b2d7e6be2adb0f",
-      "preview_dimensions": [
-        960,
-        480
+      "goal": "Open and close each drawer to check it, in this order: top, middle, bottom. Put butter into the drawer that already contains an object.",
+      "phase_labels": {
+        "0": "Demo phase",
+        "1": "Execution phase"
+      },
+      "demo_frames": 0,
+      "eef_pose_fields": [
+        "tcp"
       ],
+      "trail_history_frames": 160,
+      "preview": "robomemarena-drawers.mp4",
+      "preview_sha256": "11aceb6c28ec48058651535809798f93a01b1e6ed62368e466945f3fee5c87ec",
+      "preview_dimensions": [
+        1080,
+        650
+      ],
+      "preview_format": "video/mp4",
+      "poster": "robomemarena-drawers.jpg",
+      "poster_sha256": "f38e3866313b10bb1ae3e122ab2cf00e54b0cd1b418d0df3f38a86b734285229",
+      "poster_output_frame": 100,
       "preview_fps": 10,
       "nominal_playback_multiplier": 3,
       "preview_duration_seconds": 17.1,
@@ -1718,6 +2048,14 @@
             "target": null,
             "pending": "open"
           },
+          "perceived_position": {
+            "cabinet (x, y, z)": [
+              0.2859,
+              0.4892,
+              0.713
+            ]
+          },
+          "phase": "execution",
           "highlighted_fields": [
             "colored",
             "pending"
@@ -1737,6 +2075,14 @@
             "target": null,
             "pending": "close"
           },
+          "perceived_position": {
+            "cabinet (x, y, z)": [
+              0.2859,
+              0.4892,
+              0.713
+            ]
+          },
+          "phase": "execution",
           "highlighted_fields": [
             "colored",
             "pending"
@@ -1756,6 +2102,14 @@
             "target": null,
             "pending": "open"
           },
+          "perceived_position": {
+            "cabinet (x, y, z)": [
+              0.2859,
+              0.4892,
+              0.713
+            ]
+          },
+          "phase": "execution",
           "highlighted_fields": [
             "pending"
           ]
@@ -1774,6 +2128,14 @@
             "target": null,
             "pending": "close"
           },
+          "perceived_position": {
+            "cabinet (x, y, z)": [
+              0.2859,
+              0.4892,
+              0.713
+            ]
+          },
+          "phase": "execution",
           "highlighted_fields": [
             "colored",
             "pending"
@@ -1793,6 +2155,14 @@
             "target": null,
             "pending": "open"
           },
+          "perceived_position": {
+            "cabinet (x, y, z)": [
+              0.2859,
+              0.4892,
+              0.713
+            ]
+          },
+          "phase": "execution",
           "highlighted_fields": [
             "pending"
           ]
@@ -1811,6 +2181,14 @@
             "target": null,
             "pending": "close"
           },
+          "perceived_position": {
+            "cabinet (x, y, z)": [
+              0.2859,
+              0.4892,
+              0.713
+            ]
+          },
+          "phase": "execution",
           "highlighted_fields": [
             "colored",
             "pending"
@@ -1830,6 +2208,14 @@
             "target": "top",
             "pending": "open"
           },
+          "perceived_position": {
+            "cabinet (x, y, z)": [
+              0.2859,
+              0.4892,
+              0.713
+            ]
+          },
+          "phase": "execution",
           "highlighted_fields": [
             "pending",
             "target"
@@ -1849,6 +2235,14 @@
             "target": "top",
             "pending": "release"
           },
+          "perceived_position": {
+            "cabinet (x, y, z)": [
+              0.2859,
+              0.4892,
+              0.713
+            ]
+          },
+          "phase": "execution",
           "highlighted_fields": [
             "pending"
           ]
@@ -1867,6 +2261,14 @@
             "target": "top",
             "pending": "pick"
           },
+          "perceived_position": {
+            "cabinet (x, y, z)": [
+              0.2859,
+              0.4892,
+              0.713
+            ]
+          },
+          "phase": "execution",
           "highlighted_fields": [
             "pending"
           ]
@@ -1885,6 +2287,14 @@
             "target": "top",
             "pending": "pick"
           },
+          "perceived_position": {
+            "cabinet (x, y, z)": [
+              0.2859,
+              0.4892,
+              0.713
+            ]
+          },
+          "phase": "execution",
           "highlighted_fields": []
         }
       ]
@@ -1907,14 +2317,28 @@
       "source_decisions": "eval/robomemarena/demo_interaction_50/T07_PourSauceFrypanTwice/R050/ep000/decisions.jsonl",
       "source_decisions_sha256": "27191ab78ea39c34748ed71424002582d09c2b36a8b00eeba5fd54463e86ef25",
       "source_observations": "eval/robomemarena/demo_interaction_50/T07_PourSauceFrypanTwice/R050/ep000/observations.h5",
-      "alignment_and_calibration_sha256": "24ee826b451cdeac1dab737a61b8380c1ef56a7cd051a9f12f0ed6d7650d2d30",
+      "alignment_calibration_and_pose_sha256": "9488ff74b96195d5c040d8f63bafbce40cb9b0974cfe470fa96f1ef304d3366c",
       "camera": "agentview",
-      "preview": "robomemarena-pour-twice.gif",
-      "preview_sha256": "b63ee10ad3537bcd36679c50d2017d08242e275d83808a0a52aacca4dde43945",
-      "preview_dimensions": [
-        960,
-        480
+      "goal": "Pour tomato sauce over the frypan twice and place the sauce bottle into the bowl drainer.",
+      "phase_labels": {
+        "0": "Demo phase",
+        "1": "Execution phase"
+      },
+      "demo_frames": 0,
+      "eef_pose_fields": [
+        "tcp"
       ],
+      "trail_history_frames": 160,
+      "preview": "robomemarena-pour-twice.mp4",
+      "preview_sha256": "70146465f201316ad0acf1b7ab18cfd628fef505c5da3751df0ce7ba53de0cd4",
+      "preview_dimensions": [
+        1080,
+        650
+      ],
+      "preview_format": "video/mp4",
+      "poster": "robomemarena-pour-twice.jpg",
+      "poster_sha256": "a74de77ad85b4f9634d6560a33c33193dc3c9370c7d567fa127cf1d723de1caa",
+      "poster_output_frame": 75,
       "preview_fps": 10,
       "nominal_playback_multiplier": 2,
       "preview_duration_seconds": 10.2,
@@ -2037,6 +2461,13 @@
               0.2147
             ]
           },
+          "perceived_position": {
+            "bottle_xy (x, y)": [
+              0.0207,
+              0.0192
+            ]
+          },
+          "phase": "execution",
           "highlighted_fields": [
             "phase",
             "pour_xy",
@@ -2056,6 +2487,13 @@
               0.2147
             ]
           },
+          "perceived_position": {
+            "pour_xy (x, y)": [
+              0.0002,
+              0.2147
+            ]
+          },
+          "phase": "execution",
           "highlighted_fields": [
             "phase"
           ]
@@ -2073,6 +2511,13 @@
               0.2147
             ]
           },
+          "perceived_position": {
+            "pour_xy (x, y)": [
+              0.0002,
+              0.2147
+            ]
+          },
+          "phase": "execution",
           "highlighted_fields": [
             "pours_done"
           ]

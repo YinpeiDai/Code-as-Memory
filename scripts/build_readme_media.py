@@ -1,18 +1,20 @@
-"""Build annotated README GIFs from recorded observations and memory writes.
+"""Build annotated README videos from recorded observations and memory writes.
 
 Run: python scripts/build_readme_media.py [--only SLUG ...]
 Uses the public archive, Pillow, OpenCV, h5py and ffmpeg. No policy execution,
 simulator, model calls or changes to source artifacts. Preview caches stay under
-public_runs/website/cache/readme_memory; release GIFs and provenance go to docs/media.
+public_runs/website/cache/readme_memory; release videos and provenance go to docs/media.
 """
 import argparse
 import ast
 from concurrent.futures import ThreadPoolExecutor
 import hashlib
+import html
 import io
 import json
 import math
 from pathlib import Path
+import shutil
 import subprocess
 import tokenize
 
@@ -25,7 +27,7 @@ ROOT = Path(__file__).resolve().parents[1]
 ARCHIVE = ROOT / "public_runs"
 OUTPUT = ROOT / "docs/media"
 CACHE = ARCHIVE / "website/cache/readme_memory"
-WIDTH, HEIGHT, VIEW, HEADER, FPS = 960, 480, 448, 44, 10
+WIDTH, HEIGHT, VIEW, HEADER, BODY_BOTTOM, FPS = 1080, 650, 480, 48, 554, 10
 INK, MUTED, TEAL, GOLD = "#E5EDF6", "#91A3B8", "#55DDC1", "#F2C879"
 BG, PANEL, HIGHLIGHT = "#101B2B", "#142235", "#21473F"
 FONT_ROOT = Path("/usr/share/fonts/truetype/dejavu")
@@ -33,6 +35,8 @@ CODE = ImageFont.truetype(str(FONT_ROOT / "DejaVuSansMono.ttf"), 32)
 LABEL = ImageFont.truetype(str(FONT_ROOT / "DejaVuSans.ttf"), 22)
 SMALL = ImageFont.truetype(str(FONT_ROOT / "DejaVuSans.ttf"), 18)
 BOLD = ImageFont.truetype(str(FONT_ROOT / "DejaVuSans-Bold.ttf"), 23)
+GOAL_FONT = ImageFont.truetype(str(FONT_ROOT / "DejaVuSans.ttf"), 20)
+TRAIL_COLORS = {"tcp": (96, 178, 255), "left_ee_pose": (255, 190, 93), "right_ee_pose": (96, 178, 255)}
 
 # Benchmark, setting, task, output slug, nominal playback multiplier.
 EXAMPLES = [
@@ -83,6 +87,34 @@ def selected_memory(task, memory):
     raise ValueError(task)
 
 
+def perceived_position(task, memory):
+    """Select already recorded perception values, without evaluating perception again."""
+    m = memory or {}
+    if task == "PatternLock":
+        return {"vision_plan[0] (x, y)": m["vision_plan"][0] if m.get("vision_plan") else None}
+    if task == "VideoUnmaskSwap":
+        target = m["targets"][m["next_index"]][:2] if m.get("targets") else None
+        return {"targets[next_index] (x, y)": target}
+    if task == "swap_blocks":
+        return {"src_xy (x, y)": m["src_xy"][:2] if m.get("src_xy") else None}
+    if task == "cover_blocks":
+        index = int(m["pending"].split(":")[1]) if m.get("pending") else None
+        return {"block_pos[slot] (x, y, z)": m["block_pos"][index] if index is not None else None}
+    if task.startswith("BatteriesChecker"):
+        return {"batteries[queue[0]] (x, y, z)": m["batteries"][int(m["queue"][0])] if m.get("queue") else None}
+    if task.startswith("SeqOfColors"):
+        if m.get("pending", "").startswith("touch:"):
+            color = m["pending"].split(":")[1]
+            return {"cube_xy[target] (x, y)": m["cube_xy"][m["cube_colors"].index(color)]}
+        return {"button_xy (x, y)": m.get("button_xy") or None}
+    if task.startswith("T04"):
+        return {"cabinet (x, y, z)": m.get("cabinet")}
+    if task.startswith("T07"):
+        key = "bottle_xy" if m.get("phase") == "pick" else "pour_xy"
+        return {key + " (x, y)": m.get(key)}
+    raise ValueError(task)
+
+
 def literal(value):
     if isinstance(value, str):
         return json.dumps(value)
@@ -118,7 +150,7 @@ def code_lines(fields):
 
 def action_caption(task, row):
     if row is None:
-        return "Watch the cue", "Memory starts after the cue"
+        return "Watch the video", "Memory starts after the video"
     m, act = row["memory_written"], row["act"]
     tool = act["tool"]
     if task == "PatternLock":
@@ -215,22 +247,66 @@ def syntax(draw, position, text):
         pass  # Individual lines of a multiline list still get their token colors.
 
 
-def render(rgb, task, row, fields, changed, camera, h5, frame_index, success):
+def wrap_text(text, font, width):
+    lines = [""]
+    for word in text.split():
+        candidate = (lines[-1] + " " + word).strip()
+        if font.getlength(candidate) > width and lines[-1]:
+            lines.append(word)
+        else:
+            lines[-1] = candidate
+    return lines
+
+
+def draw_trails(canvas, poses, phase, index, K, E, scale, offset, size):
+    """Only recorded history, restarting at phase boundaries; no future trajectory."""
+    start = index
+    while start > 0 and phase[start - 1] == phase[index]:
+        start -= 1
+    start = max(start, index - 159)
+    overlay = Image.new("RGBA", canvas.size)
+    draw = ImageDraw.Draw(overlay)
+    for key, positions in poses.items():
+        color = TRAIL_COLORS[key]
+        points = []
+        for world in positions[start:index + 1, :3]:
+            pc = E[:, :3] @ world + E[:, 3]
+            uv = K @ pc
+            x, y = uv[:2] / uv[2] * scale + np.asarray(offset)
+            valid = pc[2] > 0 and np.isfinite([x, y]).all() and offset[0] <= x <= offset[0] + size[0] and offset[1] <= y <= offset[1] + size[1]
+            points.append((float(x), float(y)) if valid else None)
+        for j, (a, b) in enumerate(zip(points, points[1:])):
+            if a is not None and b is not None:
+                alpha = round(40 + 180 * (j + 1) / max(1, len(points) - 1))
+                draw.line([a, b], fill=(*color, alpha), width=4)
+        if points and points[-1] is not None:
+            x, y = points[-1]
+            draw.ellipse((x - 4, y - 4, x + 4, y + 4), fill=(*color, 255))
+    canvas.paste(Image.alpha_composite(canvas.convert("RGBA"), overlay).convert("RGB"))
+
+
+def render(rgb, task, row, fields, position, changed, camera, h5, frame_index, success, poses, phases, goal):
     canvas = Image.new("RGB", (WIDTH, HEIGHT), BG)
     draw = ImageDraw.Draw(canvas)
     draw.rectangle((VIEW, 0, WIDTH, HEIGHT), fill=PANEL)
-    draw.text((18, 10), "OVERVIEW" if camera == "head" else "FRONT VIEW", font=LABEL, fill=MUTED)
+    demo = not bool(phases[frame_index])
+    phase_color = GOLD if demo else TEAL
+    draw.text((18, 10), "Demo phase" if demo else "Execution phase", font=BOLD, fill=phase_color)
     draw.text((VIEW + 24, 10), "ROBOT MEMORY", font=LABEL, fill=TEAL)
     frame = Image.fromarray(rgb)
-    scale = min(VIEW / frame.width, (HEIGHT - HEADER) / frame.height)
+    scale = min((VIEW - 12) / frame.width, (BODY_BOTTOM - HEADER) / frame.height)
     size = (round(frame.width * scale), round(frame.height * scale))
-    offset = ((VIEW - size[0]) // 2, HEADER + (HEIGHT - HEADER - size[1]) // 2)
+    offset = ((VIEW - size[0]) // 2, HEADER + (BODY_BOTTOM - HEADER - size[1]) // 2)
     canvas.paste(frame.resize(size, Image.Resampling.LANCZOS), offset)
-    draw = ImageDraw.Draw(canvas)
-    caption, explanation = action_caption(task, row)
+    caption, _ = action_caption(task, row)
     points, connect = markers(task, row)
     projected = []
     K, E = h5[camera + "_K"][frame_index], h5[camera + "_extrinsic"][frame_index]
+    draw_trails(canvas, poses, phases, frame_index, K, E, scale, offset, size)
+    draw = ImageDraw.Draw(canvas)
+    if demo:
+        draw.rectangle((offset[0], offset[1], offset[0] + size[0] - 1, offset[1] + size[1] - 1), outline=GOLD, width=6)
+        caption = "Watch the video"
     for world, label in points:
         pc = E[:, :3] @ np.asarray(world) + E[:, 3]
         if pc[2] <= 0:
@@ -252,16 +328,30 @@ def render(rgb, task, row, fields, changed, camera, h5, frame_index, success):
         caption = "TASK COMPLETE"
     badge_width = BOLD.getlength(caption) + 28
     assert badge_width <= VIEW - 20, caption
-    draw.rounded_rectangle((12, HEIGHT - 45, 12 + badge_width, HEIGHT - 9), radius=8, fill=BG)
-    draw.text((26, HEIGHT - 40), caption, font=BOLD, fill=TEAL if success else INK)
+    draw.rounded_rectangle((12, BODY_BOTTOM - 45, 12 + badge_width, BODY_BOTTOM - 9), radius=8, fill=BG)
+    draw.text((26, BODY_BOTTOM - 40), caption, font=BOLD, fill=TEAL if success else GOLD if demo else INK)
+    legend = [("Left EEF", "left_ee_pose"), ("Right EEF", "right_ee_pose")] if "left_ee_pose" in poses else [("EEF trail", "tcp")]
+    lx = 14
+    for text, key in legend:
+        draw.rounded_rectangle((lx, HEADER + 5, lx + SMALL.getlength(text) + 27, HEADER + 31), radius=4, fill=BG)
+        draw.line((lx + 6, HEADER + 18, lx + 18, HEADER + 18), fill=TRAIL_COLORS[key], width=3)
+        draw.text((lx + 23, HEADER + 7), text, font=SMALL, fill=INK)
+        lx += SMALL.getlength(text) + 39
     for i, (key, text) in enumerate(code_lines(fields)):
         y = 76 + i * 39
         if key in changed:
             draw.rounded_rectangle((VIEW + 13, y - 2, WIDTH - 12, y + 37), radius=5, fill=HIGHLIGHT)
             draw.rectangle((VIEW + 13, y + 3, VIEW + 17, y + 32), fill=TEAL)
         syntax(draw, (VIEW + 24, y), text)
-    assert LABEL.getlength(explanation) < WIDTH - VIEW - 48
-    draw.text((VIEW + 24, HEIGHT - 38), explanation, font=LABEL, fill=MUTED)
+    for name, value in position.items():
+        draw.text((VIEW + 24, 414), "PERCEIVED POSITION · METERS", font=SMALL, fill=MUTED)
+        draw.text((VIEW + 24, 440), name, font=LABEL, fill=INK)
+        syntax(draw, (VIEW + 24, 472), literal(value))
+    draw.line((0, BODY_BOTTOM + 1, WIDTH, BODY_BOTTOM + 1), fill="#34465B", width=1)
+    goal_lines = wrap_text("Goal: " + goal, GOAL_FONT, WIDTH - 32)
+    assert len(goal_lines) <= 3, goal_lines
+    for j, text in enumerate(goal_lines):
+        draw.text((16, BODY_BOTTOM + 12 + j * 24), text, font=GOAL_FONT, fill=INK)
     return canvas
 
 
@@ -281,10 +371,13 @@ def build(example, episodes):
     capture = cv2.VideoCapture(str(video))
     frame_count = int(capture.get(cv2.CAP_PROP_FRAME_COUNT))
     source_fps = capture.get(cv2.CAP_PROP_FPS)
-    preview = OUTPUT / f"{name}.gif"
+    preview = OUTPUT / f"{name}.mp4"
+    poster = OUTPUT / f"{name}.jpg"
     timeline, schedule = [], []
     with h5py.File(result.parent / "observations.h5") as h5:
         phases, steps = h5["phase"][:], h5["step"][:]
+        poses = {key: h5[key][:, :3] for key in TRAIL_COLORS if key in h5}
+        assert poses and all(np.isfinite(value).all() for value in poses.values())
         assert len(steps) == frame_count == len(h5[camera + "_rgb"])
         labels = [("E" if phase else "D") + str(step) for phase, step in zip(phases, steps)]
         assert len(set(labels)) == len(labels)
@@ -297,39 +390,52 @@ def build(example, episodes):
             available = [i for i, start in enumerate(starts) if start <= a]
             row_index = available[-1] if available else -1
             row = rows[row_index] if row_index >= 0 else None
-            fields = selected_memory(task, row["memory_written"] if row else rows[0]["memory_in"])
+            memory = row["memory_written"] if row else rows[0]["memory_in"]
+            fields = selected_memory(task, memory)
+            position = perceived_position(task, memory)
             code_lines(fields)
             changed = {key for key, value in fields.items() if previous.get(key) != value}
             count = max(14 if changed else 1, math.ceil((b - a) / source_fps / speed * FPS))
             timeline.append({"output_frame": len(schedule), "source_frame": a, "source_label": labels[a],
-                             "decision_index": row_index, "fields": fields, "highlighted_fields": sorted(changed)})
+                             "decision_index": row_index, "fields": fields, "perceived_position": position,
+                             "phase": "execution" if phases[a] else "demo", "highlighted_fields": sorted(changed)})
             for j, index in enumerate(np.linspace(a, b - 1, count).astype(int)):
-                schedule.append((int(index), row_index, fields, changed if j < 10 else set()))
+                schedule.append((int(index), row_index, fields, position, changed if j < 10 else set()))
             previous = fields
-        schedule.extend([(frame_count - 1, len(rows) - 1, previous, set())] * 14)
+        schedule.extend([(frame_count - 1, len(rows) - 1, previous, position, set())] * 14)
+        poster_row = min(len(rows) - 1, len(rows) * 2 // 3)
+        poster_index = next(e["output_frame"] for e in timeline if e["decision_index"] == poster_row) + 6
         command = ["ffmpeg", "-v", "error", "-y", "-threads", "1", "-f", "rawvideo", "-pix_fmt", "rgb24",
-                   "-s", f"{WIDTH}x{HEIGHT}", "-r", str(FPS), "-i", "-", "-filter_complex_threads", "1",
-                   "-filter_complex", "split[a][b];[a]palettegen=max_colors=128:stats_mode=diff[p];[b][p]paletteuse=dither=bayer:bayer_scale=4:diff_mode=rectangle",
-                   "-loop", "0", "-an", str(preview)]
+                   "-s", f"{WIDTH}x{HEIGHT}", "-r", str(FPS), "-i", "-", "-c:v", "libx264",
+                   "-preset", "medium", "-crf", "23", "-pix_fmt", "yuv420p", "-threads", "1",
+                   "-movflags", "+faststart", "-an", str(preview)]
         log_path = work / "encode.log"
         with log_path.open("w") as log:
             process = subprocess.Popen(command, stdin=subprocess.PIPE, stderr=log)
-            position, bgr = -1, None
+            decoded_index, bgr = -1, None
             snapshots = {event["output_frame"] for event in timeline} | {len(schedule) - 1}
             try:
-                for output_index, (index, row_index, fields, changed) in enumerate(schedule):
-                    while position < index:
+                for output_index, (index, row_index, fields, position, changed) in enumerate(schedule):
+                    while decoded_index < index:
                         ok, bgr = capture.read()
                         if not ok:
                             raise ValueError(f"Missing video frame {index}: {name}")
-                        position += 1
+                        decoded_index += 1
                     raw_width = h5[camera + "_rgb"].shape[2]
                     rgb = cv2.cvtColor(bgr[:, :raw_width], cv2.COLOR_BGR2RGB)
                     row = rows[row_index] if row_index >= 0 else None
-                    frame = render(rgb, task, row, fields, changed, camera, h5, index, index == frame_count - 1)
+                    frame = render(rgb, task, row, fields, position, changed, camera, h5, index,
+                                   index == frame_count - 1, poses, phases, outcome["goal"])
                     process.stdin.write(frame.tobytes())
                     if output_index in snapshots:
                         frame.save(work / f"state_{output_index:04d}.png")
+                    if output_index == poster_index:
+                        still = frame.copy()
+                        draw = ImageDraw.Draw(still, "RGBA")
+                        x, y = VIEW // 2, (HEADER + BODY_BOTTOM) // 2
+                        draw.ellipse((x - 33, y - 33, x + 33, y + 33), fill=(16, 27, 43, 210), outline=(255, 255, 255, 235), width=2)
+                        draw.polygon([(x - 9, y - 17), (x - 9, y + 17), (x + 19, y)], fill=(255, 255, 255, 255))
+                        still.save(poster, quality=92, subsampling=0)
                 process.stdin.close()
                 if process.wait() != 0:
                     raise RuntimeError(log_path.read_text())
@@ -340,7 +446,7 @@ def build(example, episodes):
             finally:
                 capture.release()
         calibration = hashlib.sha256()
-        for key in ("phase", "step", camera + "_K", camera + "_extrinsic"):
+        for key in ("phase", "step", camera + "_K", camera + "_extrinsic", *poses):
             calibration.update(key.encode())
             calibration.update(np.ascontiguousarray(h5[key][:]).tobytes())
     record = {
@@ -350,14 +456,35 @@ def build(example, episodes):
         "source_result": source["result"], "source_result_sha256": digest(result),
         "source_decisions": str(decision_path.relative_to(ARCHIVE)), "source_decisions_sha256": digest(decision_path),
         "source_observations": str((result.parent / "observations.h5").relative_to(ARCHIVE)),
-        "alignment_and_calibration_sha256": calibration.hexdigest(), "camera": camera,
+        "alignment_calibration_and_pose_sha256": calibration.hexdigest(), "camera": camera,
+        "goal": outcome["goal"], "phase_labels": {"0": "Demo phase", "1": "Execution phase"},
+        "demo_frames": int(np.count_nonzero(phases == 0)), "eef_pose_fields": list(poses), "trail_history_frames": 160,
         "preview": preview.name, "preview_sha256": digest(preview), "preview_dimensions": [WIDTH, HEIGHT],
+        "preview_format": "video/mp4", "poster": poster.name, "poster_sha256": digest(poster), "poster_output_frame": poster_index,
         "preview_fps": FPS, "nominal_playback_multiplier": speed, "preview_duration_seconds": len(schedule) / FPS,
         "source_frames": frame_count, "sampled_source_frames": [r[0] for r in schedule], "memory_timeline": timeline,
     }
+    shutil.copyfile(preview, work / "presentation.mp4")
+    shutil.copyfile(poster, work / "poster.jpg")
     (work / "provenance.json").write_text(json.dumps(record, indent=2) + "\n")
     print(f"{name}: {len(schedule) / FPS:.1f}s, {preview.stat().st_size / 1048576:.2f} MiB, {len(rows)} recorded decisions", flush=True)
     return record
+
+
+def write_gallery(clips, output, cached=False):
+    cards = []
+    for clip in clips:
+        slug = Path(clip["preview"]).stem
+        video = f"{slug}/presentation.mp4" if cached else clip["preview"]
+        poster = f"{slug}/poster.jpg" if cached else clip["poster"]
+        cards.append(f'<article><h2>{html.escape(clip["task"])}</h2><p>{html.escape(clip["goal"])}</p>'
+                     f'<video controls playsinline preload="none" poster="{poster}" src="{video}"></video></article>')
+    page = '''<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Successful held-out episodes · CaM</title><style>
+body{margin:0;background:#0e1725;color:#e5edf6;font:17px/1.6 system-ui,sans-serif}main{max-width:1080px;margin:auto;padding:32px 20px}
+h1{font-size:32px}h2{font-size:21px;margin:0}p{color:#aebed1;margin:12px 0 18px}article{margin:32px 0 48px}video{width:100%;display:block;border-radius:12px;background:#101b2b}
+</style><main><h1>Successful held-out episodes</h1><p>Recorded memory, perceived positions, and end-effector motion.</p>'''
+    output.write_text(page + "\n".join(cards) + "</main></html>\n")
 
 
 if __name__ == "__main__":
@@ -372,10 +499,12 @@ if __name__ == "__main__":
     if args.only:
         print("Partial render complete; run without --only to update the release manifest.")
     else:
-        manifest = {"schema": "cam-readme-media/2", "source_root": "public_runs",
+        manifest = {"schema": "cam-readme-media/3", "source_root": "public_runs",
                     "selection": "Lowest numbered successful held-out episode for each selected task.",
-                    "presentation": "Front/overview video with recorded memory excerpts. Changed fields highlight for one second; changed states last at least 1.4 seconds. Final observation holds for 1.4 seconds. Timing is illustrative, not real-time robot latency.",
-                    "memory_format": "Original selected values; positions rounded to two decimals. VideoUnmaskSwap colors are parsed from memory.note; T04 colored maps drawer names to the first component of memory.scores (colored-pixel counts). No memory is inferred between decisions or after episode termination.",
-                    "annotations": "Projected remembered locations or action targets using recorded camera calibration. Markers are explanatory overlays, not simulator ground truth or a new object tracker. PatternLock, VideoUnmaskSwap, swap_blocks and T07 use documented display surface heights.",
+                    "presentation": "H.264 MP4, front/overview video with recorded memory excerpts and perceived positions. Changed fields highlight for one second; changed states last at least 1.4 seconds. Final observation holds for 1.4 seconds. Timing is illustrative, not real-time robot latency.",
+                    "memory_format": "Original selected values; positions rounded to two decimals in world-frame meters. Position panels select retained estimates from logged memory, not hidden object state or newly executed perception. VideoUnmaskSwap colors are parsed from memory.note; T04 colored maps drawer names to the first component of memory.scores (colored-pixel counts). No memory is inferred between decisions or after episode termination.",
+                    "annotations": "Demo/execution labels follow recorded observation phase, with a gold border and Watch the video caption for demo frames. EEF trails project at most 160 past recorded poses and reset at phase boundaries; two-arm poses use separate colors. Point markers project remembered locations or action targets. Display surface heights: PatternLock 0.0m, VideoUnmaskSwap 0.04m, swap_blocks 0.778m, T07 bottle 0.48m and pan 0.43m. Official goal text comes verbatim from the selected result.json.",
                     "builder_sha256": digest(Path(__file__)), "clips": clips}
         (OUTPUT / "manifest.json").write_text(json.dumps(manifest, indent=2) + "\n")
+        write_gallery(clips, OUTPUT / "index.html")
+        write_gallery(clips, CACHE / "index.html", cached=True)

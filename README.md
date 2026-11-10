@@ -30,51 +30,67 @@ Their 800 held-out evaluations made **zero model calls**.
 Timing measures perception and memory decisions on recorded observations, excluding
 action-tool execution and simulation. [Measurement details and figure sources](docs/figures/README.md).
 
-## Robot memory in action
+## Successful held-out episodes
 
-Selected successful held-out episodes, with the robot's recorded memory beside the
-front view. Highlighted fields show what changes; scene markers connect remembered
-locations to actions. [How the GIFs are made](docs/media/README.md).
+Click a preview to open the MP4. Each video shows the recorded task goal, phase,
+end-effector trail, and relevant memory and perceived positions.
+[Video sources and presentation details](docs/media/README.md).
 
 ### RoboMME
 
-**Remember a pattern** · Store the path, then retrace it.
+**PatternLock**
 
-[![PatternLock: annotated front view beside the remembered path](docs/media/robomme-pattern-lock.gif)](docs/media/robomme-pattern-lock.gif)
+> watch the video carefully, then use the stick attached to the robot to retrace the same pattern
 
-**Track hidden objects** · Recall the targets after their containers move.
+[![Play PatternLock: recorded memory, positions and end-effector trail](docs/media/robomme-pattern-lock.jpg)](docs/media/robomme-pattern-lock.mp4)
 
-[![VideoUnmaskSwap: annotated targets beside the remembered colors and next target index](docs/media/robomme-hidden-objects.gif)](docs/media/robomme-hidden-objects.gif)
+**VideoUnmaskSwap**
+
+> watch the video carefully, then pick up the container hiding the green cube, finally pick up another container hiding the blue cube
+
+[![Play VideoUnmaskSwap: recorded memory, positions and end-effector trail](docs/media/robomme-hidden-objects.jpg)](docs/media/robomme-hidden-objects.mp4)
 
 ### RMBench
 
-**Keep track of a swap** · Follow a three-move plan through an empty tray.
+**swap_blocks**
 
-[![swap_blocks: annotated workspace beside the move list and current move index](docs/media/rmbench-swap-blocks.gif)](docs/media/rmbench-swap-blocks.gif)
+> There are three traies on the table, and two blocks are placed in two different traies. You may move only one block at a time, and each tray can hold at most one block. Swap the positions of the two blocks. Finally press the button.
 
-**Remember what is covered** · Retain the colors, then uncover them in order.
+[![Play swap_blocks: recorded memory, positions and end-effector trail](docs/media/rmbench-swap-blocks.jpg)](docs/media/rmbench-swap-blocks.mp4)
 
-[![cover_blocks: annotated workspace beside the remembered color order](docs/media/rmbench-cover-blocks.gif)](docs/media/rmbench-cover-blocks.gif)
+**cover_blocks**
+
+> On the table, red, green, and blue blocks are arranged randomly along with three lids. From the current viewpoint, cover the blocks from left to right using the lids, and then uncover them again in the sequence red, green, and blue.
+
+[![Play cover_blocks: recorded memory, positions and end-effector trail](docs/media/rmbench-cover-blocks.jpg)](docs/media/rmbench-cover-blocks.mp4)
 
 ### MIKASA-Robo
 
-**Remember which batteries work** · Keep each lamp result as testing continues.
+**BatteriesCheckerEasy-3-VLA-v0**
 
-[![BatteriesChecker: annotated front view beside the battery results and remaining queue](docs/media/mikasa-batteries.gif)](docs/media/mikasa-batteries.gif)
+> Find all working batteries by inserting each one into the socket, observing the lamp result, and then pressing the button to confirm.
 
-**Recall a color sequence** · Turn an earlier cue into an ordered sequence of touches.
+[![Play BatteriesCheckerEasy-3-VLA-v0: recorded memory, positions and end-effector trail](docs/media/mikasa-batteries.jpg)](docs/media/mikasa-batteries.mp4)
 
-[![SeqOfColors3: annotated color targets beside the remembered sequence and touch count](docs/media/mikasa-color-sequence.gif)](docs/media/mikasa-color-sequence.gif)
+**SeqOfColors3-VLA-v0**
+
+> Observe which colored cubes appear during the cue, wait, then touch all of them in any order and press the center button.
+
+[![Play SeqOfColors3-VLA-v0: recorded memory, positions and end-effector trail](docs/media/mikasa-color-sequence.jpg)](docs/media/mikasa-color-sequence.mp4)
 
 ### RoboMemArena
 
-**Remember what is inside** · Keep drawer observations and return to the occupied one.
+**T04_ButterNonEmptyDrawer**
 
-[![ButterNonEmptyDrawer: annotated front view beside drawer observations and the selected target](docs/media/robomemarena-drawers.gif)](docs/media/robomemarena-drawers.gif)
+> Open and close each drawer to check it, in this order: top, middle, bottom. Put butter into the drawer that already contains an object.
 
-**Count completed pours** · Update the remembered count between pours.
+[![Play T04_ButterNonEmptyDrawer: recorded memory, positions and end-effector trail](docs/media/robomemarena-drawers.jpg)](docs/media/robomemarena-drawers.mp4)
 
-[![PourSauceFrypanTwice: annotated front view beside the pour count and current phase](docs/media/robomemarena-pour-twice.gif)](docs/media/robomemarena-pour-twice.gif)
+**T07_PourSauceFrypanTwice**
+
+> Pour tomato sauce over the frypan twice and place the sauce bottle into the bowl drainer.
+
+[![Play T07_PourSauceFrypanTwice: recorded memory, positions and end-effector trail](docs/media/robomemarena-pour-twice.jpg)](docs/media/robomemarena-pour-twice.mp4)
 
 ## Try it
 
