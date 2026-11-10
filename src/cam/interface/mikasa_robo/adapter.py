@@ -7,8 +7,9 @@ shared native protocol (``mikasa_common.py``: ``mikasa_robo_suite.vla.benchmarki
 ``obs_mode="rgbd"`` with both cameras rendered at 256x256 (ManiSkill
 ``sensor_configs``), and the raw observation is read beneath the canonical wrappers
 (which drop depth, calibration and joints) by a pass-through recorder. Rendering
-settings do not touch physics. An explicit physics_backend="cpu" uses native CPU
-physics and CPU IK for a separate comparison; it is not the official GPU protocol.
+settings do not touch physics. CaM defaults to native CPU physics and CPU IK,
+except ShellGameTouch-VLA-v0, which always uses native GPU physics and GPU IK.
+Other tasks accept an explicit physics_backend="gpu" comparison override.
 
 Policy frames carry RoboMME's names: ``front_*`` (MIKASA ``base_camera``) and
 ``wrist_*`` (``hand_camera``) RGB, int16 optical-axis depth in millimetres, 3x3
@@ -29,9 +30,19 @@ IMAGE = (256, 256, 3)
 CAMERAS = {"front": "base_camera", "wrist": "hand_camera"}
 MAKE_KWARGS_RGBD = {
     **MAKE_KWARGS,
+    "sim_backend": "cpu",
     "obs_mode": "rgbd",
     "sensor_configs": {"width": IMAGE[1], "height": IMAGE[0]},
 }
+
+
+def physics_backend_for_task(task, requested=None):
+    """Resolve the shared training/evaluation backend, including the GPU exception."""
+    if requested not in (None, "cpu", "gpu"):
+        raise ValueError("physics_backend must be cpu, gpu, or None")
+    if task == "ShellGameTouch-VLA-v0":
+        return "gpu"
+    return requested or "cpu"
 
 
 def require_rgbd(depth):
@@ -183,10 +194,9 @@ class MikasaRobo(MikasaProtocol):
         return env.kinematics.dry_run(pose)
 
     def make_environment(self, metadata, task, episode, split, depth, *, physics_backend=None):
-        """Official GPU backend by default; CPU is an explicitly recorded variant."""
+        """Use the task's resolved backend for both training and held-out episodes."""
         require_rgbd(depth)
-        if physics_backend not in (None, "cpu", "gpu"):
-            raise ValueError("physics_backend must be cpu, gpu, or null")
+        physics_backend = physics_backend_for_task(task, physics_backend)
         import importlib
         import os
         from pathlib import Path
@@ -226,8 +236,7 @@ class MikasaRobo(MikasaProtocol):
         if not Path(wrappers.__file__).resolve().is_relative_to(self.source):
             raise ValueError("Canonical wrappers were not loaded from the pinned source")
         kwargs = dict(MAKE_KWARGS_RGBD)
-        if physics_backend is not None:
-            kwargs["sim_backend"] = physics_backend
+        kwargs["sim_backend"] = physics_backend
         recorder = recorder_class()(gym.make(task, **kwargs))
         env = wrappers.apply_mikasa_vla_wrappers(recorder, include_overlays=False)
         if int(env.max_episode_steps) != horizon:

@@ -2,6 +2,10 @@
 
 Each task uses 50 demos and one interaction on each of those exact identities, with CPU physics. All 90 policies and 4,500 result records are available. Full development/video evidence covers the initial ten tasks; the other 80 are imported results. Their missing historical source snapshots and reset-seed evidence are not independently verified.
 
+New preparations use GPU physics for `ShellGameTouch-VLA-v0`; other tasks default
+to CPU. Training and evaluation share this routing. Original scores and snapshots
+remain separate from evaluations under the current interface.
+
 ## Run a published policy
 
 Install the [dedicated environment](../../../envs/mikasa_robo/README.md), then:

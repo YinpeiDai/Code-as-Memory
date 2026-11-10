@@ -104,11 +104,15 @@ def render(config, task, episodes, training_episodes=None, adapter=None, interfa
             "exactly once within this budget. No new training seeds or retries. "
             "The host selects the identity; rollout accepts no seed or episode override."
         )
-    physics = (
-        f"Physics backend: {config.physics_backend or 'gpu'} for both training and held-out execution; "
-        "host-selected and fixed for this run. Rendering uses the GPU independently.\n"
-        if config.benchmark in ("mikasa_robo", "mikasa_robo_v2") else ""
-    )
+    physics = ""
+    if config.benchmark in ("mikasa_robo", "mikasa_robo_v2"):
+        from cam.interface.mikasa_robo.adapter import physics_backend_for_task
+
+        physics = (
+            f"Physics backend: {physics_backend_for_task(task, config.physics_backend)} "
+            "for both training and held-out execution; "
+            "host-selected and fixed for this run. Rendering uses the GPU independently.\n"
+        )
     initialization = (
         "Continue the supplied existing Python policy for this same task in a user-requested repair. "
         "Review and fix code bugs, keeping its task strategy unless a code bug requires a change. "

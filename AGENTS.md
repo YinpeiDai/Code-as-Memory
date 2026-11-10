@@ -60,7 +60,8 @@ Read [docs/reproducing.md](docs/reproducing.md) before preparing or running an e
 - Published MIKASA has 90 policies and 4,444/4,500 successes. The imported 80
   contribute 3,970/4,000 results but lack full development/rollout evidence.
   Never describe their compatibility targets as verified historical provenance.
-- Current MIKASA interaction reproduction uses CPU physics, 50 demos and one
+- Current MIKASA interaction reproduction uses CPU physics except
+  `ShellGameTouch-VLA-v0`, which uses GPU physics, with 50 demos and one
   attempt per assigned demo identity. RoboMemArena uses 50 demos/attempts except
   T04's actual 32. RMBench's larger pool has 49/49/48 demos for battery_try,
   blocks_ranking_try and observe_and_pickup; the other seven have 50.

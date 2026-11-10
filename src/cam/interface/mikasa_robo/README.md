@@ -4,6 +4,12 @@ This package connects the trusted harness to MIKASA-Robo. It declares the public
 sensors and actions, selects pinned episode identities, and translates simulator
 steps into policy observations. Native scoring remains in the official simulator.
 
+Training and evaluation default to CPU physics. `ShellGameTouch-VLA-v0` always
+uses GPU physics, including when a shared configuration requests CPU. Other tasks
+accept an explicit GPU override for comparisons. The backend also selects native
+CPU/GPU IK; rendering always uses the GPU. New preparations record the effective
+backend per task in `run.json`, and episode results record the actual backend.
+
 - `adapter.py`: environment lifecycle, sensor/action interface, scoring boundary.
 - `data.py`: demonstration assignment and format handling.
 - `guide.md`: public task-independent guidance composed into learner prompts.

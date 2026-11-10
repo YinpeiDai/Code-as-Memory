@@ -69,6 +69,11 @@ separate five-episode sanity check, which uses ten workers per GPU.
 | RMBench | 25 or up to 50 | None |
 | RoboMemArena | 25 or up to 50 | None, or one attempt per assigned demo identity |
 
+New MIKASA preparations use GPU physics for `ShellGameTouch-VLA-v0`, overriding
+the configured CPU default. Other tasks default to CPU and permit an explicit
+GPU comparison override. The resolved backend is recorded per task in `run.json`;
+historical snapshots and scores retain their original backend.
+
 RMBench’s larger pool has 49 demos for `battery_try`, 49 for
 `blocks_ranking_try`, 48 for `observe_and_pickup`, and 50 for the other seven
 (496 total). RoboMemArena has 32 for T04 and 50 for the other 25 (1,282 total).

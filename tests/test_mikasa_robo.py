@@ -25,7 +25,7 @@ TASK = "TakeItBack-VLA-v0"
 def test_physics_backend_is_explicit_and_mikasa_only():
     default = RunConfig(benchmark="mikasa_robo", mode="demos")
     assert default.physics_backend is None
-    assert mikasa.MAKE_KWARGS_RGBD["sim_backend"] == "gpu"
+    assert mikasa.MAKE_KWARGS_RGBD["sim_backend"] == "cpu"
     for backend in ("cpu", "gpu"):
         cfg = RunConfig(benchmark="mikasa_robo", mode="demos", physics_backend=backend)
         assert RunConfig.from_dict(cfg.to_dict()).physics_backend == backend
@@ -39,6 +39,21 @@ def adapter():
     if not (SOURCE / "mikasa_robo_suite/vla").is_dir():
         pytest.skip("MIKASA-Robo submodule missing")
     return get_adapter("mikasa_robo")
+
+
+@pytest.mark.parametrize("requested", [None, "cpu", "gpu"])
+def test_task_physics_routing_and_prompt_agree_for_all_ninety_tasks(adapter, requested):
+    cfg = RunConfig(benchmark="mikasa_robo", mode="demos", physics_backend=requested)
+    tasks = adapter.tasks()
+    assert len(tasks) == 90 and "ShellGameTouch-VLA-v0" in tasks
+    for task in tasks:
+        expected = "gpu" if task == "ShellGameTouch-VLA-v0" else requested or "cpu"
+        assert mikasa.physics_backend_for_task(task, requested) == expected
+        assert f"Physics backend: {expected} for both training and held-out execution" in render(
+            cfg, task, [], adapter=adapter
+        )
+    with pytest.raises(ValueError, match="physics_backend"):
+        mikasa.physics_backend_for_task("ShellGameTouch-VLA-v0", "auto")
 
 
 def _raw(index_shift=0):

@@ -500,6 +500,12 @@ if __name__ == "__main__":
     if published:
         manifest["published_solution"] = published["provenance"]
         manifest["evaluation_only"] = True
+    if config.benchmark in ("mikasa_robo", "mikasa_robo_v2"):
+        from cam.interface.mikasa_robo.adapter import physics_backend_for_task
+
+        manifest["physics_backend_by_task"] = {
+            task: physics_backend_for_task(task, config.physics_backend) for task in tasks
+        }
     write(root / "run.json", manifest)
     write_run_readme(root, manifest)
     write(root / "prepared.json", {"ready": True, "created": time.time()})

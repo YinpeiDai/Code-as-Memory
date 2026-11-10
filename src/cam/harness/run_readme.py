@@ -216,6 +216,7 @@ is not mounted into coding tools. Existing legacy run paths remain usable.
 
 
 def write_run_readme(root, manifest):
+    physics = manifest.get("physics_backend_by_task") or manifest["config"].get("physics_backend") or "benchmark default"
     if manifest.get("evaluation_only"):
         source = manifest["published_solution"]
         (root / "README.md").write_text(f'''# Published CaM solution evaluation
@@ -230,6 +231,8 @@ historical full-policy hash even though its executable code and memory match.
 The policy is already frozen at R000. The current checkout's harness, installed
 simulator, environment and complete official test identities are pinned here.
 This is a new evaluation, not a copy of the source experiment's scored outcomes.
+
+Physics backend: `{physics}` (independent of GPU rendering).
 
 ```bash
 cam evaluate {shlex.quote(str(root))} --gpus 0 --workers-per-gpu 1
@@ -315,7 +318,7 @@ The policy sandbox gets only its frozen program, public runtime and observations
 | Maximum training simulator attempts | `{cfg["budget"]}` |
 | Interaction seed schedule | `{cfg.get("training_seed_policy", "demo_cycle")}`; `{cfg.get("training_seed_count")}` identities |
 | Depth / task-provided reset video | `{cfg["depth"]}` / `{cfg["builtin_demo"]}` |
-| Physics backend | `{cfg.get("physics_backend") or "benchmark default"}` (independent of GPU rendering) |
+| Physics backend | `{physics}` (independent of GPU rendering) |
 | Expected test episodes | `{sum(len(v) for v in manifest["test_episodes"].values())}` |
 
 {attempt_guidance} Logs and freeze metadata record the number actually used.
@@ -365,10 +368,10 @@ reports/                          aggregate JSON and CSV results
 """
         + HISTORY
         + (MIKASA_RGBD + (
-            "CPU physics is an explicit comparison variant, not the official GPU evaluation. "
-            "The controller uses native CPU IK; rendering still uses the GPU. "
+            "CaM defaults to CPU physics except ShellGameTouch-VLA-v0, which uses GPU physics. "
+            "Other tasks accept an explicit GPU comparison override. The native controller's "
+            "IK follows the physics backend; rendering always uses the GPU. "
             "Keep CPU and GPU scores separate.\n\n"
-            if cfg.get("physics_backend") == "cpu" else ""
         ) if cfg["benchmark"] in ("mikasa_robo", "mikasa_robo_v2") else "")
         + (MIKASA_DRY_RUN if cfg["benchmark"] in ("mikasa_robo", "mikasa_robo_v2") else "")
         + (RMBENCH_ROBOT_CHECKS if any(

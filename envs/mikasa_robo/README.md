@@ -12,7 +12,8 @@ MS_ASSET_DIR="$PWD/envs/mikasa_robo/assets" \
 
 The installer uses the pinned upstream `pyproject.toml` and `uv.lock`, with the
 environment stored here. It pins ManiSkill 3.0.0b15, SAPIEN 3.0.0b1, and PyTorch
-2.2.1. Standard runs use CPU physics and GPU rendering.
+2.2.1. Standard runs use CPU physics except `ShellGameTouch-VLA-v0`, which uses
+GPU physics. All tasks use GPU rendering.
 
 `CAM_MIKASA_ROBO_PYTHON` overrides the interpreter;
 `CAM_MIKASA_ROBO_ASSETS` overrides `envs/mikasa_robo/assets`. Preparation preserves
