@@ -42,6 +42,12 @@ The byte-identical frozen solutions and immutable catalogs are published here:
 
 Development logs, immutable checkpoints and all rollouts remain under
 `runs/mikasa_robo_vla_suite/20261110T190922_491466Z/` in this workspace.
+An upload-ready copy of all 15 development histories is in
+`public_runs/dev_logs/mikasa_robo_vla_suite/<setting>/<task>/<timestamp>/`,
+including transcripts, revisions, source snapshots and all 250 training rollouts.
+Its `README.md`, `MANIFEST.json` and `CHECKSUMS.sha256` describe the contents and
+verify each file. Demo H5s and held-out rollout media remain in their existing
+locations; the original run files and scores are unchanged.
 Each catalog records its source run, checkpoint, harness/prompt hashes, assigned
 demos, training attempts, physics backend and per-task scored/expected counts.
 

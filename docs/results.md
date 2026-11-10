@@ -93,6 +93,8 @@ The new MIKASA comparison is under
 `runs/mikasa_robo_vla_suite/20261110T190922_491466Z/`; its 750 episodes are reported
 by setting rather than pooled into a benchmark headline. Published code and
 immutable schemas/checksums live in `solutions/` and `configs/solutions/`.
+All 15 development histories also have a checksum-verified copy under
+`public_runs/dev_logs/mikasa_robo_vla_suite/` for upload, including training rollouts.
 Original data, snapshots, prompts, intermediate revisions and scores are preserved.
 Exact source provenance is retained; missing historical evidence is not inferred
 from current compatibility targets.
