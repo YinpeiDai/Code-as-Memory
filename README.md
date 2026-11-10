@@ -25,13 +25,13 @@ CaM achieves **near-perfect performance across four robot memory benchmarks**, o
 
 > **Task Goal:** There are three traies on the table, and two blocks are placed in two different traies. You may move only one block at a time, and each tray can hold at most one block. Swap the positions of the two blocks. Finally press the button.
 
-<video controls src="https://github.com/user-attachments/assets/1e420cf9-cc9e-45bd-bab0-020dd7fbaa15" width="1080"></video>
+https://github.com/user-attachments/assets/1e420cf9-cc9e-45bd-bab0-020dd7fbaa15
 
 **Task: cover_blocks**
 
 > **Task Goal:** On the table, red, green, and blue blocks are arranged randomly along with three lids. From the current viewpoint, cover the blocks from left to right using the lids, and then uncover them again in the sequence red, green, and blue.
 
-<video controls src="https://github.com/user-attachments/assets/01af08e7-6f9c-444a-af09-63cfa6ce91b8" width="1080"></video>
+https://github.com/user-attachments/assets/01af08e7-6f9c-444a-af09-63cfa6ce91b8
 
 ### MIKASA-Robo
 
@@ -39,13 +39,13 @@ CaM achieves **near-perfect performance across four robot memory benchmarks**, o
 
 > **Task Goal:** Find all working batteries by inserting each one into the socket, observing the lamp result, and then pressing the button to confirm.
 
-<video controls src="https://github.com/user-attachments/assets/1e8cb1f9-d766-495d-b78b-b522a689a100" width="1080"></video>
+https://github.com/user-attachments/assets/1e8cb1f9-d766-495d-b78b-b522a689a100
 
 **Task: SeqOfColors3-VLA-v0**
 
 > **Task Goal:** Observe which colored cubes appear during the cue, wait, then touch all of them in any order and press the center button.
 
-<video controls src="https://github.com/user-attachments/assets/dd791a43-1ff3-490f-a2fc-8ee6e420bce1" width="1080"></video>
+https://github.com/user-attachments/assets/dd791a43-1ff3-490f-a2fc-8ee6e420bce1
 
 ### RoboMME
 
@@ -53,13 +53,13 @@ CaM achieves **near-perfect performance across four robot memory benchmarks**, o
 
 > **Task Goal:** watch the video carefully, then use the stick attached to the robot to retrace the same pattern
 
-<video controls src="https://github.com/user-attachments/assets/2292461f-dd57-4521-8db6-99f427e4d449" width="1080"></video>
+https://github.com/user-attachments/assets/2292461f-dd57-4521-8db6-99f427e4d449
 
 **Task: VideoUnmaskSwap**
 
 > **Task Goal:** watch the video carefully, then pick up the container hiding the green cube, finally pick up another container hiding the blue cube
 
-<video controls src="https://github.com/user-attachments/assets/c535af07-06f6-4fa2-8a74-d7a1595f0425" width="1080"></video>
+https://github.com/user-attachments/assets/c535af07-06f6-4fa2-8a74-d7a1595f0425
 
 ### RoboMemArena
 
@@ -67,13 +67,13 @@ CaM achieves **near-perfect performance across four robot memory benchmarks**, o
 
 > **Task Goal:** Open and close each drawer to check it, in this order: top, middle, bottom. Put butter into the drawer that already contains an object.
 
-<video controls src="https://github.com/user-attachments/assets/77102ab7-a06a-40c5-a770-db522e6a6fb2" width="1080"></video>
+https://github.com/user-attachments/assets/77102ab7-a06a-40c5-a770-db522e6a6fb2
 
 **Task: T07_PourSauceFrypanTwice**
 
 > **Task Goal:** Pour tomato sauce over the frypan twice and place the sauce bottle into the bowl drainer.
 
-<video controls src="https://github.com/user-attachments/assets/d044e7d0-28ba-464c-9f66-5654e48bafb2" width="1080"></video>
+https://github.com/user-attachments/assets/d044e7d0-28ba-464c-9f66-5654e48bafb2
 
 ## Try it
 

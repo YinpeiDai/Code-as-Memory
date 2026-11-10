@@ -25,8 +25,8 @@ plt.rcParams.update({
 })
 
 
-def rounded(value):
-    return str(Decimal(str(value)).quantize(Decimal("0.1"), rounding=ROUND_HALF_UP))
+def rounded(value, decimals=1):
+    return str(Decimal(str(value)).quantize(Decimal(1).scaleb(-decimals), rounding=ROUND_HALF_UP))
 
 
 def save(fig, name):
@@ -60,7 +60,7 @@ def benchmark_comparison():
             ax.barh(y, row["success_percent"], height=.32, color=color, edgecolor="none", zorder=2)
             ax.text(0, y + .27, row["method"], fontsize=18, weight="bold" if cam else "normal",
                     color=ACCENT if cam else INK, va="bottom")
-            ax.text(100, y + .27, rounded(row["success_percent"]) + "%", ha="right", va="bottom",
+            ax.text(100, y + .27, rounded(row["success_percent"], row.get("display_decimals", 1)) + "%", ha="right", va="bottom",
                     fontsize=18, color=ACCENT if cam else INK, weight="bold" if cam else "normal")
         ax.set_axis_off()
         cam_row = next(row for row in panel["methods"] if row["method"] == "CaM")

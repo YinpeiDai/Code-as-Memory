@@ -15,7 +15,8 @@ python scripts/plot_public_results.py
 ## Baseline sources and scope
 
 The comparison uses whole-task success, equal task weights, and the best published
-CaM setting for each benchmark. Values are rounded to one decimal for display.
+CaM setting for each benchmark. Values are rounded to one decimal for display,
+except Embodied Astra's requested two-decimal label (92.13%; exact mean 92.125%).
 The JSON retains source URLs, snapshot hashes, available per-task values, and
 CaM's exact success/episode counts. Sources were checked on November 10, 2026.
 

@@ -5,7 +5,9 @@ readable excerpts of the policy's recorded memory. Each is episode 0, the lowest
 numbered successful episode for its task. Aggregate scores are in [results](../results.md).
 
 The README embeds compact H.264 MP4s as GitHub video attachments with playback
-controls. [github_assets.json](github_assets.json) records each attachment URL and
+controls. Each attachment URL is on its own line so GitHub generates the player
+and signs private-media URLs for the viewer. Custom `<video>` tags can leave
+private attachment references unresolved. [github_assets.json](github_assets.json) records each attachment URL and
 the matching local video hash. For an offline gallery with the same videos, open
 [index.html](index.html) in a browser after cloning.
 

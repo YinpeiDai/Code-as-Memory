@@ -374,6 +374,32 @@
           }
         },
         {
+          "method": "Embodied Astra",
+          "success_percent": 92.125,
+          "display_decimals": 2,
+          "reported_success_percent": 92.13,
+          "task_count": 16,
+          "source": "robomme_leaderboard_embodied_astra",
+          "reported_per_task": {
+            "BinFill": 0.98,
+            "PickXtimes": 1.0,
+            "SwingXtimes": 0.98,
+            "StopCube": 0.54,
+            "VideoUnmask": 0.94,
+            "ButtonUnmask": 1.0,
+            "VideoUnmaskSwap": 0.96,
+            "ButtonUnmaskSwap": 0.98,
+            "PickHighlight": 0.98,
+            "VideoRepick": 1.0,
+            "VideoPlaceButton": 1.0,
+            "VideoPlaceOrder": 0.98,
+            "MoveCube": 0.54,
+            "InsertPeg": 0.92,
+            "PatternLock": 1.0,
+            "RouteStick": 0.94
+          }
+        },
+        {
           "method": "MEMI-Astra-Act",
           "success_percent": 97.0,
           "task_count": 16,
@@ -716,6 +742,12 @@
       "path": "docs/figures/benchmark_costs.json",
       "sha256": "dd38a84c219074c4d8a7742681addad016195d2e4f87cc62a38eb55c05c4c613",
       "note": "Total final session estimates across the selected development setting. RMBench cost includes all ten tasks; the success-rate panel uses nine shared tasks."
+    },
+    "robomme_leaderboard_embodied_astra": {
+      "url": "https://robomme.github.io/leaderboard.html",
+      "snapshot_sha256": "5d01a87ed6f51c54bb2c40603b0cc104cc00eb0f90a234dbe539c1b26ad9b227",
+      "reported_method": "Embodied-Astra (Jedlicki et al.)",
+      "note": "Unweighted mean of the 16 reported task success rates is 92.125%; displayed as 92.13% with decimal half-up rounding."
     }
   }
 }
