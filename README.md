@@ -19,7 +19,23 @@ The learned program carries memory across observations and runs with
 | MIKASA-Robo | 50 demonstrations + 50 interactions | 4,444 / 4,500 | **98.76%** |
 | RoboMemArena | Up to 50 demonstrations + matching interactions | 1,271 / 1,300 | **97.77%** |
 
+![CaM and selected published baselines across RoboMME, RMBench, MIKASA-Robo, and RoboMemArena](docs/figures/benchmark_comparison.png)
+
+The comparison uses nine shared RMBench tasks and five shared MIKASA task identities
+(CaM: **90.0%**); the table above covers each full suite. Published methods use
+different training and evaluation protocols.
+
 [More results, coverage, and provenance →](docs/results.md)
+
+## Learn once, execute as code
+
+RoboMME's 16 memory programs used **$29.44 in reported development API cost**.
+Their 800 held-out evaluations made **zero model calls**.
+
+![RoboMME memory-decision timing distribution and development versus evaluation API cost](docs/figures/robomme_efficiency.png)
+
+Timing measures perception and memory decisions on recorded observations, excluding
+action-tool execution and simulation. [Measurement details and figure sources](docs/figures/README.md).
 
 ## Robot memory in action
 

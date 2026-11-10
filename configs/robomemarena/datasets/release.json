@@ -1,0 +1,9 @@
+{
+  "schema": "cam-demo-release/1",
+  "repo_id": "Yinpei/robomemarena-50-demos",
+  "revision": "b204d825aa926892d3576a395acdc5c4a29b9f69",
+  "manifest_sha256": "e0277fcc2e01b7c18cfa80c887d70e6d9aeb02a692da8a405ba333eac2d06767",
+  "selection_sha256": "6a5ce3e0ed5088f77aab9a24faad84e6c347f517cc04c19313a79117b5e6eaeb",
+  "tasks": 26,
+  "episodes": 1282
+}

@@ -26,9 +26,8 @@ simulators or contacting a model.
 
 ## Demonstration packages
 
-RoboMME and RMBench are published and verified. MIKASA-Robo and RoboMemArena
-uploads are still in progress. `cam download-demos` becomes available for each
-benchmark after its verified revision is recorded in
+All four packages are published and transfer-verified. `cam download-demos`
+uses the immutable revision and metadata hashes recorded in
 `configs/<benchmark>/datasets/release.json`.
 
 Set `DATA` to a downloaded, extracted **prepared** package:

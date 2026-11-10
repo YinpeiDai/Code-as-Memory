@@ -1,0 +1,613 @@
+{
+  "schema": "cam-benchmark-figure/1",
+  "retrieved_at": "2026-11-10T15:51:49.360976+00:00",
+  "panels": [
+    {
+      "benchmark": "robomme",
+      "title": "RoboMME",
+      "task_count": 16,
+      "metric": "Success (%)",
+      "methods": [
+        {
+          "method": "FrameSamp+Modul",
+          "success_percent": 44.514374999999994,
+          "task_count": 16,
+          "source": "robomme_leaderboard",
+          "reported_per_task": {
+            "BinFill": 0.3956,
+            "PickXtimes": 0.8733,
+            "SwingXtimes": 0.92,
+            "StopCube": 0.42,
+            "VideoUnmask": 0.3267,
+            "ButtonUnmask": 0.2511,
+            "VideoUnmaskSwap": 0.2444,
+            "ButtonUnmaskSwap": 0.1822,
+            "PickHighlight": 0.2289,
+            "VideoRepick": 0.3044,
+            "VideoPlaceButton": 0.6,
+            "VideoPlaceOrder": 0.32,
+            "MoveCube": 0.7778,
+            "InsertPeg": 0.0756,
+            "PatternLock": 0.5356,
+            "RouteStick": 0.6667
+          }
+        },
+        {
+          "method": "PonderPounce",
+          "success_percent": 60.833124999999995,
+          "task_count": 16,
+          "source": "robomme_leaderboard",
+          "reported_per_task": {
+            "BinFill": 0.5067,
+            "PickXtimes": 0.9333,
+            "SwingXtimes": 0.72,
+            "StopCube": 0.8267,
+            "VideoUnmask": 0.9467,
+            "ButtonUnmask": 0.9733,
+            "VideoUnmaskSwap": 0.2533,
+            "ButtonUnmaskSwap": 0.34,
+            "PickHighlight": 0.8533,
+            "VideoRepick": 0.4067,
+            "VideoPlaceButton": 0.8333,
+            "VideoPlaceOrder": 0.7933,
+            "MoveCube": 0.8133,
+            "InsertPeg": 0.06,
+            "PatternLock": 0.1267,
+            "RouteStick": 0.3467
+          }
+        },
+        {
+          "method": "SimpleMemVLA",
+          "success_percent": 88.25,
+          "task_count": 16,
+          "source": "robomme_leaderboard",
+          "reported_per_task": {
+            "BinFill": 0.78,
+            "PickXtimes": 1,
+            "SwingXtimes": 0.96,
+            "StopCube": 0.92,
+            "VideoUnmask": 1,
+            "ButtonUnmask": 1,
+            "VideoUnmaskSwap": 0.9,
+            "ButtonUnmaskSwap": 0.94,
+            "PickHighlight": 0.9,
+            "VideoRepick": 0.64,
+            "VideoPlaceButton": 0.86,
+            "VideoPlaceOrder": 0.9,
+            "MoveCube": 0.94,
+            "InsertPeg": 0.46,
+            "PatternLock": 0.94,
+            "RouteStick": 0.98
+          }
+        },
+        {
+          "method": "MEMI-Astra-Act",
+          "success_percent": 97.0,
+          "task_count": 16,
+          "source": "robomme_leaderboard",
+          "reported_per_task": {
+            "BinFill": 0.98,
+            "PickXtimes": 1,
+            "SwingXtimes": 1,
+            "StopCube": 0.96,
+            "VideoUnmask": 1,
+            "ButtonUnmask": 1,
+            "VideoUnmaskSwap": 0.96,
+            "ButtonUnmaskSwap": 0.92,
+            "PickHighlight": 1,
+            "VideoRepick": 0.92,
+            "VideoPlaceButton": 1,
+            "VideoPlaceOrder": 1,
+            "MoveCube": 0.96,
+            "InsertPeg": 0.84,
+            "PatternLock": 1,
+            "RouteStick": 0.98
+          }
+        },
+        {
+          "method": "CaM",
+          "success_percent": 99.375,
+          "successes": 795,
+          "episodes": 800,
+          "task_count": 16,
+          "source": "cam_published_archive",
+          "setting": "demo_only_25",
+          "per_task": {
+            "BinFill": {
+              "successes": 50,
+              "episodes": 50
+            },
+            "ButtonUnmask": {
+              "successes": 50,
+              "episodes": 50
+            },
+            "ButtonUnmaskSwap": {
+              "successes": 50,
+              "episodes": 50
+            },
+            "InsertPeg": {
+              "successes": 50,
+              "episodes": 50
+            },
+            "MoveCube": {
+              "successes": 50,
+              "episodes": 50
+            },
+            "PatternLock": {
+              "successes": 50,
+              "episodes": 50
+            },
+            "PickHighlight": {
+              "successes": 50,
+              "episodes": 50
+            },
+            "PickXtimes": {
+              "successes": 50,
+              "episodes": 50
+            },
+            "RouteStick": {
+              "successes": 50,
+              "episodes": 50
+            },
+            "StopCube": {
+              "successes": 47,
+              "episodes": 50
+            },
+            "SwingXtimes": {
+              "successes": 50,
+              "episodes": 50
+            },
+            "VideoPlaceButton": {
+              "successes": 50,
+              "episodes": 50
+            },
+            "VideoPlaceOrder": {
+              "successes": 48,
+              "episodes": 50
+            },
+            "VideoRepick": {
+              "successes": 50,
+              "episodes": 50
+            },
+            "VideoUnmask": {
+              "successes": 50,
+              "episodes": 50
+            },
+            "VideoUnmaskSwap": {
+              "successes": 50,
+              "episodes": 50
+            }
+          }
+        }
+      ]
+    },
+    {
+      "benchmark": "rmbench",
+      "title": "RMBench",
+      "task_count": 9,
+      "metric": "Success (%)",
+      "methods": [
+        {
+          "method": "Mem-0",
+          "success_percent": 42.0,
+          "task_count": 9,
+          "source": "simplemem_v2",
+          "reported_per_task": {
+            "observe_and_pickup": 4,
+            "rearrange_blocks": 89,
+            "put_back_block": 90,
+            "swap_blocks": 67,
+            "swap_T": 14,
+            "battery_try": 28,
+            "blocks_ranking_try": 18,
+            "cover_blocks": 68,
+            "press_button": 0
+          }
+        },
+        {
+          "method": "EventVLA",
+          "success_percent": 67.8,
+          "task_count": 9,
+          "source": "simplemem_v2",
+          "reported_per_task": {
+            "observe_and_pickup": 21,
+            "rearrange_blocks": 96,
+            "put_back_block": 95,
+            "swap_blocks": 96,
+            "swap_T": 87,
+            "battery_try": 35,
+            "blocks_ranking_try": 81,
+            "cover_blocks": 97,
+            "press_button": 3
+          },
+          "aggregation_note": "Paper-reported overall is 67.8%; the nine displayed integer per-task values average to 67.8889%. The figure retains the reported overall."
+        },
+        {
+          "method": "DIM-WAM",
+          "success_percent": 69.8,
+          "task_count": 9,
+          "source": "simplemem_v2",
+          "reported_per_task": {
+            "observe_and_pickup": 13,
+            "rearrange_blocks": 99,
+            "put_back_block": 98,
+            "swap_blocks": 96,
+            "swap_T": 97,
+            "battery_try": 48,
+            "blocks_ranking_try": 87,
+            "cover_blocks": 56,
+            "press_button": 34
+          }
+        },
+        {
+          "method": "MemoryWAM",
+          "success_percent": 83.0,
+          "task_count": 9,
+          "source": "simplemem_v2",
+          "reported_per_task": {
+            "observe_and_pickup": 27,
+            "rearrange_blocks": 100,
+            "put_back_block": 100,
+            "swap_blocks": 100,
+            "swap_T": 94,
+            "battery_try": 41,
+            "blocks_ranking_try": 100,
+            "cover_blocks": 98,
+            "press_button": 87
+          }
+        },
+        {
+          "method": "SimpleMemVLA",
+          "success_percent": 94.0,
+          "task_count": 9,
+          "source": "simplemem_v2",
+          "reported_per_task": {
+            "observe_and_pickup": 65,
+            "rearrange_blocks": 100,
+            "put_back_block": 100,
+            "swap_blocks": 100,
+            "swap_T": 93,
+            "battery_try": 90,
+            "blocks_ranking_try": 100,
+            "cover_blocks": 98,
+            "press_button": 100
+          }
+        },
+        {
+          "method": "CaM",
+          "success_percent": 100.0,
+          "successes": 900,
+          "episodes": 900,
+          "task_count": 9,
+          "source": "cam_published_archive",
+          "setting": "demo_only_50",
+          "per_task": {
+            "battery_try": {
+              "successes": 100,
+              "episodes": 100
+            },
+            "blocks_ranking_try": {
+              "successes": 100,
+              "episodes": 100
+            },
+            "cover_blocks": {
+              "successes": 100,
+              "episodes": 100
+            },
+            "observe_and_pickup": {
+              "successes": 100,
+              "episodes": 100
+            },
+            "press_button": {
+              "successes": 100,
+              "episodes": 100
+            },
+            "put_back_block": {
+              "successes": 100,
+              "episodes": 100
+            },
+            "rearrange_blocks": {
+              "successes": 100,
+              "episodes": 100
+            },
+            "swap_T": {
+              "successes": 100,
+              "episodes": 100
+            },
+            "swap_blocks": {
+              "successes": 100,
+              "episodes": 100
+            }
+          }
+        }
+      ]
+    },
+    {
+      "benchmark": "mikasa_robo",
+      "title": "MIKASA-Robo",
+      "task_count": 5,
+      "metric": "Success (%)",
+      "methods": [
+        {
+          "method": "π₀",
+          "success_percent": 29.4,
+          "task_count": 5,
+          "source": "simplemem_v2",
+          "reported_per_task": {
+            "ShellGameTouch-VLA-v0": 33,
+            "InterceptMedium-VLA-v0": 42,
+            "RememberColor3-VLA-v0": 35,
+            "RememberColor5-VLA-v0": 22,
+            "RememberColor9-VLA-v0": 15
+          }
+        },
+        {
+          "method": "MemoryVLA",
+          "success_percent": 41.2,
+          "task_count": 5,
+          "source": "simplemem_v2",
+          "reported_per_task": {
+            "ShellGameTouch-VLA-v0": 88,
+            "InterceptMedium-VLA-v0": 24,
+            "RememberColor3-VLA-v0": 44,
+            "RememberColor5-VLA-v0": 30,
+            "RememberColor9-VLA-v0": 20
+          }
+        },
+        {
+          "method": "MemoryVLA++",
+          "success_percent": 44.4,
+          "task_count": 5,
+          "source": "simplemem_v2",
+          "reported_per_task": {
+            "ShellGameTouch-VLA-v0": 97,
+            "InterceptMedium-VLA-v0": 40,
+            "RememberColor3-VLA-v0": 50,
+            "RememberColor5-VLA-v0": 19,
+            "RememberColor9-VLA-v0": 16
+          }
+        },
+        {
+          "method": "GMP",
+          "success_percent": 67.8,
+          "task_count": 5,
+          "source": "simplemem_v2",
+          "reported_per_task": {
+            "ShellGameTouch-VLA-v0": 98,
+            "InterceptMedium-VLA-v0": 83,
+            "RememberColor3-VLA-v0": 80,
+            "RememberColor5-VLA-v0": 61,
+            "RememberColor9-VLA-v0": 17
+          }
+        },
+        {
+          "method": "SimpleMemVLA",
+          "success_percent": 74.0,
+          "task_count": 5,
+          "source": "simplemem_v2",
+          "reported_per_task": {
+            "ShellGameTouch-VLA-v0": 99,
+            "InterceptMedium-VLA-v0": 83,
+            "RememberColor3-VLA-v0": 71,
+            "RememberColor5-VLA-v0": 58,
+            "RememberColor9-VLA-v0": 59
+          }
+        },
+        {
+          "method": "CaM",
+          "success_percent": 90.0,
+          "successes": 225,
+          "episodes": 250,
+          "task_count": 5,
+          "source": "cam_published_archive",
+          "setting": "demo_interaction_50",
+          "per_task": {
+            "RememberColor3-VLA-v0": {
+              "successes": 50,
+              "episodes": 50
+            },
+            "ShellGameTouch-VLA-v0": {
+              "successes": 25,
+              "episodes": 50
+            },
+            "InterceptMedium-VLA-v0": {
+              "successes": 50,
+              "episodes": 50
+            },
+            "RememberColor5-VLA-v0": {
+              "successes": 50,
+              "episodes": 50
+            },
+            "RememberColor9-VLA-v0": {
+              "successes": 50,
+              "episodes": 50
+            }
+          }
+        }
+      ]
+    },
+    {
+      "benchmark": "robomemarena",
+      "title": "RoboMemArena",
+      "task_count": 26,
+      "metric": "TSR (%)",
+      "methods": [
+        {
+          "method": "FrameSamp+Modul",
+          "success_percent": 46.15,
+          "task_count": 26,
+          "source": "robomemarena_leaderboard",
+          "verification": "literature-reported; not independently verified by benchmark maintainers"
+        },
+        {
+          "method": "RoboFoundry",
+          "success_percent": 53.5,
+          "task_count": 26,
+          "source": "robomemarena_leaderboard",
+          "verification": "literature-reported; not independently verified by benchmark maintainers"
+        },
+        {
+          "method": "HarnessWAM",
+          "success_percent": 59.6,
+          "task_count": 26,
+          "source": "robomemarena_leaderboard",
+          "verification": "literature-reported; not independently verified by benchmark maintainers"
+        },
+        {
+          "method": "SimpleMemVLA",
+          "success_percent": 63.6,
+          "task_count": 26,
+          "source": "robomemarena_leaderboard",
+          "verification": "literature-reported; not independently verified by benchmark maintainers"
+        },
+        {
+          "method": "Astra (Codex)",
+          "success_percent": 67.3076923076923,
+          "task_count": 26,
+          "source": "robomemarena_leaderboard",
+          "verification": "literature-reported; not independently verified by benchmark maintainers"
+        },
+        {
+          "method": "CaM",
+          "success_percent": 97.76923076923077,
+          "successes": 1271,
+          "episodes": 1300,
+          "task_count": 26,
+          "source": "cam_published_archive",
+          "setting": "demo_interaction_50",
+          "per_task": {
+            "T01_CookiesTomatoBasket": {
+              "successes": 50,
+              "episodes": 50
+            },
+            "T02_ButterPopcornBasket": {
+              "successes": 50,
+              "episodes": 50
+            },
+            "T03_CreamPuddingBasket": {
+              "successes": 50,
+              "episodes": 50
+            },
+            "T04_ButterNonEmptyDrawer": {
+              "successes": 50,
+              "episodes": 50
+            },
+            "T05_ButterEmptyDrawer": {
+              "successes": 50,
+              "episodes": 50
+            },
+            "T06_PourSauceCookiesTwice": {
+              "successes": 50,
+              "episodes": 50
+            },
+            "T07_PourSauceFrypanTwice": {
+              "successes": 50,
+              "episodes": 50
+            },
+            "T08_ChocolateFrypanPourSauceTwice": {
+              "successes": 50,
+              "episodes": 50
+            },
+            "T09_ButterFrypanPourSauceTwice": {
+              "successes": 50,
+              "episodes": 50
+            },
+            "T10_PourWineMugTwice": {
+              "successes": 50,
+              "episodes": 50
+            },
+            "T11_CookiesTopButterMiddle": {
+              "successes": 50,
+              "episodes": 50
+            },
+            "T12_CookiesChocolateMiddleDrawer": {
+              "successes": 50,
+              "episodes": 50
+            },
+            "T13_CookiesButterMiddleDrawer": {
+              "successes": 50,
+              "episodes": 50
+            },
+            "T14_CookiesChocolateDrawers": {
+              "successes": 50,
+              "episodes": 50
+            },
+            "T15_ButterFrypanPourMilkTwice": {
+              "successes": 50,
+              "episodes": 50
+            },
+            "T16_PourMilkMugTwice": {
+              "successes": 50,
+              "episodes": 50
+            },
+            "T17_ButterChocolateMiddleDrawer": {
+              "successes": 50,
+              "episodes": 50
+            },
+            "T18_ChocolateButterCabinet": {
+              "successes": 48,
+              "episodes": 50
+            },
+            "T19_SauceMilkJuiceCabinet": {
+              "successes": 25,
+              "episodes": 50
+            },
+            "T20_CookiesChocolateMicrowave": {
+              "successes": 50,
+              "episodes": 50
+            },
+            "T21_ButterChocolateMicrowave": {
+              "successes": 50,
+              "episodes": 50
+            },
+            "T22_PourSauceCookiesMicrowave": {
+              "successes": 50,
+              "episodes": 50
+            },
+            "T23_CreamPopcornMicrowave": {
+              "successes": 50,
+              "episodes": 50
+            },
+            "T24_CookiesPopcornMicrowave": {
+              "successes": 50,
+              "episodes": 50
+            },
+            "T25_ButterCreamPlate": {
+              "successes": 48,
+              "episodes": 50
+            },
+            "T26_ChocolateCreamPlate": {
+              "successes": 50,
+              "episodes": 50
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "comparison_note": "Selected reported results on matching task lists, not a controlled comparison. Training data, sensing, interaction budgets, simulator revisions and evaluation episode counts differ.",
+  "sources": {
+    "robomme_leaderboard": {
+      "url": "https://robomme.github.io/leaderboard.html",
+      "snapshot_sha256": "5d01a87ed6f51c54bb2c40603b0cc104cc00eb0f90a234dbe539c1b26ad9b227",
+      "note": "Unweighted mean of 16 per-task values; MEMI-Astra-Act excludes the oracle-planner variant."
+    },
+    "simplemem_v2": {
+      "url": "https://arxiv.org/pdf/2609.05533v2",
+      "location": "Figure 3, Table 1 (RMBench), Table 3 (MIKASA-Robo)",
+      "snapshot_sha256": "a9a44bfdaa1d01a8730ac0aba514fe48a1d94152596be3f6d0b4ac1969f34132",
+      "note": "RMBench excludes place_block_mat. MIKASA uses the five listed task identities; legacy and current VLA releases differ."
+    },
+    "robomemarena_leaderboard": {
+      "url": "https://robomemarena.github.io/leaderboard.html",
+      "data_url": "https://robomemarena.github.io/leaderboard.js",
+      "snapshot_sha256": "dae66cf9ec68255d68ed52258373823a23c586425a82c424056a41002f199597",
+      "note": "UNVERIFIED_ROWS, full 26-task reported TSR; methods have different evaluation counts."
+    },
+    "cam_published_archive": {
+      "path": "public_runs/dashboard/index.json",
+      "snapshot_sha256": "5e89c945ae61388df15ba0db3e8c8d03475b4e59634f720928e87b5606705446",
+      "note": "Historical frozen results; MIKASA initial ten full artifacts plus imported results for remaining 80. No new scores."
+    }
+  }
+}

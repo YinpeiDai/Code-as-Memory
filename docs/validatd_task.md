@@ -167,7 +167,7 @@ RMBENCH=(
 
 ## Run on the other machine
 
-Pull `main`, initialize submodules, install the shared harness and the selected simulator environment following [installation](getting_started.md). The dataset uploads are still in progress; download after that benchmark has a verified `configs/<benchmark>/datasets/release.json` pin.
+Pull `main`, initialize submodules, install the shared harness and the selected simulator environment following [installation](getting_started.md). All four demonstration packages are published; the download command uses each benchmark's verified `configs/<benchmark>/datasets/release.json` pin.
 
 Choose one row and set `TASKS` to its array:
 

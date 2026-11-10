@@ -1,0 +1,9 @@
+{
+  "schema": "cam-demo-release/1",
+  "repo_id": "Yinpei/mikasa_robo-50-demos",
+  "revision": "e3b881cee84b4bc8477bc7510dc93ff4dde72e96",
+  "manifest_sha256": "3330366b14d5a518e60a79e0718f0a3b51319ccbd97d9ba0a356ba70e79a5441",
+  "selection_sha256": "ebd0064f6b0a5a9675df80f203e2c99cf4e13ef61d4af44d605b1c168f19611c",
+  "tasks": 90,
+  "episodes": 4500
+}
