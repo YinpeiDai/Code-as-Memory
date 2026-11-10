@@ -17,11 +17,15 @@ Read [docs/reproducing.md](docs/reproducing.md) before preparing or running an e
 
 ## Current user-authorized defaults
 
+- This workspace uses `/home/daiyp/Code-as-Memory/runs` for development logs,
+  rollout data, and related run artifacts. Pass this root with `--output` when a
+  published plan defaults to `public_runs` or `validate_runs`; keep existing
+  artifacts in place.
 - Eight concurrent development jobs. Normal evaluation uses five episode workers
   per GPU, with GPU admission and unchanged episode scoring.
 - The release sanity check covers every published task, setting and solution:
   five complete episodes per policy, ten workers per GPU on GPUs 0 and 1.
-  Store logs and JSON only in `validate_runs/eval_sanity_check/`; use recording `results`.
+  Store logs and JSON only in `runs/eval_sanity_check/`; use recording `results`.
   Preserve failures and archive unscorable infrastructure attempts before identical retries.
   Task failure is a valid execution outcome; policy/runtime errors must be reported.
 - Publish demonstration pools to `Yinpei/<benchmark>-<count>-demos`: RoboMME's
@@ -30,7 +34,7 @@ Read [docs/reproducing.md](docs/reproducing.md) before preparing or running an e
   Materialize the selected subset during experiment preparation. A learner assigned
   25 demonstrations must never receive the full 50-demo H5 or a mount of the pool.
 - All website inputs, progress, consolidated results and preview caches belong
-  under the selected `public_runs` or `validate_runs` directory. Gallery cards
+  under the selected run directory (`runs` in this workspace). Gallery cards
   open a separate page; detail episode navigation stays in that page.
 
 ## Experiment integrity

@@ -43,6 +43,7 @@ def published_manifest(root, manifest, adapter=None):
 
     Exact train/test metadata must match. The current native source is explicitly
     a compatibility target, not a claim about the historical acquisition build.
+    Normalize the historical ``source`` field to the harness's ``raw_data`` key.
     """
     from cam.interface.base import source_hash
     adapter = adapter or get_adapter("robomme")
@@ -52,6 +53,7 @@ def published_manifest(root, manifest, adapter=None):
             if sha256(path) != item.get(split + "_metadata_sha256"):
                 raise ValueError(f"Published RoboMME {split} identities changed: {task}")
     return {**manifest, "schema": "cam-dataset/1", "benchmark_hash": source_hash(adapter),
+            "raw_data": manifest.get("raw_data") or manifest["source"],
             "compatibility": {"source_schema": manifest["schema"],
                               "source_manifest_sha256": sha256(Path(root) / "manifest.json"),
                               "metadata_hashes_verified": True,

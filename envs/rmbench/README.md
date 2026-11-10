@@ -4,6 +4,7 @@ The trusted simulator uses Python 3.10, SAPIEN 3.0.0b1, PyTorch 2.4.1+cu121 and
 CuRobo v0.7.8. The shared harness and isolated policy runtime use root Python 3.11.
 
 ```bash
+git submodule update --init third_party/rmbench
 bash envs/rmbench/install.sh
 .venv/bin/cam doctor --benchmark rmbench
 ```

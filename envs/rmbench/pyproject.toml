@@ -16,6 +16,8 @@ dependencies = [
   "gymnasium==0.29.1",
   "trimesh==4.4.3",
   "open3d==0.18.0",
+  # Required by the Linux Open3D wheel; absent from its cross-platform lock metadata.
+  "ipywidgets==8.1.8",
   "imageio==2.34.2",
   "imageio-ffmpeg==0.5.1",
   "pydantic==2.9.2",

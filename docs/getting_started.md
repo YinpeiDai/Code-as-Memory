@@ -11,13 +11,16 @@ analysis libraries, and website. Each simulator uses its own environment:
 | RoboMemArena | `uv sync --locked --project envs/robomemarena --python 3.10` |
 
 ```bash
-git clone --recurse-submodules https://github.com/YinpeiDai/Code-as-Memory.git
+git clone https://github.com/YinpeiDai/Code-as-Memory.git
 cd Code-as-Memory
+git submodule update --init
 uv sync --locked --inexact --extra dev
 source .venv/bin/activate
 ```
 
-For an existing checkout, run `git submodule update --init --recursive` first.
+For an existing checkout, run `git submodule update --init` first. CaM needs only
+the four top-level simulator submodules. Nested baseline repositories, including
+SimpleMemVLA, are unused; recursive initialization is unnecessary.
 Install system `bubblewrap`, `strace`, and `ffmpeg`.
 NVIDIA/Vulkan or EGL support is required by the chosen simulator. Each
 [environment README](../envs/README.md) describes assets and interpreter overrides.

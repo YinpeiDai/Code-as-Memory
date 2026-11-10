@@ -114,7 +114,7 @@ def test_extraction_resume_reuses_only_verified_files(dataset, raw):
         )
 
 
-def test_historical_robomme_package_uses_explicit_metadata_compatibility(dataset, monkeypatch):
+def test_historical_robomme_package_uses_explicit_metadata_compatibility(dataset, monkeypatch, tmp_path):
     from cam.interface.registry import get_adapter
     from cam.interface.robomme import data as module
     from cam.data.extract import load_dataset_manifest
@@ -123,6 +123,7 @@ def test_historical_robomme_package_uses_explicit_metadata_compatibility(dataset
     monkeypatch.setattr(module, 'get_adapter', lambda name: adapter)
     manifest = read(root / 'manifest.json')
     manifest['schema'] = 'cap-regular-extraction/2'
+    manifest['source'] = manifest.pop('raw_data')
     item = manifest['tasks']['BinFill']
     for split in ('train', 'test'):
         item[split + '_metadata_sha256'] = sha256(source / 'env_metadata' / split / 'record_dataset_BinFill_metadata.json')
@@ -138,9 +139,16 @@ def test_historical_robomme_package_uses_explicit_metadata_compatibility(dataset
     item['sha256'] = sha256(file)
     write(root / 'manifest.json', manifest)
     current = load_dataset_manifest(root, adapter)
+    assert current['raw_data'] == manifest['source']
     assert current['compatibility']['h5_reads'] == 0
     assert not current['compatibility']['h5_bytes_changed']
     module.validate_dataset(root)
+    from cam.config import RunConfig
+    from cam.harness.prepare import prepare
+    prepared = prepare(tmp_path / 'historical_run', root,
+                       RunConfig(benchmark='robomme', mode='demos', budget=0),
+                       benchmark_source=source)
+    assert prepared['raw_data_reference'] == manifest['source']
     monkeypatch.setattr(trajectory, 'ROOT', root / 'h5')
     with trajectory.Trajectory('BinFill',0) as tr:
         assert tr.T == 3
