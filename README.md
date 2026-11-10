@@ -9,17 +9,13 @@ Four benchmarks, one development harness, and a browsable record of every experi
 | Benchmark | Setting | Successful / evaluated | Success rate |
 |---|---|---:|---:|
 | RoboMME | 25 demonstrations | 795 / 800 | **99.38%** |
-| MIKASA-Robo | 50 demonstrations + 50 interactions | 4,444 / 4,500 | **98.76%** |
-| RMBench | 25 demonstrations | 927 / 1,000 | **92.70%** |
 | RMBench | Up to 50 demonstrations | 1,000 / 1,000 | **100.00%** |
-| RoboMemArena | 25 demonstrations | 1,070 / 1,300 | **82.31%** |
-| RoboMemArena | Up to 50 demonstrations | 1,179 / 1,300 | **90.69%** |
+| MIKASA-Robo | 50 demonstrations + 50 interactions | 4,444 / 4,500 | **98.76%** |
 | RoboMemArena | Up to 50 demonstrations + matching interactions | 1,271 / 1,300 | **97.77%** |
 
-These are the published experiments, with complete scored coverage. Prompt and
-interface revisions differ between some settings. MIKASA includes 80 imported
-tasks with result records only. [Results and provenance](docs/results.md) explain
-coverage, actual demonstration counts, and comparison limits.
+These are the best published settings for each benchmark. See
+[more results and provenance](docs/results.md) for other settings, coverage,
+actual demonstration counts, and comparison limits.
 
 ## Start with a published solution
 
@@ -59,11 +55,17 @@ provenance, and a runnable command.
 | Benchmark | Environment | Published solutions | Development plan |
 |---|---|---|---|
 | [RoboMME](docs/benchmarks/robomme/README.md) | [envs/robomme](envs/robomme/README.md) | [demo_only_25](solutions/robomme/demo_only_25/README.md) | `configs/robomme/experiments/demo_only_25.json` |
-| [MIKASA-Robo](docs/benchmarks/mikasa_robo/README.md) | [envs/mikasa_robo](envs/mikasa_robo/README.md) | [demo_interaction_50](solutions/mikasa_robo/demo_interaction_50/README.md) | `configs/mikasa_robo/experiments/demo_interaction_50.json` |
 | [RMBench](docs/benchmarks/rmbench/README.md) | [envs/rmbench](envs/rmbench/README.md) | [25 demos](solutions/rmbench/demo_only_25/README.md) · [50 demos](solutions/rmbench/demo_only_50/README.md) | `configs/rmbench/experiments/demo_only_50.json` |
+| [MIKASA-Robo](docs/benchmarks/mikasa_robo/README.md) | [envs/mikasa_robo](envs/mikasa_robo/README.md) | [demo_interaction_50](solutions/mikasa_robo/demo_interaction_50/README.md) | `configs/mikasa_robo/experiments/demo_interaction_50.json` |
 | [RoboMemArena](docs/benchmarks/robomemarena/README.md) | [envs/robomemarena](envs/robomemarena/README.md) | [25 demos](solutions/robomemarena/demo_only_25/README.md) · [50 demos](solutions/robomemarena/demo_only_50/README.md) · [interaction](solutions/robomemarena/demo_interaction_50/README.md) | `configs/robomemarena/experiments/demo_interaction_50.json` |
 
 ## Reproduce development
+
+The demonstrations are successful trajectories collected through replay:
+**25 per task for RoboMME and up to 50 per task for the other benchmarks**.
+CaM develops memory code
+using only the assigned demonstration trajectories and, when interaction is
+enabled, training rollouts from those same demonstration seeds.
 
 Download a prepared demonstration pool, choose a benchmark plan from the table,
 and supply the data directory and the directory for your logs.
