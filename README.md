@@ -17,63 +17,63 @@ CaM achieves **near-perfect performance across four robot memory benchmarks**, o
 [More results can be found here →](docs/results.md)
 
 
-## Successful Evaluation Examples
+## Rollout Examples
 
 ### RMBench
 
-**swap_blocks**
+**Task: swap_blocks**
 
-> There are three traies on the table, and two blocks are placed in two different traies. You may move only one block at a time, and each tray can hold at most one block. Swap the positions of the two blocks. Finally press the button.
+> **Task Goal:** There are three traies on the table, and two blocks are placed in two different traies. You may move only one block at a time, and each tray can hold at most one block. Swap the positions of the two blocks. Finally press the button.
 
-[![Play swap_blocks: recorded memory, positions and end-effector trail](docs/media/rmbench-swap-blocks.jpg)](docs/media/rmbench-swap-blocks.mp4)
+<video controls src="https://github.com/user-attachments/assets/1e420cf9-cc9e-45bd-bab0-020dd7fbaa15" width="1080"></video>
 
-**cover_blocks**
+**Task: cover_blocks**
 
-> On the table, red, green, and blue blocks are arranged randomly along with three lids. From the current viewpoint, cover the blocks from left to right using the lids, and then uncover them again in the sequence red, green, and blue.
+> **Task Goal:** On the table, red, green, and blue blocks are arranged randomly along with three lids. From the current viewpoint, cover the blocks from left to right using the lids, and then uncover them again in the sequence red, green, and blue.
 
-[![Play cover_blocks: recorded memory, positions and end-effector trail](docs/media/rmbench-cover-blocks.jpg)](docs/media/rmbench-cover-blocks.mp4)
+<video controls src="https://github.com/user-attachments/assets/01af08e7-6f9c-444a-af09-63cfa6ce91b8" width="1080"></video>
 
 ### MIKASA-Robo
 
-**BatteriesCheckerEasy-3-VLA-v0**
+**Task: BatteriesCheckerEasy-3-VLA-v0**
 
-> Find all working batteries by inserting each one into the socket, observing the lamp result, and then pressing the button to confirm.
+> **Task Goal:** Find all working batteries by inserting each one into the socket, observing the lamp result, and then pressing the button to confirm.
 
-[![Play BatteriesCheckerEasy-3-VLA-v0: recorded memory, positions and end-effector trail](docs/media/mikasa-batteries.jpg)](docs/media/mikasa-batteries.mp4)
+<video controls src="https://github.com/user-attachments/assets/1e8cb1f9-d766-495d-b78b-b522a689a100" width="1080"></video>
 
-**SeqOfColors3-VLA-v0**
+**Task: SeqOfColors3-VLA-v0**
 
-> Observe which colored cubes appear during the cue, wait, then touch all of them in any order and press the center button.
+> **Task Goal:** Observe which colored cubes appear during the cue, wait, then touch all of them in any order and press the center button.
 
-[![Play SeqOfColors3-VLA-v0: recorded memory, positions and end-effector trail](docs/media/mikasa-color-sequence.jpg)](docs/media/mikasa-color-sequence.mp4)
+<video controls src="https://github.com/user-attachments/assets/dd791a43-1ff3-490f-a2fc-8ee6e420bce1" width="1080"></video>
 
 ### RoboMME
 
-**PatternLock**
+**Task: PatternLock**
 
-> watch the video carefully, then use the stick attached to the robot to retrace the same pattern
+> **Task Goal:** watch the video carefully, then use the stick attached to the robot to retrace the same pattern
 
-[![Play PatternLock: recorded memory, positions and end-effector trail](docs/media/robomme-pattern-lock.jpg)](docs/media/robomme-pattern-lock.mp4)
+<video controls src="https://github.com/user-attachments/assets/2292461f-dd57-4521-8db6-99f427e4d449" width="1080"></video>
 
-**VideoUnmaskSwap**
+**Task: VideoUnmaskSwap**
 
-> watch the video carefully, then pick up the container hiding the green cube, finally pick up another container hiding the blue cube
+> **Task Goal:** watch the video carefully, then pick up the container hiding the green cube, finally pick up another container hiding the blue cube
 
-[![Play VideoUnmaskSwap: recorded memory, positions and end-effector trail](docs/media/robomme-hidden-objects.jpg)](docs/media/robomme-hidden-objects.mp4)
+<video controls src="https://github.com/user-attachments/assets/c535af07-06f6-4fa2-8a74-d7a1595f0425" width="1080"></video>
 
 ### RoboMemArena
 
-**T04_ButterNonEmptyDrawer**
+**Task: T04_ButterNonEmptyDrawer**
 
-> Open and close each drawer to check it, in this order: top, middle, bottom. Put butter into the drawer that already contains an object.
+> **Task Goal:** Open and close each drawer to check it, in this order: top, middle, bottom. Put butter into the drawer that already contains an object.
 
-[![Play T04_ButterNonEmptyDrawer: recorded memory, positions and end-effector trail](docs/media/robomemarena-drawers.jpg)](docs/media/robomemarena-drawers.mp4)
+<video controls src="https://github.com/user-attachments/assets/77102ab7-a06a-40c5-a770-db522e6a6fb2" width="1080"></video>
 
-**T07_PourSauceFrypanTwice**
+**Task: T07_PourSauceFrypanTwice**
 
-> Pour tomato sauce over the frypan twice and place the sauce bottle into the bowl drainer.
+> **Task Goal:** Pour tomato sauce over the frypan twice and place the sauce bottle into the bowl drainer.
 
-[![Play T07_PourSauceFrypanTwice: recorded memory, positions and end-effector trail](docs/media/robomemarena-pour-twice.jpg)](docs/media/robomemarena-pour-twice.mp4)
+<video controls src="https://github.com/user-attachments/assets/d044e7d0-28ba-464c-9f66-5654e48bafb2" width="1080"></video>
 
 ## Try it
 

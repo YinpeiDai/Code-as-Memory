@@ -460,13 +460,13 @@ def write_gallery(clips, output, cached=False):
         slug = Path(clip["preview"]).stem
         video = f"{slug}/presentation.mp4" if cached else clip["preview"]
         poster = f"{slug}/poster.jpg" if cached else clip["poster"]
-        cards.append(f'<article><h2>{html.escape(clip["task"])}</h2><p>{html.escape(clip["goal"])}</p>'
+        cards.append(f'<article><h2>Task: {html.escape(clip["task"])}</h2><p><strong>Task Goal:</strong> {html.escape(clip["goal"])}</p>'
                      f'<video controls playsinline preload="none" poster="{poster}" src="{video}"></video></article>')
     page = '''<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Successful held-out episodes · CaM</title><style>
+<title>Rollout Examples · CaM</title><style>
 body{margin:0;background:#0e1725;color:#e5edf6;font:17px/1.6 system-ui,sans-serif}main{max-width:1080px;margin:auto;padding:32px 20px}
 h1{font-size:32px}h2{font-size:21px;margin:0}p{color:#aebed1;margin:12px 0 18px}article{margin:32px 0 48px}video{width:100%;display:block;border-radius:12px;background:#101b2b}
-</style><main><h1>Successful held-out episodes</h1><p>Recorded memory, perceived positions, and end-effector motion.</p>'''
+</style><main><h1>Rollout Examples</h1><p>Recorded memory, perceived positions, and end-effector motion.</p>'''
     output.write_text(page + "\n".join(cards) + "</main></html>\n")
 
 

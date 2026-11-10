@@ -1,11 +1,13 @@
-# Successful held-out episodes
+# Rollout Examples
 
 Eight selected **successful held-out episodes** pair the main camera with large,
 readable excerpts of the policy's recorded memory. Each is episode 0, the lowest
 numbered successful episode for its task. Aggregate scores are in [results](../results.md).
 
-The README links compact H.264 MP4s through JPEG previews. For a local gallery
-with playback controls, open [index.html](index.html) in a browser after cloning.
+The README embeds compact H.264 MP4s as GitHub video attachments with playback
+controls. [github_assets.json](github_assets.json) records each attachment URL and
+the matching local video hash. For an offline gallery with the same videos, open
+[index.html](index.html) in a browser after cloning.
 
 | Benchmark | Video | Memory shown |
 |---|---|---|
