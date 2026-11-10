@@ -4,6 +4,7 @@
 - [Reproducing development and evaluation](reproducing.md)
 - [Published solutions](solutions.md)
 - [Results and provenance](results.md)
+- [Recorded examples and media sources](media/README.md)
 - [Website and run-directory format](website.md)
 - [Architecture](architecture.md)
 - Benchmark guides: [RoboMME](benchmarks/robomme/README.md),

@@ -1,0 +1,9 @@
+{
+  "schema": "cam-demo-release/1",
+  "repo_id": "Yinpei/rmbench-50-demos",
+  "revision": "08991668a54bc90dfcd7d384c9e9e77868c3e477",
+  "manifest_sha256": "8d849c33bf82478ae65ebb5a80888e98cff2dee8ea617a7cd06a6470b95987cb",
+  "selection_sha256": "4b82d90745de07f68352a80b985be6bcf3ea62c6d611ad84a41edbfe3012121a",
+  "tasks": 10,
+  "episodes": 496
+}

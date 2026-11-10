@@ -38,6 +38,8 @@ __pycache__/
 *.npz
 *.mp4
 *.webm
+# Curated publication recordings; full experiment outputs stay ignored.
+!/docs/media/*.mp4
 *.tar
 *.tar.gz
 *.tar.xz

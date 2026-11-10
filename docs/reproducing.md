@@ -1,6 +1,6 @@
 # Reproducing experiments
 
-Use the [README](../README.md) for commands and the
+Use [installation and data](getting_started.md) to set up the repository and the
 [benchmark guides](benchmarks/) for exact settings. New development uses the
 current prompt and interface. Published scores refer to their original frozen
 runs; rerunning a policy creates separate evidence.
@@ -13,7 +13,7 @@ runs; rerunning a policy creates separate evidence.
    25-demo plans. Manual preparations require `cam subset` first when the pool
    is larger than the assignment; see [data setup](getting_started.md).
 3. Select a configuration and run `cam prepare OUTPUT --dataset DATA --config
-   CONFIG --tasks TASK`, or use the batch command in the README. Each task gets a
+   CONFIG --tasks TASK`, or use the batch commands below. Each task gets a
    new timestamped run, a blank initial policy, a pinned source/configuration
    snapshot, its composed prompt, and a generated README.
 4. `cam learn RUN` develops and freezes the policy. Demo-only mode permits zero
@@ -22,10 +22,43 @@ runs; rerunning a policy creates separate evidence.
    makes no model calls. Retain all scored outcomes and report scored/expected
    coverage; infrastructure failures are separate.
 
+## Concurrent development
+
+Authenticate Claude Code or Codex separately. The supplied plans use Claude Code
+with Opus 5.5; configure the referenced client settings for your account before
+starting paid development sessions.
+
+| Benchmark | Development plan | Best published solution |
+|---|---|---|
+| RoboMME | `configs/robomme/experiments/demo_only_25.json` | `solutions/robomme/demo_only_25` |
+| RMBench | `configs/rmbench/experiments/demo_only_50.json` | `solutions/rmbench/demo_only_50` |
+| MIKASA-Robo | `configs/mikasa_robo/experiments/demo_interaction_50.json` | `solutions/mikasa_robo/demo_interaction_50` |
+| RoboMemArena | `configs/robomemarena/experiments/demo_interaction_50.json` | `solutions/robomemarena/demo_interaction_50` |
+
+```bash
+DATA="$PWD/public_runs/demos/mikasa_robo"
+LOGS="$PWD/validate_runs/mikasa_reproduction"
+uv sync --locked --inexact --extra data
+cam download-demos --benchmark mikasa_robo --output "$DATA" --videos
+
+python scripts/develop_batch.py start \
+  configs/mikasa_robo/experiments/demo_interaction_50.json \
+  --dataset "$DATA" --output "$LOGS" --workers 8 --gpus 0 1 \
+  --evaluate-on-freeze --evaluation-workers-per-gpu 5
+```
+
+Omit `--evaluate-on-freeze` to develop without automatic held-out evaluation.
+Videos are optional. Add `--tasks TASK_NAME` to select tasks. For a 25-demo plan,
+preparation extracts the exact `selected_25.json` identities locally; the full
+downloaded pool stays outside the learner's sandbox.
+
 The batch launcher defaults to eight coding jobs. `--dataset`, `--output`, and
 `--tasks` override a single-benchmark plan without editing it. `--evaluate-on-freeze`
 starts a separate host evaluation queue, with five workers per GPU by default.
 Training simulators have a shared GPU lease; coding concurrency is independent.
+Across GPUs 0 and 1, normal evaluation admits up to ten episode workers total.
+See [running solutions](solutions.md) for evaluation without development and the
+separate five-episode sanity check, which uses ten workers per GPU.
 
 ## Released settings
 
@@ -57,6 +90,11 @@ The [prompt directory](../src/cam/prompts/README.md) describes shared instructio
 and each benchmark’s additions. Existing snapshots keep their exact original
 prompts. The shared demo-only prompt now requires final offline execution checks;
 some published runs predate that revision. See [results](results.md).
+
+Prompts combine a shared core and learning mode with the benchmark's public
+interface. MIKASA and RoboMemArena add their own demo-first interaction guidance.
+RMBench demo-only uses the shared prompt and public interface without an extra
+motion supplement. Each run saves the exact composed prompt.
 
 Learners have six tools: `command`, `read_image`, `usage`, `snapshot`, `validate`,
 and `rollout`. Their sandbox exposes `/workspace`, assigned `/demonstrations`,

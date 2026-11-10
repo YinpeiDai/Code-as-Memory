@@ -24,12 +24,14 @@ for the current interface. Historical catalogs remain intact. The current
 it exposes no native planner flags. This is a new-interface evaluation, not a
 relabelled historical score.
 
+## Sanity checks
+
 For compact recordings, add `--recording results` to `cam prepare --solution`.
 For a five-episode check of every solution:
 
 ```bash
 cam check-solutions --output validate_runs/eval_sanity_check \
-  --episodes 5 --gpus 0 1 --workers-per-gpu 12
+  --episodes 5 --gpus 0 1 --workers-per-gpu 10
 ```
 
 Use `--benchmarks rmbench` and/or `--tasks swap_blocks` to select a subset.

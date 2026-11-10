@@ -10,8 +10,15 @@ analysis libraries, and website. Each simulator uses its own environment:
 | RMBench | `bash envs/rmbench/install.sh` |
 | RoboMemArena | `uv sync --locked --project envs/robomemarena --python 3.10` |
 
-Start with `git submodule update --init --recursive` and `uv sync --locked --inexact --extra
-dev`. Activate `.venv`; install system `bubblewrap`, `strace`, and `ffmpeg`.
+```bash
+git clone --recurse-submodules https://github.com/YinpeiDai/Code-as-Memory.git
+cd Code-as-Memory
+uv sync --locked --inexact --extra dev
+source .venv/bin/activate
+```
+
+For an existing checkout, run `git submodule update --init --recursive` first.
+Install system `bubblewrap`, `strace`, and `ffmpeg`.
 NVIDIA/Vulkan or EGL support is required by the chosen simulator. Each
 [environment README](../envs/README.md) describes assets and interpreter overrides.
 `cam doctor --simulator` checks the four dedicated environments without resetting
@@ -19,10 +26,10 @@ simulators or contacting a model.
 
 ## Demonstration packages
 
-The dataset uploads are in progress. `cam download-demos` becomes available for
-each benchmark after its verified revision is recorded in
-`configs/<benchmark>/datasets/release.json`. The code release is ready independently
-of these transfers.
+RoboMME and RMBench are published and verified. MIKASA-Robo and RoboMemArena
+uploads are still in progress. `cam download-demos` becomes available for each
+benchmark after its verified revision is recorded in
+`configs/<benchmark>/datasets/release.json`.
 
 Set `DATA` to a downloaded, extracted **prepared** package:
 
@@ -80,4 +87,4 @@ For a different benchmark, use the matching configuration and task. Configure
 and authenticate the coding client before `learn`; it starts paid sessions.
 Published solutions need neither demonstrations nor coding credentials:
 [run a solution](solutions.md). For concurrent all-task development, use the
-batch command in the [README](../README.md#reproduce-development).
+batch commands in the [reproduction guide](reproducing.md#concurrent-development).

@@ -1,0 +1,9 @@
+{
+  "schema": "cam-demo-release/1",
+  "repo_id": "Yinpei/robomme-25-demos",
+  "revision": "6c0d4404ca7b6c24d8e9bf673bfd54f54c9d3700",
+  "manifest_sha256": "11b6ef4aa067961a9d70291a8254c16df26297950e293e28dc3af2e0b679826a",
+  "selection_sha256": "3af123676d2cb9a64bb840c40198abf2c6ed62f170695f8becab9d088fa054e7",
+  "tasks": 16,
+  "episodes": 400
+}
