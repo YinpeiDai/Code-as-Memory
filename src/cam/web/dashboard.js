@@ -2,7 +2,7 @@
 (() => {
   'use strict';
   const $ = s => document.querySelector(s), main = $('#main');
-  const names = {robomme:'RoboMME', mikasa_robo:'MIKASA-Robo', rmbench:'RMBench', robomemarena:'RoboMemArena'};
+  const names = {robomme:'RoboMME', mikasa_robo:'MIKASA-Robo', mikasa_robo_vla_suite:'MIKASA-Robo VLA suite (5 tasks)', rmbench:'RMBench', robomemarena:'RoboMemArena'};
   const initials = {robomme:'MM', mikasa_robo:'MK', rmbench:'RM', robomemarena:'MA'};
   const labels = {demo_only_25:'25 demonstrations', demo_only_50:'Up to 50 demonstrations', demo_interaction_50:'50 demonstrations + interaction', demo_only_25_observed_motion:'25 demos · current interface', demo_only_50_observed_motion:'50 demos · current interface', pool:'Full demonstration pool'};
   const esc = v => String(v ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));

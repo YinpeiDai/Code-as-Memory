@@ -14,6 +14,7 @@ from pathlib import Path
 import time
 
 from cam.io import read, write
+from cam.config import COMPARISON_SUITES
 
 BENCHMARKS = ("robomme", "mikasa_robo", "rmbench", "robomemarena")
 BEST_SETTINGS = {"robomme": "demo_only_25", "mikasa_robo": "demo_interaction_50",
@@ -176,7 +177,7 @@ def index_directory(data_root):
     for path in sorted((root / "configs/solutions").glob("*/*.json")):
         spec = load(path)
         if spec.get("schema") == "cam-solutions/1":
-            catalogs[(canonical(spec["benchmark"]), spec["experiment"])] = spec
+            catalogs[(spec.get("suite") or canonical(spec["benchmark"]), spec["experiment"])] = spec
 
     def add_episodes(folder, patterns, run, kind):
         for pattern in patterns:
@@ -194,8 +195,12 @@ def index_directory(data_root):
     for directory in find_runs(root / "dev_logs" if archive else root):
         plan = load(directory / "run.json")
         config = plan.get("config", {})
-        benchmark = canonical(config.get("benchmark"))
-        if benchmark not in BENCHMARKS:
+        simulator_benchmark = canonical(config.get("benchmark"))
+        if simulator_benchmark not in BENCHMARKS:
+            continue
+        benchmark = config.get("suite") or simulator_benchmark
+        if config.get("suite") and benchmark not in COMPARISON_SUITES:
+            warnings.append(f"Unknown comparison suite: {benchmark}")
             continue
         for task in plan.get("tasks", []):
             folder = directory / "tasks" / task
@@ -209,6 +214,8 @@ def index_directory(data_root):
             sanity = load(directory / "sanity_check.json")
             frozen = (folder / "policy/freeze.json").is_file()
             item = {"id": stable_id(relative, task), "benchmark": benchmark, "setting": setting,
+                    "simulator_benchmark": simulator_benchmark, "suite": config.get("suite"),
+                    "physics_backend": plan.get("physics_backend_by_task", {}).get(task, config.get("physics_backend")),
                     "task": task, "tag": directory.name, "path": relative,
                     "scope": "sanity" if sanity else "evaluation", "created": plan.get("created"),
                     "development_status": _state(folder, frozen), "frozen": frozen,

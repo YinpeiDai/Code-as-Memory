@@ -1,0 +1,36 @@
+{
+  "schema": "cam-development-suite/1",
+  "suite": "mikasa_robo_vla_suite",
+  "benchmark": "mikasa_robo",
+  "tasks": [
+    "ShellGameTouch-VLA-v0",
+    "InterceptMedium-VLA-v0",
+    "RememberColor3-VLA-v0",
+    "RememberColor5-VLA-v0",
+    "RememberColor9-VLA-v0"
+  ],
+  "arms": {
+    "demo_only_25": {
+      "plan": "configs/mikasa_robo_vla_suite/experiments/demo_only_25.json",
+      "workers": 3,
+      "demo_count": 25,
+      "interaction_count": 0
+    },
+    "demo_only_50": {
+      "plan": "configs/mikasa_robo_vla_suite/experiments/demo_only_50.json",
+      "workers": 3,
+      "demo_count": 50,
+      "interaction_count": 0
+    },
+    "demo_interaction_50": {
+      "plan": "configs/mikasa_robo_vla_suite/experiments/demo_interaction_50.json",
+      "workers": 2,
+      "demo_count": 50,
+      "interaction_count": 50
+    }
+  },
+  "reference": "https://arxiv.org/pdf/2609.05533",
+  "expected_policies": 15,
+  "evaluation_episodes_per_task": 50,
+  "comparison_note": "Same five task identities; report CaM RGB-D, physics/IK backends, data and interaction budgets explicitly. These runs do not establish an identical training or evaluation protocol to the cited VLA methods."
+}

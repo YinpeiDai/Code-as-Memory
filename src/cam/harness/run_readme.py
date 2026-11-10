@@ -233,6 +233,7 @@ simulator, environment and complete official test identities are pinned here.
 This is a new evaluation, not a copy of the source experiment's scored outcomes.
 
 Physics backend: `{physics}` (independent of GPU rendering).
+Comparison suite: `{manifest["config"].get("suite") or "full benchmark"}`.
 
 ```bash
 cam evaluate {shlex.quote(str(root))} --gpus 0 --workers-per-gpu 1
@@ -313,6 +314,7 @@ The policy sandbox gets only its frozen program, public runtime and observations
 | Provider | `{coding["provider"]}` |
 | Reasoning effort | `{coding["reasoning_effort"]}` |
 | Learning setting | `{setting}` |
+| Comparison suite | `{cfg.get("suite") or "full benchmark"}` |
 | Demo + interaction protocol | {protocol} |
 | Demonstrations per task | `{manifest["demonstrations_per_task"]}` |
 | Maximum training simulator attempts | `{cfg["budget"]}` |

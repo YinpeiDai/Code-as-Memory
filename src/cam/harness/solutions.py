@@ -98,7 +98,7 @@ def prepare_solutions(base, solution, tasks=None, benchmark_source=None, timetag
     if timetag in (".", "..") or not re.fullmatch(r"[A-Za-z0-9_.-]+", timetag):
         raise ValueError("Timetag must be a single alphanumeric path component")
     base = Path(base).resolve()
-    roots = [base / spec["benchmark"] / task / "published" / spec["experiment"] / timetag for task in tasks]
+    roots = [base / (config.suite or spec["benchmark"]) / task / "published" / spec["experiment"] / timetag for task in tasks]
     if any(root.exists() for root in roots):
         raise FileExistsError("Published evaluation run already exists; choose a new timetag")
     selected = {"schema": "cam-published-evaluation/1", "benchmark": spec["benchmark"],

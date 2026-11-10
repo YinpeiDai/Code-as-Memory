@@ -5,6 +5,9 @@ Keep these files with the source: they are required for reproduction.
 - `<benchmark>/*_<client>.json`: coding client, learning mode, budgets, and runtime limits.
 - `<benchmark>/experiments/`: portable all-task plans; `--dataset`, `--output`, and `--tasks` select local inputs and storage.
 - `solutions/<benchmark>/`: published policy memory schemas, checksums, interface identities, source provenance, and evaluation settings.
+- `mikasa_robo_vla_suite/`: five-task comparison plans for 25 demos, 50 demos,
+  and 50 demos plus 50 interactions. The simulator benchmark remains `mikasa_robo`;
+  the explicit `suite` field keeps paths and reported results separate from all 90 tasks.
 
 Only final Python programs and setting READMEs belong in `solutions/`.
 Historical imports and catalog hashes remain unchanged. RMBench's

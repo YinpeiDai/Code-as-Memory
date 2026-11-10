@@ -210,12 +210,14 @@ def build(root):
         # Organized runs share a timetag across tasks/settings. Keep the full
         # experiment identity in display and paired-comparison keys.
         "name": "/".join(identity.parts[-5:])
-        if plan.get("evaluation_only") or identity.parent.name in (
+        if plan.get("evaluation_only") or plan["config"].get("suite") or identity.parent.name in (
             "demo_only", "interaction_only", "demo_interaction",
             "demo_interaction_v1", "demo_interaction_v2",
         )
         else identity.name,
         "benchmark": plan["config"]["benchmark"],
+        "suite": plan["config"].get("suite"),
+        "physics_backend_by_task": plan.get("physics_backend_by_task", {}),
         "benchmark_hash": plan["benchmark_hash"],
         "config": plan["config"],
         "learning_setting": learning_setting(

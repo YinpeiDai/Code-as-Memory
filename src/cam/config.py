@@ -4,6 +4,15 @@ from dataclasses import asdict, dataclass, field
 
 MODES = ("demos", "interaction", "both")
 DEMO_FIRST_BENCHMARKS = ("mikasa_robo", "robomemarena")
+COMPARISON_SUITES = {
+    "mikasa_robo_vla_suite": {
+        "benchmark": "mikasa_robo",
+        "tasks": (
+            "ShellGameTouch-VLA-v0", "InterceptMedium-VLA-v0",
+            "RememberColor3-VLA-v0", "RememberColor5-VLA-v0", "RememberColor9-VLA-v0",
+        ),
+    },
+}
 BOTH_PROTOCOLS = {
     "v1": "Free use of demonstrations and interaction",
     "v2": "Demonstrations first; interaction verifies and explores uncertainties",
@@ -72,8 +81,13 @@ class RunConfig:
     both_protocol: str | None = None
     physics_backend: str | None = None
     recording: str = "full"
+    suite: str | None = None
 
     def __post_init__(self):
+        if self.suite is not None:
+            spec = COMPARISON_SUITES.get(self.suite)
+            if spec is None or spec["benchmark"] != self.benchmark:
+                raise ValueError("Unknown comparison suite or mismatched benchmark")
         if self.recording not in ("full", "results"):
             raise ValueError("recording must be full or results")
         if self.benchmark in DEMO_FIRST_BENCHMARKS and self.mode == "both":

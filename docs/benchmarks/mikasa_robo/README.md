@@ -6,6 +6,10 @@ New preparations use GPU physics for `ShellGameTouch-VLA-v0`; other tasks defaul
 to CPU. Training and evaluation share this routing. Original scores and snapshots
 remain separate from evaluations under the current interface.
 
+The [five-task VLA comparison suite](../mikasa_robo_vla_suite/README.md) has its
+own `mikasa_robo_vla_suite` label and 25-demo, 50-demo and 50-demo-plus-interaction
+settings. It does not replace this full 90-task result track.
+
 ## Run a published policy
 
 Install the [dedicated environment](../../../envs/mikasa_robo/README.md), then:

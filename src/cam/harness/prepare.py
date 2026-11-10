@@ -15,7 +15,7 @@ from urllib.parse import quote
 from cam import __file__ as package_file
 from cam.interface.base import pin_source, source_hash
 from cam.interface.registry import checkout, get_adapter, simulator_python
-from cam.config import RunConfig
+from cam.config import COMPARISON_SUITES, RunConfig
 from cam.core.budget import Ledger, program_hash
 from cam.core.history import freeze, materialize, payload, snapshot
 from cam.data.extract import load_dataset_manifest, validate_dataset
@@ -274,7 +274,8 @@ def prepare_runs(
     base = Path(base).resolve()
     client = coding_run_name(config.coding)
     roots = [
-        base / config.benchmark / task / client / config.setting / timetag
+        base / (config.suite or config.benchmark) / task / client /
+        (f"{config.setting}_{len(selected['tasks'][task]['episodes'])}" if config.suite else config.setting) / timetag
         for task in tasks
     ]
     for root in roots:
@@ -297,6 +298,8 @@ def prepare_runs(
 
 def _prepare(root, dataset, config, tasks, adapter, selected, initial=None, published=None,
              validate_data=False):
+    if config.suite and set(tasks) - set(COMPARISON_SUITES[config.suite]["tasks"]):
+        raise ValueError(f"Tasks are outside comparison suite {config.suite}")
     if root.exists():
         raise FileExistsError(
             "Use a new run directory; existing logs and budgets cannot be reset"

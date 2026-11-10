@@ -52,10 +52,12 @@ def frozen_evaluation(root, task):
 
 def data_assignment(name, item, config):
     """Check budgets and complete manifests before creating or launching a batch."""
-    from cam.config import RunConfig
+    from cam.config import COMPARISON_SUITES, RunConfig
     from cam.io import read
 
     cfg = RunConfig.from_dict(config)
+    if cfg.suite and set(item["tasks"]) - set(COMPARISON_SUITES[cfg.suite]["tasks"]):
+        raise ValueError(f"Tasks are outside comparison suite {cfg.suite}")
     count = item.get("demo_count", 25)
     if type(count) is not int or count < 1:
         raise ValueError("demo_count must be a positive integer")
@@ -260,6 +262,8 @@ def start(args):
             "environment": env, "python": sys.executable, "runs": str((output / "dev_logs" if output else ROOT / "runs").resolve()),
             "harness_hash": tree_hash(checkout / "src/cam"),
             "held_out_evaluation": evaluation["enabled"], "evaluation": evaluation}
+    if getattr(args, "resource_root", None):
+        plan["resource_root"] = str(args.resource_root.resolve())
     write(batch / "plan.json", plan)
     shutil.copy2(Path(__file__), batch / "driver.py")
     (batch / "runner.py").write_text(
@@ -384,11 +388,13 @@ def worker(batch):
             assert source_hash(get_adapter(name, cfg["source"])) == cfg["source_hash"]
             for link, digest in cfg["asset_hashes"].items():
                 assert tree_hash(Path(cfg["source"]) / link) == digest
+        resources = Path(plan.get("resource_root", batch))
+        resources.mkdir(parents=True, exist_ok=True)
         env = {**os.environ, **plan["environment"], "PYTHONDONTWRITEBYTECODE": "1",
                "OMP_NUM_THREADS": "1", "OPENBLAS_NUM_THREADS": "1",
-               "CAM_SIMULATOR_LOCK_DIR": str(batch / "gpu_locks"),
+               "CAM_SIMULATOR_LOCK_DIR": str(resources / "gpu_locks"),
                "CAM_SIMULATOR_GPUS": ",".join(map(str, plan["gpus"]))}
-        (batch / "gpu_locks").mkdir(exist_ok=True)
+        (resources / "gpu_locks").mkdir(exist_ok=True)
         (batch / "logs").mkdir(exist_ok=True)
         tasks = {f"{name}/{task}": {"benchmark": name, "task": task, "status": "waiting_data"}
                  for name, cfg in plan["benchmarks"].items() for task in cfg["tasks"]}
@@ -456,7 +462,7 @@ def worker(batch):
             try:
                 if name == "robomemarena":
                     gpu = plan["gpus"][-1]
-                    with (batch / "gpu_locks" / f"gpu_{gpu}.lock").open("a") as lease:
+                    with (resources / "gpu_locks" / f"gpu_{gpu}.lock").open("a") as lease:
                         fcntl.flock(lease, fcntl.LOCK_EX)
                         command(f"extract_{name}", args, {"CUDA_VISIBLE_DEVICES": str(gpu)})
                 else:
@@ -510,11 +516,14 @@ def worker(batch):
                 try:
                     if frozen_evaluation(root, task) != assignment:
                         raise ValueError("Frozen assignment changed while queued")
-                    save(key, evaluation_status="running", evaluation_started=time.time())
-                    command(f"evaluate_{name}_{task}", [plan["python"], str(root / "runner.py"),
-                            "evaluate", str(root), "--budgets", str(assignment["budget"]),
-                            "--gpus", *map(str, plan["gpus"]), "--workers-per-gpu",
-                            str(evaluation["workers_per_gpu"])])
+                    save(key, evaluation_status="waiting_resources")
+                    with (resources / "evaluation.lock").open("a") as lease:
+                        fcntl.flock(lease, fcntl.LOCK_EX)
+                        save(key, evaluation_status="running", evaluation_started=time.time())
+                        command(f"evaluate_{name}_{task}", [plan["python"], str(root / "runner.py"),
+                                "evaluate", str(root), "--budgets", str(assignment["budget"]),
+                                "--gpus", *map(str, plan["gpus"]), "--workers-per-gpu",
+                                str(evaluation["workers_per_gpu"])])
                     summary = next(row for row in build(root)["settings"] if row["budget"] == assignment["budget"])
                     counts = {field: summary[field] for field in (
                         "scored", "expected", "successes", "success_rate", "infrastructure_errors")}
@@ -570,6 +579,7 @@ def main():
     p.add_argument("plan", type=Path)
     p.add_argument("--dataset", type=Path, help="Downloaded demonstration directory containing manifest.json")
     p.add_argument("--output", type=Path, help="Keep batch state, development logs and rollouts beneath this directory")
+    p.add_argument("--resource-root", type=Path, help="Share training GPU leases and one evaluation queue across batches")
     p.add_argument("--tasks", nargs="+", help="Optionally select tasks from a single-benchmark plan")
     p.add_argument("--workers", type=int, default=8)
     p.add_argument("--prepare-workers", type=int, default=1,

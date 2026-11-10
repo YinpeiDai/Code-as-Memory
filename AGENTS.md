@@ -23,6 +23,11 @@ Read [docs/reproducing.md](docs/reproducing.md) before preparing or running an e
   artifacts in place.
 - Eight concurrent development jobs. Normal evaluation uses five episode workers
   per GPU, with GPU admission and unchanged episode scoring.
+- `mikasa_robo_vla_suite` is a separate five-task comparison namespace over the
+  `mikasa_robo` simulator: ShellGameTouch, InterceptMedium, RememberColor3/5/9
+  (standard `-VLA-v0` IDs). Develop fresh 25-demo-only, 50-demo-only and
+  50-demo-plus-50-interaction policies. Keep its 750 held-out episodes separate
+  from full-90 results. Concurrent arms share eight coding workers and GPU leases.
 - The release sanity check covers every published task, setting and solution:
   five complete episodes per policy, ten workers per GPU on GPUs 0 and 1.
   Store logs and JSON only in `runs/eval_sanity_check/`; use recording `results`.

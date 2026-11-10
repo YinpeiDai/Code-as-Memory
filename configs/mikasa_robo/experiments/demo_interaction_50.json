@@ -1,5 +1,5 @@
 {
-  "selection_reason": "All 90 MIKASA tasks using the released 50-demo RGB-D assignment. CPU physics; demo-first interaction uses each demo identity once.",
+  "selection_reason": "All 90 MIKASA tasks using the released 50-demo RGB-D assignment. GPU physics for ShellGameTouch, CPU defaults elsewhere; demo-first interaction uses each demo identity once. Separate from the five-task VLA comparison suite.",
   "benchmarks": {
     "mikasa_robo": {
       "config": "configs/mikasa_robo/both_claude_code.json",

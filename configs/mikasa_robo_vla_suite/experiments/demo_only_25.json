@@ -1,0 +1,20 @@
+{
+  "selection_reason": "mikasa_robo_vla_suite: the five requested VLA comparison tasks, 25 assigned demos, zero training simulator attempts. Fresh policies; GPU physics for ShellGameTouch, CPU for the other tasks.",
+  "benchmarks": {
+    "mikasa_robo": {
+      "config": "configs/mikasa_robo_vla_suite/demos_claude_code.json",
+      "demo_count": 25,
+      "require_prepared_data": true,
+      "datasets": [
+        "public_runs/demos/mikasa_robo"
+      ],
+      "tasks": [
+        "ShellGameTouch-VLA-v0",
+        "InterceptMedium-VLA-v0",
+        "RememberColor3-VLA-v0",
+        "RememberColor5-VLA-v0",
+        "RememberColor9-VLA-v0"
+      ]
+    }
+  }
+}
