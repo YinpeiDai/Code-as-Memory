@@ -25,10 +25,9 @@ training and evaluation protocols; full-suite results and provenance are in the 
 RoboMME's 16 memory programs used **$29.44 in reported development API cost**.
 Their 800 held-out evaluations made **zero model calls**.
 
-![RoboMME memory-decision timing distribution and development versus evaluation API cost](docs/figures/robomme_efficiency.png)
+![RoboMME success rates, policy computation per control step, and development/evaluation API costs](docs/figures/robomme_efficiency.png)
 
-Timing measures perception and memory decisions on recorded observations, excluding
-action-tool execution and simulation. [Measurement details and figure sources](docs/figures/README.md).
+[RoboMME comparison: measurement scope and sources](docs/figures/README.md#robomme-performance-latency-and-api-cost).
 
 ## Successful held-out episodes
 

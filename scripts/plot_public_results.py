@@ -10,7 +10,6 @@ from pathlib import Path
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
-from matplotlib.ticker import FuncFormatter
 import numpy as np
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -66,61 +65,58 @@ def benchmark_comparison():
 
 
 def robomme_efficiency():
-    data = json.loads((OUT / "robomme_efficiency.json").read_text())
-    fig = plt.figure(figsize=(15, 6.8))
-    fig.text(.055, .935, "RoboMME · memory decisions and API spend", fontsize=24, weight="bold")
-    fig.text(.055, .878, "16 frozen programs · 25 demonstrations per task · no evaluation-time model calls", fontsize=13, color=MUTED)
-
-    # The entire distribution makes expensive visual decisions visible alongside
-    # fast memory updates. Each point is the median of five warm measurements.
-    values = np.sort([row["median_ms"] for row in data["decisions_data"]])
-    ax = fig.add_axes([.075, .21, .43, .49])
-    ax.step(values, np.arange(1, len(values) + 1) / len(values) * 100,
-            where="post", lw=2.8, color=ACCENT)
-    ax.fill_between(values, 0, np.arange(1, len(values) + 1) / len(values) * 100,
-                    step="post", alpha=.08, color=ACCENT)
-    ax.set_xscale("log")
-    ax.set_xlim(.02, max(1000, float(values[-1]) * 1.15))
-    ax.set_ylim(0, 104)
-    ax.set_yticks([0, 25, 50, 75, 100])
-    ax.set_xticks([.1, 1, 10, 100, 1000])
-    ax.xaxis.set_major_formatter(FuncFormatter(lambda v, _: f"{v:g}"))
-    ax.set_xlabel("Perception + memory decision time (ms, log scale)", fontsize=11, labelpad=10)
-    ax.set_ylabel("Recorded decisions (%)", fontsize=11, labelpad=10)
-    ax.grid(axis="y", color=LINE, lw=.8)
-    ax.set_axisbelow(True)
-    ax.axvline(data["median_ms"], ls=(0, (3, 4)), color=ACCENT, alpha=.65, lw=1)
-    ax.axvline(data["p95_ms"], ls=(0, (3, 4)), color=MUTED, alpha=.65, lw=1)
-    fig.text(.075, .768, f"{data['median_ms']:.2f} ms", fontsize=24, color=ACCENT, weight="bold")
-    fig.text(.075, .724, "MEDIAN", fontsize=9, color=MUTED)
-    fig.text(.272, .768, f"{data['p95_ms']:.1f} ms", fontsize=20, weight="bold")
-    fig.text(.272, .724, "95TH PERCENTILE", fontsize=9, color=MUTED)
-    fig.text(.505, .768, f"{data['mean_ms']:.1f} ms", fontsize=15, ha="right")
-    fig.text(.505, .724, "MEAN", fontsize=9, color=MUTED, ha="right")
-
-    cost = fig.add_axes([.60, .25, .34, .40])
-    cost.barh([1, 0], [data["development_api_cost_usd"], 0], height=.32,
-              color=[ACCENT, BASE], zorder=2)
-    cost.scatter([0], [0], s=65, color=ACCENT, zorder=3, clip_on=False)
-    cost.set_xlim(0, 35)
-    cost.set_ylim(-.5, 1.55)
-    cost.set_yticks([])
-    cost.set_xticks([0, 10, 20, 30])
-    cost.xaxis.set_major_formatter(FuncFormatter(lambda v, _: f"${v:g}"))
-    cost.grid(axis="x", color=LINE, lw=.8)
-    cost.set_axisbelow(True)
-    cost.spines["left"].set_visible(False)
-    cost.set_xlabel("Reported API cost (USD)", fontsize=11, labelpad=11)
-    cost.text(0, 1.27, "Development · all 16 tasks", fontsize=12, weight="bold")
-    cost.text(0, .27, "Evaluation · 800 episodes", fontsize=12, weight="bold")
-    cost.text(data["development_api_cost_usd"] + 1, 1, f"${data['development_api_cost_usd']:.2f}", va="center", fontsize=12, color=ACCENT, weight="bold")
-    cost.text(1, 0, "$0.00", va="center", fontsize=12, color=ACCENT, weight="bold")
-    fig.text(.60, .768, f"${data['development_api_cost_usd']:.2f}", fontsize=30, color=ACCENT, weight="bold")
-    fig.text(.60, .714, "TOTAL API SPEND", fontsize=10, color=MUTED)
-    fig.text(.94, .77, "795 / 800", fontsize=19, weight="bold", ha="right")
-    fig.text(.94, .726, "HELD-OUT SUCCESSES", fontsize=9, color=MUTED, ha="right")
-    fig.text(.055, .095, f"Timing: {data['decisions']} decisions from {data['episodes']} recorded episodes; 5 repeats per decision on CPU.", fontsize=10, color=MUTED)
-    fig.text(.055, .055, "Decision timing excludes act tools, I/O and simulation. API estimates exclude local compute and data preparation.", fontsize=10, color=MUTED)
+    data = json.loads((OUT / "robomme_comparison.json").read_text())
+    rows = data["methods"]
+    fig = plt.figure(figsize=(18, 6.4))
+    positions = np.arange(len(rows) - 1, -1, -1)
+    axes = [fig.add_axes([.03 + i * .33, .12, .285, .72]) for i in range(3)]
+    titles = ["Success rate", "Policy computation", "API cost (USD)"]
+    subtitles = ["Original RoboMME", "Mean ms / control step · log scale", "Development and evaluation separately"]
+    for ax, title, subtitle in zip(axes, titles, subtitles):
+        ax.set_ylim(-.5, len(rows) - .15)
+        ax.set_title(title, loc="left", fontsize=24, weight="bold", pad=44)
+        ax.text(0, 1.025, subtitle, transform=ax.transAxes, fontsize=14, color=MUTED)
+        ax.set_axis_off()
+    axes[0].set_xlim(0, 100)
+    axes[1].set_xscale("log")
+    axes[1].set_xlim(.1, 500)
+    axes[2].set_xlim(0, 1)
+    for row, y in zip(rows, positions):
+        cam = row["id"] == "cam"
+        color = ACCENT if cam else BASE
+        weight = "bold" if cam else "normal"
+        for ax in axes:
+            ax.text(0, y + .27, row["method"], transform=ax.get_yaxis_transform(),
+                    fontsize=18, weight=weight, color=ACCENT if cam else INK, va="bottom")
+        ax = axes[0]
+        ax.barh(y, 100, height=.28, color=PALE)
+        ax.barh(y, row["success_percent"], height=.28, color=color)
+        ax.text(100, y + .27, rounded(row["success_percent"]) + "%", ha="right", va="bottom",
+                fontsize=18, color=ACCENT if cam else INK, weight=weight)
+        ax = axes[1]
+        value = row["policy_compute_ms_per_control_step"]
+        label = "N/R" if value is None else f"{value:.2f}"
+        upper = row.get("policy_compute_display_upper_bound_ms")
+        if upper is not None:
+            if value is None or not 0 <= value < upper:
+                raise ValueError("Latency display bound does not contain the measured mean")
+            label = f"<{upper:g} ms"
+        ax.barh(y, 499.9, left=.1, height=.28, color=PALE)
+        if value is not None:
+            ax.barh(y, max(0, value - .1), left=.1, height=.28, color=color)
+        ax.text(500, y + .27, label, ha="right", va="bottom",
+                fontsize=18, color=ACCENT if cam else INK, weight=weight)
+        ax = axes[2]
+        dev, evaluation = row["development_api_cost_usd"], row["evaluation_api_cost_usd"]
+        ax.text(.02, y - .02, "Develop", fontsize=13, color=MUTED, va="center")
+        ax.text(.48, y - .02, "N/R" if dev is None else f"${dev:.2f}", ha="right", va="center",
+                fontsize=18, color=ACCENT if cam else MUTED, weight=weight)
+        ax.text(.55, y - .02, "Evaluate", fontsize=13, color=MUTED, va="center")
+        ax.text(1, y - .02, "N/R" if evaluation is None else f"${evaluation:,.0f}", ha="right", va="center",
+                fontsize=18, color=ACCENT if cam else INK, weight=weight)
+        ax.plot([0, 1], [y - .30, y - .30], color=LINE, lw=.8)
+    fig.text(.03, .047, "CaM timing: CPU replay, including action helpers. Baseline timing: RoboMME-Plus reference measurements.", fontsize=13, color=MUTED)
+    fig.text(.03, .008, "API cost excludes local compute. N/R = not reported. Different hardware and evaluation protocols; see source notes.", fontsize=13, color=MUTED)
     save(fig, "robomme_efficiency")
 
 
