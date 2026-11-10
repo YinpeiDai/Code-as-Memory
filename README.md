@@ -1,39 +1,27 @@
-# CaM · Robot Memory as Code
+### Code-as-Memory (CaM)
 
-[Results](#results) · [Try it](#try-it) · [Demonstrations](docs/getting_started.md#demonstration-packages) · [Documentation](docs/README.md)
+**Code-as-Memory (CaM)** uses a coding agent to translate demonstrations directly into an executable Python program that **remembers, decides, and acts**.
 
-**CaM learns robot memory as code.**
+The program maintains explicit memory through Python variables (e.g., `dict`, `list`), which can be initialized and updated in place using built-in functions.
 
-A coding agent turns demonstrations and optional practice into a Python program
-that remembers, decides, and acts.
+Once generated, the program operates autonomously across observations, requiring:
+- **Zero gradient-based optimization during development**
+- **Zero model or API calls during inference**
+- **Near-zero inference latency**, with only lightweight Python code execution
 
-The learned program carries memory across observations and runs with
-**zero model calls during evaluation**.
-
-## Results
-
+CaM achieves near-perfect performance across four robot memory benchmarks, outperforming prior approaches with significantly lower computational cost and near-zero inference latency.
+ 
 ![CaM and selected published baselines across RoboMME, RMBench, MIKASA-Robo, and RoboMemArena](docs/figures/benchmark_comparison.png)
-
-The comparison uses nine shared RMBench tasks and five shared MIKASA task identities
-(CaM: **100.0%**, with the CPU-physics correction). Published methods use different
-training and evaluation protocols; full-suite results and provenance are in the docs.
-
-[More results, coverage, and provenance →](docs/results.md)
-
-## Learn once, execute as code
-
-RoboMME's 16 memory programs used **$29.44 in reported development API cost**.
-Their 800 held-out evaluations made **zero model calls**.
 
 ![RoboMME success rates, policy computation per control step, and development/evaluation API costs](docs/figures/robomme_efficiency.png)
 
 [RoboMME comparison: measurement scope and sources](docs/figures/README.md#robomme-performance-latency-and-api-cost).
 
-## Successful held-out episodes
 
-Click a preview to open the MP4. Each video shows the phase,
-end-effector trail, and relevant memory and perceived positions.
-[Video sources and presentation details](docs/media/README.md).
+[More results can be found here →](docs/results.md)
+
+
+## Successful Evaluation Examples
 
 ### RoboMME
 
@@ -126,12 +114,5 @@ python scripts/develop_batch.py start configs/robomme/experiments/demo_only_25.j
   --workers 8 --gpus 0 1
 ```
 
-**Eight concurrent development jobs; five evaluation jobs per GPU.**
-[Batch evaluation, prompts, and reproduction details](docs/reproducing.md) ·
-[Five-episode sanity checks](docs/solutions.md#sanity-checks) ·
-[Live dashboard and experiment galleries](docs/website.md)
-
-[All documentation](docs/README.md) · [Architecture](docs/architecture.md) ·
-[Selected revalidation tasks](docs/validatd_task.md)
 
 Apache-2.0. Benchmark code and assets retain their upstream licenses; see [NOTICE](NOTICE).
