@@ -1,0 +1,41 @@
+{
+  "selection_reason": "All robomemarena tasks using the exact published 25-demo assignment, materialized from the downloaded larger pool during preparation; fresh policies and zero training rollouts.",
+  "benchmarks": {
+    "robomemarena": {
+      "config": "configs/robomemarena/demos_claude_code.json",
+      "datasets": [
+        "public_runs/demos/robomemarena"
+      ],
+      "demo_count": 25,
+      "require_prepared_data": true,
+      "tasks": [
+        "T01_CookiesTomatoBasket",
+        "T02_ButterPopcornBasket",
+        "T03_CreamPuddingBasket",
+        "T04_ButterNonEmptyDrawer",
+        "T05_ButterEmptyDrawer",
+        "T06_PourSauceCookiesTwice",
+        "T07_PourSauceFrypanTwice",
+        "T08_ChocolateFrypanPourSauceTwice",
+        "T09_ButterFrypanPourSauceTwice",
+        "T10_PourWineMugTwice",
+        "T11_CookiesTopButterMiddle",
+        "T12_CookiesChocolateMiddleDrawer",
+        "T13_CookiesButterMiddleDrawer",
+        "T14_CookiesChocolateDrawers",
+        "T15_ButterFrypanPourMilkTwice",
+        "T16_PourMilkMugTwice",
+        "T17_ButterChocolateMiddleDrawer",
+        "T18_ChocolateButterCabinet",
+        "T19_SauceMilkJuiceCabinet",
+        "T20_CookiesChocolateMicrowave",
+        "T21_ButterChocolateMicrowave",
+        "T22_PourSauceCookiesMicrowave",
+        "T23_CreamPopcornMicrowave",
+        "T24_CookiesPopcornMicrowave",
+        "T25_ButterCreamPlate",
+        "T26_ChocolateCreamPlate"
+      ]
+    }
+  }
+}

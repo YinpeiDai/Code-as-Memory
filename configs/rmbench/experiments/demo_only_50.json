@@ -1,0 +1,30 @@
+{
+  "selection_reason": "All rmbench tasks, 50-demonstration setting with actual released shortfalls, fresh policies and zero training rollouts.",
+  "benchmarks": {
+    "rmbench": {
+      "config": "configs/rmbench/demos_claude_code.json",
+      "datasets": [
+        "public_runs/demos/rmbench"
+      ],
+      "demo_count": 50,
+      "require_prepared_data": true,
+      "tasks": [
+        "battery_try",
+        "blocks_ranking_try",
+        "cover_blocks",
+        "observe_and_pickup",
+        "place_block_mat",
+        "press_button",
+        "put_back_block",
+        "rearrange_blocks",
+        "swap_T",
+        "swap_blocks"
+      ],
+      "demo_counts": {
+        "battery_try": 49,
+        "blocks_ranking_try": 49,
+        "observe_and_pickup": 48
+      }
+    }
+  }
+}

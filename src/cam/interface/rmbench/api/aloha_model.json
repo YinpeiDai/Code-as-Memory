@@ -1,0 +1,380 @@
+{
+  "schema": "cam-rmbench-robot-model/1",
+  "robot": "aloha-agilex",
+  "setting": "demo_clean",
+  "world_root_pose_wxyz": [
+    0,
+    -0.65,
+    0.0,
+    0.707,
+    0,
+    0,
+    0.707
+  ],
+  "gripper_bias_m": 0.12,
+  "action_offset_m": 0.12,
+  "delta_matrix": [
+    [
+      1,
+      0,
+      0
+    ],
+    [
+      0,
+      1,
+      0
+    ],
+    [
+      0,
+      0,
+      1
+    ]
+  ],
+  "limit_reference": "Released RMBench URDF; not manufacturer safety limits",
+  "arms": {
+    "left": {
+      "base_link": "fl_base_link",
+      "ee_link": "fl_link6",
+      "frame_bias_m": [
+        -0.2305,
+        -0.297,
+        -0.782
+      ],
+      "planner_yaw_rad": -0.02,
+      "chain": [
+        {
+          "name": "fl_joint1",
+          "type": "revolute",
+          "child_link": "fl_link1",
+          "xyz": [
+            0.0,
+            0.0,
+            0.058
+          ],
+          "rpy": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "axis": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "limits": {
+            "lower": -10.0,
+            "upper": 10.0,
+            "effort": 100.0,
+            "velocity": 1000.0
+          }
+        },
+        {
+          "name": "fl_joint2",
+          "type": "revolute",
+          "child_link": "fl_link2",
+          "xyz": [
+            0.025013,
+            0.00060169,
+            0.042
+          ],
+          "rpy": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "axis": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "limits": {
+            "lower": -10.0,
+            "upper": 10.0,
+            "effort": 100.0,
+            "velocity": 1000.0
+          }
+        },
+        {
+          "name": "fl_joint3",
+          "type": "revolute",
+          "child_link": "fl_link3",
+          "xyz": [
+            -0.26396,
+            0.0044548,
+            0.0
+          ],
+          "rpy": [
+            -3.1416,
+            0.0,
+            -0.015928
+          ],
+          "axis": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "limits": {
+            "lower": -10.0,
+            "upper": 10.0,
+            "effort": 100.0,
+            "velocity": 1000.0
+          }
+        },
+        {
+          "name": "fl_joint4",
+          "type": "revolute",
+          "child_link": "fl_link4",
+          "xyz": [
+            0.246,
+            -0.00025,
+            -0.06
+          ],
+          "rpy": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "axis": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "limits": {
+            "lower": -10.0,
+            "upper": 10.0,
+            "effort": 100.0,
+            "velocity": 1000.0
+          }
+        },
+        {
+          "name": "fl_joint5",
+          "type": "revolute",
+          "child_link": "fl_link5",
+          "xyz": [
+            0.06775,
+            0.0015,
+            -0.0855
+          ],
+          "rpy": [
+            0.0,
+            0.0,
+            -0.015928
+          ],
+          "axis": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "limits": {
+            "lower": -10.0,
+            "upper": 10.0,
+            "effort": 100.0,
+            "velocity": 1000.0
+          }
+        },
+        {
+          "name": "fl_joint6",
+          "type": "revolute",
+          "child_link": "fl_link6",
+          "xyz": [
+            0.03095,
+            0.0,
+            0.0855
+          ],
+          "rpy": [
+            -3.1416,
+            0.0,
+            0.0
+          ],
+          "axis": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "limits": {
+            "lower": -10.0,
+            "upper": 10.0,
+            "effort": 100.0,
+            "velocity": 1000.0
+          }
+        }
+      ]
+    },
+    "right": {
+      "base_link": "fr_base_link",
+      "ee_link": "fr_link6",
+      "frame_bias_m": [
+        -0.2315,
+        0.3063,
+        -0.781
+      ],
+      "planner_yaw_rad": -0.01,
+      "chain": [
+        {
+          "name": "fr_joint1",
+          "type": "revolute",
+          "child_link": "fr_link1",
+          "xyz": [
+            0.0,
+            0.0,
+            0.058
+          ],
+          "rpy": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "axis": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "limits": {
+            "lower": -10.0,
+            "upper": 10.0,
+            "effort": 100.0,
+            "velocity": 1000.0
+          }
+        },
+        {
+          "name": "fr_joint2",
+          "type": "revolute",
+          "child_link": "fr_link2",
+          "xyz": [
+            0.025013,
+            0.00060169,
+            0.042
+          ],
+          "rpy": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "axis": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "limits": {
+            "lower": -10.0,
+            "upper": 10.0,
+            "effort": 100.0,
+            "velocity": 1000.0
+          }
+        },
+        {
+          "name": "fr_joint3",
+          "type": "revolute",
+          "child_link": "fr_link3",
+          "xyz": [
+            -0.26396,
+            0.0044548,
+            0.0
+          ],
+          "rpy": [
+            -3.1416,
+            0.0,
+            -0.015928
+          ],
+          "axis": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "limits": {
+            "lower": -10.0,
+            "upper": 10.0,
+            "effort": 100.0,
+            "velocity": 1000.0
+          }
+        },
+        {
+          "name": "fr_joint4",
+          "type": "revolute",
+          "child_link": "fr_link4",
+          "xyz": [
+            0.246,
+            -0.00025,
+            -0.06
+          ],
+          "rpy": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "axis": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "limits": {
+            "lower": -10.0,
+            "upper": 10.0,
+            "effort": 100.0,
+            "velocity": 1000.0
+          }
+        },
+        {
+          "name": "fr_joint5",
+          "type": "revolute",
+          "child_link": "fr_link5",
+          "xyz": [
+            0.06775,
+            0.0015,
+            -0.0855
+          ],
+          "rpy": [
+            0.0,
+            0.0,
+            -0.015928
+          ],
+          "axis": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "limits": {
+            "lower": -10.0,
+            "upper": 10.0,
+            "effort": 100.0,
+            "velocity": 1000.0
+          }
+        },
+        {
+          "name": "fr_joint6",
+          "type": "revolute",
+          "child_link": "fr_link6",
+          "xyz": [
+            0.03095,
+            0.0,
+            0.0855
+          ],
+          "rpy": [
+            -3.1416,
+            0.0,
+            0.0
+          ],
+          "axis": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "limits": {
+            "lower": -10.0,
+            "upper": 10.0,
+            "effort": 100.0,
+            "velocity": 1000.0
+          }
+        }
+      ]
+    }
+  },
+  "provenance": {
+    "config.yml": "a4f043d2d4b44cca5ec47fb498a3194da3f87ff9530dcbfdcee1539a44423d57",
+    "urdf/arx5_description_isaac.urdf": "65dc70ecd6c673b60b6a4cc79daa3587f2c4aac86409830037f03eb6b1a5e6db",
+    "curobo_left_tmp.yml": "5860346baf83c74da3dfacbc548f3165fe6caba5797fd28da158a618576556c8",
+    "curobo_right_tmp.yml": "bebc418e0bb02cc70a4cb124b9cda6c4c12ce27c5bdbf1b4153654d781fb62f8",
+    "envs/robot/robot.py": "c0a89268d2deb4ce6cae62977a9f5c798deea23ffd75c4a29821b7f8a397776e",
+    "envs/robot/planner.py": "f1012345542483f4cfbac64880a266b7ee0d4a64362d5ec6fd6985ed9c34b564"
+  }
+}

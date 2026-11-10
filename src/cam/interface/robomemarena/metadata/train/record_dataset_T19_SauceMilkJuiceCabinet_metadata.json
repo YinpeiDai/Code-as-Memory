@@ -1,0 +1,511 @@
+{
+  "env_id": "T19_SauceMilkJuiceCabinet",
+  "task_id": 19,
+  "bddl": "bddl/19_tomato_milk_orange_cabinet.bddl",
+  "bddl_sha256": "fe566e81fae94ee8a4705aff83c44dd8444e7ce446a537b4a887e4313bb76e72",
+  "benchmark_commit": "830a31ae7c08fb99f514843275cd264a2bf36f16",
+  "split": "train",
+  "identity": "released demonstrations of RoboMemArenaBenchmark/RoboMemArena@93d765af20efa13f7b5190b0f35319a86f7ab202, ranked by seed",
+  "records": [
+    {
+      "episode": 0,
+      "seed": 100,
+      "difficulty": null
+    },
+    {
+      "episode": 1,
+      "seed": 102,
+      "difficulty": null
+    },
+    {
+      "episode": 2,
+      "seed": 114,
+      "difficulty": null
+    },
+    {
+      "episode": 3,
+      "seed": 116,
+      "difficulty": null
+    },
+    {
+      "episode": 4,
+      "seed": 129,
+      "difficulty": null
+    },
+    {
+      "episode": 5,
+      "seed": 136,
+      "difficulty": null
+    },
+    {
+      "episode": 6,
+      "seed": 159,
+      "difficulty": null
+    },
+    {
+      "episode": 7,
+      "seed": 161,
+      "difficulty": null
+    },
+    {
+      "episode": 8,
+      "seed": 163,
+      "difficulty": null
+    },
+    {
+      "episode": 9,
+      "seed": 169,
+      "difficulty": null
+    },
+    {
+      "episode": 10,
+      "seed": 173,
+      "difficulty": null
+    },
+    {
+      "episode": 11,
+      "seed": 178,
+      "difficulty": null
+    },
+    {
+      "episode": 12,
+      "seed": 183,
+      "difficulty": null
+    },
+    {
+      "episode": 13,
+      "seed": 187,
+      "difficulty": null
+    },
+    {
+      "episode": 14,
+      "seed": 200,
+      "difficulty": null
+    },
+    {
+      "episode": 15,
+      "seed": 202,
+      "difficulty": null
+    },
+    {
+      "episode": 16,
+      "seed": 203,
+      "difficulty": null
+    },
+    {
+      "episode": 17,
+      "seed": 204,
+      "difficulty": null
+    },
+    {
+      "episode": 18,
+      "seed": 210,
+      "difficulty": null
+    },
+    {
+      "episode": 19,
+      "seed": 211,
+      "difficulty": null
+    },
+    {
+      "episode": 20,
+      "seed": 222,
+      "difficulty": null
+    },
+    {
+      "episode": 21,
+      "seed": 237,
+      "difficulty": null
+    },
+    {
+      "episode": 22,
+      "seed": 256,
+      "difficulty": null
+    },
+    {
+      "episode": 23,
+      "seed": 259,
+      "difficulty": null
+    },
+    {
+      "episode": 24,
+      "seed": 268,
+      "difficulty": null
+    },
+    {
+      "episode": 25,
+      "seed": 270,
+      "difficulty": null
+    },
+    {
+      "episode": 26,
+      "seed": 272,
+      "difficulty": null
+    },
+    {
+      "episode": 27,
+      "seed": 273,
+      "difficulty": null
+    },
+    {
+      "episode": 28,
+      "seed": 285,
+      "difficulty": null
+    },
+    {
+      "episode": 29,
+      "seed": 286,
+      "difficulty": null
+    },
+    {
+      "episode": 30,
+      "seed": 298,
+      "difficulty": null
+    },
+    {
+      "episode": 31,
+      "seed": 299,
+      "difficulty": null
+    },
+    {
+      "episode": 32,
+      "seed": 306,
+      "difficulty": null
+    },
+    {
+      "episode": 33,
+      "seed": 314,
+      "difficulty": null
+    },
+    {
+      "episode": 34,
+      "seed": 320,
+      "difficulty": null
+    },
+    {
+      "episode": 35,
+      "seed": 330,
+      "difficulty": null
+    },
+    {
+      "episode": 36,
+      "seed": 331,
+      "difficulty": null
+    },
+    {
+      "episode": 37,
+      "seed": 351,
+      "difficulty": null
+    },
+    {
+      "episode": 38,
+      "seed": 354,
+      "difficulty": null
+    },
+    {
+      "episode": 39,
+      "seed": 359,
+      "difficulty": null
+    },
+    {
+      "episode": 40,
+      "seed": 363,
+      "difficulty": null
+    },
+    {
+      "episode": 41,
+      "seed": 376,
+      "difficulty": null
+    },
+    {
+      "episode": 42,
+      "seed": 379,
+      "difficulty": null
+    },
+    {
+      "episode": 43,
+      "seed": 380,
+      "difficulty": null
+    },
+    {
+      "episode": 44,
+      "seed": 400,
+      "difficulty": null
+    },
+    {
+      "episode": 45,
+      "seed": 412,
+      "difficulty": null
+    },
+    {
+      "episode": 46,
+      "seed": 417,
+      "difficulty": null
+    },
+    {
+      "episode": 47,
+      "seed": 439,
+      "difficulty": null
+    },
+    {
+      "episode": 48,
+      "seed": 441,
+      "difficulty": null
+    },
+    {
+      "episode": 49,
+      "seed": 443,
+      "difficulty": null
+    },
+    {
+      "episode": 50,
+      "seed": 444,
+      "difficulty": null
+    },
+    {
+      "episode": 51,
+      "seed": 445,
+      "difficulty": null
+    },
+    {
+      "episode": 52,
+      "seed": 452,
+      "difficulty": null
+    },
+    {
+      "episode": 53,
+      "seed": 456,
+      "difficulty": null
+    },
+    {
+      "episode": 54,
+      "seed": 464,
+      "difficulty": null
+    },
+    {
+      "episode": 55,
+      "seed": 467,
+      "difficulty": null
+    },
+    {
+      "episode": 56,
+      "seed": 471,
+      "difficulty": null
+    },
+    {
+      "episode": 57,
+      "seed": 479,
+      "difficulty": null
+    },
+    {
+      "episode": 58,
+      "seed": 482,
+      "difficulty": null
+    },
+    {
+      "episode": 59,
+      "seed": 507,
+      "difficulty": null
+    },
+    {
+      "episode": 60,
+      "seed": 513,
+      "difficulty": null
+    },
+    {
+      "episode": 61,
+      "seed": 515,
+      "difficulty": null
+    },
+    {
+      "episode": 62,
+      "seed": 531,
+      "difficulty": null
+    },
+    {
+      "episode": 63,
+      "seed": 540,
+      "difficulty": null
+    },
+    {
+      "episode": 64,
+      "seed": 548,
+      "difficulty": null
+    },
+    {
+      "episode": 65,
+      "seed": 552,
+      "difficulty": null
+    },
+    {
+      "episode": 66,
+      "seed": 555,
+      "difficulty": null
+    },
+    {
+      "episode": 67,
+      "seed": 564,
+      "difficulty": null
+    },
+    {
+      "episode": 68,
+      "seed": 568,
+      "difficulty": null
+    },
+    {
+      "episode": 69,
+      "seed": 585,
+      "difficulty": null
+    },
+    {
+      "episode": 70,
+      "seed": 594,
+      "difficulty": null
+    },
+    {
+      "episode": 71,
+      "seed": 595,
+      "difficulty": null
+    },
+    {
+      "episode": 72,
+      "seed": 605,
+      "difficulty": null
+    },
+    {
+      "episode": 73,
+      "seed": 622,
+      "difficulty": null
+    },
+    {
+      "episode": 74,
+      "seed": 625,
+      "difficulty": null
+    },
+    {
+      "episode": 75,
+      "seed": 632,
+      "difficulty": null
+    },
+    {
+      "episode": 76,
+      "seed": 641,
+      "difficulty": null
+    },
+    {
+      "episode": 77,
+      "seed": 658,
+      "difficulty": null
+    },
+    {
+      "episode": 78,
+      "seed": 674,
+      "difficulty": null
+    },
+    {
+      "episode": 79,
+      "seed": 676,
+      "difficulty": null
+    },
+    {
+      "episode": 80,
+      "seed": 678,
+      "difficulty": null
+    },
+    {
+      "episode": 81,
+      "seed": 691,
+      "difficulty": null
+    },
+    {
+      "episode": 82,
+      "seed": 693,
+      "difficulty": null
+    },
+    {
+      "episode": 83,
+      "seed": 695,
+      "difficulty": null
+    },
+    {
+      "episode": 84,
+      "seed": 698,
+      "difficulty": null
+    },
+    {
+      "episode": 85,
+      "seed": 700,
+      "difficulty": null
+    },
+    {
+      "episode": 86,
+      "seed": 701,
+      "difficulty": null
+    },
+    {
+      "episode": 87,
+      "seed": 702,
+      "difficulty": null
+    },
+    {
+      "episode": 88,
+      "seed": 708,
+      "difficulty": null
+    },
+    {
+      "episode": 89,
+      "seed": 716,
+      "difficulty": null
+    },
+    {
+      "episode": 90,
+      "seed": 739,
+      "difficulty": null
+    },
+    {
+      "episode": 91,
+      "seed": 746,
+      "difficulty": null
+    },
+    {
+      "episode": 92,
+      "seed": 760,
+      "difficulty": null
+    },
+    {
+      "episode": 93,
+      "seed": 775,
+      "difficulty": null
+    },
+    {
+      "episode": 94,
+      "seed": 776,
+      "difficulty": null
+    },
+    {
+      "episode": 95,
+      "seed": 779,
+      "difficulty": null
+    },
+    {
+      "episode": 96,
+      "seed": 788,
+      "difficulty": null
+    },
+    {
+      "episode": 97,
+      "seed": 793,
+      "difficulty": null
+    },
+    {
+      "episode": 98,
+      "seed": 800,
+      "difficulty": null
+    },
+    {
+      "episode": 99,
+      "seed": 813,
+      "difficulty": null
+    }
+  ]
+}

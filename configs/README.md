@@ -1,0 +1,17 @@
+# Reproducible settings and policy metadata
+
+Keep these files with the source: they are required for reproduction.
+
+- `<benchmark>/*_<client>.json`: coding client, learning mode, budgets, and runtime limits.
+- `<benchmark>/experiments/`: portable all-task plans; `--dataset`, `--output`, and `--tasks` select local inputs and storage.
+- `solutions/<benchmark>/`: published policy memory schemas, checksums, interface identities, source provenance, and evaluation settings.
+
+Only final Python programs and setting READMEs belong in `solutions/`.
+Historical imports and catalog hashes remain unchanged. RMBench's
+`*_observed_motion.json` catalogs target the current public interface; original
+catalogs remain provenance for historical scores. Superseded experimental plans
+are archived locally under ignored `legacy/`.
+
+The default coding plans use Claude Code / Opus 5.5. Configure the referenced
+client settings for your own account before development. Both clients share the
+same assigned evidence and isolated tool interface.

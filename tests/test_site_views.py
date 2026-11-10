@@ -229,3 +229,80 @@ def test_reference_videos_use_only_assigned_demo_groups_without_mutation(run_fac
     tile = mosaic(frames, 2)
     assert tile.shape == (8, 12, 3)
     assert [int(tile[y, x, 0]) for y, x in [(0, 0), (0, 6), (4, 0), (4, 6)]] == list(range(4))
+
+
+def test_lazy_rollout_export_does_not_read_observations(run_factory, tmp_path, monkeypatch):
+    from cam.core.budget import Ledger
+    from cam.io import read
+    from cam.reporting import site
+
+    root = run_factory("interaction", 2)
+    task = root / "tasks/BinFill"
+    config = read(task / "state/config.json")
+    ledger = Ledger(config["ledger"])
+    attempt = ledger.reserve(config, config["train_episodes"][0])
+    ledger.update(attempt, steps=3, step_calls=3, status="fail")
+    folder = task / "rollouts/train/R001"
+    _rollout(folder)
+    result = read(folder / "result.json")
+    result.update(attempt=attempt, program_hash=ledger.rows()[0]["program_hash"])
+    write(folder / "result.json", result)
+
+    def forbidden(*args, **kwargs):
+        raise AssertionError("Lazy export must not load rollout observations")
+
+    monkeypatch.setattr(site, "cached_trace", forbidden)
+    monkeypatch.setattr(site, "cached_poster", forbidden)
+    output = tmp_path / "site"
+    site.build_site([root], [], output, lazy_rollouts=True)
+    rollout = read(output / "data.json")["runs"][0]["development"][0]["rollouts"][0]
+    assert rollout["trace"].startswith("rollout-trace/")
+    assert rollout["poster"].startswith("rollout-poster/")
+    assert read(output / ".sources.json")["lazy_rollouts"] is True
+    sources = read(output / ".rollout_sources.json")
+    assert len(sources) == 1 and next(iter(sources.values()))["folder"] == str(folder)
+
+
+def test_lazy_rollout_server_builds_registered_assets_only(tmp_path, monkeypatch):
+    import threading
+    from urllib.error import HTTPError
+    from urllib.request import urlopen
+    import pytest
+    from cam.reporting import site
+
+    folder = tmp_path / "episode"
+    _rollout(folder)
+    output = tmp_path / "site"
+    write(output / ".rollout_sources.json", {
+        "registered": {"folder": str(folder), "interface": {"video": ["front_rgb", "wrist_rgb"]}}
+    })
+    servers, threads = [], []
+    original = site.ThreadingHTTPServer
+
+    def launch(*args, **kwargs):
+        server = original(*args, **kwargs)
+        thread = threading.Thread(target=server.serve_forever, daemon=True)
+        thread.start()
+        server.serve_forever = lambda: None
+        servers.append(server)
+        threads.append(thread)
+        return server
+
+    monkeypatch.setattr(site, "ThreadingHTTPServer", launch)
+    try:
+        site.serve(output, port=0)
+        address = f"http://127.0.0.1:{servers[0].server_port}"
+        with urlopen(address + "/rollout-trace/registered.json", timeout=5) as response:
+            assert json.load(response)["frames"] == 4
+        with urlopen(address + "/rollout-poster/registered.jpg", timeout=5) as response:
+            assert response.headers["Content-Type"] == "image/jpeg"
+            assert response.read().startswith(b"\xff\xd8")
+        with pytest.raises(HTTPError) as error:
+            urlopen(address + "/rollout-trace/unregistered.json", timeout=5)
+        assert error.value.code == 404
+    finally:
+        for server in servers:
+            server.shutdown()
+            server.server_close()
+        for thread in threads:
+            thread.join(timeout=5)

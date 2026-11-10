@@ -4,10 +4,10 @@ import argparse
 import os
 from pathlib import Path
 
-from cam.benchmarks.registry import get_adapter
+from cam.interface.registry import get_adapter
 from cam.config import RunConfig
 from cam.core.history import materialize
-from cam.benchmarks.robomme_data import scalar
+from cam.interface.robomme.data import scalar
 from cam.harness.broker import execute
 from cam.harness.prepare import make_runtime, STARTER
 from cam.io import write

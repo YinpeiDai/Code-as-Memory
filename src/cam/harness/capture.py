@@ -88,3 +88,16 @@ class Capture:
     def close(self):
         self.video.close()
         self.h5.close()
+
+
+class ResultsCapture:
+    """Count observations without writing images, videos or arrays."""
+
+    def __init__(self):
+        self.n = 0
+
+    def append(self, frames):
+        self.n += len(frames)
+
+    def close(self):
+        pass

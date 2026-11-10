@@ -7,7 +7,7 @@ import h5py
 import numpy as np
 import pytest
 
-from cam.benchmarks.base import EpisodeStart, StepResult, action, check_frames, sensor
+from cam.interface.base import EpisodeStart, StepResult, action, check_frames, sensor
 from cam.config import RunConfig
 from cam.data import demonstrations
 from cam.io import read, sha256, write
@@ -39,7 +39,7 @@ class ToyEnv:
 class Toy:
     name = "toy"
     package = "toy"
-    guide = "robomme.md"
+    guide = "robomme/guide.md"
     describe_interface = True
 
     def __init__(self, source=None, leak=False):
@@ -94,7 +94,7 @@ class Toy:
 
 @pytest.fixture
 def toy(tmp_path, monkeypatch):
-    from cam.benchmarks import registry
+    from cam.interface import registry as registry
     from cam.harness import prepare
 
     source = tmp_path / "toy_source"
@@ -110,7 +110,7 @@ def toy(tmp_path, monkeypatch):
 
 
 def make_dataset(root, adapter, length=4):
-    from cam.benchmarks.base import source_hash
+    from cam.interface.base import source_hash
 
     declared = demonstrations.declaration(
         {
@@ -266,6 +266,29 @@ def test_broker_generic_actions_metrics_and_leak(tmp_path):
     assert read(tmp_path / "train/private_native_metrics.json") == {"progress": 1.0}
     leaked = execute(Toy(leak=True), tmp_path, TASK, 0, "test", program, runtime, tmp_path / "leak", config)
     assert leaked["status"] == "harness_error" and not leaked["scorable"]
+
+
+@pytest.mark.isolation
+def test_results_recording_preserves_execution_without_large_artifacts(tmp_path):
+    from cam.harness.broker import execute
+    from cam.harness.prepare import make_runtime
+
+    runtime = make_runtime(tmp_path / "runtime")
+    program = policy_program(tmp_path / "program")
+    config = {"depth": False, "builtin_demo": True, "max_decisions": 5,
+              "max_action_steps": 50, "policy_timeout": 120}
+    full_adapter, light_adapter = Toy(), Toy()
+    full = execute(full_adapter, tmp_path, TASK, 0, "test", program, runtime, tmp_path / "full", config)
+    light = execute(light_adapter, tmp_path, TASK, 0, "test", program, runtime,
+                    tmp_path / "light", {**config, "recording": "results"})
+    for key in ("status", "success", "scorable", "steps", "step_calls", "decisions", "native_metrics", "program_hash"):
+        assert full[key] == light[key]
+    assert full_adapter.sent == light_adapter.sent
+    assert light["observation_frames"] == full["video_frames"] == 4
+    assert light["video_frames"] == 0
+    assert not any(p.suffix in (".h5", ".mp4", ".npy", ".strace") for p in (tmp_path / "light").iterdir())
+    assert (tmp_path / "light/result.json").is_file()
+    assert (tmp_path / "light/decisions.jsonl").is_file()
 
 
 @pytest.mark.isolation
@@ -464,3 +487,30 @@ def test_disjoint_schedule_rejects_shortage_and_filters_seed_aliases(tmp_path, t
     monkeypatch.setattr(adapter, "records", lambda task, split: alias_rows if split == "train" else TEST)
     selected = training_schedule(adapter, TASK, demos, replace(config, budget=3, training_seed_count=3))
     assert {r["seed"] for r in selected}.isdisjoint(r["seed"] for r in demos + TEST)
+
+
+def test_explicit_subset_copies_only_recorded_episode_seed_pairs(tmp_path, toy, monkeypatch):
+    from cam.data import subset as module
+    adapter, _ = toy
+    source = make_dataset(tmp_path / 'pool', adapter)
+    original = read(source / 'manifest.json')
+    rows = original['tasks'][TASK]['episodes']
+    selection = {'schema': 'cam-demo-selection/1', 'benchmark': 'toy', 'count': 2,
+                 'tasks': {TASK: [{k: r[k] for k in ('episode', 'seed')} for r in rows[-2:]]}}
+    path = tmp_path / 'selected_25.json'
+    write(path, selection)
+    real_validate = module.validate_dataset
+    def validate_new_only(root, **kwargs):
+        assert Path(root) != source
+        return real_validate(root, **kwargs)
+    monkeypatch.setattr(module, 'validate_dataset', validate_new_only)
+    output = tmp_path / 'assigned'
+    result = module.subset(source, output, count=2, selection=path, validate_source=False)
+    assert result['tasks'][TASK]['episodes'] == rows[-2:]
+    with h5py.File(output / original['tasks'][TASK]['file']) as h:
+        assert set(h) == {f"episode_{r['episode']}" for r in rows[-2:]}
+    assert sha256(source / original['tasks'][TASK]['file']) == original['tasks'][TASK]['sha256']
+    selection['tasks'][TASK][0]['seed'] += 999
+    write(path, selection)
+    with pytest.raises(ValueError, match='episode/seed'):
+        module.subset(source, tmp_path / 'bad', 2, selection=path, validate_source=False)

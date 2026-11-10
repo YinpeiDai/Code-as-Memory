@@ -59,7 +59,7 @@ FIRST_FRAME = """
 import sys, hashlib, json, os
 sys.path.insert(0, {harness!r})
 from pathlib import Path
-from cam.benchmarks.rmbench import RMBench
+from cam.interface.rmbench.adapter import RMBench
 a = RMBench({source!r})
 env = a.make_environment(Path({metadata!r}), {task!r}, {episode}, {split!r}, False)
 frame = a.begin(env, builtin_demo=False, depth=False).frames[0]
@@ -137,7 +137,7 @@ def main():
     import imageio.v2 as imageio
     import numpy as np
 
-    from cam.benchmarks.rmbench import RMBench
+    from cam.interface.rmbench.adapter import RMBench
     from cam.config import RunConfig
     from cam.core.history import materialize
     from cam.harness.broker import execute

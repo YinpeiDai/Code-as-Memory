@@ -1,0 +1,1022 @@
+{
+  "schema": "cam-solutions/1",
+  "benchmark": "robomme",
+  "experiment": "demo_only_25",
+  "description": "Unmodified final Python code from the historical 25-demo 795/800 run.",
+  "benchmark_source_sha256": "751073afd779521887cd469325808f6fa2db3bd95f3b70d932354e95c009e47e",
+  "evaluation_config": {
+    "benchmark": "robomme",
+    "mode": "demos",
+    "budget": 0,
+    "training_seed_count": null,
+    "training_seed_policy": "demo_cycle",
+    "depth": true,
+    "builtin_demo": true,
+    "perceptual_variations": false,
+    "max_decisions": 40,
+    "max_action_steps": 1500,
+    "policy_timeout": 1800,
+    "both_protocol": null,
+    "physics_backend": null
+  },
+  "source_coding": {
+    "agent": "claude_code",
+    "model": "us.anthropic.claude-opus-5-5",
+    "provider": "bedrock"
+  },
+  "archived_result": {
+    "expected": 800,
+    "scored": 800,
+    "successes": 795,
+    "success_rate": 0.99375
+  },
+  "compatibility_note": "Current CaM import is a fresh evaluation; the archived 99.4% was scored by the original runner.",
+  "tasks": {
+    "BinFill": {
+      "task_spec": {
+        "task": "BinFill",
+        "runtime": "python",
+        "memory": [
+          {
+            "name": "remaining",
+            "type": "list",
+            "description": "cube colours still to be put into the bin (one entry per cube)"
+          },
+          {
+            "name": "placed",
+            "type": "list",
+            "description": "colours of cubes released into the bin so far"
+          },
+          {
+            "name": "bin",
+            "type": "position",
+            "description": "bin centre [x, y] from the first front frame"
+          },
+          {
+            "name": "button",
+            "type": "position",
+            "description": "button centre [x, y] from the first front frame"
+          },
+          {
+            "name": "failures",
+            "type": "count",
+            "description": "failed grasp attempts"
+          },
+          {
+            "name": "avoid",
+            "type": "positions",
+            "description": "recent failed grasp positions to skip"
+          },
+          {
+            "name": "status",
+            "type": "label",
+            "description": "last decision"
+          }
+        ]
+      },
+      "code_sha256": {
+        "policy.py": "3a5a14ab3bc031435263a9266e8496adf8709e847c7678738149a1aee1149f81"
+      },
+      "source_run_tag": "regular_demo_v2_restart_20261105_040321",
+      "source_program_hash": "b6d0a94ac2c3c007ddb006630260446a261ca7a992702f9357117aa32c41a34d",
+      "source_harness_sha256": "d57cbdb0162b59cd60c74328b20cd61de1915d4606a3a2756717ebacf438d815",
+      "source_development": "dev_logs/robomme/demo_only_25/BinFill",
+      "source_evaluation": "eval/robomme/demo_only_25/BinFill",
+      "assigned_demos": 25,
+      "training_attempts": 0,
+      "source_checkpoint": 0,
+      "test_records_sha256": "a93cc8f43e62ef45041f383c7cd20e5d5bb96ff9d5478125f75fd630231f5424",
+      "interface_sha256": "81dd0f004c1e19e487d078cc3c43e60ca7eea64dc34ef79e4f364095d7616b3f",
+      "archived_result": {
+        "expected": 50,
+        "scored": 50,
+        "successes": 50
+      }
+    },
+    "ButtonUnmask": {
+      "task_spec": {
+        "task": "ButtonUnmask",
+        "runtime": "python",
+        "memory": [
+          {
+            "name": "stage",
+            "type": "label",
+            "description": "press or pick"
+          },
+          {
+            "name": "targets",
+            "type": "list",
+            "description": "goal cube colours in pick order"
+          },
+          {
+            "name": "cube_red",
+            "type": "position",
+            "description": "world xy of red cube seen before containers dropped"
+          },
+          {
+            "name": "cube_green",
+            "type": "position",
+            "description": "world xy of green cube"
+          },
+          {
+            "name": "cube_blue",
+            "type": "position",
+            "description": "world xy of blue cube"
+          },
+          {
+            "name": "button",
+            "type": "position",
+            "description": "world xy of button base centre"
+          },
+          {
+            "name": "next_index",
+            "type": "count",
+            "description": "index of next target to pick"
+          },
+          {
+            "name": "retries",
+            "type": "count",
+            "description": "failed grasp attempts on current target"
+          },
+          {
+            "name": "notes",
+            "type": "text",
+            "description": "diagnostics"
+          }
+        ]
+      },
+      "code_sha256": {
+        "policy.py": "eff1511c5cf4a2f233bc9c5c8afd8965d1dc1176f74843ae4f7fa1121992393f"
+      },
+      "source_run_tag": "regular_demo_v2_restart_20261105_040321",
+      "source_program_hash": "ca3e2b50346d8ebade5d91d8b3878a375fbf478c99bf9f0a351009b6ddc68cce",
+      "source_harness_sha256": "d57cbdb0162b59cd60c74328b20cd61de1915d4606a3a2756717ebacf438d815",
+      "source_development": "dev_logs/robomme/demo_only_25/ButtonUnmask",
+      "source_evaluation": "eval/robomme/demo_only_25/ButtonUnmask",
+      "assigned_demos": 25,
+      "training_attempts": 0,
+      "source_checkpoint": 0,
+      "test_records_sha256": "07f4f8ec598b44c33726075ebb6e81c76ed20b58499a8c70c3a87cc90e927412",
+      "interface_sha256": "81dd0f004c1e19e487d078cc3c43e60ca7eea64dc34ef79e4f364095d7616b3f",
+      "archived_result": {
+        "expected": 50,
+        "scored": 50,
+        "successes": 50
+      }
+    },
+    "ButtonUnmaskSwap": {
+      "task_spec": {
+        "task": "ButtonUnmaskSwap",
+        "runtime": "python",
+        "memory": [
+          {
+            "name": "stage",
+            "type": "label",
+            "description": "start | press | wait | pick | picked | placed | done"
+          },
+          {
+            "name": "targets",
+            "type": "list",
+            "description": "goal cube colours in pick order"
+          },
+          {
+            "name": "target_index",
+            "type": "count",
+            "description": "index of the goal colour being picked"
+          },
+          {
+            "name": "cube_colors",
+            "type": "list",
+            "description": "cube colours seen before covering"
+          },
+          {
+            "name": "cube_positions",
+            "type": "positions",
+            "description": "world XY of those cubes"
+          },
+          {
+            "name": "containers",
+            "type": "positions",
+            "description": "tracked world XY of each container (visible-face centroid)"
+          },
+          {
+            "name": "container_labels",
+            "type": "list",
+            "description": "colour hidden under each container, or none"
+          },
+          {
+            "name": "buttons",
+            "type": "positions",
+            "description": "press XY of the buttons, +y first"
+          },
+          {
+            "name": "button_index",
+            "type": "count",
+            "description": "buttons already commanded"
+          },
+          {
+            "name": "frames_seen",
+            "type": "count",
+            "description": "execution frames processed"
+          },
+          {
+            "name": "static_frames",
+            "type": "count",
+            "description": "consecutive frames without container motion"
+          },
+          {
+            "name": "pick_attempts",
+            "type": "count",
+            "description": "failed grasps of the current target"
+          },
+          {
+            "name": "last_pick",
+            "type": "position",
+            "description": "[x, y, yaw] of the last commanded grasp"
+          },
+          {
+            "name": "tracking",
+            "type": "boolean",
+            "description": "whether container tracking is still active"
+          }
+        ]
+      },
+      "code_sha256": {
+        "motion.py": "58c52ebeb7721c53a1fa4202dad4420bcab6fa07b68bed939e28de53a9427ba2",
+        "policy.py": "694ac3f197742dbebe6ef555a53e21607d43f1a43377875de71f01fbbf1d90e9",
+        "vision.py": "cad378ee9fe9e318531c90baf7aaa9dbbaa555bf468c0b2e955b8499ef930586"
+      },
+      "source_run_tag": "regular_demo_v2_restart_20261105_040321",
+      "source_program_hash": "2ded25e5e1b9b8b7faea82b02369f24d6c31f94595731ea7b0605b0c5f03c666",
+      "source_harness_sha256": "d57cbdb0162b59cd60c74328b20cd61de1915d4606a3a2756717ebacf438d815",
+      "source_development": "dev_logs/robomme/demo_only_25/ButtonUnmaskSwap",
+      "source_evaluation": "eval/robomme/demo_only_25/ButtonUnmaskSwap",
+      "assigned_demos": 25,
+      "training_attempts": 0,
+      "source_checkpoint": 0,
+      "test_records_sha256": "91a2edda2e0ac8fef55a8f9766296236ae232b379125b759fd06e091764185e1",
+      "interface_sha256": "81dd0f004c1e19e487d078cc3c43e60ca7eea64dc34ef79e4f364095d7616b3f",
+      "archived_result": {
+        "expected": 50,
+        "scored": 50,
+        "successes": 50
+      }
+    },
+    "InsertPeg": {
+      "task_spec": {
+        "task": "InsertPeg",
+        "runtime": "python",
+        "memory": [
+          {
+            "name": "ref",
+            "type": "positions",
+            "description": "per-step demonstrated TCP reference rows [x,y,z,roll,pitch,yaw,closed]"
+          },
+          {
+            "name": "close_index",
+            "type": "count",
+            "description": "reference index where the demo gripper closes"
+          },
+          {
+            "name": "source",
+            "type": "label",
+            "description": "pose source used: tcp or wrist (extrinsic hand-eye)"
+          },
+          {
+            "name": "stage",
+            "type": "label",
+            "description": "follow, push, hold or no_demo"
+          }
+        ]
+      },
+      "code_sha256": {
+        "policy.py": "afc32c6ca85644aebdd1a1952226dbecd2de26da93a673474b4fa2b5bbcfad9e"
+      },
+      "source_run_tag": "regular_demo_v2_restart_20261105_040321",
+      "source_program_hash": "0c92b4bb6e9e330aca6b2a4d5a905a3b54c71398a2d9ac1166dd2e2abdfe362e",
+      "source_harness_sha256": "d57cbdb0162b59cd60c74328b20cd61de1915d4606a3a2756717ebacf438d815",
+      "source_development": "dev_logs/robomme/demo_only_25/InsertPeg",
+      "source_evaluation": "eval/robomme/demo_only_25/InsertPeg",
+      "assigned_demos": 25,
+      "training_attempts": 0,
+      "source_checkpoint": 0,
+      "test_records_sha256": "c4d9b355ec5f65d4febc9075bb75e4a1976428160be7fde6ed2e8b079fcc223d",
+      "interface_sha256": "81dd0f004c1e19e487d078cc3c43e60ca7eea64dc34ef79e4f364095d7616b3f",
+      "archived_result": {
+        "expected": 50,
+        "scored": 50,
+        "successes": 50
+      }
+    },
+    "MoveCube": {
+      "task_spec": {
+        "task": "MoveCube",
+        "runtime": "python",
+        "memory": [
+          {
+            "name": "manner",
+            "type": "label",
+            "description": "demonstrated manner: pick, push or peg"
+          },
+          {
+            "name": "evidence",
+            "type": "text",
+            "description": "why the manner was chosen"
+          },
+          {
+            "name": "attempts",
+            "type": "count",
+            "description": "number of manipulation attempts launched"
+          },
+          {
+            "name": "last_plan",
+            "type": "text",
+            "description": "last planned waypoint parameters"
+          },
+          {
+            "name": "target_xy",
+            "type": "position",
+            "description": "target centre [x, y] from the first unoccluded execution frame"
+          },
+          {
+            "name": "waited",
+            "type": "boolean",
+            "description": "already waited once after an attempt ended near the target"
+          }
+        ]
+      },
+      "code_sha256": {
+        "policy.py": "81eed8fc6339a4a620410fe6a4b224c494bdfea56824910cf9115a05a7c0021c"
+      },
+      "source_run_tag": "regular_demo_v2_restart_20261105_040321",
+      "source_program_hash": "beb3a184595733f2c2c2e2aae4214acd2cd211062086b4353f7617a5250761fe",
+      "source_harness_sha256": "d57cbdb0162b59cd60c74328b20cd61de1915d4606a3a2756717ebacf438d815",
+      "source_development": "dev_logs/robomme/demo_only_25/MoveCube",
+      "source_evaluation": "eval/robomme/demo_only_25/MoveCube",
+      "assigned_demos": 25,
+      "training_attempts": 0,
+      "source_checkpoint": 0,
+      "test_records_sha256": "4bfead6eb5d8d3d8cd801b90a859cff805c3cd57df017f4c9e23f2997b717224",
+      "interface_sha256": "81dd0f004c1e19e487d078cc3c43e60ca7eea64dc34ef79e4f364095d7616b3f",
+      "archived_result": {
+        "expected": 50,
+        "scored": 50,
+        "successes": 50
+      }
+    },
+    "PatternLock": {
+      "task_spec": {
+        "task": "PatternLock",
+        "runtime": "python",
+        "memory": [
+          {
+            "name": "plan",
+            "type": "positions",
+            "description": "Ordered [x,y] lattice nodes of the demonstrated pattern (start node first)."
+          },
+          {
+            "name": "vision_plan",
+            "type": "positions",
+            "description": "Same sequence measured from red button highlights in the front camera (diagnostic/fallback)."
+          },
+          {
+            "name": "traced",
+            "type": "boolean",
+            "description": "True once act_trace_pattern has been issued."
+          },
+          {
+            "name": "decisions",
+            "type": "count",
+            "description": "Number of decisions made this episode."
+          }
+        ]
+      },
+      "code_sha256": {
+        "policy.py": "680cfeddfffd7f6a99e428de3416abf701a6c52d985f5eea68a238fb67d1a143"
+      },
+      "source_run_tag": "regular_demo_v2_restart_20261105_040321",
+      "source_program_hash": "61b061845b0d7bd027a4c71126ad0120dff2ee3f86da18ce118bd3ca75761bbb",
+      "source_harness_sha256": "d57cbdb0162b59cd60c74328b20cd61de1915d4606a3a2756717ebacf438d815",
+      "source_development": "dev_logs/robomme/demo_only_25/PatternLock",
+      "source_evaluation": "eval/robomme/demo_only_25/PatternLock",
+      "assigned_demos": 25,
+      "training_attempts": 0,
+      "source_checkpoint": 0,
+      "test_records_sha256": "3ba2d342d1abc7eb8bc58e3259fd4c337ccadee6a6576a521585299fa30dd147",
+      "interface_sha256": "649342dbf8ba329f290c87f494d50ecdf2e1d9b4259b9aae04192a3d2dce4715",
+      "archived_result": {
+        "expected": 50,
+        "scored": 50,
+        "successes": 50
+      }
+    },
+    "PickHighlight": {
+      "task_spec": {
+        "task": "PickHighlight",
+        "runtime": "python",
+        "memory": [
+          {
+            "name": "stage",
+            "type": "label",
+            "description": "start | observe | pressing | pick | finished"
+          },
+          {
+            "name": "targets",
+            "type": "positions",
+            "description": "world positions of highlighted cubes (perceived centres)"
+          },
+          {
+            "name": "target_colors",
+            "type": "list",
+            "description": "colour label of each target cube"
+          },
+          {
+            "name": "done",
+            "type": "count",
+            "description": "number of targets handled"
+          },
+          {
+            "name": "tries",
+            "type": "count",
+            "description": "failed grasp attempts on current target"
+          },
+          {
+            "name": "observe_count",
+            "type": "count",
+            "description": "observation holds performed"
+          },
+          {
+            "name": "button",
+            "type": "position",
+            "description": "perceived button disc centre"
+          },
+          {
+            "name": "pressed",
+            "type": "boolean",
+            "description": "button press executed"
+          }
+        ]
+      },
+      "code_sha256": {
+        "motion.py": "ad70676843b5ff8091ce792d414fb3028b203b4ec1425940a186dbb92741b712",
+        "perception.py": "674fef3fd1891cd938e940d3b33c13ec48f6bd4215f9be384d98e6b50e8c1ae7",
+        "policy.py": "8d0cb5c61af44092de412a4caa7b786ce3d73bfbdb33ebe38fcc6558d40e9815"
+      },
+      "source_run_tag": "regular_demo_v2_restart_20261105_040321",
+      "source_program_hash": "4fd98cbfe1f2a3961f501b0110dfe0964db617ed26bda96d479de20b9c7c54b9",
+      "source_harness_sha256": "d57cbdb0162b59cd60c74328b20cd61de1915d4606a3a2756717ebacf438d815",
+      "source_development": "dev_logs/robomme/demo_only_25/PickHighlight",
+      "source_evaluation": "eval/robomme/demo_only_25/PickHighlight",
+      "assigned_demos": 25,
+      "training_attempts": 0,
+      "source_checkpoint": 0,
+      "test_records_sha256": "c7f070821af6472ad024ccd71bc31db8c5b37373d60ba4bb231765a421748825",
+      "interface_sha256": "81dd0f004c1e19e487d078cc3c43e60ca7eea64dc34ef79e4f364095d7616b3f",
+      "archived_result": {
+        "expected": 50,
+        "scored": 50,
+        "successes": 50
+      }
+    },
+    "PickXtimes": {
+      "task_spec": {
+        "task": "PickXtimes",
+        "runtime": "python",
+        "memory": [
+          {
+            "name": "stage",
+            "type": "label",
+            "description": "start | picking | placing | pressing | observing (last issued action)"
+          },
+          {
+            "name": "placed",
+            "type": "count",
+            "description": "completed pick-and-place cycles"
+          },
+          {
+            "name": "fails",
+            "type": "count",
+            "description": "failed grasps / repeated presses"
+          },
+          {
+            "name": "n_required",
+            "type": "count",
+            "description": "repetitions parsed from goal"
+          },
+          {
+            "name": "target",
+            "type": "position",
+            "description": "perceived target centre (world xy)"
+          },
+          {
+            "name": "button",
+            "type": "position",
+            "description": "perceived button centre (world xy)"
+          },
+          {
+            "name": "last_cube",
+            "type": "position",
+            "description": "last perceived goal-colour cube top centre"
+          },
+          {
+            "name": "grasp_yaw",
+            "type": "number",
+            "description": "gripper yaw used for the current grasp"
+          }
+        ]
+      },
+      "code_sha256": {
+        "policy.py": "2f6ecc64658bf4f753c3b8e9eadce7b025a0639c71444f68f71ef8f80b461481"
+      },
+      "source_run_tag": "regular_demo_v2_restart_20261105_040321",
+      "source_program_hash": "14e2654c03da556738f0aa84cc69dc94a61185e3025572ab0aec9bea3221e2c7",
+      "source_harness_sha256": "d57cbdb0162b59cd60c74328b20cd61de1915d4606a3a2756717ebacf438d815",
+      "source_development": "dev_logs/robomme/demo_only_25/PickXtimes",
+      "source_evaluation": "eval/robomme/demo_only_25/PickXtimes",
+      "assigned_demos": 25,
+      "training_attempts": 0,
+      "source_checkpoint": 0,
+      "test_records_sha256": "eeb1023d7a281ef661f302cc604105216871d187db64d724e001aa7476764850",
+      "interface_sha256": "81dd0f004c1e19e487d078cc3c43e60ca7eea64dc34ef79e4f364095d7616b3f",
+      "archived_result": {
+        "expected": 50,
+        "scored": 50,
+        "successes": 50
+      }
+    },
+    "RouteStick": {
+      "task_spec": {
+        "task": "RouteStick",
+        "runtime": "python",
+        "memory": [
+          {
+            "name": "route",
+            "type": "positions",
+            "description": "Demonstrated TCP route from the instruction video, resampled at 4 mm"
+          },
+          {
+            "name": "source",
+            "type": "label",
+            "description": "Which signal produced the route: tcp, wrist_extrinsic, front_depth or none"
+          },
+          {
+            "name": "progress",
+            "type": "count",
+            "description": "Index into route reached so far"
+          },
+          {
+            "name": "follow_calls",
+            "type": "count",
+            "description": "Number of route-following act calls issued"
+          },
+          {
+            "name": "done",
+            "type": "boolean",
+            "description": "Route completed (or abandoned); hold afterwards"
+          }
+        ]
+      },
+      "code_sha256": {
+        "policy.py": "45110cbb3d376cddc60d4eccdc5edb291f4ece3dc9e683fbf7c9f2e22e0aeed0"
+      },
+      "source_run_tag": "regular_demo_v2_restart_20261105_040321",
+      "source_program_hash": "04957fa2feb9ea2429e0e6d6ddf89ea6b1a8e4de96feca77d00af8af75454964",
+      "source_harness_sha256": "d57cbdb0162b59cd60c74328b20cd61de1915d4606a3a2756717ebacf438d815",
+      "source_development": "dev_logs/robomme/demo_only_25/RouteStick",
+      "source_evaluation": "eval/robomme/demo_only_25/RouteStick",
+      "assigned_demos": 25,
+      "training_attempts": 0,
+      "source_checkpoint": 0,
+      "test_records_sha256": "4062e5fc593ae405f2ef5dfecd444e99b022ac6578cacb09b080525f8d6a157f",
+      "interface_sha256": "649342dbf8ba329f290c87f494d50ecdf2e1d9b4259b9aae04192a3d2dce4715",
+      "archived_result": {
+        "expected": 50,
+        "scored": 50,
+        "successes": 50
+      }
+    },
+    "StopCube": {
+      "task_spec": {
+        "task": "StopCube",
+        "runtime": "python",
+        "memory": [
+          {
+            "name": "count",
+            "type": "count",
+            "description": "N parsed from the goal: press when the cube reaches the target for the N-th time"
+          },
+          {
+            "name": "pressed",
+            "type": "boolean",
+            "description": "true once act_stop_cube has been issued; later decisions only hold"
+          }
+        ]
+      },
+      "code_sha256": {
+        "policy.py": "6cd35bd4a2a7bd315ed3205b4c4655035d95f5a040b06636e09431f0697ba1c9",
+        "vision.py": "f3feb82cd1098dd1cbb6fe15c810173832a27f85bac81e78dca8f651cd0e1cc6"
+      },
+      "source_run_tag": "regular_demo_v2_restart_20261105_040321",
+      "source_program_hash": "e0ee7b1bd6e37d7ece25acbc292c429180e7fc8358b82de69f23e4225daf0663",
+      "source_harness_sha256": "d57cbdb0162b59cd60c74328b20cd61de1915d4606a3a2756717ebacf438d815",
+      "source_development": "dev_logs/robomme/demo_only_25/StopCube",
+      "source_evaluation": "eval/robomme/demo_only_25/StopCube",
+      "assigned_demos": 25,
+      "training_attempts": 0,
+      "source_checkpoint": 0,
+      "test_records_sha256": "218ea261bf98aae7adf2874f6d9a10f9cf46d11e9198aba71bad3ad1e9d7c8d0",
+      "interface_sha256": "81dd0f004c1e19e487d078cc3c43e60ca7eea64dc34ef79e4f364095d7616b3f",
+      "archived_result": {
+        "expected": 50,
+        "scored": 50,
+        "successes": 47
+      }
+    },
+    "SwingXtimes": {
+      "task_spec": {
+        "task": "SwingXtimes",
+        "runtime": "python",
+        "memory": [
+          {
+            "name": "stage",
+            "type": "label",
+            "description": "scan/refine/grasped/swing/press/done"
+          },
+          {
+            "name": "color",
+            "type": "label",
+            "description": "goal cube colour"
+          },
+          {
+            "name": "count",
+            "type": "count",
+            "description": "number of right-left back-and-forth cycles"
+          },
+          {
+            "name": "cube",
+            "type": "position",
+            "description": "cube centre xy (world m)"
+          },
+          {
+            "name": "cube_yaw",
+            "type": "number",
+            "description": "grasp yaw (rad)"
+          },
+          {
+            "name": "target_r",
+            "type": "position",
+            "description": "right-side (-y) target xy"
+          },
+          {
+            "name": "target_l",
+            "type": "position",
+            "description": "left-side (+y) target xy"
+          },
+          {
+            "name": "button",
+            "type": "position",
+            "description": "button cap xy"
+          },
+          {
+            "name": "legs",
+            "type": "count",
+            "description": "target visits completed while holding"
+          },
+          {
+            "name": "tries",
+            "type": "count",
+            "description": "recovery attempts used"
+          },
+          {
+            "name": "home",
+            "type": "position",
+            "description": "initial TCP xyz used as viewing pose"
+          },
+          {
+            "name": "note",
+            "type": "text",
+            "description": "last diagnostic"
+          }
+        ]
+      },
+      "code_sha256": {
+        "decide.py": "a3bb62d81134634104ebf1877bcdde7f9e43e1b562a3b8261e7246c021aa4e5a",
+        "motion.py": "24e1fa8c70b5a03f79723afad3d0cb42fd5fb59fed403cb2315aa0580b77fb1c",
+        "perception.py": "44219d2dec504b19002ea736eb86f63fbf1b0f75e298bef35754a9cc77b9ad92"
+      },
+      "source_run_tag": "regular_demo_v2_restart_20261105_040321",
+      "source_program_hash": "2358e0600d716a37515a83ce19104641b12ff24da96b115f8661a590af83f6f5",
+      "source_harness_sha256": "d57cbdb0162b59cd60c74328b20cd61de1915d4606a3a2756717ebacf438d815",
+      "source_development": "dev_logs/robomme/demo_only_25/SwingXtimes",
+      "source_evaluation": "eval/robomme/demo_only_25/SwingXtimes",
+      "assigned_demos": 25,
+      "training_attempts": 0,
+      "source_checkpoint": 0,
+      "test_records_sha256": "84f237d5acb3fd35f7dd0575da7c1b1b4c3d7a2de9d2cc5f116b5afa6aebdddb",
+      "interface_sha256": "81dd0f004c1e19e487d078cc3c43e60ca7eea64dc34ef79e4f364095d7616b3f",
+      "archived_result": {
+        "expected": 50,
+        "scored": 50,
+        "successes": 50
+      }
+    },
+    "VideoPlaceButton": {
+      "task_spec": {
+        "task": "VideoPlaceButton",
+        "runtime": "python",
+        "memory": [
+          {
+            "name": "target",
+            "type": "position",
+            "description": "World [x, y] of the goal target after following any target swaps in the video"
+          },
+          {
+            "name": "analysed",
+            "type": "boolean",
+            "description": "Instruction video already analysed"
+          },
+          {
+            "name": "attempts",
+            "type": "count",
+            "description": "Pick-and-place attempts made"
+          },
+          {
+            "name": "stage",
+            "type": "label",
+            "description": "place or done"
+          },
+          {
+            "name": "info",
+            "type": "text",
+            "description": "Video-analysis diagnostics"
+          },
+          {
+            "name": "color",
+            "type": "label",
+            "description": "Goal cube colour"
+          }
+        ]
+      },
+      "code_sha256": {
+        "control.py": "8f66e7dae5b8d11a390105c8fc54f5ee0597195a066986c37c443837f017ac6e",
+        "decide.py": "64a5ca7be48cd4d0629eff7eb7d986f07f02b55b64778f59cfd4f44255d5945b",
+        "demo.py": "e8f788783fe12ddaed79acea12bc19ea113a9d27a2d2d13b52408f5239200609",
+        "perception.py": "0fe900f46674fa90550f2270ef7247d4be8976e3c9bf2ec3219d87efd572d798"
+      },
+      "source_run_tag": "regular_demo_v2_restart_20261105_040321",
+      "source_program_hash": "0cc1b9d195190983029a8647a3743dc7d2c14ae3707ee5bdd90d338d6c01654c",
+      "source_harness_sha256": "d57cbdb0162b59cd60c74328b20cd61de1915d4606a3a2756717ebacf438d815",
+      "source_development": "dev_logs/robomme/demo_only_25/VideoPlaceButton",
+      "source_evaluation": "eval/robomme/demo_only_25/VideoPlaceButton",
+      "assigned_demos": 25,
+      "training_attempts": 0,
+      "source_checkpoint": 0,
+      "test_records_sha256": "1a2880a2a0af7fdb3755194f3fbccf5feb46127562055a36f9780ec72790357e",
+      "interface_sha256": "81dd0f004c1e19e487d078cc3c43e60ca7eea64dc34ef79e4f364095d7616b3f",
+      "archived_result": {
+        "expected": 50,
+        "scored": 50,
+        "successes": 50
+      }
+    },
+    "VideoPlaceOrder": {
+      "task_spec": {
+        "task": "VideoPlaceOrder",
+        "runtime": "python",
+        "memory": [
+          {
+            "name": "stage",
+            "type": "label",
+            "description": "analyse | pick | place | done"
+          },
+          {
+            "name": "color",
+            "type": "label",
+            "description": "goal cube colour parsed from the goal"
+          },
+          {
+            "name": "order",
+            "type": "list",
+            "description": "target ids visited by the cube in the video, in order"
+          },
+          {
+            "name": "target_pos",
+            "type": "position",
+            "description": "world XY of the chosen target after tracking swaps"
+          },
+          {
+            "name": "cube_pos",
+            "type": "position",
+            "description": "last estimated goal cube centre"
+          },
+          {
+            "name": "attempts",
+            "type": "count",
+            "description": "pick attempts so far"
+          },
+          {
+            "name": "notes",
+            "type": "text",
+            "description": "video analysis summary"
+          }
+        ]
+      },
+      "code_sha256": {
+        "policy.py": "167e076df8831007dab086f16a87f73ae298ffea6695ff7ccf8375ac6eea9f9c"
+      },
+      "source_run_tag": "regular_demo_v2_restart_20261105_040321",
+      "source_program_hash": "10ab16734de194fd2d0070572170006811aa5d0ea61ff9f1996c3d21fdefd9ba",
+      "source_harness_sha256": "d57cbdb0162b59cd60c74328b20cd61de1915d4606a3a2756717ebacf438d815",
+      "source_development": "dev_logs/robomme/demo_only_25/VideoPlaceOrder",
+      "source_evaluation": "eval/robomme/demo_only_25/VideoPlaceOrder",
+      "assigned_demos": 25,
+      "training_attempts": 0,
+      "source_checkpoint": 0,
+      "test_records_sha256": "d20e2d4f47f713f213161a56f4c33459463bd700259561be84fb4af9d2a1fbb1",
+      "interface_sha256": "81dd0f004c1e19e487d078cc3c43e60ca7eea64dc34ef79e4f364095d7616b3f",
+      "archived_result": {
+        "expected": 50,
+        "scored": 50,
+        "successes": 48
+      }
+    },
+    "VideoRepick": {
+      "task_spec": {
+        "task": "VideoRepick",
+        "runtime": "python",
+        "memory": [
+          {
+            "name": "stage",
+            "type": "label",
+            "description": "repick or press"
+          },
+          {
+            "name": "target",
+            "type": "position",
+            "description": "world [x, y] of the tracked cube-top centre"
+          },
+          {
+            "name": "color",
+            "type": "label",
+            "description": "target cube colour index 0 red, 1 green, 2 blue, or none"
+          },
+          {
+            "name": "button",
+            "type": "position",
+            "description": "world [x, y] of the button, or null"
+          },
+          {
+            "name": "count",
+            "type": "count",
+            "description": "required number of pick-and-put-down repetitions parsed from the goal"
+          },
+          {
+            "name": "done",
+            "type": "count",
+            "description": "successful repetitions so far"
+          },
+          {
+            "name": "attempts",
+            "type": "count",
+            "description": "repick attempts so far"
+          },
+          {
+            "name": "yaw",
+            "type": "number",
+            "description": "target cube yaw estimate (rad)"
+          },
+          {
+            "name": "notes",
+            "type": "text",
+            "description": "diagnostics from demo tracking"
+          }
+        ]
+      },
+      "code_sha256": {
+        "policy.py": "c79c8c50ba6e2ead893f0aa3f62b80cc38d4a99f4c26cc758e174e98b7ec8444"
+      },
+      "source_run_tag": "regular_demo_v2_restart_20261105_040321",
+      "source_program_hash": "259c4d45dae7a38d03a29e30bfff8796f423e25278e8d8fb178bdcf412445465",
+      "source_harness_sha256": "d57cbdb0162b59cd60c74328b20cd61de1915d4606a3a2756717ebacf438d815",
+      "source_development": "dev_logs/robomme/demo_only_25/VideoRepick",
+      "source_evaluation": "eval/robomme/demo_only_25/VideoRepick",
+      "assigned_demos": 25,
+      "training_attempts": 0,
+      "source_checkpoint": 0,
+      "test_records_sha256": "04c2569bbe6a6d086f6aba2c31f3e0089425c0e52780bf24b5eb25d30ee7526b",
+      "interface_sha256": "81dd0f004c1e19e487d078cc3c43e60ca7eea64dc34ef79e4f364095d7616b3f",
+      "archived_result": {
+        "expected": 50,
+        "scored": 50,
+        "successes": 50
+      }
+    },
+    "VideoUnmask": {
+      "task_spec": {
+        "task": "VideoUnmask",
+        "runtime": "python",
+        "memory": [
+          {
+            "name": "colors",
+            "type": "list",
+            "description": "goal cube colours in pick order"
+          },
+          {
+            "name": "targets",
+            "type": "positions",
+            "description": "container [x, y, z_top] per goal colour, from video cube position + first exec frame"
+          },
+          {
+            "name": "yaws",
+            "type": "text",
+            "description": "comma-separated grasp yaw (rad) per target"
+          },
+          {
+            "name": "stage",
+            "type": "count",
+            "description": "index of the next target to pick"
+          },
+          {
+            "name": "attempts",
+            "type": "count",
+            "description": "failed grasp attempts on the current target"
+          },
+          {
+            "name": "status",
+            "type": "label",
+            "description": "planned / picking / done"
+          }
+        ]
+      },
+      "code_sha256": {
+        "policy.py": "ef5bcadda871e038adaf2c93430120b9acdf9cd1a459fadf47dcb06f3e2b01e0"
+      },
+      "source_run_tag": "regular_demo_v2_restart_20261105_040321",
+      "source_program_hash": "4cec7516e7dce85a902175411d42291d550450b8de41ff04cde383e7994b8d4e",
+      "source_harness_sha256": "d57cbdb0162b59cd60c74328b20cd61de1915d4606a3a2756717ebacf438d815",
+      "source_development": "dev_logs/robomme/demo_only_25/VideoUnmask",
+      "source_evaluation": "eval/robomme/demo_only_25/VideoUnmask",
+      "assigned_demos": 25,
+      "training_attempts": 0,
+      "source_checkpoint": 0,
+      "test_records_sha256": "7578364de1617493af660fb36239c0ab0904de4852c2f3341d822bb321bf38a8",
+      "interface_sha256": "81dd0f004c1e19e487d078cc3c43e60ca7eea64dc34ef79e4f364095d7616b3f",
+      "archived_result": {
+        "expected": 50,
+        "scored": 50,
+        "successes": 50
+      }
+    },
+    "VideoUnmaskSwap": {
+      "task_spec": {
+        "task": "VideoUnmaskSwap",
+        "runtime": "python",
+        "memory": [
+          {
+            "name": "targets",
+            "type": "positions",
+            "description": "[x, y, yaw] world target containers in goal order, from video tracking"
+          },
+          {
+            "name": "next_index",
+            "type": "count",
+            "description": "index of the next target to pick"
+          },
+          {
+            "name": "attempts",
+            "type": "count",
+            "description": "failed grasp attempts on the current target"
+          },
+          {
+            "name": "pending",
+            "type": "label",
+            "description": "last action kind issued"
+          },
+          {
+            "name": "note",
+            "type": "text",
+            "description": "perception diagnostics"
+          }
+        ]
+      },
+      "code_sha256": {
+        "policy.py": "756bd2aaf52a23e0fdac380430eaa68a92a7448731e7da4b1602be3c029250f3"
+      },
+      "source_run_tag": "regular_demo_v2_restart_20261105_040321",
+      "source_program_hash": "2d477f4e01c3d8f2faeca7fa8535f28cb3669b03955469ab910e33d8382f5974",
+      "source_harness_sha256": "d57cbdb0162b59cd60c74328b20cd61de1915d4606a3a2756717ebacf438d815",
+      "source_development": "dev_logs/robomme/demo_only_25/VideoUnmaskSwap",
+      "source_evaluation": "eval/robomme/demo_only_25/VideoUnmaskSwap",
+      "assigned_demos": 25,
+      "training_attempts": 0,
+      "source_checkpoint": 0,
+      "test_records_sha256": "683088f28b31444fc542eb70f52414f4c04ac3c220a050fdb00e5d647a6e930a",
+      "interface_sha256": "81dd0f004c1e19e487d078cc3c43e60ca7eea64dc34ef79e4f364095d7616b3f",
+      "archived_result": {
+        "expected": 50,
+        "scored": 50,
+        "successes": 50
+      }
+    }
+  }
+}

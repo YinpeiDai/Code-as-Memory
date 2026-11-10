@@ -31,10 +31,10 @@ def locked(path):
         yield
 
 
-def preflight(root):
+def preflight(root, full_data=False):
     """Stream a long synthetic reset for every distinct declared task interface."""
     root = Path(root)
-    plan = validate_run(root, full_data=True)
+    plan = validate_run(root, full_data=full_data)
     path = root / "preflight.json"
     interfaces = plan.get("interfaces") or {None: None}
     key = json.dumps(sorted(interfaces.items(), key=lambda item: str(item[0])), sort_keys=True)
@@ -257,8 +257,10 @@ def run_queue(root, name, jobs, slots, worker, resume=False):
             pending.put(job)
 
         def save():
+            from cam.reporting.progress import write_progress
             state["updated"] = time.time()
             write(folder / "status.json", state)
+            write_progress(folder, name.capitalize(), state)
 
         save()
 
@@ -314,14 +316,14 @@ def subprocess_job(root, argv, log, gpu, timeout, python=None):
             raise
 
 
-def learn(root, gpus=(0, 1), workers_per_gpu=1, tasks=None, resume=False):
+def learn(root, gpus=(0, 1), workers_per_gpu=None, tasks=None, resume=False, *, workers=8):
     root = Path(root).resolve()
     plan = validate_run(root)
     preflight(root)
     tasks = tasks or plan["tasks"]
     if set(tasks) - set(plan["tasks"]) or len(set(tasks)) != len(tasks):
         raise ValueError("Unassigned or duplicate tasks")
-    slots = gpu_slots(gpus, workers_per_gpu)
+    slots = gpu_slots(gpus, workers_per_gpu) if workers_per_gpu is not None else development_slots(gpus, workers)
     jobs = [
         (task,)
         for task in tasks
@@ -358,8 +360,15 @@ def gpu_slots(gpus, workers_per_gpu):
     return [gpu for gpu in gpus for _ in range(workers_per_gpu)]
 
 
+def development_slots(gpus, workers=8):
+    gpu_slots(gpus, 1)
+    if workers < 1:
+        raise ValueError("Choose a positive total number of development workers")
+    return [gpus[index % len(gpus)] for index in range(workers)]
+
+
 def evaluate(
-    root, budgets=None, gpus=(0, 1), workers_per_gpu=8, tasks=None, resume=False
+    root, budgets=None, gpus=(0, 1), workers_per_gpu=5, tasks=None, resume=False
 ):
     root = Path(root).resolve()
     plan = validate_run(root)

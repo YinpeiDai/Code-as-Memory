@@ -1,0 +1,39 @@
+[project]
+name = "cam-env-robomemarena"
+version = "0.1.0"
+description = "Pinned simulator environment for the CaM RoboMemArena adapter (LIBERO fork, MuJoCo/EGL)"
+requires-python = "==3.10.*"
+# Versions follow third_party/robomemarena/baselines/astra_codex/requirements.txt
+# and the fork's robosuite 1.4 API; CaM's broker additionally needs h5py and imageio-ffmpeg.
+dependencies = [
+  "numpy==1.26.4",
+  "scipy==1.15.3",
+  "Pillow==11.2.1",
+  "opencv-python==4.11.0.86",
+  "mujoco==3.3.7",
+  "robosuite==1.4.0",
+  "bddl==1.0.1",
+  "gym==0.25.2",
+  "easydict==1.13",
+  "PyYAML==6.0.2",
+  "matplotlib==3.9.2",
+  "imageio==2.34.2",
+  "imageio-ffmpeg==0.5.1",
+  "tqdm==4.67.1",
+  "cloudpickle==3.1.1",
+  "h5py==3.12.1",
+  "termcolor==2.5.0",
+  "future==1.0.0",
+  "torch==2.4.1",
+]
+
+[tool.uv]
+package = false
+
+[tool.uv.sources]
+torch = { index = "pytorch-cpu" }
+
+[[tool.uv.index]]
+name = "pytorch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
+explicit = true

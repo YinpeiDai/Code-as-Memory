@@ -12,7 +12,7 @@ const Studio = {
     if (view) params.set("view", view);
     return "?" + params + "#development";
   },
-  bench: (name) => ({ mikasa_robo: "MIKASA-Robo", mikasa_robo_v2: "MIKASA-Robo v2", rmbench: "RMBench", robomemarena: "RoboMemArena", robomme: "RoboMME" })[name] || name,
+  bench: (name) => ({ mikasa_robo: "MIKASA-Robo", mikasa_robo_v2: "MIKASA-Robo", rmbench: "RMBench", robomemarena: "RoboMemArena", robomme: "RoboMME" })[name] || name,
   short: (name) => name.replace(/-VLA-v\d+$/, ""),
   benchmarkLabel(row) {
     const backend = row.run?.config.physics_backend;
@@ -84,7 +84,7 @@ const Studio = {
     const videos = this.rows.reduce((n, r) => n + (r.task?.rollouts.filter((a) => a.video).length || 0), 0);
     const testVideos = this.rows.reduce((n, r) => n + this.evaluations(r).filter((e) => e.video).length, 0);
     document.getElementById("studio-summary").innerHTML = [
-      [this.rows.length, "tasks"], [frozen, "policies frozen"], [active, "developing"], [videos, "training videos"], [testVideos, "evaluation videos"],
+      [this.rows.length, "task runs"], [frozen, "policies frozen"], [active, "developing"], [videos, "training videos"], [testVideos, "evaluation videos"],
     ].map(([n, label]) => `<div><b>${n}</b><span>${label}</span></div>`).join("") +
       '<p><span class="status-dot"></span>Training development <span class="muted">· refreshes automatically</span></p>';
     Demos.library(this.rows);
@@ -127,11 +127,11 @@ const Studio = {
     const row = this.current();
     if (!row) { document.getElementById("studio-task-header").innerHTML = ""; return; }
     const selected = row.task?.rollouts.find((a) => a.attempt === this.attempt);
-    const hasCode = Object.keys(selected?.policy_files || {}).length;
+    const hasCode = Object.keys(selected?.policy_files || {}).length || !!row.task?.frozen;
     const evaluations = this.evaluations(row);
     document.title = `${this.short(row.name)} · ${this.demoView ? "Reference demos" : this.query.get("view") === "log" ? "Agent log" : this.query.get("view") === "code" ? "Code" : "R" + (this.attempt ?? "—")} · CaM`;
     document.getElementById("studio-task-header").innerHTML = `<div class="studio-task-title"><a class="back-link" href="./#development">← Rollout library</a><div class="eyebrow">${X.esc(this.benchmarkLabel(row))} <span> / ${X.esc(this.demoView ? "Reference demonstrations" : this.status(row))}</span></div><h2 title="${X.esc(row.name)}">${X.esc(this.short(row.name))}</h2><p>${row.task ? this.demoView ? `${row.task.reference_demos?.length || 0} assigned training demonstrations · reference behavior` : `${row.task.demonstrations} offline demos · ${row.task.attempts.length}/${row.run.config.budget} interactions` : "Demonstrations are being prepared for this task."}</p></div>
-      <div class="studio-actions">${evaluations.length ? `<a class="button evaluation-link" href="${X.esc(this.evaluationUrl(row))}" target="_blank" rel="noopener">Evaluation (${evaluations.length} episodes) ↗</a>` : ""}${this.demoView ? `<a class="button" href="${X.esc(this.url(row))}" target="_blank" rel="noopener">Policy rollouts ↗</a>` : `<button class="reference-link" data-studio-action="demos"${row.task?.reference_demos?.length ? "" : " disabled"}>Reference demos (${row.task?.reference_demos?.length || 0}) ↗</button><button data-studio-action="log"${row.task ? "" : " disabled"}>Agent log</button><button data-studio-action="code"${hasCode ? "" : " disabled"}>Executed code${selected ? ` · R${selected.attempt}` : ""}</button><button data-studio-action="expand"${selected?.video ? "" : " disabled"} aria-label="Expand video player">⛶ Expand</button>`}</div>`;
+      <div class="studio-actions">${evaluations.length ? `<a class="button evaluation-link" href="${X.esc(this.evaluationUrl(row))}" target="_blank" rel="noopener">Evaluation (${evaluations.length} episodes) ↗</a>` : ""}${this.demoView ? `<a class="button" href="${X.esc(this.url(row))}" target="_blank" rel="noopener">Policy rollouts ↗</a>` : `<button class="reference-link" data-studio-action="demos"${row.task?.reference_demos?.length ? "" : " disabled"}>Reference demos (${row.task?.reference_demos?.length || 0}) ↗</button><button data-studio-action="log"${row.task ? "" : " disabled"}>Agent log</button><button data-studio-action="code"${hasCode ? "" : " disabled"}>${selected ? "Executed code" : "Frozen policy"}${selected ? ` · R${selected.attempt}` : ""}</button><button data-studio-action="expand"${selected?.video ? "" : " disabled"} aria-label="Expand video player">⛶ Expand</button>`}</div>`;
   },
   renderWorkspace(reset) {
     const row = this.current(), attempts = row?.task?.rollouts || [];

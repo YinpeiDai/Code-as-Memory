@@ -1,0 +1,16 @@
+[project]
+name = "cam-env-robomme"
+version = "0.1.0"
+description = "Pinned RoboMME simulator, separate from the Robot Memory harness"
+requires-python = ">=3.11,<3.12"
+dependencies = [
+  "robomme", "numpy>=1.26,<2", "scipy>=1.11", "h5py>=3.10",
+  "Pillow>=10", "imageio[ffmpeg]>=2.34", "opencv-python>=4.11,<4.12",
+]
+
+[tool.uv]
+package = false
+
+[tool.uv.sources]
+robomme = {path = "../../third_party/robomme_benchmark"}
+mani-skill = {git = "https://github.com/YinpeiDai/ManiSkill.git", rev = "07be6fbc66350ddca200abfb0a11b692f078f7fd"}

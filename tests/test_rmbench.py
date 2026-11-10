@@ -1,17 +1,13 @@
-"""Offline RMBench adapter and extraction checks (no simulator, no GPU)."""
+"""Public RMBench adapter checks (no simulator, no downloaded demos)."""
 
-import hashlib
-import importlib.util
 import json
 from pathlib import Path
-import zipfile
 
-import h5py
 import numpy as np
 import pytest
 
-from cam.benchmarks import rmbench, rmbench_data
-from cam.benchmarks.base import check_frames, normalize_action, source_hash
+from cam.interface.rmbench import adapter as rmbench
+from cam.interface.base import check_frames, normalize_action, source_hash
 from cam.prompts import describe_interface
 
 SOURCE = Path(__file__).resolve().parents[1] / "third_party/rmbench"
@@ -97,13 +93,6 @@ def test_frames_are_allowlisted_rebuilds():
     assert not any("depth" in key or "third_view" in key or "pointcloud" in key for key in frame)
 
 
-def test_demo_extrinsics_match_live_definition():
-    obs = native_obs(1)
-    for camera in obs["observation"].values():
-        derived = rmbench_data.extrinsic(camera["cam2world_gl"][None])[0]
-        assert np.abs(derived - camera["extrinsic_cv"]).max() < 1e-5
-
-
 def test_opt_in_depth_units_invalid_values_and_alignment():
     obs = native_obs()
     for camera in obs["observation"].values():
@@ -146,144 +135,6 @@ def test_pinned_metadata_has_no_train_test_overlap():
             assert value["provenance"]["task_config"] == "demo_clean"
 
 
-def encoder():
-    spec = importlib.util.spec_from_file_location("decoder", SOURCE / "data/decode_image_bit.py")
-    module = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(module)
-    return module.images_encoding
-
-
-def write_episode(path, length, goal, rng):
-    encode = encoder()
-    with h5py.File(path, "w") as h5:
-        string = h5py.string_dtype(encoding="utf-8")
-        h5.create_dataset("data_format_version", data="v1.0", dtype=string)
-        h5.create_dataset("instructions", data=json.dumps([goal]), dtype=string)
-        h5.create_group("additional_info").create_dataset("frequency", data=np.int32(15))
-        for arm in ("left", "right"):
-            for key, width in (("arm_joint_states", 6), ("ee_joint_states", 1), ("ee_poses", 7)):
-                values = rng.normal(size=(length + 1, width)).astype(np.float32)
-                h5.create_dataset(f"state/{arm}_{key}", data=values[:-1])
-                h5.create_dataset(f"action/{arm}_{key}", data=values[1:])
-        images = {}
-        for name, (_, group) in rmbench.CAMERAS.items():
-            # Smooth images so JPEG loss is small and a channel swap is detectable.
-            base = np.zeros((length, 240, 320, 3), np.uint8)
-            base[..., 0] = 200
-            base[..., 1] = 60 + 20 * np.arange(length)[:, None, None]
-            base[..., 2] = 20
-            images[name] = base
-            bits, width = encode(base)
-            vision = h5.create_group(f"vision/{group}")
-            vision.create_dataset("colors", data=bits, dtype=f"S{width}")
-            vision.create_dataset("shape", data=np.array([240, 320, 3], np.int32))
-            vision.create_dataset(
-                "intrinsic_matrix", data=np.repeat(np.eye(3, dtype=np.float32)[None], length, 0)
-            )
-            gl = pose(rng.normal(size=3), [0, 1, -0.4], [-1, 0, 0]).astype(np.float32)
-            vision.create_dataset("extrinsics_matrix", data=np.repeat(gl[None], length, 0))
-        return images
-
-
-def raw_release(tmp_path, seeds, lengths):
-    goal = adapter().goal(TASK)
-    rng = np.random.default_rng(0)
-    raw = tmp_path / "raw"
-    directory = raw / "demo_clean" / TASK / "aloha_agilex"
-    (directory / "data").mkdir(parents=True)
-    (directory / "seed.txt").write_text("".join(f"{s} " for s in seeds))
-    images = {}
-    for i, length in enumerate(lengths):
-        images[i] = write_episode(directory / "data" / f"episode_{i:07d}.hdf5", length, goal, rng)
-    archive = raw / "hf/data" / TASK / "demo_clean.zip"
-    archive.parent.mkdir(parents=True)
-    with zipfile.ZipFile(archive, "w") as z:
-        z.write(directory / "seed.txt", f"{TASK}/aloha_agilex/seed.txt")
-        for i in range(len(seeds)):
-            name = f"episode_{i:07d}.hdf5"
-            z.write(directory / "data" / name, f"{TASK}/aloha_agilex/data/{name}")
-    digest = hashlib.sha256(archive.read_bytes()).hexdigest()
-    return raw, digest, images
-
-
-def pin(tmp_path, monkeypatch, seeds, digest, test_seeds):
-    metadata = tmp_path / "metadata"
-    (metadata / "train").mkdir(parents=True, exist_ok=True)
-    (metadata / "test").mkdir(exist_ok=True)
-    (metadata / "train" / f"record_dataset_{TASK}_metadata.json").write_text(
-        json.dumps(
-            {
-                "records": [{"episode": i, "seed": s} for i, s in enumerate(seeds)],
-                "provenance": {"repo": "TianxingChen/RMBench", "revision": "test", "zip_sha256": digest},
-            }
-        )
-    )
-    (metadata / "test" / f"record_dataset_{TASK}_metadata.json").write_text(
-        json.dumps({"records": [{"episode": i, "seed": s} for i, s in enumerate(test_seeds)]})
-    )
-    monkeypatch.setattr(rmbench, "METADATA", metadata)
-
-
-def test_synthetic_release_extracts_and_validates(tmp_path, monkeypatch):
-    seeds = [3, 1, 7, 146]
-    raw, digest, images = raw_release(tmp_path, seeds, [5, 4, 6, 3])
-    pin(tmp_path, monkeypatch, seeds, digest, [100000 + i for i in range(100)])
-    out = tmp_path / "out"
-    manifest = rmbench_data.extract(
-        raw, out, "rmbench", 2, [TASK], False, True, 1, SOURCE
-    )
-    assert manifest["benchmark_hash"] == source_hash(adapter())
-    item = manifest["tasks"][TASK]
-    chosen = [row["episode"] for row in item["episodes"]]
-    assert len(chosen) == 2 and chosen == sorted(chosen)
-    assert all(row["seed"] == seeds[row["episode"]] for row in item["episodes"])
-    assert (out / item["episodes"][0]["video"]).stat().st_size > 0
-    rmbench_data.validate_dataset(out)
-    with h5py.File(out / item["file"], "r") as h5:
-        group = h5[f"episode_{chosen[0]}"]
-        assert set(group) == set(manifest["fields"]["frame"])
-        rgb = group["head_rgb"][:]
-        original = images[chosen[0]]["head"]
-        assert np.abs(rgb.astype(int) - original).mean() < 3  # JPEG at source, RGB order kept
-        assert np.abs(rgb[..., ::-1].astype(int) - original).mean() > 50
-        assert group["left_gripper"].shape == (len(rgb),)
-        assert not group["is_demo"][:].any()
-    manifest_path = out / "manifest.json"
-    tampered = json.loads(manifest_path.read_text())
-    tampered["tasks"][TASK]["episodes"][0]["seed"] = 100000
-    manifest_path.write_text(json.dumps(tampered))
-    with pytest.raises(ValueError):
-        rmbench_data.validate_dataset(out)
-
-
-def test_extraction_rejects_changed_raw_or_overlap(tmp_path, monkeypatch):
-    seeds = [3, 1, 7]
-    raw, digest, _ = raw_release(tmp_path, seeds, [3, 3, 3])
-    pin(tmp_path, monkeypatch, seeds, "0" * 64, [100000])
-    with pytest.raises(ValueError, match="sha256"):
-        rmbench_data.extract(raw, tmp_path / "a", "rmbench", 2, [TASK], False, False, 1, SOURCE)
-    pin(tmp_path, monkeypatch, seeds, digest, [7])
-    with pytest.raises(ValueError, match="overlap"):
-        rmbench_data.extract(raw, tmp_path / "b", "rmbench", 2, [TASK], False, False, 1, SOURCE)
-    pin(tmp_path, monkeypatch, seeds, digest, [100000])
-    path = raw / "demo_clean" / TASK / "aloha_agilex/data/episode_0000001.hdf5"
-    with h5py.File(path, "a") as h5:
-        h5["state/left_ee_poses"][0, 0] += 1.0  # same size, different bytes
-    with pytest.raises(ValueError, match="CRC|differs"):
-        rmbench_data.extract(raw, tmp_path / "c", "rmbench", "all", [TASK], False, False, 1, SOURCE)
-
-
-def test_repeated_extraction_is_byte_identical(tmp_path, monkeypatch):
-    seeds = [3, 1, 7, 146]
-    raw, digest, _ = raw_release(tmp_path, seeds, [3, 4, 3, 2])
-    pin(tmp_path, monkeypatch, seeds, digest, [100000])
-    hashes = [
-        rmbench_data.extract(raw, tmp_path / name, "rmbench", 2, [TASK], False, False, 1, SOURCE)["tasks"][TASK]["sha256"]
-        for name in ("pilot", "full")
-    ]
-    assert hashes[0] == hashes[1]
-
-
 def test_changed_seed_rejected_before_native_import(tmp_path, monkeypatch):
     a = adapter()
     records = a.records(TASK, "train")
@@ -293,3 +144,47 @@ def test_changed_seed_rejected_before_native_import(tmp_path, monkeypatch):
     monkeypatch.setattr(a, "import_native", lambda task: pytest.fail("simulator imported before seed validation"))
     with pytest.raises(ValueError, match="seed disagrees"):
         a.make_environment(tmp_path, TASK, records[0]["episode"], "train", False)
+
+
+def test_published_rgbd_configs_prepare_from_manifest_without_reading_h5(tmp_path, monkeypatch):
+    from cam.harness import prepare
+    from cam.io import read, write
+
+    a = adapter()
+    demo = tmp_path / "h5/demo.h5"
+    demo.parent.mkdir()
+    # Deliberately not HDF5: preparation must trust the published manifest and
+    # leave content inspection to the learner, rather than regenerate or audit.
+    demo.write_bytes(b"synthetic placeholder, not a demonstration dataset")
+    write(tmp_path / "manifest.json", {
+        "schema": "cam-dataset/1", "benchmark": "rmbench", "depth": True,
+        "benchmark_hash": source_hash(a), "raw_data": None,
+        "tasks": {TASK: {"file": "h5/demo.h5", "sha256": "0" * 64,
+                         "episodes": a.records(TASK, "train")[:3]}},
+    })
+    original_open = Path.open
+
+    def no_h5_open(path, *args, **kwargs):
+        if path.suffix == ".h5":
+            raise AssertionError("Preparation must not open or hash demonstration H5s")
+        return original_open(path, *args, **kwargs)
+
+    def no_validation(*args, **kwargs):
+        raise AssertionError("Published demonstrations do not need revalidation")
+
+    monkeypatch.setattr(Path, "open", no_h5_open)
+    monkeypatch.setattr(prepare, "validate_dataset", no_validation)
+    for name in ("demos_claude_code.json", "demos_codex.json"):
+        config = read(SOURCE.parents[1] / "configs/rmbench" / name)
+        _, cfg, tasks, _, selected = prepare.preparation_inputs(tmp_path, config)
+        assert cfg.depth and cfg.mode == "demos" and cfg.budget == 0
+        assert tasks == [TASK] and selected["tasks"][TASK]["sha256"] == "0" * 64
+
+
+def test_raw_extraction_directs_users_to_published_data_without_creating_output(tmp_path):
+    from cam.data.extract import extract
+
+    output = tmp_path / "unused"
+    with pytest.raises(NotImplementedError, match="published RGB-D dataset"):
+        extract(tmp_path / "missing_raw", output, benchmark="rmbench")
+    assert not output.exists()

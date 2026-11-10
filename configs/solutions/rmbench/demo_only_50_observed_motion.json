@@ -1,0 +1,773 @@
+{
+  "schema": "cam-solutions/1",
+  "benchmark": "rmbench",
+  "experiment": "demo_only_50_observed_motion",
+  "benchmark_source_sha256": "01a2b42f86e6308a3bc847c6225c1b8c049111510158443c6d50721a1a39bb45",
+  "description": "Unchanged published final policies under observation-derived MotionError. A fresh evaluation is required; historical scores are not results of this interface.",
+  "source_coding": {
+    "agent": "claude_code",
+    "model": "us.anthropic.claude-opus-5-5"
+  },
+  "tasks": {
+    "battery_try": {
+      "task_spec": {
+        "task": "battery_try",
+        "runtime": "python",
+        "memory": [
+          {
+            "name": "phase",
+            "type": "label",
+            "description": "init | grasped | placed_left | search | solved"
+          },
+          {
+            "name": "home_left",
+            "type": "list",
+            "description": "left arm home ee pose (7 numbers) captured at reset"
+          },
+          {
+            "name": "home_right",
+            "type": "list",
+            "description": "right arm home ee pose (7 numbers) captured at reset"
+          },
+          {
+            "name": "flips",
+            "type": "count",
+            "description": "number of single-battery flips executed so far"
+          },
+          {
+            "name": "next_arm",
+            "type": "label",
+            "description": "arm whose battery is flipped next (Gray-code order left,right,left,...)"
+          },
+          {
+            "name": "repairs",
+            "type": "count",
+            "description": "re-pick attempts for a battery missing from the slot"
+          },
+          {
+            "name": "needle",
+            "type": "label",
+            "description": "last head-camera needle reading: idle | rotated | unknown"
+          },
+          {
+            "name": "note",
+            "type": "text",
+            "description": "summary of the last decision"
+          }
+        ]
+      },
+      "code_sha256": {
+        "policy.py": "10d957f503cbac2484995bb7a134c59720027fd5c47b94e17fc12d0558b71293"
+      },
+      "source_run_tag": "20261108T032001_064494Z",
+      "source_program_hash": "a1da65b5c9347b6c858e768a3d7bf0072221a68b4c7142cd3f3761b47381f102",
+      "source_harness_sha256": "dbaa3bc9a8f283b991bbeb290c236c6d11cd6468ab9f80d1aef5625b5e986463",
+      "assigned_demos": 49,
+      "training_attempts": 0,
+      "test_records_sha256": "d7c7a1b7f9fbffd0cc2f602f52551601e123b306884fb10424f22575966a9e0d",
+      "interface_sha256": "4f69b0b6d255e6418f07bb369b012b757085d359e3daab712e59c3a4672165f4",
+      "source_interface_sha256": "5424604638394ea66ba5e139062fdaa4f19aa950af583c9d6e03c99089c58884"
+    },
+    "blocks_ranking_try": {
+      "task_spec": {
+        "task": "blocks_ranking_try",
+        "runtime": "python",
+        "memory": [
+          {
+            "name": "stage",
+            "type": "label",
+            "description": "start | press | swap | verify: next step of the press/swap cycle"
+          },
+          {
+            "name": "swaps_done",
+            "type": "count",
+            "description": "completed swaps (index into SWAP_CYCLE)"
+          },
+          {
+            "name": "presses",
+            "type": "count",
+            "description": "button presses commanded so far"
+          },
+          {
+            "name": "retries",
+            "type": "count",
+            "description": "repair attempts for the current arrangement"
+          },
+          {
+            "name": "slots",
+            "type": "positions",
+            "description": "three slot grasp xy positions measured at reset (left to right)"
+          },
+          {
+            "name": "button",
+            "type": "position",
+            "description": "button centre xy and top z measured at reset"
+          },
+          {
+            "name": "top_z",
+            "type": "number",
+            "description": "cube top height measured at reset"
+          },
+          {
+            "name": "ref_colors",
+            "type": "positions",
+            "description": "mean RGB of the cube initially in each slot (colour index = initial slot)"
+          },
+          {
+            "name": "order",
+            "type": "list",
+            "description": "order[slot] = colour index expected in that slot after the last commanded arrangement"
+          },
+          {
+            "name": "park_pose",
+            "type": "list",
+            "description": "right arm reset pose (x,y,z,qw,qx,qy,qz) used as an unoccluding park"
+          },
+          {
+            "name": "log",
+            "type": "text",
+            "description": "last decision note"
+          }
+        ]
+      },
+      "code_sha256": {
+        "policy.py": "7d1ffb5ed573ca99b9826f60d99cd985196f007aabcd4ebf4b98899219feb10e"
+      },
+      "source_run_tag": "20261108T032001_064494Z",
+      "source_program_hash": "dced17cb2c516c630b792cb2b43f14074b9710bbc6e7b7597b6d16263a905ab2",
+      "source_harness_sha256": "dbaa3bc9a8f283b991bbeb290c236c6d11cd6468ab9f80d1aef5625b5e986463",
+      "assigned_demos": 49,
+      "training_attempts": 0,
+      "test_records_sha256": "f42493626bbfdad7633ad4654afbdf547c8f0f435460d29245dccc24c78f650e",
+      "interface_sha256": "4bed4fe20117010ed3d89fe61d8e98d7b91f2951d165c3ca5ef991506f740b27",
+      "source_interface_sha256": "b29d6328550d1a123509e7add86dc0e886534b5afc0f9146b1008129477291d5"
+    },
+    "cover_blocks": {
+      "task_spec": {
+        "task": "cover_blocks",
+        "runtime": "python",
+        "memory": [
+          {
+            "name": "phase",
+            "type": "label",
+            "description": "init | cover | uncover | done"
+          },
+          {
+            "name": "colors",
+            "type": "list",
+            "description": "block colours ordered in cover order (viewer left to right), recorded before covering"
+          },
+          {
+            "name": "block_pos",
+            "type": "positions",
+            "description": "block [x,y,ztop] per slot, recorded while visible"
+          },
+          {
+            "name": "lid_home",
+            "type": "positions",
+            "description": "original lid handle-top [x,y,z] for each slot's lid"
+          },
+          {
+            "name": "uncover_order",
+            "type": "list",
+            "description": "colour order for uncovering parsed from the goal"
+          },
+          {
+            "name": "index",
+            "type": "count",
+            "description": "progress index within the current phase"
+          },
+          {
+            "name": "tries",
+            "type": "count",
+            "description": "failed attempts at the current subtask"
+          },
+          {
+            "name": "pending",
+            "type": "label",
+            "description": "'cover:k'/'uncover:k' move awaiting visual verification, or empty"
+          },
+          {
+            "name": "home_poses",
+            "type": "positions",
+            "description": "initial left and right EE poses (7 values each)"
+          },
+          {
+            "name": "log",
+            "type": "text",
+            "description": "short decision trace"
+          }
+        ]
+      },
+      "code_sha256": {
+        "perception.py": "2276f71a8639258f873753d3d785aa9e87be08756d269329b1f05c2353e7e9a7",
+        "policy.py": "b1911a823f3df8889cd1faec6c16a0f7171ba0d9a760f5fe838421ac9da628d2"
+      },
+      "source_run_tag": "20261108T032001_064494Z",
+      "source_program_hash": "d93ca9528e3ad6fbfd3c22638a4f60c70347be685d110aa809613b27bb54c95d",
+      "source_harness_sha256": "dbaa3bc9a8f283b991bbeb290c236c6d11cd6468ab9f80d1aef5625b5e986463",
+      "assigned_demos": 50,
+      "training_attempts": 0,
+      "test_records_sha256": "ca0a4c43e12cc4c03e7fc95c492cc3d64cbf59d3db33ddc1f413eb58146766c8",
+      "interface_sha256": "ff7254257aa3b34bc6e5a33e63b2ad116652a7231bd24820e496c5c746ab8187",
+      "source_interface_sha256": "5f6e90818327144a5afcf978ebd66bfaa074ed17c12dbc3e6656faa7f9edffbc"
+    },
+    "observe_and_pickup": {
+      "task_spec": {
+        "task": "observe_and_pickup",
+        "runtime": "python",
+        "memory": [
+          {
+            "name": "stage",
+            "type": "label",
+            "description": "current stage of the grasp state machine"
+          },
+          {
+            "name": "shelf",
+            "type": "list",
+            "description": "descriptor of the shelf object seen at reset: [height, length, width, 125-bin soft RGB histogram]"
+          },
+          {
+            "name": "cands",
+            "type": "list",
+            "description": "ranked table candidates [x, y, cost, h, L, W, yaw] (head camera)"
+          },
+          {
+            "name": "cand_index",
+            "type": "count",
+            "description": "index of the current candidate in cands"
+          },
+          {
+            "name": "target",
+            "type": "position",
+            "description": "expected xy of the current target"
+          },
+          {
+            "name": "grasp",
+            "type": "list",
+            "description": "current grasp [x, y, grasp_centre_z, psi]"
+          },
+          {
+            "name": "arm",
+            "type": "label",
+            "description": "arm used for the current target (left if x<0)"
+          },
+          {
+            "name": "tries",
+            "type": "count",
+            "description": "retries on the current target"
+          },
+          {
+            "name": "attempts",
+            "type": "count",
+            "description": "completed grasp attempts without success"
+          },
+          {
+            "name": "home",
+            "type": "list",
+            "description": "initial ee poses of left and right arms (14 numbers)"
+          },
+          {
+            "name": "refines",
+            "type": "count",
+            "description": "wrist re-survey moves for the current target"
+          },
+          {
+            "name": "fails",
+            "type": "count",
+            "description": "motion failures in the current stage"
+          },
+          {
+            "name": "tried",
+            "type": "positions",
+            "description": "xy of targets already attempted"
+          },
+          {
+            "name": "outcome",
+            "type": "label",
+            "description": "classification of the last failed attempt: missed (object still on table under gripper) or held"
+          },
+          {
+            "name": "note",
+            "type": "text",
+            "description": "last perception/decision note"
+          }
+        ]
+      },
+      "code_sha256": {
+        "perception.py": "b33807d342efb8ed053a3d8acf6af1dc883e88d0c5a3423e5cd0c0096661e7f5",
+        "policy.py": "ce03846b2044fb74a8a999656f6da0f1af536a1759ccf8b92b926bd5a5f11643"
+      },
+      "source_run_tag": "20261108T032001_064494Z",
+      "source_program_hash": "e8815da38726203f58bd0be0f1897afb4d52c08287b0f24d4e3d846c0021c13b",
+      "source_harness_sha256": "dbaa3bc9a8f283b991bbeb290c236c6d11cd6468ab9f80d1aef5625b5e986463",
+      "assigned_demos": 48,
+      "training_attempts": 0,
+      "test_records_sha256": "12b97cbabcb73a14c0ff7c2d280f5fb0fc9efd018f8515caba281794e35569bf",
+      "interface_sha256": "53a97dfdc1cbf142a7e55f6ca3a816783a4ec2cb8007e0b3a0de8d5951997b47",
+      "source_interface_sha256": "d8de97734fc9a93083502e7f30eadc4cb2e9907322b9b69967443aa23264015d"
+    },
+    "place_block_mat": {
+      "task_spec": {
+        "task": "place_block_mat",
+        "runtime": "python",
+        "memory": [
+          {
+            "name": "orig",
+            "type": "positions",
+            "description": "original [x,y,top_z] of every red block, sorted left to right (world x), measured on the reset frame"
+          },
+          {
+            "name": "green",
+            "type": "position",
+            "description": "green mat centre [x,y,surface_z] from the reset frame"
+          },
+          {
+            "name": "home_left",
+            "type": "list",
+            "description": "left arm reset ee pose (7 numbers) used as retreat pose"
+          },
+          {
+            "name": "home_right",
+            "type": "list",
+            "description": "right arm reset ee pose (7 numbers) used as retreat pose"
+          },
+          {
+            "name": "idx",
+            "type": "count",
+            "description": "index of the block currently being handled"
+          },
+          {
+            "name": "phase",
+            "type": "label",
+            "description": "to_green (move block idx onto green mat) or to_orig (return it to orig[idx])"
+          },
+          {
+            "name": "attempts",
+            "type": "count",
+            "description": "transfer attempts made in the current phase"
+          },
+          {
+            "name": "carrying",
+            "type": "boolean",
+            "description": "true right after act_pick; the next decision checks the wrist camera and places or retreats"
+          },
+          {
+            "name": "arm",
+            "type": "label",
+            "description": "arm used for the current block: left if its original x<0 else right"
+          },
+          {
+            "name": "dst",
+            "type": "position",
+            "description": "[x,y,surface_z] destination of the current move (green mat or orig[idx] mat)"
+          },
+          {
+            "name": "note",
+            "type": "text",
+            "description": "last decision summary"
+          }
+        ]
+      },
+      "code_sha256": {
+        "policy.py": "bfed4be513107b50356bfb8c3fe36a246093e1895c7a1cd62ee2b30d31e329de"
+      },
+      "source_run_tag": "20261108T032001_064494Z",
+      "source_program_hash": "b4e6a564036e248f9a6862464c7fae1b9c6ccbc34b80154b26a7c72b859947c8",
+      "source_harness_sha256": "dbaa3bc9a8f283b991bbeb290c236c6d11cd6468ab9f80d1aef5625b5e986463",
+      "assigned_demos": 50,
+      "training_attempts": 0,
+      "test_records_sha256": "d7c7a1b7f9fbffd0cc2f602f52551601e123b306884fb10424f22575966a9e0d",
+      "interface_sha256": "ff7254257aa3b34bc6e5a33e63b2ad116652a7231bd24820e496c5c746ab8187",
+      "source_interface_sha256": "5f6e90818327144a5afcf978ebd66bfaa074ed17c12dbc3e6656faa7f9edffbc"
+    },
+    "press_button": {
+      "task_spec": {
+        "task": "press_button",
+        "runtime": "python",
+        "memory": [
+          {
+            "name": "stage",
+            "type": "label",
+            "description": "current phase: start, goto_left, press_left, goto_middle, press_middle, retract_left, goto_right, press_right, confirm_retry, idle"
+          },
+          {
+            "name": "left_count",
+            "type": "count",
+            "description": "digit read on the left tile at reset = presses required on the left button"
+          },
+          {
+            "name": "middle_count",
+            "type": "count",
+            "description": "digit read on the right tile at reset = presses required on the middle button"
+          },
+          {
+            "name": "left_done",
+            "type": "count",
+            "description": "measured presses of the left button so far"
+          },
+          {
+            "name": "middle_done",
+            "type": "count",
+            "description": "measured presses of the middle button so far"
+          },
+          {
+            "name": "right_done",
+            "type": "count",
+            "description": "measured presses of the right (confirm) button so far"
+          },
+          {
+            "name": "retries",
+            "type": "count",
+            "description": "failed attempts of the current move stage"
+          },
+          {
+            "name": "arm_low",
+            "type": "boolean",
+            "description": "pressing arm ended the last action still below the release height"
+          },
+          {
+            "name": "left_home",
+            "type": "positions",
+            "description": "left ee pose at reset [x,y,z,qw,qx,qy,qz]"
+          },
+          {
+            "name": "right_home",
+            "type": "positions",
+            "description": "right ee pose at reset [x,y,z,qw,qx,qy,qz]"
+          },
+          {
+            "name": "reading",
+            "type": "text",
+            "description": "digit reading with template scores and margins"
+          },
+          {
+            "name": "history",
+            "type": "text",
+            "description": "recent stage trace"
+          },
+          {
+            "name": "buttons",
+            "type": "positions",
+            "description": "button centres [[x,y] left, middle, right] used for pressing (nominal unless head RGB-D shows a different layout)"
+          }
+        ]
+      },
+      "code_sha256": {
+        "perception.py": "d568081fcdd8c055448febcc7f1ab86a4595bd31e0ca745d804c7488eadd8a8d",
+        "policy.py": "b4819c3bf4d6023382660e8c67a4a8bf486c4c9984d793bcc51fe6a8fbd449c4",
+        "templates.py": "8f79b801a9add624e968db6b8f0d9d9e16e05ad3dd5cbf218464deceea4de35e"
+      },
+      "source_run_tag": "20261108T032001_064494Z",
+      "source_program_hash": "285a4e7c996ec5000ebafd1e18453d8a2f9401e8d5c9f2adf30c01b9f20a75f2",
+      "source_harness_sha256": "dbaa3bc9a8f283b991bbeb290c236c6d11cd6468ab9f80d1aef5625b5e986463",
+      "assigned_demos": 50,
+      "training_attempts": 0,
+      "test_records_sha256": "d7c7a1b7f9fbffd0cc2f602f52551601e123b306884fb10424f22575966a9e0d",
+      "interface_sha256": "ff7254257aa3b34bc6e5a33e63b2ad116652a7231bd24820e496c5c746ab8187",
+      "source_interface_sha256": "5f6e90818327144a5afcf978ebd66bfaa074ed17c12dbc3e6656faa7f9edffbc"
+    },
+    "put_back_block": {
+      "task_spec": {
+        "task": "put_back_block",
+        "runtime": "python",
+        "memory": [
+          {
+            "name": "stage",
+            "type": "label",
+            "description": "progress: null, pick1, placed, pressed, pick2, returned, done"
+          },
+          {
+            "name": "origin",
+            "type": "position",
+            "description": "block's original mat position [x, y, top z] seen at reset (the put-back target)"
+          },
+          {
+            "name": "centre",
+            "type": "position",
+            "description": "centre of the four-mat cross [x, y]"
+          },
+          {
+            "name": "button",
+            "type": "position",
+            "description": "button [x, y, top z] seen at reset"
+          },
+          {
+            "name": "pick_at",
+            "type": "position",
+            "description": "where the last grasp was attempted [x, y, top z]"
+          },
+          {
+            "name": "attempts",
+            "type": "count",
+            "description": "number of recovery retries so far"
+          },
+          {
+            "name": "left_home",
+            "type": "positions",
+            "description": "left arm reset pose [[x,y,z],[qw,qx,qy,qz]] to return to after pressing"
+          },
+          {
+            "name": "note",
+            "type": "text",
+            "description": "last decision reason"
+          }
+        ]
+      },
+      "code_sha256": {
+        "perception.py": "137ab309152fe7a9e30ff7637848ad57ce8f56d06380f07868c61c4b7df08d1b",
+        "policy.py": "cc2249ac0b511f5b78b0c432799e4ad7a90adc6affdfb94d9aa95d9afc9637ca"
+      },
+      "source_run_tag": "20261108T032001_064494Z",
+      "source_program_hash": "8b115352266b136558b3e987cbdc61831d8f912222aa888634d0056b16257ab8",
+      "source_harness_sha256": "dbaa3bc9a8f283b991bbeb290c236c6d11cd6468ab9f80d1aef5625b5e986463",
+      "assigned_demos": 50,
+      "training_attempts": 0,
+      "test_records_sha256": "d7c7a1b7f9fbffd0cc2f602f52551601e123b306884fb10424f22575966a9e0d",
+      "interface_sha256": "4ec0979a2794b9d799565a1f7ab3d92aa3e914a57e006371d3d8bb8756e2a43d",
+      "source_interface_sha256": "d55cd9570dda2c0d27f4688db2e349d4626745294390512827deb8cd143d08ab"
+    },
+    "rearrange_blocks": {
+      "task_spec": {
+        "task": "rearrange_blocks",
+        "runtime": "python",
+        "memory": [
+          {
+            "name": "stage",
+            "type": "label",
+            "description": "last commanded phase: pick1, press, pick2, done (null before init)"
+          },
+          {
+            "name": "mid_xy",
+            "type": "position",
+            "description": "initial perceived xy of the block between the mats (= final target of block 2)"
+          },
+          {
+            "name": "src2_xy",
+            "type": "position",
+            "description": "initial perceived xy of the block that started on a mat"
+          },
+          {
+            "name": "target1_xy",
+            "type": "position",
+            "description": "perceived centre of the initially empty mat"
+          },
+          {
+            "name": "button_xy",
+            "type": "position",
+            "description": "perceived xy of the button top"
+          },
+          {
+            "name": "dz",
+            "type": "number",
+            "description": "perceived table height minus demo table height (clipped +-2 cm)"
+          },
+          {
+            "name": "tries",
+            "type": "count",
+            "description": "attempts in the current pick stage"
+          },
+          {
+            "name": "presses",
+            "type": "count",
+            "description": "number of button presses commanded"
+          },
+          {
+            "name": "notes",
+            "type": "text",
+            "description": "short diagnostic of the last decision"
+          }
+        ]
+      },
+      "code_sha256": {
+        "policy.py": "bdebbdbee066ae5544ac934e642ed10eb2cfc2e3b18cc1ec11ea4da3cff3af12"
+      },
+      "source_run_tag": "20261108T032001_064494Z",
+      "source_program_hash": "ce03c0c3b6c8eb7162be12dca528ade9b22286aaaef64c00984ddb45f7d81abb",
+      "source_harness_sha256": "dbaa3bc9a8f283b991bbeb290c236c6d11cd6468ab9f80d1aef5625b5e986463",
+      "assigned_demos": 50,
+      "training_attempts": 0,
+      "test_records_sha256": "d7c7a1b7f9fbffd0cc2f602f52551601e123b306884fb10424f22575966a9e0d",
+      "interface_sha256": "f5d4bdf71e97a76e9599798f000cc5ca03fcf855e67c3bd40c16b34cb269c3be",
+      "source_interface_sha256": "cab2908b47a10e32834836bebfe6a3420d32f039f07bf516bef32c3cededa5b0"
+    },
+    "swap_T": {
+      "task_spec": {
+        "task": "swap_T",
+        "runtime": "python",
+        "memory": [
+          {
+            "name": "phase",
+            "type": "label",
+            "description": "state-machine phase: start, grasped, homed, left_placed, verify"
+          },
+          {
+            "name": "red_init",
+            "type": "list",
+            "description": "[x, y, yaw] of the red T origin seen at reset (target for the blue block); metres / radians"
+          },
+          {
+            "name": "blue_init",
+            "type": "list",
+            "description": "[x, y, yaw] of the blue T origin seen at reset (target for the red block)"
+          },
+          {
+            "name": "left_holds",
+            "type": "label",
+            "description": "block colour the left arm was assigned to carry (red)"
+          },
+          {
+            "name": "right_holds",
+            "type": "label",
+            "description": "block colour the right arm was assigned to carry (blue)"
+          },
+          {
+            "name": "left_flip",
+            "type": "count",
+            "description": "1 if the left grasp used gripper yaw = block yaw + pi"
+          },
+          {
+            "name": "right_flip",
+            "type": "count",
+            "description": "1 if the right grasp used gripper yaw = block yaw + pi"
+          },
+          {
+            "name": "n_corr",
+            "type": "count",
+            "description": "correction re-pick/re-place rounds used after the swap"
+          },
+          {
+            "name": "n_retry",
+            "type": "count",
+            "description": "initial-grasp retries / detection retries used"
+          },
+          {
+            "name": "notes",
+            "type": "text",
+            "description": "last perception summary (errors vs targets) for the log"
+          }
+        ]
+      },
+      "code_sha256": {
+        "motion.py": "60cde1ff2b3d2f93a2c04f0c56a195d16d8b4d5dcaed141d4ec6defd209f7a3d",
+        "perception.py": "8cc4cc089dde23a01dfe529d90ac8e0dabb08470426ff38509fb322c807f8b8f",
+        "policy.py": "1e8d3acae1d914072e8f5f9737b70cf725456e22c15e5dad8e8bfb354456f3c7"
+      },
+      "source_run_tag": "20261108T032001_064494Z",
+      "source_program_hash": "8dd4e60e4a6e518668e60f1cb85e8b32013fa969d794016bb9223e29dd6423ce",
+      "source_harness_sha256": "dbaa3bc9a8f283b991bbeb290c236c6d11cd6468ab9f80d1aef5625b5e986463",
+      "assigned_demos": 50,
+      "training_attempts": 0,
+      "test_records_sha256": "2d2b84e749197f038091f003de013b56e819d5d50cd9b103e9d3bf44d2306822",
+      "interface_sha256": "5c3e1a8cb0afc8862a9dce0e650f30f4289c237ed5d3ddc65777ec07a751111a",
+      "source_interface_sha256": "a4ec012a34c7ef8592df768ea52756c5a9064cafef695c5129f5a671efaff2de"
+    },
+    "swap_blocks": {
+      "task_spec": {
+        "task": "swap_blocks",
+        "runtime": "python",
+        "memory": [
+          {
+            "name": "phase",
+            "type": "label",
+            "description": "controller phase: null (init), pick, check_pick, check_place, press, done"
+          },
+          {
+            "name": "plan",
+            "type": "list",
+            "description": "ordered tray moves 'src>dst' (trays 0=left,1=middle,2=right) computed once from the initial occupancy"
+          },
+          {
+            "name": "move_idx",
+            "type": "count",
+            "description": "index of the current move in plan"
+          },
+          {
+            "name": "retries",
+            "type": "count",
+            "description": "failed attempts for the current move / init observation"
+          },
+          {
+            "name": "arm",
+            "type": "label",
+            "description": "arm ('left'/'right') used for the current pick and its place"
+          },
+          {
+            "name": "grip_yaw",
+            "type": "number",
+            "description": "gripper yaw (deg) used for the current grasp; reused when placing"
+          },
+          {
+            "name": "grip_tilt",
+            "type": "number",
+            "description": "approach tilt (deg) used for the current grasp; reused when placing"
+          },
+          {
+            "name": "src_xy",
+            "type": "position",
+            "description": "[x, y, source tray index or -1 for stray] of the block being moved"
+          },
+          {
+            "name": "decisions",
+            "type": "count",
+            "description": "decisions taken so far this episode"
+          },
+          {
+            "name": "press_tries",
+            "type": "count",
+            "description": "button press attempts that did not end the episode"
+          },
+          {
+            "name": "notes",
+            "type": "text",
+            "description": "last decision rationale"
+          }
+        ]
+      },
+      "code_sha256": {
+        "policy.py": "96d43896652c9236d3bf27fa4fbbe9601df4bdcd2ad6f2016f18d5be609eda44"
+      },
+      "source_run_tag": "20261108T150726_925267Z_swap_blocks_fresh",
+      "source_program_hash": "c09ef1d293d96a44081872e118688248f9159c2e7814b13853127ddf3463dadd",
+      "source_harness_sha256": "272d973be525cc3cc721546dd52b77dd76a62c2932302f6e7ccd748095eaf51b",
+      "assigned_demos": 50,
+      "training_attempts": 0,
+      "test_records_sha256": "d4f790933c7613c84c1247fa06e42d113cf74e99e8d5dc201f6fac8d21a38968",
+      "interface_sha256": "4f69b0b6d255e6418f07bb369b012b757085d359e3daab712e59c3a4672165f4",
+      "source_interface_sha256": "5424604638394ea66ba5e139062fdaa4f19aa950af583c9d6e03c99089c58884"
+    }
+  },
+  "evaluation_config": {
+    "benchmark": "rmbench",
+    "mode": "demos",
+    "budget": 0,
+    "training_seed_count": 3,
+    "training_seed_policy": "demo_cycle",
+    "depth": true,
+    "builtin_demo": false,
+    "perceptual_variations": false,
+    "max_decisions": 40,
+    "max_action_steps": 3600,
+    "policy_timeout": 7200,
+    "both_protocol": null,
+    "physics_backend": null
+  },
+  "comparison_note": "Uses the fresh swap_blocks run with the revised offline-review prompt; original baseline remains archived.",
+  "interface_revision": {
+    "schema": "cam-solution-interface-revision/1",
+    "source_catalog": "configs/solutions/rmbench/demo_only_50.json",
+    "source_catalog_sha256": "5a128019d4a0f950ef989f9741656c7fcc73fcc0908cb83b16fa787c9c58fd69",
+    "source_experiment": "demo_only_50",
+    "policy_code_changed": false,
+    "memory_schema_changed": false,
+    "evaluation_config_changed": false,
+    "native_planner_feedback": false,
+    "motion_feedback": {
+      "schema": "cam-rmbench-observed-motion/1",
+      "source": "public_post_action_ee_pose",
+      "position_tolerance_m": 0.02,
+      "rotation_tolerance_rad": 0.1
+    },
+    "scope": "Public post-action EEF pose comparison; current offline robot helpers are also available. No new learning or demo reads."
+  }
+}

@@ -1,7 +1,7 @@
 Code-as-Memory (CaM)
 
 The Python policy interface, restricted execution, streamed observation transport,
-and development accounting are adapted from the existing Code-as-Policies
+and development accounting are adapted from the earlier robot policy
 implementation developed for RoboMME and RoboMME-Plus, distributed under the
 Apache License 2.0. Modified source files identify this adaptation.
 

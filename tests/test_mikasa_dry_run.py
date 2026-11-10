@@ -7,8 +7,8 @@ import numpy as np
 import pytest
 from scipy.spatial.transform import Rotation
 
-from cam.benchmarks.mikasa_robo_api import PREVIEW_SPEC
-from cam.benchmarks.mikasa_robo_api.preview import absolute_command, joint_report
+from cam.interface.mikasa_robo.api import PREVIEW_SPEC
+from cam.interface.mikasa_robo.api.preview import absolute_command, joint_report
 from cam.runtime.robot import MotionError, Robot
 from cam.runtime.wire import receive, send
 
@@ -147,7 +147,7 @@ def test_runtime_copies_public_reference_only_for_mikasa(tmp_path):
     doc = public / "cam/runtime/mikasa_robo/dry_run.md"
     assert 'mode="absolute"' in doc.read_text()
     assert sorted(p.name for p in doc.parent.iterdir()) == ["__init__.py", "dry_run.md", "offline.py", "panda_model.json", "safety_check.md"]
-    assert not (public / "cam/benchmarks").exists()
+    assert not (public / "cam/interface").exists()
     assert not list(public.rglob("preview.py")) and not list(public.rglob("kinematics.py"))
     generic = make_runtime(tmp_path / "other")
     assert not (generic / "cam/runtime/mikasa_robo").exists()

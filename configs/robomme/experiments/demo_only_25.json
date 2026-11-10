@@ -1,0 +1,31 @@
+{
+  "selection_reason": "All robomme tasks, 25-demonstration setting with actual released shortfalls, fresh policies and zero training rollouts.",
+  "benchmarks": {
+    "robomme": {
+      "config": "configs/robomme/demos_claude_code.json",
+      "datasets": [
+        "public_runs/demos/robomme"
+      ],
+      "demo_count": 25,
+      "require_prepared_data": true,
+      "tasks": [
+        "BinFill",
+        "ButtonUnmask",
+        "ButtonUnmaskSwap",
+        "InsertPeg",
+        "MoveCube",
+        "PatternLock",
+        "PickHighlight",
+        "PickXtimes",
+        "RouteStick",
+        "StopCube",
+        "SwingXtimes",
+        "VideoPlaceButton",
+        "VideoPlaceOrder",
+        "VideoRepick",
+        "VideoUnmask",
+        "VideoUnmaskSwap"
+      ]
+    }
+  }
+}

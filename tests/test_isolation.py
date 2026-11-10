@@ -110,7 +110,7 @@ sys.stdin.read(1)
         def running():
             try:
                 return Path(f"/proc/{child}/stat").read_text().rsplit(")", 1)[1].split()[0] != "Z"
-            except FileNotFoundError:
+            except (FileNotFoundError, ProcessLookupError):
                 return False
 
         time.sleep(0.2)

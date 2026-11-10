@@ -7,7 +7,7 @@ never used. Results go to ``outputs/dev_eval/...``; the run directory, its ledge
 and its evidence are not modified. Use this to diagnose failures before deciding
 on a guide change; report held-out test results only via ``cam evaluate``.
 
-  .venv/bin/python scripts/dev_evaluate.py RUN_LEAF --episodes 10 --gpus 0 --workers 4
+  .venv/bin/python scripts/dev_evaluate.py RUN_LEAF --episodes 10 --gpus 0 --workers 5
 """
 
 import argparse
@@ -23,7 +23,12 @@ import json, sys
 plan = json.loads(open(sys.argv[1]).read())
 sys.path.insert(0, plan["harness"])
 sys.dont_write_bytecode = True
-from cam.benchmarks.registry import get_adapter
+try:
+    from cam.interface.registry import get_adapter
+except ModuleNotFoundError as error:
+    if not error.name.startswith("cam.interface"):
+        raise
+    from cam.benchmarks.registry import get_adapter
 from cam.harness.broker import execute
 adapter = get_adapter(plan["benchmark"], plan["benchmark_source"])
 result = execute(adapter, plan["metadata"], plan["task"], plan["episode"], "train",
@@ -38,14 +43,19 @@ def main():
     parser.add_argument("run", type=Path)
     parser.add_argument("--episodes", type=int, default=10)
     parser.add_argument("--gpus", type=int, nargs="+", default=[0])
-    parser.add_argument("--workers", type=int, default=4, help="workers per GPU")
+    parser.add_argument("--workers", type=int, default=5, help="workers per GPU")
     parser.add_argument("--output", type=Path)
     args = parser.parse_args()
     run = args.run.resolve()
     plan = json.loads((run / "run.json").read_text())
     (task,) = plan["tasks"]
     sys.path.insert(0, str(run / "inputs/harness"))
-    from cam.benchmarks.registry import get_adapter
+    try:
+        from cam.interface.registry import get_adapter
+    except ModuleNotFoundError as error:
+        if not error.name.startswith("cam.interface"):
+            raise
+        from cam.benchmarks.registry import get_adapter
     from cam.core.budget import program_hash
     from cam.io import read, write
 

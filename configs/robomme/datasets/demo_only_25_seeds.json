@@ -1,0 +1,1641 @@
+{
+  "schema": "cam-demo-selection/1",
+  "benchmark": "robomme",
+  "setting": "demo_only_25",
+  "count": 25,
+  "provenance": "Exact published 25-demo assignment.",
+  "tasks": {
+    "BinFill": [
+      {
+        "episode": 0,
+        "seed": 4000
+      },
+      {
+        "episode": 12,
+        "seed": 5200
+      },
+      {
+        "episode": 24,
+        "seed": 6400
+      },
+      {
+        "episode": 36,
+        "seed": 7600
+      },
+      {
+        "episode": 48,
+        "seed": 8800
+      },
+      {
+        "episode": 61,
+        "seed": 10100
+      },
+      {
+        "episode": 73,
+        "seed": 11300
+      },
+      {
+        "episode": 85,
+        "seed": 12501
+      },
+      {
+        "episode": 97,
+        "seed": 13700
+      },
+      {
+        "episode": 2,
+        "seed": 4200
+      },
+      {
+        "episode": 14,
+        "seed": 5401
+      },
+      {
+        "episode": 30,
+        "seed": 7001
+      },
+      {
+        "episode": 42,
+        "seed": 8200
+      },
+      {
+        "episode": 58,
+        "seed": 9800
+      },
+      {
+        "episode": 70,
+        "seed": 11000
+      },
+      {
+        "episode": 86,
+        "seed": 12600
+      },
+      {
+        "episode": 98,
+        "seed": 13800
+      },
+      {
+        "episode": 3,
+        "seed": 4301
+      },
+      {
+        "episode": 15,
+        "seed": 5501
+      },
+      {
+        "episode": 31,
+        "seed": 7101
+      },
+      {
+        "episode": 43,
+        "seed": 8300
+      },
+      {
+        "episode": 59,
+        "seed": 9900
+      },
+      {
+        "episode": 71,
+        "seed": 11102
+      },
+      {
+        "episode": 87,
+        "seed": 12700
+      },
+      {
+        "episode": 99,
+        "seed": 13902
+      }
+    ],
+    "ButtonUnmask": [
+      {
+        "episode": 0,
+        "seed": 8000
+      },
+      {
+        "episode": 12,
+        "seed": 9200
+      },
+      {
+        "episode": 24,
+        "seed": 10400
+      },
+      {
+        "episode": 36,
+        "seed": 11600
+      },
+      {
+        "episode": 48,
+        "seed": 12800
+      },
+      {
+        "episode": 61,
+        "seed": 14100
+      },
+      {
+        "episode": 73,
+        "seed": 15300
+      },
+      {
+        "episode": 85,
+        "seed": 16500
+      },
+      {
+        "episode": 97,
+        "seed": 17700
+      },
+      {
+        "episode": 2,
+        "seed": 8200
+      },
+      {
+        "episode": 14,
+        "seed": 9400
+      },
+      {
+        "episode": 30,
+        "seed": 11000
+      },
+      {
+        "episode": 42,
+        "seed": 12200
+      },
+      {
+        "episode": 58,
+        "seed": 13800
+      },
+      {
+        "episode": 70,
+        "seed": 15000
+      },
+      {
+        "episode": 86,
+        "seed": 16600
+      },
+      {
+        "episode": 98,
+        "seed": 17800
+      },
+      {
+        "episode": 3,
+        "seed": 8300
+      },
+      {
+        "episode": 15,
+        "seed": 9500
+      },
+      {
+        "episode": 31,
+        "seed": 11100
+      },
+      {
+        "episode": 43,
+        "seed": 12300
+      },
+      {
+        "episode": 59,
+        "seed": 13900
+      },
+      {
+        "episode": 71,
+        "seed": 15100
+      },
+      {
+        "episode": 87,
+        "seed": 16700
+      },
+      {
+        "episode": 99,
+        "seed": 17900
+      }
+    ],
+    "ButtonUnmaskSwap": [
+      {
+        "episode": 0,
+        "seed": 7000
+      },
+      {
+        "episode": 12,
+        "seed": 8200
+      },
+      {
+        "episode": 24,
+        "seed": 9400
+      },
+      {
+        "episode": 36,
+        "seed": 10600
+      },
+      {
+        "episode": 48,
+        "seed": 11800
+      },
+      {
+        "episode": 61,
+        "seed": 13100
+      },
+      {
+        "episode": 73,
+        "seed": 14300
+      },
+      {
+        "episode": 85,
+        "seed": 15500
+      },
+      {
+        "episode": 97,
+        "seed": 16700
+      },
+      {
+        "episode": 2,
+        "seed": 7200
+      },
+      {
+        "episode": 14,
+        "seed": 8400
+      },
+      {
+        "episode": 30,
+        "seed": 10000
+      },
+      {
+        "episode": 42,
+        "seed": 11200
+      },
+      {
+        "episode": 58,
+        "seed": 12800
+      },
+      {
+        "episode": 70,
+        "seed": 14001
+      },
+      {
+        "episode": 86,
+        "seed": 15600
+      },
+      {
+        "episode": 98,
+        "seed": 16801
+      },
+      {
+        "episode": 3,
+        "seed": 7300
+      },
+      {
+        "episode": 15,
+        "seed": 8500
+      },
+      {
+        "episode": 31,
+        "seed": 10100
+      },
+      {
+        "episode": 43,
+        "seed": 11300
+      },
+      {
+        "episode": 59,
+        "seed": 12900
+      },
+      {
+        "episode": 71,
+        "seed": 14100
+      },
+      {
+        "episode": 87,
+        "seed": 15700
+      },
+      {
+        "episode": 99,
+        "seed": 16900
+      }
+    ],
+    "InsertPeg": [
+      {
+        "episode": 0,
+        "seed": 13000
+      },
+      {
+        "episode": 12,
+        "seed": 14200
+      },
+      {
+        "episode": 24,
+        "seed": 15401
+      },
+      {
+        "episode": 36,
+        "seed": 16601
+      },
+      {
+        "episode": 48,
+        "seed": 17801
+      },
+      {
+        "episode": 61,
+        "seed": 19100
+      },
+      {
+        "episode": 73,
+        "seed": 20301
+      },
+      {
+        "episode": 85,
+        "seed": 21500
+      },
+      {
+        "episode": 97,
+        "seed": 22700
+      },
+      {
+        "episode": 2,
+        "seed": 13201
+      },
+      {
+        "episode": 14,
+        "seed": 14402
+      },
+      {
+        "episode": 30,
+        "seed": 16001
+      },
+      {
+        "episode": 42,
+        "seed": 17203
+      },
+      {
+        "episode": 58,
+        "seed": 18801
+      },
+      {
+        "episode": 70,
+        "seed": 20003
+      },
+      {
+        "episode": 86,
+        "seed": 21600
+      },
+      {
+        "episode": 98,
+        "seed": 22800
+      },
+      {
+        "episode": 3,
+        "seed": 13300
+      },
+      {
+        "episode": 15,
+        "seed": 14500
+      },
+      {
+        "episode": 31,
+        "seed": 16100
+      },
+      {
+        "episode": 43,
+        "seed": 17307
+      },
+      {
+        "episode": 59,
+        "seed": 18900
+      },
+      {
+        "episode": 71,
+        "seed": 20101
+      },
+      {
+        "episode": 87,
+        "seed": 21702
+      },
+      {
+        "episode": 99,
+        "seed": 22900
+      }
+    ],
+    "MoveCube": [
+      {
+        "episode": 0,
+        "seed": 14000
+      },
+      {
+        "episode": 12,
+        "seed": 15200
+      },
+      {
+        "episode": 24,
+        "seed": 16400
+      },
+      {
+        "episode": 36,
+        "seed": 17601
+      },
+      {
+        "episode": 48,
+        "seed": 18800
+      },
+      {
+        "episode": 61,
+        "seed": 20100
+      },
+      {
+        "episode": 73,
+        "seed": 21300
+      },
+      {
+        "episode": 85,
+        "seed": 22500
+      },
+      {
+        "episode": 97,
+        "seed": 23700
+      },
+      {
+        "episode": 2,
+        "seed": 14200
+      },
+      {
+        "episode": 14,
+        "seed": 15400
+      },
+      {
+        "episode": 30,
+        "seed": 17000
+      },
+      {
+        "episode": 42,
+        "seed": 18200
+      },
+      {
+        "episode": 58,
+        "seed": 19800
+      },
+      {
+        "episode": 70,
+        "seed": 21000
+      },
+      {
+        "episode": 86,
+        "seed": 22600
+      },
+      {
+        "episode": 98,
+        "seed": 23800
+      },
+      {
+        "episode": 3,
+        "seed": 14300
+      },
+      {
+        "episode": 15,
+        "seed": 15500
+      },
+      {
+        "episode": 31,
+        "seed": 17100
+      },
+      {
+        "episode": 43,
+        "seed": 18300
+      },
+      {
+        "episode": 59,
+        "seed": 19900
+      },
+      {
+        "episode": 71,
+        "seed": 21100
+      },
+      {
+        "episode": 87,
+        "seed": 22700
+      },
+      {
+        "episode": 99,
+        "seed": 23900
+      }
+    ],
+    "PatternLock": [
+      {
+        "episode": 0,
+        "seed": 15001
+      },
+      {
+        "episode": 12,
+        "seed": 16200
+      },
+      {
+        "episode": 24,
+        "seed": 17400
+      },
+      {
+        "episode": 36,
+        "seed": 18600
+      },
+      {
+        "episode": 48,
+        "seed": 19800
+      },
+      {
+        "episode": 61,
+        "seed": 21100
+      },
+      {
+        "episode": 73,
+        "seed": 22300
+      },
+      {
+        "episode": 85,
+        "seed": 23500
+      },
+      {
+        "episode": 97,
+        "seed": 24700
+      },
+      {
+        "episode": 2,
+        "seed": 15200
+      },
+      {
+        "episode": 14,
+        "seed": 16400
+      },
+      {
+        "episode": 30,
+        "seed": 18000
+      },
+      {
+        "episode": 42,
+        "seed": 19200
+      },
+      {
+        "episode": 58,
+        "seed": 20800
+      },
+      {
+        "episode": 70,
+        "seed": 22000
+      },
+      {
+        "episode": 86,
+        "seed": 23600
+      },
+      {
+        "episode": 98,
+        "seed": 24800
+      },
+      {
+        "episode": 3,
+        "seed": 15300
+      },
+      {
+        "episode": 15,
+        "seed": 16500
+      },
+      {
+        "episode": 31,
+        "seed": 18100
+      },
+      {
+        "episode": 43,
+        "seed": 19300
+      },
+      {
+        "episode": 59,
+        "seed": 20900
+      },
+      {
+        "episode": 71,
+        "seed": 22100
+      },
+      {
+        "episode": 87,
+        "seed": 23700
+      },
+      {
+        "episode": 99,
+        "seed": 24900
+      }
+    ],
+    "PickHighlight": [
+      {
+        "episode": 0,
+        "seed": 12000
+      },
+      {
+        "episode": 12,
+        "seed": 13200
+      },
+      {
+        "episode": 24,
+        "seed": 14400
+      },
+      {
+        "episode": 36,
+        "seed": 15600
+      },
+      {
+        "episode": 48,
+        "seed": 16800
+      },
+      {
+        "episode": 61,
+        "seed": 18100
+      },
+      {
+        "episode": 73,
+        "seed": 19300
+      },
+      {
+        "episode": 85,
+        "seed": 20501
+      },
+      {
+        "episode": 97,
+        "seed": 21700
+      },
+      {
+        "episode": 2,
+        "seed": 12200
+      },
+      {
+        "episode": 14,
+        "seed": 13400
+      },
+      {
+        "episode": 30,
+        "seed": 15000
+      },
+      {
+        "episode": 42,
+        "seed": 16200
+      },
+      {
+        "episode": 58,
+        "seed": 17800
+      },
+      {
+        "episode": 70,
+        "seed": 19000
+      },
+      {
+        "episode": 86,
+        "seed": 20600
+      },
+      {
+        "episode": 98,
+        "seed": 21800
+      },
+      {
+        "episode": 3,
+        "seed": 12300
+      },
+      {
+        "episode": 15,
+        "seed": 13500
+      },
+      {
+        "episode": 31,
+        "seed": 15100
+      },
+      {
+        "episode": 43,
+        "seed": 16300
+      },
+      {
+        "episode": 59,
+        "seed": 17900
+      },
+      {
+        "episode": 71,
+        "seed": 19100
+      },
+      {
+        "episode": 87,
+        "seed": 20700
+      },
+      {
+        "episode": 99,
+        "seed": 21900
+      }
+    ],
+    "PickXtimes": [
+      {
+        "episode": 0,
+        "seed": 1000
+      },
+      {
+        "episode": 12,
+        "seed": 2200
+      },
+      {
+        "episode": 24,
+        "seed": 3400
+      },
+      {
+        "episode": 36,
+        "seed": 4600
+      },
+      {
+        "episode": 48,
+        "seed": 5800
+      },
+      {
+        "episode": 61,
+        "seed": 7100
+      },
+      {
+        "episode": 73,
+        "seed": 8300
+      },
+      {
+        "episode": 85,
+        "seed": 9500
+      },
+      {
+        "episode": 97,
+        "seed": 10700
+      },
+      {
+        "episode": 2,
+        "seed": 1200
+      },
+      {
+        "episode": 14,
+        "seed": 2400
+      },
+      {
+        "episode": 30,
+        "seed": 4000
+      },
+      {
+        "episode": 42,
+        "seed": 5202
+      },
+      {
+        "episode": 58,
+        "seed": 6800
+      },
+      {
+        "episode": 70,
+        "seed": 8000
+      },
+      {
+        "episode": 86,
+        "seed": 9600
+      },
+      {
+        "episode": 98,
+        "seed": 10800
+      },
+      {
+        "episode": 3,
+        "seed": 1300
+      },
+      {
+        "episode": 15,
+        "seed": 2500
+      },
+      {
+        "episode": 31,
+        "seed": 4100
+      },
+      {
+        "episode": 43,
+        "seed": 5300
+      },
+      {
+        "episode": 59,
+        "seed": 6900
+      },
+      {
+        "episode": 71,
+        "seed": 8100
+      },
+      {
+        "episode": 87,
+        "seed": 9700
+      },
+      {
+        "episode": 99,
+        "seed": 10900
+      }
+    ],
+    "RouteStick": [
+      {
+        "episode": 0,
+        "seed": 16000
+      },
+      {
+        "episode": 12,
+        "seed": 17200
+      },
+      {
+        "episode": 24,
+        "seed": 18400
+      },
+      {
+        "episode": 36,
+        "seed": 19600
+      },
+      {
+        "episode": 48,
+        "seed": 20800
+      },
+      {
+        "episode": 61,
+        "seed": 22100
+      },
+      {
+        "episode": 73,
+        "seed": 23300
+      },
+      {
+        "episode": 85,
+        "seed": 24500
+      },
+      {
+        "episode": 97,
+        "seed": 25700
+      },
+      {
+        "episode": 2,
+        "seed": 16200
+      },
+      {
+        "episode": 14,
+        "seed": 17400
+      },
+      {
+        "episode": 30,
+        "seed": 19000
+      },
+      {
+        "episode": 42,
+        "seed": 20200
+      },
+      {
+        "episode": 58,
+        "seed": 21800
+      },
+      {
+        "episode": 70,
+        "seed": 23000
+      },
+      {
+        "episode": 86,
+        "seed": 24600
+      },
+      {
+        "episode": 98,
+        "seed": 25800
+      },
+      {
+        "episode": 3,
+        "seed": 16300
+      },
+      {
+        "episode": 15,
+        "seed": 17500
+      },
+      {
+        "episode": 31,
+        "seed": 19100
+      },
+      {
+        "episode": 43,
+        "seed": 20300
+      },
+      {
+        "episode": 59,
+        "seed": 21900
+      },
+      {
+        "episode": 71,
+        "seed": 23100
+      },
+      {
+        "episode": 87,
+        "seed": 24700
+      },
+      {
+        "episode": 99,
+        "seed": 25900
+      }
+    ],
+    "StopCube": [
+      {
+        "episode": 0,
+        "seed": 2000
+      },
+      {
+        "episode": 12,
+        "seed": 3200
+      },
+      {
+        "episode": 24,
+        "seed": 4400
+      },
+      {
+        "episode": 36,
+        "seed": 5600
+      },
+      {
+        "episode": 48,
+        "seed": 6800
+      },
+      {
+        "episode": 61,
+        "seed": 8100
+      },
+      {
+        "episode": 73,
+        "seed": 9300
+      },
+      {
+        "episode": 85,
+        "seed": 10500
+      },
+      {
+        "episode": 97,
+        "seed": 11700
+      },
+      {
+        "episode": 2,
+        "seed": 2200
+      },
+      {
+        "episode": 14,
+        "seed": 3401
+      },
+      {
+        "episode": 30,
+        "seed": 5000
+      },
+      {
+        "episode": 42,
+        "seed": 6200
+      },
+      {
+        "episode": 58,
+        "seed": 7800
+      },
+      {
+        "episode": 70,
+        "seed": 9000
+      },
+      {
+        "episode": 86,
+        "seed": 10600
+      },
+      {
+        "episode": 98,
+        "seed": 11800
+      },
+      {
+        "episode": 3,
+        "seed": 2300
+      },
+      {
+        "episode": 15,
+        "seed": 3500
+      },
+      {
+        "episode": 31,
+        "seed": 5100
+      },
+      {
+        "episode": 43,
+        "seed": 6300
+      },
+      {
+        "episode": 59,
+        "seed": 7900
+      },
+      {
+        "episode": 71,
+        "seed": 9100
+      },
+      {
+        "episode": 87,
+        "seed": 10700
+      },
+      {
+        "episode": 99,
+        "seed": 11900
+      }
+    ],
+    "SwingXtimes": [
+      {
+        "episode": 0,
+        "seed": 3000
+      },
+      {
+        "episode": 12,
+        "seed": 4200
+      },
+      {
+        "episode": 24,
+        "seed": 5400
+      },
+      {
+        "episode": 36,
+        "seed": 6600
+      },
+      {
+        "episode": 48,
+        "seed": 7800
+      },
+      {
+        "episode": 61,
+        "seed": 9100
+      },
+      {
+        "episode": 73,
+        "seed": 10300
+      },
+      {
+        "episode": 85,
+        "seed": 11500
+      },
+      {
+        "episode": 97,
+        "seed": 12700
+      },
+      {
+        "episode": 2,
+        "seed": 3200
+      },
+      {
+        "episode": 14,
+        "seed": 4400
+      },
+      {
+        "episode": 30,
+        "seed": 6000
+      },
+      {
+        "episode": 42,
+        "seed": 7200
+      },
+      {
+        "episode": 58,
+        "seed": 8801
+      },
+      {
+        "episode": 70,
+        "seed": 10000
+      },
+      {
+        "episode": 86,
+        "seed": 11600
+      },
+      {
+        "episode": 98,
+        "seed": 12800
+      },
+      {
+        "episode": 3,
+        "seed": 3301
+      },
+      {
+        "episode": 15,
+        "seed": 4500
+      },
+      {
+        "episode": 31,
+        "seed": 6101
+      },
+      {
+        "episode": 43,
+        "seed": 7300
+      },
+      {
+        "episode": 59,
+        "seed": 8900
+      },
+      {
+        "episode": 71,
+        "seed": 10100
+      },
+      {
+        "episode": 87,
+        "seed": 11700
+      },
+      {
+        "episode": 99,
+        "seed": 12900
+      }
+    ],
+    "VideoPlaceButton": [
+      {
+        "episode": 0,
+        "seed": 10000
+      },
+      {
+        "episode": 12,
+        "seed": 11200
+      },
+      {
+        "episode": 24,
+        "seed": 12400
+      },
+      {
+        "episode": 36,
+        "seed": 13600
+      },
+      {
+        "episode": 48,
+        "seed": 14800
+      },
+      {
+        "episode": 61,
+        "seed": 16100
+      },
+      {
+        "episode": 73,
+        "seed": 17300
+      },
+      {
+        "episode": 85,
+        "seed": 18500
+      },
+      {
+        "episode": 97,
+        "seed": 19700
+      },
+      {
+        "episode": 2,
+        "seed": 10202
+      },
+      {
+        "episode": 14,
+        "seed": 11400
+      },
+      {
+        "episode": 30,
+        "seed": 13000
+      },
+      {
+        "episode": 42,
+        "seed": 14200
+      },
+      {
+        "episode": 58,
+        "seed": 15800
+      },
+      {
+        "episode": 70,
+        "seed": 17000
+      },
+      {
+        "episode": 86,
+        "seed": 18601
+      },
+      {
+        "episode": 98,
+        "seed": 19800
+      },
+      {
+        "episode": 3,
+        "seed": 10301
+      },
+      {
+        "episode": 15,
+        "seed": 11500
+      },
+      {
+        "episode": 31,
+        "seed": 13100
+      },
+      {
+        "episode": 43,
+        "seed": 14300
+      },
+      {
+        "episode": 59,
+        "seed": 15900
+      },
+      {
+        "episode": 71,
+        "seed": 17100
+      },
+      {
+        "episode": 87,
+        "seed": 18700
+      },
+      {
+        "episode": 99,
+        "seed": 19900
+      }
+    ],
+    "VideoPlaceOrder": [
+      {
+        "episode": 0,
+        "seed": 11003
+      },
+      {
+        "episode": 12,
+        "seed": 12200
+      },
+      {
+        "episode": 24,
+        "seed": 13400
+      },
+      {
+        "episode": 36,
+        "seed": 14600
+      },
+      {
+        "episode": 48,
+        "seed": 15800
+      },
+      {
+        "episode": 61,
+        "seed": 17100
+      },
+      {
+        "episode": 73,
+        "seed": 18300
+      },
+      {
+        "episode": 85,
+        "seed": 19505
+      },
+      {
+        "episode": 97,
+        "seed": 20702
+      },
+      {
+        "episode": 2,
+        "seed": 11206
+      },
+      {
+        "episode": 14,
+        "seed": 12400
+      },
+      {
+        "episode": 30,
+        "seed": 14001
+      },
+      {
+        "episode": 42,
+        "seed": 15203
+      },
+      {
+        "episode": 58,
+        "seed": 16800
+      },
+      {
+        "episode": 70,
+        "seed": 18000
+      },
+      {
+        "episode": 86,
+        "seed": 19600
+      },
+      {
+        "episode": 98,
+        "seed": 20805
+      },
+      {
+        "episode": 3,
+        "seed": 11305
+      },
+      {
+        "episode": 15,
+        "seed": 12501
+      },
+      {
+        "episode": 31,
+        "seed": 14101
+      },
+      {
+        "episode": 43,
+        "seed": 15300
+      },
+      {
+        "episode": 59,
+        "seed": 16900
+      },
+      {
+        "episode": 71,
+        "seed": 18100
+      },
+      {
+        "episode": 87,
+        "seed": 19700
+      },
+      {
+        "episode": 99,
+        "seed": 20903
+      }
+    ],
+    "VideoRepick": [
+      {
+        "episode": 0,
+        "seed": 9000
+      },
+      {
+        "episode": 12,
+        "seed": 10202
+      },
+      {
+        "episode": 24,
+        "seed": 11400
+      },
+      {
+        "episode": 36,
+        "seed": 12600
+      },
+      {
+        "episode": 48,
+        "seed": 13800
+      },
+      {
+        "episode": 61,
+        "seed": 15100
+      },
+      {
+        "episode": 73,
+        "seed": 16301
+      },
+      {
+        "episode": 85,
+        "seed": 17500
+      },
+      {
+        "episode": 97,
+        "seed": 18700
+      },
+      {
+        "episode": 2,
+        "seed": 9200
+      },
+      {
+        "episode": 14,
+        "seed": 10400
+      },
+      {
+        "episode": 30,
+        "seed": 12000
+      },
+      {
+        "episode": 42,
+        "seed": 13200
+      },
+      {
+        "episode": 58,
+        "seed": 14800
+      },
+      {
+        "episode": 70,
+        "seed": 16000
+      },
+      {
+        "episode": 86,
+        "seed": 17600
+      },
+      {
+        "episode": 98,
+        "seed": 18800
+      },
+      {
+        "episode": 3,
+        "seed": 9301
+      },
+      {
+        "episode": 15,
+        "seed": 10500
+      },
+      {
+        "episode": 31,
+        "seed": 12100
+      },
+      {
+        "episode": 43,
+        "seed": 13300
+      },
+      {
+        "episode": 59,
+        "seed": 14900
+      },
+      {
+        "episode": 71,
+        "seed": 16100
+      },
+      {
+        "episode": 87,
+        "seed": 17700
+      },
+      {
+        "episode": 99,
+        "seed": 18900
+      }
+    ],
+    "VideoUnmask": [
+      {
+        "episode": 0,
+        "seed": 6000
+      },
+      {
+        "episode": 12,
+        "seed": 7200
+      },
+      {
+        "episode": 24,
+        "seed": 8400
+      },
+      {
+        "episode": 36,
+        "seed": 9600
+      },
+      {
+        "episode": 48,
+        "seed": 10800
+      },
+      {
+        "episode": 61,
+        "seed": 12100
+      },
+      {
+        "episode": 73,
+        "seed": 13300
+      },
+      {
+        "episode": 85,
+        "seed": 14500
+      },
+      {
+        "episode": 97,
+        "seed": 15700
+      },
+      {
+        "episode": 2,
+        "seed": 6200
+      },
+      {
+        "episode": 14,
+        "seed": 7400
+      },
+      {
+        "episode": 30,
+        "seed": 9000
+      },
+      {
+        "episode": 42,
+        "seed": 10200
+      },
+      {
+        "episode": 58,
+        "seed": 11800
+      },
+      {
+        "episode": 70,
+        "seed": 13000
+      },
+      {
+        "episode": 86,
+        "seed": 14600
+      },
+      {
+        "episode": 98,
+        "seed": 15800
+      },
+      {
+        "episode": 3,
+        "seed": 6300
+      },
+      {
+        "episode": 15,
+        "seed": 7500
+      },
+      {
+        "episode": 31,
+        "seed": 9100
+      },
+      {
+        "episode": 43,
+        "seed": 10300
+      },
+      {
+        "episode": 59,
+        "seed": 11900
+      },
+      {
+        "episode": 71,
+        "seed": 13100
+      },
+      {
+        "episode": 87,
+        "seed": 14700
+      },
+      {
+        "episode": 99,
+        "seed": 15900
+      }
+    ],
+    "VideoUnmaskSwap": [
+      {
+        "episode": 0,
+        "seed": 5000
+      },
+      {
+        "episode": 12,
+        "seed": 6200
+      },
+      {
+        "episode": 24,
+        "seed": 7400
+      },
+      {
+        "episode": 36,
+        "seed": 8600
+      },
+      {
+        "episode": 48,
+        "seed": 9800
+      },
+      {
+        "episode": 61,
+        "seed": 11101
+      },
+      {
+        "episode": 73,
+        "seed": 12300
+      },
+      {
+        "episode": 85,
+        "seed": 13500
+      },
+      {
+        "episode": 97,
+        "seed": 14700
+      },
+      {
+        "episode": 2,
+        "seed": 5200
+      },
+      {
+        "episode": 14,
+        "seed": 6400
+      },
+      {
+        "episode": 30,
+        "seed": 8000
+      },
+      {
+        "episode": 42,
+        "seed": 9200
+      },
+      {
+        "episode": 58,
+        "seed": 10800
+      },
+      {
+        "episode": 70,
+        "seed": 12000
+      },
+      {
+        "episode": 86,
+        "seed": 13600
+      },
+      {
+        "episode": 98,
+        "seed": 14800
+      },
+      {
+        "episode": 3,
+        "seed": 5300
+      },
+      {
+        "episode": 15,
+        "seed": 6500
+      },
+      {
+        "episode": 31,
+        "seed": 8100
+      },
+      {
+        "episode": 43,
+        "seed": 9300
+      },
+      {
+        "episode": 59,
+        "seed": 10900
+      },
+      {
+        "episode": 71,
+        "seed": 12100
+      },
+      {
+        "episode": 87,
+        "seed": 13700
+      },
+      {
+        "episode": 99,
+        "seed": 14900
+      }
+    ]
+  }
+}

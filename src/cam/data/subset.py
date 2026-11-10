@@ -9,16 +9,36 @@ import time
 import h5py
 
 from cam.data.demonstrations import SCHEMA, random_select
-from cam.data.extract import validate_dataset
+from cam.data.extract import load_dataset_manifest, validate_dataset
 from cam.io import read, sha256, write
 
 
 def choose(manifest, task, count):
     rows = manifest["tasks"][task]["episodes"]
+    if manifest["benchmark"] == "robomemarena":
+        from cam.interface.robomemarena.data import release, select
+
+        return select(rows, count, "robomemarena", task, release()["tasks"][task])
     return random_select(rows, count, manifest["benchmark"], task)
 
 
-def subset(source, output, count=25, tasks=None, allow_fewer=False, resume=False):
+def selected_rows(pool, selection, task, count):
+    """Match both episode and seed; never silently replace a published assignment."""
+    from cam.interface.registry import benchmark_matches
+    if selection.get("schema") != "cam-demo-selection/1" or not benchmark_matches(pool["benchmark"], selection.get("benchmark")):
+        raise ValueError("Selection benchmark or schema differs from the pool")
+    requested = selection.get("tasks", {}).get(task, [])
+    identities = [(int(row["episode"]), int(row["seed"])) for row in requested]
+    if len(identities) != count or len(set(identities)) != count:
+        raise ValueError(f"{task}: selection must contain exactly {count} distinct identities")
+    available = {(int(row["episode"]), int(row["seed"])): row for row in pool["tasks"][task]["episodes"]}
+    if set(identities) - set(available):
+        raise ValueError(f"{task}: selected episode/seed pair is absent from the pool")
+    return [available[key] for key in identities]
+
+
+def subset(source, output, count=25, tasks=None, allow_fewer=False, resume=False,
+           selection=None, validate_source=True):
     """Copy selected groups into self-contained H5s; originals remain unchanged.
 
     Selection is deterministic within this pool. It need not equal a selection
@@ -33,7 +53,9 @@ def subset(source, output, count=25, tasks=None, allow_fewer=False, resume=False
     if count < 1:
         raise ValueError("Subset count must be positive")
     manifest_hash = sha256(source / "manifest.json")
-    pool = validate_dataset(source)
+    pool = validate_dataset(source) if validate_source else load_dataset_manifest(source)
+    selection_path = Path(selection) if selection is not None else None
+    assignment = read(selection_path) if selection_path else None
     if pool.get("demonstration_schema") != SCHEMA:
         raise ValueError("Pool subsets require cam-demonstrations/2")
     tasks = list(tasks or pool["tasks"])
@@ -44,7 +66,8 @@ def subset(source, output, count=25, tasks=None, allow_fewer=False, resume=False
         available = len(pool["tasks"][task]["episodes"])
         if not available or (available < count and not allow_fewer):
             raise ValueError(f"{task}: requested {count} demos, only {available} available")
-        selected[task] = choose(pool, task, min(count, available))
+        selected[task] = (selected_rows(pool, assignment, task, count) if assignment is not None
+                          else choose(pool, task, min(count, available)))
     if sha256(source / "manifest.json") != manifest_hash:
         raise ValueError("Pool manifest changed during validation")
     manifest = deepcopy(pool)
@@ -52,12 +75,14 @@ def subset(source, output, count=25, tasks=None, allow_fewer=False, resume=False
     manifest["selection"] = {
         "count": count,
         "allow_fewer": bool(allow_fewer),
-        "rule": "deterministic uniform selection within the prepared pool",
+        "rule": "deterministic selection within the prepared pool; proportional scene-variant selection for RoboMemArena, uniform otherwise",
         "source_dataset": str(source),
         "source_manifest_sha256": manifest_hash,
         "source_selection": pool.get("selection"),
         "actual_counts": {task: len(rows) for task, rows in selected.items()},
     }
+    if selection_path:
+        manifest["selection"].update(rule="Exact published episode/seed list", selection_sha256=sha256(selection_path))
     partial = output / "manifest.partial.json"
     if resume:
         previous = read(output / "manifest.json" if (output / "manifest.json").exists() else partial)
@@ -66,6 +91,8 @@ def subset(source, output, count=25, tasks=None, allow_fewer=False, resume=False
                 raise ValueError(f"Subset resume inputs changed: {key}")
         manifest["created"] = previous["created"]
     output.mkdir(parents=True, exist_ok=resume)
+    if selection_path:
+        shutil.copy2(selection_path, output / "selected_25.json")
     write(partial, manifest)
     for task, rows in selected.items():
         item = deepcopy(pool["tasks"][task])
@@ -101,15 +128,18 @@ def subset(source, output, count=25, tasks=None, allow_fewer=False, resume=False
         if "replay" in item:
             item["replay"]["selected"] = len(rows)
             if pool["benchmark"] == "robomemarena":
-                from cam.benchmarks.robomemarena_data import release, strata
+                from cam.interface.robomemarena.data import release, strata
 
                 item["replay"]["strata"] = strata(pool["tasks"][task]["episodes"], rows, release()["tasks"][task])
         for row in rows:
             if not row.get("video"):
                 continue
             video = source / row["video"]
-            if not video.resolve().is_relative_to(source) or not video.is_file():
-                raise ValueError("Preview video must exist inside the source pool")
+            if not video.resolve().is_relative_to(source):
+                raise ValueError("Preview video must be inside the source pool")
+            if not video.is_file():
+                # Downloads may omit optional previews; H5 contains the frames.
+                continue
             target = output / row["video"]
             target.parent.mkdir(parents=True, exist_ok=True)
             shutil.copy2(video, target)

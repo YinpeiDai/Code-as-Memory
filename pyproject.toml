@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "code-as-memory"
 version = "0.1.0"
-description = "Code-as-Memory: learn reusable Python programs from demonstrations and interaction"
+description = "Robot Memory: develop and evaluate reusable robot programs"
 readme = "README.md"
 requires-python = ">=3.11,<3.12"
 license = "Apache-2.0"
@@ -14,20 +14,17 @@ dependencies = ["numpy>=1.26,<2", "scipy>=1.11", "h5py>=3.10", "Pillow>=10", "im
 
 [project.optional-dependencies]
 dev = ["pytest>=8", "matplotlib>=3.8"]
-robomme = ["robomme"]
-
-[tool.uv.sources]
-robomme = {path = "third_party/robomme_benchmark"}
-mani-skill = {git = "https://github.com/YinpeiDai/ManiSkill.git", rev = "07be6fbc66350ddca200abfb0a11b692f078f7fd"}
+data = ["huggingface_hub>=1,<3"]
 
 [project.scripts]
 cam = "cam.cli:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]
+exclude = ["cam.legacy", "cam.legacy.*"]
 
 [tool.setuptools.package-data]
-cam = ["prompts/*.md", "prompts/modes/*.md", "prompts/clarifications/*.md", "prompts/benchmarks/*.md", "benchmarks/*.md", "benchmarks/mikasa_robo_api/*.md", "benchmarks/mikasa_robo_api/*.json", "benchmarks/metadata/**/*.json", "web/*"]
+cam = ["prompts/**/*.md", "prompts/*.md", "interface/**/*.md", "interface/**/*.json", "web/*"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

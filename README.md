@@ -1,94 +1,156 @@
-# Code-as-Memory (CaM)
+# CaM · Robot Memory
 
-Learn reusable Python programs from demonstrations, interaction, or both.
-A coding agent develops the program; the frozen program performs perception,
-decisions, and control with **zero model calls during evaluation**.
+Build robot memory from demonstrations and interaction. A coding agent develops a
+Python program that remembers what it observes, makes decisions, and controls the
+robot. The frozen program runs with **no model calls during evaluation**.
 
-RoboMME, MIKASA-Robo, and RMBench have runnable adapters with pinned simulator environments. `mikasa_robo_v2` runs the official MIKASA-Robo
-protocol with RoboMME-style 256x256 RGB-D, calibration and joint observations,
-replayed 50-demo datasets, and the opt-in `robot.dry_run` kinematic check (see
-[benchmarks](docs/benchmarks.md#mikasa-robo-v2)). Claude Code and Codex use the same task
-prompt, six isolated CaM tools, attempt accounting, and result format.
+Four benchmarks, one development harness, and a browsable record of every experiment.
 
-```text
-Raw training data → validated demonstrations → isolated coding agent
-  → frozen Python policy → held-out evaluation → logs, videos, reports, website
-```
+| Benchmark | Setting | Successful / evaluated | Success rate |
+|---|---|---:|---:|
+| RoboMME | 25 demonstrations | 795 / 800 | **99.38%** |
+| MIKASA-Robo | 50 demonstrations + 50 interactions | 4,444 / 4,500 | **98.76%** |
+| RMBench | 25 demonstrations | 927 / 1,000 | **92.70%** |
+| RMBench | Up to 50 demonstrations | 1,000 / 1,000 | **100.00%** |
+| RoboMemArena | 25 demonstrations | 1,070 / 1,300 | **82.31%** |
+| RoboMemArena | Up to 50 demonstrations | 1,179 / 1,300 | **90.69%** |
+| RoboMemArena | Up to 50 demonstrations + matching interactions | 1,271 / 1,300 | **97.77%** |
 
-## Get started
+These are the published experiments, with complete scored coverage. Prompt and
+interface revisions differ between some settings. MIKASA includes 80 imported
+tasks with result records only. [Results and provenance](docs/results.md) explain
+coverage, actual demonstration counts, and comparison limits.
 
-Use Linux, Python 3.11, Bubblewrap, strace, ffmpeg, and an NVIDIA/Vulkan setup.
-Install and authenticate your chosen coding client separately.
+## Start with a published solution
+
+Use Linux, Python 3.11, an NVIDIA GPU, and `uv`. Install `bubblewrap`, `strace`, and
+`ffmpeg` through your system package manager.
 
 ```bash
 git clone --recurse-submodules https://github.com/YinpeiDai/Code-as-Memory.git
 cd Code-as-Memory
-uv sync --locked --extra dev --extra robomme
+uv sync --locked --inexact --extra dev
 source .venv/bin/activate
-cam doctor --simulator
+
+# Install only the benchmark you want to run.
+uv sync --locked --project envs/robomme --python 3.11
+cam doctor --benchmark robomme
+
+cam prepare validate_runs --solution solutions/robomme/demo_only_25 --tasks BinFill
+# Set RUN to the task run path printed by prepare.
+cam evaluate "$RUN" --budgets 0 --gpus 0 1 --workers-per-gpu 5
 ```
 
-Follow the [first-run guide](docs/getting_started.md) for data download, model
-configuration, and a complete one-task experiment. The core workflow is:
+To evaluate **all 16 RoboMME tasks** (all 800 held-out episodes):
 
 ```bash
-cam extract --benchmark robomme --raw-data /path/to/raw_h5 \
-  --output data/robomme_25_rgbd --tasks ButtonUnmaskSwap --count 25
-cam prepare runs --dataset data/robomme_25_rgbd \
-  --config configs/robomme/demos_claude_code.json --tasks ButtonUnmaskSwap
-
-# Set run_dir to the leaf path printed by prepare.
-cam learn "$run_dir" --gpus 0 --workers-per-gpu 1
-cam evaluate "$run_dir" --budgets 0 --gpus 0 --workers-per-gpu 4
-cam report "$run_dir"
-cam site --runs "$run_dir" --datasets data/robomme_25_rgbd --output sites/robomme
-cam serve sites/robomme --host 127.0.0.1 --port 8910
+python scripts/evaluate_solutions.py solutions/robomme/demo_only_25 \
+  --output validate_runs/robomme_full --gpus 0 1 --workers-per-gpu 5
 ```
 
-Edit the example configuration for your account before preparing. `learn` starts
-paid model sessions. Evaluation is a separate host command after policy freeze;
-the coding agent cannot trigger it or access test feedback.
+Use any setting directory from the table below with the same command. It evaluates
+one task at a time with five episode workers on each GPU, keeping the limit shared
+across the whole batch. `--resume BATCH` continues its unchanged preparations.
 
-## Experiments and documentation
+Published solutions need simulator assets, but no demonstrations, coding client,
+or model credentials. Each setting has its own README with results, prompt
+provenance, and a runnable command.
+
+| Benchmark | Environment | Published solutions | Development plan |
+|---|---|---|---|
+| [RoboMME](docs/benchmarks/robomme/README.md) | [envs/robomme](envs/robomme/README.md) | [demo_only_25](solutions/robomme/demo_only_25/README.md) | `configs/robomme/experiments/demo_only_25.json` |
+| [MIKASA-Robo](docs/benchmarks/mikasa_robo/README.md) | [envs/mikasa_robo](envs/mikasa_robo/README.md) | [demo_interaction_50](solutions/mikasa_robo/demo_interaction_50/README.md) | `configs/mikasa_robo/experiments/demo_interaction_50.json` |
+| [RMBench](docs/benchmarks/rmbench/README.md) | [envs/rmbench](envs/rmbench/README.md) | [25 demos](solutions/rmbench/demo_only_25/README.md) · [50 demos](solutions/rmbench/demo_only_50/README.md) | `configs/rmbench/experiments/demo_only_50.json` |
+| [RoboMemArena](docs/benchmarks/robomemarena/README.md) | [envs/robomemarena](envs/robomemarena/README.md) | [25 demos](solutions/robomemarena/demo_only_25/README.md) · [50 demos](solutions/robomemarena/demo_only_50/README.md) · [interaction](solutions/robomemarena/demo_interaction_50/README.md) | `configs/robomemarena/experiments/demo_interaction_50.json` |
+
+## Reproduce development
+
+Download a prepared demonstration pool, choose a benchmark plan from the table,
+and supply the data directory and the directory for your logs.
+Authenticate Claude Code or Codex separately; the supplied plans use Claude Code
+with Opus 5.5. Edit the referenced client configuration for your account before
+launching paid development sessions.
+
+```bash
+uv sync --locked --inexact --extra data
+DATA="$PWD/public_runs/demos/mikasa_robo"
+cam download-demos --benchmark mikasa_robo --output "$DATA" --videos
+LOGS="$PWD/validate_runs/mikasa_reproduction"
+
+# Eight concurrent coding jobs; all run records stay under LOGS.
+python scripts/develop_batch.py start \
+  configs/mikasa_robo/experiments/demo_interaction_50.json \
+  --dataset "$DATA" --output "$LOGS" --workers 8 --gpus 0 1
+```
+
+The [four datasets](docs/getting_started.md#demonstration-packages) contain the
+released pools and `selected_25.json`. For a 25-demo plan, preparation extracts
+those exact identities locally; download the larger pool only once. Videos are
+optional. Add `--tasks TASK_NAME` to develop selected tasks. For automatic evaluation as
+policies finish and freeze, use:
+
+```bash
+python scripts/develop_batch.py start \
+  configs/mikasa_robo/experiments/demo_interaction_50.json \
+  --dataset "$DATA" --output "$LOGS" --workers 8 --gpus 0 1 \
+  --evaluate-on-freeze --evaluation-workers-per-gpu 5
+```
+
+**Defaults: eight development jobs; five evaluation episode workers per GPU.**
+On GPUs 0 and 1, evaluation uses up to ten episode workers. Training simulators
+use a shared GPU lease independently of the coding-job count.
+
+Prompts share a core and learning-mode instructions, then add each benchmark’s
+public interface. MIKASA and RoboMemArena also have their own demo-first
+interaction guidance. RMBench demo-only uses the shared prompt and its public
+interface without an additional motion supplement. Exact prompts are saved in
+every run. See [prompt composition](src/cam/prompts/README.md) and the
+[reproduction guide](docs/reproducing.md).
+
+## Inspect experiments
+
+```bash
+# A complete archive, or any directory containing your new task runs.
+cam site --data-root public_runs
+cam serve public_runs/website --port 8935
+
+cam site --data-root validate_runs
+cam serve validate_runs/website --port 8936
+```
+
+The website provides live development and evaluation progress, consolidated
+results, and galleries for demonstrations, development logs, and evaluation.
+Gallery cards open a separate page; episode numbers and previous/next navigate
+within that page. The selected directory holds its progress files, results,
+website metadata, and preview cache. [Website guide](docs/website.md).
+
+To check every published policy on five complete episodes, saving logs and JSON
+results without videos or observation recordings:
+
+```bash
+cam check-solutions --output validate_runs/eval_sanity_check \
+  --episodes 5 --gpus 0 1 --workers-per-gpu 10
+```
+
+This dedicated sanity check defaults to 10 workers per GPU and checks available
+GPU memory before admission. Its results stay separate from published scores.
+
+## Repository map
 
 ```text
-runs/<benchmark>/<task>/<agent-model>/<setting>/<timetag>/
+src/cam/interface/<benchmark>/  Simulator adapters, public APIs, task metadata
+src/cam/harness/                Preparation, isolated development, evaluation
+src/cam/prompts/                Shared prompts and benchmark guidance
+envs/<benchmark>/              Four independent simulator environments
+configs/<benchmark>/           Client settings and reproducible experiment plans
+configs/solutions/<benchmark>/  Policy schemas, checksums, provenance
+solutions/<benchmark>/         Final Python programs and setting READMEs
+docs/                          Setup, reproduction, results, website, architecture
+public_runs/ · validate_runs/   Downloaded or generated experiment artifacts
 ```
 
-Short names include `cc-opus5.5` (Claude Code) and `cx-gpt6.1-sol` (Codex).
-Settings are `demo_only`, `interaction_only`, `demo_interaction_v1`, and
-`demo_interaction_v2`. For mode `both`, choose `both_protocol: "v1"` for free use
-of demos and interaction, or `"v2"` for demos first and interaction to verify
-uncertainties. Both use the same six-tool harness. See the
-[two prompt versions and example commands](docs/demo_interaction.md). Every run
-gets a README with its settings, artifact paths, commands, and filesystem access.
-Datasets, runs, logs, and generated sites stay outside version control.
+[Installation and data](docs/getting_started.md) ·
+[Reproduction](docs/reproducing.md) · [Architecture](docs/architecture.md) ·
+[Running solutions](docs/solutions.md)
 
-| Guide | Contents |
-|---|---|
-| [First run](docs/getting_started.md) | Install, download, develop, evaluate, view the website |
-| [MIKASA-Robo v2 setup](docs/mikasa_v2_setup.md) | Run the 50-demo RGB-D experiment on another machine |
-| [Reproducing experiments](docs/reproducing.md) | Selection, settings, learner access, held-out test rules |
-| [Demo + interaction v1/v2](docs/demo_interaction.md) | Free evidence choice versus demos first; same harness |
-| [Run layout and recovery](docs/run_layout.md) | Logs, every code version, checkpoints, resume and retries |
-| [Statistics](docs/statistics.md) | Complete/partial rates, efficiency, development cost |
-| [Benchmark protocols](docs/benchmarks.md) | Sensors, actions, data selection, simulator builds |
-| [Architecture](docs/architecture.md) | Components, client isolation, adding benchmarks |
-| [Validation](docs/validation.md) | Tests, native checks, completed ButtonUnmaskSwap experiment |
-| [Historical selection](docs/ROBOMME_25_DEMO_SEEDS.md) | The 25-demo sampling rule and original provenance |
-| [Prompt comparison](docs/prompt_comparison.md) | Differences from the earlier CAP protocols |
-
-The historical regular RoboMME result was **795/800 (99.375%)**, from the original
-runner. Its [logs and rollouts](https://huggingface.co/datasets/Yinpei/robomme-CaM-log-rollout)
-are reference evidence; they do not initialize new policies. The current CaM
-runner has completed **50/50 ButtonUnmaskSwap test episodes** with Claude Code /
-Opus 5.5; a full 800-episode reproduction remains outstanding. Demo-only pilots
-on 13 further tasks (5 MIKASA-Robo, 4 RMBench, 4 RoboMemArena) are listed in
-[validation](docs/validation.md#multi-benchmark-pilots-2026-11-07).
-
-RoboMME-Plus is a protocol draft; ReMemBench and ActiveArena are planned. Run `cam benchmarks`
-for status. Website code is in `src/cam/web/` (`explorer.js`: annotated rollout explorer and
-development log), with its builder and server in `src/cam/reporting/site.py`
-(`trace.py`, `devlog.py`).
-
-Apache-2.0. See [NOTICE](NOTICE) and [source provenance](docs/migration_sources.json).
+Apache-2.0. Benchmark code and assets retain their upstream licenses; see [NOTICE](NOTICE).

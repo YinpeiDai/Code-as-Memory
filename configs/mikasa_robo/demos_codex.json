@@ -2,7 +2,7 @@
   "benchmark": "mikasa_robo",
   "mode": "demos",
   "budget": 0,
-  "depth": false,
+  "depth": true,
   "builtin_demo": false,
   "max_decisions": 40,
   "max_action_steps": 2200,
@@ -14,5 +14,7 @@
     "reasoning_effort": "high",
     "timeout": 21600
   },
-  "training_seed_count": 3
+  "training_seed_count": null,
+  "physics_backend": "cpu",
+  "training_seed_policy": "demo_cycle"
 }

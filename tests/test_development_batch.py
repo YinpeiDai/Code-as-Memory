@@ -13,8 +13,15 @@ batch = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(batch)
 
 
-def setup_dataset(tmp_path, name="mikasa_robo_v2", count=50):
-    config = json.loads((ROOT / f"configs/{name}/both_v2_claude_code.json").read_text())
+def batch_protocol(config):
+    from cam.config import RunConfig
+    return RunConfig.from_dict(config).both_protocol
+
+
+def setup_dataset(tmp_path, name="mikasa_robo", count=50):
+    config = json.loads((ROOT / f"configs/{name}/" / ("both_claude_code.json" if name in ("mikasa_robo", "robomemarena") else "both_v2_claude_code.json")).read_text())
+    if name == "robomemarena" and count == 25:
+        config.update(budget=25, training_seed_count=25, training_seed_policy="disjoint_once")
     path = tmp_path / "dataset"
     path.mkdir()
     item = {"datasets": [str(path)], "tasks": ["Example"], "demo_count": count}
@@ -25,7 +32,7 @@ def setup_dataset(tmp_path, name="mikasa_robo_v2", count=50):
     return config, item, manifest, path
 
 
-@pytest.mark.parametrize("name,count", [("mikasa_robo", 25), ("mikasa_robo_v2", 50)])
+@pytest.mark.parametrize("name,count", [("robomemarena", 25), ("mikasa_robo", 50)])
 def test_explicit_budgets_and_legacy_default(tmp_path, name, count):
     config, item, _, path = setup_dataset(tmp_path, name, count)
     if count == 25:
@@ -44,7 +51,7 @@ def test_incomplete_or_mismatched_data_cannot_start(tmp_path, fault):
     elif fault == "missing_task":
         item["tasks"].append("Missing")
     elif fault == "wrong_benchmark":
-        manifest["benchmark"] = "mikasa_robo"
+        manifest["benchmark"] = "robomme"
     elif fault == "wrong_depth":
         manifest["depth"] = False
     elif fault == "wrong_budget":
@@ -52,19 +59,9 @@ def test_incomplete_or_mismatched_data_cannot_start(tmp_path, fault):
     if fault != "partial":
         (path / "manifest.json").write_text(json.dumps(manifest))
     with pytest.raises(ValueError):
-        batch.data_assignment("mikasa_robo_v2", item, config)
+        batch.data_assignment("mikasa_robo", item, config)
 
 
-def test_new_plan_reuses_exact_prior_tasks_and_fifty_fifty():
-    old = json.loads((ROOT / "configs/experiments/mikasa_25_newseeds_10tasks.json").read_text())
-    new = json.loads((ROOT / "configs/experiments/mikasa_v2_50_newseeds_10tasks.json").read_text())
-    item = new["benchmarks"]["mikasa_robo_v2"]
-    assert item["tasks"] == old["benchmarks"]["mikasa_robo"]["tasks"]
-    assert len(item["tasks"]) == 10 and item["demo_count"] == 50 and item["require_prepared_data"]
-    config = json.loads((ROOT / item["config"]).read_text())
-    assert config["budget"] == config["training_seed_count"] == 50
-    assert config["coding"]["agent"] == "claude_code"
-    assert config["coding"]["model"] == "us.anthropic.claude-opus-5-5"
 
 
 def test_start_rejects_partial_data_before_creating_batch_or_launching(tmp_path, monkeypatch):
@@ -73,7 +70,7 @@ def test_start_rejects_partial_data_before_creating_batch_or_launching(tmp_path,
     item["config"] = "config.json"
     (tmp_path / item["config"]).write_text(json.dumps(config))
     plan = tmp_path / "plan.json"
-    plan.write_text(json.dumps({"benchmarks": {"mikasa_robo_v2": item}}))
+    plan.write_text(json.dumps({"benchmarks": {"mikasa_robo": item}}))
     monkeypatch.setattr(batch, "ROOT", tmp_path)
 
     def launch_forbidden(*args, **kwargs):
@@ -85,68 +82,79 @@ def test_start_rejects_partial_data_before_creating_batch_or_launching(tmp_path,
     assert not (tmp_path / "outputs").exists()
 
 
-def test_cpu_interaction_plan_retains_assignment_and_pins_backend():
-    from cam.config import RunConfig
-
-    old = json.loads((ROOT / "configs/experiments/mikasa_v2_50_newseeds_10tasks.json").read_text())
-    plan = json.loads((ROOT / "configs/experiments/mikasa_v2_cpu_50_demoseeds_10tasks.json").read_text())
-    item = plan["benchmarks"]["mikasa_robo_v2"]
-    original = old["benchmarks"]["mikasa_robo_v2"]
-    assert {k: v for k, v in item.items() if k != "config"} == {
-        k: v for k, v in original.items() if k != "config"
-    }
-    config = json.loads((ROOT / item["config"]).read_text())
-    assert RunConfig.from_dict(config).physics_backend == "cpu"
-    assert config["training_seed_policy"] == "demo_cycle"
-    assert config["training_seed_count"] == config["budget"] == item["demo_count"] == 50
-    previous = json.loads((ROOT / original["config"]).read_text())
-    changed = {"physics_backend", "training_seed_policy"}
-    assert {k: v for k, v in config.items() if k not in changed} == {
-        k: v for k, v in previous.items() if k not in changed
-    }
 
 
 def test_demo_seed_batch_requires_full_demo_assignment(tmp_path):
     config, item, _, _ = setup_dataset(tmp_path)
     config.update(training_seed_policy="demo_cycle", physics_backend="cpu")
-    assert batch.data_assignment("mikasa_robo_v2", item, config)["missing"] == []
+    assert batch.data_assignment("mikasa_robo", item, config)["missing"] == []
     config.update(training_seed_count=25, budget=25)
     with pytest.raises(ValueError, match="every assigned demonstration"):
-        batch.data_assignment("mikasa_robo_v2", item, config)
+        batch.data_assignment("mikasa_robo", item, config)
 
 
-def test_cpu_remaining_eighty_completes_task_set_without_duplicates():
-    from cam.benchmarks.registry import get_adapter
+def test_demo_seed_shortfall_pins_exact_attempt_count(tmp_path):
+    config, item, _, path = setup_dataset(tmp_path, "robomemarena", 32)
+    config.update(budget=50, training_seed_count=50, training_seed_policy="demo_cycle")
+    item.update(demo_count=50, demo_counts={"Example": 32}, interaction_counts={"Example": 32})
+    assignment = batch.data_assignment("robomemarena", item, config)
+    effective = batch.task_configuration(config, assignment, "Example")
+    assert effective["budget"] == effective["training_seed_count"] == 32
+    assert {k: v for k, v in effective.items() if k not in ("budget", "training_seed_count")} == {
+        k: v for k, v in config.items() if k not in ("budget", "training_seed_count")}
+    assert config["budget"] == 50
+    assert assignment["existing"] == {str(path): ["Example"]}
+    for fault in ({"Example": 31}, {"Example": 51}, {"Unknown": 32}, {"Example": True}):
+        item["interaction_counts"] = fault
+        with pytest.raises(ValueError):
+            batch.data_assignment("robomemarena", item, config)
+    item["interaction_counts"] = {"Example": 32}
+    config["training_seed_policy"] = "disjoint_once"
+    with pytest.raises(ValueError, match="demo-seed"):
+        batch.data_assignment("robomemarena", item, config)
 
-    ten = json.loads((ROOT / "configs/experiments/mikasa_v2_cpu_50_demoseeds_10tasks.json").read_text())["benchmarks"]["mikasa_robo_v2"]
-    remaining = json.loads((ROOT / "configs/experiments/mikasa_v2_cpu_50_demoseeds_remaining80.json").read_text())["benchmarks"]["mikasa_robo_v2"]
-    assert len(remaining["tasks"]) == len(set(remaining["tasks"])) == 80
-    assert set(remaining["tasks"]).isdisjoint(ten["tasks"])
-    assert set(remaining["tasks"]) | set(ten["tasks"]) == set(get_adapter("mikasa_robo_v2").tasks())
-    assert remaining["config"] == ten["config"]
-    assert remaining["demo_count"] == 50 and remaining["require_prepared_data"]
-    assert remaining["datasets"] == ["/nfs/turbo/coe-chaijy-unreplicated/daiyp/CaM/data/mikasa_robo_v2_50"]
 
+def test_robomemarena_demo_seed_plan_uses_actual_demos_once_each():
+    from cam.interface.registry import get_adapter
 
-def test_mikasa_demo_only_followup_has_fifty_demos_and_no_rollouts(tmp_path):
-    from cam.benchmarks.registry import get_adapter
-    from cam.config import RunConfig
-    from cam.prompts import render
-
-    plan = json.loads((ROOT / "configs/experiments/mikasa_v2_demos50_10tasks.json").read_text())
-    item = plan["benchmarks"]["mikasa_robo_v2"]
-    old = json.loads((ROOT / "configs/experiments/mikasa_25_newseeds_10tasks.json").read_text())
-    assert item["tasks"] == old["benchmarks"]["mikasa_robo"]["tasks"]
+    plan = json.loads((ROOT / "configs/robomemarena/experiments/demo_interaction_50.json").read_text())
+    item = plan["benchmarks"]["robomemarena"]
     config = json.loads((ROOT / item["config"]).read_text())
-    assert config["mode"] == "demos" and config["budget"] == 0
-    assert item["demo_count"] == 50 and config["depth"]
-    _, fake, _, _ = setup_dataset(tmp_path)
-    assert batch.data_assignment("mikasa_robo_v2", fake, config)["demo_count"] == 50
-    adapter = get_adapter("mikasa_robo_v2")
-    task = item["tasks"][0]
-    prompt = render(RunConfig.from_dict(config), task, [{"episode": i} for i in range(50)], [], adapter, adapter.interface(task, True))
-    for text in ("Assigned expert demonstrations: 50", "Zero simulator attempts are allowed", "Derive the memory representation", "candidate completion conditions", "safety_check", "pure offline"):
-        assert text in prompt
+    assert item["tasks"] == get_adapter("robomemarena").tasks()
+    assert len(item["tasks"]) == 26 and item["demo_count"] == 50
+    assert item["interaction_counts"] == item["demo_counts"] == {"T04_ButterNonEmptyDrawer": 32}
+    assert config["budget"] == config["training_seed_count"] == 50
+    assert config["training_seed_policy"] == "demo_cycle" and batch_protocol(config) == "demo_first"
+    assert config["coding"]["model"] == "us.anthropic.claude-opus-5-5"
+
+
+
+
+
+
+@pytest.mark.parametrize("count", [25, 50])
+def test_demo_only_accepts_assigned_count_without_interaction_identities(tmp_path, count):
+    _, item, _, path = setup_dataset(tmp_path, "robomemarena", count)
+    config = json.loads((ROOT / "configs/robomemarena/demos_claude_code.json").read_text())
+    item["require_prepared_data"] = True
+    assert batch.data_assignment("robomemarena", item, config) == {
+        "demo_count": count, "existing": {str(path): ["Example"]}, "missing": []}
+    item["tasks"].append("Missing")
+    with pytest.raises(ValueError, match="Complete the prepared demonstrations"):
+        batch.data_assignment("robomemarena", item, config)
+
+
+@pytest.mark.parametrize("count", [25, 50])
+def test_demo_only_plan_covers_every_robomemarena_task(count):
+    from cam.interface.registry import get_adapter
+
+    plan = json.loads((ROOT / f"configs/robomemarena/experiments/demo_only_{count}.json").read_text())
+    item = plan["benchmarks"]["robomemarena"]
+    assert item["tasks"] == get_adapter("robomemarena").tasks()
+    assert len(item["tasks"]) == 26 and item["demo_count"] == count
+    assert item["require_prepared_data"]
+    config = json.loads((ROOT / item["config"]).read_text())
+    assert config["mode"] == "demos" and config["budget"] == 0 and config["depth"]
 
 
 @pytest.mark.parametrize("fault", [None, "unfinished", "early_freeze", "changed_policy", "changed_checkpoint"])
@@ -178,10 +186,11 @@ def test_automatic_evaluation_requires_finished_full_budget_and_intact_policy(ru
 
 
 @pytest.mark.parametrize("evaluation_failure", [False, True])
-def test_evaluation_starts_while_other_tasks_learn_with_four_episode_workers(tmp_path, monkeypatch, evaluation_failure):
+@pytest.mark.parametrize("shortfall_config", [False, True])
+def test_evaluation_starts_while_other_tasks_learn_with_four_episode_workers(tmp_path, monkeypatch, evaluation_failure, shortfall_config):
     import threading
-    import cam.benchmarks.base
-    import cam.benchmarks.registry
+    import cam.interface.base
+    import cam.interface.registry
     import cam.reporting.report
     from cam.io import read, tree_hash, write
 
@@ -193,12 +202,14 @@ def test_evaluation_starts_while_other_tasks_learn_with_four_episode_workers(tmp
     plan = {"workers": 2, "gpus": [0, 1], "python": "python", "runs": str(tmp_path / "runs"),
             "tag": "test", "environment": {}, "harness_hash": tree_hash(harness),
             "evaluation": {"enabled": True, "workers_per_gpu": 2, "task_concurrency": 1},
-            "benchmarks": {"mikasa_robo_v2": {"tasks": list(names), "source": "fake", "source_hash": "source",
+            "benchmarks": {"mikasa_robo": {"tasks": list(names), "source": "fake", "source_hash": "source",
                 "asset_hashes": {}, "existing": {"dataset": list(names)}, "missing": [],
                 "config": "config.json", "demo_count": 50}}}
+    if shortfall_config:
+        plan["benchmarks"]["mikasa_robo"]["task_configs"] = {"Slow": "shortfall.json"}
     write(root / "plan.json", plan)
-    monkeypatch.setattr(cam.benchmarks.registry, "get_adapter", lambda *args: object())
-    monkeypatch.setattr(cam.benchmarks.base, "source_hash", lambda *args: "source")
+    monkeypatch.setattr(cam.interface.registry, "get_adapter", lambda *args: object())
+    monkeypatch.setattr(cam.interface.base, "source_hash", lambda *args: "source")
     monkeypatch.setattr(batch, "boundary_check", lambda *args: None)
     monkeypatch.setattr(batch, "frozen_evaluation", lambda *args: {"budget": 50, "expected": 50, "program_hash": "hash"})
     def report(run):
@@ -220,7 +231,12 @@ def test_evaluation_starts_while_other_tasks_learn_with_four_episode_workers(tmp
         def wait(self):
             argv = self.argv
             if "prepare" in argv:
-                self.log.write(json.dumps({"runs": [{"root": str(runs[t]), "task": t} for t in names]}).encode())
+                assigned = argv[argv.index("--tasks") + 1:]
+                expected_config = "shortfall.json" if shortfall_config and assigned == ["Slow"] else "config.json"
+                assert argv[argv.index("--config") + 1] == expected_config
+                if shortfall_config:
+                    assert len(assigned) == 1
+                self.log.write(json.dumps({"runs": [{"root": str(runs[t]), "task": t} for t in assigned]}).encode())
             elif "learn" in argv:
                 task = Path(argv[argv.index("learn") + 1]).name
                 if task == "Slow":

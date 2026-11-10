@@ -8,14 +8,17 @@ ROOT = Path(__file__).parent
 
 # Explicit user-authorized exceptions only; never generate these from a scorer.
 TASK_CLARIFICATIONS = {
-    ("mikasa_robo", "SeqOfColors3-VLA-v0"): "clarifications/mikasa_robo_seq_of_colors3.md",
-    ("mikasa_robo_v2", "SeqOfColors3-VLA-v0"): "clarifications/mikasa_robo_seq_of_colors3.md",
+    ("mikasa_robo", "SeqOfColors3-VLA-v0"): "mikasa_robo/seq_of_colors3.md",
+    ("mikasa_robo_v2", "SeqOfColors3-VLA-v0"): "mikasa_robo/seq_of_colors3.md",
 }
 
 # Static, task-independent public-interface guidance; no diagnostic input.
 BENCHMARK_MODE_GUIDANCE = {
-    ("mikasa_robo", "both", "v2"): "benchmarks/mikasa_robo_both_v2.md",
-    ("mikasa_robo_v2", "both", "v2"): "benchmarks/mikasa_robo_both_v2.md",
+    # RMBench uses the shared demo-only prompt, including its final offline
+    # code review. Its retired supplement is archived in legacy/rmbench/prompts/.
+    ("mikasa_robo", "both", "demo_first"): "mikasa_robo/both.md",
+    ("mikasa_robo_v2", "both", "v2"): "mikasa_robo/both.md",
+    ("robomemarena", "both", "demo_first"): "robomemarena/both.md",
 }
 
 
@@ -83,7 +86,7 @@ def render(config, task, episodes, training_episodes=None, adapter=None, interfa
     mode_file = config.mode
     protocol = ""
     if config.mode == "both":
-        mode_file = f"both_{config.both_protocol}"
+        mode_file = "both_v2" if config.both_protocol == "demo_first" else f"both_{config.both_protocol}"
         protocol = (
             f"Demo + interaction protocol: {config.both_protocol} "
             f"({BOTH_PROTOCOLS[config.both_protocol]}).\n"
@@ -104,7 +107,7 @@ def render(config, task, episodes, training_episodes=None, adapter=None, interfa
     physics = (
         f"Physics backend: {config.physics_backend or 'gpu'} for both training and held-out execution; "
         "host-selected and fixed for this run. Rendering uses the GPU independently.\n"
-        if config.benchmark == "mikasa_robo_v2" else ""
+        if config.benchmark in ("mikasa_robo", "mikasa_robo_v2") else ""
     )
     initialization = (
         "Continue the supplied existing Python policy for this same task in a user-requested repair. "
@@ -124,22 +127,25 @@ Use only the CaM tools: command, read_image, usage, snapshot, validate, rollout.
 The writable directory is /workspace; save analysis files in /workspace/scratch.
 Read the supplied api_reference before implementing the policy.
 """
-    guide = getattr(adapter, "guide", "robomme.md") if adapter is not None else "robomme.md"
-    benchmark = (ROOT.parent / "benchmarks" / guide).read_text()
+    guide = getattr(adapter, "guide", "robomme/guide.md") if adapter is not None else "robomme/guide.md"
+    benchmark = (ROOT.parent / "interface" / guide).read_text()
     if config.benchmark == "robomme_plus":
-        benchmark += "\n" + (ROOT.parent / "benchmarks/robomme_plus.md").read_text()
+        benchmark += "\n" + (ROOT.parent / "interface/robomme/plus.md").read_text()
     if interface is not None and getattr(adapter, "describe_interface", False):
         benchmark += "\n" + describe_interface(interface)
     # Static public guidance and authorized corrections only. Never read
     # source-derived task guides, scorer contracts or diagnostic outcomes.
     clarification = task_clarification(config.benchmark, task)
     guidance = benchmark_mode_guidance(config)
+    mode_text = (ROOT / "modes" / f"{mode_file}.md").read_text()
+    if config.both_protocol == "demo_first":
+        mode_text = mode_text.replace("Demonstrations + interaction v2:", "Demonstrations + interaction:", 1)
     return "\n\n".join(
         [
             assignment,
             *([clarification["text"]] if clarification else []),
             (ROOT / "core.md").read_text(),
-            (ROOT / "modes" / f"{mode_file}.md").read_text(),
+            mode_text,
             *([guidance["text"]] if guidance else []),
             benchmark,
         ]

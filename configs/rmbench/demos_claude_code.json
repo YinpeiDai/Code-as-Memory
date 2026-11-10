@@ -2,7 +2,7 @@
   "benchmark": "rmbench",
   "mode": "demos",
   "budget": 0,
-  "depth": false,
+  "depth": true,
   "builtin_demo": false,
   "max_decisions": 40,
   "max_action_steps": 3600,

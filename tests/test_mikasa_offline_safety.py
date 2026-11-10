@@ -7,7 +7,7 @@ import numpy as np
 import pytest
 from scipy.spatial.transform import Rotation
 
-from cam.benchmarks.mikasa_robo_api.offline import _kinematics, safety_check
+from cam.interface.mikasa_robo.api.offline import _kinematics, safety_check
 from cam.harness.prepare import make_runtime
 
 Q = np.array([0, .3, 0, -1.9, 0, 2.2, .7])
@@ -105,7 +105,7 @@ state = {"joints": [0,.3,0,-1.9,0,2.2,.7], "joint_velocities": [0]*7}
 result = safety_check(state, [0]*6)
 assert result["estimated_drive_torque"]["values_nm"] == [0]*7
 assert not any(m in sys.modules for m in ["mani_skill", "sapien", "torch", "gymnasium"])
-assert importlib.util.find_spec("cam.benchmarks") is None
+assert importlib.util.find_spec("cam.interface") is None
 writer = BytesIO()
 robot = Robot(None, BytesIO(), writer, {"motion_preview": {"schema": "test"}})
 assert robot.safety_check(state, [0]*6) == result
@@ -121,7 +121,7 @@ print(json.dumps({"passed": True, "simulator_used": result["simulator_used"]}))
 
 def test_exported_robot_geometry_matches_installed_urdf():
     import hashlib
-    from cam.benchmarks.mikasa_robo_api.offline import MODEL
+    from cam.interface.mikasa_robo.api.offline import MODEL
 
     root = Path(__file__).resolve().parents[1]
     urdf = root / "envs/mikasa_robo/.venv/lib/python3.11/site-packages/mani_skill/assets/robots/panda/panda_v2.urdf"

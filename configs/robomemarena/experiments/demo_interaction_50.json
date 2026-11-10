@@ -1,0 +1,47 @@
+{
+  "selection_reason": "All 26 tasks with released RGB-D demos and demo-first development. One attempt per assigned demo identity: 50 per task, except T04 uses its actual 32. Use every attempt; no new seeds. CPU policy execution, official simulator and scoring; no test feedback reaches learners.",
+  "benchmarks": {
+    "robomemarena": {
+      "config": "configs/robomemarena/both_claude_code.json",
+      "datasets": [
+        "public_runs/demos/robomemarena"
+      ],
+      "demo_count": 50,
+      "require_prepared_data": true,
+      "tasks": [
+        "T01_CookiesTomatoBasket",
+        "T02_ButterPopcornBasket",
+        "T03_CreamPuddingBasket",
+        "T04_ButterNonEmptyDrawer",
+        "T05_ButterEmptyDrawer",
+        "T06_PourSauceCookiesTwice",
+        "T07_PourSauceFrypanTwice",
+        "T08_ChocolateFrypanPourSauceTwice",
+        "T09_ButterFrypanPourSauceTwice",
+        "T10_PourWineMugTwice",
+        "T11_CookiesTopButterMiddle",
+        "T12_CookiesChocolateMiddleDrawer",
+        "T13_CookiesButterMiddleDrawer",
+        "T14_CookiesChocolateDrawers",
+        "T15_ButterFrypanPourMilkTwice",
+        "T16_PourMilkMugTwice",
+        "T17_ButterChocolateMiddleDrawer",
+        "T18_ChocolateButterCabinet",
+        "T19_SauceMilkJuiceCabinet",
+        "T20_CookiesChocolateMicrowave",
+        "T21_ButterChocolateMicrowave",
+        "T22_PourSauceCookiesMicrowave",
+        "T23_CreamPopcornMicrowave",
+        "T24_CookiesPopcornMicrowave",
+        "T25_ButterCreamPlate",
+        "T26_ChocolateCreamPlate"
+      ],
+      "demo_counts": {
+        "T04_ButterNonEmptyDrawer": 32
+      },
+      "interaction_counts": {
+        "T04_ButterNonEmptyDrawer": 32
+      }
+    }
+  }
+}

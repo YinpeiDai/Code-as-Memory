@@ -54,12 +54,12 @@ def create(path, benchmark, task, declared, depth, source):
 
 
 class Episode:
-    """Stream one episode's declared arrays in chunks of frames."""
+    """Stream declared arrays; length=None grows until the recorded episode ends."""
 
     def __init__(self, h5, declared, episode, length, attrs, static=None):
         if set(attrs) != EPISODE_ATTRS - {"episode"}:
             raise ValueError("Episode attributes must be exactly " + str(sorted(EPISODE_ATTRS)))
-        self.declared, self.length, self.filled = declared, int(length), 0
+        self.declared, self.length, self.filled = declared, None if length is None else int(length), 0
         self.group = h5.create_group(f"episode_{int(episode)}")
         self.group.attrs.update(episode=int(episode), **{k: ("" if v is None else v) for k, v in attrs.items()})
         static = static or {}
@@ -74,10 +74,11 @@ class Episode:
             shape = tuple(spec["shape"])
             self.group.create_dataset(
                 name,
-                shape=(self.length, *shape),
+                shape=(self.length or 0, *shape),
                 dtype=np.dtype(spec["dtype"]),
                 chunks=(1, *shape) if shape else None,
                 compression="lzf" if shape else None,
+                **({"maxshape": (None, *shape)} if self.length is None else {}),
             )
 
     def append(self, arrays):
@@ -89,18 +90,20 @@ class Episode:
         if len(count) != 1:
             raise ValueError("Frame arrays have different lengths")
         count = count.pop()
-        if self.filled + count > self.length:
+        if self.length is not None and self.filled + count > self.length:
             raise ValueError("More frames than declared")
         arrays = {**arrays, "step": np.arange(self.filled, self.filled + count)}
         for name, value in arrays.items():
             spec = self.declared["frame"][name]
             value = np.asarray(value)
             _check(name, value, spec, (count,))
+            if self.length is None:
+                self.group[name].resize(self.filled + count, axis=0)
             self.group[name][self.filled : self.filled + count] = value
         self.filled += count
 
     def close(self):
-        if self.filled != self.length:
+        if self.length is not None and self.filled != self.length:
             raise ValueError(f"Episode has {self.filled} of {self.length} frames")
 
 

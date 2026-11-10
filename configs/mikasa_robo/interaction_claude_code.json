@@ -1,8 +1,8 @@
 {
   "benchmark": "mikasa_robo",
   "mode": "interaction",
-  "budget": 20,
-  "depth": false,
+  "budget": 50,
+  "depth": true,
   "builtin_demo": false,
   "max_decisions": 40,
   "max_action_steps": 2200,
@@ -16,5 +16,7 @@
     "aws_profile": "sagemaker",
     "aws_region": "us-east-1"
   },
-  "training_seed_count": 3
+  "training_seed_count": 50,
+  "physics_backend": "cpu",
+  "training_seed_policy": "demo_cycle"
 }

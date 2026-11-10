@@ -1,8 +1,8 @@
 import h5py
 import numpy as np
 import pytest
-from cam.benchmarks.robomme_observations import observations, KEYS
-from cam.benchmarks.robomme import RoboMME
+from cam.interface.robomme.observations import observations, KEYS
+from cam.interface.robomme.adapter import RoboMME
 from cam.core.history import freeze
 from cam.harness.broker import execute
 from cam.io import read, write

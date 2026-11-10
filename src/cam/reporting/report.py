@@ -197,17 +197,24 @@ def build(root):
         for t in development
         if t["usage"]["reported_cost_usd"] is not None
     ]
+    # The pinned task configuration retains the original run identity after a
+    # rename into an archive whose leaf is only the task name.
+    identity = root
+    if plan["tasks"]:
+        config_path = root / "tasks" / plan["tasks"][0] / "state/config.json"
+        if config_path.is_file():
+            identity = Path(read(config_path)["task_root"]).parent.parent
     summary = {
         "schema": "cam-report/1",
         "updated": time.time(),
         # Organized runs share a timetag across tasks/settings. Keep the full
         # experiment identity in display and paired-comparison keys.
-        "name": "/".join(root.parts[-5:])
-        if root.parent.name in (
+        "name": "/".join(identity.parts[-5:])
+        if plan.get("evaluation_only") or identity.parent.name in (
             "demo_only", "interaction_only", "demo_interaction",
             "demo_interaction_v1", "demo_interaction_v2",
         )
-        else root.name,
+        else identity.name,
         "benchmark": plan["config"]["benchmark"],
         "benchmark_hash": plan["benchmark_hash"],
         "config": plan["config"],

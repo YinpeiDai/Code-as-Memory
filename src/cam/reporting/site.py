@@ -1,6 +1,7 @@
 """Shared website export and narrowly scoped artifact server for CaM runs."""
 
 from functools import partial
+import gzip
 import hashlib
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 import json
@@ -19,10 +20,21 @@ from cam.reporting.reference import encode_video, references
 from cam.reporting.trace import cached_poster, cached_trace
 
 
+def accepts_gzip(header):
+    for item in header.split(','):
+        parts = [part.strip() for part in item.split(';')]
+        if parts[0].lower() == 'gzip':
+            try:
+                return next((float(p[2:]) for p in parts[1:] if p.startswith('q=')), 1.0) > 0
+            except ValueError:
+                return False
+    return False
+
+
 def task_interface(benchmark, task, depth):
     """The adapter's declared policy interface (sensors and action), if available."""
     try:
-        from cam.benchmarks.registry import get_adapter
+        from cam.interface.registry import get_adapter
 
         return get_adapter(benchmark).interface(task, depth)
     except Exception:  # an unavailable adapter must not break the site
@@ -109,13 +121,14 @@ def batch_status(batch):
     return {**state, "tasks": tasks, "workers": plan["workers"]}
 
 
-def build_site(runs, datasets, output, batch=None, demo_limits=None):
+def build_site(runs, datasets, output, batch=None, demo_limits=None, lazy_rollouts=False):
     """``demo_limits`` maps a dataset path to the number of demos shown per task."""
     demo_limits = {str(Path(k).resolve()): int(v) for k, v in (demo_limits or {}).items()}
     output = Path(output).resolve()
     output.mkdir(parents=True, exist_ok=True)
     artifacts = {}
     demo_sources = {}
+    rollout_sources = {}
     batch_state = None
     if batch:
         batch = Path(batch).resolve()
@@ -134,19 +147,31 @@ def build_site(runs, datasets, output, batch=None, demo_limits=None):
                  if row.get("run") and (Path(row["run"]) / "prepared.json").is_file()]
         runs = list(dict.fromkeys([*(str(Path(r).resolve()) for r in runs), *ready]))
 
-    def asset(path, suffix=None):
-        path = Path(path).resolve()
-        if not path.is_file():
+    def asset(path, suffix=None, deferred=False):
+        # Recorded rollout paths can be checked when requested. Resolving and
+        # statting every NFS artifact here otherwise dominates live refreshes.
+        path = Path(path).absolute() if deferred else Path(path).resolve()
+        if not deferred and not path.is_file():
             return None
         key = hashlib.sha256(str(path).encode()).hexdigest()[:24] + (suffix or path.suffix)
         artifacts[key] = str(path)
         return "artifact/" + key
 
+    def deferred_rollout(folder, interface, kind):
+        folder = Path(folder).absolute()
+        key = hashlib.sha256((str(folder) + json.dumps(interface or {}, sort_keys=True)).encode()).hexdigest()[:24]
+        rollout_sources[key] = {"folder": str(folder), "interface": interface}
+        return f"rollout-{kind}/{key}." + ("json" if kind == "trace" else "jpg")
+
     def trace_url(folder, interface):
+        if lazy_rollouts:
+            return deferred_rollout(folder, interface, "trace")
         path = cached_trace(folder, output, interface)
         return path.relative_to(output).as_posix() if path else None
 
     def poster_url(folder, interface):
+        if lazy_rollouts:
+            return deferred_rollout(folder, interface, "poster")
         path = cached_poster(folder, output, interface)
         return path.relative_to(output).as_posix() if path else None
 
@@ -281,12 +306,12 @@ def build_site(runs, datasets, output, batch=None, demo_limits=None):
         for row in run["episodes"]:
             folder = root / row["directory"]
             row.update(
-                video=asset(folder / "episode.mp4"),
+                video=asset(folder / "episode.mp4", deferred=lazy_rollouts),
                 poster=poster_url(folder, interfaces.get(row["task"])),
-                observations=asset(folder / "observations.h5"),
-                actions=asset(folder / "actions.npy"),
-                decisions_log=asset(folder / "decisions.jsonl"),
-                result_file=asset(folder / "result.json"),
+                observations=asset(folder / "observations.h5", deferred=lazy_rollouts),
+                actions=asset(folder / "actions.npy", deferred=lazy_rollouts),
+                decisions_log=asset(folder / "decisions.jsonl", deferred=lazy_rollouts),
+                result_file=asset(folder / "result.json", deferred=lazy_rollouts),
                 trace=trace_url(folder, interfaces.get(row["task"])),
             )
         content["runs"].append(run)
@@ -354,9 +379,25 @@ def build_site(runs, datasets, output, batch=None, demo_limits=None):
     for path in source.iterdir():
         if path.is_file():
             shutil.copy2(path, output / path.name)
+    note = output / ".site_note.txt"
+    if note.is_file():
+        content["site_note"] = note.read_text().strip()
+    presentation = output / '.presentation.json'
+    if presentation.is_file():
+        spec = read(presentation)
+        if spec.get('kind') == 'robomemarena_archive':
+            from cam.reporting.arena import compact_archive, summarize_archive
+            content['archive'] = summarize_archive(content, spec, runs)
+            compact_archive(content)
+            shutil.copy2(source / 'arena.html', output / 'index.html')
     write(output / "data.json", content)
+    if content.get('archive'):
+        packed = output / '.data.json.gz.partial'
+        packed.write_bytes(gzip.compress((output / 'data.json').read_bytes(), mtime=0))
+        packed.replace(output / '.data.json.gz')
     write(output / ".artifacts.json", artifacts)
     write(output / ".demo_sources.json", demo_sources)
+    write(output / ".rollout_sources.json", rollout_sources)
     write(
         output / ".sources.json",
         {
@@ -364,6 +405,7 @@ def build_site(runs, datasets, output, batch=None, demo_limits=None):
             "datasets": [str(Path(p).resolve()) for p in datasets],
             "demo_limits": demo_limits,
             "batch": str(batch) if batch else None,
+            "lazy_rollouts": lazy_rollouts,
         },
     )
     return {
@@ -380,6 +422,9 @@ def serve(site, host="127.0.0.1", port=8910):
     demo_slots = threading.BoundedSemaphore(2)
     demo_guard = threading.Lock()
     demo_locks = {}
+    rollout_slots = threading.BoundedSemaphore(2)
+    rollout_guard = threading.Lock()
+    rollout_locks = {}
     # The exported site is current at startup; later refreshes run in the
     # background so large sites never block a page load (writes are atomic).
     refreshed = [time.monotonic()]
@@ -387,7 +432,11 @@ def serve(site, host="127.0.0.1", port=8910):
     def refresh():
         try:
             sources = read(site / ".sources.json")
-            build_site(sources["runs"], sources["datasets"], site, sources.get("batch"), sources.get("demo_limits"))
+            if sources.get("data_root"):
+                from cam.reporting.dashboard import build_dashboard
+                build_dashboard(sources["data_root"], site)
+            else:
+                build_site(sources["runs"], sources["datasets"], site, sources.get("batch"), sources.get("demo_limits"), sources.get("lazy_rollouts", False))
         finally:
             refreshed[0] = time.monotonic()
             mutex.release()
@@ -397,6 +446,8 @@ def serve(site, host="127.0.0.1", port=8910):
             route = unquote(urlsplit(self.path).path)
             if (
                 route == "/data.json"
+                and not ((site / '.presentation.json').is_file()
+                         and read(site / '.presentation.json').get('live') is False)
                 and time.monotonic() - refreshed[0] > 20
                 and mutex.acquire(blocking=False)
             ):
@@ -407,7 +458,64 @@ def serve(site, host="127.0.0.1", port=8910):
             self.serve_route(unquote(urlsplit(self.path).path), head=True)
 
         def serve_route(self, route, head):
-            if route.startswith("/demo-video/"):
+            compressed = False
+            if route.startswith("/agent-log/"):
+                key = route.removeprefix("/agent-log/").removesuffix(".json")
+                registry = site / ".log_sources.json"
+                sources = read(registry).get(key) if registry.is_file() else None
+                if sources is None or not route.endswith(".json"):
+                    self.send_error(404)
+                    return
+                from cam.reporting.dashboard import transcript
+                payload = json.dumps(transcript(sources)).encode()
+                self.send_response(200)
+                self.send_header("Content-Type", "application/json")
+                self.send_header("Content-Length", str(len(payload)))
+                self.send_header("Cache-Control", "no-cache")
+                self.end_headers()
+                if not head:
+                    self.wfile.write(payload)
+                return
+            elif route.startswith("/preview/"):
+                key = route.removeprefix("/preview/").removesuffix(".jpg")
+                registry = site / ".preview_sources.json"
+                spec = read(registry).get(key) if registry.is_file() else None
+                if not spec or not route.endswith(".jpg"):
+                    self.send_error(404)
+                    return
+                with demo_guard:
+                    lock = demo_locks.setdefault("poster-" + key, threading.Lock())
+                try:
+                    with lock, demo_slots:
+                        from cam.reporting.dashboard import preview
+                        path = preview(spec, site, key)
+                except Exception as error:
+                    self.log_error("Preview %s: %s", key, error)
+                    self.send_error(503, "Unable to prepare preview")
+                    return
+            elif route.startswith(("/rollout-trace/", "/rollout-poster/")):
+                trace = route.startswith("/rollout-trace/")
+                suffix = ".json" if trace else ".jpg"
+                key = route.rsplit("/", 1)[-1].removesuffix(suffix)
+                registry = site / ".rollout_sources.json"
+                spec = read(registry).get(key) if registry.is_file() else None
+                if not spec or not route.endswith(suffix):
+                    self.send_error(404)
+                    return
+                with rollout_guard:
+                    lock = rollout_locks.setdefault(key, threading.Lock())
+                try:
+                    with lock, rollout_slots:
+                        builder = cached_trace if trace else cached_poster
+                        path = builder(spec["folder"], site, spec.get("interface"))
+                except Exception as error:
+                    self.log_error("Rollout preview %s: %s", key, error)
+                    self.send_error(503, "Unable to prepare rollout preview")
+                    return
+                if path is None:
+                    self.send_error(404)
+                    return
+            elif route.startswith("/demo-video/"):
                 key = route.removeprefix("/demo-video/").removesuffix(".mp4")
                 registry = site / ".demo_sources.json"
                 spec = read(registry).get(key) if registry.is_file() else None
@@ -441,6 +549,10 @@ def serve(site, host="127.0.0.1", port=8910):
             if not path.is_file():
                 self.send_error(404)
                 return
+            packed = site / '.data.json.gz'
+            if (route == '/data.json' and accepts_gzip(self.headers.get('Accept-Encoding', '')) and not self.headers.get('Range')
+                    and packed.is_file() and packed.stat().st_mtime_ns >= path.stat().st_mtime_ns):
+                path, compressed = packed, True
             size = path.stat().st_size
             start, end, code = 0, size - 1, 200
             if self.headers.get("Range"):
@@ -468,6 +580,10 @@ def serve(site, host="127.0.0.1", port=8910):
             self.send_header("Accept-Ranges", "bytes")
             self.send_header("X-Content-Type-Options", "nosniff")
             self.send_header("Cache-Control", "no-cache")
+            if route == '/data.json':
+                self.send_header('Vary', 'Accept-Encoding')
+            if compressed:
+                self.send_header('Content-Encoding', 'gzip')
             if code == 206:
                 self.send_header("Content-Range", f"bytes {start}-{end}/{size}")
             self.end_headers()

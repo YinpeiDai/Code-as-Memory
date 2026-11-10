@@ -1,0 +1,9189 @@
+{
+  "schema": "cam-demo-selection/1",
+  "benchmark": "mikasa_robo",
+  "setting": "demo_only_25",
+  "count": 25,
+  "provenance": "New deterministic subset; no historical 25-demo experiment claimed.",
+  "tasks": {
+    "BatteriesCheckerEasy-3-VLA-v0": [
+      {
+        "episode": 2,
+        "seed": 20
+      },
+      {
+        "episode": 3,
+        "seed": 115
+      },
+      {
+        "episode": 18,
+        "seed": 131
+      },
+      {
+        "episode": 24,
+        "seed": 22
+      },
+      {
+        "episode": 39,
+        "seed": 151
+      },
+      {
+        "episode": 48,
+        "seed": 160
+      },
+      {
+        "episode": 62,
+        "seed": 174
+      },
+      {
+        "episode": 82,
+        "seed": 193
+      },
+      {
+        "episode": 85,
+        "seed": 196
+      },
+      {
+        "episode": 95,
+        "seed": 205
+      },
+      {
+        "episode": 109,
+        "seed": 218
+      },
+      {
+        "episode": 133,
+        "seed": 240
+      },
+      {
+        "episode": 136,
+        "seed": 242
+      },
+      {
+        "episode": 144,
+        "seed": 252
+      },
+      {
+        "episode": 160,
+        "seed": 266
+      },
+      {
+        "episode": 168,
+        "seed": 37
+      },
+      {
+        "episode": 180,
+        "seed": 48
+      },
+      {
+        "episode": 184,
+        "seed": 13
+      },
+      {
+        "episode": 198,
+        "seed": 65
+      },
+      {
+        "episode": 204,
+        "seed": 71
+      },
+      {
+        "episode": 209,
+        "seed": 75
+      },
+      {
+        "episode": 211,
+        "seed": 77
+      },
+      {
+        "episode": 232,
+        "seed": 96
+      },
+      {
+        "episode": 238,
+        "seed": 104
+      },
+      {
+        "episode": 240,
+        "seed": 105
+      }
+    ],
+    "BatteriesCheckerEasy-6-VLA-v0": [
+      {
+        "episode": 4,
+        "seed": 137
+      },
+      {
+        "episode": 8,
+        "seed": 142
+      },
+      {
+        "episode": 25,
+        "seed": 162
+      },
+      {
+        "episode": 36,
+        "seed": 174
+      },
+      {
+        "episode": 47,
+        "seed": 185
+      },
+      {
+        "episode": 48,
+        "seed": 187
+      },
+      {
+        "episode": 51,
+        "seed": 190
+      },
+      {
+        "episode": 58,
+        "seed": 198
+      },
+      {
+        "episode": 75,
+        "seed": 216
+      },
+      {
+        "episode": 79,
+        "seed": 33
+      },
+      {
+        "episode": 87,
+        "seed": 228
+      },
+      {
+        "episode": 89,
+        "seed": 230
+      },
+      {
+        "episode": 109,
+        "seed": 250
+      },
+      {
+        "episode": 116,
+        "seed": 255
+      },
+      {
+        "episode": 135,
+        "seed": 39
+      },
+      {
+        "episode": 138,
+        "seed": 278
+      },
+      {
+        "episode": 148,
+        "seed": 289
+      },
+      {
+        "episode": 160,
+        "seed": 302
+      },
+      {
+        "episode": 169,
+        "seed": 44
+      },
+      {
+        "episode": 175,
+        "seed": 50
+      },
+      {
+        "episode": 188,
+        "seed": 64
+      },
+      {
+        "episode": 209,
+        "seed": 87
+      },
+      {
+        "episode": 214,
+        "seed": 93
+      },
+      {
+        "episode": 218,
+        "seed": 97
+      },
+      {
+        "episode": 219,
+        "seed": 98
+      }
+    ],
+    "BatteriesCheckerHard-3-VLA-v0": [
+      {
+        "episode": 9,
+        "seed": 165
+      },
+      {
+        "episode": 17,
+        "seed": 175
+      },
+      {
+        "episode": 18,
+        "seed": 176
+      },
+      {
+        "episode": 28,
+        "seed": 191
+      },
+      {
+        "episode": 63,
+        "seed": 257
+      },
+      {
+        "episode": 69,
+        "seed": 265
+      },
+      {
+        "episode": 73,
+        "seed": 273
+      },
+      {
+        "episode": 77,
+        "seed": 277
+      },
+      {
+        "episode": 89,
+        "seed": 292
+      },
+      {
+        "episode": 92,
+        "seed": 295
+      },
+      {
+        "episode": 105,
+        "seed": 314
+      },
+      {
+        "episode": 111,
+        "seed": 324
+      },
+      {
+        "episode": 127,
+        "seed": 341
+      },
+      {
+        "episode": 129,
+        "seed": 345
+      },
+      {
+        "episode": 138,
+        "seed": 354
+      },
+      {
+        "episode": 140,
+        "seed": 357
+      },
+      {
+        "episode": 146,
+        "seed": 29
+      },
+      {
+        "episode": 151,
+        "seed": 373
+      },
+      {
+        "episode": 153,
+        "seed": 375
+      },
+      {
+        "episode": 160,
+        "seed": 381
+      },
+      {
+        "episode": 163,
+        "seed": 384
+      },
+      {
+        "episode": 164,
+        "seed": 385
+      },
+      {
+        "episode": 172,
+        "seed": 37
+      },
+      {
+        "episode": 183,
+        "seed": 55
+      },
+      {
+        "episode": 216,
+        "seed": 103
+      }
+    ],
+    "BatteriesCheckerHard-6-VLA-v0": [
+      {
+        "episode": 2,
+        "seed": 5
+      },
+      {
+        "episode": 14,
+        "seed": 24
+      },
+      {
+        "episode": 15,
+        "seed": 26
+      },
+      {
+        "episode": 22,
+        "seed": 41
+      },
+      {
+        "episode": 31,
+        "seed": 76
+      },
+      {
+        "episode": 33,
+        "seed": 79
+      },
+      {
+        "episode": 50,
+        "seed": 111
+      },
+      {
+        "episode": 70,
+        "seed": 152
+      },
+      {
+        "episode": 73,
+        "seed": 161
+      },
+      {
+        "episode": 84,
+        "seed": 176
+      },
+      {
+        "episode": 96,
+        "seed": 204
+      },
+      {
+        "episode": 106,
+        "seed": 221
+      },
+      {
+        "episode": 131,
+        "seed": 272
+      },
+      {
+        "episode": 139,
+        "seed": 285
+      },
+      {
+        "episode": 145,
+        "seed": 294
+      },
+      {
+        "episode": 154,
+        "seed": 310
+      },
+      {
+        "episode": 172,
+        "seed": 337
+      },
+      {
+        "episode": 175,
+        "seed": 344
+      },
+      {
+        "episode": 191,
+        "seed": 376
+      },
+      {
+        "episode": 192,
+        "seed": 378
+      },
+      {
+        "episode": 195,
+        "seed": 381
+      },
+      {
+        "episode": 196,
+        "seed": 388
+      },
+      {
+        "episode": 203,
+        "seed": 403
+      },
+      {
+        "episode": 206,
+        "seed": 412
+      },
+      {
+        "episode": 242,
+        "seed": 734
+      }
+    ],
+    "BlinkCountButtonPressEasy-Long-VLA-v0": [
+      {
+        "episode": 14,
+        "seed": 114
+      },
+      {
+        "episode": 17,
+        "seed": 117
+      },
+      {
+        "episode": 19,
+        "seed": 119
+      },
+      {
+        "episode": 23,
+        "seed": 123
+      },
+      {
+        "episode": 28,
+        "seed": 127
+      },
+      {
+        "episode": 31,
+        "seed": 130
+      },
+      {
+        "episode": 36,
+        "seed": 135
+      },
+      {
+        "episode": 47,
+        "seed": 145
+      },
+      {
+        "episode": 58,
+        "seed": 155
+      },
+      {
+        "episode": 81,
+        "seed": 176
+      },
+      {
+        "episode": 94,
+        "seed": 189
+      },
+      {
+        "episode": 103,
+        "seed": 197
+      },
+      {
+        "episode": 111,
+        "seed": 206
+      },
+      {
+        "episode": 113,
+        "seed": 20
+      },
+      {
+        "episode": 118,
+        "seed": 212
+      },
+      {
+        "episode": 125,
+        "seed": 219
+      },
+      {
+        "episode": 126,
+        "seed": 220
+      },
+      {
+        "episode": 130,
+        "seed": 224
+      },
+      {
+        "episode": 139,
+        "seed": 232
+      },
+      {
+        "episode": 150,
+        "seed": 243
+      },
+      {
+        "episode": 164,
+        "seed": 257
+      },
+      {
+        "episode": 193,
+        "seed": 49
+      },
+      {
+        "episode": 208,
+        "seed": 63
+      },
+      {
+        "episode": 228,
+        "seed": 8
+      },
+      {
+        "episode": 243,
+        "seed": 97
+      }
+    ],
+    "BlinkCountButtonPressEasy-VLA-v0": [
+      {
+        "episode": 26,
+        "seed": 135
+      },
+      {
+        "episode": 37,
+        "seed": 145
+      },
+      {
+        "episode": 41,
+        "seed": 149
+      },
+      {
+        "episode": 47,
+        "seed": 154
+      },
+      {
+        "episode": 49,
+        "seed": 156
+      },
+      {
+        "episode": 51,
+        "seed": 158
+      },
+      {
+        "episode": 58,
+        "seed": 164
+      },
+      {
+        "episode": 60,
+        "seed": 166
+      },
+      {
+        "episode": 62,
+        "seed": 168
+      },
+      {
+        "episode": 63,
+        "seed": 169
+      },
+      {
+        "episode": 70,
+        "seed": 175
+      },
+      {
+        "episode": 74,
+        "seed": 179
+      },
+      {
+        "episode": 76,
+        "seed": 181
+      },
+      {
+        "episode": 84,
+        "seed": 188
+      },
+      {
+        "episode": 96,
+        "seed": 202
+      },
+      {
+        "episode": 102,
+        "seed": 207
+      },
+      {
+        "episode": 146,
+        "seed": 35
+      },
+      {
+        "episode": 153,
+        "seed": 253
+      },
+      {
+        "episode": 154,
+        "seed": 254
+      },
+      {
+        "episode": 156,
+        "seed": 256
+      },
+      {
+        "episode": 157,
+        "seed": 36
+      },
+      {
+        "episode": 181,
+        "seed": 49
+      },
+      {
+        "episode": 192,
+        "seed": 59
+      },
+      {
+        "episode": 197,
+        "seed": 63
+      },
+      {
+        "episode": 230,
+        "seed": 94
+      }
+    ],
+    "BlinkCountButtonPressHard-Long-VLA-v0": [
+      {
+        "episode": 5,
+        "seed": 119
+      },
+      {
+        "episode": 14,
+        "seed": 127
+      },
+      {
+        "episode": 22,
+        "seed": 136
+      },
+      {
+        "episode": 32,
+        "seed": 145
+      },
+      {
+        "episode": 40,
+        "seed": 153
+      },
+      {
+        "episode": 43,
+        "seed": 156
+      },
+      {
+        "episode": 56,
+        "seed": 168
+      },
+      {
+        "episode": 74,
+        "seed": 184
+      },
+      {
+        "episode": 77,
+        "seed": 189
+      },
+      {
+        "episode": 88,
+        "seed": 200
+      },
+      {
+        "episode": 107,
+        "seed": 222
+      },
+      {
+        "episode": 108,
+        "seed": 223
+      },
+      {
+        "episode": 127,
+        "seed": 239
+      },
+      {
+        "episode": 129,
+        "seed": 241
+      },
+      {
+        "episode": 135,
+        "seed": 26
+      },
+      {
+        "episode": 147,
+        "seed": 259
+      },
+      {
+        "episode": 158,
+        "seed": 270
+      },
+      {
+        "episode": 161,
+        "seed": 273
+      },
+      {
+        "episode": 162,
+        "seed": 274
+      },
+      {
+        "episode": 163,
+        "seed": 275
+      },
+      {
+        "episode": 167,
+        "seed": 279
+      },
+      {
+        "episode": 218,
+        "seed": 85
+      },
+      {
+        "episode": 226,
+        "seed": 93
+      },
+      {
+        "episode": 238,
+        "seed": 104
+      },
+      {
+        "episode": 241,
+        "seed": 106
+      }
+    ],
+    "BlinkCountButtonPressHard-VLA-v0": [
+      {
+        "episode": 4,
+        "seed": 119
+      },
+      {
+        "episode": 11,
+        "seed": 126
+      },
+      {
+        "episode": 32,
+        "seed": 146
+      },
+      {
+        "episode": 45,
+        "seed": 158
+      },
+      {
+        "episode": 46,
+        "seed": 28
+      },
+      {
+        "episode": 54,
+        "seed": 166
+      },
+      {
+        "episode": 64,
+        "seed": 176
+      },
+      {
+        "episode": 73,
+        "seed": 184
+      },
+      {
+        "episode": 86,
+        "seed": 197
+      },
+      {
+        "episode": 97,
+        "seed": 207
+      },
+      {
+        "episode": 124,
+        "seed": 35
+      },
+      {
+        "episode": 137,
+        "seed": 244
+      },
+      {
+        "episode": 155,
+        "seed": 262
+      },
+      {
+        "episode": 158,
+        "seed": 264
+      },
+      {
+        "episode": 160,
+        "seed": 266
+      },
+      {
+        "episode": 183,
+        "seed": 53
+      },
+      {
+        "episode": 190,
+        "seed": 59
+      },
+      {
+        "episode": 196,
+        "seed": 65
+      },
+      {
+        "episode": 198,
+        "seed": 67
+      },
+      {
+        "episode": 199,
+        "seed": 68
+      },
+      {
+        "episode": 202,
+        "seed": 71
+      },
+      {
+        "episode": 205,
+        "seed": 77
+      },
+      {
+        "episode": 226,
+        "seed": 96
+      },
+      {
+        "episode": 227,
+        "seed": 97
+      },
+      {
+        "episode": 238,
+        "seed": 107
+      }
+    ],
+    "BlinkCountButtonPressMedium-Long-VLA-v0": [
+      {
+        "episode": 8,
+        "seed": 114
+      },
+      {
+        "episode": 14,
+        "seed": 119
+      },
+      {
+        "episode": 16,
+        "seed": 121
+      },
+      {
+        "episode": 18,
+        "seed": 123
+      },
+      {
+        "episode": 39,
+        "seed": 143
+      },
+      {
+        "episode": 48,
+        "seed": 151
+      },
+      {
+        "episode": 59,
+        "seed": 162
+      },
+      {
+        "episode": 80,
+        "seed": 183
+      },
+      {
+        "episode": 82,
+        "seed": 185
+      },
+      {
+        "episode": 86,
+        "seed": 190
+      },
+      {
+        "episode": 91,
+        "seed": 194
+      },
+      {
+        "episode": 96,
+        "seed": 199
+      },
+      {
+        "episode": 120,
+        "seed": 222
+      },
+      {
+        "episode": 129,
+        "seed": 230
+      },
+      {
+        "episode": 167,
+        "seed": 267
+      },
+      {
+        "episode": 173,
+        "seed": 4
+      },
+      {
+        "episode": 181,
+        "seed": 41
+      },
+      {
+        "episode": 186,
+        "seed": 45
+      },
+      {
+        "episode": 204,
+        "seed": 62
+      },
+      {
+        "episode": 209,
+        "seed": 66
+      },
+      {
+        "episode": 214,
+        "seed": 71
+      },
+      {
+        "episode": 236,
+        "seed": 93
+      },
+      {
+        "episode": 243,
+        "seed": 100
+      },
+      {
+        "episode": 247,
+        "seed": 104
+      },
+      {
+        "episode": 249,
+        "seed": 106
+      }
+    ],
+    "BlinkCountButtonPressMedium-VLA-v0": [
+      {
+        "episode": 1,
+        "seed": 14
+      },
+      {
+        "episode": 2,
+        "seed": 23
+      },
+      {
+        "episode": 12,
+        "seed": 123
+      },
+      {
+        "episode": 22,
+        "seed": 132
+      },
+      {
+        "episode": 34,
+        "seed": 143
+      },
+      {
+        "episode": 36,
+        "seed": 144
+      },
+      {
+        "episode": 38,
+        "seed": 146
+      },
+      {
+        "episode": 75,
+        "seed": 181
+      },
+      {
+        "episode": 100,
+        "seed": 206
+      },
+      {
+        "episode": 104,
+        "seed": 209
+      },
+      {
+        "episode": 107,
+        "seed": 212
+      },
+      {
+        "episode": 114,
+        "seed": 217
+      },
+      {
+        "episode": 119,
+        "seed": 222
+      },
+      {
+        "episode": 123,
+        "seed": 226
+      },
+      {
+        "episode": 135,
+        "seed": 35
+      },
+      {
+        "episode": 140,
+        "seed": 241
+      },
+      {
+        "episode": 158,
+        "seed": 258
+      },
+      {
+        "episode": 162,
+        "seed": 262
+      },
+      {
+        "episode": 186,
+        "seed": 54
+      },
+      {
+        "episode": 188,
+        "seed": 56
+      },
+      {
+        "episode": 218,
+        "seed": 84
+      },
+      {
+        "episode": 226,
+        "seed": 92
+      },
+      {
+        "episode": 234,
+        "seed": 99
+      },
+      {
+        "episode": 235,
+        "seed": 100
+      },
+      {
+        "episode": 236,
+        "seed": 101
+      }
+    ],
+    "BunchOfColors3-Long-VLA-v0": [
+      {
+        "episode": 1,
+        "seed": 1
+      },
+      {
+        "episode": 21,
+        "seed": 132
+      },
+      {
+        "episode": 25,
+        "seed": 137
+      },
+      {
+        "episode": 39,
+        "seed": 151
+      },
+      {
+        "episode": 52,
+        "seed": 163
+      },
+      {
+        "episode": 64,
+        "seed": 175
+      },
+      {
+        "episode": 73,
+        "seed": 185
+      },
+      {
+        "episode": 77,
+        "seed": 190
+      },
+      {
+        "episode": 79,
+        "seed": 20
+      },
+      {
+        "episode": 80,
+        "seed": 192
+      },
+      {
+        "episode": 92,
+        "seed": 203
+      },
+      {
+        "episode": 104,
+        "seed": 214
+      },
+      {
+        "episode": 105,
+        "seed": 215
+      },
+      {
+        "episode": 106,
+        "seed": 216
+      },
+      {
+        "episode": 136,
+        "seed": 243
+      },
+      {
+        "episode": 150,
+        "seed": 257
+      },
+      {
+        "episode": 153,
+        "seed": 260
+      },
+      {
+        "episode": 156,
+        "seed": 263
+      },
+      {
+        "episode": 158,
+        "seed": 264
+      },
+      {
+        "episode": 170,
+        "seed": 31
+      },
+      {
+        "episode": 174,
+        "seed": 34
+      },
+      {
+        "episode": 176,
+        "seed": 36
+      },
+      {
+        "episode": 189,
+        "seed": 49
+      },
+      {
+        "episode": 205,
+        "seed": 66
+      },
+      {
+        "episode": 247,
+        "seed": 111
+      }
+    ],
+    "BunchOfColors3-VLA-v0": [
+      {
+        "episode": 14,
+        "seed": 123
+      },
+      {
+        "episode": 47,
+        "seed": 156
+      },
+      {
+        "episode": 49,
+        "seed": 158
+      },
+      {
+        "episode": 67,
+        "seed": 176
+      },
+      {
+        "episode": 77,
+        "seed": 186
+      },
+      {
+        "episode": 82,
+        "seed": 191
+      },
+      {
+        "episode": 85,
+        "seed": 194
+      },
+      {
+        "episode": 90,
+        "seed": 21
+      },
+      {
+        "episode": 94,
+        "seed": 202
+      },
+      {
+        "episode": 95,
+        "seed": 203
+      },
+      {
+        "episode": 109,
+        "seed": 216
+      },
+      {
+        "episode": 110,
+        "seed": 217
+      },
+      {
+        "episode": 114,
+        "seed": 219
+      },
+      {
+        "episode": 135,
+        "seed": 25
+      },
+      {
+        "episode": 154,
+        "seed": 259
+      },
+      {
+        "episode": 160,
+        "seed": 264
+      },
+      {
+        "episode": 162,
+        "seed": 266
+      },
+      {
+        "episode": 173,
+        "seed": 3
+      },
+      {
+        "episode": 174,
+        "seed": 34
+      },
+      {
+        "episode": 186,
+        "seed": 46
+      },
+      {
+        "episode": 201,
+        "seed": 61
+      },
+      {
+        "episode": 216,
+        "seed": 76
+      },
+      {
+        "episode": 234,
+        "seed": 93
+      },
+      {
+        "episode": 239,
+        "seed": 11
+      },
+      {
+        "episode": 241,
+        "seed": 102
+      }
+    ],
+    "BunchOfColors5-Long-VLA-v0": [
+      {
+        "episode": 1,
+        "seed": 2
+      },
+      {
+        "episode": 18,
+        "seed": 132
+      },
+      {
+        "episode": 22,
+        "seed": 136
+      },
+      {
+        "episode": 33,
+        "seed": 146
+      },
+      {
+        "episode": 63,
+        "seed": 179
+      },
+      {
+        "episode": 71,
+        "seed": 186
+      },
+      {
+        "episode": 78,
+        "seed": 196
+      },
+      {
+        "episode": 81,
+        "seed": 198
+      },
+      {
+        "episode": 86,
+        "seed": 203
+      },
+      {
+        "episode": 95,
+        "seed": 213
+      },
+      {
+        "episode": 113,
+        "seed": 24
+      },
+      {
+        "episode": 119,
+        "seed": 236
+      },
+      {
+        "episode": 121,
+        "seed": 239
+      },
+      {
+        "episode": 132,
+        "seed": 251
+      },
+      {
+        "episode": 152,
+        "seed": 270
+      },
+      {
+        "episode": 159,
+        "seed": 276
+      },
+      {
+        "episode": 162,
+        "seed": 279
+      },
+      {
+        "episode": 164,
+        "seed": 281
+      },
+      {
+        "episode": 166,
+        "seed": 283
+      },
+      {
+        "episode": 195,
+        "seed": 7
+      },
+      {
+        "episode": 204,
+        "seed": 68
+      },
+      {
+        "episode": 207,
+        "seed": 71
+      },
+      {
+        "episode": 212,
+        "seed": 80
+      },
+      {
+        "episode": 229,
+        "seed": 95
+      },
+      {
+        "episode": 231,
+        "seed": 97
+      }
+    ],
+    "BunchOfColors5-VLA-v0": [
+      {
+        "episode": 9,
+        "seed": 122
+      },
+      {
+        "episode": 17,
+        "seed": 129
+      },
+      {
+        "episode": 20,
+        "seed": 132
+      },
+      {
+        "episode": 25,
+        "seed": 136
+      },
+      {
+        "episode": 39,
+        "seed": 149
+      },
+      {
+        "episode": 40,
+        "seed": 150
+      },
+      {
+        "episode": 45,
+        "seed": 155
+      },
+      {
+        "episode": 48,
+        "seed": 157
+      },
+      {
+        "episode": 71,
+        "seed": 184
+      },
+      {
+        "episode": 84,
+        "seed": 198
+      },
+      {
+        "episode": 85,
+        "seed": 199
+      },
+      {
+        "episode": 86,
+        "seed": 200
+      },
+      {
+        "episode": 87,
+        "seed": 201
+      },
+      {
+        "episode": 89,
+        "seed": 203
+      },
+      {
+        "episode": 93,
+        "seed": 206
+      },
+      {
+        "episode": 98,
+        "seed": 213
+      },
+      {
+        "episode": 107,
+        "seed": 221
+      },
+      {
+        "episode": 113,
+        "seed": 24
+      },
+      {
+        "episode": 122,
+        "seed": 234
+      },
+      {
+        "episode": 126,
+        "seed": 238
+      },
+      {
+        "episode": 132,
+        "seed": 244
+      },
+      {
+        "episode": 167,
+        "seed": 278
+      },
+      {
+        "episode": 182,
+        "seed": 45
+      },
+      {
+        "episode": 191,
+        "seed": 53
+      },
+      {
+        "episode": 230,
+        "seed": 94
+      }
+    ],
+    "BunchOfColors7-Long-VLA-v0": [
+      {
+        "episode": 3,
+        "seed": 148
+      },
+      {
+        "episode": 6,
+        "seed": 152
+      },
+      {
+        "episode": 13,
+        "seed": 18
+      },
+      {
+        "episode": 20,
+        "seed": 170
+      },
+      {
+        "episode": 24,
+        "seed": 20
+      },
+      {
+        "episode": 39,
+        "seed": 197
+      },
+      {
+        "episode": 44,
+        "seed": 204
+      },
+      {
+        "episode": 62,
+        "seed": 228
+      },
+      {
+        "episode": 111,
+        "seed": 290
+      },
+      {
+        "episode": 115,
+        "seed": 293
+      },
+      {
+        "episode": 125,
+        "seed": 309
+      },
+      {
+        "episode": 149,
+        "seed": 339
+      },
+      {
+        "episode": 158,
+        "seed": 352
+      },
+      {
+        "episode": 159,
+        "seed": 354
+      },
+      {
+        "episode": 166,
+        "seed": 370
+      },
+      {
+        "episode": 171,
+        "seed": 44
+      },
+      {
+        "episode": 185,
+        "seed": 61
+      },
+      {
+        "episode": 200,
+        "seed": 82
+      },
+      {
+        "episode": 202,
+        "seed": 84
+      },
+      {
+        "episode": 206,
+        "seed": 10
+      },
+      {
+        "episode": 218,
+        "seed": 104
+      },
+      {
+        "episode": 223,
+        "seed": 114
+      },
+      {
+        "episode": 226,
+        "seed": 117
+      },
+      {
+        "episode": 234,
+        "seed": 127
+      },
+      {
+        "episode": 246,
+        "seed": 139
+      }
+    ],
+    "BunchOfColors7-VLA-v0": [
+      {
+        "episode": 6,
+        "seed": 123
+      },
+      {
+        "episode": 24,
+        "seed": 18
+      },
+      {
+        "episode": 31,
+        "seed": 151
+      },
+      {
+        "episode": 39,
+        "seed": 158
+      },
+      {
+        "episode": 42,
+        "seed": 162
+      },
+      {
+        "episode": 43,
+        "seed": 163
+      },
+      {
+        "episode": 60,
+        "seed": 180
+      },
+      {
+        "episode": 94,
+        "seed": 216
+      },
+      {
+        "episode": 108,
+        "seed": 235
+      },
+      {
+        "episode": 113,
+        "seed": 28
+      },
+      {
+        "episode": 132,
+        "seed": 261
+      },
+      {
+        "episode": 136,
+        "seed": 264
+      },
+      {
+        "episode": 149,
+        "seed": 276
+      },
+      {
+        "episode": 153,
+        "seed": 281
+      },
+      {
+        "episode": 173,
+        "seed": 5
+      },
+      {
+        "episode": 189,
+        "seed": 54
+      },
+      {
+        "episode": 193,
+        "seed": 59
+      },
+      {
+        "episode": 198,
+        "seed": 64
+      },
+      {
+        "episode": 201,
+        "seed": 69
+      },
+      {
+        "episode": 206,
+        "seed": 8
+      },
+      {
+        "episode": 207,
+        "seed": 76
+      },
+      {
+        "episode": 243,
+        "seed": 112
+      },
+      {
+        "episode": 245,
+        "seed": 114
+      },
+      {
+        "episode": 247,
+        "seed": 116
+      },
+      {
+        "episode": 248,
+        "seed": 117
+      }
+    ],
+    "ChainOfColors3-Long-VLA-v0": [
+      {
+        "episode": 12,
+        "seed": 125
+      },
+      {
+        "episode": 15,
+        "seed": 127
+      },
+      {
+        "episode": 40,
+        "seed": 151
+      },
+      {
+        "episode": 41,
+        "seed": 152
+      },
+      {
+        "episode": 47,
+        "seed": 157
+      },
+      {
+        "episode": 48,
+        "seed": 158
+      },
+      {
+        "episode": 51,
+        "seed": 161
+      },
+      {
+        "episode": 70,
+        "seed": 181
+      },
+      {
+        "episode": 72,
+        "seed": 183
+      },
+      {
+        "episode": 74,
+        "seed": 185
+      },
+      {
+        "episode": 100,
+        "seed": 210
+      },
+      {
+        "episode": 107,
+        "seed": 216
+      },
+      {
+        "episode": 108,
+        "seed": 217
+      },
+      {
+        "episode": 110,
+        "seed": 219
+      },
+      {
+        "episode": 113,
+        "seed": 26
+      },
+      {
+        "episode": 115,
+        "seed": 222
+      },
+      {
+        "episode": 148,
+        "seed": 258
+      },
+      {
+        "episode": 156,
+        "seed": 266
+      },
+      {
+        "episode": 178,
+        "seed": 40
+      },
+      {
+        "episode": 202,
+        "seed": 66
+      },
+      {
+        "episode": 211,
+        "seed": 77
+      },
+      {
+        "episode": 215,
+        "seed": 81
+      },
+      {
+        "episode": 221,
+        "seed": 86
+      },
+      {
+        "episode": 232,
+        "seed": 96
+      },
+      {
+        "episode": 249,
+        "seed": 113
+      }
+    ],
+    "ChainOfColors3-VLA-v0": [
+      {
+        "episode": 0,
+        "seed": 6
+      },
+      {
+        "episode": 2,
+        "seed": 16
+      },
+      {
+        "episode": 11,
+        "seed": 118
+      },
+      {
+        "episode": 40,
+        "seed": 146
+      },
+      {
+        "episode": 44,
+        "seed": 150
+      },
+      {
+        "episode": 65,
+        "seed": 171
+      },
+      {
+        "episode": 78,
+        "seed": 184
+      },
+      {
+        "episode": 86,
+        "seed": 191
+      },
+      {
+        "episode": 98,
+        "seed": 203
+      },
+      {
+        "episode": 126,
+        "seed": 227
+      },
+      {
+        "episode": 143,
+        "seed": 247
+      },
+      {
+        "episode": 185,
+        "seed": 46
+      },
+      {
+        "episode": 186,
+        "seed": 47
+      },
+      {
+        "episode": 187,
+        "seed": 48
+      },
+      {
+        "episode": 189,
+        "seed": 50
+      },
+      {
+        "episode": 193,
+        "seed": 54
+      },
+      {
+        "episode": 203,
+        "seed": 64
+      },
+      {
+        "episode": 208,
+        "seed": 69
+      },
+      {
+        "episode": 210,
+        "seed": 71
+      },
+      {
+        "episode": 230,
+        "seed": 90
+      },
+      {
+        "episode": 231,
+        "seed": 91
+      },
+      {
+        "episode": 239,
+        "seed": 15
+      },
+      {
+        "episode": 245,
+        "seed": 105
+      },
+      {
+        "episode": 247,
+        "seed": 107
+      },
+      {
+        "episode": 249,
+        "seed": 109
+      }
+    ],
+    "ChainOfColors5-Long-VLA-v0": [
+      {
+        "episode": 9,
+        "seed": 132
+      },
+      {
+        "episode": 25,
+        "seed": 149
+      },
+      {
+        "episode": 37,
+        "seed": 162
+      },
+      {
+        "episode": 49,
+        "seed": 173
+      },
+      {
+        "episode": 56,
+        "seed": 180
+      },
+      {
+        "episode": 59,
+        "seed": 182
+      },
+      {
+        "episode": 62,
+        "seed": 185
+      },
+      {
+        "episode": 65,
+        "seed": 188
+      },
+      {
+        "episode": 94,
+        "seed": 217
+      },
+      {
+        "episode": 107,
+        "seed": 229
+      },
+      {
+        "episode": 109,
+        "seed": 231
+      },
+      {
+        "episode": 119,
+        "seed": 240
+      },
+      {
+        "episode": 122,
+        "seed": 243
+      },
+      {
+        "episode": 126,
+        "seed": 248
+      },
+      {
+        "episode": 137,
+        "seed": 259
+      },
+      {
+        "episode": 144,
+        "seed": 267
+      },
+      {
+        "episode": 145,
+        "seed": 268
+      },
+      {
+        "episode": 150,
+        "seed": 273
+      },
+      {
+        "episode": 168,
+        "seed": 36
+      },
+      {
+        "episode": 169,
+        "seed": 37
+      },
+      {
+        "episode": 173,
+        "seed": 10
+      },
+      {
+        "episode": 184,
+        "seed": 11
+      },
+      {
+        "episode": 199,
+        "seed": 74
+      },
+      {
+        "episode": 237,
+        "seed": 113
+      },
+      {
+        "episode": 249,
+        "seed": 125
+      }
+    ],
+    "ChainOfColors5-VLA-v0": [
+      {
+        "episode": 6,
+        "seed": 121
+      },
+      {
+        "episode": 10,
+        "seed": 125
+      },
+      {
+        "episode": 17,
+        "seed": 131
+      },
+      {
+        "episode": 18,
+        "seed": 132
+      },
+      {
+        "episode": 34,
+        "seed": 149
+      },
+      {
+        "episode": 35,
+        "seed": 20
+      },
+      {
+        "episode": 38,
+        "seed": 152
+      },
+      {
+        "episode": 68,
+        "seed": 24
+      },
+      {
+        "episode": 72,
+        "seed": 184
+      },
+      {
+        "episode": 107,
+        "seed": 217
+      },
+      {
+        "episode": 115,
+        "seed": 223
+      },
+      {
+        "episode": 123,
+        "seed": 231
+      },
+      {
+        "episode": 125,
+        "seed": 232
+      },
+      {
+        "episode": 126,
+        "seed": 233
+      },
+      {
+        "episode": 129,
+        "seed": 236
+      },
+      {
+        "episode": 144,
+        "seed": 251
+      },
+      {
+        "episode": 149,
+        "seed": 256
+      },
+      {
+        "episode": 153,
+        "seed": 260
+      },
+      {
+        "episode": 154,
+        "seed": 261
+      },
+      {
+        "episode": 164,
+        "seed": 273
+      },
+      {
+        "episode": 167,
+        "seed": 276
+      },
+      {
+        "episode": 172,
+        "seed": 38
+      },
+      {
+        "episode": 192,
+        "seed": 60
+      },
+      {
+        "episode": 209,
+        "seed": 78
+      },
+      {
+        "episode": 243,
+        "seed": 109
+      }
+    ],
+    "ChainOfColors7-Long-VLA-v0": [
+      {
+        "episode": 8,
+        "seed": 142
+      },
+      {
+        "episode": 20,
+        "seed": 154
+      },
+      {
+        "episode": 22,
+        "seed": 157
+      },
+      {
+        "episode": 28,
+        "seed": 165
+      },
+      {
+        "episode": 30,
+        "seed": 168
+      },
+      {
+        "episode": 39,
+        "seed": 178
+      },
+      {
+        "episode": 68,
+        "seed": 25
+      },
+      {
+        "episode": 72,
+        "seed": 211
+      },
+      {
+        "episode": 73,
+        "seed": 213
+      },
+      {
+        "episode": 74,
+        "seed": 215
+      },
+      {
+        "episode": 80,
+        "seed": 221
+      },
+      {
+        "episode": 135,
+        "seed": 33
+      },
+      {
+        "episode": 137,
+        "seed": 282
+      },
+      {
+        "episode": 142,
+        "seed": 287
+      },
+      {
+        "episode": 145,
+        "seed": 290
+      },
+      {
+        "episode": 153,
+        "seed": 300
+      },
+      {
+        "episode": 156,
+        "seed": 303
+      },
+      {
+        "episode": 169,
+        "seed": 38
+      },
+      {
+        "episode": 203,
+        "seed": 82
+      },
+      {
+        "episode": 209,
+        "seed": 89
+      },
+      {
+        "episode": 222,
+        "seed": 103
+      },
+      {
+        "episode": 227,
+        "seed": 108
+      },
+      {
+        "episode": 228,
+        "seed": 17
+      },
+      {
+        "episode": 229,
+        "seed": 110
+      },
+      {
+        "episode": 241,
+        "seed": 123
+      }
+    ],
+    "ChainOfColors7-VLA-v0": [
+      {
+        "episode": 1,
+        "seed": 9
+      },
+      {
+        "episode": 27,
+        "seed": 148
+      },
+      {
+        "episode": 33,
+        "seed": 156
+      },
+      {
+        "episode": 39,
+        "seed": 161
+      },
+      {
+        "episode": 43,
+        "seed": 168
+      },
+      {
+        "episode": 61,
+        "seed": 187
+      },
+      {
+        "episode": 63,
+        "seed": 189
+      },
+      {
+        "episode": 75,
+        "seed": 202
+      },
+      {
+        "episode": 77,
+        "seed": 204
+      },
+      {
+        "episode": 81,
+        "seed": 208
+      },
+      {
+        "episode": 86,
+        "seed": 214
+      },
+      {
+        "episode": 116,
+        "seed": 241
+      },
+      {
+        "episode": 118,
+        "seed": 243
+      },
+      {
+        "episode": 125,
+        "seed": 250
+      },
+      {
+        "episode": 152,
+        "seed": 277
+      },
+      {
+        "episode": 191,
+        "seed": 60
+      },
+      {
+        "episode": 197,
+        "seed": 65
+      },
+      {
+        "episode": 216,
+        "seed": 87
+      },
+      {
+        "episode": 225,
+        "seed": 96
+      },
+      {
+        "episode": 226,
+        "seed": 97
+      },
+      {
+        "episode": 227,
+        "seed": 98
+      },
+      {
+        "episode": 228,
+        "seed": 17
+      },
+      {
+        "episode": 232,
+        "seed": 103
+      },
+      {
+        "episode": 238,
+        "seed": 109
+      },
+      {
+        "episode": 249,
+        "seed": 120
+      }
+    ],
+    "FindImposterColor3-VLA-v0": [
+      {
+        "episode": 2,
+        "seed": 2
+      },
+      {
+        "episode": 16,
+        "seed": 16
+      },
+      {
+        "episode": 20,
+        "seed": 100
+      },
+      {
+        "episode": 23,
+        "seed": 103
+      },
+      {
+        "episode": 26,
+        "seed": 106
+      },
+      {
+        "episode": 39,
+        "seed": 119
+      },
+      {
+        "episode": 44,
+        "seed": 124
+      },
+      {
+        "episode": 60,
+        "seed": 140
+      },
+      {
+        "episode": 62,
+        "seed": 142
+      },
+      {
+        "episode": 67,
+        "seed": 147
+      },
+      {
+        "episode": 81,
+        "seed": 161
+      },
+      {
+        "episode": 83,
+        "seed": 163
+      },
+      {
+        "episode": 93,
+        "seed": 173
+      },
+      {
+        "episode": 101,
+        "seed": 181
+      },
+      {
+        "episode": 103,
+        "seed": 183
+      },
+      {
+        "episode": 107,
+        "seed": 187
+      },
+      {
+        "episode": 108,
+        "seed": 188
+      },
+      {
+        "episode": 134,
+        "seed": 204
+      },
+      {
+        "episode": 137,
+        "seed": 207
+      },
+      {
+        "episode": 197,
+        "seed": 47
+      },
+      {
+        "episode": 209,
+        "seed": 59
+      },
+      {
+        "episode": 212,
+        "seed": 62
+      },
+      {
+        "episode": 226,
+        "seed": 76
+      },
+      {
+        "episode": 232,
+        "seed": 82
+      },
+      {
+        "episode": 238,
+        "seed": 88
+      }
+    ],
+    "FindImposterColor5-VLA-v0": [
+      {
+        "episode": 1,
+        "seed": 1
+      },
+      {
+        "episode": 40,
+        "seed": 120
+      },
+      {
+        "episode": 45,
+        "seed": 125
+      },
+      {
+        "episode": 54,
+        "seed": 134
+      },
+      {
+        "episode": 60,
+        "seed": 140
+      },
+      {
+        "episode": 90,
+        "seed": 170
+      },
+      {
+        "episode": 94,
+        "seed": 174
+      },
+      {
+        "episode": 96,
+        "seed": 176
+      },
+      {
+        "episode": 109,
+        "seed": 189
+      },
+      {
+        "episode": 110,
+        "seed": 190
+      },
+      {
+        "episode": 111,
+        "seed": 191
+      },
+      {
+        "episode": 131,
+        "seed": 201
+      },
+      {
+        "episode": 151,
+        "seed": 221
+      },
+      {
+        "episode": 168,
+        "seed": 238
+      },
+      {
+        "episode": 170,
+        "seed": 240
+      },
+      {
+        "episode": 195,
+        "seed": 45
+      },
+      {
+        "episode": 198,
+        "seed": 48
+      },
+      {
+        "episode": 201,
+        "seed": 51
+      },
+      {
+        "episode": 202,
+        "seed": 52
+      },
+      {
+        "episode": 213,
+        "seed": 63
+      },
+      {
+        "episode": 217,
+        "seed": 67
+      },
+      {
+        "episode": 222,
+        "seed": 72
+      },
+      {
+        "episode": 238,
+        "seed": 88
+      },
+      {
+        "episode": 240,
+        "seed": 90
+      },
+      {
+        "episode": 245,
+        "seed": 95
+      }
+    ],
+    "FindImposterColor9-VLA-v0": [
+      {
+        "episode": 0,
+        "seed": 0
+      },
+      {
+        "episode": 4,
+        "seed": 4
+      },
+      {
+        "episode": 25,
+        "seed": 105
+      },
+      {
+        "episode": 26,
+        "seed": 106
+      },
+      {
+        "episode": 31,
+        "seed": 111
+      },
+      {
+        "episode": 35,
+        "seed": 115
+      },
+      {
+        "episode": 40,
+        "seed": 120
+      },
+      {
+        "episode": 52,
+        "seed": 132
+      },
+      {
+        "episode": 53,
+        "seed": 133
+      },
+      {
+        "episode": 56,
+        "seed": 136
+      },
+      {
+        "episode": 64,
+        "seed": 144
+      },
+      {
+        "episode": 113,
+        "seed": 193
+      },
+      {
+        "episode": 114,
+        "seed": 194
+      },
+      {
+        "episode": 115,
+        "seed": 195
+      },
+      {
+        "episode": 121,
+        "seed": 21
+      },
+      {
+        "episode": 129,
+        "seed": 29
+      },
+      {
+        "episode": 136,
+        "seed": 206
+      },
+      {
+        "episode": 138,
+        "seed": 208
+      },
+      {
+        "episode": 157,
+        "seed": 227
+      },
+      {
+        "episode": 173,
+        "seed": 243
+      },
+      {
+        "episode": 186,
+        "seed": 36
+      },
+      {
+        "episode": 199,
+        "seed": 49
+      },
+      {
+        "episode": 213,
+        "seed": 63
+      },
+      {
+        "episode": 218,
+        "seed": 68
+      },
+      {
+        "episode": 236,
+        "seed": 86
+      }
+    ],
+    "FindImposterShape3-VLA-v0": [
+      {
+        "episode": 4,
+        "seed": 4
+      },
+      {
+        "episode": 6,
+        "seed": 6
+      },
+      {
+        "episode": 11,
+        "seed": 11
+      },
+      {
+        "episode": 15,
+        "seed": 15
+      },
+      {
+        "episode": 21,
+        "seed": 101
+      },
+      {
+        "episode": 34,
+        "seed": 114
+      },
+      {
+        "episode": 40,
+        "seed": 120
+      },
+      {
+        "episode": 55,
+        "seed": 135
+      },
+      {
+        "episode": 86,
+        "seed": 166
+      },
+      {
+        "episode": 89,
+        "seed": 169
+      },
+      {
+        "episode": 106,
+        "seed": 186
+      },
+      {
+        "episode": 111,
+        "seed": 191
+      },
+      {
+        "episode": 117,
+        "seed": 197
+      },
+      {
+        "episode": 119,
+        "seed": 199
+      },
+      {
+        "episode": 131,
+        "seed": 201
+      },
+      {
+        "episode": 148,
+        "seed": 218
+      },
+      {
+        "episode": 153,
+        "seed": 223
+      },
+      {
+        "episode": 163,
+        "seed": 233
+      },
+      {
+        "episode": 171,
+        "seed": 241
+      },
+      {
+        "episode": 196,
+        "seed": 46
+      },
+      {
+        "episode": 202,
+        "seed": 52
+      },
+      {
+        "episode": 207,
+        "seed": 57
+      },
+      {
+        "episode": 219,
+        "seed": 69
+      },
+      {
+        "episode": 232,
+        "seed": 82
+      },
+      {
+        "episode": 233,
+        "seed": 83
+      }
+    ],
+    "FindImposterShape5-VLA-v0": [
+      {
+        "episode": 10,
+        "seed": 10
+      },
+      {
+        "episode": 25,
+        "seed": 105
+      },
+      {
+        "episode": 35,
+        "seed": 115
+      },
+      {
+        "episode": 36,
+        "seed": 116
+      },
+      {
+        "episode": 45,
+        "seed": 125
+      },
+      {
+        "episode": 48,
+        "seed": 128
+      },
+      {
+        "episode": 54,
+        "seed": 134
+      },
+      {
+        "episode": 57,
+        "seed": 137
+      },
+      {
+        "episode": 59,
+        "seed": 139
+      },
+      {
+        "episode": 68,
+        "seed": 148
+      },
+      {
+        "episode": 87,
+        "seed": 167
+      },
+      {
+        "episode": 88,
+        "seed": 168
+      },
+      {
+        "episode": 92,
+        "seed": 172
+      },
+      {
+        "episode": 102,
+        "seed": 182
+      },
+      {
+        "episode": 107,
+        "seed": 187
+      },
+      {
+        "episode": 120,
+        "seed": 20
+      },
+      {
+        "episode": 128,
+        "seed": 28
+      },
+      {
+        "episode": 129,
+        "seed": 29
+      },
+      {
+        "episode": 134,
+        "seed": 204
+      },
+      {
+        "episode": 135,
+        "seed": 205
+      },
+      {
+        "episode": 146,
+        "seed": 216
+      },
+      {
+        "episode": 172,
+        "seed": 242
+      },
+      {
+        "episode": 220,
+        "seed": 70
+      },
+      {
+        "episode": 229,
+        "seed": 79
+      },
+      {
+        "episode": 232,
+        "seed": 82
+      }
+    ],
+    "FindImposterShape9-VLA-v0": [
+      {
+        "episode": 6,
+        "seed": 6
+      },
+      {
+        "episode": 18,
+        "seed": 18
+      },
+      {
+        "episode": 47,
+        "seed": 137
+      },
+      {
+        "episode": 71,
+        "seed": 161
+      },
+      {
+        "episode": 79,
+        "seed": 169
+      },
+      {
+        "episode": 81,
+        "seed": 171
+      },
+      {
+        "episode": 89,
+        "seed": 179
+      },
+      {
+        "episode": 93,
+        "seed": 183
+      },
+      {
+        "episode": 98,
+        "seed": 188
+      },
+      {
+        "episode": 123,
+        "seed": 23
+      },
+      {
+        "episode": 133,
+        "seed": 213
+      },
+      {
+        "episode": 135,
+        "seed": 215
+      },
+      {
+        "episode": 148,
+        "seed": 228
+      },
+      {
+        "episode": 151,
+        "seed": 231
+      },
+      {
+        "episode": 161,
+        "seed": 241
+      },
+      {
+        "episode": 179,
+        "seed": 259
+      },
+      {
+        "episode": 183,
+        "seed": 43
+      },
+      {
+        "episode": 186,
+        "seed": 46
+      },
+      {
+        "episode": 192,
+        "seed": 52
+      },
+      {
+        "episode": 201,
+        "seed": 61
+      },
+      {
+        "episode": 202,
+        "seed": 62
+      },
+      {
+        "episode": 204,
+        "seed": 64
+      },
+      {
+        "episode": 205,
+        "seed": 65
+      },
+      {
+        "episode": 221,
+        "seed": 81
+      },
+      {
+        "episode": 228,
+        "seed": 88
+      }
+    ],
+    "FindImposterShapeAndColor3x2-VLA-v0": [
+      {
+        "episode": 6,
+        "seed": 6
+      },
+      {
+        "episode": 22,
+        "seed": 102
+      },
+      {
+        "episode": 24,
+        "seed": 104
+      },
+      {
+        "episode": 30,
+        "seed": 110
+      },
+      {
+        "episode": 43,
+        "seed": 123
+      },
+      {
+        "episode": 67,
+        "seed": 147
+      },
+      {
+        "episode": 70,
+        "seed": 150
+      },
+      {
+        "episode": 73,
+        "seed": 153
+      },
+      {
+        "episode": 75,
+        "seed": 155
+      },
+      {
+        "episode": 80,
+        "seed": 160
+      },
+      {
+        "episode": 120,
+        "seed": 20
+      },
+      {
+        "episode": 124,
+        "seed": 24
+      },
+      {
+        "episode": 126,
+        "seed": 26
+      },
+      {
+        "episode": 128,
+        "seed": 28
+      },
+      {
+        "episode": 138,
+        "seed": 208
+      },
+      {
+        "episode": 143,
+        "seed": 213
+      },
+      {
+        "episode": 145,
+        "seed": 215
+      },
+      {
+        "episode": 176,
+        "seed": 246
+      },
+      {
+        "episode": 179,
+        "seed": 249
+      },
+      {
+        "episode": 188,
+        "seed": 38
+      },
+      {
+        "episode": 209,
+        "seed": 59
+      },
+      {
+        "episode": 210,
+        "seed": 60
+      },
+      {
+        "episode": 211,
+        "seed": 61
+      },
+      {
+        "episode": 218,
+        "seed": 68
+      },
+      {
+        "episode": 221,
+        "seed": 71
+      }
+    ],
+    "FindImposterShapeAndColor3x3-VLA-v0": [
+      {
+        "episode": 7,
+        "seed": 7
+      },
+      {
+        "episode": 26,
+        "seed": 116
+      },
+      {
+        "episode": 31,
+        "seed": 121
+      },
+      {
+        "episode": 56,
+        "seed": 166
+      },
+      {
+        "episode": 57,
+        "seed": 167
+      },
+      {
+        "episode": 80,
+        "seed": 190
+      },
+      {
+        "episode": 83,
+        "seed": 193
+      },
+      {
+        "episode": 84,
+        "seed": 194
+      },
+      {
+        "episode": 88,
+        "seed": 198
+      },
+      {
+        "episode": 94,
+        "seed": 204
+      },
+      {
+        "episode": 102,
+        "seed": 212
+      },
+      {
+        "episode": 109,
+        "seed": 219
+      },
+      {
+        "episode": 123,
+        "seed": 23
+      },
+      {
+        "episode": 143,
+        "seed": 263
+      },
+      {
+        "episode": 154,
+        "seed": 274
+      },
+      {
+        "episode": 164,
+        "seed": 284
+      },
+      {
+        "episode": 169,
+        "seed": 289
+      },
+      {
+        "episode": 176,
+        "seed": 306
+      },
+      {
+        "episode": 177,
+        "seed": 307
+      },
+      {
+        "episode": 180,
+        "seed": 30
+      },
+      {
+        "episode": 197,
+        "seed": 47
+      },
+      {
+        "episode": 203,
+        "seed": 53
+      },
+      {
+        "episode": 225,
+        "seed": 85
+      },
+      {
+        "episode": 228,
+        "seed": 88
+      },
+      {
+        "episode": 239,
+        "seed": 99
+      }
+    ],
+    "FindImposterShapeAndColor5x3-VLA-v0": [
+      {
+        "episode": 0,
+        "seed": 20
+      },
+      {
+        "episode": 12,
+        "seed": 42
+      },
+      {
+        "episode": 18,
+        "seed": 48
+      },
+      {
+        "episode": 21,
+        "seed": 321
+      },
+      {
+        "episode": 24,
+        "seed": 324
+      },
+      {
+        "episode": 34,
+        "seed": 334
+      },
+      {
+        "episode": 37,
+        "seed": 337
+      },
+      {
+        "episode": 38,
+        "seed": 338
+      },
+      {
+        "episode": 42,
+        "seed": 392
+      },
+      {
+        "episode": 58,
+        "seed": 408
+      },
+      {
+        "episode": 63,
+        "seed": 483
+      },
+      {
+        "episode": 65,
+        "seed": 485
+      },
+      {
+        "episode": 96,
+        "seed": 566
+      },
+      {
+        "episode": 108,
+        "seed": 578
+      },
+      {
+        "episode": 145,
+        "seed": 625
+      },
+      {
+        "episode": 156,
+        "seed": 636
+      },
+      {
+        "episode": 160,
+        "seed": 650
+      },
+      {
+        "episode": 162,
+        "seed": 652
+      },
+      {
+        "episode": 195,
+        "seed": 85
+      },
+      {
+        "episode": 196,
+        "seed": 86
+      },
+      {
+        "episode": 197,
+        "seed": 87
+      },
+      {
+        "episode": 214,
+        "seed": 234
+      },
+      {
+        "episode": 216,
+        "seed": 236
+      },
+      {
+        "episode": 218,
+        "seed": 238
+      },
+      {
+        "episode": 228,
+        "seed": 248
+      }
+    ],
+    "GatherAndRecall1-VLA-v0": [
+      {
+        "episode": 56,
+        "seed": 154
+      },
+      {
+        "episode": 57,
+        "seed": 17
+      },
+      {
+        "episode": 65,
+        "seed": 162
+      },
+      {
+        "episode": 80,
+        "seed": 176
+      },
+      {
+        "episode": 86,
+        "seed": 182
+      },
+      {
+        "episode": 96,
+        "seed": 192
+      },
+      {
+        "episode": 98,
+        "seed": 194
+      },
+      {
+        "episode": 126,
+        "seed": 219
+      },
+      {
+        "episode": 128,
+        "seed": 221
+      },
+      {
+        "episode": 140,
+        "seed": 232
+      },
+      {
+        "episode": 157,
+        "seed": 26
+      },
+      {
+        "episode": 158,
+        "seed": 248
+      },
+      {
+        "episode": 159,
+        "seed": 249
+      },
+      {
+        "episode": 175,
+        "seed": 33
+      },
+      {
+        "episode": 178,
+        "seed": 36
+      },
+      {
+        "episode": 201,
+        "seed": 58
+      },
+      {
+        "episode": 211,
+        "seed": 68
+      },
+      {
+        "episode": 213,
+        "seed": 70
+      },
+      {
+        "episode": 217,
+        "seed": 9
+      },
+      {
+        "episode": 218,
+        "seed": 74
+      },
+      {
+        "episode": 228,
+        "seed": 10
+      },
+      {
+        "episode": 232,
+        "seed": 88
+      },
+      {
+        "episode": 233,
+        "seed": 89
+      },
+      {
+        "episode": 241,
+        "seed": 96
+      },
+      {
+        "episode": 245,
+        "seed": 100
+      }
+    ],
+    "GatherAndRecall3-VLA-v0": [
+      {
+        "episode": 5,
+        "seed": 108
+      },
+      {
+        "episode": 30,
+        "seed": 132
+      },
+      {
+        "episode": 45,
+        "seed": 147
+      },
+      {
+        "episode": 46,
+        "seed": 17
+      },
+      {
+        "episode": 48,
+        "seed": 149
+      },
+      {
+        "episode": 58,
+        "seed": 159
+      },
+      {
+        "episode": 61,
+        "seed": 162
+      },
+      {
+        "episode": 71,
+        "seed": 172
+      },
+      {
+        "episode": 83,
+        "seed": 183
+      },
+      {
+        "episode": 88,
+        "seed": 189
+      },
+      {
+        "episode": 103,
+        "seed": 202
+      },
+      {
+        "episode": 127,
+        "seed": 223
+      },
+      {
+        "episode": 145,
+        "seed": 240
+      },
+      {
+        "episode": 154,
+        "seed": 250
+      },
+      {
+        "episode": 159,
+        "seed": 254
+      },
+      {
+        "episode": 178,
+        "seed": 38
+      },
+      {
+        "episode": 183,
+        "seed": 43
+      },
+      {
+        "episode": 184,
+        "seed": 7
+      },
+      {
+        "episode": 197,
+        "seed": 56
+      },
+      {
+        "episode": 206,
+        "seed": 9
+      },
+      {
+        "episode": 207,
+        "seed": 65
+      },
+      {
+        "episode": 209,
+        "seed": 67
+      },
+      {
+        "episode": 213,
+        "seed": 71
+      },
+      {
+        "episode": 230,
+        "seed": 87
+      },
+      {
+        "episode": 248,
+        "seed": 104
+      }
+    ],
+    "GatherAndRecall5-VLA-v0": [
+      {
+        "episode": 5,
+        "seed": 111
+      },
+      {
+        "episode": 6,
+        "seed": 112
+      },
+      {
+        "episode": 35,
+        "seed": 14
+      },
+      {
+        "episode": 39,
+        "seed": 145
+      },
+      {
+        "episode": 40,
+        "seed": 146
+      },
+      {
+        "episode": 50,
+        "seed": 156
+      },
+      {
+        "episode": 59,
+        "seed": 164
+      },
+      {
+        "episode": 61,
+        "seed": 166
+      },
+      {
+        "episode": 77,
+        "seed": 182
+      },
+      {
+        "episode": 90,
+        "seed": 20
+      },
+      {
+        "episode": 93,
+        "seed": 199
+      },
+      {
+        "episode": 111,
+        "seed": 216
+      },
+      {
+        "episode": 124,
+        "seed": 24
+      },
+      {
+        "episode": 125,
+        "seed": 229
+      },
+      {
+        "episode": 157,
+        "seed": 28
+      },
+      {
+        "episode": 160,
+        "seed": 266
+      },
+      {
+        "episode": 162,
+        "seed": 268
+      },
+      {
+        "episode": 173,
+        "seed": 3
+      },
+      {
+        "episode": 177,
+        "seed": 38
+      },
+      {
+        "episode": 179,
+        "seed": 40
+      },
+      {
+        "episode": 184,
+        "seed": 4
+      },
+      {
+        "episode": 191,
+        "seed": 51
+      },
+      {
+        "episode": 244,
+        "seed": 103
+      },
+      {
+        "episode": 247,
+        "seed": 106
+      },
+      {
+        "episode": 249,
+        "seed": 108
+      }
+    ],
+    "GatherAndRecall7-VLA-v0": [
+      {
+        "episode": 0,
+        "seed": 2
+      },
+      {
+        "episode": 7,
+        "seed": 120
+      },
+      {
+        "episode": 13,
+        "seed": 14
+      },
+      {
+        "episode": 15,
+        "seed": 127
+      },
+      {
+        "episode": 47,
+        "seed": 159
+      },
+      {
+        "episode": 51,
+        "seed": 164
+      },
+      {
+        "episode": 67,
+        "seed": 181
+      },
+      {
+        "episode": 71,
+        "seed": 185
+      },
+      {
+        "episode": 75,
+        "seed": 190
+      },
+      {
+        "episode": 110,
+        "seed": 222
+      },
+      {
+        "episode": 114,
+        "seed": 224
+      },
+      {
+        "episode": 119,
+        "seed": 229
+      },
+      {
+        "episode": 120,
+        "seed": 230
+      },
+      {
+        "episode": 133,
+        "seed": 245
+      },
+      {
+        "episode": 141,
+        "seed": 254
+      },
+      {
+        "episode": 142,
+        "seed": 256
+      },
+      {
+        "episode": 154,
+        "seed": 269
+      },
+      {
+        "episode": 173,
+        "seed": 5
+      },
+      {
+        "episode": 175,
+        "seed": 35
+      },
+      {
+        "episode": 201,
+        "seed": 64
+      },
+      {
+        "episode": 210,
+        "seed": 74
+      },
+      {
+        "episode": 218,
+        "seed": 83
+      },
+      {
+        "episode": 225,
+        "seed": 91
+      },
+      {
+        "episode": 228,
+        "seed": 11
+      },
+      {
+        "episode": 234,
+        "seed": 99
+      }
+    ],
+    "GatherAndRecall9-VLA-v0": [
+      {
+        "episode": 3,
+        "seed": 11
+      },
+      {
+        "episode": 13,
+        "seed": 42
+      },
+      {
+        "episode": 15,
+        "seed": 44
+      },
+      {
+        "episode": 25,
+        "seed": 70
+      },
+      {
+        "episode": 32,
+        "seed": 89
+      },
+      {
+        "episode": 36,
+        "seed": 103
+      },
+      {
+        "episode": 47,
+        "seed": 131
+      },
+      {
+        "episode": 56,
+        "seed": 157
+      },
+      {
+        "episode": 63,
+        "seed": 183
+      },
+      {
+        "episode": 74,
+        "seed": 220
+      },
+      {
+        "episode": 81,
+        "seed": 245
+      },
+      {
+        "episode": 88,
+        "seed": 261
+      },
+      {
+        "episode": 116,
+        "seed": 354
+      },
+      {
+        "episode": 122,
+        "seed": 367
+      },
+      {
+        "episode": 128,
+        "seed": 388
+      },
+      {
+        "episode": 133,
+        "seed": 399
+      },
+      {
+        "episode": 139,
+        "seed": 412
+      },
+      {
+        "episode": 160,
+        "seed": 470
+      },
+      {
+        "episode": 168,
+        "seed": 495
+      },
+      {
+        "episode": 175,
+        "seed": 519
+      },
+      {
+        "episode": 210,
+        "seed": 643
+      },
+      {
+        "episode": 212,
+        "seed": 648
+      },
+      {
+        "episode": 220,
+        "seed": 666
+      },
+      {
+        "episode": 226,
+        "seed": 685
+      },
+      {
+        "episode": 248,
+        "seed": 753
+      }
+    ],
+    "InterceptFast-VLA-v0": [
+      {
+        "episode": 4,
+        "seed": 14
+      },
+      {
+        "episode": 5,
+        "seed": 15
+      },
+      {
+        "episode": 10,
+        "seed": 20
+      },
+      {
+        "episode": 45,
+        "seed": 2765
+      },
+      {
+        "episode": 67,
+        "seed": 3237
+      },
+      {
+        "episode": 82,
+        "seed": 3302
+      },
+      {
+        "episode": 95,
+        "seed": 3485
+      },
+      {
+        "episode": 121,
+        "seed": 191
+      },
+      {
+        "episode": 130,
+        "seed": 4070
+      },
+      {
+        "episode": 132,
+        "seed": 4072
+      },
+      {
+        "episode": 133,
+        "seed": 4073
+      },
+      {
+        "episode": 136,
+        "seed": 4076
+      },
+      {
+        "episode": 168,
+        "seed": 4168
+      },
+      {
+        "episode": 170,
+        "seed": 4470
+      },
+      {
+        "episode": 171,
+        "seed": 4471
+      },
+      {
+        "episode": 173,
+        "seed": 4473
+      },
+      {
+        "episode": 176,
+        "seed": 4476
+      },
+      {
+        "episode": 189,
+        "seed": 239
+      },
+      {
+        "episode": 193,
+        "seed": 313
+      },
+      {
+        "episode": 198,
+        "seed": 318
+      },
+      {
+        "episode": 206,
+        "seed": 1316
+      },
+      {
+        "episode": 218,
+        "seed": 1638
+      },
+      {
+        "episode": 242,
+        "seed": 1872
+      },
+      {
+        "episode": 245,
+        "seed": 1875
+      },
+      {
+        "episode": 248,
+        "seed": 1878
+      }
+    ],
+    "InterceptGrabFast-VLA-v0": [
+      {
+        "episode": 6,
+        "seed": 26
+      },
+      {
+        "episode": 16,
+        "seed": 36
+      },
+      {
+        "episode": 18,
+        "seed": 38
+      },
+      {
+        "episode": 19,
+        "seed": 39
+      },
+      {
+        "episode": 20,
+        "seed": 470
+      },
+      {
+        "episode": 27,
+        "seed": 477
+      },
+      {
+        "episode": 35,
+        "seed": 535
+      },
+      {
+        "episode": 40,
+        "seed": 560
+      },
+      {
+        "episode": 53,
+        "seed": 603
+      },
+      {
+        "episode": 57,
+        "seed": 607
+      },
+      {
+        "episode": 101,
+        "seed": 871
+      },
+      {
+        "episode": 105,
+        "seed": 875
+      },
+      {
+        "episode": 121,
+        "seed": 91
+      },
+      {
+        "episode": 135,
+        "seed": 975
+      },
+      {
+        "episode": 172,
+        "seed": 1322
+      },
+      {
+        "episode": 175,
+        "seed": 1325
+      },
+      {
+        "episode": 181,
+        "seed": 111
+      },
+      {
+        "episode": 192,
+        "seed": 142
+      },
+      {
+        "episode": 198,
+        "seed": 148
+      },
+      {
+        "episode": 204,
+        "seed": 214
+      },
+      {
+        "episode": 216,
+        "seed": 316
+      },
+      {
+        "episode": 224,
+        "seed": 404
+      },
+      {
+        "episode": 228,
+        "seed": 408
+      },
+      {
+        "episode": 241,
+        "seed": 451
+      },
+      {
+        "episode": 243,
+        "seed": 453
+      }
+    ],
+    "InterceptGrabMedium-VLA-v0": [
+      {
+        "episode": 27,
+        "seed": 137
+      },
+      {
+        "episode": 33,
+        "seed": 143
+      },
+      {
+        "episode": 42,
+        "seed": 152
+      },
+      {
+        "episode": 43,
+        "seed": 153
+      },
+      {
+        "episode": 49,
+        "seed": 159
+      },
+      {
+        "episode": 52,
+        "seed": 162
+      },
+      {
+        "episode": 58,
+        "seed": 168
+      },
+      {
+        "episode": 62,
+        "seed": 172
+      },
+      {
+        "episode": 75,
+        "seed": 205
+      },
+      {
+        "episode": 80,
+        "seed": 210
+      },
+      {
+        "episode": 83,
+        "seed": 213
+      },
+      {
+        "episode": 86,
+        "seed": 216
+      },
+      {
+        "episode": 94,
+        "seed": 224
+      },
+      {
+        "episode": 97,
+        "seed": 227
+      },
+      {
+        "episode": 106,
+        "seed": 236
+      },
+      {
+        "episode": 107,
+        "seed": 237
+      },
+      {
+        "episode": 120,
+        "seed": 20
+      },
+      {
+        "episode": 121,
+        "seed": 21
+      },
+      {
+        "episode": 156,
+        "seed": 286
+      },
+      {
+        "episode": 174,
+        "seed": 304
+      },
+      {
+        "episode": 199,
+        "seed": 69
+      },
+      {
+        "episode": 230,
+        "seed": 110
+      },
+      {
+        "episode": 235,
+        "seed": 115
+      },
+      {
+        "episode": 238,
+        "seed": 118
+      },
+      {
+        "episode": 245,
+        "seed": 125
+      }
+    ],
+    "InterceptGrabSlow-VLA-v0": [
+      {
+        "episode": 2,
+        "seed": 2
+      },
+      {
+        "episode": 18,
+        "seed": 18
+      },
+      {
+        "episode": 26,
+        "seed": 106
+      },
+      {
+        "episode": 65,
+        "seed": 145
+      },
+      {
+        "episode": 82,
+        "seed": 162
+      },
+      {
+        "episode": 105,
+        "seed": 195
+      },
+      {
+        "episode": 108,
+        "seed": 198
+      },
+      {
+        "episode": 109,
+        "seed": 199
+      },
+      {
+        "episode": 113,
+        "seed": 203
+      },
+      {
+        "episode": 117,
+        "seed": 207
+      },
+      {
+        "episode": 120,
+        "seed": 20
+      },
+      {
+        "episode": 139,
+        "seed": 219
+      },
+      {
+        "episode": 158,
+        "seed": 238
+      },
+      {
+        "episode": 159,
+        "seed": 239
+      },
+      {
+        "episode": 164,
+        "seed": 244
+      },
+      {
+        "episode": 168,
+        "seed": 248
+      },
+      {
+        "episode": 185,
+        "seed": 35
+      },
+      {
+        "episode": 186,
+        "seed": 36
+      },
+      {
+        "episode": 193,
+        "seed": 43
+      },
+      {
+        "episode": 215,
+        "seed": 65
+      },
+      {
+        "episode": 224,
+        "seed": 74
+      },
+      {
+        "episode": 226,
+        "seed": 76
+      },
+      {
+        "episode": 230,
+        "seed": 80
+      },
+      {
+        "episode": 236,
+        "seed": 86
+      },
+      {
+        "episode": 242,
+        "seed": 92
+      }
+    ],
+    "InterceptMedium-VLA-v0": [
+      {
+        "episode": 41,
+        "seed": 1091
+      },
+      {
+        "episode": 82,
+        "seed": 1412
+      },
+      {
+        "episode": 88,
+        "seed": 1418
+      },
+      {
+        "episode": 98,
+        "seed": 1488
+      },
+      {
+        "episode": 104,
+        "seed": 1534
+      },
+      {
+        "episode": 107,
+        "seed": 1537
+      },
+      {
+        "episode": 113,
+        "seed": 1583
+      },
+      {
+        "episode": 116,
+        "seed": 1586
+      },
+      {
+        "episode": 118,
+        "seed": 1588
+      },
+      {
+        "episode": 126,
+        "seed": 376
+      },
+      {
+        "episode": 128,
+        "seed": 378
+      },
+      {
+        "episode": 132,
+        "seed": 1612
+      },
+      {
+        "episode": 142,
+        "seed": 1852
+      },
+      {
+        "episode": 145,
+        "seed": 1855
+      },
+      {
+        "episode": 173,
+        "seed": 2003
+      },
+      {
+        "episode": 180,
+        "seed": 440
+      },
+      {
+        "episode": 187,
+        "seed": 447
+      },
+      {
+        "episode": 191,
+        "seed": 471
+      },
+      {
+        "episode": 200,
+        "seed": 530
+      },
+      {
+        "episode": 215,
+        "seed": 595
+      },
+      {
+        "episode": 216,
+        "seed": 596
+      },
+      {
+        "episode": 231,
+        "seed": 901
+      },
+      {
+        "episode": 232,
+        "seed": 902
+      },
+      {
+        "episode": 236,
+        "seed": 906
+      },
+      {
+        "episode": 245,
+        "seed": 935
+      }
+    ],
+    "InterceptSlow-VLA-v0": [
+      {
+        "episode": 3,
+        "seed": 3
+      },
+      {
+        "episode": 6,
+        "seed": 6
+      },
+      {
+        "episode": 7,
+        "seed": 7
+      },
+      {
+        "episode": 16,
+        "seed": 26
+      },
+      {
+        "episode": 27,
+        "seed": 177
+      },
+      {
+        "episode": 35,
+        "seed": 195
+      },
+      {
+        "episode": 45,
+        "seed": 205
+      },
+      {
+        "episode": 51,
+        "seed": 211
+      },
+      {
+        "episode": 65,
+        "seed": 255
+      },
+      {
+        "episode": 67,
+        "seed": 257
+      },
+      {
+        "episode": 70,
+        "seed": 260
+      },
+      {
+        "episode": 83,
+        "seed": 303
+      },
+      {
+        "episode": 93,
+        "seed": 313
+      },
+      {
+        "episode": 94,
+        "seed": 314
+      },
+      {
+        "episode": 96,
+        "seed": 316
+      },
+      {
+        "episode": 98,
+        "seed": 318
+      },
+      {
+        "episode": 106,
+        "seed": 386
+      },
+      {
+        "episode": 117,
+        "seed": 397
+      },
+      {
+        "episode": 173,
+        "seed": 463
+      },
+      {
+        "episode": 177,
+        "seed": 467
+      },
+      {
+        "episode": 188,
+        "seed": 78
+      },
+      {
+        "episode": 202,
+        "seed": 92
+      },
+      {
+        "episode": 234,
+        "seed": 144
+      },
+      {
+        "episode": 236,
+        "seed": 146
+      },
+      {
+        "episode": 246,
+        "seed": 166
+      }
+    ],
+    "RememberColor3-Long-VLA-v0": [
+      {
+        "episode": 18,
+        "seed": 131
+      },
+      {
+        "episode": 22,
+        "seed": 135
+      },
+      {
+        "episode": 27,
+        "seed": 139
+      },
+      {
+        "episode": 31,
+        "seed": 144
+      },
+      {
+        "episode": 36,
+        "seed": 148
+      },
+      {
+        "episode": 38,
+        "seed": 150
+      },
+      {
+        "episode": 50,
+        "seed": 161
+      },
+      {
+        "episode": 54,
+        "seed": 165
+      },
+      {
+        "episode": 56,
+        "seed": 167
+      },
+      {
+        "episode": 61,
+        "seed": 171
+      },
+      {
+        "episode": 72,
+        "seed": 181
+      },
+      {
+        "episode": 108,
+        "seed": 214
+      },
+      {
+        "episode": 115,
+        "seed": 219
+      },
+      {
+        "episode": 117,
+        "seed": 221
+      },
+      {
+        "episode": 124,
+        "seed": 37
+      },
+      {
+        "episode": 148,
+        "seed": 249
+      },
+      {
+        "episode": 168,
+        "seed": 41
+      },
+      {
+        "episode": 196,
+        "seed": 66
+      },
+      {
+        "episode": 200,
+        "seed": 70
+      },
+      {
+        "episode": 208,
+        "seed": 77
+      },
+      {
+        "episode": 220,
+        "seed": 89
+      },
+      {
+        "episode": 221,
+        "seed": 90
+      },
+      {
+        "episode": 233,
+        "seed": 101
+      },
+      {
+        "episode": 236,
+        "seed": 104
+      },
+      {
+        "episode": 246,
+        "seed": 113
+      }
+    ],
+    "RememberColor3-VLA-v0": [
+      {
+        "episode": 1,
+        "seed": 1
+      },
+      {
+        "episode": 12,
+        "seed": 12
+      },
+      {
+        "episode": 17,
+        "seed": 17
+      },
+      {
+        "episode": 46,
+        "seed": 126
+      },
+      {
+        "episode": 58,
+        "seed": 138
+      },
+      {
+        "episode": 64,
+        "seed": 144
+      },
+      {
+        "episode": 73,
+        "seed": 153
+      },
+      {
+        "episode": 74,
+        "seed": 154
+      },
+      {
+        "episode": 83,
+        "seed": 163
+      },
+      {
+        "episode": 106,
+        "seed": 186
+      },
+      {
+        "episode": 108,
+        "seed": 188
+      },
+      {
+        "episode": 122,
+        "seed": 22
+      },
+      {
+        "episode": 144,
+        "seed": 214
+      },
+      {
+        "episode": 148,
+        "seed": 218
+      },
+      {
+        "episode": 165,
+        "seed": 235
+      },
+      {
+        "episode": 176,
+        "seed": 246
+      },
+      {
+        "episode": 182,
+        "seed": 32
+      },
+      {
+        "episode": 191,
+        "seed": 41
+      },
+      {
+        "episode": 198,
+        "seed": 48
+      },
+      {
+        "episode": 200,
+        "seed": 50
+      },
+      {
+        "episode": 213,
+        "seed": 63
+      },
+      {
+        "episode": 216,
+        "seed": 66
+      },
+      {
+        "episode": 226,
+        "seed": 76
+      },
+      {
+        "episode": 233,
+        "seed": 83
+      },
+      {
+        "episode": 234,
+        "seed": 84
+      }
+    ],
+    "RememberColor5-Long-VLA-v0": [
+      {
+        "episode": 2,
+        "seed": 26
+      },
+      {
+        "episode": 12,
+        "seed": 125
+      },
+      {
+        "episode": 19,
+        "seed": 131
+      },
+      {
+        "episode": 36,
+        "seed": 146
+      },
+      {
+        "episode": 37,
+        "seed": 147
+      },
+      {
+        "episode": 53,
+        "seed": 162
+      },
+      {
+        "episode": 64,
+        "seed": 173
+      },
+      {
+        "episode": 74,
+        "seed": 183
+      },
+      {
+        "episode": 85,
+        "seed": 193
+      },
+      {
+        "episode": 87,
+        "seed": 195
+      },
+      {
+        "episode": 90,
+        "seed": 34
+      },
+      {
+        "episode": 96,
+        "seed": 203
+      },
+      {
+        "episode": 99,
+        "seed": 206
+      },
+      {
+        "episode": 114,
+        "seed": 219
+      },
+      {
+        "episode": 120,
+        "seed": 225
+      },
+      {
+        "episode": 135,
+        "seed": 38
+      },
+      {
+        "episode": 146,
+        "seed": 39
+      },
+      {
+        "episode": 165,
+        "seed": 266
+      },
+      {
+        "episode": 172,
+        "seed": 45
+      },
+      {
+        "episode": 176,
+        "seed": 48
+      },
+      {
+        "episode": 193,
+        "seed": 64
+      },
+      {
+        "episode": 199,
+        "seed": 69
+      },
+      {
+        "episode": 214,
+        "seed": 83
+      },
+      {
+        "episode": 217,
+        "seed": 23
+      },
+      {
+        "episode": 229,
+        "seed": 96
+      }
+    ],
+    "RememberColor5-VLA-v0": [
+      {
+        "episode": 10,
+        "seed": 10
+      },
+      {
+        "episode": 22,
+        "seed": 102
+      },
+      {
+        "episode": 25,
+        "seed": 105
+      },
+      {
+        "episode": 29,
+        "seed": 109
+      },
+      {
+        "episode": 32,
+        "seed": 112
+      },
+      {
+        "episode": 47,
+        "seed": 147
+      },
+      {
+        "episode": 85,
+        "seed": 185
+      },
+      {
+        "episode": 92,
+        "seed": 192
+      },
+      {
+        "episode": 93,
+        "seed": 193
+      },
+      {
+        "episode": 102,
+        "seed": 212
+      },
+      {
+        "episode": 113,
+        "seed": 243
+      },
+      {
+        "episode": 114,
+        "seed": 244
+      },
+      {
+        "episode": 117,
+        "seed": 247
+      },
+      {
+        "episode": 118,
+        "seed": 248
+      },
+      {
+        "episode": 125,
+        "seed": 25
+      },
+      {
+        "episode": 143,
+        "seed": 263
+      },
+      {
+        "episode": 149,
+        "seed": 269
+      },
+      {
+        "episode": 180,
+        "seed": 30
+      },
+      {
+        "episode": 195,
+        "seed": 45
+      },
+      {
+        "episode": 196,
+        "seed": 46
+      },
+      {
+        "episode": 200,
+        "seed": 50
+      },
+      {
+        "episode": 210,
+        "seed": 60
+      },
+      {
+        "episode": 222,
+        "seed": 72
+      },
+      {
+        "episode": 229,
+        "seed": 79
+      },
+      {
+        "episode": 243,
+        "seed": 93
+      }
+    ],
+    "RememberColor9-Long-VLA-v0": [
+      {
+        "episode": 0,
+        "seed": 17
+      },
+      {
+        "episode": 3,
+        "seed": 119
+      },
+      {
+        "episode": 6,
+        "seed": 122
+      },
+      {
+        "episode": 17,
+        "seed": 132
+      },
+      {
+        "episode": 18,
+        "seed": 133
+      },
+      {
+        "episode": 26,
+        "seed": 140
+      },
+      {
+        "episode": 58,
+        "seed": 170
+      },
+      {
+        "episode": 64,
+        "seed": 176
+      },
+      {
+        "episode": 65,
+        "seed": 177
+      },
+      {
+        "episode": 80,
+        "seed": 190
+      },
+      {
+        "episode": 98,
+        "seed": 207
+      },
+      {
+        "episode": 106,
+        "seed": 214
+      },
+      {
+        "episode": 108,
+        "seed": 216
+      },
+      {
+        "episode": 109,
+        "seed": 217
+      },
+      {
+        "episode": 111,
+        "seed": 219
+      },
+      {
+        "episode": 128,
+        "seed": 234
+      },
+      {
+        "episode": 146,
+        "seed": 41
+      },
+      {
+        "episode": 173,
+        "seed": 20
+      },
+      {
+        "episode": 192,
+        "seed": 65
+      },
+      {
+        "episode": 201,
+        "seed": 74
+      },
+      {
+        "episode": 209,
+        "seed": 81
+      },
+      {
+        "episode": 222,
+        "seed": 93
+      },
+      {
+        "episode": 226,
+        "seed": 97
+      },
+      {
+        "episode": 239,
+        "seed": 26
+      },
+      {
+        "episode": 245,
+        "seed": 114
+      }
+    ],
+    "RememberColor9-VLA-v0": [
+      {
+        "episode": 6,
+        "seed": 6
+      },
+      {
+        "episode": 10,
+        "seed": 10
+      },
+      {
+        "episode": 24,
+        "seed": 104
+      },
+      {
+        "episode": 39,
+        "seed": 119
+      },
+      {
+        "episode": 59,
+        "seed": 139
+      },
+      {
+        "episode": 68,
+        "seed": 148
+      },
+      {
+        "episode": 76,
+        "seed": 156
+      },
+      {
+        "episode": 79,
+        "seed": 159
+      },
+      {
+        "episode": 97,
+        "seed": 177
+      },
+      {
+        "episode": 108,
+        "seed": 188
+      },
+      {
+        "episode": 109,
+        "seed": 189
+      },
+      {
+        "episode": 118,
+        "seed": 198
+      },
+      {
+        "episode": 133,
+        "seed": 203
+      },
+      {
+        "episode": 165,
+        "seed": 235
+      },
+      {
+        "episode": 172,
+        "seed": 242
+      },
+      {
+        "episode": 181,
+        "seed": 31
+      },
+      {
+        "episode": 199,
+        "seed": 49
+      },
+      {
+        "episode": 201,
+        "seed": 51
+      },
+      {
+        "episode": 205,
+        "seed": 55
+      },
+      {
+        "episode": 208,
+        "seed": 58
+      },
+      {
+        "episode": 210,
+        "seed": 60
+      },
+      {
+        "episode": 223,
+        "seed": 73
+      },
+      {
+        "episode": 227,
+        "seed": 77
+      },
+      {
+        "episode": 242,
+        "seed": 92
+      },
+      {
+        "episode": 247,
+        "seed": 97
+      }
+    ],
+    "RememberShape3-Long-VLA-v0": [
+      {
+        "episode": 0,
+        "seed": 18
+      },
+      {
+        "episode": 2,
+        "seed": 28
+      },
+      {
+        "episode": 16,
+        "seed": 132
+      },
+      {
+        "episode": 24,
+        "seed": 30
+      },
+      {
+        "episode": 43,
+        "seed": 158
+      },
+      {
+        "episode": 51,
+        "seed": 165
+      },
+      {
+        "episode": 58,
+        "seed": 171
+      },
+      {
+        "episode": 62,
+        "seed": 175
+      },
+      {
+        "episode": 83,
+        "seed": 194
+      },
+      {
+        "episode": 84,
+        "seed": 195
+      },
+      {
+        "episode": 94,
+        "seed": 204
+      },
+      {
+        "episode": 104,
+        "seed": 213
+      },
+      {
+        "episode": 111,
+        "seed": 220
+      },
+      {
+        "episode": 114,
+        "seed": 221
+      },
+      {
+        "episode": 121,
+        "seed": 228
+      },
+      {
+        "episode": 128,
+        "seed": 234
+      },
+      {
+        "episode": 154,
+        "seed": 258
+      },
+      {
+        "episode": 164,
+        "seed": 267
+      },
+      {
+        "episode": 180,
+        "seed": 55
+      },
+      {
+        "episode": 183,
+        "seed": 58
+      },
+      {
+        "episode": 192,
+        "seed": 66
+      },
+      {
+        "episode": 199,
+        "seed": 72
+      },
+      {
+        "episode": 209,
+        "seed": 81
+      },
+      {
+        "episode": 217,
+        "seed": 25
+      },
+      {
+        "episode": 224,
+        "seed": 96
+      }
+    ],
+    "RememberShape3-VLA-v0": [
+      {
+        "episode": 4,
+        "seed": 4
+      },
+      {
+        "episode": 25,
+        "seed": 115
+      },
+      {
+        "episode": 42,
+        "seed": 132
+      },
+      {
+        "episode": 55,
+        "seed": 145
+      },
+      {
+        "episode": 75,
+        "seed": 165
+      },
+      {
+        "episode": 81,
+        "seed": 171
+      },
+      {
+        "episode": 99,
+        "seed": 189
+      },
+      {
+        "episode": 108,
+        "seed": 198
+      },
+      {
+        "episode": 110,
+        "seed": 200
+      },
+      {
+        "episode": 114,
+        "seed": 204
+      },
+      {
+        "episode": 117,
+        "seed": 207
+      },
+      {
+        "episode": 126,
+        "seed": 36
+      },
+      {
+        "episode": 137,
+        "seed": 217
+      },
+      {
+        "episode": 170,
+        "seed": 270
+      },
+      {
+        "episode": 175,
+        "seed": 275
+      },
+      {
+        "episode": 178,
+        "seed": 278
+      },
+      {
+        "episode": 184,
+        "seed": 44
+      },
+      {
+        "episode": 187,
+        "seed": 47
+      },
+      {
+        "episode": 193,
+        "seed": 53
+      },
+      {
+        "episode": 200,
+        "seed": 60
+      },
+      {
+        "episode": 213,
+        "seed": 73
+      },
+      {
+        "episode": 220,
+        "seed": 80
+      },
+      {
+        "episode": 221,
+        "seed": 81
+      },
+      {
+        "episode": 228,
+        "seed": 88
+      },
+      {
+        "episode": 246,
+        "seed": 106
+      }
+    ],
+    "RememberShape5-Long-VLA-v0": [
+      {
+        "episode": 6,
+        "seed": 104
+      },
+      {
+        "episode": 11,
+        "seed": 109
+      },
+      {
+        "episode": 12,
+        "seed": 110
+      },
+      {
+        "episode": 15,
+        "seed": 112
+      },
+      {
+        "episode": 31,
+        "seed": 127
+      },
+      {
+        "episode": 43,
+        "seed": 138
+      },
+      {
+        "episode": 48,
+        "seed": 142
+      },
+      {
+        "episode": 60,
+        "seed": 153
+      },
+      {
+        "episode": 76,
+        "seed": 168
+      },
+      {
+        "episode": 84,
+        "seed": 177
+      },
+      {
+        "episode": 94,
+        "seed": 186
+      },
+      {
+        "episode": 102,
+        "seed": 193
+      },
+      {
+        "episode": 107,
+        "seed": 198
+      },
+      {
+        "episode": 113,
+        "seed": 21
+      },
+      {
+        "episode": 127,
+        "seed": 216
+      },
+      {
+        "episode": 129,
+        "seed": 218
+      },
+      {
+        "episode": 148,
+        "seed": 235
+      },
+      {
+        "episode": 152,
+        "seed": 239
+      },
+      {
+        "episode": 162,
+        "seed": 248
+      },
+      {
+        "episode": 173,
+        "seed": 4
+      },
+      {
+        "episode": 174,
+        "seed": 31
+      },
+      {
+        "episode": 192,
+        "seed": 48
+      },
+      {
+        "episode": 233,
+        "seed": 85
+      },
+      {
+        "episode": 241,
+        "seed": 92
+      },
+      {
+        "episode": 248,
+        "seed": 99
+      }
+    ],
+    "RememberShape5-VLA-v0": [
+      {
+        "episode": 1,
+        "seed": 1
+      },
+      {
+        "episode": 2,
+        "seed": 2
+      },
+      {
+        "episode": 12,
+        "seed": 12
+      },
+      {
+        "episode": 14,
+        "seed": 14
+      },
+      {
+        "episode": 17,
+        "seed": 17
+      },
+      {
+        "episode": 20,
+        "seed": 100
+      },
+      {
+        "episode": 43,
+        "seed": 123
+      },
+      {
+        "episode": 45,
+        "seed": 125
+      },
+      {
+        "episode": 46,
+        "seed": 126
+      },
+      {
+        "episode": 50,
+        "seed": 130
+      },
+      {
+        "episode": 51,
+        "seed": 131
+      },
+      {
+        "episode": 64,
+        "seed": 144
+      },
+      {
+        "episode": 96,
+        "seed": 176
+      },
+      {
+        "episode": 100,
+        "seed": 180
+      },
+      {
+        "episode": 103,
+        "seed": 183
+      },
+      {
+        "episode": 111,
+        "seed": 191
+      },
+      {
+        "episode": 135,
+        "seed": 205
+      },
+      {
+        "episode": 139,
+        "seed": 209
+      },
+      {
+        "episode": 150,
+        "seed": 220
+      },
+      {
+        "episode": 154,
+        "seed": 224
+      },
+      {
+        "episode": 157,
+        "seed": 227
+      },
+      {
+        "episode": 164,
+        "seed": 234
+      },
+      {
+        "episode": 176,
+        "seed": 246
+      },
+      {
+        "episode": 189,
+        "seed": 39
+      },
+      {
+        "episode": 246,
+        "seed": 96
+      }
+    ],
+    "RememberShape9-Long-VLA-v0": [
+      {
+        "episode": 0,
+        "seed": 0
+      },
+      {
+        "episode": 3,
+        "seed": 103
+      },
+      {
+        "episode": 4,
+        "seed": 104
+      },
+      {
+        "episode": 10,
+        "seed": 110
+      },
+      {
+        "episode": 11,
+        "seed": 111
+      },
+      {
+        "episode": 15,
+        "seed": 114
+      },
+      {
+        "episode": 27,
+        "seed": 125
+      },
+      {
+        "episode": 47,
+        "seed": 143
+      },
+      {
+        "episode": 66,
+        "seed": 162
+      },
+      {
+        "episode": 67,
+        "seed": 163
+      },
+      {
+        "episode": 75,
+        "seed": 170
+      },
+      {
+        "episode": 86,
+        "seed": 180
+      },
+      {
+        "episode": 91,
+        "seed": 184
+      },
+      {
+        "episode": 105,
+        "seed": 197
+      },
+      {
+        "episode": 126,
+        "seed": 215
+      },
+      {
+        "episode": 140,
+        "seed": 229
+      },
+      {
+        "episode": 147,
+        "seed": 235
+      },
+      {
+        "episode": 156,
+        "seed": 244
+      },
+      {
+        "episode": 186,
+        "seed": 43
+      },
+      {
+        "episode": 201,
+        "seed": 57
+      },
+      {
+        "episode": 207,
+        "seed": 62
+      },
+      {
+        "episode": 223,
+        "seed": 78
+      },
+      {
+        "episode": 224,
+        "seed": 79
+      },
+      {
+        "episode": 225,
+        "seed": 80
+      },
+      {
+        "episode": 239,
+        "seed": 9
+      }
+    ],
+    "RememberShape9-VLA-v0": [
+      {
+        "episode": 5,
+        "seed": 5
+      },
+      {
+        "episode": 12,
+        "seed": 12
+      },
+      {
+        "episode": 23,
+        "seed": 103
+      },
+      {
+        "episode": 50,
+        "seed": 130
+      },
+      {
+        "episode": 53,
+        "seed": 133
+      },
+      {
+        "episode": 68,
+        "seed": 148
+      },
+      {
+        "episode": 71,
+        "seed": 151
+      },
+      {
+        "episode": 102,
+        "seed": 182
+      },
+      {
+        "episode": 109,
+        "seed": 189
+      },
+      {
+        "episode": 126,
+        "seed": 26
+      },
+      {
+        "episode": 127,
+        "seed": 27
+      },
+      {
+        "episode": 134,
+        "seed": 204
+      },
+      {
+        "episode": 159,
+        "seed": 229
+      },
+      {
+        "episode": 161,
+        "seed": 231
+      },
+      {
+        "episode": 177,
+        "seed": 247
+      },
+      {
+        "episode": 178,
+        "seed": 248
+      },
+      {
+        "episode": 179,
+        "seed": 249
+      },
+      {
+        "episode": 182,
+        "seed": 32
+      },
+      {
+        "episode": 187,
+        "seed": 37
+      },
+      {
+        "episode": 193,
+        "seed": 43
+      },
+      {
+        "episode": 196,
+        "seed": 46
+      },
+      {
+        "episode": 206,
+        "seed": 56
+      },
+      {
+        "episode": 213,
+        "seed": 63
+      },
+      {
+        "episode": 219,
+        "seed": 69
+      },
+      {
+        "episode": 239,
+        "seed": 89
+      }
+    ],
+    "RememberShapeAndColor3x2-Long-VLA-v0": [
+      {
+        "episode": 3,
+        "seed": 101
+      },
+      {
+        "episode": 8,
+        "seed": 106
+      },
+      {
+        "episode": 13,
+        "seed": 12
+      },
+      {
+        "episode": 15,
+        "seed": 112
+      },
+      {
+        "episode": 17,
+        "seed": 114
+      },
+      {
+        "episode": 22,
+        "seed": 119
+      },
+      {
+        "episode": 44,
+        "seed": 139
+      },
+      {
+        "episode": 54,
+        "seed": 148
+      },
+      {
+        "episode": 61,
+        "seed": 154
+      },
+      {
+        "episode": 64,
+        "seed": 157
+      },
+      {
+        "episode": 78,
+        "seed": 170
+      },
+      {
+        "episode": 84,
+        "seed": 175
+      },
+      {
+        "episode": 94,
+        "seed": 184
+      },
+      {
+        "episode": 110,
+        "seed": 199
+      },
+      {
+        "episode": 117,
+        "seed": 204
+      },
+      {
+        "episode": 121,
+        "seed": 208
+      },
+      {
+        "episode": 134,
+        "seed": 220
+      },
+      {
+        "episode": 136,
+        "seed": 221
+      },
+      {
+        "episode": 160,
+        "seed": 243
+      },
+      {
+        "episode": 164,
+        "seed": 247
+      },
+      {
+        "episode": 171,
+        "seed": 29
+      },
+      {
+        "episode": 174,
+        "seed": 31
+      },
+      {
+        "episode": 178,
+        "seed": 35
+      },
+      {
+        "episode": 198,
+        "seed": 53
+      },
+      {
+        "episode": 220,
+        "seed": 73
+      }
+    ],
+    "RememberShapeAndColor3x2-VLA-v0": [
+      {
+        "episode": 13,
+        "seed": 13
+      },
+      {
+        "episode": 20,
+        "seed": 100
+      },
+      {
+        "episode": 27,
+        "seed": 107
+      },
+      {
+        "episode": 33,
+        "seed": 113
+      },
+      {
+        "episode": 37,
+        "seed": 117
+      },
+      {
+        "episode": 62,
+        "seed": 142
+      },
+      {
+        "episode": 75,
+        "seed": 155
+      },
+      {
+        "episode": 97,
+        "seed": 177
+      },
+      {
+        "episode": 98,
+        "seed": 178
+      },
+      {
+        "episode": 110,
+        "seed": 190
+      },
+      {
+        "episode": 129,
+        "seed": 29
+      },
+      {
+        "episode": 138,
+        "seed": 208
+      },
+      {
+        "episode": 140,
+        "seed": 210
+      },
+      {
+        "episode": 141,
+        "seed": 211
+      },
+      {
+        "episode": 159,
+        "seed": 229
+      },
+      {
+        "episode": 165,
+        "seed": 235
+      },
+      {
+        "episode": 189,
+        "seed": 39
+      },
+      {
+        "episode": 196,
+        "seed": 46
+      },
+      {
+        "episode": 202,
+        "seed": 52
+      },
+      {
+        "episode": 207,
+        "seed": 57
+      },
+      {
+        "episode": 210,
+        "seed": 60
+      },
+      {
+        "episode": 212,
+        "seed": 62
+      },
+      {
+        "episode": 223,
+        "seed": 73
+      },
+      {
+        "episode": 227,
+        "seed": 77
+      },
+      {
+        "episode": 228,
+        "seed": 78
+      }
+    ],
+    "RememberShapeAndColor3x3-Long-VLA-v0": [
+      {
+        "episode": 6,
+        "seed": 109
+      },
+      {
+        "episode": 7,
+        "seed": 110
+      },
+      {
+        "episode": 11,
+        "seed": 114
+      },
+      {
+        "episode": 13,
+        "seed": 13
+      },
+      {
+        "episode": 30,
+        "seed": 131
+      },
+      {
+        "episode": 35,
+        "seed": 16
+      },
+      {
+        "episode": 38,
+        "seed": 138
+      },
+      {
+        "episode": 41,
+        "seed": 141
+      },
+      {
+        "episode": 50,
+        "seed": 149
+      },
+      {
+        "episode": 55,
+        "seed": 154
+      },
+      {
+        "episode": 66,
+        "seed": 164
+      },
+      {
+        "episode": 73,
+        "seed": 170
+      },
+      {
+        "episode": 91,
+        "seed": 186
+      },
+      {
+        "episode": 93,
+        "seed": 188
+      },
+      {
+        "episode": 95,
+        "seed": 190
+      },
+      {
+        "episode": 103,
+        "seed": 197
+      },
+      {
+        "episode": 132,
+        "seed": 223
+      },
+      {
+        "episode": 147,
+        "seed": 236
+      },
+      {
+        "episode": 177,
+        "seed": 37
+      },
+      {
+        "episode": 188,
+        "seed": 47
+      },
+      {
+        "episode": 189,
+        "seed": 48
+      },
+      {
+        "episode": 194,
+        "seed": 53
+      },
+      {
+        "episode": 195,
+        "seed": 7
+      },
+      {
+        "episode": 236,
+        "seed": 92
+      },
+      {
+        "episode": 245,
+        "seed": 100
+      }
+    ],
+    "RememberShapeAndColor3x3-VLA-v0": [
+      {
+        "episode": 9,
+        "seed": 9
+      },
+      {
+        "episode": 17,
+        "seed": 17
+      },
+      {
+        "episode": 20,
+        "seed": 110
+      },
+      {
+        "episode": 28,
+        "seed": 118
+      },
+      {
+        "episode": 29,
+        "seed": 119
+      },
+      {
+        "episode": 41,
+        "seed": 131
+      },
+      {
+        "episode": 46,
+        "seed": 136
+      },
+      {
+        "episode": 55,
+        "seed": 145
+      },
+      {
+        "episode": 67,
+        "seed": 157
+      },
+      {
+        "episode": 86,
+        "seed": 176
+      },
+      {
+        "episode": 98,
+        "seed": 188
+      },
+      {
+        "episode": 100,
+        "seed": 190
+      },
+      {
+        "episode": 107,
+        "seed": 197
+      },
+      {
+        "episode": 114,
+        "seed": 204
+      },
+      {
+        "episode": 120,
+        "seed": 20
+      },
+      {
+        "episode": 123,
+        "seed": 23
+      },
+      {
+        "episode": 128,
+        "seed": 28
+      },
+      {
+        "episode": 137,
+        "seed": 217
+      },
+      {
+        "episode": 147,
+        "seed": 227
+      },
+      {
+        "episode": 154,
+        "seed": 234
+      },
+      {
+        "episode": 155,
+        "seed": 235
+      },
+      {
+        "episode": 190,
+        "seed": 40
+      },
+      {
+        "episode": 191,
+        "seed": 41
+      },
+      {
+        "episode": 222,
+        "seed": 72
+      },
+      {
+        "episode": 243,
+        "seed": 103
+      }
+    ],
+    "RememberShapeAndColor5x3-Long-VLA-v0": [
+      {
+        "episode": 1,
+        "seed": 1
+      },
+      {
+        "episode": 8,
+        "seed": 106
+      },
+      {
+        "episode": 15,
+        "seed": 112
+      },
+      {
+        "episode": 28,
+        "seed": 124
+      },
+      {
+        "episode": 49,
+        "seed": 143
+      },
+      {
+        "episode": 56,
+        "seed": 150
+      },
+      {
+        "episode": 61,
+        "seed": 154
+      },
+      {
+        "episode": 73,
+        "seed": 166
+      },
+      {
+        "episode": 85,
+        "seed": 177
+      },
+      {
+        "episode": 91,
+        "seed": 182
+      },
+      {
+        "episode": 94,
+        "seed": 185
+      },
+      {
+        "episode": 95,
+        "seed": 186
+      },
+      {
+        "episode": 96,
+        "seed": 187
+      },
+      {
+        "episode": 97,
+        "seed": 188
+      },
+      {
+        "episode": 118,
+        "seed": 206
+      },
+      {
+        "episode": 122,
+        "seed": 210
+      },
+      {
+        "episode": 123,
+        "seed": 211
+      },
+      {
+        "episode": 143,
+        "seed": 229
+      },
+      {
+        "episode": 158,
+        "seed": 242
+      },
+      {
+        "episode": 178,
+        "seed": 35
+      },
+      {
+        "episode": 182,
+        "seed": 39
+      },
+      {
+        "episode": 201,
+        "seed": 56
+      },
+      {
+        "episode": 221,
+        "seed": 74
+      },
+      {
+        "episode": 225,
+        "seed": 78
+      },
+      {
+        "episode": 240,
+        "seed": 91
+      }
+    ],
+    "RememberShapeAndColor5x3-VLA-v0": [
+      {
+        "episode": 6,
+        "seed": 6
+      },
+      {
+        "episode": 16,
+        "seed": 16
+      },
+      {
+        "episode": 24,
+        "seed": 104
+      },
+      {
+        "episode": 25,
+        "seed": 105
+      },
+      {
+        "episode": 31,
+        "seed": 111
+      },
+      {
+        "episode": 41,
+        "seed": 121
+      },
+      {
+        "episode": 47,
+        "seed": 127
+      },
+      {
+        "episode": 56,
+        "seed": 146
+      },
+      {
+        "episode": 75,
+        "seed": 175
+      },
+      {
+        "episode": 92,
+        "seed": 192
+      },
+      {
+        "episode": 93,
+        "seed": 193
+      },
+      {
+        "episode": 101,
+        "seed": 201
+      },
+      {
+        "episode": 114,
+        "seed": 214
+      },
+      {
+        "episode": 135,
+        "seed": 225
+      },
+      {
+        "episode": 136,
+        "seed": 226
+      },
+      {
+        "episode": 142,
+        "seed": 232
+      },
+      {
+        "episode": 148,
+        "seed": 238
+      },
+      {
+        "episode": 150,
+        "seed": 240
+      },
+      {
+        "episode": 155,
+        "seed": 245
+      },
+      {
+        "episode": 159,
+        "seed": 249
+      },
+      {
+        "episode": 167,
+        "seed": 257
+      },
+      {
+        "episode": 169,
+        "seed": 259
+      },
+      {
+        "episode": 183,
+        "seed": 33
+      },
+      {
+        "episode": 240,
+        "seed": 90
+      },
+      {
+        "episode": 241,
+        "seed": 91
+      }
+    ],
+    "RotateLenientPos-VLA-v0": [
+      {
+        "episode": 7,
+        "seed": 7
+      },
+      {
+        "episode": 23,
+        "seed": 113
+      },
+      {
+        "episode": 25,
+        "seed": 115
+      },
+      {
+        "episode": 32,
+        "seed": 122
+      },
+      {
+        "episode": 34,
+        "seed": 124
+      },
+      {
+        "episode": 38,
+        "seed": 128
+      },
+      {
+        "episode": 42,
+        "seed": 132
+      },
+      {
+        "episode": 50,
+        "seed": 140
+      },
+      {
+        "episode": 68,
+        "seed": 158
+      },
+      {
+        "episode": 70,
+        "seed": 160
+      },
+      {
+        "episode": 81,
+        "seed": 171
+      },
+      {
+        "episode": 105,
+        "seed": 195
+      },
+      {
+        "episode": 129,
+        "seed": 29
+      },
+      {
+        "episode": 132,
+        "seed": 212
+      },
+      {
+        "episode": 139,
+        "seed": 219
+      },
+      {
+        "episode": 141,
+        "seed": 231
+      },
+      {
+        "episode": 146,
+        "seed": 236
+      },
+      {
+        "episode": 158,
+        "seed": 258
+      },
+      {
+        "episode": 176,
+        "seed": 276
+      },
+      {
+        "episode": 180,
+        "seed": 30
+      },
+      {
+        "episode": 190,
+        "seed": 40
+      },
+      {
+        "episode": 198,
+        "seed": 48
+      },
+      {
+        "episode": 220,
+        "seed": 80
+      },
+      {
+        "episode": 226,
+        "seed": 86
+      },
+      {
+        "episode": 235,
+        "seed": 95
+      }
+    ],
+    "RotateLenientPosNeg-VLA-v0": [
+      {
+        "episode": 4,
+        "seed": 4
+      },
+      {
+        "episode": 21,
+        "seed": 101
+      },
+      {
+        "episode": 35,
+        "seed": 115
+      },
+      {
+        "episode": 36,
+        "seed": 116
+      },
+      {
+        "episode": 49,
+        "seed": 129
+      },
+      {
+        "episode": 57,
+        "seed": 137
+      },
+      {
+        "episode": 67,
+        "seed": 147
+      },
+      {
+        "episode": 87,
+        "seed": 167
+      },
+      {
+        "episode": 98,
+        "seed": 178
+      },
+      {
+        "episode": 129,
+        "seed": 29
+      },
+      {
+        "episode": 130,
+        "seed": 200
+      },
+      {
+        "episode": 137,
+        "seed": 207
+      },
+      {
+        "episode": 144,
+        "seed": 214
+      },
+      {
+        "episode": 162,
+        "seed": 232
+      },
+      {
+        "episode": 164,
+        "seed": 234
+      },
+      {
+        "episode": 173,
+        "seed": 253
+      },
+      {
+        "episode": 179,
+        "seed": 259
+      },
+      {
+        "episode": 182,
+        "seed": 32
+      },
+      {
+        "episode": 203,
+        "seed": 53
+      },
+      {
+        "episode": 204,
+        "seed": 54
+      },
+      {
+        "episode": 212,
+        "seed": 62
+      },
+      {
+        "episode": 217,
+        "seed": 67
+      },
+      {
+        "episode": 239,
+        "seed": 89
+      },
+      {
+        "episode": 242,
+        "seed": 92
+      },
+      {
+        "episode": 245,
+        "seed": 95
+      }
+    ],
+    "RotateStrictPos-VLA-v0": [
+      {
+        "episode": 2,
+        "seed": 102
+      },
+      {
+        "episode": 16,
+        "seed": 156
+      },
+      {
+        "episode": 36,
+        "seed": 656
+      },
+      {
+        "episode": 43,
+        "seed": 683
+      },
+      {
+        "episode": 64,
+        "seed": 844
+      },
+      {
+        "episode": 85,
+        "seed": 885
+      },
+      {
+        "episode": 86,
+        "seed": 886
+      },
+      {
+        "episode": 89,
+        "seed": 889
+      },
+      {
+        "episode": 96,
+        "seed": 996
+      },
+      {
+        "episode": 103,
+        "seed": 1053
+      },
+      {
+        "episode": 106,
+        "seed": 1056
+      },
+      {
+        "episode": 122,
+        "seed": 342
+      },
+      {
+        "episode": 125,
+        "seed": 345
+      },
+      {
+        "episode": 139,
+        "seed": 1149
+      },
+      {
+        "episode": 167,
+        "seed": 1367
+      },
+      {
+        "episode": 170,
+        "seed": 1410
+      },
+      {
+        "episode": 171,
+        "seed": 1411
+      },
+      {
+        "episode": 174,
+        "seed": 1414
+      },
+      {
+        "episode": 176,
+        "seed": 1416
+      },
+      {
+        "episode": 177,
+        "seed": 1417
+      },
+      {
+        "episode": 195,
+        "seed": 365
+      },
+      {
+        "episode": 200,
+        "seed": 370
+      },
+      {
+        "episode": 228,
+        "seed": 508
+      },
+      {
+        "episode": 231,
+        "seed": 541
+      },
+      {
+        "episode": 243,
+        "seed": 583
+      }
+    ],
+    "RotateStrictPosNeg-VLA-v0": [
+      {
+        "episode": 4,
+        "seed": 14
+      },
+      {
+        "episode": 7,
+        "seed": 17
+      },
+      {
+        "episode": 12,
+        "seed": 42
+      },
+      {
+        "episode": 13,
+        "seed": 43
+      },
+      {
+        "episode": 26,
+        "seed": 266
+      },
+      {
+        "episode": 37,
+        "seed": 287
+      },
+      {
+        "episode": 44,
+        "seed": 294
+      },
+      {
+        "episode": 48,
+        "seed": 298
+      },
+      {
+        "episode": 83,
+        "seed": 363
+      },
+      {
+        "episode": 84,
+        "seed": 364
+      },
+      {
+        "episode": 106,
+        "seed": 386
+      },
+      {
+        "episode": 115,
+        "seed": 395
+      },
+      {
+        "episode": 116,
+        "seed": 396
+      },
+      {
+        "episode": 125,
+        "seed": 105
+      },
+      {
+        "episode": 126,
+        "seed": 106
+      },
+      {
+        "episode": 137,
+        "seed": 407
+      },
+      {
+        "episode": 139,
+        "seed": 409
+      },
+      {
+        "episode": 144,
+        "seed": 414
+      },
+      {
+        "episode": 149,
+        "seed": 419
+      },
+      {
+        "episode": 184,
+        "seed": 114
+      },
+      {
+        "episode": 206,
+        "seed": 156
+      },
+      {
+        "episode": 221,
+        "seed": 201
+      },
+      {
+        "episode": 227,
+        "seed": 207
+      },
+      {
+        "episode": 233,
+        "seed": 213
+      },
+      {
+        "episode": 239,
+        "seed": 219
+      }
+    ],
+    "SeqOfColors3-Long-VLA-v0": [
+      {
+        "episode": 8,
+        "seed": 116
+      },
+      {
+        "episode": 10,
+        "seed": 118
+      },
+      {
+        "episode": 14,
+        "seed": 123
+      },
+      {
+        "episode": 48,
+        "seed": 155
+      },
+      {
+        "episode": 57,
+        "seed": 18
+      },
+      {
+        "episode": 78,
+        "seed": 186
+      },
+      {
+        "episode": 84,
+        "seed": 191
+      },
+      {
+        "episode": 91,
+        "seed": 197
+      },
+      {
+        "episode": 97,
+        "seed": 204
+      },
+      {
+        "episode": 111,
+        "seed": 217
+      },
+      {
+        "episode": 130,
+        "seed": 233
+      },
+      {
+        "episode": 131,
+        "seed": 234
+      },
+      {
+        "episode": 139,
+        "seed": 246
+      },
+      {
+        "episode": 142,
+        "seed": 249
+      },
+      {
+        "episode": 144,
+        "seed": 252
+      },
+      {
+        "episode": 147,
+        "seed": 254
+      },
+      {
+        "episode": 161,
+        "seed": 267
+      },
+      {
+        "episode": 169,
+        "seed": 29
+      },
+      {
+        "episode": 181,
+        "seed": 40
+      },
+      {
+        "episode": 188,
+        "seed": 47
+      },
+      {
+        "episode": 200,
+        "seed": 60
+      },
+      {
+        "episode": 209,
+        "seed": 71
+      },
+      {
+        "episode": 211,
+        "seed": 73
+      },
+      {
+        "episode": 223,
+        "seed": 85
+      },
+      {
+        "episode": 229,
+        "seed": 90
+      }
+    ],
+    "SeqOfColors3-VLA-v0": [
+      {
+        "episode": 1,
+        "seed": 4
+      },
+      {
+        "episode": 6,
+        "seed": 110
+      },
+      {
+        "episode": 50,
+        "seed": 152
+      },
+      {
+        "episode": 54,
+        "seed": 156
+      },
+      {
+        "episode": 64,
+        "seed": 165
+      },
+      {
+        "episode": 71,
+        "seed": 174
+      },
+      {
+        "episode": 72,
+        "seed": 175
+      },
+      {
+        "episode": 81,
+        "seed": 183
+      },
+      {
+        "episode": 88,
+        "seed": 190
+      },
+      {
+        "episode": 94,
+        "seed": 195
+      },
+      {
+        "episode": 108,
+        "seed": 209
+      },
+      {
+        "episode": 118,
+        "seed": 217
+      },
+      {
+        "episode": 146,
+        "seed": 26
+      },
+      {
+        "episode": 154,
+        "seed": 255
+      },
+      {
+        "episode": 175,
+        "seed": 34
+      },
+      {
+        "episode": 184,
+        "seed": 7
+      },
+      {
+        "episode": 185,
+        "seed": 43
+      },
+      {
+        "episode": 198,
+        "seed": 55
+      },
+      {
+        "episode": 211,
+        "seed": 69
+      },
+      {
+        "episode": 217,
+        "seed": 10
+      },
+      {
+        "episode": 219,
+        "seed": 77
+      },
+      {
+        "episode": 225,
+        "seed": 83
+      },
+      {
+        "episode": 236,
+        "seed": 93
+      },
+      {
+        "episode": 239,
+        "seed": 12
+      },
+      {
+        "episode": 244,
+        "seed": 101
+      }
+    ],
+    "SeqOfColors5-Long-VLA-v0": [
+      {
+        "episode": 17,
+        "seed": 137
+      },
+      {
+        "episode": 20,
+        "seed": 140
+      },
+      {
+        "episode": 26,
+        "seed": 146
+      },
+      {
+        "episode": 28,
+        "seed": 149
+      },
+      {
+        "episode": 29,
+        "seed": 150
+      },
+      {
+        "episode": 31,
+        "seed": 152
+      },
+      {
+        "episode": 41,
+        "seed": 163
+      },
+      {
+        "episode": 42,
+        "seed": 164
+      },
+      {
+        "episode": 48,
+        "seed": 169
+      },
+      {
+        "episode": 50,
+        "seed": 171
+      },
+      {
+        "episode": 52,
+        "seed": 173
+      },
+      {
+        "episode": 62,
+        "seed": 182
+      },
+      {
+        "episode": 64,
+        "seed": 184
+      },
+      {
+        "episode": 97,
+        "seed": 217
+      },
+      {
+        "episode": 111,
+        "seed": 230
+      },
+      {
+        "episode": 130,
+        "seed": 249
+      },
+      {
+        "episode": 131,
+        "seed": 250
+      },
+      {
+        "episode": 141,
+        "seed": 260
+      },
+      {
+        "episode": 150,
+        "seed": 269
+      },
+      {
+        "episode": 189,
+        "seed": 57
+      },
+      {
+        "episode": 196,
+        "seed": 63
+      },
+      {
+        "episode": 203,
+        "seed": 75
+      },
+      {
+        "episode": 217,
+        "seed": 11
+      },
+      {
+        "episode": 235,
+        "seed": 106
+      },
+      {
+        "episode": 241,
+        "seed": 113
+      }
+    ],
+    "SeqOfColors5-VLA-v0": [
+      {
+        "episode": 19,
+        "seed": 130
+      },
+      {
+        "episode": 21,
+        "seed": 132
+      },
+      {
+        "episode": 23,
+        "seed": 134
+      },
+      {
+        "episode": 24,
+        "seed": 16
+      },
+      {
+        "episode": 35,
+        "seed": 17
+      },
+      {
+        "episode": 36,
+        "seed": 146
+      },
+      {
+        "episode": 54,
+        "seed": 165
+      },
+      {
+        "episode": 56,
+        "seed": 167
+      },
+      {
+        "episode": 63,
+        "seed": 173
+      },
+      {
+        "episode": 77,
+        "seed": 186
+      },
+      {
+        "episode": 89,
+        "seed": 197
+      },
+      {
+        "episode": 102,
+        "seed": 209
+      },
+      {
+        "episode": 107,
+        "seed": 214
+      },
+      {
+        "episode": 110,
+        "seed": 217
+      },
+      {
+        "episode": 120,
+        "seed": 225
+      },
+      {
+        "episode": 123,
+        "seed": 228
+      },
+      {
+        "episode": 132,
+        "seed": 236
+      },
+      {
+        "episode": 141,
+        "seed": 245
+      },
+      {
+        "episode": 165,
+        "seed": 270
+      },
+      {
+        "episode": 183,
+        "seed": 47
+      },
+      {
+        "episode": 188,
+        "seed": 52
+      },
+      {
+        "episode": 197,
+        "seed": 61
+      },
+      {
+        "episode": 202,
+        "seed": 67
+      },
+      {
+        "episode": 228,
+        "seed": 12
+      },
+      {
+        "episode": 236,
+        "seed": 100
+      }
+    ],
+    "SeqOfColors7-Long-VLA-v0": [
+      {
+        "episode": 7,
+        "seed": 138
+      },
+      {
+        "episode": 8,
+        "seed": 139
+      },
+      {
+        "episode": 10,
+        "seed": 141
+      },
+      {
+        "episode": 14,
+        "seed": 144
+      },
+      {
+        "episode": 28,
+        "seed": 159
+      },
+      {
+        "episode": 52,
+        "seed": 188
+      },
+      {
+        "episode": 66,
+        "seed": 203
+      },
+      {
+        "episode": 83,
+        "seed": 221
+      },
+      {
+        "episode": 102,
+        "seed": 241
+      },
+      {
+        "episode": 104,
+        "seed": 244
+      },
+      {
+        "episode": 106,
+        "seed": 248
+      },
+      {
+        "episode": 114,
+        "seed": 255
+      },
+      {
+        "episode": 116,
+        "seed": 258
+      },
+      {
+        "episode": 118,
+        "seed": 260
+      },
+      {
+        "episode": 129,
+        "seed": 271
+      },
+      {
+        "episode": 133,
+        "seed": 276
+      },
+      {
+        "episode": 140,
+        "seed": 282
+      },
+      {
+        "episode": 154,
+        "seed": 298
+      },
+      {
+        "episode": 155,
+        "seed": 299
+      },
+      {
+        "episode": 179,
+        "seed": 48
+      },
+      {
+        "episode": 181,
+        "seed": 53
+      },
+      {
+        "episode": 197,
+        "seed": 72
+      },
+      {
+        "episode": 201,
+        "seed": 76
+      },
+      {
+        "episode": 232,
+        "seed": 110
+      },
+      {
+        "episode": 241,
+        "seed": 119
+      }
+    ],
+    "SeqOfColors7-VLA-v0": [
+      {
+        "episode": 3,
+        "seed": 118
+      },
+      {
+        "episode": 7,
+        "seed": 122
+      },
+      {
+        "episode": 19,
+        "seed": 136
+      },
+      {
+        "episode": 31,
+        "seed": 150
+      },
+      {
+        "episode": 37,
+        "seed": 156
+      },
+      {
+        "episode": 45,
+        "seed": 167
+      },
+      {
+        "episode": 48,
+        "seed": 169
+      },
+      {
+        "episode": 53,
+        "seed": 174
+      },
+      {
+        "episode": 84,
+        "seed": 208
+      },
+      {
+        "episode": 89,
+        "seed": 214
+      },
+      {
+        "episode": 114,
+        "seed": 236
+      },
+      {
+        "episode": 122,
+        "seed": 244
+      },
+      {
+        "episode": 132,
+        "seed": 254
+      },
+      {
+        "episode": 145,
+        "seed": 267
+      },
+      {
+        "episode": 160,
+        "seed": 281
+      },
+      {
+        "episode": 162,
+        "seed": 283
+      },
+      {
+        "episode": 172,
+        "seed": 37
+      },
+      {
+        "episode": 179,
+        "seed": 44
+      },
+      {
+        "episode": 181,
+        "seed": 46
+      },
+      {
+        "episode": 194,
+        "seed": 60
+      },
+      {
+        "episode": 202,
+        "seed": 69
+      },
+      {
+        "episode": 208,
+        "seed": 74
+      },
+      {
+        "episode": 212,
+        "seed": 78
+      },
+      {
+        "episode": 217,
+        "seed": 12
+      },
+      {
+        "episode": 236,
+        "seed": 104
+      }
+    ],
+    "ShellGameColorLampTouch-VLA-v0": [
+      {
+        "episode": 0,
+        "seed": 0
+      },
+      {
+        "episode": 7,
+        "seed": 7
+      },
+      {
+        "episode": 8,
+        "seed": 8
+      },
+      {
+        "episode": 27,
+        "seed": 377
+      },
+      {
+        "episode": 34,
+        "seed": 404
+      },
+      {
+        "episode": 36,
+        "seed": 406
+      },
+      {
+        "episode": 48,
+        "seed": 488
+      },
+      {
+        "episode": 76,
+        "seed": 596
+      },
+      {
+        "episode": 86,
+        "seed": 606
+      },
+      {
+        "episode": 88,
+        "seed": 608
+      },
+      {
+        "episode": 123,
+        "seed": 53
+      },
+      {
+        "episode": 128,
+        "seed": 58
+      },
+      {
+        "episode": 149,
+        "seed": 819
+      },
+      {
+        "episode": 156,
+        "seed": 836
+      },
+      {
+        "episode": 164,
+        "seed": 854
+      },
+      {
+        "episode": 165,
+        "seed": 855
+      },
+      {
+        "episode": 170,
+        "seed": 860
+      },
+      {
+        "episode": 180,
+        "seed": 150
+      },
+      {
+        "episode": 189,
+        "seed": 159
+      },
+      {
+        "episode": 205,
+        "seed": 175
+      },
+      {
+        "episode": 207,
+        "seed": 177
+      },
+      {
+        "episode": 209,
+        "seed": 179
+      },
+      {
+        "episode": 223,
+        "seed": 253
+      },
+      {
+        "episode": 237,
+        "seed": 267
+      },
+      {
+        "episode": 238,
+        "seed": 268
+      }
+    ],
+    "ShellGamePush-VLA-v0": [
+      {
+        "episode": 10,
+        "seed": 20
+      },
+      {
+        "episode": 14,
+        "seed": 24
+      },
+      {
+        "episode": 27,
+        "seed": 347
+      },
+      {
+        "episode": 28,
+        "seed": 348
+      },
+      {
+        "episode": 33,
+        "seed": 383
+      },
+      {
+        "episode": 47,
+        "seed": 397
+      },
+      {
+        "episode": 48,
+        "seed": 398
+      },
+      {
+        "episode": 49,
+        "seed": 399
+      },
+      {
+        "episode": 53,
+        "seed": 403
+      },
+      {
+        "episode": 65,
+        "seed": 435
+      },
+      {
+        "episode": 78,
+        "seed": 468
+      },
+      {
+        "episode": 83,
+        "seed": 473
+      },
+      {
+        "episode": 92,
+        "seed": 482
+      },
+      {
+        "episode": 133,
+        "seed": 573
+      },
+      {
+        "episode": 146,
+        "seed": 586
+      },
+      {
+        "episode": 149,
+        "seed": 589
+      },
+      {
+        "episode": 166,
+        "seed": 606
+      },
+      {
+        "episode": 167,
+        "seed": 607
+      },
+      {
+        "episode": 172,
+        "seed": 612
+      },
+      {
+        "episode": 191,
+        "seed": 171
+      },
+      {
+        "episode": 197,
+        "seed": 177
+      },
+      {
+        "episode": 216,
+        "seed": 206
+      },
+      {
+        "episode": 221,
+        "seed": 231
+      },
+      {
+        "episode": 222,
+        "seed": 232
+      },
+      {
+        "episode": 234,
+        "seed": 304
+      }
+    ],
+    "ShellGameShuffleColorLampTouch-Long-VLA-v0": [
+      {
+        "episode": 28,
+        "seed": 133
+      },
+      {
+        "episode": 30,
+        "seed": 135
+      },
+      {
+        "episode": 31,
+        "seed": 136
+      },
+      {
+        "episode": 37,
+        "seed": 141
+      },
+      {
+        "episode": 44,
+        "seed": 148
+      },
+      {
+        "episode": 55,
+        "seed": 158
+      },
+      {
+        "episode": 63,
+        "seed": 165
+      },
+      {
+        "episode": 70,
+        "seed": 171
+      },
+      {
+        "episode": 83,
+        "seed": 183
+      },
+      {
+        "episode": 99,
+        "seed": 198
+      },
+      {
+        "episode": 115,
+        "seed": 211
+      },
+      {
+        "episode": 125,
+        "seed": 220
+      },
+      {
+        "episode": 133,
+        "seed": 228
+      },
+      {
+        "episode": 163,
+        "seed": 255
+      },
+      {
+        "episode": 167,
+        "seed": 259
+      },
+      {
+        "episode": 169,
+        "seed": 36
+      },
+      {
+        "episode": 171,
+        "seed": 38
+      },
+      {
+        "episode": 175,
+        "seed": 41
+      },
+      {
+        "episode": 178,
+        "seed": 44
+      },
+      {
+        "episode": 179,
+        "seed": 45
+      },
+      {
+        "episode": 194,
+        "seed": 59
+      },
+      {
+        "episode": 202,
+        "seed": 66
+      },
+      {
+        "episode": 203,
+        "seed": 67
+      },
+      {
+        "episode": 232,
+        "seed": 93
+      },
+      {
+        "episode": 238,
+        "seed": 99
+      }
+    ],
+    "ShellGameShuffleColorLampTouch-VLA-v0": [
+      {
+        "episode": 7,
+        "seed": 37
+      },
+      {
+        "episode": 26,
+        "seed": 466
+      },
+      {
+        "episode": 31,
+        "seed": 541
+      },
+      {
+        "episode": 47,
+        "seed": 597
+      },
+      {
+        "episode": 52,
+        "seed": 752
+      },
+      {
+        "episode": 74,
+        "seed": 934
+      },
+      {
+        "episode": 76,
+        "seed": 936
+      },
+      {
+        "episode": 87,
+        "seed": 1097
+      },
+      {
+        "episode": 96,
+        "seed": 1156
+      },
+      {
+        "episode": 112,
+        "seed": 1272
+      },
+      {
+        "episode": 118,
+        "seed": 1278
+      },
+      {
+        "episode": 121,
+        "seed": 141
+      },
+      {
+        "episode": 122,
+        "seed": 142
+      },
+      {
+        "episode": 126,
+        "seed": 146
+      },
+      {
+        "episode": 131,
+        "seed": 1391
+      },
+      {
+        "episode": 135,
+        "seed": 1395
+      },
+      {
+        "episode": 142,
+        "seed": 1572
+      },
+      {
+        "episode": 166,
+        "seed": 1646
+      },
+      {
+        "episode": 178,
+        "seed": 1778
+      },
+      {
+        "episode": 179,
+        "seed": 1779
+      },
+      {
+        "episode": 189,
+        "seed": 179
+      },
+      {
+        "episode": 198,
+        "seed": 208
+      },
+      {
+        "episode": 206,
+        "seed": 226
+      },
+      {
+        "episode": 208,
+        "seed": 228
+      },
+      {
+        "episode": 220,
+        "seed": 390
+      }
+    ],
+    "ShellGameShuffleTouch-Long-VLA-v0": [
+      {
+        "episode": 5,
+        "seed": 111
+      },
+      {
+        "episode": 14,
+        "seed": 119
+      },
+      {
+        "episode": 34,
+        "seed": 138
+      },
+      {
+        "episode": 36,
+        "seed": 139
+      },
+      {
+        "episode": 46,
+        "seed": 23
+      },
+      {
+        "episode": 50,
+        "seed": 152
+      },
+      {
+        "episode": 55,
+        "seed": 157
+      },
+      {
+        "episode": 56,
+        "seed": 158
+      },
+      {
+        "episode": 71,
+        "seed": 171
+      },
+      {
+        "episode": 72,
+        "seed": 172
+      },
+      {
+        "episode": 78,
+        "seed": 178
+      },
+      {
+        "episode": 82,
+        "seed": 181
+      },
+      {
+        "episode": 85,
+        "seed": 184
+      },
+      {
+        "episode": 96,
+        "seed": 194
+      },
+      {
+        "episode": 108,
+        "seed": 205
+      },
+      {
+        "episode": 109,
+        "seed": 206
+      },
+      {
+        "episode": 117,
+        "seed": 212
+      },
+      {
+        "episode": 122,
+        "seed": 217
+      },
+      {
+        "episode": 139,
+        "seed": 232
+      },
+      {
+        "episode": 150,
+        "seed": 242
+      },
+      {
+        "episode": 157,
+        "seed": 33
+      },
+      {
+        "episode": 163,
+        "seed": 254
+      },
+      {
+        "episode": 168,
+        "seed": 34
+      },
+      {
+        "episode": 238,
+        "seed": 98
+      },
+      {
+        "episode": 248,
+        "seed": 107
+      }
+    ],
+    "ShellGameShuffleTouch-VLA-v0": [
+      {
+        "episode": 11,
+        "seed": 71
+      },
+      {
+        "episode": 18,
+        "seed": 78
+      },
+      {
+        "episode": 34,
+        "seed": 304
+      },
+      {
+        "episode": 43,
+        "seed": 313
+      },
+      {
+        "episode": 49,
+        "seed": 319
+      },
+      {
+        "episode": 52,
+        "seed": 342
+      },
+      {
+        "episode": 70,
+        "seed": 370
+      },
+      {
+        "episode": 78,
+        "seed": 378
+      },
+      {
+        "episode": 87,
+        "seed": 387
+      },
+      {
+        "episode": 89,
+        "seed": 389
+      },
+      {
+        "episode": 98,
+        "seed": 438
+      },
+      {
+        "episode": 99,
+        "seed": 439
+      },
+      {
+        "episode": 104,
+        "seed": 494
+      },
+      {
+        "episode": 118,
+        "seed": 528
+      },
+      {
+        "episode": 157,
+        "seed": 567
+      },
+      {
+        "episode": 161,
+        "seed": 581
+      },
+      {
+        "episode": 162,
+        "seed": 582
+      },
+      {
+        "episode": 174,
+        "seed": 594
+      },
+      {
+        "episode": 196,
+        "seed": 156
+      },
+      {
+        "episode": 204,
+        "seed": 164
+      },
+      {
+        "episode": 208,
+        "seed": 168
+      },
+      {
+        "episode": 211,
+        "seed": 171
+      },
+      {
+        "episode": 226,
+        "seed": 206
+      },
+      {
+        "episode": 237,
+        "seed": 237
+      },
+      {
+        "episode": 248,
+        "seed": 248
+      }
+    ],
+    "ShellGameTouch-VLA-v0": [
+      {
+        "episode": 7,
+        "seed": 147
+      },
+      {
+        "episode": 16,
+        "seed": 176
+      },
+      {
+        "episode": 21,
+        "seed": 761
+      },
+      {
+        "episode": 23,
+        "seed": 763
+      },
+      {
+        "episode": 35,
+        "seed": 775
+      },
+      {
+        "episode": 49,
+        "seed": 839
+      },
+      {
+        "episode": 55,
+        "seed": 915
+      },
+      {
+        "episode": 59,
+        "seed": 919
+      },
+      {
+        "episode": 66,
+        "seed": 966
+      },
+      {
+        "episode": 69,
+        "seed": 969
+      },
+      {
+        "episode": 83,
+        "seed": 1043
+      },
+      {
+        "episode": 97,
+        "seed": 1167
+      },
+      {
+        "episode": 101,
+        "seed": 1191
+      },
+      {
+        "episode": 109,
+        "seed": 1199
+      },
+      {
+        "episode": 127,
+        "seed": 267
+      },
+      {
+        "episode": 133,
+        "seed": 1463
+      },
+      {
+        "episode": 142,
+        "seed": 1492
+      },
+      {
+        "episode": 149,
+        "seed": 1499
+      },
+      {
+        "episode": 175,
+        "seed": 2085
+      },
+      {
+        "episode": 193,
+        "seed": 383
+      },
+      {
+        "episode": 194,
+        "seed": 384
+      },
+      {
+        "episode": 209,
+        "seed": 399
+      },
+      {
+        "episode": 212,
+        "seed": 522
+      },
+      {
+        "episode": 216,
+        "seed": 526
+      },
+      {
+        "episode": 228,
+        "seed": 558
+      }
+    ],
+    "TakeItBack-VLA-v0": [
+      {
+        "episode": 3,
+        "seed": 3
+      },
+      {
+        "episode": 12,
+        "seed": 12
+      },
+      {
+        "episode": 48,
+        "seed": 138
+      },
+      {
+        "episode": 59,
+        "seed": 149
+      },
+      {
+        "episode": 61,
+        "seed": 151
+      },
+      {
+        "episode": 77,
+        "seed": 167
+      },
+      {
+        "episode": 92,
+        "seed": 182
+      },
+      {
+        "episode": 121,
+        "seed": 21
+      },
+      {
+        "episode": 122,
+        "seed": 22
+      },
+      {
+        "episode": 140,
+        "seed": 230
+      },
+      {
+        "episode": 142,
+        "seed": 232
+      },
+      {
+        "episode": 151,
+        "seed": 241
+      },
+      {
+        "episode": 163,
+        "seed": 253
+      },
+      {
+        "episode": 167,
+        "seed": 257
+      },
+      {
+        "episode": 171,
+        "seed": 261
+      },
+      {
+        "episode": 192,
+        "seed": 52
+      },
+      {
+        "episode": 199,
+        "seed": 59
+      },
+      {
+        "episode": 209,
+        "seed": 69
+      },
+      {
+        "episode": 221,
+        "seed": 81
+      },
+      {
+        "episode": 229,
+        "seed": 89
+      },
+      {
+        "episode": 231,
+        "seed": 91
+      },
+      {
+        "episode": 232,
+        "seed": 92
+      },
+      {
+        "episode": 234,
+        "seed": 94
+      },
+      {
+        "episode": 241,
+        "seed": 101
+      },
+      {
+        "episode": 242,
+        "seed": 102
+      }
+    ],
+    "TimedTransferEasy-Long-VLA-v0": [
+      {
+        "episode": 5,
+        "seed": 104
+      },
+      {
+        "episode": 6,
+        "seed": 105
+      },
+      {
+        "episode": 18,
+        "seed": 118
+      },
+      {
+        "episode": 21,
+        "seed": 121
+      },
+      {
+        "episode": 22,
+        "seed": 122
+      },
+      {
+        "episode": 24,
+        "seed": 13
+      },
+      {
+        "episode": 39,
+        "seed": 137
+      },
+      {
+        "episode": 58,
+        "seed": 155
+      },
+      {
+        "episode": 67,
+        "seed": 165
+      },
+      {
+        "episode": 81,
+        "seed": 177
+      },
+      {
+        "episode": 92,
+        "seed": 187
+      },
+      {
+        "episode": 101,
+        "seed": 20
+      },
+      {
+        "episode": 108,
+        "seed": 202
+      },
+      {
+        "episode": 148,
+        "seed": 239
+      },
+      {
+        "episode": 162,
+        "seed": 252
+      },
+      {
+        "episode": 164,
+        "seed": 254
+      },
+      {
+        "episode": 178,
+        "seed": 35
+      },
+      {
+        "episode": 183,
+        "seed": 40
+      },
+      {
+        "episode": 199,
+        "seed": 54
+      },
+      {
+        "episode": 201,
+        "seed": 56
+      },
+      {
+        "episode": 205,
+        "seed": 60
+      },
+      {
+        "episode": 208,
+        "seed": 62
+      },
+      {
+        "episode": 209,
+        "seed": 63
+      },
+      {
+        "episode": 222,
+        "seed": 75
+      },
+      {
+        "episode": 248,
+        "seed": 100
+      }
+    ],
+    "TimedTransferEasy-VLA-v0": [
+      {
+        "episode": 19,
+        "seed": 20
+      },
+      {
+        "episode": 27,
+        "seed": 28
+      },
+      {
+        "episode": 34,
+        "seed": 35
+      },
+      {
+        "episode": 46,
+        "seed": 47
+      },
+      {
+        "episode": 47,
+        "seed": 48
+      },
+      {
+        "episode": 60,
+        "seed": 61
+      },
+      {
+        "episode": 63,
+        "seed": 64
+      },
+      {
+        "episode": 83,
+        "seed": 84
+      },
+      {
+        "episode": 95,
+        "seed": 96
+      },
+      {
+        "episode": 99,
+        "seed": 100
+      },
+      {
+        "episode": 142,
+        "seed": 143
+      },
+      {
+        "episode": 160,
+        "seed": 161
+      },
+      {
+        "episode": 166,
+        "seed": 167
+      },
+      {
+        "episode": 179,
+        "seed": 180
+      },
+      {
+        "episode": 184,
+        "seed": 185
+      },
+      {
+        "episode": 186,
+        "seed": 187
+      },
+      {
+        "episode": 192,
+        "seed": 193
+      },
+      {
+        "episode": 193,
+        "seed": 194
+      },
+      {
+        "episode": 205,
+        "seed": 206
+      },
+      {
+        "episode": 222,
+        "seed": 223
+      },
+      {
+        "episode": 224,
+        "seed": 225
+      },
+      {
+        "episode": 236,
+        "seed": 237
+      },
+      {
+        "episode": 239,
+        "seed": 240
+      },
+      {
+        "episode": 242,
+        "seed": 243
+      },
+      {
+        "episode": 246,
+        "seed": 247
+      }
+    ],
+    "TimedTransferHard-Long-VLA-v0": [
+      {
+        "episode": 6,
+        "seed": 107
+      },
+      {
+        "episode": 14,
+        "seed": 114
+      },
+      {
+        "episode": 21,
+        "seed": 121
+      },
+      {
+        "episode": 25,
+        "seed": 124
+      },
+      {
+        "episode": 35,
+        "seed": 14
+      },
+      {
+        "episode": 63,
+        "seed": 159
+      },
+      {
+        "episode": 81,
+        "seed": 176
+      },
+      {
+        "episode": 82,
+        "seed": 177
+      },
+      {
+        "episode": 83,
+        "seed": 178
+      },
+      {
+        "episode": 97,
+        "seed": 191
+      },
+      {
+        "episode": 123,
+        "seed": 215
+      },
+      {
+        "episode": 127,
+        "seed": 218
+      },
+      {
+        "episode": 136,
+        "seed": 226
+      },
+      {
+        "episode": 142,
+        "seed": 232
+      },
+      {
+        "episode": 146,
+        "seed": 25
+      },
+      {
+        "episode": 175,
+        "seed": 33
+      },
+      {
+        "episode": 187,
+        "seed": 44
+      },
+      {
+        "episode": 188,
+        "seed": 45
+      },
+      {
+        "episode": 190,
+        "seed": 47
+      },
+      {
+        "episode": 198,
+        "seed": 55
+      },
+      {
+        "episode": 203,
+        "seed": 60
+      },
+      {
+        "episode": 206,
+        "seed": 7
+      },
+      {
+        "episode": 207,
+        "seed": 63
+      },
+      {
+        "episode": 229,
+        "seed": 84
+      },
+      {
+        "episode": 235,
+        "seed": 90
+      }
+    ],
+    "TimedTransferHard-VLA-v0": [
+      {
+        "episode": 4,
+        "seed": 102
+      },
+      {
+        "episode": 6,
+        "seed": 104
+      },
+      {
+        "episode": 7,
+        "seed": 105
+      },
+      {
+        "episode": 10,
+        "seed": 108
+      },
+      {
+        "episode": 37,
+        "seed": 132
+      },
+      {
+        "episode": 45,
+        "seed": 140
+      },
+      {
+        "episode": 51,
+        "seed": 145
+      },
+      {
+        "episode": 63,
+        "seed": 156
+      },
+      {
+        "episode": 65,
+        "seed": 158
+      },
+      {
+        "episode": 71,
+        "seed": 164
+      },
+      {
+        "episode": 76,
+        "seed": 169
+      },
+      {
+        "episode": 91,
+        "seed": 182
+      },
+      {
+        "episode": 93,
+        "seed": 184
+      },
+      {
+        "episode": 116,
+        "seed": 205
+      },
+      {
+        "episode": 130,
+        "seed": 218
+      },
+      {
+        "episode": 158,
+        "seed": 243
+      },
+      {
+        "episode": 165,
+        "seed": 250
+      },
+      {
+        "episode": 187,
+        "seed": 42
+      },
+      {
+        "episode": 189,
+        "seed": 44
+      },
+      {
+        "episode": 217,
+        "seed": 7
+      },
+      {
+        "episode": 230,
+        "seed": 81
+      },
+      {
+        "episode": 233,
+        "seed": 85
+      },
+      {
+        "episode": 237,
+        "seed": 89
+      },
+      {
+        "episode": 240,
+        "seed": 91
+      },
+      {
+        "episode": 247,
+        "seed": 98
+      }
+    ],
+    "TimedTransferMedium-Long-VLA-v0": [
+      {
+        "episode": 2,
+        "seed": 10
+      },
+      {
+        "episode": 5,
+        "seed": 103
+      },
+      {
+        "episode": 8,
+        "seed": 106
+      },
+      {
+        "episode": 17,
+        "seed": 114
+      },
+      {
+        "episode": 21,
+        "seed": 118
+      },
+      {
+        "episode": 23,
+        "seed": 120
+      },
+      {
+        "episode": 43,
+        "seed": 138
+      },
+      {
+        "episode": 56,
+        "seed": 150
+      },
+      {
+        "episode": 67,
+        "seed": 160
+      },
+      {
+        "episode": 71,
+        "seed": 164
+      },
+      {
+        "episode": 113,
+        "seed": 20
+      },
+      {
+        "episode": 135,
+        "seed": 22
+      },
+      {
+        "episode": 136,
+        "seed": 223
+      },
+      {
+        "episode": 146,
+        "seed": 23
+      },
+      {
+        "episode": 150,
+        "seed": 236
+      },
+      {
+        "episode": 156,
+        "seed": 243
+      },
+      {
+        "episode": 179,
+        "seed": 35
+      },
+      {
+        "episode": 180,
+        "seed": 36
+      },
+      {
+        "episode": 195,
+        "seed": 5
+      },
+      {
+        "episode": 201,
+        "seed": 55
+      },
+      {
+        "episode": 208,
+        "seed": 61
+      },
+      {
+        "episode": 210,
+        "seed": 63
+      },
+      {
+        "episode": 224,
+        "seed": 76
+      },
+      {
+        "episode": 235,
+        "seed": 87
+      },
+      {
+        "episode": 240,
+        "seed": 91
+      }
+    ],
+    "TimedTransferMedium-VLA-v0": [
+      {
+        "episode": 12,
+        "seed": 12
+      },
+      {
+        "episode": 22,
+        "seed": 22
+      },
+      {
+        "episode": 23,
+        "seed": 23
+      },
+      {
+        "episode": 28,
+        "seed": 28
+      },
+      {
+        "episode": 29,
+        "seed": 29
+      },
+      {
+        "episode": 37,
+        "seed": 37
+      },
+      {
+        "episode": 51,
+        "seed": 51
+      },
+      {
+        "episode": 59,
+        "seed": 59
+      },
+      {
+        "episode": 64,
+        "seed": 64
+      },
+      {
+        "episode": 74,
+        "seed": 74
+      },
+      {
+        "episode": 89,
+        "seed": 89
+      },
+      {
+        "episode": 103,
+        "seed": 103
+      },
+      {
+        "episode": 104,
+        "seed": 104
+      },
+      {
+        "episode": 109,
+        "seed": 109
+      },
+      {
+        "episode": 125,
+        "seed": 125
+      },
+      {
+        "episode": 147,
+        "seed": 147
+      },
+      {
+        "episode": 153,
+        "seed": 153
+      },
+      {
+        "episode": 165,
+        "seed": 165
+      },
+      {
+        "episode": 186,
+        "seed": 186
+      },
+      {
+        "episode": 192,
+        "seed": 192
+      },
+      {
+        "episode": 193,
+        "seed": 193
+      },
+      {
+        "episode": 197,
+        "seed": 197
+      },
+      {
+        "episode": 219,
+        "seed": 219
+      },
+      {
+        "episode": 237,
+        "seed": 237
+      },
+      {
+        "episode": 241,
+        "seed": 241
+      }
+    ],
+    "TraceShapeEasy-VLA-v0": [
+      {
+        "episode": 19,
+        "seed": 116
+      },
+      {
+        "episode": 20,
+        "seed": 117
+      },
+      {
+        "episode": 25,
+        "seed": 121
+      },
+      {
+        "episode": 29,
+        "seed": 125
+      },
+      {
+        "episode": 33,
+        "seed": 129
+      },
+      {
+        "episode": 36,
+        "seed": 131
+      },
+      {
+        "episode": 50,
+        "seed": 144
+      },
+      {
+        "episode": 51,
+        "seed": 145
+      },
+      {
+        "episode": 56,
+        "seed": 150
+      },
+      {
+        "episode": 72,
+        "seed": 164
+      },
+      {
+        "episode": 85,
+        "seed": 176
+      },
+      {
+        "episode": 95,
+        "seed": 185
+      },
+      {
+        "episode": 101,
+        "seed": 19
+      },
+      {
+        "episode": 125,
+        "seed": 212
+      },
+      {
+        "episode": 136,
+        "seed": 222
+      },
+      {
+        "episode": 177,
+        "seed": 33
+      },
+      {
+        "episode": 186,
+        "seed": 41
+      },
+      {
+        "episode": 196,
+        "seed": 50
+      },
+      {
+        "episode": 217,
+        "seed": 7
+      },
+      {
+        "episode": 226,
+        "seed": 78
+      },
+      {
+        "episode": 233,
+        "seed": 84
+      },
+      {
+        "episode": 236,
+        "seed": 87
+      },
+      {
+        "episode": 241,
+        "seed": 91
+      },
+      {
+        "episode": 244,
+        "seed": 94
+      },
+      {
+        "episode": 245,
+        "seed": 95
+      }
+    ],
+    "TraceShapeHard-VLA-v0": [
+      {
+        "episode": 7,
+        "seed": 105
+      },
+      {
+        "episode": 17,
+        "seed": 114
+      },
+      {
+        "episode": 23,
+        "seed": 120
+      },
+      {
+        "episode": 25,
+        "seed": 121
+      },
+      {
+        "episode": 38,
+        "seed": 133
+      },
+      {
+        "episode": 43,
+        "seed": 138
+      },
+      {
+        "episode": 47,
+        "seed": 141
+      },
+      {
+        "episode": 48,
+        "seed": 142
+      },
+      {
+        "episode": 51,
+        "seed": 145
+      },
+      {
+        "episode": 61,
+        "seed": 154
+      },
+      {
+        "episode": 75,
+        "seed": 167
+      },
+      {
+        "episode": 84,
+        "seed": 175
+      },
+      {
+        "episode": 95,
+        "seed": 185
+      },
+      {
+        "episode": 102,
+        "seed": 191
+      },
+      {
+        "episode": 109,
+        "seed": 198
+      },
+      {
+        "episode": 153,
+        "seed": 238
+      },
+      {
+        "episode": 154,
+        "seed": 239
+      },
+      {
+        "episode": 165,
+        "seed": 249
+      },
+      {
+        "episode": 175,
+        "seed": 31
+      },
+      {
+        "episode": 179,
+        "seed": 35
+      },
+      {
+        "episode": 186,
+        "seed": 42
+      },
+      {
+        "episode": 189,
+        "seed": 45
+      },
+      {
+        "episode": 201,
+        "seed": 56
+      },
+      {
+        "episode": 224,
+        "seed": 77
+      },
+      {
+        "episode": 228,
+        "seed": 8
+      }
+    ],
+    "TraceShapeMedium-VLA-v0": [
+      {
+        "episode": 0,
+        "seed": 1
+      },
+      {
+        "episode": 19,
+        "seed": 118
+      },
+      {
+        "episode": 22,
+        "seed": 121
+      },
+      {
+        "episode": 25,
+        "seed": 123
+      },
+      {
+        "episode": 29,
+        "seed": 127
+      },
+      {
+        "episode": 31,
+        "seed": 129
+      },
+      {
+        "episode": 32,
+        "seed": 130
+      },
+      {
+        "episode": 49,
+        "seed": 145
+      },
+      {
+        "episode": 66,
+        "seed": 161
+      },
+      {
+        "episode": 67,
+        "seed": 162
+      },
+      {
+        "episode": 74,
+        "seed": 168
+      },
+      {
+        "episode": 84,
+        "seed": 177
+      },
+      {
+        "episode": 88,
+        "seed": 181
+      },
+      {
+        "episode": 93,
+        "seed": 185
+      },
+      {
+        "episode": 115,
+        "seed": 205
+      },
+      {
+        "episode": 117,
+        "seed": 207
+      },
+      {
+        "episode": 175,
+        "seed": 32
+      },
+      {
+        "episode": 181,
+        "seed": 38
+      },
+      {
+        "episode": 182,
+        "seed": 39
+      },
+      {
+        "episode": 194,
+        "seed": 50
+      },
+      {
+        "episode": 204,
+        "seed": 59
+      },
+      {
+        "episode": 217,
+        "seed": 8
+      },
+      {
+        "episode": 219,
+        "seed": 72
+      },
+      {
+        "episode": 237,
+        "seed": 90
+      },
+      {
+        "episode": 244,
+        "seed": 96
+      }
+    ],
+    "TraceShapeSeqEasy-VLA-v0": [
+      {
+        "episode": 11,
+        "seed": 137
+      },
+      {
+        "episode": 22,
+        "seed": 153
+      },
+      {
+        "episode": 24,
+        "seed": 15
+      },
+      {
+        "episode": 27,
+        "seed": 157
+      },
+      {
+        "episode": 33,
+        "seed": 163
+      },
+      {
+        "episode": 46,
+        "seed": 18
+      },
+      {
+        "episode": 83,
+        "seed": 220
+      },
+      {
+        "episode": 91,
+        "seed": 227
+      },
+      {
+        "episode": 115,
+        "seed": 254
+      },
+      {
+        "episode": 123,
+        "seed": 263
+      },
+      {
+        "episode": 126,
+        "seed": 265
+      },
+      {
+        "episode": 149,
+        "seed": 289
+      },
+      {
+        "episode": 150,
+        "seed": 290
+      },
+      {
+        "episode": 162,
+        "seed": 307
+      },
+      {
+        "episode": 165,
+        "seed": 311
+      },
+      {
+        "episode": 169,
+        "seed": 34
+      },
+      {
+        "episode": 170,
+        "seed": 35
+      },
+      {
+        "episode": 185,
+        "seed": 50
+      },
+      {
+        "episode": 188,
+        "seed": 53
+      },
+      {
+        "episode": 196,
+        "seed": 63
+      },
+      {
+        "episode": 197,
+        "seed": 64
+      },
+      {
+        "episode": 206,
+        "seed": 7
+      },
+      {
+        "episode": 210,
+        "seed": 80
+      },
+      {
+        "episode": 211,
+        "seed": 81
+      },
+      {
+        "episode": 235,
+        "seed": 110
+      }
+    ],
+    "TraceShapeSeqHard-VLA-v0": [
+      {
+        "episode": 5,
+        "seed": 124
+      },
+      {
+        "episode": 9,
+        "seed": 131
+      },
+      {
+        "episode": 17,
+        "seed": 140
+      },
+      {
+        "episode": 56,
+        "seed": 183
+      },
+      {
+        "episode": 58,
+        "seed": 184
+      },
+      {
+        "episode": 93,
+        "seed": 223
+      },
+      {
+        "episode": 104,
+        "seed": 235
+      },
+      {
+        "episode": 110,
+        "seed": 241
+      },
+      {
+        "episode": 119,
+        "seed": 251
+      },
+      {
+        "episode": 123,
+        "seed": 258
+      },
+      {
+        "episode": 132,
+        "seed": 266
+      },
+      {
+        "episode": 137,
+        "seed": 270
+      },
+      {
+        "episode": 153,
+        "seed": 288
+      },
+      {
+        "episode": 156,
+        "seed": 293
+      },
+      {
+        "episode": 161,
+        "seed": 298
+      },
+      {
+        "episode": 164,
+        "seed": 301
+      },
+      {
+        "episode": 175,
+        "seed": 37
+      },
+      {
+        "episode": 181,
+        "seed": 43
+      },
+      {
+        "episode": 186,
+        "seed": 48
+      },
+      {
+        "episode": 193,
+        "seed": 56
+      },
+      {
+        "episode": 197,
+        "seed": 62
+      },
+      {
+        "episode": 212,
+        "seed": 79
+      },
+      {
+        "episode": 225,
+        "seed": 94
+      },
+      {
+        "episode": 230,
+        "seed": 99
+      },
+      {
+        "episode": 236,
+        "seed": 107
+      }
+    ],
+    "TraceShapeSeqMedium-VLA-v0": [
+      {
+        "episode": 22,
+        "seed": 154
+      },
+      {
+        "episode": 25,
+        "seed": 156
+      },
+      {
+        "episode": 28,
+        "seed": 159
+      },
+      {
+        "episode": 42,
+        "seed": 175
+      },
+      {
+        "episode": 47,
+        "seed": 180
+      },
+      {
+        "episode": 50,
+        "seed": 183
+      },
+      {
+        "episode": 81,
+        "seed": 220
+      },
+      {
+        "episode": 93,
+        "seed": 234
+      },
+      {
+        "episode": 95,
+        "seed": 236
+      },
+      {
+        "episode": 99,
+        "seed": 240
+      },
+      {
+        "episode": 104,
+        "seed": 245
+      },
+      {
+        "episode": 136,
+        "seed": 280
+      },
+      {
+        "episode": 139,
+        "seed": 283
+      },
+      {
+        "episode": 144,
+        "seed": 289
+      },
+      {
+        "episode": 146,
+        "seed": 31
+      },
+      {
+        "episode": 160,
+        "seed": 307
+      },
+      {
+        "episode": 166,
+        "seed": 314
+      },
+      {
+        "episode": 176,
+        "seed": 40
+      },
+      {
+        "episode": 189,
+        "seed": 55
+      },
+      {
+        "episode": 196,
+        "seed": 64
+      },
+      {
+        "episode": 197,
+        "seed": 65
+      },
+      {
+        "episode": 201,
+        "seed": 73
+      },
+      {
+        "episode": 226,
+        "seed": 102
+      },
+      {
+        "episode": 241,
+        "seed": 119
+      },
+      {
+        "episode": 249,
+        "seed": 129
+      }
+    ]
+  }
+}

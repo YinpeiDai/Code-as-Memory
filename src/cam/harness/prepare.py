@@ -13,12 +13,12 @@ import re
 from urllib.parse import quote
 
 from cam import __file__ as package_file
-from cam.benchmarks.base import pin_source, source_hash
-from cam.benchmarks.registry import checkout, get_adapter, simulator_python
+from cam.interface.base import pin_source, source_hash
+from cam.interface.registry import checkout, get_adapter, simulator_python
 from cam.config import RunConfig
 from cam.core.budget import Ledger, program_hash
-from cam.core.history import materialize, payload, snapshot
-from cam.data.extract import validate_dataset
+from cam.core.history import freeze, materialize, payload, snapshot
+from cam.data.extract import load_dataset_manifest, validate_dataset
 from cam.io import copy_tree, read, sha256, tree_hash, write
 from cam.prompts import benchmark_mode_guidance, render, task_clarification
 from cam.harness.run_readme import write_run_readme, write_runs_readme
@@ -92,7 +92,7 @@ def simulator_build_files(adapter):
     ]
 
 
-def make_runtime(output, demonstrations=True, mikasa_motion_preview=False):
+def make_runtime(output, demonstrations=True, mikasa_motion_preview=False, rmbench_robot_checks=False):
     source = Path(package_file).parent
     package = output / "cam"
     for folder in ("", "core", "runtime"):
@@ -113,10 +113,15 @@ def make_runtime(output, demonstrations=True, mikasa_motion_preview=False):
     if mikasa_motion_preview:
         target = package / "runtime/mikasa_robo/dry_run.md"
         target.parent.mkdir()
-        shutil.copy2(source / "benchmarks/mikasa_robo_api/api.md", target)
+        shutil.copy2(source / "interface/mikasa_robo/api/api.md", target)
         (target.parent / "__init__.py").write_text('"""Public MIKASA robot-only offline API."""\nfrom .offline import safety_check\n')
         for name in ("offline.py", "panda_model.json", "safety_check.md"):
-            shutil.copy2(source / "benchmarks/mikasa_robo_api" / name, target.parent / name)
+            shutil.copy2(source / "interface/mikasa_robo/api" / name, target.parent / name)
+    if rmbench_robot_checks:
+        target = package / "runtime/rmbench"
+        target.mkdir()
+        for name in ("__init__.py", "offline.py", "aloha_model.json", "api.md"):
+            shutil.copy2(source / "interface/rmbench/api" / name, target / name)
     return output
 
 
@@ -147,7 +152,7 @@ def training_schedule(adapter, task, demonstrations, config):
     return random_select(candidates, config.training_seed_count, config.benchmark + "/interaction-disjoint-v1", task)
 
 
-def preparation_inputs(dataset, config, tasks=None, benchmark_source=None):
+def preparation_inputs(dataset, config, tasks=None, benchmark_source=None, validate_data=False):
     dataset = Path(dataset).resolve()
     config = config if isinstance(config, RunConfig) else RunConfig.from_dict(config)
     adapter = get_adapter(config.benchmark, benchmark_source)
@@ -155,13 +160,18 @@ def preparation_inputs(dataset, config, tasks=None, benchmark_source=None):
         raise ValueError(
             "Perceptual variation protocols are not implemented in this RoboMME release"
         )
-    selected = validate_dataset(dataset)
-    if selected["benchmark"] != config.benchmark or selected[
+    selected = validate_dataset(dataset) if validate_data else load_dataset_manifest(dataset, adapter=adapter)
+    from cam.interface.registry import benchmark_matches
+    if not benchmark_matches(config.benchmark, selected["benchmark"]) or selected[
         "benchmark_hash"
     ] != source_hash(adapter):
         raise ValueError("Dataset and benchmark snapshot do not match")
     if selected["depth"] != config.depth:
         raise ValueError("Extraction and policy sensor settings must agree")
+    if config.benchmark in ("mikasa_robo", "mikasa_robo_v2"):
+        from cam.interface.mikasa_robo.data import DECLARED
+        if not selected["depth"] or selected.get("fields") != DECLARED:
+            raise ValueError("MIKASA requires the released 256x256 RGB-D schema; RGB-only data belongs in legacy")
     tasks = tasks or list(selected["tasks"])
     if (
         not tasks
@@ -173,6 +183,7 @@ def preparation_inputs(dataset, config, tasks=None, benchmark_source=None):
         raise ValueError(f"{config.benchmark} has no reset video; set builtin_demo=false")
     for task in tasks:
         adapter.interface(task, config.depth)
+        pinned = {}
         for split in ("train", "test"):
             try:
                 rows = adapter.records(task, split)
@@ -183,7 +194,13 @@ def preparation_inputs(dataset, config, tasks=None, benchmark_source=None):
                 ) from exc
             if not rows:
                 raise ValueError(f"{config.benchmark}/{task}: empty {split} metadata")
+            pinned[split] = rows
         records = selected["tasks"][task]["episodes"]
+        train = {int(row["episode"]): int(row["seed"]) for row in pinned["train"]}
+        test = {int(row["seed"]) for row in pinned["test"]}
+        if any(train.get(int(row["episode"])) != int(row["seed"]) or int(row["seed"]) in test
+               for row in records):
+            raise ValueError(f"{task}: assigned demonstration identity or train/test overlap")
         training_schedule(adapter, task, records, config)
     return dataset, config, tasks, adapter, selected
 
@@ -220,11 +237,12 @@ def initial_policy_input(source, config, tasks, selected):
     }
 
 
-def prepare(root, dataset, config, tasks=None, benchmark_source=None, initial_policy_run=None):
+def prepare(root, dataset, config, tasks=None, benchmark_source=None, initial_policy_run=None,
+            validate_data=False):
     """Prepare an exact run path; retained for embedded callers and old runs."""
-    dataset, config, tasks, adapter, selected = preparation_inputs(dataset, config, tasks, benchmark_source)
+    dataset, config, tasks, adapter, selected = preparation_inputs(dataset, config, tasks, benchmark_source, validate_data)
     initial = initial_policy_input(initial_policy_run, config, tasks, selected)
-    return _prepare(Path(root).resolve(), dataset, config, tasks, adapter, selected, initial)
+    return _prepare(Path(root).resolve(), dataset, config, tasks, adapter, selected, initial, validate_data=validate_data)
 
 
 def coding_run_name(coding):
@@ -242,11 +260,12 @@ def coding_run_name(coding):
 
 
 def prepare_runs(
-    base, dataset, config, tasks=None, benchmark_source=None, timetag=None, initial_policy_run=None
+    base, dataset, config, tasks=None, benchmark_source=None, timetag=None, initial_policy_run=None,
+    validate_data=False,
 ):
     """Create one task per benchmark/task/client-model/setting/timetag leaf."""
     dataset, config, tasks, adapter, selected = preparation_inputs(
-        dataset, config, tasks, benchmark_source
+        dataset, config, tasks, benchmark_source, validate_data
     )
     initial = initial_policy_input(initial_policy_run, config, tasks, selected)
     timetag = timetag or datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%S_%fZ")
@@ -265,7 +284,7 @@ def prepare_runs(
     write_runs_readme(base)
     results = []
     for task, root in zip(tasks, roots):
-        _prepare(root, dataset, config, [task], adapter, selected, initial)
+        _prepare(root, dataset, config, [task], adapter, selected, initial, validate_data=validate_data)
         results.append({"task": task, "root": str(root)})
     return {
         "schema": "cam-preparation/1",
@@ -276,7 +295,8 @@ def prepare_runs(
     }
 
 
-def _prepare(root, dataset, config, tasks, adapter, selected, initial=None):
+def _prepare(root, dataset, config, tasks, adapter, selected, initial=None, published=None,
+             validate_data=False):
     if root.exists():
         raise FileExistsError(
             "Use a new run directory; existing logs and budgets cannot be reset"
@@ -287,10 +307,11 @@ def _prepare(root, dataset, config, tasks, adapter, selected, initial=None):
     if initial and tree_hash(benchmark) != initial["provenance"]["benchmark_hash"]:
         raise ValueError("Initial-policy repair must keep the same native benchmark snapshot")
     package = root / "inputs/harness/cam"
-    copy_tree(Path(package_file).parent, package)
+    copy_tree(Path(package_file).parent, package, ("legacy",))
     runtime = make_runtime(
         root / "runtime", demonstrations=config.mode != "interaction",
         mikasa_motion_preview=adapter.name in ("mikasa_robo", "mikasa_robo_v2"),
+        rmbench_robot_checks=adapter.name == "rmbench",
     )
     write(root / "inputs/dataset.json", selected)
     write(root / "inputs/environment.json", environment_snapshot())
@@ -305,6 +326,15 @@ def _prepare(root, dataset, config, tasks, adapter, selected, initial=None):
         for name in initial["files"]:
             path = saved / name
             inputs[path.relative_to(root).as_posix()] = sha256(path)
+    if published:
+        write(root / "inputs/published_solution.json", published["provenance"])
+        inputs["inputs/published_solution.json"] = sha256(root / "inputs/published_solution.json")
+        for task in tasks:
+            saved = root / "inputs/published_policy" / task
+            materialize(saved, published["files"][task])
+            for name in published["files"][task]:
+                path = saved / name
+                inputs[path.relative_to(root).as_posix()] = sha256(path)
     simulator = simulator_python(adapter)
     if simulator is not None:
         write(root / "inputs/simulator_environment.json", simulator_snapshot(simulator))
@@ -327,9 +357,9 @@ def _prepare(root, dataset, config, tasks, adapter, selected, initial=None):
     for task in tasks:
         item = selected["tasks"][task]
         records = item["episodes"]
-        training_records = training_schedule(adapter, task, records, config)
+        training_records = [] if published else training_schedule(adapter, task, records, config)
         counts[task] = len(records) if config.mode != "interaction" else 0
-        train = {int(row["episode"]): row for row in adapter.records(task, "train")}
+        train = {} if published else {int(row["episode"]): row for row in adapter.records(task, "train")}
         test = adapter.records(task, "test")
         for row in records:
             native = train[int(row["episode"])]
@@ -360,12 +390,14 @@ def _prepare(root, dataset, config, tasks, adapter, selected, initial=None):
         }
         if initial:
             files = initial["files"]
+        if published:
+            files = published["files"][task]
         materialize(workspace, files)
         materialize(task_root / "program", files)
         (workspace / "scratch").mkdir()
         (task_root / "feedback").mkdir()
         (task_root / "logs").mkdir()
-        prompt = render(
+        prompt = "Evaluation of a published frozen policy. No learning is permitted.\n" if published else render(
             config, task, records, training_records, adapter, interfaces[task],
             initial_policy=initial["provenance"] if initial else None,
         )
@@ -392,8 +424,14 @@ def _prepare(root, dataset, config, tasks, adapter, selected, initial=None):
             task_root / "state/config.json"
         )
         Ledger(cfg["ledger"]).initialize(cfg)
-        snapshot(cfg, "initialized from user-authorized prior policy" if initial else "initialized")
-        if config.mode != "interaction":
+        snapshot(cfg, "imported published final policy" if published else "initialized from user-authorized prior policy" if initial else "initialized")
+        if published:
+            freeze(cfg)
+            write(task_root / "logs/completion.json", {
+                "status": "finished", "source": "published_solution",
+                "learning_performed": False, "model_calls": 0,
+            })
+        if config.mode != "interaction" and not published:
             target = task_root / "demonstrations" / Path(item["file"]).name
             target.parent.mkdir()
             try:
@@ -429,7 +467,12 @@ if __name__ == "__main__":
             task: value for task in tasks
             if (value := task_clarification(config.benchmark, task)) is not None
         },
-        "dataset_reference": str(dataset / "manifest.json"),
+        "dataset_reference": str(dataset / "manifest.json") if dataset is not None else None,
+        "dataset_validation": {
+            "mode": "none" if published else "full" if validate_data else "published_manifest",
+            "h5_scanned": bool(validate_data and not published),
+            "hashes_checked": bool(validate_data and not published),
+        },
         "raw_data_reference": selected["raw_data"],
         "benchmark_package": adapter.package,
         "benchmark_hash": tree_hash(benchmark),
@@ -450,10 +493,13 @@ if __name__ == "__main__":
         },
         "evaluation_api_calls": 0,
         "test_feedback_to_coding": False,
-        "fresh_policy": initial is None,
+        "fresh_policy": initial is None and published is None,
         "initial_policy": initial["provenance"] if initial else None,
         "checkpoint_rule": "R_N is saved before attempt N+1; final code is saved at early stop",
     }
+    if published:
+        manifest["published_solution"] = published["provenance"]
+        manifest["evaluation_only"] = True
     write(root / "run.json", manifest)
     write_run_readme(root, manifest)
     write(root / "prepared.json", {"ready": True, "created": time.time()})

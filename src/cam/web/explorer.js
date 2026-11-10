@@ -276,6 +276,9 @@ const Explorer = {
       this.fallbackVideo();
       return;
     }
+    // Remote trace generation must not hide an already available recording.
+    this.fallbackVideo("Recorded video · action labels loading…");
+    this.hud.textContent = "Video available; loading action labels…";
     let trace = this.traces.get(item.trace);
     if (!trace) {
       try {
@@ -292,23 +295,29 @@ const Explorer = {
       return;
     }
     this.trace = trace;
+    this.root.classList.remove("video-only");
+    this.video.controls = false;
+    this.playOverlay.hidden = !this.video.paused;
     this.goalBox.hidden = !trace.result?.goal;
     this.goalBox.innerHTML = trace.result?.goal ? `<span>Task goal</span><p>${X.esc(trace.result.goal)}</p>` : "";
     this.scrubber.max = Math.max(0, trace.frames - 1);
     this.buildTiles(trace);
     const seconds = trace.frames / trace.fps;
-    const rate = [1, 0.5, 0.25, 0.1].find((r) => seconds / r >= 8) ?? 0.1; // at least ~8 s on screen
+    const rate = this.video.currentTime > 0 ? this.video.playbackRate
+      : [1, 0.5, 0.25, 0.1].find((r) => seconds / r >= 8) ?? 0.1; // at least ~8 s on screen
     this.speed.value = String(rate);
     this.video.playbackRate = rate;
     this.renderTimeline();
     this.renderDecisions();
     this.result.innerHTML = this.resultHtml(item, trace);
-    this.seek(0, true);
+    // Attaching late labels must preserve the viewer's playback position/state.
+    this.sync();
+    this.paint();
   },
-  fallbackVideo() {
+  fallbackVideo(message = "Recorded video · action labels unavailable") {
     this.root.classList.add("video-only");
     this.video.controls = true;
-    this.current.textContent = "Recorded video · action labels unavailable";
+    this.current.textContent = message;
     this.playOverlay.hidden = true;
   },
   buildTiles(trace) {
@@ -635,6 +644,7 @@ const DevLog = {
       if (this.codeVersions.length) this.showCodeVersion(Math.max(0, selected));
     }
     if (name === "rollouts") {
+      if (window.CaMArena?.trainingGallery) return window.CaMArena.trainingGallery(this);
       const rows = this.task?.rollouts || [];
       this.body.innerHTML = rows.length
         ? `<div class="chips">${rows.map((r, i) => `<span><button class="chip big ${X.outcomeClass(r.status)}" data-rollout="${i}">R${String(r.attempt).padStart(3, "0")} · ep ${X.esc(r.episode)}<br><small>${X.esc(r.status)} · ${X.esc(r.steps)} steps</small></button>${Object.keys(r.policy_files || {}).length ? `<button data-code-attempt="${r.attempt}">Code</button>` : ""}</span>`).join("")}</div>`
@@ -744,7 +754,7 @@ function trainItems(task, run) {
     short: `R${r.attempt}`,
     task: task.task,
     run: run?.name || "",
-    physics: run?.config?.physics_backend || (run?.benchmark === "mikasa_robo_v2" ? "gpu" : null),
+    physics: run?.config?.physics_backend || (["mikasa_robo", "mikasa_robo_v2"].includes(run?.benchmark) ? "gpu" : null),
     episode: r.episode,
     attempt: r.attempt,
     status: r.status,
@@ -764,7 +774,7 @@ function testItems(run, episodes) {
     short: String(e.episode),
     task: e.task,
     run: run.name,
-    physics: run.config?.physics_backend || (run.benchmark === "mikasa_robo_v2" ? "gpu" : null),
+    physics: run.config?.physics_backend || (["mikasa_robo", "mikasa_robo_v2"].includes(run.benchmark) ? "gpu" : null),
     episode: e.episode,
     status: e.status,
     steps: e.steps,

@@ -14,7 +14,7 @@ import h5py
 import numpy as np
 
 ROOT = Path("/demonstrations")
-SCHEMAS = ("cam-demonstrations/1", "cam-demonstrations/2")
+SCHEMAS = ("cam-demonstrations/1", "cam-demonstrations/2", "cap-regular-fewshot/2")
 EPISODE_KEYS = ("step", "is_demo")
 
 
@@ -41,8 +41,8 @@ class Trajectory:
         self.episode = int(episode)
         self.goal = attrs["goal"]
         self.difficulty = attrs.get("difficulty")
-        self.action_alignment = attrs["action_alignment"]
-        self.step_semantics = attrs["step_semantics"]
+        self.action_alignment = attrs.get("action_alignment", self._file.attrs.get("action_alignment"))
+        self.step_semantics = attrs.get("step_semantics", self._file.attrs.get("step_semantics"))
         self.tcp_frame = self._file.attrs.get("tcp_frame", "native measured TCP")
         declared = json.loads(self._file.attrs.get("fields", "{}"))
         self.T = len(self._group["step"])

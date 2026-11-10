@@ -1,0 +1,2420 @@
+{
+  "schema": "cam-mikasa-solution-import-validation/1",
+  "created": 1794279837.367759,
+  "all_passed": true,
+  "tasks": {
+    "BlinkCountButtonPressEasy-Long-VLA-v0": {
+      "task": "BlinkCountButtonPressEasy-Long-VLA-v0",
+      "passed": true,
+      "returncode": 0,
+      "program_hash": "267d0b33ae975afcc62f874db5e8d3d979667dab8658193e0cc3a806500ec2e2",
+      "demo_episode": 4,
+      "interface_sha256": "233b905d12ff4752d4738232644c0e6a394a7447f0efb94691e7d66ae9d82908",
+      "test_records_sha256": "cbbd6e9c6e17d440bb656a8aa29d2833deaf6c9c991bc950bdcc1c8faa06cdca",
+      "checks": {
+        "schema_valid": true,
+        "tool_signatures_valid": true,
+        "first_decision_valid": true,
+        "memory_keys": [
+          "black_attempts",
+          "black_pos",
+          "blink_count",
+          "blink_steps",
+          "blue_on",
+          "go_step",
+          "last_step",
+          "log",
+          "phase",
+          "presses_done",
+          "red_pos"
+        ],
+        "first_tool": "act_wait_for_go",
+        "boundary": "step",
+        "command_components": 7
+      }
+    },
+    "BatteriesCheckerEasy-6-VLA-v0": {
+      "task": "BatteriesCheckerEasy-6-VLA-v0",
+      "passed": true,
+      "returncode": 0,
+      "program_hash": "6bb71167fd66dc40fa0efe4267ba87822f12fd66ec01efe4d3b54791738397e9",
+      "demo_episode": 4,
+      "interface_sha256": "d6ca34150927d26e8a0cc71c5249d2c531d705d9d51826e17e556be92fa7a284",
+      "test_records_sha256": "1598e7b439070679c551e100e6de0ba9a7e089d2d47b7f39d10e074a5f246eb2",
+      "checks": {
+        "schema_valid": true,
+        "tool_signatures_valid": true,
+        "first_decision_valid": true,
+        "memory_keys": [
+          "battery",
+          "button",
+          "hold_rpy",
+          "log",
+          "phase",
+          "results",
+          "retries",
+          "slots",
+          "socket",
+          "tray"
+        ],
+        "first_tool": "act_pick",
+        "boundary": "step",
+        "command_components": 7
+      }
+    },
+    "BatteriesCheckerHard-3-VLA-v0": {
+      "task": "BatteriesCheckerHard-3-VLA-v0",
+      "passed": true,
+      "returncode": 0,
+      "program_hash": "d14d4da9f52c87ecca875048604bd2f721af87b75fc1e802c47aa5bb0faa453f",
+      "demo_episode": 9,
+      "interface_sha256": "d6ca34150927d26e8a0cc71c5249d2c531d705d9d51826e17e556be92fa7a284",
+      "test_records_sha256": "73c7d136e2afa4e6c399b553bf3561f3a3ce39e90da58cd157f3c3a11bce7aea",
+      "checks": {
+        "schema_valid": true,
+        "tool_signatures_valid": true,
+        "first_decision_valid": true,
+        "memory_keys": [
+          "battery",
+          "button",
+          "decisions",
+          "lamp_counts",
+          "lamp_results",
+          "lamp_uv",
+          "notes",
+          "retries",
+          "slots",
+          "socket",
+          "stage"
+        ],
+        "first_tool": "act_pick",
+        "boundary": "step",
+        "command_components": 7
+      }
+    },
+    "BatteriesCheckerHard-6-VLA-v0": {
+      "task": "BatteriesCheckerHard-6-VLA-v0",
+      "passed": true,
+      "returncode": 0,
+      "program_hash": "0f9db6098fd8fec0c9a4f328a9b8d5b1e94906d0ed90423d4b1432cda7d8618b",
+      "demo_episode": 0,
+      "interface_sha256": "441761e420dfe3a905f8d33dc3d88d550e8dce52205557414119df8b3a956594",
+      "test_records_sha256": "772b6cf903371e9eae1775ec3c4f16b6878087789f831265a17b4090f64c54ce",
+      "checks": {
+        "schema_valid": true,
+        "tool_signatures_valid": true,
+        "first_decision_valid": true,
+        "memory_keys": [
+          "detect_info",
+          "lamps",
+          "log",
+          "next_index",
+          "org",
+          "retries",
+          "rpy",
+          "stage"
+        ],
+        "first_tool": "act_cycle",
+        "boundary": "step",
+        "command_components": 7
+      }
+    },
+    "BlinkCountButtonPressHard-Long-VLA-v0": {
+      "task": "BlinkCountButtonPressHard-Long-VLA-v0",
+      "passed": true,
+      "returncode": 0,
+      "program_hash": "b5d05f64ce55a37849bbea08d0161a6e1ef46ddb9d6de70cfba4a19118fbc358",
+      "demo_episode": 5,
+      "interface_sha256": "233b905d12ff4752d4738232644c0e6a394a7447f0efb94691e7d66ae9d82908",
+      "test_records_sha256": "ddca55848c64053ae8437736863c36d2ee2a94717ad2645e39e8b0287ba775fc",
+      "checks": {
+        "schema_valid": true,
+        "tool_signatures_valid": true,
+        "first_decision_valid": true,
+        "memory_keys": [
+          "blink_count",
+          "blink_steps",
+          "count_lamp_box",
+          "green_step",
+          "home_rpy",
+          "lamp_on",
+          "last_step",
+          "notes",
+          "press_button",
+          "press_down",
+          "press_log",
+          "presses_done",
+          "rot_sign",
+          "spec",
+          "stage",
+          "status_lamp_box",
+          "submit_attempts",
+          "submit_button"
+        ],
+        "first_tool": "act_watch_cue",
+        "boundary": "step",
+        "command_components": 7
+      }
+    },
+    "BlinkCountButtonPressMedium-VLA-v0": {
+      "task": "BlinkCountButtonPressMedium-VLA-v0",
+      "passed": true,
+      "returncode": 0,
+      "program_hash": "976782afa3f7468109c9f0810aef0b9cccf7e1340eb0c3b99fb7932e23472543",
+      "demo_episode": 1,
+      "interface_sha256": "64a28c7d0a908c35643e3f19033194b6eae5fcfb6e3e8ac4b151a5ffe255ff1f",
+      "test_records_sha256": "555663443d94fd70990a9366cbe765a7956b599c6ea3f87b81692780812e636e",
+      "checks": {
+        "schema_valid": true,
+        "tool_signatures_valid": true,
+        "first_decision_valid": true,
+        "memory_keys": [
+          "black_presses",
+          "black_xyz",
+          "blinks",
+          "blue_on",
+          "frames_seen",
+          "go_seen",
+          "notes",
+          "presses_done",
+          "red_xyz",
+          "stage"
+        ],
+        "first_tool": "act_wait",
+        "boundary": "step",
+        "command_components": 7
+      }
+    },
+    "BlinkCountButtonPressMedium-Long-VLA-v0": {
+      "task": "BlinkCountButtonPressMedium-Long-VLA-v0",
+      "passed": true,
+      "returncode": 0,
+      "program_hash": "34cb8dfa21303acbda8f9859bec68d5baa9c537c213993060b4b432a1982d9ec",
+      "demo_episode": 8,
+      "interface_sha256": "233b905d12ff4752d4738232644c0e6a394a7447f0efb94691e7d66ae9d82908",
+      "test_records_sha256": "e6d4604390a9cdf214b1c361957d9fa18fc05a2ff309259f2e57b10d70b7b237",
+      "checks": {
+        "schema_valid": true,
+        "tool_signatures_valid": true,
+        "first_decision_valid": true,
+        "memory_keys": [
+          "black_attempts",
+          "black_xyz",
+          "blink_count",
+          "blink_steps",
+          "blue_on",
+          "button_info",
+          "decisions",
+          "green_step",
+          "last_step",
+          "notes",
+          "press_down",
+          "press_zmins",
+          "presses_done",
+          "red_xyz",
+          "stage",
+          "yaw_ref"
+        ],
+        "first_tool": "act_watch",
+        "boundary": "step",
+        "command_components": 7
+      }
+    },
+    "BlinkCountButtonPressHard-VLA-v0": {
+      "task": "BlinkCountButtonPressHard-VLA-v0",
+      "passed": true,
+      "returncode": 0,
+      "program_hash": "1c86b9a0a64503a6c2f10697f5496dd272bffec58e48008c52a8bd85fea4d039",
+      "demo_episode": 2,
+      "interface_sha256": "dde2b8a99727aeb2edf6265ef9f63f7a03d3525e78af8273bb58d69a4d233361",
+      "test_records_sha256": "efa6b7b77bae3d524bfe3f06b0e66fc0a42c700f16830afb38df9329d8b2ab71",
+      "checks": {
+        "schema_valid": true,
+        "tool_signatures_valid": true,
+        "first_decision_valid": true,
+        "memory_keys": [
+          "black_attempts",
+          "black_dips",
+          "black_xy",
+          "blink_count",
+          "blink_steps",
+          "blue_on",
+          "green_seen",
+          "green_step",
+          "last_step",
+          "notes",
+          "red_dips",
+          "red_xy",
+          "stage",
+          "tcp_low",
+          "yaw0"
+        ],
+        "first_tool": "act_wait_cue",
+        "boundary": "step",
+        "command_components": 7
+      }
+    },
+    "BunchOfColors3-Long-VLA-v0": {
+      "task": "BunchOfColors3-Long-VLA-v0",
+      "passed": true,
+      "returncode": 0,
+      "program_hash": "44bc0550020adf2d2bacc024a79c1d84bbae02ea682b5dc17b1aec4de9d17bb4",
+      "demo_episode": 1,
+      "interface_sha256": "eb2eca855b76d97608a8394d4705ee7903359ffa2576490599ea9dedac931def",
+      "test_records_sha256": "40fd1cbc90e9df1fafa57d6f6417710de5a199be033f748934c0ccdeace8ea2c",
+      "checks": {
+        "schema_valid": true,
+        "tool_signatures_valid": true,
+        "first_decision_valid": true,
+        "memory_keys": [
+          "arc_seen",
+          "arc_step",
+          "button",
+          "cue_colors",
+          "home_rpy",
+          "log",
+          "presses",
+          "stage",
+          "target_colors",
+          "targets",
+          "touched"
+        ],
+        "first_tool": "act_wait_for_arc",
+        "boundary": "step",
+        "command_components": 7
+      }
+    },
+    "BunchOfColors5-Long-VLA-v0": {
+      "task": "BunchOfColors5-Long-VLA-v0",
+      "passed": true,
+      "returncode": 0,
+      "program_hash": "29f0ede154c602d891840862447a2e878648e06aaf0b6903cd15be985fd99af0",
+      "demo_episode": 1,
+      "interface_sha256": "eb2eca855b76d97608a8394d4705ee7903359ffa2576490599ea9dedac931def",
+      "test_records_sha256": "d47617955a0e7792d40dca2779dd59daacb25ac50f593c222048990cb20bee17",
+      "checks": {
+        "schema_valid": true,
+        "tool_signatures_valid": true,
+        "first_decision_valid": true,
+        "memory_keys": [
+          "button_xy",
+          "cue_colors",
+          "home_rpy",
+          "log",
+          "press_count",
+          "ring_colors",
+          "ring_xy",
+          "stage",
+          "steps_used",
+          "touched"
+        ],
+        "first_tool": "act_wait_ring",
+        "boundary": "step",
+        "command_components": 7
+      }
+    },
+    "BunchOfColors7-Long-VLA-v0": {
+      "task": "BunchOfColors7-Long-VLA-v0",
+      "passed": true,
+      "returncode": 0,
+      "program_hash": "d9cf68ee13352a1d919ebbadb9534199e8efb470fe3769ae2ad9ca0a1affa38e",
+      "demo_episode": 3,
+      "interface_sha256": "eb2eca855b76d97608a8394d4705ee7903359ffa2576490599ea9dedac931def",
+      "test_records_sha256": "9852cda74bada3993dfc134793e551fbf06ba561ffb3b0c12754d0d32fdda5ec",
+      "checks": {
+        "schema_valid": true,
+        "tool_signatures_valid": true,
+        "first_decision_valid": true,
+        "memory_keys": [
+          "attempts",
+          "button",
+          "cue_colors",
+          "cue_step",
+          "log",
+          "next_index",
+          "pass_count",
+          "plan_colors",
+          "plan_positions",
+          "presses",
+          "response_cubes",
+          "response_step",
+          "rpy_ref",
+          "stage",
+          "touched"
+        ],
+        "first_tool": "act_wait_for_response",
+        "boundary": "step",
+        "command_components": 7
+      }
+    },
+    "BunchOfColors5-VLA-v0": {
+      "task": "BunchOfColors5-VLA-v0",
+      "passed": true,
+      "returncode": 0,
+      "program_hash": "ce49287727cd38ccd5a32c1fbbbe84a6d52b45a04fcca6afce182b53c2f184d5",
+      "demo_episode": 4,
+      "interface_sha256": "781eff87348a27ea5766ea3488cae5c91d2ad3f4fe62190fc4dc19b2def4e912",
+      "test_records_sha256": "5754305466978855559e909d2d5aafdf75d728f3a67e0d5c9527cd8d493d081f",
+      "checks": {
+        "schema_valid": true,
+        "tool_signatures_valid": true,
+        "first_decision_valid": true,
+        "memory_keys": [
+          "button",
+          "cue_colors",
+          "cue_step",
+          "log",
+          "press_tries",
+          "stage",
+          "target_colors",
+          "targets",
+          "touch_round",
+          "touched",
+          "yaw"
+        ],
+        "first_tool": "act_wait_for_arc",
+        "boundary": "step",
+        "command_components": 7
+      }
+    },
+    "BunchOfColors7-VLA-v0": {
+      "task": "BunchOfColors7-VLA-v0",
+      "passed": true,
+      "returncode": 0,
+      "program_hash": "9117b5528ad9f49aa00c5b1d8a5becee8eeb5131a6fdec1c2b40b6e000b5cecc",
+      "demo_episode": 6,
+      "interface_sha256": "781eff87348a27ea5766ea3488cae5c91d2ad3f4fe62190fc4dc19b2def4e912",
+      "test_records_sha256": "a86b82abfd95524ba38696165c8a36e12037b7c146fe131a3b6a71f06dc776a5",
+      "checks": {
+        "schema_valid": true,
+        "tool_signatures_valid": true,
+        "first_decision_valid": true,
+        "memory_keys": [
+          "button",
+          "cue_colors",
+          "cue_frames",
+          "cue_step",
+          "distractors",
+          "notes",
+          "press_count",
+          "resp_colors",
+          "resp_frames",
+          "resp_step",
+          "rpy0",
+          "scene_phase",
+          "stage",
+          "target_colors",
+          "targets",
+          "touch_attempts",
+          "touched"
+        ],
+        "first_tool": "act_wait",
+        "boundary": "step",
+        "command_components": 7
+      }
+    },
+    "ChainOfColors3-Long-VLA-v0": {
+      "task": "ChainOfColors3-Long-VLA-v0",
+      "passed": true,
+      "returncode": 0,
+      "program_hash": "c437f82a2df9dd8d05fb2b2a87eeae438e7f1626ba8fd5a668898e4c94d0de28",
+      "demo_episode": 11,
+      "interface_sha256": "cc2ae5481d03282df45a2f5318129a2879b6a0bb15149e2609ecb9132b94ec8f",
+      "test_records_sha256": "f3b15cfbb1c77050bb575061e2970bae6f17ea891e8daabec335afa23310dd5c",
+      "checks": {
+        "schema_valid": true,
+        "tool_signatures_valid": true,
+        "first_decision_valid": true,
+        "memory_keys": [
+          "button",
+          "cue_runs",
+          "notes",
+          "presses",
+          "stage",
+          "targets",
+          "touched"
+        ],
+        "first_tool": "act_wait_arc",
+        "boundary": "step",
+        "command_components": 7
+      }
+    },
+    "ChainOfColors5-Long-VLA-v0": {
+      "task": "ChainOfColors5-Long-VLA-v0",
+      "passed": true,
+      "returncode": 0,
+      "program_hash": "b72a8acbc799d2513857b08172a3e00391b4c64aa79acae24f110305273776a3",
+      "demo_episode": 8,
+      "interface_sha256": "8759399445c0ba5850621db1fe856db47968e16e0d7ce8d3f875e053562756d4",
+      "test_records_sha256": "780c406566bd68bb591648365988bec0784b693bec704e82338a3018fc7d9baf",
+      "checks": {
+        "schema_valid": true,
+        "tool_signatures_valid": true,
+        "first_decision_valid": true,
+        "memory_keys": [
+          "button",
+          "cue_colors",
+          "cue_run",
+          "cue_run_len",
+          "cue_steps",
+          "next_index",
+          "notes",
+          "press_count",
+          "ring_step",
+          "stage",
+          "target_positions",
+          "targets",
+          "touch_log"
+        ],
+        "first_tool": "act_wait_for_ring",
+        "boundary": "step",
+        "command_components": 7
+      }
+    },
+    "ChainOfColors5-VLA-v0": {
+      "task": "ChainOfColors5-VLA-v0",
+      "passed": true,
+      "returncode": 0,
+      "program_hash": "a7e46c0e439e1f56f04146f48b5831c950de1a287a1dfc6756d32178134f7955",
+      "demo_episode": 0,
+      "interface_sha256": "781eff87348a27ea5766ea3488cae5c91d2ad3f4fe62190fc4dc19b2def4e912",
+      "test_records_sha256": "03c5ecd6000f99e8db30b3307238eca001839f8b9efc50458686425567e3ea17",
+      "checks": {
+        "schema_valid": true,
+        "tool_signatures_valid": true,
+        "first_decision_valid": true,
+        "memory_keys": [
+          "button",
+          "cue_colors",
+          "cue_frames",
+          "home_rpy",
+          "notes",
+          "press_tries",
+          "round",
+          "stage",
+          "target_labels",
+          "targets",
+          "touched"
+        ],
+        "first_tool": "act_watch",
+        "boundary": "step",
+        "command_components": 7
+      }
+    },
+    "ChainOfColors7-Long-VLA-v0": {
+      "task": "ChainOfColors7-Long-VLA-v0",
+      "passed": true,
+      "returncode": 0,
+      "program_hash": "5b4cc6e585c4197e0e53bfe702c9eab0218cc17b4e3b196834c5a81b2f4f5d38",
+      "demo_episode": 7,
+      "interface_sha256": "233b905d12ff4752d4738232644c0e6a394a7447f0efb94691e7d66ae9d82908",
+      "test_records_sha256": "ee171cd2f7d9d04e91df152ceda3384f5a9438040eec335b54edee4a8afe7c46",
+      "checks": {
+        "schema_valid": true,
+        "tool_signatures_valid": true,
+        "first_decision_valid": true,
+        "memory_keys": [
+          "button",
+          "cue_runs",
+          "cue_seq",
+          "last_step",
+          "notes",
+          "presses",
+          "resequenced",
+          "ring_step",
+          "rpy0",
+          "stage",
+          "target_labels",
+          "targets",
+          "touch_retries",
+          "touched"
+        ],
+        "first_tool": "act_watch",
+        "boundary": "step",
+        "command_components": 7
+      }
+    },
+    "FindImposterColor5-VLA-v0": {
+      "task": "FindImposterColor5-VLA-v0",
+      "passed": true,
+      "returncode": 0,
+      "program_hash": "7cfa4875ca14bb48198befed6978205f9058854dbb0ba11b146ea0df50af645c",
+      "demo_episode": 1,
+      "interface_sha256": "837edd7b455e53a26c0247d161075e4f96da9d7829bdc5e0d999fb39e54a49ee",
+      "test_records_sha256": "25989028dc8c7f71ac69f98a65f8e481bef235dea3363215a2e8f80e0d03b31e",
+      "checks": {
+        "schema_valid": true,
+        "tool_signatures_valid": true,
+        "first_decision_valid": true,
+        "memory_keys": [
+          "cue_colors",
+          "imposter",
+          "log",
+          "phase",
+          "seen_blank",
+          "target",
+          "test_step"
+        ],
+        "first_tool": "act_wait",
+        "boundary": "step",
+        "command_components": 7
+      }
+    },
+    "FindImposterColor9-VLA-v0": {
+      "task": "FindImposterColor9-VLA-v0",
+      "passed": true,
+      "returncode": 0,
+      "program_hash": "e0235c6f85e432e6668f8711f7e185a3666d24297c206f01b3b7d1f713187993",
+      "demo_episode": 0,
+      "interface_sha256": "837edd7b455e53a26c0247d161075e4f96da9d7829bdc5e0d999fb39e54a49ee",
+      "test_records_sha256": "e2d9235324174593ee66cc6aee20b7ca04aa6c497230959bc741b622fda42983",
+      "checks": {
+        "schema_valid": true,
+        "tool_signatures_valid": true,
+        "first_decision_valid": true,
+        "memory_keys": [
+          "cue_colors",
+          "cue_step",
+          "fallback",
+          "imposter",
+          "imposter_xy",
+          "log",
+          "stage",
+          "target_rule",
+          "test_colors",
+          "test_step"
+        ],
+        "first_tool": "act_wait_for_test",
+        "boundary": "step",
+        "command_components": 7
+      }
+    },
+    "ChainOfColors7-VLA-v0": {
+      "task": "ChainOfColors7-VLA-v0",
+      "passed": true,
+      "returncode": 0,
+      "program_hash": "c1d6b9f9a9321b104ea34435b487074b6344b797bd4f6ef9b35c7f2c3a3dc047",
+      "demo_episode": 1,
+      "interface_sha256": "781eff87348a27ea5766ea3488cae5c91d2ad3f4fe62190fc4dc19b2def4e912",
+      "test_records_sha256": "9899fe769081a0a8e8b3fb57d408b6c6ba4cd02d70a0b4c89ac16ac2c79186cd",
+      "checks": {
+        "schema_valid": true,
+        "tool_signatures_valid": true,
+        "first_decision_valid": true,
+        "memory_keys": [
+          "button",
+          "cue",
+          "cue_steps",
+          "gap",
+          "home_rpy",
+          "layout",
+          "layout_step",
+          "log",
+          "next_index",
+          "press_count",
+          "stage",
+          "target_colors",
+          "targets",
+          "touch_attempts"
+        ],
+        "first_tool": "act_watch",
+        "boundary": "step",
+        "command_components": 7
+      }
+    },
+    "FindImposterShape5-VLA-v0": {
+      "task": "FindImposterShape5-VLA-v0",
+      "passed": true,
+      "returncode": 0,
+      "program_hash": "e54bdbe0c0bcf5470d49be26034246ce07b594aef5ec45dcaae51346095c4797",
+      "demo_episode": 10,
+      "interface_sha256": "837edd7b455e53a26c0247d161075e4f96da9d7829bdc5e0d999fb39e54a49ee",
+      "test_records_sha256": "8e42e90ffcef3ba0b041936e041c0e23eef67e4c78d98687f738e773ed778c04",
+      "checks": {
+        "schema_valid": true,
+        "tool_signatures_valid": true,
+        "first_decision_valid": true,
+        "memory_keys": [
+          "blank_step",
+          "decisions",
+          "notes",
+          "phase",
+          "set1_feats",
+          "set1_positions",
+          "set1_shapes",
+          "set1_step",
+          "set2_positions",
+          "set2_shapes",
+          "set2_step",
+          "target_conf",
+          "target_pos",
+          "target_shape",
+          "touch_attempts"
+        ],
+        "first_tool": "act_wait",
+        "boundary": "step",
+        "command_components": 7
+      }
+    },
+    "FindImposterShapeAndColor3x2-VLA-v0": {
+      "task": "FindImposterShapeAndColor3x2-VLA-v0",
+      "passed": true,
+      "returncode": 0,
+      "program_hash": "820ab9be13f05c57229e5c7a418cb48e21f3a4f2f5d0e37588ddd67e7f385f25",
+      "demo_episode": 6,
+      "interface_sha256": "837edd7b455e53a26c0247d161075e4f96da9d7829bdc5e0d999fb39e54a49ee",
+      "test_records_sha256": "1308015dc41b29618b2268213f091fa534263ad3c84c9c01399b5b17ab982819",
+      "checks": {
+        "schema_valid": true,
+        "tool_signatures_valid": true,
+        "first_decision_valid": true,
+        "memory_keys": [
+          "cue_blobs",
+          "cue_combos",
+          "cue_start_step",
+          "delay_start_step",
+          "frames_seen",
+          "imposter",
+          "log",
+          "phase",
+          "target",
+          "test_combos",
+          "test_start_step",
+          "touch_tries"
+        ],
+        "first_tool": "act_wait",
+        "boundary": "step",
+        "command_components": 7
+      }
+    },
+    "FindImposterShape3-VLA-v0": {
+      "task": "FindImposterShape3-VLA-v0",
+      "passed": true,
+      "returncode": 0,
+      "program_hash": "2dd499395a761c04abac9abcd6a8a72eeb5cae47439d09556a6ddd2d40916b8d",
+      "demo_episode": 4,
+      "interface_sha256": "837edd7b455e53a26c0247d161075e4f96da9d7829bdc5e0d999fb39e54a49ee",
+      "test_records_sha256": "c676ef7b226d281b08c57e467f0c1d63329d8a8addc26849032925578ab8c6b1",
+      "checks": {
+        "schema_valid": true,
+        "tool_signatures_valid": true,
+        "first_decision_valid": true,
+        "memory_keys": [
+          "blank_frames",
+          "cue_frames",
+          "cue_shapes",
+          "cue_votes",
+          "frames_seen",
+          "last_step",
+          "notes",
+          "reveal_shapes",
+          "stage",
+          "target_position",
+          "target_shape"
+        ],
+        "first_tool": "act_wait",
+        "boundary": "step",
+        "command_components": 7
+      }
+    },
+    "FindImposterShape9-VLA-v0": {
+      "task": "FindImposterShape9-VLA-v0",
+      "passed": true,
+      "returncode": 0,
+      "program_hash": "611102e97c381e7979074c712f5682d0c4600ed7619bff9c10a439362a7c9e3b",
+      "demo_episode": 6,
+      "interface_sha256": "837edd7b455e53a26c0247d161075e4f96da9d7829bdc5e0d999fb39e54a49ee",
+      "test_records_sha256": "d90862318c29bd15c21b9edd824a1cac786fa08471935a465850b80a9d2c8c5e",
+      "checks": {
+        "schema_valid": true,
+        "tool_signatures_valid": true,
+        "first_decision_valid": true,
+        "memory_keys": [
+          "blank_step",
+          "cue1_step",
+          "imposter_class",
+          "log",
+          "margin",
+          "miss_scores",
+          "set1_classes",
+          "set2_classes",
+          "set2_step",
+          "stage",
+          "target",
+          "target_cells",
+          "touch_calls"
+        ],
+        "first_tool": "act_wait",
+        "boundary": "step",
+        "command_components": 7
+      }
+    },
+    "FindImposterShapeAndColor5x3-VLA-v0": {
+      "task": "FindImposterShapeAndColor5x3-VLA-v0",
+      "passed": true,
+      "returncode": 0,
+      "program_hash": "6d83a1f70671a4e7da1ca41462eab895945644e1b60429cf75b1a61157c96874",
+      "demo_episode": 0,
+      "interface_sha256": "f98cc35f7146a0ea77cb2d8b94653582dd1fce44cd5465464fba6266bfa07255",
+      "test_records_sha256": "66e6081c3de7d28109b7374e4eaf4c31f058b4062648c50797ad0bb8141d7482",
+      "checks": {
+        "schema_valid": true,
+        "tool_signatures_valid": true,
+        "first_decision_valid": true,
+        "memory_keys": [
+          "attempts",
+          "blank_frames",
+          "cue_frame",
+          "cue_objs",
+          "log",
+          "phase",
+          "scores",
+          "steps_seen",
+          "target",
+          "target_label",
+          "test_objs"
+        ],
+        "first_tool": "act_wait",
+        "boundary": "step",
+        "command_components": 7
+      }
+    },
+    "GatherAndRecall1-VLA-v0": {
+      "task": "GatherAndRecall1-VLA-v0",
+      "passed": true,
+      "returncode": 0,
+      "program_hash": "802fc7ce4021e33069ab369c601077c4c8b5e3e7889375d96961e2e0e5fbc52c",
+      "demo_episode": 2,
+      "interface_sha256": "64a28c7d0a908c35643e3f19033194b6eae5fcfb6e3e8ac4b151a5ffe255ff1f",
+      "test_records_sha256": "b55ab7310a33f1588191e90a1f4b43a15eeceff413b62be04165e9b25bddd4dc",
+      "checks": {
+        "schema_valid": true,
+        "tool_signatures_valid": true,
+        "first_decision_valid": true,
+        "memory_keys": [
+          "button_colors",
+          "button_pos",
+          "cube_index",
+          "cubes",
+          "disc",
+          "flash_color",
+          "flash_ended",
+          "flash_last_on",
+          "flash_start",
+          "flash_votes",
+          "init_tries",
+          "lamp_bbox",
+          "last_outcome",
+          "notes",
+          "pick_attempts",
+          "press_attempts",
+          "ref_rpy",
+          "stage"
+        ],
+        "first_tool": "act_pick",
+        "boundary": "step",
+        "command_components": 7
+      }
+    },
+    "FindImposterShapeAndColor3x3-VLA-v0": {
+      "task": "FindImposterShapeAndColor3x3-VLA-v0",
+      "passed": true,
+      "returncode": 0,
+      "program_hash": "89ac7124020b0c0682ae8d32bb06de017c1984c4a8579a437d3b5a94a45f8667",
+      "demo_episode": 7,
+      "interface_sha256": "837edd7b455e53a26c0247d161075e4f96da9d7829bdc5e0d999fb39e54a49ee",
+      "test_records_sha256": "28db8062c232ac8e407cef4fc847025643e51a845e098ef445237d23da1a751c",
+      "checks": {
+        "schema_valid": true,
+        "tool_signatures_valid": true,
+        "first_decision_valid": true,
+        "memory_keys": [
+          "cue_frame",
+          "cue_objects",
+          "delay_frame",
+          "frames_seen",
+          "notes",
+          "stage",
+          "target",
+          "target_info",
+          "test_frame",
+          "touch_calls"
+        ],
+        "first_tool": "act_wait",
+        "boundary": "step",
+        "command_components": 7
+      }
+    },
+    "GatherAndRecall3-VLA-v0": {
+      "task": "GatherAndRecall3-VLA-v0",
+      "passed": true,
+      "returncode": 0,
+      "program_hash": "439e2d4a3a2da764331abb874521fb232cdca1072365504769779eb18bbf9ea3",
+      "demo_episode": 2,
+      "interface_sha256": "781eff87348a27ea5766ea3488cae5c91d2ad3f4fe62190fc4dc19b2def4e912",
+      "test_records_sha256": "5e60d6cd1da80d97172a270d1856f8e66b108cfebabfd66f78bff3d7561aa6ee",
+      "checks": {
+        "schema_valid": true,
+        "tool_signatures_valid": true,
+        "first_decision_valid": true,
+        "memory_keys": [
+          "button_colors",
+          "button_pos",
+          "cube_colors",
+          "cube_pos",
+          "disc",
+          "disc_r",
+          "flash_color",
+          "flash_frames",
+          "flash_step",
+          "lamp_box",
+          "notes",
+          "placed",
+          "press_tries",
+          "stage",
+          "step",
+          "tries",
+          "wait_steps"
+        ],
+        "first_tool": "act_pick_place",
+        "boundary": "step",
+        "command_components": 7
+      }
+    },
+    "GatherAndRecall7-VLA-v0": {
+      "task": "GatherAndRecall7-VLA-v0",
+      "passed": true,
+      "returncode": 0,
+      "program_hash": "43465132eff2e376a521e9348e361b16c2b6cca395c3e793d59b2e1be6eb0427",
+      "demo_episode": 0,
+      "interface_sha256": "cc2ae5481d03282df45a2f5318129a2879b6a0bb15149e2609ecb9132b94ec8f",
+      "test_records_sha256": "8f36b1722c874b6bf9ae6c169db21f500362d7a36914fc39e616842511283093",
+      "checks": {
+        "schema_valid": true,
+        "tool_signatures_valid": true,
+        "first_decision_valid": true,
+        "memory_keys": [
+          "attempts",
+          "buttons",
+          "cube_colors",
+          "cubes",
+          "disc",
+          "flash_color",
+          "flash_step",
+          "flash_votes",
+          "lamp",
+          "log",
+          "placed",
+          "slot_next",
+          "stage"
+        ],
+        "first_tool": "act_pick_place",
+        "boundary": "motion_preview",
+        "command_components": 6
+      }
+    },
+    "GatherAndRecall5-VLA-v0": {
+      "task": "GatherAndRecall5-VLA-v0",
+      "passed": true,
+      "returncode": 0,
+      "program_hash": "4d687abf9033e516442365e08224d002ac07cec673f360f0b6050cb111506218",
+      "demo_episode": 2,
+      "interface_sha256": "435b2c1f6cbf026ce0a3c1e2ab2e300b9298d5ec51e4f4a4a22b4dba1ae22908",
+      "test_records_sha256": "285e449848c4d63c10ee2395efcdfba3455ad497bc9cb4c044115d56a43d778d",
+      "checks": {
+        "schema_valid": true,
+        "tool_signatures_valid": true,
+        "first_decision_valid": true,
+        "memory_keys": [
+          "buttons",
+          "cubes",
+          "disc",
+          "fails",
+          "flash_color",
+          "flash_step",
+          "history",
+          "lamp_box",
+          "last_slot",
+          "last_target",
+          "placed",
+          "press_tries",
+          "slots_used",
+          "stage"
+        ],
+        "first_tool": "act_pick_place",
+        "boundary": "step",
+        "command_components": 7
+      }
+    },
+    "InterceptFast-VLA-v0": {
+      "task": "InterceptFast-VLA-v0",
+      "passed": true,
+      "returncode": 0,
+      "program_hash": "1b0af3fffaeb41620ddbfdbd0206146da2d54ea59ec1abe56ed57dff4507b42c",
+      "demo_episode": 4,
+      "interface_sha256": "ae8160e9cdfda93c6ee3728ba1a8776ab879a519d47e22a4a68b1823f710dbe8",
+      "test_records_sha256": "73b66345a096dd89ee5422b71748c58eb041598c84c7fce5a0f89227eb4681a5",
+      "checks": {
+        "schema_valid": true,
+        "tool_signatures_valid": true,
+        "first_decision_valid": true,
+        "memory_keys": [
+          "ball_track",
+          "log",
+          "stage",
+          "target"
+        ],
+        "first_tool": "act_intercept",
+        "boundary": "step",
+        "command_components": 7
+      }
+    },
+    "GatherAndRecall9-VLA-v0": {
+      "task": "GatherAndRecall9-VLA-v0",
+      "passed": true,
+      "returncode": 0,
+      "program_hash": "c7b8074d8e7fd3ad002ccf134afe4c4be95db2f7c68b9302751f2e2ac95c5122",
+      "demo_episode": 2,
+      "interface_sha256": "8759399445c0ba5850621db1fe856db47968e16e0d7ce8d3f875e053562756d4",
+      "test_records_sha256": "039c2f5a67d4db02a76ad05de6cf169677d9894c49cbcead9e14a34658d116ae",
+      "checks": {
+        "schema_valid": true,
+        "tool_signatures_valid": true,
+        "first_decision_valid": true,
+        "memory_keys": [
+          "attempts",
+          "buttons",
+          "cubes",
+          "disc_center",
+          "disc_radius",
+          "flash_color",
+          "flash_step",
+          "flash_votes",
+          "inspections",
+          "lamp_roi",
+          "log",
+          "placed",
+          "presses",
+          "repairs",
+          "rpy",
+          "slots",
+          "stage",
+          "waits"
+        ],
+        "first_tool": "act_pick_place",
+        "boundary": "step",
+        "command_components": 7
+      }
+    },
+    "InterceptGrabFast-VLA-v0": {
+      "task": "InterceptGrabFast-VLA-v0",
+      "passed": true,
+      "returncode": 0,
+      "program_hash": "34ec4ffba9c4b52b8bb96d4b75fa51ef2481cc58460f9ecc69c5a6a2291fbb4b",
+      "demo_episode": 4,
+      "interface_sha256": "ae8160e9cdfda93c6ee3728ba1a8776ab879a519d47e22a4a68b1823f710dbe8",
+      "test_records_sha256": "b0ffdca95d9815bb97d7fb04159684c0d4d9a6d776b0edfe02c9be2a87f99d11",
+      "checks": {
+        "schema_valid": true,
+        "tool_signatures_valid": true,
+        "first_decision_valid": true,
+        "memory_keys": [
+          "attempts",
+          "ball_last",
+          "notes",
+          "stage"
+        ],
+        "first_tool": "act_catch",
+        "boundary": "step",
+        "command_components": 7
+      }
+    },
+    "InterceptGrabMedium-VLA-v0": {
+      "task": "InterceptGrabMedium-VLA-v0",
+      "passed": true,
+      "returncode": 0,
+      "program_hash": "a8e98dace112e15ed5a73fb575949d96899fd2b66cb0d28a1ad65b1018ad73fc",
+      "demo_episode": 7,
+      "interface_sha256": "ae8160e9cdfda93c6ee3728ba1a8776ab879a519d47e22a4a68b1823f710dbe8",
+      "test_records_sha256": "f7ee9ee402486444b8f22f1ec905f1e24486952e17346051d1a5b0f567296823",
+      "checks": {
+        "schema_valid": true,
+        "tool_signatures_valid": true,
+        "first_decision_valid": true,
+        "memory_keys": [
+          "attempts",
+          "ball_pos",
+          "grasped",
+          "notes",
+          "stage"
+        ],
+        "first_tool": "act_catch",
+        "boundary": "step",
+        "command_components": 7
+      }
+    },
+    "InterceptGrabSlow-VLA-v0": {
+      "task": "InterceptGrabSlow-VLA-v0",
+      "passed": true,
+      "returncode": 0,
+      "program_hash": "6911b0aac2a0f32c06c501abb4b6750578338717cc7afa7e0243ef10b0ca0106",
+      "demo_episode": 2,
+      "interface_sha256": "ae8160e9cdfda93c6ee3728ba1a8776ab879a519d47e22a4a68b1823f710dbe8",
+      "test_records_sha256": "06bbed4edd9087ee593761e93dc1c632eec862c9d2a707727e76104570c25e47",
+      "checks": {
+        "schema_valid": true,
+        "tool_signatures_valid": true,
+        "first_decision_valid": true,
+        "memory_keys": [
+          "attempts",
+          "ball_estimate",
+          "ball_track",
+          "ball_velocity",
+          "goal_ok",
+          "history",
+          "stage"
+        ],
+        "first_tool": "act_intercept",
+        "boundary": "motion_preview",
+        "command_components": 6
+      }
+    },
+    "InterceptMedium-VLA-v0": {
+      "task": "InterceptMedium-VLA-v0",
+      "passed": true,
+      "returncode": 0,
+      "program_hash": "1d23c53f2688937453650a7451cfcae4cc1e889f3c1938ef5079c7e32169d6ca",
+      "demo_episode": 13,
+      "interface_sha256": "ae8160e9cdfda93c6ee3728ba1a8776ab879a519d47e22a4a68b1823f710dbe8",
+      "test_records_sha256": "4c1ba5ce95c7bf31a85a01cb48e153b7ff5a150c17cdde7b83c4f7e7731f393b",
+      "checks": {
+        "schema_valid": true,
+        "tool_signatures_valid": true,
+        "first_decision_valid": true,
+        "memory_keys": [
+          "ball_first",
+          "last_result",
+          "notes",
+          "stage",
+          "target"
+        ],
+        "first_tool": "act_intercept",
+        "boundary": "step",
+        "command_components": 7
+      }
+    },
+    "InterceptSlow-VLA-v0": {
+      "task": "InterceptSlow-VLA-v0",
+      "passed": true,
+      "returncode": 0,
+      "program_hash": "265ce13873998cf1ded4e768ebdc572e17395a6a089b1ccb5440fb5f82a90307",
+      "demo_episode": 3,
+      "interface_sha256": "ae8160e9cdfda93c6ee3728ba1a8776ab879a519d47e22a4a68b1823f710dbe8",
+      "test_records_sha256": "ea67ce18b3887c6bd018d660a5b21d62906d11474185d15c066a0d880e9d133c",
+      "checks": {
+        "schema_valid": true,
+        "tool_signatures_valid": true,
+        "first_decision_valid": true,
+        "memory_keys": [
+          "ball_track",
+          "decisions",
+          "first_ball_step",
+          "notes",
+          "stage",
+          "target_xy"
+        ],
+        "first_tool": "act_control",
+        "boundary": "step",
+        "command_components": 7
+      }
+    },
+    "RememberColor3-Long-VLA-v0": {
+      "task": "RememberColor3-Long-VLA-v0",
+      "passed": true,
+      "returncode": 0,
+      "program_hash": "afd4fb0e300d11788be1852e96b801441d50d91e1df64a877ce6d5f97c0ae592",
+      "demo_episode": 15,
+      "interface_sha256": "435b2c1f6cbf026ce0a3c1e2ab2e300b9298d5ec51e4f4a4a22b4dba1ae22908",
+      "test_records_sha256": "5aaaac62487fa797ff92c7ddca2f1e0b07b58bdcf7f0f2e2afc3c352436e3fd5",
+      "checks": {
+        "schema_valid": true,
+        "tool_signatures_valid": true,
+        "first_decision_valid": true,
+        "memory_keys": [
+          "cubes_step",
+          "cue_color",
+          "cue_hue",
+          "cue_step",
+          "decisions",
+          "log",
+          "stage",
+          "target",
+          "target_color",
+          "target_hue_diff",
+          "touch_calls"
+        ],
+        "first_tool": "act_wait_for_cubes",
+        "boundary": "step",
+        "command_components": 7
+      }
+    },
+    "RememberColor5-Long-VLA-v0": {
+      "task": "RememberColor5-Long-VLA-v0",
+      "passed": true,
+      "returncode": 0,
+      "program_hash": "a1cb621000f6e708ef6385b60353fea0a5e96f396b23aadb2b3b2e450807e02d",
+      "demo_episode": 2,
+      "interface_sha256": "435b2c1f6cbf026ce0a3c1e2ab2e300b9298d5ec51e4f4a4a22b4dba1ae22908",
+      "test_records_sha256": "022f5989c1a5e0f2cf53e106ae9533824f55237680ccd73b3c97ed5626e93fe2",
+      "checks": {
+        "schema_valid": true,
+        "tool_signatures_valid": true,
+        "first_decision_valid": true,
+        "memory_keys": [
+          "cubes_step",
+          "cue_color",
+          "cue_hue",
+          "cue_pixels",
+          "cue_step",
+          "notes",
+          "stage",
+          "target",
+          "touch_attempts"
+        ],
+        "first_tool": "act_wait_for_cubes",
+        "boundary": "step",
+        "command_components": 7
+      }
+    },
+    "RememberColor5-VLA-v0": {
+      "task": "RememberColor5-VLA-v0",
+      "passed": true,
+      "returncode": 0,
+      "program_hash": "44114fbe86b9a0fbdce20fbe472952b0562fbfd614d0c2872a9943f477f10d92",
+      "demo_episode": 10,
+      "interface_sha256": "837edd7b455e53a26c0247d161075e4f96da9d7829bdc5e0d999fb39e54a49ee",
+      "test_records_sha256": "18917eb2977221a9fbb2758de2b929f0935cc1a35d1f77c690192d1bd4b2c76d",
+      "checks": {
+        "schema_valid": true,
+        "tool_signatures_valid": true,
+        "first_decision_valid": true,
+        "memory_keys": [
+          "cue_color",
+          "cue_frames",
+          "cue_rgb",
+          "cue_step",
+          "events",
+          "grip",
+          "last_z",
+          "match",
+          "retarget",
+          "sel_step",
+          "stage",
+          "steps",
+          "target",
+          "target_n"
+        ],
+        "first_tool": "act_step",
+        "boundary": "step",
+        "command_components": 7
+      }
+    },
+    "RememberColor9-Long-VLA-v0": {
+      "task": "RememberColor9-Long-VLA-v0",
+      "passed": true,
+      "returncode": 0,
+      "program_hash": "bf63e0de73ce0e91f221eb3de3d1cd9dc3d4e704de28ab1109f46a4ef32c9f38",
+      "demo_episode": 0,
+      "interface_sha256": "435b2c1f6cbf026ce0a3c1e2ab2e300b9298d5ec51e4f4a4a22b4dba1ae22908",
+      "test_records_sha256": "b82cb66804042e4e0822dffd0d089ec84e36ca72d34d183fca5a59206f8888ab",
+      "checks": {
+        "schema_valid": true,
+        "tool_signatures_valid": true,
+        "first_decision_valid": true,
+        "memory_keys": [
+          "candidates",
+          "cubes_step",
+          "cue_info",
+          "cue_key",
+          "decisions",
+          "log",
+          "stage",
+          "target_xy",
+          "touch_index"
+        ],
+        "first_tool": "act_wait_for_cubes",
+        "boundary": "step",
+        "command_components": 7
+      }
+    },
+    "RememberColor9-VLA-v0": {
+      "task": "RememberColor9-VLA-v0",
+      "passed": true,
+      "returncode": 0,
+      "program_hash": "44b80c7e06883d96049c3ed76a17d275e07710a10f989a5edcca9edd2804aa64",
+      "demo_episode": 6,
+      "interface_sha256": "837edd7b455e53a26c0247d161075e4f96da9d7829bdc5e0d999fb39e54a49ee",
+      "test_records_sha256": "501f5174c790337c2ec256758e7c322a44655edb7344d5555705b28c1cd85a4f",
+      "checks": {
+        "schema_valid": true,
+        "tool_signatures_valid": true,
+        "first_decision_valid": true,
+        "memory_keys": [
+          "candidate_rgbs",
+          "candidates",
+          "cubes_step",
+          "cue_frames",
+          "cue_rgb",
+          "cue_step",
+          "decisions",
+          "level",
+          "log",
+          "match_dist",
+          "match_margin",
+          "stage",
+          "target",
+          "target_rgb"
+        ],
+        "first_tool": "act_wait_for_candidates",
+        "boundary": "step",
+        "command_components": 7
+      }
+    },
+    "RememberShape3-Long-VLA-v0": {
+      "task": "RememberShape3-Long-VLA-v0",
+      "passed": true,
+      "returncode": 0,
+      "program_hash": "24835ff858420cdabb246790d29f0f0cb9b995ed891da4a24b36fbf73cb7266d",
+      "demo_episode": 0,
+      "interface_sha256": "435b2c1f6cbf026ce0a3c1e2ab2e300b9298d5ec51e4f4a4a22b4dba1ae22908",
+      "test_records_sha256": "b4a54eefe8d52501fd5a3cc8f17078fdc6c41857e204b5545120f755580041cd",
+      "checks": {
+        "schema_valid": true,
+        "tool_signatures_valid": true,
+        "first_decision_valid": true,
+        "memory_keys": [
+          "choices",
+          "cue_info",
+          "cue_shape",
+          "cue_step",
+          "notes",
+          "stage",
+          "target",
+          "target_shape",
+          "touch_tries"
+        ],
+        "first_tool": "act_wait_change",
+        "boundary": "step",
+        "command_components": 7
+      }
+    },
+    "RememberShape5-Long-VLA-v0": {
+      "task": "RememberShape5-Long-VLA-v0",
+      "passed": true,
+      "returncode": 0,
+      "program_hash": "cad77e04560f91dbbddaeda5c9bcf6b7d1b236629986c0acfdf390106d62b797",
+      "demo_episode": 2,
+      "interface_sha256": "435b2c1f6cbf026ce0a3c1e2ab2e300b9298d5ec51e4f4a4a22b4dba1ae22908",
+      "test_records_sha256": "8d43239e91e6589b6e520c02fa07ea9b20c958ff855782c8128921edffb88788",
+      "checks": {
+        "schema_valid": true,
+        "tool_signatures_valid": true,
+        "first_decision_valid": true,
+        "memory_keys": [
+          "attempts",
+          "candidate_shapes",
+          "candidates",
+          "cue_info",
+          "cue_shape",
+          "cue_step",
+          "notes",
+          "stage",
+          "target",
+          "target_shape"
+        ],
+        "first_tool": "act_wait_for_objects",
+        "boundary": "step",
+        "command_components": 7
+      }
+    },
+    "RememberShape3-VLA-v0": {
+      "task": "RememberShape3-VLA-v0",
+      "passed": true,
+      "returncode": 0,
+      "program_hash": "07425349990cc7da993e920b2c87f360f74a127a35d6ea30e6a24dfcdc90a655",
+      "demo_episode": 0,
+      "interface_sha256": "837edd7b455e53a26c0247d161075e4f96da9d7829bdc5e0d999fb39e54a49ee",
+      "test_records_sha256": "97a013c70a438e5e1b08a5f629b0b460ad84f454f336793c42ef60511b281da2",
+      "checks": {
+        "schema_valid": true,
+        "tool_signatures_valid": true,
+        "first_decision_valid": true,
+        "memory_keys": [
+          "appear_step",
+          "cand_centers",
+          "cand_shapes",
+          "cue_info",
+          "cue_shape",
+          "log",
+          "n_steps",
+          "phase",
+          "stage_count",
+          "target",
+          "target_info"
+        ],
+        "first_tool": "act_wait",
+        "boundary": "step",
+        "command_components": 7
+      }
+    },
+    "RememberShape5-VLA-v0": {
+      "task": "RememberShape5-VLA-v0",
+      "passed": true,
+      "returncode": 0,
+      "program_hash": "1f731aaeea3f4b6f7f5218a296b77868c9aefda4f4ebf799302103ed9bf159a7",
+      "demo_episode": 1,
+      "interface_sha256": "837edd7b455e53a26c0247d161075e4f96da9d7829bdc5e0d999fb39e54a49ee",
+      "test_records_sha256": "3373a401ad02b052ec359c80da778a55da90ef88b0056e27f3fc8d35bc150557",
+      "checks": {
+        "schema_valid": true,
+        "tool_signatures_valid": true,
+        "first_decision_valid": true,
+        "memory_keys": [
+          "cands_info",
+          "cue_class",
+          "cue_info",
+          "cue_margin",
+          "cue_step",
+          "frames_seen",
+          "log",
+          "settle_waits",
+          "stage",
+          "target",
+          "target_class",
+          "touch_tries"
+        ],
+        "first_tool": "act_wait",
+        "boundary": "step",
+        "command_components": 7
+      }
+    },
+    "RememberShape9-Long-VLA-v0": {
+      "task": "RememberShape9-Long-VLA-v0",
+      "passed": true,
+      "returncode": 0,
+      "program_hash": "92bba09865d2b246892053674a16fa645e735359b7cfa4754538c6e8bc086d14",
+      "demo_episode": 0,
+      "interface_sha256": "435b2c1f6cbf026ce0a3c1e2ab2e300b9298d5ec51e4f4a4a22b4dba1ae22908",
+      "test_records_sha256": "2244011e217ebcac9db28e5c3157e13fdc2c9fb72e7a1317c69c6f4186c7a76e",
+      "checks": {
+        "schema_valid": true,
+        "tool_signatures_valid": true,
+        "first_decision_valid": true,
+        "memory_keys": [
+          "arc_step",
+          "candidates",
+          "cue_class",
+          "cue_feats",
+          "cue_step",
+          "notes",
+          "stage",
+          "target",
+          "target_info",
+          "touch_tries"
+        ],
+        "first_tool": "act_wait_for_arc",
+        "boundary": "step",
+        "command_components": 7
+      }
+    },
+    "RememberShape9-VLA-v0": {
+      "task": "RememberShape9-VLA-v0",
+      "passed": true,
+      "returncode": 0,
+      "program_hash": "2c588d2bfa9e5d26c26ec1f36b16a37f5765f095b9acf1903d72ddb53c6a233e",
+      "demo_episode": 3,
+      "interface_sha256": "837edd7b455e53a26c0247d161075e4f96da9d7829bdc5e0d999fb39e54a49ee",
+      "test_records_sha256": "60ae4445fe306ab93015ef06f2533dab5809fdebb8bfcbeb4f904da627616a3e",
+      "checks": {
+        "schema_valid": true,
+        "tool_signatures_valid": true,
+        "first_decision_valid": true,
+        "memory_keys": [
+          "cue_center",
+          "cue_info",
+          "cue_seen",
+          "cue_step",
+          "cue_template",
+          "log",
+          "match_best",
+          "match_others",
+          "match_second",
+          "stage",
+          "steps_seen",
+          "target",
+          "touch",
+          "ztop"
+        ],
+        "first_tool": "act_wait_candidates",
+        "boundary": "step",
+        "command_components": 7
+      }
+    },
+    "RememberShapeAndColor3x2-Long-VLA-v0": {
+      "task": "RememberShapeAndColor3x2-Long-VLA-v0",
+      "passed": true,
+      "returncode": 0,
+      "program_hash": "bbea747976ac40c38a6f8839558c593641d976083776d827af056595386e390a",
+      "demo_episode": 1,
+      "interface_sha256": "435b2c1f6cbf026ce0a3c1e2ab2e300b9298d5ec51e4f4a4a22b4dba1ae22908",
+      "test_records_sha256": "dc523c535326a4329f8115d4d2bce53fef143c5a4450779cbf660acd52c7d940",
+      "checks": {
+        "schema_valid": true,
+        "tool_signatures_valid": true,
+        "first_decision_valid": true,
+        "memory_keys": [
+          "cue_area_cm2",
+          "cue_color",
+          "cue_confidence",
+          "cue_shape",
+          "cue_step",
+          "log",
+          "objects",
+          "reach_attempts",
+          "scene_step",
+          "stage",
+          "target",
+          "target_reason"
+        ],
+        "first_tool": "act_wait_for_scene",
+        "boundary": "step",
+        "command_components": 7
+      }
+    },
+    "RememberShapeAndColor3x2-VLA-v0": {
+      "task": "RememberShapeAndColor3x2-VLA-v0",
+      "passed": true,
+      "returncode": 0,
+      "program_hash": "6d34558960102ef7f5b38dd4ea63bfb400d1cd88357cecea180470820947d002",
+      "demo_episode": 13,
+      "interface_sha256": "837edd7b455e53a26c0247d161075e4f96da9d7829bdc5e0d999fb39e54a49ee",
+      "test_records_sha256": "3a4d9f9d5309ca643c9685a99309f9f3a60be25e2a18df32a5215c2b0b8d899a",
+      "checks": {
+        "schema_valid": true,
+        "tool_signatures_valid": true,
+        "first_decision_valid": true,
+        "memory_keys": [
+          "choice_step",
+          "cue_color",
+          "cue_confidence",
+          "cue_shape",
+          "cue_step",
+          "frames_seen",
+          "log",
+          "objects_seen_last",
+          "phase",
+          "target",
+          "target_info",
+          "touch_attempts"
+        ],
+        "first_tool": "act_wait",
+        "boundary": "step",
+        "command_components": 7
+      }
+    },
+    "RememberShapeAndColor3x3-Long-VLA-v0": {
+      "task": "RememberShapeAndColor3x3-Long-VLA-v0",
+      "passed": true,
+      "returncode": 0,
+      "program_hash": "93e61663a7c59a42413e5000735f88e31e5f40cec7e00d5c1aff14a742234939",
+      "demo_episode": 6,
+      "interface_sha256": "435b2c1f6cbf026ce0a3c1e2ab2e300b9298d5ec51e4f4a4a22b4dba1ae22908",
+      "test_records_sha256": "c2e8dce0f8ae1ca3069f93409458d5185c498f0f18cd87a8c884a8779d8cef39",
+      "checks": {
+        "schema_valid": true,
+        "tool_signatures_valid": true,
+        "first_decision_valid": true,
+        "memory_keys": [
+          "attempt",
+          "cue_color",
+          "cue_conf",
+          "cue_shape",
+          "cue_step",
+          "log",
+          "objects",
+          "stage",
+          "target",
+          "target_shape"
+        ],
+        "first_tool": "act_wait_for_objects",
+        "boundary": "step",
+        "command_components": 7
+      }
+    },
+    "RememberShapeAndColor3x3-VLA-v0": {
+      "task": "RememberShapeAndColor3x3-VLA-v0",
+      "passed": true,
+      "returncode": 0,
+      "program_hash": "b052c2d1b8243ec06c742dd3ef64977d9db7168cf6e325a6e7234b13a9203391",
+      "demo_episode": 9,
+      "interface_sha256": "837edd7b455e53a26c0247d161075e4f96da9d7829bdc5e0d999fb39e54a49ee",
+      "test_records_sha256": "53e93035d84cc0420b1b33b1caf0bca6a275e1e075a2708b8e9f6ddf2ebe9736",
+      "checks": {
+        "schema_valid": true,
+        "tool_signatures_valid": true,
+        "first_decision_valid": true,
+        "memory_keys": [
+          "cue_color",
+          "cue_shape",
+          "cue_step",
+          "cue_votes",
+          "decisions",
+          "log",
+          "objects_step",
+          "phase",
+          "target",
+          "target_info",
+          "touch_attempts"
+        ],
+        "first_tool": "act_wait",
+        "boundary": "step",
+        "command_components": 7
+      }
+    },
+    "RememberShapeAndColor5x3-VLA-v0": {
+      "task": "RememberShapeAndColor5x3-VLA-v0",
+      "passed": true,
+      "returncode": 0,
+      "program_hash": "13f8aaae3f3efc0146e49d0dc38e4dd4b19908f9290336acf6641f2d7686e7b5",
+      "demo_episode": 1,
+      "interface_sha256": "837edd7b455e53a26c0247d161075e4f96da9d7829bdc5e0d999fb39e54a49ee",
+      "test_records_sha256": "64ff02138618ddc4b3256f5208ec6cb4d3016121a6f419031d43caf2f130c08e",
+      "checks": {
+        "schema_valid": true,
+        "tool_signatures_valid": true,
+        "first_decision_valid": true,
+        "memory_keys": [
+          "cand_step",
+          "cue_color",
+          "cue_conf",
+          "cue_first_step",
+          "cue_frames",
+          "cue_shape",
+          "cue_votes",
+          "decisions",
+          "empty_frames",
+          "last_outcome",
+          "n_candidates",
+          "stage",
+          "target",
+          "target_info",
+          "target_origin",
+          "target_top",
+          "touch_attempts"
+        ],
+        "first_tool": "act_wait",
+        "boundary": "step",
+        "command_components": 7
+      }
+    },
+    "RememberShapeAndColor5x3-Long-VLA-v0": {
+      "task": "RememberShapeAndColor5x3-Long-VLA-v0",
+      "passed": true,
+      "returncode": 0,
+      "program_hash": "efd9a6ca3b6182643316470cf057dd85031e61018d54fb5ce0312b39f898a6a4",
+      "demo_episode": 0,
+      "interface_sha256": "435b2c1f6cbf026ce0a3c1e2ab2e300b9298d5ec51e4f4a4a22b4dba1ae22908",
+      "test_records_sha256": "bab4adc0dca747f9d38a0e1a1ab1f1d1aebc21d9c900bc1b829905cf91de9051",
+      "checks": {
+        "schema_valid": true,
+        "tool_signatures_valid": true,
+        "first_decision_valid": true,
+        "memory_keys": [
+          "attempts",
+          "cue_color",
+          "cue_margin",
+          "cue_shape",
+          "cue_step",
+          "excluded",
+          "notes",
+          "stage",
+          "target",
+          "target_info"
+        ],
+        "first_tool": "act_wait",
+        "boundary": "step",
+        "command_components": 7
+      }
+    },
+    "RotateLenientPos-VLA-v0": {
+      "task": "RotateLenientPos-VLA-v0",
+      "passed": true,
+      "returncode": 0,
+      "program_hash": "0cb0d870e2dacaf0856ae22e011e5601e683ff5e96e2c8983698a707f237813f",
+      "demo_episode": 7,
+      "interface_sha256": "ae8160e9cdfda93c6ee3728ba1a8776ab879a519d47e22a4a68b1823f710dbe8",
+      "test_records_sha256": "f397c24a97dca3fd7ba572cc218b931872245bf37ecc37cfd8ee7ced74c0cfac",
+      "checks": {
+        "schema_valid": true,
+        "tool_signatures_valid": true,
+        "first_decision_valid": true,
+        "memory_keys": [
+          "holds",
+          "last_result",
+          "n_decisions",
+          "peg_center",
+          "pushes",
+          "ref_yaw_deg",
+          "rotation_deg",
+          "stage",
+          "target_deg"
+        ],
+        "first_tool": "act_rotate_peg",
+        "boundary": "step",
+        "command_components": 7
+      }
+    },
+    "RotateLenientPosNeg-VLA-v0": {
+      "task": "RotateLenientPosNeg-VLA-v0",
+      "passed": true,
+      "returncode": 0,
+      "program_hash": "c8eb2c80ebea73c17c62297ed71387dccf08961246e5ae2e496c71cd0e9bdae0",
+      "demo_episode": 4,
+      "interface_sha256": "ae8160e9cdfda93c6ee3728ba1a8776ab879a519d47e22a4a68b1823f710dbe8",
+      "test_records_sha256": "9766aa4200c372dcc71f58349b0a2fb933100898a69dd8ed04d19daaf2753f3d",
+      "checks": {
+        "schema_valid": true,
+        "tool_signatures_valid": true,
+        "first_decision_valid": true,
+        "memory_keys": [
+          "decisions",
+          "goal_deg",
+          "last_act",
+          "notes",
+          "peg0",
+          "push_sign",
+          "retries",
+          "sigma",
+          "stage",
+          "start_xy",
+          "yaw0",
+          "yaw_keep",
+          "yaw_now"
+        ],
+        "first_tool": "act_approach",
+        "boundary": "step",
+        "command_components": 7
+      }
+    },
+    "RotateStrictPos-VLA-v0": {
+      "task": "RotateStrictPos-VLA-v0",
+      "passed": true,
+      "returncode": 0,
+      "program_hash": "5ed4bdfea6649f05430238e85616b6960f20def0e38f768847679e0fb79c9281",
+      "demo_episode": 2,
+      "interface_sha256": "6ce21eddc6d0ff2befb0efa33c961f539e946907d22738df20c69e0a1bf385d9",
+      "test_records_sha256": "9a2b1887c3aab8dd1483c74bf542f8fd6e6046be6227edc0da2d3becc4edfff1",
+      "checks": {
+        "schema_valid": true,
+        "tool_signatures_valid": true,
+        "first_decision_valid": true,
+        "memory_keys": [
+          "cycle",
+          "delta",
+          "g_final",
+          "g_grasp",
+          "grasp_xy",
+          "log",
+          "peg0",
+          "peg_yaw0",
+          "rho_done",
+          "stage",
+          "steps",
+          "theta_deg"
+        ],
+        "first_tool": "act_approach",
+        "boundary": "step",
+        "command_components": 7
+      }
+    },
+    "RotateStrictPosNeg-VLA-v0": {
+      "task": "RotateStrictPosNeg-VLA-v0",
+      "passed": true,
+      "returncode": 0,
+      "program_hash": "2d3174851e5b4399db7aba473377b981b2698e216422aaaef38d196d235eaefc",
+      "demo_episode": 4,
+      "interface_sha256": "6ce21eddc6d0ff2befb0efa33c961f539e946907d22738df20c69e0a1bf385d9",
+      "test_records_sha256": "fe9d8bf4e511cdce1e8abad54808d4b42f651c2cbc40253e52fb087111f40b82",
+      "checks": {
+        "schema_valid": true,
+        "tool_signatures_valid": true,
+        "first_decision_valid": true,
+        "memory_keys": [
+          "final_yaw",
+          "goal_deg",
+          "grasp_yaw",
+          "notes",
+          "peg_center",
+          "peg_yaw0",
+          "stage",
+          "yaw_ref"
+        ],
+        "first_tool": "act_align_grasp",
+        "boundary": "dry_run",
+        "command_components": 6
+      }
+    },
+    "SeqOfColors3-Long-VLA-v0": {
+      "task": "SeqOfColors3-Long-VLA-v0",
+      "passed": true,
+      "returncode": 0,
+      "program_hash": "ae497ca222fd4112650557ce170510724a620a57f8acd45dfe7d294cc86b42ff",
+      "demo_episode": 4,
+      "interface_sha256": "cc2ae5481d03282df45a2f5318129a2879b6a0bb15149e2609ecb9132b94ec8f",
+      "test_records_sha256": "7c22a699d83b702ccc342d36bf51788ca3494ee9bc64224d2666829c47c78112",
+      "checks": {
+        "schema_valid": true,
+        "tool_signatures_valid": true,
+        "first_decision_valid": true,
+        "memory_keys": [
+          "button",
+          "cue_colors",
+          "cue_first_steps",
+          "last_step",
+          "layout_step",
+          "notes",
+          "press_attempts",
+          "stage",
+          "target_colors",
+          "targets",
+          "touch_attempts",
+          "touch_index",
+          "touch_round"
+        ],
+        "first_tool": "act_wait_for_layout",
+        "boundary": "step",
+        "command_components": 7
+      }
+    },
+    "SeqOfColors5-VLA-v0": {
+      "task": "SeqOfColors5-VLA-v0",
+      "passed": true,
+      "returncode": 0,
+      "program_hash": "445cf0ab56eff738682af10112cff89ddf75d1ada7b01ba7835ab7fdb143e0bc",
+      "demo_episode": 9,
+      "interface_sha256": "781eff87348a27ea5766ea3488cae5c91d2ad3f4fe62190fc4dc19b2def4e912",
+      "test_records_sha256": "fc78068e9f5dedf282f1d6c68083dfdb73187980960e44cc4a0ff77c28c344a7",
+      "checks": {
+        "schema_valid": true,
+        "tool_signatures_valid": true,
+        "first_decision_valid": true,
+        "memory_keys": [
+          "all_cubes",
+          "button",
+          "cue_colors",
+          "cue_log",
+          "home_rpy",
+          "log",
+          "press_count",
+          "redo_count",
+          "stage",
+          "target_colors",
+          "targets",
+          "touched"
+        ],
+        "first_tool": "act_wait_for_arc",
+        "boundary": "step",
+        "command_components": 7
+      }
+    },
+    "SeqOfColors5-Long-VLA-v0": {
+      "task": "SeqOfColors5-Long-VLA-v0",
+      "passed": true,
+      "returncode": 0,
+      "program_hash": "5500eeddec8874c3362d2532594920e815f6d78f95973d8514b0d1612cfdd2c0",
+      "demo_episode": 2,
+      "interface_sha256": "8759399445c0ba5850621db1fe856db47968e16e0d7ce8d3f875e053562756d4",
+      "test_records_sha256": "416594016daea87e274da442ba08bdac1305c63c554b8636c728cbcb4fdcdce1",
+      "checks": {
+        "schema_valid": true,
+        "tool_signatures_valid": true,
+        "first_decision_valid": true,
+        "memory_keys": [
+          "button",
+          "cue_colors",
+          "cue_frames",
+          "cue_last",
+          "home_rpy",
+          "log",
+          "presses",
+          "retries",
+          "ring_step",
+          "stage",
+          "target_names",
+          "targets",
+          "touched"
+        ],
+        "first_tool": "act_wait_for_ring",
+        "boundary": "step",
+        "command_components": 7
+      }
+    },
+    "SeqOfColors7-VLA-v0": {
+      "task": "SeqOfColors7-VLA-v0",
+      "passed": true,
+      "returncode": 0,
+      "program_hash": "0c5efbc0193800c953054bee02bab4d46e49497360980561502a284c13a5b087",
+      "demo_episode": 0,
+      "interface_sha256": "781eff87348a27ea5766ea3488cae5c91d2ad3f4fe62190fc4dc19b2def4e912",
+      "test_records_sha256": "b9faa8e9e03671039c5921b51d68412d0dbcb032f649c8ff1b70e5c295195122",
+      "checks": {
+        "schema_valid": true,
+        "tool_signatures_valid": true,
+        "first_decision_valid": true,
+        "memory_keys": [
+          "button",
+          "cube_labels",
+          "cubes",
+          "cue_colors",
+          "cue_labels",
+          "home_rpy",
+          "notes",
+          "pending",
+          "pending_tries",
+          "press_attempts",
+          "ring_step",
+          "stage",
+          "target_labels",
+          "targets",
+          "touched"
+        ],
+        "first_tool": "act_wait_ring",
+        "boundary": "step",
+        "command_components": 7
+      }
+    },
+    "SeqOfColors7-Long-VLA-v0": {
+      "task": "SeqOfColors7-Long-VLA-v0",
+      "passed": true,
+      "returncode": 0,
+      "program_hash": "1d629ad6448244c63efcd490826aa6a8796b0f311c693d46a7cf4f7cd0e0c018",
+      "demo_episode": 3,
+      "interface_sha256": "233b905d12ff4752d4738232644c0e6a394a7447f0efb94691e7d66ae9d82908",
+      "test_records_sha256": "84923638096fcbdd524170c10e971ea3f806a93fabb2f66340025f36cd1050fc",
+      "checks": {
+        "schema_valid": true,
+        "tool_signatures_valid": true,
+        "first_decision_valid": true,
+        "memory_keys": [
+          "arc_step",
+          "attempts",
+          "button",
+          "cue_last",
+          "cue_run",
+          "cue_steps",
+          "cues",
+          "done_colours",
+          "notes",
+          "pending",
+          "presses",
+          "round",
+          "rpy0",
+          "stage",
+          "target_colours",
+          "targets"
+        ],
+        "first_tool": "act_watch",
+        "boundary": "step",
+        "command_components": 7
+      }
+    },
+    "ShellGameColorLampTouch-VLA-v0": {
+      "task": "ShellGameColorLampTouch-VLA-v0",
+      "passed": true,
+      "returncode": 0,
+      "program_hash": "b9660191a24647c19e14271891d894a7df8a487f20c25d1908a4bd5f6c381ed7",
+      "demo_episode": 0,
+      "interface_sha256": "d186ceefeb91510e39c2feaf745f8a83bfa3ac25adef8675c478ec5ab2000cf8",
+      "test_records_sha256": "fde5380b9e92e70a880f1b08f3ec37c8d31580cce06c74f35db4d4f70f3c8c1c",
+      "checks": {
+        "schema_valid": true,
+        "tool_signatures_valid": true,
+        "first_decision_valid": true,
+        "memory_keys": [
+          "attempt",
+          "ball_step",
+          "balls",
+          "lamp_color",
+          "lamp_step",
+          "log",
+          "ref_rpy",
+          "stage"
+        ],
+        "first_tool": "act_wait_for_lamp",
+        "boundary": "step",
+        "command_components": 7
+      }
+    },
+    "ShellGamePush-VLA-v0": {
+      "task": "ShellGamePush-VLA-v0",
+      "passed": true,
+      "returncode": 0,
+      "program_hash": "3a9f69e0b71d3b7d70c6bb89ab9ee14c2f060983b1ed8b8d4bea726178f17863",
+      "demo_episode": 1,
+      "interface_sha256": "d186ceefeb91510e39c2feaf745f8a83bfa3ac25adef8675c478ec5ab2000cf8",
+      "test_records_sha256": "188bde41f0971cc4cbcce56b2d5b120e32e3dbd922208b607cc0315996e5d80a",
+      "checks": {
+        "schema_valid": true,
+        "tool_signatures_valid": true,
+        "first_decision_valid": true,
+        "memory_keys": [
+          "ball",
+          "ball_step",
+          "cups",
+          "cups_step",
+          "extra_pushes",
+          "notes",
+          "push_x0",
+          "stage",
+          "target",
+          "target_index"
+        ],
+        "first_tool": "act_wait_cue",
+        "boundary": "step",
+        "command_components": 7
+      }
+    },
+    "ShellGameShuffleColorLampTouch-Long-VLA-v0": {
+      "task": "ShellGameShuffleColorLampTouch-Long-VLA-v0",
+      "passed": true,
+      "returncode": 0,
+      "program_hash": "1ff31f1a1c85ae978f2ff2d8f29e99d597ee23c240334c37567644b3a6004326",
+      "demo_episode": 2,
+      "interface_sha256": "435b2c1f6cbf026ce0a3c1e2ab2e300b9298d5ec51e4f4a4a22b4dba1ae22908",
+      "test_records_sha256": "6ddc0c49489179fd3dd818ad5745639cc176db7da7fde5385f6710d6f5f56bc3",
+      "checks": {
+        "schema_valid": true,
+        "tool_signatures_valid": true,
+        "first_decision_valid": true,
+        "memory_keys": [
+          "lamp_color",
+          "notes",
+          "stage",
+          "target",
+          "touch_tries",
+          "watch_state"
+        ],
+        "first_tool": "act_watch",
+        "boundary": "step",
+        "command_components": 7
+      }
+    },
+    "ShellGameShuffleColorLampTouch-VLA-v0": {
+      "task": "ShellGameShuffleColorLampTouch-VLA-v0",
+      "passed": true,
+      "returncode": 0,
+      "program_hash": "4cbf9c514c416a5fa72395bc7963c8ed46519ddac51d7c1ab94ecb0e3f4aaeb3",
+      "demo_episode": 4,
+      "interface_sha256": "ae8160e9cdfda93c6ee3728ba1a8776ab879a519d47e22a4a68b1823f710dbe8",
+      "test_records_sha256": "c926f688dc7d34639bd0caada082f2cb2177727c5951dc3b90f657c7f20c112b",
+      "checks": {
+        "schema_valid": true,
+        "tool_signatures_valid": true,
+        "first_decision_valid": true,
+        "memory_keys": [
+          "ball_colors",
+          "ball_xy",
+          "cup_xy",
+          "lamp_bbox",
+          "lamp_color",
+          "lamp_xyz",
+          "notes",
+          "stage",
+          "steps_used",
+          "target_index",
+          "target_xy",
+          "top_z",
+          "touch_tries"
+        ],
+        "first_tool": "act_wait_for_lamp",
+        "boundary": "step",
+        "command_components": 7
+      }
+    },
+    "ShellGameShuffleTouch-Long-VLA-v0": {
+      "task": "ShellGameShuffleTouch-Long-VLA-v0",
+      "passed": true,
+      "returncode": 0,
+      "program_hash": "5dfd831e4a129cb46a40786667ba79dc4703fe5f0dbef71e6226df211889ed2c",
+      "demo_episode": 1,
+      "interface_sha256": "435b2c1f6cbf026ce0a3c1e2ab2e300b9298d5ec51e4f4a4a22b4dba1ae22908",
+      "test_records_sha256": "1dec6670d0b47af343d81775ced1150f11346be8ed940f89232339d72fe7ea2e",
+      "checks": {
+        "schema_valid": true,
+        "tool_signatures_valid": true,
+        "first_decision_valid": true,
+        "memory_keys": [
+          "attempts",
+          "ball_cup",
+          "ball_match_dist",
+          "ball_px",
+          "ball_step",
+          "ball_xy",
+          "cups",
+          "cups_step",
+          "home_rpy",
+          "last_frame_step",
+          "log",
+          "motion_frames",
+          "shuffle_end_step",
+          "stage",
+          "still_frames",
+          "target"
+        ],
+        "first_tool": "act_wait_shuffle",
+        "boundary": "step",
+        "command_components": 7
+      }
+    },
+    "ShellGameShuffleTouch-VLA-v0": {
+      "task": "ShellGameShuffleTouch-VLA-v0",
+      "passed": true,
+      "returncode": 0,
+      "program_hash": "9c1c6fbbebc1c631ffa6a8960d11712cfe86e8500b2fbe81e69500a2242b3e1d",
+      "demo_episode": 11,
+      "interface_sha256": "ae8160e9cdfda93c6ee3728ba1a8776ab879a519d47e22a4a68b1823f710dbe8",
+      "test_records_sha256": "9dbcb1732b19d092f1b08e1c33b40e060f4fadbd03a8c1699d0ffe496b344688",
+      "checks": {
+        "schema_valid": true,
+        "tool_signatures_valid": true,
+        "first_decision_valid": true,
+        "memory_keys": [
+          "attempt",
+          "ball_cup",
+          "ball_xy",
+          "cups",
+          "log",
+          "moved_frames",
+          "stage",
+          "still_frames",
+          "target",
+          "tcp0"
+        ],
+        "first_tool": "act_wait",
+        "boundary": "step",
+        "command_components": 7
+      }
+    },
+    "TimedTransferHard-Long-VLA-v0": {
+      "task": "TimedTransferHard-Long-VLA-v0",
+      "passed": true,
+      "returncode": 0,
+      "program_hash": "c73bd43175213bfbf72b6d8bf5d2607c4b8cbd7a085a449274fb45e4195c7de5",
+      "demo_episode": 6,
+      "interface_sha256": "233b905d12ff4752d4738232644c0e6a394a7447f0efb94691e7d66ae9d82908",
+      "test_records_sha256": "1ee5561d5a5060c777e6bd6e90d1fc2479b3bcbaaab064afdecc9e0174efe6b5",
+      "checks": {
+        "schema_valid": true,
+        "tool_signatures_valid": true,
+        "first_decision_valid": true,
+        "memory_keys": [
+          "cube_xy",
+          "green_step",
+          "last_step",
+          "log",
+          "pick_tries",
+          "place_done",
+          "red_xy",
+          "stage"
+        ],
+        "first_tool": "act_pick",
+        "boundary": "step",
+        "command_components": 7
+      }
+    },
+    "TimedTransferEasy-Long-VLA-v0": {
+      "task": "TimedTransferEasy-Long-VLA-v0",
+      "passed": true,
+      "returncode": 0,
+      "program_hash": "64d1dddd15b476ba79d8e8084507bde3771fab0cde185220e211e9421e14a7af",
+      "demo_episode": 5,
+      "interface_sha256": "435b2c1f6cbf026ce0a3c1e2ab2e300b9298d5ec51e4f4a4a22b4dba1ae22908",
+      "test_records_sha256": "84e71688b71ae4be79bdcc9154cbb0c9467fc3b9ea6e58db338163a285cefc33",
+      "checks": {
+        "schema_valid": true,
+        "tool_signatures_valid": true,
+        "first_decision_valid": true,
+        "memory_keys": [
+          "cube_pos",
+          "grasp_offset",
+          "green_pos",
+          "lamp_on_step",
+          "notes",
+          "pick_attempts",
+          "red_pos",
+          "stage"
+        ],
+        "first_tool": "act_pick",
+        "boundary": "step",
+        "command_components": 7
+      }
+    },
+    "TimedTransferHard-VLA-v0": {
+      "task": "TimedTransferHard-VLA-v0",
+      "passed": true,
+      "returncode": 0,
+      "program_hash": "6c3f566b47c034a77ee69bd8f980ca67c5aa66b04094bdf82919c14899fa78cd",
+      "demo_episode": 4,
+      "interface_sha256": "dde2b8a99727aeb2edf6265ef9f63f7a03d3525e78af8273bb58d69a4d233361",
+      "test_records_sha256": "bee539d14a4824ea414cc0370034159e20e40a3d0a724c56d22a59be8a0b3207",
+      "checks": {
+        "schema_valid": true,
+        "tool_signatures_valid": true,
+        "first_decision_valid": true,
+        "memory_keys": [
+          "attempts",
+          "cube",
+          "green_step",
+          "log",
+          "stage",
+          "target"
+        ],
+        "first_tool": "act_pick",
+        "boundary": "step",
+        "command_components": 7
+      }
+    },
+    "TimedTransferMedium-Long-VLA-v0": {
+      "task": "TimedTransferMedium-Long-VLA-v0",
+      "passed": true,
+      "returncode": 0,
+      "program_hash": "5c7483df56c90951027ffa01b08a9617e9f3bb3672e9e8716ff2da5dd6282dc0",
+      "demo_episode": 0,
+      "interface_sha256": "1caf9961d00ba679a6f859426848f97793cde887a8717203fab4ad25f8f9f3de",
+      "test_records_sha256": "4d7c9e723dc41197c649097c0af4437bbb2fa634bb43b3b64a4c523653aada99",
+      "checks": {
+        "schema_valid": true,
+        "tool_signatures_valid": true,
+        "first_decision_valid": true,
+        "memory_keys": [
+          "cube",
+          "cube_color",
+          "grasp_z",
+          "log",
+          "n_target",
+          "onset_step",
+          "place_tries",
+          "stage",
+          "target",
+          "target_color"
+        ],
+        "first_tool": "act_pick",
+        "boundary": "step",
+        "command_components": 7
+      }
+    },
+    "TimedTransferMedium-VLA-v0": {
+      "task": "TimedTransferMedium-VLA-v0",
+      "passed": true,
+      "returncode": 0,
+      "program_hash": "c4de889d5d90ab7e3679c21e4443efe30ee9de801e87edf9ce00b3b699465e2f",
+      "demo_episode": 1,
+      "interface_sha256": "6bd1239f27b72206460d25795e2306d548de9af67c3c5fbe461fcfa43f9971af",
+      "test_records_sha256": "8b3a817eecd9ff05a97fe997f7d3b1f10c4bce83ae2234dfdfe3447acffef308",
+      "checks": {
+        "schema_valid": true,
+        "tool_signatures_valid": true,
+        "first_decision_valid": true,
+        "memory_keys": [
+          "attempts",
+          "cube_xy",
+          "grasp_z",
+          "log",
+          "onset_step",
+          "red_xy",
+          "rpy0",
+          "stage"
+        ],
+        "first_tool": "act_pick",
+        "boundary": "step",
+        "command_components": 7
+      }
+    },
+    "TraceShapeHard-VLA-v0": {
+      "task": "TraceShapeHard-VLA-v0",
+      "passed": true,
+      "returncode": 0,
+      "program_hash": "b52a33b47c415ec3a2713a45253ee131fae639428fdebf37e917e80d8f4cddea",
+      "demo_episode": 7,
+      "interface_sha256": "b646ad291db1ae5b69f8bdb1101f3e68265f69a742bd13162de23558febb6ed3",
+      "test_records_sha256": "431f4cf7c9b7163bba4e895e15db324ccdb08bde793fa71cedd86485821ba284",
+      "checks": {
+        "schema_valid": true,
+        "tool_signatures_valid": true,
+        "first_decision_valid": true,
+        "memory_keys": [
+          "cube_xy",
+          "grasp_count",
+          "grasp_offset",
+          "log",
+          "red_path",
+          "red_raw",
+          "stage",
+          "trace_count"
+        ],
+        "first_tool": "act_watch",
+        "boundary": "step",
+        "command_components": 7
+      }
+    },
+    "TraceShapeEasy-VLA-v0": {
+      "task": "TraceShapeEasy-VLA-v0",
+      "passed": true,
+      "returncode": 0,
+      "program_hash": "5e9bf87512fae39f68386ec2608e7c16b9529428c7704688bd95e03ff707dbd4",
+      "demo_episode": 6,
+      "interface_sha256": "6bd1239f27b72206460d25795e2306d548de9af67c3c5fbe461fcfa43f9971af",
+      "test_records_sha256": "59fcb1c4697acd7e9482853f6728bda69812257b56611f7f01336bfa140390a7",
+      "checks": {
+        "schema_valid": true,
+        "tool_signatures_valid": true,
+        "first_decision_valid": true,
+        "memory_keys": [
+          "green",
+          "grip_offset",
+          "log",
+          "path",
+          "picks",
+          "stage",
+          "traces"
+        ],
+        "first_tool": "act_watch_cue",
+        "boundary": "step",
+        "command_components": 7
+      }
+    },
+    "TraceShapeMedium-VLA-v0": {
+      "task": "TraceShapeMedium-VLA-v0",
+      "passed": true,
+      "returncode": 0,
+      "program_hash": "7d13bfb7a57dd740bee783424f3cfbe6fadf32ceffe0704875aa25b46567c789",
+      "demo_episode": 0,
+      "interface_sha256": "dde2b8a99727aeb2edf6265ef9f63f7a03d3525e78af8273bb58d69a4d233361",
+      "test_records_sha256": "028dc20576aaea95e5f35debcb3286caeeffe8116ee72762a9fdb5db452ebec5",
+      "checks": {
+        "schema_valid": true,
+        "tool_signatures_valid": true,
+        "first_decision_valid": true,
+        "memory_keys": [
+          "carry_z",
+          "grasp_tries",
+          "green_cube",
+          "lamp_green_step",
+          "notes",
+          "path",
+          "red_samples",
+          "stage",
+          "trace_tries"
+        ],
+        "first_tool": "act_watch",
+        "boundary": "step",
+        "command_components": 7
+      }
+    },
+    "TraceShapeSeqEasy-VLA-v0": {
+      "task": "TraceShapeSeqEasy-VLA-v0",
+      "passed": true,
+      "returncode": 0,
+      "program_hash": "02effb38aa650dc12e6c218fb0b9aae3a638710f8670bb75340618bc3c9aac58",
+      "demo_episode": 0,
+      "interface_sha256": "8b293c109e43f06a92f140864e3fefcad6d86c7e2b0506695328102207ae063a",
+      "test_records_sha256": "372161eda95bf1a60f79086b71db39306f321cfa2b62b98c0f6c2a33365f35ea",
+      "checks": {
+        "schema_valid": true,
+        "tool_signatures_valid": true,
+        "first_decision_valid": true,
+        "memory_keys": [
+          "button_xy",
+          "circle_idx",
+          "circles",
+          "cube_xy",
+          "cue_info",
+          "grasp_tries",
+          "home_rpy",
+          "notes",
+          "stage"
+        ],
+        "first_tool": "act_watch_cue",
+        "boundary": "step",
+        "command_components": 7
+      }
+    },
+    "TraceShapeSeqMedium-VLA-v0": {
+      "task": "TraceShapeSeqMedium-VLA-v0",
+      "passed": true,
+      "returncode": 0,
+      "program_hash": "645447a85e75a98a7110958050c76f1b4ffb61f4b5b7c6af81e2239f145dedfe",
+      "demo_episode": 3,
+      "interface_sha256": "8b293c109e43f06a92f140864e3fefcad6d86c7e2b0506695328102207ae063a",
+      "test_records_sha256": "6286703352e9ad47301dfd713be88b0eb434acfdc7f5bd70013e5c2e38a288f1",
+      "checks": {
+        "schema_valid": true,
+        "tool_signatures_valid": true,
+        "first_decision_valid": true,
+        "memory_keys": [
+          "button",
+          "grasp_tries",
+          "green_cube",
+          "n_shapes",
+          "notes",
+          "path",
+          "press_count",
+          "shape_starts",
+          "stage"
+        ],
+        "first_tool": "act_watch",
+        "boundary": "step",
+        "command_components": 7
+      }
+    },
+    "TraceShapeSeqHard-VLA-v0": {
+      "task": "TraceShapeSeqHard-VLA-v0",
+      "passed": true,
+      "returncode": 0,
+      "program_hash": "699765bfc33aca0cd4238572676a30ef61cb82adce39c64e5459a488a536d02f",
+      "demo_episode": 5,
+      "interface_sha256": "8b293c109e43f06a92f140864e3fefcad6d86c7e2b0506695328102207ae063a",
+      "test_records_sha256": "1ee8cf28640236697e590311d10f37e03c80e649ee7c3fae86b4b2a636430b5e",
+      "checks": {
+        "schema_valid": true,
+        "tool_signatures_valid": true,
+        "first_decision_valid": true,
+        "memory_keys": [
+          "button",
+          "grasp_tries",
+          "green",
+          "green_step",
+          "notes",
+          "press_tries",
+          "red_samples",
+          "shape_idx",
+          "shapes",
+          "stage",
+          "start_step"
+        ],
+        "first_tool": "act_watch_cue",
+        "boundary": "step",
+        "command_components": 7
+      }
+    }
+  },
+  "source_manifest_sha256": "b153cddcd267ba793eb30d6ff2db4469fa4d0fab25357843a85bfec97f196f75",
+  "files": 521,
+  "python_files": 121,
+  "benchmark_source_sha256": "7de3d740a51c91002ddc66af5dfd35b13350b4605fc8c588fef1da252d96b8dc",
+  "validation_runtime_sha256": "6e3ed8285aa49cf234ae6527d46c5d8d903e36a2b512bde0887abc6169fd1f07",
+  "scope": "Every supplied file/program hash, memory schema, tool sandbox rules/signatures, and first decision with memory=None fields and last=None on one assigned demo reset frame per task. The real Robot validates the first command/query, then the offline probe stops before RPC. This is not a success or full-trajectory test.",
+  "historical_run_metadata": "Not included in the supplied export: original interface/config/prompt/harness hashes, test identities and held-out result files are unverified. Current adapter identity/interface hashes are compatibility targets, not claims about the historical run.",
+  "new_model_calls": 0,
+  "new_simulator_episodes": 0
+}

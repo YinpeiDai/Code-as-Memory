@@ -118,3 +118,17 @@ def test_prepare_cli_and_invalid_tag(dataset, tmp_path, capsys):
         prepare_runs(
             base, dataset, read(config), benchmark_source=source, timetag="../escape"
         )
+
+
+def test_public_archive_move_preserves_report_identity(dataset, tmp_path):
+    data, source = dataset
+    config = RunConfig(benchmark="robomme", mode="demos")
+    result = prepare_runs(tmp_path / "runs", data, config, benchmark_source=source, timetag="original")
+    original = Path(result["runs"][0]["root"])
+    name = build(original)["name"]
+    archive = tmp_path / "CaM_public/dev_logs/robomme/demo_only_3/BinFill"
+    archive.parent.mkdir(parents=True)
+    original.rename(archive)
+    original.symlink_to(archive, target_is_directory=True)
+    assert build(archive)["name"] == name
+    assert build(original)["name"] == name

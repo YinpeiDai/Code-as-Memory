@@ -1,0 +1,2660 @@
+{
+  "schema": "cam-demo-selection/1",
+  "benchmark": "robomemarena",
+  "setting": "demo_only_25",
+  "count": 25,
+  "tasks": {
+    "T01_CookiesTomatoBasket": [
+      {
+        "episode": 4,
+        "seed": 104
+      },
+      {
+        "episode": 6,
+        "seed": 106
+      },
+      {
+        "episode": 7,
+        "seed": 107
+      },
+      {
+        "episode": 8,
+        "seed": 108
+      },
+      {
+        "episode": 9,
+        "seed": 109
+      },
+      {
+        "episode": 11,
+        "seed": 111
+      },
+      {
+        "episode": 13,
+        "seed": 113
+      },
+      {
+        "episode": 14,
+        "seed": 114
+      },
+      {
+        "episode": 16,
+        "seed": 116
+      },
+      {
+        "episode": 17,
+        "seed": 117
+      },
+      {
+        "episode": 18,
+        "seed": 118
+      },
+      {
+        "episode": 19,
+        "seed": 119
+      },
+      {
+        "episode": 21,
+        "seed": 121
+      },
+      {
+        "episode": 22,
+        "seed": 122
+      },
+      {
+        "episode": 27,
+        "seed": 127
+      },
+      {
+        "episode": 29,
+        "seed": 129
+      },
+      {
+        "episode": 32,
+        "seed": 132
+      },
+      {
+        "episode": 38,
+        "seed": 138
+      },
+      {
+        "episode": 39,
+        "seed": 139
+      },
+      {
+        "episode": 40,
+        "seed": 140
+      },
+      {
+        "episode": 59,
+        "seed": 159
+      },
+      {
+        "episode": 62,
+        "seed": 162
+      },
+      {
+        "episode": 72,
+        "seed": 172
+      },
+      {
+        "episode": 98,
+        "seed": 198
+      },
+      {
+        "episode": 99,
+        "seed": 199
+      }
+    ],
+    "T02_ButterPopcornBasket": [
+      {
+        "episode": 0,
+        "seed": 100
+      },
+      {
+        "episode": 1,
+        "seed": 101
+      },
+      {
+        "episode": 2,
+        "seed": 102
+      },
+      {
+        "episode": 10,
+        "seed": 110
+      },
+      {
+        "episode": 12,
+        "seed": 112
+      },
+      {
+        "episode": 16,
+        "seed": 116
+      },
+      {
+        "episode": 18,
+        "seed": 118
+      },
+      {
+        "episode": 20,
+        "seed": 120
+      },
+      {
+        "episode": 22,
+        "seed": 122
+      },
+      {
+        "episode": 23,
+        "seed": 123
+      },
+      {
+        "episode": 25,
+        "seed": 125
+      },
+      {
+        "episode": 26,
+        "seed": 126
+      },
+      {
+        "episode": 32,
+        "seed": 132
+      },
+      {
+        "episode": 33,
+        "seed": 133
+      },
+      {
+        "episode": 35,
+        "seed": 135
+      },
+      {
+        "episode": 36,
+        "seed": 136
+      },
+      {
+        "episode": 37,
+        "seed": 137
+      },
+      {
+        "episode": 39,
+        "seed": 139
+      },
+      {
+        "episode": 41,
+        "seed": 141
+      },
+      {
+        "episode": 42,
+        "seed": 142
+      },
+      {
+        "episode": 44,
+        "seed": 144
+      },
+      {
+        "episode": 45,
+        "seed": 145
+      },
+      {
+        "episode": 46,
+        "seed": 146
+      },
+      {
+        "episode": 48,
+        "seed": 148
+      },
+      {
+        "episode": 49,
+        "seed": 149
+      }
+    ],
+    "T03_CreamPuddingBasket": [
+      {
+        "episode": 0,
+        "seed": 100
+      },
+      {
+        "episode": 1,
+        "seed": 101
+      },
+      {
+        "episode": 2,
+        "seed": 102
+      },
+      {
+        "episode": 4,
+        "seed": 104
+      },
+      {
+        "episode": 7,
+        "seed": 107
+      },
+      {
+        "episode": 12,
+        "seed": 112
+      },
+      {
+        "episode": 13,
+        "seed": 113
+      },
+      {
+        "episode": 17,
+        "seed": 117
+      },
+      {
+        "episode": 18,
+        "seed": 118
+      },
+      {
+        "episode": 19,
+        "seed": 119
+      },
+      {
+        "episode": 20,
+        "seed": 120
+      },
+      {
+        "episode": 22,
+        "seed": 122
+      },
+      {
+        "episode": 26,
+        "seed": 126
+      },
+      {
+        "episode": 30,
+        "seed": 130
+      },
+      {
+        "episode": 31,
+        "seed": 131
+      },
+      {
+        "episode": 32,
+        "seed": 132
+      },
+      {
+        "episode": 33,
+        "seed": 133
+      },
+      {
+        "episode": 34,
+        "seed": 134
+      },
+      {
+        "episode": 35,
+        "seed": 135
+      },
+      {
+        "episode": 38,
+        "seed": 138
+      },
+      {
+        "episode": 39,
+        "seed": 139
+      },
+      {
+        "episode": 41,
+        "seed": 141
+      },
+      {
+        "episode": 45,
+        "seed": 145
+      },
+      {
+        "episode": 46,
+        "seed": 146
+      },
+      {
+        "episode": 49,
+        "seed": 149
+      }
+    ],
+    "T04_ButterNonEmptyDrawer": [
+      {
+        "episode": 4,
+        "seed": 104
+      },
+      {
+        "episode": 7,
+        "seed": 107
+      },
+      {
+        "episode": 8,
+        "seed": 108
+      },
+      {
+        "episode": 11,
+        "seed": 111
+      },
+      {
+        "episode": 13,
+        "seed": 113
+      },
+      {
+        "episode": 14,
+        "seed": 114
+      },
+      {
+        "episode": 17,
+        "seed": 117
+      },
+      {
+        "episode": 21,
+        "seed": 121
+      },
+      {
+        "episode": 23,
+        "seed": 123
+      },
+      {
+        "episode": 27,
+        "seed": 127
+      },
+      {
+        "episode": 28,
+        "seed": 128
+      },
+      {
+        "episode": 38,
+        "seed": 138
+      },
+      {
+        "episode": 39,
+        "seed": 139
+      },
+      {
+        "episode": 40,
+        "seed": 140
+      },
+      {
+        "episode": 43,
+        "seed": 143
+      },
+      {
+        "episode": 49,
+        "seed": 149
+      },
+      {
+        "episode": 54,
+        "seed": 154
+      },
+      {
+        "episode": 60,
+        "seed": 160
+      },
+      {
+        "episode": 62,
+        "seed": 162
+      },
+      {
+        "episode": 64,
+        "seed": 164
+      },
+      {
+        "episode": 65,
+        "seed": 165
+      },
+      {
+        "episode": 66,
+        "seed": 166
+      },
+      {
+        "episode": 67,
+        "seed": 167
+      },
+      {
+        "episode": 74,
+        "seed": 174
+      },
+      {
+        "episode": 80,
+        "seed": 180
+      }
+    ],
+    "T05_ButterEmptyDrawer": [
+      {
+        "episode": 1,
+        "seed": 101
+      },
+      {
+        "episode": 2,
+        "seed": 102
+      },
+      {
+        "episode": 4,
+        "seed": 105
+      },
+      {
+        "episode": 7,
+        "seed": 108
+      },
+      {
+        "episode": 8,
+        "seed": 109
+      },
+      {
+        "episode": 9,
+        "seed": 110
+      },
+      {
+        "episode": 11,
+        "seed": 116
+      },
+      {
+        "episode": 12,
+        "seed": 117
+      },
+      {
+        "episode": 20,
+        "seed": 126
+      },
+      {
+        "episode": 22,
+        "seed": 130
+      },
+      {
+        "episode": 23,
+        "seed": 131
+      },
+      {
+        "episode": 27,
+        "seed": 136
+      },
+      {
+        "episode": 30,
+        "seed": 139
+      },
+      {
+        "episode": 32,
+        "seed": 143
+      },
+      {
+        "episode": 35,
+        "seed": 146
+      },
+      {
+        "episode": 39,
+        "seed": 153
+      },
+      {
+        "episode": 41,
+        "seed": 156
+      },
+      {
+        "episode": 42,
+        "seed": 157
+      },
+      {
+        "episode": 43,
+        "seed": 158
+      },
+      {
+        "episode": 45,
+        "seed": 160
+      },
+      {
+        "episode": 46,
+        "seed": 161
+      },
+      {
+        "episode": 47,
+        "seed": 162
+      },
+      {
+        "episode": 48,
+        "seed": 165
+      },
+      {
+        "episode": 49,
+        "seed": 166
+      },
+      {
+        "episode": 52,
+        "seed": 172
+      }
+    ],
+    "T06_PourSauceCookiesTwice": [
+      {
+        "episode": 2,
+        "seed": 106
+      },
+      {
+        "episode": 3,
+        "seed": 107
+      },
+      {
+        "episode": 5,
+        "seed": 114
+      },
+      {
+        "episode": 6,
+        "seed": 117
+      },
+      {
+        "episode": 8,
+        "seed": 121
+      },
+      {
+        "episode": 9,
+        "seed": 122
+      },
+      {
+        "episode": 10,
+        "seed": 123
+      },
+      {
+        "episode": 11,
+        "seed": 124
+      },
+      {
+        "episode": 15,
+        "seed": 131
+      },
+      {
+        "episode": 19,
+        "seed": 141
+      },
+      {
+        "episode": 20,
+        "seed": 143
+      },
+      {
+        "episode": 21,
+        "seed": 147
+      },
+      {
+        "episode": 24,
+        "seed": 157
+      },
+      {
+        "episode": 29,
+        "seed": 171
+      },
+      {
+        "episode": 31,
+        "seed": 174
+      },
+      {
+        "episode": 33,
+        "seed": 177
+      },
+      {
+        "episode": 35,
+        "seed": 182
+      },
+      {
+        "episode": 39,
+        "seed": 199
+      },
+      {
+        "episode": 40,
+        "seed": 204
+      },
+      {
+        "episode": 42,
+        "seed": 206
+      },
+      {
+        "episode": 43,
+        "seed": 207
+      },
+      {
+        "episode": 46,
+        "seed": 218
+      },
+      {
+        "episode": 48,
+        "seed": 222
+      },
+      {
+        "episode": 50,
+        "seed": 229
+      },
+      {
+        "episode": 51,
+        "seed": 230
+      }
+    ],
+    "T07_PourSauceFrypanTwice": [
+      {
+        "episode": 0,
+        "seed": 100
+      },
+      {
+        "episode": 1,
+        "seed": 101
+      },
+      {
+        "episode": 2,
+        "seed": 102
+      },
+      {
+        "episode": 4,
+        "seed": 104
+      },
+      {
+        "episode": 7,
+        "seed": 107
+      },
+      {
+        "episode": 9,
+        "seed": 109
+      },
+      {
+        "episode": 11,
+        "seed": 111
+      },
+      {
+        "episode": 13,
+        "seed": 113
+      },
+      {
+        "episode": 14,
+        "seed": 114
+      },
+      {
+        "episode": 15,
+        "seed": 115
+      },
+      {
+        "episode": 16,
+        "seed": 116
+      },
+      {
+        "episode": 20,
+        "seed": 120
+      },
+      {
+        "episode": 22,
+        "seed": 122
+      },
+      {
+        "episode": 24,
+        "seed": 124
+      },
+      {
+        "episode": 25,
+        "seed": 125
+      },
+      {
+        "episode": 28,
+        "seed": 128
+      },
+      {
+        "episode": 31,
+        "seed": 131
+      },
+      {
+        "episode": 34,
+        "seed": 134
+      },
+      {
+        "episode": 37,
+        "seed": 137
+      },
+      {
+        "episode": 40,
+        "seed": 140
+      },
+      {
+        "episode": 44,
+        "seed": 144
+      },
+      {
+        "episode": 68,
+        "seed": 168
+      },
+      {
+        "episode": 78,
+        "seed": 178
+      },
+      {
+        "episode": 82,
+        "seed": 182
+      },
+      {
+        "episode": 91,
+        "seed": 191
+      }
+    ],
+    "T08_ChocolateFrypanPourSauceTwice": [
+      {
+        "episode": 3,
+        "seed": 103
+      },
+      {
+        "episode": 5,
+        "seed": 105
+      },
+      {
+        "episode": 6,
+        "seed": 106
+      },
+      {
+        "episode": 7,
+        "seed": 107
+      },
+      {
+        "episode": 8,
+        "seed": 108
+      },
+      {
+        "episode": 9,
+        "seed": 109
+      },
+      {
+        "episode": 10,
+        "seed": 110
+      },
+      {
+        "episode": 12,
+        "seed": 112
+      },
+      {
+        "episode": 14,
+        "seed": 114
+      },
+      {
+        "episode": 15,
+        "seed": 115
+      },
+      {
+        "episode": 16,
+        "seed": 116
+      },
+      {
+        "episode": 17,
+        "seed": 117
+      },
+      {
+        "episode": 19,
+        "seed": 119
+      },
+      {
+        "episode": 20,
+        "seed": 120
+      },
+      {
+        "episode": 21,
+        "seed": 121
+      },
+      {
+        "episode": 22,
+        "seed": 122
+      },
+      {
+        "episode": 25,
+        "seed": 125
+      },
+      {
+        "episode": 30,
+        "seed": 130
+      },
+      {
+        "episode": 32,
+        "seed": 132
+      },
+      {
+        "episode": 34,
+        "seed": 134
+      },
+      {
+        "episode": 38,
+        "seed": 138
+      },
+      {
+        "episode": 44,
+        "seed": 144
+      },
+      {
+        "episode": 45,
+        "seed": 145
+      },
+      {
+        "episode": 46,
+        "seed": 146
+      },
+      {
+        "episode": 49,
+        "seed": 149
+      }
+    ],
+    "T09_ButterFrypanPourSauceTwice": [
+      {
+        "episode": 2,
+        "seed": 102
+      },
+      {
+        "episode": 3,
+        "seed": 103
+      },
+      {
+        "episode": 8,
+        "seed": 108
+      },
+      {
+        "episode": 11,
+        "seed": 111
+      },
+      {
+        "episode": 15,
+        "seed": 115
+      },
+      {
+        "episode": 20,
+        "seed": 120
+      },
+      {
+        "episode": 24,
+        "seed": 124
+      },
+      {
+        "episode": 31,
+        "seed": 131
+      },
+      {
+        "episode": 32,
+        "seed": 132
+      },
+      {
+        "episode": 40,
+        "seed": 140
+      },
+      {
+        "episode": 41,
+        "seed": 141
+      },
+      {
+        "episode": 43,
+        "seed": 143
+      },
+      {
+        "episode": 45,
+        "seed": 145
+      },
+      {
+        "episode": 47,
+        "seed": 147
+      },
+      {
+        "episode": 49,
+        "seed": 149
+      },
+      {
+        "episode": 53,
+        "seed": 153
+      },
+      {
+        "episode": 54,
+        "seed": 154
+      },
+      {
+        "episode": 59,
+        "seed": 159
+      },
+      {
+        "episode": 63,
+        "seed": 163
+      },
+      {
+        "episode": 64,
+        "seed": 164
+      },
+      {
+        "episode": 67,
+        "seed": 167
+      },
+      {
+        "episode": 71,
+        "seed": 171
+      },
+      {
+        "episode": 75,
+        "seed": 175
+      },
+      {
+        "episode": 76,
+        "seed": 176
+      },
+      {
+        "episode": 78,
+        "seed": 178
+      }
+    ],
+    "T10_PourWineMugTwice": [
+      {
+        "episode": 5,
+        "seed": 105
+      },
+      {
+        "episode": 6,
+        "seed": 106
+      },
+      {
+        "episode": 7,
+        "seed": 107
+      },
+      {
+        "episode": 9,
+        "seed": 109
+      },
+      {
+        "episode": 13,
+        "seed": 113
+      },
+      {
+        "episode": 16,
+        "seed": 116
+      },
+      {
+        "episode": 18,
+        "seed": 118
+      },
+      {
+        "episode": 19,
+        "seed": 119
+      },
+      {
+        "episode": 24,
+        "seed": 124
+      },
+      {
+        "episode": 25,
+        "seed": 125
+      },
+      {
+        "episode": 27,
+        "seed": 127
+      },
+      {
+        "episode": 29,
+        "seed": 129
+      },
+      {
+        "episode": 36,
+        "seed": 136
+      },
+      {
+        "episode": 38,
+        "seed": 138
+      },
+      {
+        "episode": 39,
+        "seed": 139
+      },
+      {
+        "episode": 47,
+        "seed": 147
+      },
+      {
+        "episode": 51,
+        "seed": 151
+      },
+      {
+        "episode": 63,
+        "seed": 163
+      },
+      {
+        "episode": 64,
+        "seed": 164
+      },
+      {
+        "episode": 69,
+        "seed": 169
+      },
+      {
+        "episode": 70,
+        "seed": 170
+      },
+      {
+        "episode": 76,
+        "seed": 176
+      },
+      {
+        "episode": 77,
+        "seed": 177
+      },
+      {
+        "episode": 82,
+        "seed": 182
+      },
+      {
+        "episode": 84,
+        "seed": 184
+      }
+    ],
+    "T11_CookiesTopButterMiddle": [
+      {
+        "episode": 1,
+        "seed": 101
+      },
+      {
+        "episode": 4,
+        "seed": 104
+      },
+      {
+        "episode": 10,
+        "seed": 110
+      },
+      {
+        "episode": 14,
+        "seed": 114
+      },
+      {
+        "episode": 16,
+        "seed": 116
+      },
+      {
+        "episode": 17,
+        "seed": 117
+      },
+      {
+        "episode": 19,
+        "seed": 119
+      },
+      {
+        "episode": 20,
+        "seed": 120
+      },
+      {
+        "episode": 21,
+        "seed": 121
+      },
+      {
+        "episode": 23,
+        "seed": 123
+      },
+      {
+        "episode": 24,
+        "seed": 124
+      },
+      {
+        "episode": 29,
+        "seed": 129
+      },
+      {
+        "episode": 32,
+        "seed": 134
+      },
+      {
+        "episode": 34,
+        "seed": 136
+      },
+      {
+        "episode": 35,
+        "seed": 137
+      },
+      {
+        "episode": 36,
+        "seed": 138
+      },
+      {
+        "episode": 38,
+        "seed": 140
+      },
+      {
+        "episode": 42,
+        "seed": 144
+      },
+      {
+        "episode": 46,
+        "seed": 148
+      },
+      {
+        "episode": 48,
+        "seed": 150
+      },
+      {
+        "episode": 49,
+        "seed": 151
+      },
+      {
+        "episode": 51,
+        "seed": 153
+      },
+      {
+        "episode": 52,
+        "seed": 154
+      },
+      {
+        "episode": 55,
+        "seed": 157
+      },
+      {
+        "episode": 57,
+        "seed": 159
+      }
+    ],
+    "T12_CookiesChocolateMiddleDrawer": [
+      {
+        "episode": 0,
+        "seed": 100
+      },
+      {
+        "episode": 1,
+        "seed": 101
+      },
+      {
+        "episode": 3,
+        "seed": 103
+      },
+      {
+        "episode": 5,
+        "seed": 105
+      },
+      {
+        "episode": 8,
+        "seed": 108
+      },
+      {
+        "episode": 10,
+        "seed": 110
+      },
+      {
+        "episode": 12,
+        "seed": 112
+      },
+      {
+        "episode": 13,
+        "seed": 113
+      },
+      {
+        "episode": 15,
+        "seed": 116
+      },
+      {
+        "episode": 17,
+        "seed": 118
+      },
+      {
+        "episode": 18,
+        "seed": 119
+      },
+      {
+        "episode": 19,
+        "seed": 120
+      },
+      {
+        "episode": 20,
+        "seed": 121
+      },
+      {
+        "episode": 24,
+        "seed": 125
+      },
+      {
+        "episode": 28,
+        "seed": 129
+      },
+      {
+        "episode": 32,
+        "seed": 133
+      },
+      {
+        "episode": 34,
+        "seed": 135
+      },
+      {
+        "episode": 35,
+        "seed": 136
+      },
+      {
+        "episode": 36,
+        "seed": 137
+      },
+      {
+        "episode": 38,
+        "seed": 139
+      },
+      {
+        "episode": 45,
+        "seed": 146
+      },
+      {
+        "episode": 47,
+        "seed": 148
+      },
+      {
+        "episode": 48,
+        "seed": 149
+      },
+      {
+        "episode": 49,
+        "seed": 150
+      },
+      {
+        "episode": 52,
+        "seed": 153
+      }
+    ],
+    "T13_CookiesButterMiddleDrawer": [
+      {
+        "episode": 1,
+        "seed": 101
+      },
+      {
+        "episode": 4,
+        "seed": 104
+      },
+      {
+        "episode": 6,
+        "seed": 106
+      },
+      {
+        "episode": 8,
+        "seed": 108
+      },
+      {
+        "episode": 10,
+        "seed": 110
+      },
+      {
+        "episode": 12,
+        "seed": 112
+      },
+      {
+        "episode": 13,
+        "seed": 113
+      },
+      {
+        "episode": 14,
+        "seed": 114
+      },
+      {
+        "episode": 15,
+        "seed": 115
+      },
+      {
+        "episode": 21,
+        "seed": 121
+      },
+      {
+        "episode": 22,
+        "seed": 122
+      },
+      {
+        "episode": 23,
+        "seed": 123
+      },
+      {
+        "episode": 26,
+        "seed": 126
+      },
+      {
+        "episode": 28,
+        "seed": 128
+      },
+      {
+        "episode": 30,
+        "seed": 130
+      },
+      {
+        "episode": 32,
+        "seed": 132
+      },
+      {
+        "episode": 34,
+        "seed": 134
+      },
+      {
+        "episode": 36,
+        "seed": 136
+      },
+      {
+        "episode": 40,
+        "seed": 140
+      },
+      {
+        "episode": 42,
+        "seed": 142
+      },
+      {
+        "episode": 45,
+        "seed": 145
+      },
+      {
+        "episode": 47,
+        "seed": 147
+      },
+      {
+        "episode": 48,
+        "seed": 148
+      },
+      {
+        "episode": 54,
+        "seed": 154
+      },
+      {
+        "episode": 55,
+        "seed": 155
+      }
+    ],
+    "T14_CookiesChocolateDrawers": [
+      {
+        "episode": 1,
+        "seed": 101
+      },
+      {
+        "episode": 4,
+        "seed": 104
+      },
+      {
+        "episode": 6,
+        "seed": 106
+      },
+      {
+        "episode": 9,
+        "seed": 109
+      },
+      {
+        "episode": 11,
+        "seed": 111
+      },
+      {
+        "episode": 13,
+        "seed": 113
+      },
+      {
+        "episode": 14,
+        "seed": 114
+      },
+      {
+        "episode": 15,
+        "seed": 115
+      },
+      {
+        "episode": 20,
+        "seed": 120
+      },
+      {
+        "episode": 26,
+        "seed": 126
+      },
+      {
+        "episode": 28,
+        "seed": 128
+      },
+      {
+        "episode": 29,
+        "seed": 129
+      },
+      {
+        "episode": 32,
+        "seed": 132
+      },
+      {
+        "episode": 34,
+        "seed": 134
+      },
+      {
+        "episode": 35,
+        "seed": 135
+      },
+      {
+        "episode": 39,
+        "seed": 139
+      },
+      {
+        "episode": 40,
+        "seed": 140
+      },
+      {
+        "episode": 41,
+        "seed": 141
+      },
+      {
+        "episode": 42,
+        "seed": 142
+      },
+      {
+        "episode": 45,
+        "seed": 145
+      },
+      {
+        "episode": 47,
+        "seed": 147
+      },
+      {
+        "episode": 48,
+        "seed": 148
+      },
+      {
+        "episode": 50,
+        "seed": 150
+      },
+      {
+        "episode": 52,
+        "seed": 152
+      },
+      {
+        "episode": 58,
+        "seed": 159
+      }
+    ],
+    "T15_ButterFrypanPourMilkTwice": [
+      {
+        "episode": 0,
+        "seed": 100
+      },
+      {
+        "episode": 4,
+        "seed": 104
+      },
+      {
+        "episode": 10,
+        "seed": 111
+      },
+      {
+        "episode": 11,
+        "seed": 112
+      },
+      {
+        "episode": 12,
+        "seed": 113
+      },
+      {
+        "episode": 14,
+        "seed": 115
+      },
+      {
+        "episode": 15,
+        "seed": 116
+      },
+      {
+        "episode": 19,
+        "seed": 120
+      },
+      {
+        "episode": 21,
+        "seed": 122
+      },
+      {
+        "episode": 22,
+        "seed": 123
+      },
+      {
+        "episode": 23,
+        "seed": 124
+      },
+      {
+        "episode": 25,
+        "seed": 126
+      },
+      {
+        "episode": 27,
+        "seed": 128
+      },
+      {
+        "episode": 28,
+        "seed": 129
+      },
+      {
+        "episode": 29,
+        "seed": 130
+      },
+      {
+        "episode": 32,
+        "seed": 133
+      },
+      {
+        "episode": 37,
+        "seed": 138
+      },
+      {
+        "episode": 40,
+        "seed": 141
+      },
+      {
+        "episode": 42,
+        "seed": 143
+      },
+      {
+        "episode": 44,
+        "seed": 145
+      },
+      {
+        "episode": 45,
+        "seed": 146
+      },
+      {
+        "episode": 46,
+        "seed": 147
+      },
+      {
+        "episode": 47,
+        "seed": 148
+      },
+      {
+        "episode": 50,
+        "seed": 151
+      },
+      {
+        "episode": 51,
+        "seed": 152
+      }
+    ],
+    "T16_PourMilkMugTwice": [
+      {
+        "episode": 2,
+        "seed": 102
+      },
+      {
+        "episode": 4,
+        "seed": 104
+      },
+      {
+        "episode": 5,
+        "seed": 105
+      },
+      {
+        "episode": 9,
+        "seed": 109
+      },
+      {
+        "episode": 10,
+        "seed": 110
+      },
+      {
+        "episode": 11,
+        "seed": 111
+      },
+      {
+        "episode": 12,
+        "seed": 112
+      },
+      {
+        "episode": 14,
+        "seed": 114
+      },
+      {
+        "episode": 17,
+        "seed": 117
+      },
+      {
+        "episode": 26,
+        "seed": 126
+      },
+      {
+        "episode": 27,
+        "seed": 127
+      },
+      {
+        "episode": 28,
+        "seed": 128
+      },
+      {
+        "episode": 30,
+        "seed": 130
+      },
+      {
+        "episode": 32,
+        "seed": 132
+      },
+      {
+        "episode": 33,
+        "seed": 133
+      },
+      {
+        "episode": 35,
+        "seed": 135
+      },
+      {
+        "episode": 36,
+        "seed": 136
+      },
+      {
+        "episode": 37,
+        "seed": 137
+      },
+      {
+        "episode": 38,
+        "seed": 138
+      },
+      {
+        "episode": 39,
+        "seed": 139
+      },
+      {
+        "episode": 40,
+        "seed": 140
+      },
+      {
+        "episode": 42,
+        "seed": 142
+      },
+      {
+        "episode": 43,
+        "seed": 143
+      },
+      {
+        "episode": 47,
+        "seed": 147
+      },
+      {
+        "episode": 49,
+        "seed": 149
+      }
+    ],
+    "T17_ButterChocolateMiddleDrawer": [
+      {
+        "episode": 0,
+        "seed": 100
+      },
+      {
+        "episode": 2,
+        "seed": 102
+      },
+      {
+        "episode": 4,
+        "seed": 104
+      },
+      {
+        "episode": 5,
+        "seed": 105
+      },
+      {
+        "episode": 8,
+        "seed": 108
+      },
+      {
+        "episode": 12,
+        "seed": 112
+      },
+      {
+        "episode": 13,
+        "seed": 113
+      },
+      {
+        "episode": 14,
+        "seed": 114
+      },
+      {
+        "episode": 15,
+        "seed": 115
+      },
+      {
+        "episode": 19,
+        "seed": 119
+      },
+      {
+        "episode": 24,
+        "seed": 124
+      },
+      {
+        "episode": 25,
+        "seed": 125
+      },
+      {
+        "episode": 28,
+        "seed": 128
+      },
+      {
+        "episode": 29,
+        "seed": 129
+      },
+      {
+        "episode": 30,
+        "seed": 130
+      },
+      {
+        "episode": 33,
+        "seed": 133
+      },
+      {
+        "episode": 34,
+        "seed": 134
+      },
+      {
+        "episode": 35,
+        "seed": 135
+      },
+      {
+        "episode": 37,
+        "seed": 137
+      },
+      {
+        "episode": 39,
+        "seed": 139
+      },
+      {
+        "episode": 44,
+        "seed": 144
+      },
+      {
+        "episode": 45,
+        "seed": 145
+      },
+      {
+        "episode": 46,
+        "seed": 146
+      },
+      {
+        "episode": 47,
+        "seed": 147
+      },
+      {
+        "episode": 49,
+        "seed": 149
+      }
+    ],
+    "T18_ChocolateButterCabinet": [
+      {
+        "episode": 2,
+        "seed": 102
+      },
+      {
+        "episode": 3,
+        "seed": 103
+      },
+      {
+        "episode": 4,
+        "seed": 104
+      },
+      {
+        "episode": 5,
+        "seed": 105
+      },
+      {
+        "episode": 6,
+        "seed": 106
+      },
+      {
+        "episode": 7,
+        "seed": 107
+      },
+      {
+        "episode": 8,
+        "seed": 108
+      },
+      {
+        "episode": 11,
+        "seed": 111
+      },
+      {
+        "episode": 13,
+        "seed": 113
+      },
+      {
+        "episode": 15,
+        "seed": 115
+      },
+      {
+        "episode": 17,
+        "seed": 117
+      },
+      {
+        "episode": 20,
+        "seed": 120
+      },
+      {
+        "episode": 22,
+        "seed": 123
+      },
+      {
+        "episode": 23,
+        "seed": 125
+      },
+      {
+        "episode": 24,
+        "seed": 126
+      },
+      {
+        "episode": 30,
+        "seed": 136
+      },
+      {
+        "episode": 35,
+        "seed": 143
+      },
+      {
+        "episode": 37,
+        "seed": 146
+      },
+      {
+        "episode": 38,
+        "seed": 147
+      },
+      {
+        "episode": 41,
+        "seed": 151
+      },
+      {
+        "episode": 43,
+        "seed": 153
+      },
+      {
+        "episode": 44,
+        "seed": 156
+      },
+      {
+        "episode": 46,
+        "seed": 158
+      },
+      {
+        "episode": 48,
+        "seed": 160
+      },
+      {
+        "episode": 51,
+        "seed": 163
+      }
+    ],
+    "T19_SauceMilkJuiceCabinet": [
+      {
+        "episode": 2,
+        "seed": 114
+      },
+      {
+        "episode": 9,
+        "seed": 169
+      },
+      {
+        "episode": 13,
+        "seed": 187
+      },
+      {
+        "episode": 16,
+        "seed": 203
+      },
+      {
+        "episode": 17,
+        "seed": 204
+      },
+      {
+        "episode": 18,
+        "seed": 210
+      },
+      {
+        "episode": 24,
+        "seed": 268
+      },
+      {
+        "episode": 25,
+        "seed": 270
+      },
+      {
+        "episode": 26,
+        "seed": 272
+      },
+      {
+        "episode": 30,
+        "seed": 298
+      },
+      {
+        "episode": 39,
+        "seed": 359
+      },
+      {
+        "episode": 40,
+        "seed": 363
+      },
+      {
+        "episode": 48,
+        "seed": 441
+      },
+      {
+        "episode": 50,
+        "seed": 444
+      },
+      {
+        "episode": 55,
+        "seed": 467
+      },
+      {
+        "episode": 57,
+        "seed": 479
+      },
+      {
+        "episode": 61,
+        "seed": 515
+      },
+      {
+        "episode": 63,
+        "seed": 540
+      },
+      {
+        "episode": 64,
+        "seed": 548
+      },
+      {
+        "episode": 65,
+        "seed": 552
+      },
+      {
+        "episode": 69,
+        "seed": 585
+      },
+      {
+        "episode": 77,
+        "seed": 658
+      },
+      {
+        "episode": 79,
+        "seed": 676
+      },
+      {
+        "episode": 81,
+        "seed": 691
+      },
+      {
+        "episode": 82,
+        "seed": 693
+      }
+    ],
+    "T20_CookiesChocolateMicrowave": [
+      {
+        "episode": 3,
+        "seed": 103
+      },
+      {
+        "episode": 4,
+        "seed": 104
+      },
+      {
+        "episode": 5,
+        "seed": 105
+      },
+      {
+        "episode": 6,
+        "seed": 106
+      },
+      {
+        "episode": 8,
+        "seed": 108
+      },
+      {
+        "episode": 10,
+        "seed": 110
+      },
+      {
+        "episode": 11,
+        "seed": 111
+      },
+      {
+        "episode": 13,
+        "seed": 113
+      },
+      {
+        "episode": 15,
+        "seed": 115
+      },
+      {
+        "episode": 17,
+        "seed": 117
+      },
+      {
+        "episode": 19,
+        "seed": 119
+      },
+      {
+        "episode": 20,
+        "seed": 120
+      },
+      {
+        "episode": 24,
+        "seed": 124
+      },
+      {
+        "episode": 26,
+        "seed": 126
+      },
+      {
+        "episode": 28,
+        "seed": 128
+      },
+      {
+        "episode": 32,
+        "seed": 132
+      },
+      {
+        "episode": 33,
+        "seed": 133
+      },
+      {
+        "episode": 35,
+        "seed": 135
+      },
+      {
+        "episode": 36,
+        "seed": 136
+      },
+      {
+        "episode": 38,
+        "seed": 138
+      },
+      {
+        "episode": 41,
+        "seed": 141
+      },
+      {
+        "episode": 42,
+        "seed": 142
+      },
+      {
+        "episode": 47,
+        "seed": 147
+      },
+      {
+        "episode": 48,
+        "seed": 148
+      },
+      {
+        "episode": 49,
+        "seed": 149
+      }
+    ],
+    "T21_ButterChocolateMicrowave": [
+      {
+        "episode": 1,
+        "seed": 101
+      },
+      {
+        "episode": 4,
+        "seed": 104
+      },
+      {
+        "episode": 5,
+        "seed": 105
+      },
+      {
+        "episode": 6,
+        "seed": 106
+      },
+      {
+        "episode": 8,
+        "seed": 108
+      },
+      {
+        "episode": 12,
+        "seed": 112
+      },
+      {
+        "episode": 14,
+        "seed": 114
+      },
+      {
+        "episode": 16,
+        "seed": 116
+      },
+      {
+        "episode": 17,
+        "seed": 117
+      },
+      {
+        "episode": 19,
+        "seed": 119
+      },
+      {
+        "episode": 21,
+        "seed": 121
+      },
+      {
+        "episode": 22,
+        "seed": 122
+      },
+      {
+        "episode": 24,
+        "seed": 124
+      },
+      {
+        "episode": 27,
+        "seed": 127
+      },
+      {
+        "episode": 31,
+        "seed": 131
+      },
+      {
+        "episode": 32,
+        "seed": 132
+      },
+      {
+        "episode": 33,
+        "seed": 133
+      },
+      {
+        "episode": 35,
+        "seed": 135
+      },
+      {
+        "episode": 36,
+        "seed": 136
+      },
+      {
+        "episode": 38,
+        "seed": 138
+      },
+      {
+        "episode": 41,
+        "seed": 141
+      },
+      {
+        "episode": 42,
+        "seed": 142
+      },
+      {
+        "episode": 44,
+        "seed": 144
+      },
+      {
+        "episode": 47,
+        "seed": 147
+      },
+      {
+        "episode": 49,
+        "seed": 149
+      }
+    ],
+    "T22_PourSauceCookiesMicrowave": [
+      {
+        "episode": 3,
+        "seed": 103
+      },
+      {
+        "episode": 5,
+        "seed": 105
+      },
+      {
+        "episode": 7,
+        "seed": 107
+      },
+      {
+        "episode": 9,
+        "seed": 109
+      },
+      {
+        "episode": 10,
+        "seed": 110
+      },
+      {
+        "episode": 14,
+        "seed": 114
+      },
+      {
+        "episode": 16,
+        "seed": 116
+      },
+      {
+        "episode": 17,
+        "seed": 117
+      },
+      {
+        "episode": 18,
+        "seed": 118
+      },
+      {
+        "episode": 19,
+        "seed": 119
+      },
+      {
+        "episode": 21,
+        "seed": 121
+      },
+      {
+        "episode": 22,
+        "seed": 122
+      },
+      {
+        "episode": 33,
+        "seed": 133
+      },
+      {
+        "episode": 34,
+        "seed": 134
+      },
+      {
+        "episode": 35,
+        "seed": 135
+      },
+      {
+        "episode": 36,
+        "seed": 136
+      },
+      {
+        "episode": 38,
+        "seed": 138
+      },
+      {
+        "episode": 39,
+        "seed": 139
+      },
+      {
+        "episode": 41,
+        "seed": 141
+      },
+      {
+        "episode": 42,
+        "seed": 142
+      },
+      {
+        "episode": 43,
+        "seed": 143
+      },
+      {
+        "episode": 46,
+        "seed": 146
+      },
+      {
+        "episode": 48,
+        "seed": 148
+      },
+      {
+        "episode": 49,
+        "seed": 149
+      },
+      {
+        "episode": 51,
+        "seed": 151
+      }
+    ],
+    "T23_CreamPopcornMicrowave": [
+      {
+        "episode": 0,
+        "seed": 100
+      },
+      {
+        "episode": 1,
+        "seed": 101
+      },
+      {
+        "episode": 2,
+        "seed": 102
+      },
+      {
+        "episode": 3,
+        "seed": 103
+      },
+      {
+        "episode": 6,
+        "seed": 106
+      },
+      {
+        "episode": 8,
+        "seed": 108
+      },
+      {
+        "episode": 10,
+        "seed": 110
+      },
+      {
+        "episode": 11,
+        "seed": 111
+      },
+      {
+        "episode": 12,
+        "seed": 112
+      },
+      {
+        "episode": 13,
+        "seed": 113
+      },
+      {
+        "episode": 15,
+        "seed": 115
+      },
+      {
+        "episode": 20,
+        "seed": 120
+      },
+      {
+        "episode": 21,
+        "seed": 121
+      },
+      {
+        "episode": 23,
+        "seed": 123
+      },
+      {
+        "episode": 28,
+        "seed": 128
+      },
+      {
+        "episode": 32,
+        "seed": 132
+      },
+      {
+        "episode": 35,
+        "seed": 135
+      },
+      {
+        "episode": 37,
+        "seed": 137
+      },
+      {
+        "episode": 38,
+        "seed": 138
+      },
+      {
+        "episode": 40,
+        "seed": 140
+      },
+      {
+        "episode": 42,
+        "seed": 142
+      },
+      {
+        "episode": 43,
+        "seed": 143
+      },
+      {
+        "episode": 45,
+        "seed": 145
+      },
+      {
+        "episode": 46,
+        "seed": 146
+      },
+      {
+        "episode": 47,
+        "seed": 147
+      }
+    ],
+    "T24_CookiesPopcornMicrowave": [
+      {
+        "episode": 0,
+        "seed": 100
+      },
+      {
+        "episode": 2,
+        "seed": 102
+      },
+      {
+        "episode": 4,
+        "seed": 104
+      },
+      {
+        "episode": 5,
+        "seed": 105
+      },
+      {
+        "episode": 6,
+        "seed": 106
+      },
+      {
+        "episode": 9,
+        "seed": 109
+      },
+      {
+        "episode": 10,
+        "seed": 110
+      },
+      {
+        "episode": 11,
+        "seed": 111
+      },
+      {
+        "episode": 13,
+        "seed": 113
+      },
+      {
+        "episode": 19,
+        "seed": 119
+      },
+      {
+        "episode": 21,
+        "seed": 121
+      },
+      {
+        "episode": 23,
+        "seed": 123
+      },
+      {
+        "episode": 27,
+        "seed": 127
+      },
+      {
+        "episode": 28,
+        "seed": 128
+      },
+      {
+        "episode": 29,
+        "seed": 129
+      },
+      {
+        "episode": 33,
+        "seed": 133
+      },
+      {
+        "episode": 34,
+        "seed": 134
+      },
+      {
+        "episode": 37,
+        "seed": 137
+      },
+      {
+        "episode": 38,
+        "seed": 138
+      },
+      {
+        "episode": 39,
+        "seed": 139
+      },
+      {
+        "episode": 41,
+        "seed": 141
+      },
+      {
+        "episode": 42,
+        "seed": 142
+      },
+      {
+        "episode": 45,
+        "seed": 145
+      },
+      {
+        "episode": 46,
+        "seed": 146
+      },
+      {
+        "episode": 48,
+        "seed": 148
+      }
+    ],
+    "T25_ButterCreamPlate": [
+      {
+        "episode": 1,
+        "seed": 101
+      },
+      {
+        "episode": 2,
+        "seed": 102
+      },
+      {
+        "episode": 3,
+        "seed": 103
+      },
+      {
+        "episode": 5,
+        "seed": 105
+      },
+      {
+        "episode": 7,
+        "seed": 107
+      },
+      {
+        "episode": 9,
+        "seed": 110
+      },
+      {
+        "episode": 10,
+        "seed": 111
+      },
+      {
+        "episode": 11,
+        "seed": 112
+      },
+      {
+        "episode": 15,
+        "seed": 116
+      },
+      {
+        "episode": 19,
+        "seed": 121
+      },
+      {
+        "episode": 23,
+        "seed": 129
+      },
+      {
+        "episode": 25,
+        "seed": 131
+      },
+      {
+        "episode": 26,
+        "seed": 132
+      },
+      {
+        "episode": 27,
+        "seed": 134
+      },
+      {
+        "episode": 28,
+        "seed": 135
+      },
+      {
+        "episode": 30,
+        "seed": 137
+      },
+      {
+        "episode": 31,
+        "seed": 140
+      },
+      {
+        "episode": 32,
+        "seed": 141
+      },
+      {
+        "episode": 37,
+        "seed": 148
+      },
+      {
+        "episode": 41,
+        "seed": 153
+      },
+      {
+        "episode": 42,
+        "seed": 155
+      },
+      {
+        "episode": 43,
+        "seed": 156
+      },
+      {
+        "episode": 48,
+        "seed": 164
+      },
+      {
+        "episode": 50,
+        "seed": 168
+      },
+      {
+        "episode": 52,
+        "seed": 172
+      }
+    ],
+    "T26_ChocolateCreamPlate": [
+      {
+        "episode": 0,
+        "seed": 100
+      },
+      {
+        "episode": 1,
+        "seed": 101
+      },
+      {
+        "episode": 3,
+        "seed": 104
+      },
+      {
+        "episode": 5,
+        "seed": 106
+      },
+      {
+        "episode": 11,
+        "seed": 119
+      },
+      {
+        "episode": 14,
+        "seed": 123
+      },
+      {
+        "episode": 15,
+        "seed": 129
+      },
+      {
+        "episode": 16,
+        "seed": 131
+      },
+      {
+        "episode": 18,
+        "seed": 137
+      },
+      {
+        "episode": 22,
+        "seed": 145
+      },
+      {
+        "episode": 23,
+        "seed": 148
+      },
+      {
+        "episode": 24,
+        "seed": 150
+      },
+      {
+        "episode": 28,
+        "seed": 159
+      },
+      {
+        "episode": 30,
+        "seed": 163
+      },
+      {
+        "episode": 32,
+        "seed": 166
+      },
+      {
+        "episode": 33,
+        "seed": 172
+      },
+      {
+        "episode": 34,
+        "seed": 174
+      },
+      {
+        "episode": 38,
+        "seed": 191
+      },
+      {
+        "episode": 41,
+        "seed": 196
+      },
+      {
+        "episode": 42,
+        "seed": 197
+      },
+      {
+        "episode": 45,
+        "seed": 200
+      },
+      {
+        "episode": 47,
+        "seed": 204
+      },
+      {
+        "episode": 48,
+        "seed": 205
+      },
+      {
+        "episode": 51,
+        "seed": 210
+      },
+      {
+        "episode": 55,
+        "seed": 223
+      }
+    ]
+  }
+}

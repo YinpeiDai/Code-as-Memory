@@ -9,7 +9,7 @@ import subprocess
 import tempfile
 import threading
 import time
-from cam.benchmarks.base import synthetic_value, zero_action
+from cam.interface.base import synthetic_value, zero_action
 from cam.harness.isolation import command, limits, terminate
 from cam.runtime.wire import observation_fields, pack, send, receive
 
@@ -20,7 +20,7 @@ MINIMUM_BYTES = 256 * 1024**2
 
 def legacy_interface(include_depth=False):
     """RoboMME's 256x256 sensor set, used when no benchmark interface is given."""
-    from cam.benchmarks.base import action, sensor
+    from cam.interface.base import action, sensor
 
     sensors = {
         "front_rgb": sensor("uint8", (256, 256, 3), "front RGB"),

@@ -14,6 +14,17 @@ __pycache__/
 /outputs
 /outputs/
 /local/
+/public_runs
+/public_runs/
+/validate_runs
+/validate_runs/
+# Incoming policy bundle; publish verified final code through solutions/.
+/mikasarobo/
+# Local historical tooling and compatibility paths are not public source.
+/legacy/
+/src/cam/legacy/
+/solutions/mikasa_robo_v2
+/configs/solutions/mikasa_robo_v2
 .ruff_cache/
 *.log
 .env
@@ -39,5 +50,7 @@ __pycache__/
 
 # Local simulator builds and downloaded assets; retain environment recipes/locks.
 /envs/*/assets/
+/envs/*/assets
 /envs/*/curobo/
 /envs/*/install_record.txt
+/legacy/

@@ -13,31 +13,37 @@ from cam.prompts import BENCHMARK_MODE_GUIDANCE, ROOT, benchmark_mode_guidance, 
 ])
 def test_guidance_is_only_for_mikasa_both_v2(mode, budget, protocol):
     class Adapter:
-        guide = "mikasa_robo_v2.md"
+        guide = "mikasa_robo/guide.md"
 
         def task_guide(self, task):
             raise AssertionError("Private task information must not enter the prompt")
 
         diagnostic_task_contract = task_guide
 
-    supplement = (ROOT / "benchmarks/mikasa_robo_both_v2.md").read_text()
-    for benchmark in ("mikasa_robo", "mikasa_robo_v2", "robomme", "rmbench", "robomemarena"):
-        config = RunConfig(benchmark=benchmark, mode=mode, budget=budget, both_protocol=protocol)
+    supplement = (ROOT / "mikasa_robo/both.md").read_text()
+    for benchmark in ("mikasa_robo_v2", "robomme", "rmbench", "robomemarena"):
+        selected_protocol = None if benchmark == "robomemarena" and mode == "both" else protocol
+        config = RunConfig(benchmark=benchmark, mode=mode, budget=budget, both_protocol=selected_protocol)
         enabled = benchmark in ("mikasa_robo", "mikasa_robo_v2") and protocol == "v2"
         for task in ("BunchOfColors3-VLA-v0", "TakeItBack-VLA-v0"):
             prompt = render(config, task, [{"episode": 1}], [{"episode": 2}], adapter=Adapter())
             assert prompt.count(supplement) == int(enabled)
-            assert (benchmark_mode_guidance(config) is not None) == enabled
+            guidance = benchmark_mode_guidance(config)
+            assert (guidance is not None and guidance["text"] == supplement) == enabled
             mode_file = f"both_{protocol}" if mode == "both" else mode
-            assert (ROOT / "modes" / f"{mode_file}.md").read_text() in prompt
+            mode_text = (ROOT / "modes" / f"{mode_file}.md").read_text()
+            if config.both_protocol == "demo_first":
+                mode_text = (ROOT / "modes/both_v2.md").read_text().replace("Demonstrations + interaction v2:", "Demonstrations + interaction:", 1)
+            assert mode_text in prompt
             assert (ROOT / "core.md").read_text() in prompt
             assert "Maximum simulator attempts: " + str(budget) in prompt
 
 
-def test_preparation_pins_guidance_and_records_its_provenance(run_factory, monkeypatch):
+@pytest.mark.parametrize("benchmark", ["mikasa_robo_v2", "robomemarena"])
+def test_preparation_pins_guidance_and_records_its_provenance(run_factory, monkeypatch, benchmark):
     # The synthetic RoboMME fixture exercises full preparation without MIKASA
     # data, benchmark implementation, a native simulator, or a coding client.
-    relative = BENCHMARK_MODE_GUIDANCE[("mikasa_robo_v2", "both", "v2")]
+    relative = BENCHMARK_MODE_GUIDANCE[(benchmark, "both", "demo_first" if benchmark == "robomemarena" else "v2")]
     monkeypatch.setitem(BENCHMARK_MODE_GUIDANCE, ("robomme", "both", "v2"), relative)
     root = run_factory("both", 2, both_protocol="v2")
     manifest = validate_run(root)

@@ -35,21 +35,24 @@ def test_all_versioned_templates_and_client_independent_prompts():
     benchmark_clients = set()
     for path in templates:
         config = RunConfig.from_dict(read(path))
-        # MIKASA-Robo v2 assigns 50 demos and 50 interaction seeds (user decision).
-        assert config.budget == (50 if config.benchmark == "mikasa_robo_v2" else 25)
-        assert path.name == f"both_{config.both_protocol}_{config.coding.agent}.json"
+        # MIKASA assigns 50 demos and one attempt on each demo identity.
+        assert config.budget == (50 if config.benchmark in ("mikasa_robo", "mikasa_robo_v2", "robomemarena") else 25)
+        assert path.name == (f"both_{config.coding.agent}.json" if config.benchmark in ("mikasa_robo", "robomemarena")
+                             else f"both_{config.both_protocol}_{config.coding.agent}.json")
         assert RunConfig.from_dict(config.to_dict()) == config
         benchmark_clients.add((config.benchmark, config.coding.agent))
     for benchmark, client in benchmark_clients:
+        if benchmark in ("mikasa_robo", "robomemarena"):
+            continue
         versions = [
             read(configs / benchmark / f"both_{version}_{client}.json")
-            for version in BOTH_PROTOCOLS
+            for version in ("v1", "v2")
         ]
         assert {k: v for k, v in versions[0].items() if k != "both_protocol"} == {
             k: v for k, v in versions[1].items() if k != "both_protocol"
         }
     assert not (ROOT / "modes/both.md").exists()
-    for version in BOTH_PROTOCOLS:
+    for version in ("v1", "v2"):
         claude = RunConfig(benchmark="robomme", mode="both", budget=20, both_protocol=version)
         codex = replace(claude, coding=CodingConfig(agent="codex", model="gpt-6.1-sol", provider="openai"))
         episodes = [{"episode": 2}, {"episode": 5}, {"episode": 8}]
@@ -62,7 +65,7 @@ def test_all_versioned_templates_and_client_independent_prompts():
 def test_two_versions_pin_distinct_prompts_with_identical_evidence_and_harness(dataset, tmp_path):
     data, source = dataset
     roots, plans, prompts, states = [], [], [], []
-    for version in BOTH_PROTOCOLS:
+    for version in ("v1", "v2"):
         result = prepare_runs(
             tmp_path / "runs", data,
             RunConfig(benchmark="robomme", mode="both", budget=2, both_protocol=version),
@@ -127,7 +130,7 @@ def test_historical_unversioned_reports_are_not_relabeled():
 ])
 def test_prompts_never_read_source_derived_task_guides(mode, budget, version):
     class Adapter:
-        guide = "robomme.md"
+        guide = "robomme/guide.md"
 
         def task_guide(self, task):
             raise AssertionError("Private success conditions must never reach a learner")
@@ -145,7 +148,7 @@ def test_prompts_never_read_source_derived_task_guides(mode, budget, version):
 ])
 def test_authorized_order_correction_is_scoped_to_exact_benchmark_task(mode, budget, version):
     class Adapter:
-        guide = "mikasa_robo.md"
+        guide = "mikasa_robo/guide.md"
 
         def task_guide(self, task):
             raise AssertionError("A static correction must not read simulator task guides")
@@ -155,13 +158,14 @@ def test_authorized_order_correction_is_scoped_to_exact_benchmark_task(mode, bud
     for benchmark, task in [
         ("mikasa_robo", "SeqOfColors3-VLA-v0"),
         ("mikasa_robo_v2", "SeqOfColors3-VLA-v0"),
-        ("mikasa_robo_v2", "SeqOfColors5-VLA-v0"),
         ("mikasa_robo", "SeqOfColors5-VLA-v0"),
-        ("mikasa_robo", "SeqOfColors3-Long-VLA-v0"),
-        ("mikasa_robo", "ChainOfColors3-VLA-v0"),
+        ("mikasa_robo_v2", "SeqOfColors5-VLA-v0"),
+        ("mikasa_robo_v2", "SeqOfColors3-Long-VLA-v0"),
+        ("mikasa_robo_v2", "ChainOfColors3-VLA-v0"),
         ("rmbench", "SeqOfColors3-VLA-v0"),
     ]:
-        config = RunConfig(benchmark=benchmark, mode=mode, budget=budget, both_protocol=version)
+        selected_version = None if benchmark == "mikasa_robo" and mode == "both" else version
+        config = RunConfig(benchmark=benchmark, mode=mode, budget=budget, both_protocol=selected_version)
         prompt = render(config, task, [{"episode": 0}], adapter=Adapter())
         corrected = benchmark in ("mikasa_robo", "mikasa_robo_v2") and task == "SeqOfColors3-VLA-v0"
         assert ("## Task instruction clarification" in prompt) == corrected
@@ -176,7 +180,7 @@ def test_preparation_records_and_pins_clarification(run_factory, monkeypatch):
     from cam.prompts import TASK_CLARIFICATIONS, task_clarification
 
     # Exercise preparation with the small synthetic dataset, without a simulator.
-    relative = TASK_CLARIFICATIONS[("mikasa_robo", "SeqOfColors3-VLA-v0")]
+    relative = TASK_CLARIFICATIONS[("mikasa_robo_v2", "SeqOfColors3-VLA-v0")]
     monkeypatch.setitem(TASK_CLARIFICATIONS, ("robomme", "BinFill"), relative)
     root = run_factory()
     entry = task_clarification("robomme", "BinFill")

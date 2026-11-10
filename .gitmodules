@@ -7,3 +7,6 @@
 [submodule "third_party/rmbench"]
 	path = third_party/rmbench
 	url = https://github.com/robotwin-Platform/rmbench
+[submodule "third_party/robomemarena"]
+	path = third_party/robomemarena
+	url = https://github.com/OpenHelix-Team/RoboMemArena

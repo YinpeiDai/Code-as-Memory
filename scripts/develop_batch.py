@@ -3,7 +3,7 @@
 Usage: .venv/bin/python scripts/develop_batch.py start PLAN --workers 8 --gpus 0 1
        .venv/bin/python scripts/develop_batch.py status BATCH
 PLAN declares tasks, demo counts, datasets and raw-data roots. Existing plans
-default to 25 demos. MIKASA v2 requires completed, separately rendered data.
+default to 25 demos. MIKASA requires its released RGB-D demonstration package.
 Missing demos for other benchmarks may be extracted. --evaluate-on-freeze opts
 into a separate host evaluation queue after each task finishes and freezes.
 """
@@ -64,12 +64,19 @@ def data_assignment(name, item, config):
         raise ValueError("demo_counts must map selected tasks to explicit counts")
     if any(type(value) is not int or value < 1 or value > count for value in counts.values()):
         raise ValueError("Per-task demo counts must be positive and no larger than demo_count")
+    interactions = item.get("interaction_counts", {})
+    if not isinstance(interactions, dict) or set(interactions) - set(item["tasks"]):
+        raise ValueError("interaction_counts must map selected tasks to explicit counts")
+    if interactions and (cfg.mode != "both" or cfg.training_seed_policy != "demo_cycle"):
+        raise ValueError("Per-task interaction counts require the demo-seed protocol")
+    if any(type(value) is not int or value < 1 or value > cfg.budget for value in interactions.values()):
+        raise ValueError("Per-task interaction counts must be positive and no larger than the budget")
     if cfg.benchmark != name:
         raise ValueError("Batch benchmark differs from configuration")
     if cfg.mode == "demos":
         if cfg.budget != 0:
             raise ValueError("Demo-only batches require zero simulator attempts")
-    elif (cfg.mode != "both" or cfg.both_protocol != "v2"
+    elif (cfg.mode != "both" or cfg.both_protocol not in ("v2", "demo_first")
           or cfg.training_seed_policy not in ("disjoint_once", "demo_cycle")
           or cfg.budget < 1 or cfg.budget != cfg.training_seed_count):
         raise ValueError("Batch requires demo-only or v2 with one distinct training seed per allowed attempt")
@@ -79,7 +86,8 @@ def data_assignment(name, item, config):
         if not (root / "manifest.json").is_file():
             raise ValueError(f"Dataset is not finalized: {root}/manifest.json")
         manifest = read(root / "manifest.json")
-        if manifest["benchmark"] != name or bool(manifest["depth"]) != cfg.depth:
+        from cam.interface.registry import benchmark_matches
+        if not benchmark_matches(name, manifest["benchmark"]) or bool(manifest["depth"]) != cfg.depth:
             raise ValueError(f"Dataset benchmark or depth differs from configuration: {root}")
         datasets[str(root)] = manifest
     existing, missing = {}, []
@@ -92,39 +100,113 @@ def data_assignment(name, item, config):
         expected = counts.get(task, count)
         if len(records) != expected:
             raise ValueError(f"Expected exactly {expected} demos: {name}/{task}, found {len(records)}")
-        if cfg.mode == "both" and cfg.training_seed_policy == "demo_cycle" and expected != cfg.budget:
+        if (cfg.mode == "both" and cfg.training_seed_policy == "demo_cycle"
+                and expected != interactions.get(task, cfg.budget)):
             raise ValueError("Demo-seed batches require one attempt for every assigned demonstration")
         existing.setdefault(dataset, []).append(task)
-    if missing and (name == "mikasa_robo_v2" or item.get("require_prepared_data", False)):
+    if missing and (name in ("mikasa_robo", "mikasa_robo_v2") or item.get("require_prepared_data", False)):
         raise ValueError(f"Complete the prepared demonstrations first: {name}: {', '.join(missing)}")
     if any(task in counts for task in missing):
         raise ValueError("Explicit per-task counts require already prepared demonstrations")
+    if any(task in interactions for task in missing):
+        raise ValueError("Explicit interaction counts require already prepared demonstrations")
     assignment = {"demo_count": count, "existing": existing, "missing": missing}
     if counts:
         assignment["demo_counts"] = {task: counts.get(task, count) for task in item["tasks"]}
+    if interactions:
+        assignment["interaction_counts"] = {task: interactions.get(task, cfg.budget) for task in item["tasks"]}
     return assignment
+
+
+def task_configuration(config, assignment, task):
+    """Pin a demo shortfall's attempt count without changing its learning protocol."""
+    budget = assignment.get("interaction_counts", {}).get(task, config["budget"])
+    if budget == config["budget"]:
+        return dict(config)
+    return {**config, "budget": budget, "training_seed_count": budget}
+
+
+def preparation_groups(cfg):
+    """Prepare tasks sharing an assigned dataset and exact pinned configuration."""
+    for dataset, tasks in cfg["existing"].items():
+        groups = {}
+        for task in tasks:
+            config = cfg.get("task_configs", {}).get(task, cfg["config"])
+            groups.setdefault(config, []).append(task)
+        for config, group in groups.items():
+            yield dataset, group, {**cfg, "config": config}
+
+
+def assign_downloaded_pool(name, item, output):
+    """Materialize a selected-25 H5 during preparation, before any learner starts."""
+    from cam.data.subset import selected_rows, subset
+    from cam.io import read
+
+    if item.get("demo_count", 25) != 25:
+        return
+    datasets = []
+    for index, raw in enumerate(item["datasets"]):
+        source = (ROOT / raw).resolve()
+        if not (source / "manifest.json").is_file():
+            datasets.append(raw)
+            continue
+        manifest = read(source / "manifest.json")
+        tasks = [task for task in item["tasks"] if task in manifest["tasks"]]
+        selection = source / "selected_25.json"
+        if not selection.exists():
+            selection = ROOT / "configs" / name / "datasets/demo_only_25_seeds.json"
+        if not tasks or not selection.exists():
+            datasets.append(raw)
+            continue
+        assignment = read(selection)
+        for task in tasks:
+            selected_rows(manifest, assignment, task, 25)
+        if any(len(manifest["tasks"][task]["episodes"]) > 25 for task in tasks):
+            destination = Path(output) / name / f"selected_25_{index}"
+            subset(source, destination, 25, tasks, selection=selection, validate_source=False)
+            datasets.append(str(destination))
+        else:
+            datasets.append(raw)
+    item["datasets"] = datasets
 
 
 def start(args):
     import cam
-    from cam.benchmarks.base import source_hash
-    from cam.benchmarks.registry import get_adapter, simulator_python
+    from cam.interface.base import source_hash
+    from cam.interface.registry import get_adapter, simulator_python
     from cam.harness.prepare import simulator_build_files
     from cam.io import copy_tree, read, tree_hash, write
 
     spec = read(args.plan)
+    if getattr(args, "dataset", None):
+        if len(spec["benchmarks"]) != 1:
+            raise ValueError("--dataset requires a single-benchmark plan")
+        item = next(iter(spec["benchmarks"].values()))
+        item["datasets"] = [str(args.dataset.resolve())]
+        item["require_prepared_data"] = True
+    if getattr(args, "tasks", None):
+        if len(spec["benchmarks"]) != 1:
+            raise ValueError("--tasks requires a single-benchmark plan")
+        item = next(iter(spec["benchmarks"].values()))
+        item["tasks"] = args.tasks
+        for key in ("demo_counts", "interaction_counts"):
+            if key in item:
+                item[key] = {task: count for task, count in item[key].items() if task in args.tasks}
+    tag = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%S_%fZ")
+    output = Path(args.output).resolve() if getattr(args, "output", None) else None
+    data = ((output / "datasets" if output else ROOT / "data/development_batches") / tag).resolve()
+    for name, item in spec["benchmarks"].items():
+        assign_downloaded_pool(name, item, data)
     configs = {name: read(ROOT / item["config"]) for name, item in spec["benchmarks"].items()}
     assignments = {name: data_assignment(name, item, configs[name]) for name, item in spec["benchmarks"].items()}
-    tag = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%S_%fZ")
-    batch = (ROOT / "outputs/development_batches" / tag).resolve()
+    batch = ((output / "batches" if output else ROOT / "outputs/development_batches") / tag).resolve()
     batch.mkdir(parents=True)
-    data = (ROOT / "data/development_batches" / tag).resolve()
-    data.mkdir(parents=True)
+    data.mkdir(parents=True, exist_ok=True)
     checkout = batch / "inputs/checkout"
     checkout.mkdir(parents=True)
     for name in ("pyproject.toml", "uv.lock"):
         shutil.copy2(ROOT / name, checkout / name)
-    copy_tree(Path(cam.__file__).parent, checkout / "src/cam")
+    copy_tree(Path(cam.__file__).parent, checkout / "src/cam", ("legacy",))
     shutil.copy2(ROOT / "scripts/audit_run.py", batch / "audit_run.py")
     env, benches = {}, {}
     for name, item in spec["benchmarks"].items():
@@ -144,7 +226,7 @@ def start(args):
                 path.parent.mkdir(parents=True, exist_ok=True)
                 path.symlink_to(Path(original).resolve(), target_is_directory=True)
                 assets[link] = tree_hash(original)
-        else:
+        elif getattr(adapter, "asset_links", {}):
             asset = next(iter(adapter.asset_links.values()))
             env[f"CAM_{adapter.package.upper()}_ASSETS"] = str(Path(asset).resolve())
         assert source_hash(get_adapter(name, target)) == source_hash(adapter)
@@ -155,19 +237,27 @@ def start(args):
             shutil.copy2(recipe, dest)
         config = configs[name]
         write(batch / "inputs" / f"{name}.json", config)
+        task_configs = {}
+        for task in tasks:
+            task_config = task_configuration(config, assignments[name], task)
+            if task_config != config:
+                path = batch / "inputs/task_configs" / name / f"{task}.json"
+                write(path, task_config)
+                task_configs[task] = str(path)
         benches[name] = {"tasks": tasks, **assignments[name], "interaction_count": config["budget"],
-                         "raw": str((ROOT / item["raw"]).resolve()), "source": str(target),
+                         "raw": str((ROOT / item.get("raw", f"data/raw/{name}")).resolve()), "source": str(target),
                          "source_hash": source_hash(adapter), "asset_hashes": assets,
                          "config": str(batch / "inputs" / f"{name}.json"),
+                         "task_configs": task_configs,
                          "training_seed_policy": config.get("training_seed_policy", "demo_cycle"),
                          "new_data": str(data / name), "depth": config["depth"]}
     evaluation = {"enabled": getattr(args, "evaluate_on_freeze", False),
-                  "workers_per_gpu": getattr(args, "evaluation_workers_per_gpu", 2),
+                  "workers_per_gpu": getattr(args, "evaluation_workers_per_gpu", 5),
                   "task_concurrency": 1}
     plan = {"created": time.time(), "tag": tag, "workers": args.workers, "gpus": args.gpus,
             "prepare_workers": getattr(args, "prepare_workers", 1),
             "selection_reason": spec["selection_reason"], "benchmarks": benches,
-            "environment": env, "python": sys.executable, "runs": str((ROOT / "runs").resolve()),
+            "environment": env, "python": sys.executable, "runs": str((output / "dev_logs" if output else ROOT / "runs").resolve()),
             "harness_hash": tree_hash(checkout / "src/cam"),
             "held_out_evaluation": evaluation["enabled"], "evaluation": evaluation}
     write(batch / "plan.json", plan)
@@ -178,7 +268,8 @@ def start(args):
         "if __name__ == '__main__':\n    from cam.cli import main\n    raise SystemExit(main())\n"
     )
     rows = [f"| {name} | {cfg['demo_count']} | {cfg['interaction_count']} | {', '.join(cfg['tasks'])} |" for name, cfg in benches.items()]
-    actual_counts = [f"- {name}/{task}: {count} assigned demos (target {cfg['demo_count']})."
+    actual_counts = [f"- {name}/{task}: {count} assigned demos (target {cfg['demo_count']}), "
+                     f"{cfg.get('interaction_counts', {}).get(task, cfg['interaction_count'])} training attempts."
                      for name, cfg in benches.items() for task, count in cfg.get("demo_counts", {}).items()]
     (batch / "README.md").write_text(
         f"# Coding development batch: {tag}\n\n"
@@ -251,20 +342,19 @@ def boundary_check(root, task, demo_count=25):
             }
     assert "Task-specific contract" not in prompt and "Success criterion" not in prompt
     private = [str(root), str(root / "inputs"), str(ROOT), plan["raw_data_reference"],
-               "/runtime/cam/benchmarks", "/runtime/cam/harness", "/feedback/../inputs"]
-    script = """import json, os, socket, pathlib, h5py
+               "/runtime/cam/interface", "/runtime/cam/harness", "/feedback/../inputs"]
+    script = """import json, os, socket, pathlib
 private = PRIVATE
 assert not any(pathlib.Path(p).exists() for p in private), private
 assert not any(k.startswith(('AWS_', 'ANTHROPIC_', 'CAM_SIMULATOR_')) for k in os.environ)
 files = list(pathlib.Path('/demonstrations').glob('*.h5'))
 assert len(files) == 1
-with h5py.File(files[0], 'r') as h: assert len(h) == DEMO_COUNT
 s = socket.socket(); s.settimeout(1)
 try: result = s.connect_ex(('192.0.2.1', 443))
 except OSError: result = -1
 assert result != 0
 s.close()
-print(json.dumps({'passed': True, 'public_demo_episodes': DEMO_COUNT, 'private_paths_hidden': True, 'network_unreachable': True}))
+print(json.dumps({'passed': True, 'public_demo_episodes': DEMO_COUNT, 'demo_count_source': 'prepared_manifest', 'h5_opened': False, 'private_paths_hidden': True, 'network_unreachable': True}))
 """.replace("PRIVATE", repr(private)).replace("DEMO_COUNT", str(demo_count))
     code, out, err = run(folder / "workspace", root / "runtime", ["python", "-c", script],
                          feedback=folder / "feedback", demonstrations=folder / "demonstrations", readonly=True)
@@ -282,8 +372,8 @@ print(json.dumps({'passed': True, 'public_demo_episodes': DEMO_COUNT, 'private_p
 
 
 def worker(batch):
-    from cam.benchmarks.base import source_hash
-    from cam.benchmarks.registry import get_adapter
+    from cam.interface.base import source_hash
+    from cam.interface.registry import get_adapter
     from cam.io import read, tree_hash, write
 
     with (batch / "worker.lock").open("a") as lock:
@@ -307,11 +397,14 @@ def worker(batch):
         evaluation = plan.get("evaluation", {"enabled": False})
 
         def save(key=None, **changes):
+            from cam.reporting.progress import write_progress
             with guard:
                 if key:
                     tasks[key].update(changes, updated=time.time())
-                write(batch / "status.json", {"status": "running", "pid": os.getpid(),
-                      "updated": time.time(), "workers": plan["workers"], "tasks": tasks})
+                current = {"status": "running", "pid": os.getpid(),
+                           "updated": time.time(), "workers": plan["workers"], "tasks": tasks}
+                write(batch / "status.json", current)
+                write_progress(batch, "Development batch", current)
 
         def command(label, argv, extra=None):
             path = batch / "logs" / f"{label}_{time.time_ns()}"
@@ -337,16 +430,17 @@ def worker(batch):
                 ready.put((name, task, root))
 
         def prepare_benchmark(name, cfg):
-            def existing_group(dataset, group):
+            def existing_group(dataset, group, group_cfg):
                 try:
-                    prepare_group(name, cfg, dataset, group)
+                    prepare_group(name, group_cfg, dataset, group)
                 except Exception as exc:
                     for task in group:
                         if tasks[f"{name}/{task}"]["status"] == "preparing":
                             save(f"{name}/{task}", status="preparation_failed", error=str(exc))
 
             with ThreadPoolExecutor(max_workers=plan.get("prepare_workers", 1)) as pool:
-                futures = [pool.submit(existing_group, dataset, group) for dataset, group in cfg["existing"].items()]
+                futures = [pool.submit(existing_group, dataset, group, group_cfg)
+                           for dataset, group, group_cfg in preparation_groups(cfg)]
                 for future in as_completed(futures):
                     future.result()
             group = cfg["missing"]
@@ -462,8 +556,11 @@ def worker(batch):
         complete = all(t["status"] == "finished" and t.get("audit_status") == "finished"
                        and (not evaluation["enabled"] or t.get("evaluation_status") == "finished")
                        for t in tasks.values())
-        write(batch / "status.json", {"status": "finished" if complete else "needs_attention",
-              "finished": time.time(), "workers": plan["workers"], "tasks": tasks})
+        final = {"status": "finished" if complete else "needs_attention",
+                 "finished": time.time(), "workers": plan["workers"], "tasks": tasks}
+        write(batch / "status.json", final)
+        from cam.reporting.progress import write_progress
+        write_progress(batch, "Development batch", final)
 
 
 def main():
@@ -471,13 +568,16 @@ def main():
     commands = parser.add_subparsers(dest="command", required=True)
     p = commands.add_parser("start")
     p.add_argument("plan", type=Path)
+    p.add_argument("--dataset", type=Path, help="Downloaded demonstration directory containing manifest.json")
+    p.add_argument("--output", type=Path, help="Keep batch state, development logs and rollouts beneath this directory")
+    p.add_argument("--tasks", nargs="+", help="Optionally select tasks from a single-benchmark plan")
     p.add_argument("--workers", type=int, default=8)
     p.add_argument("--prepare-workers", type=int, default=1,
                    help="Concurrent dataset preparations; use per-task datasets to start learning progressively")
     p.add_argument("--gpus", type=int, nargs="+", default=[0, 1])
     p.add_argument("--evaluate-on-freeze", action="store_true",
                    help="Evaluate completed frozen policies in a separate host queue")
-    p.add_argument("--evaluation-workers-per-gpu", type=int, default=2)
+    p.add_argument("--evaluation-workers-per-gpu", type=int, default=5)
     for name in ("_worker", "status"):
         commands.add_parser(name).add_argument("batch", type=Path)
     args = parser.parse_args()

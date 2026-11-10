@@ -189,6 +189,7 @@ function render() {
     : demosOnly
       ? `<div class="note">Demonstration browser: ${DATA.datasets.length} extracted dataset(s) across ${new Set(DATA.datasets.map((d) => d.benchmark)).size} benchmark(s). No runs are linked to this site.</div>`
       : '<div class="note">Fresh CaM workspace. No historical results are imported. Extract raw training data, prepare a run, then develop and evaluate policies.</div>';
+  if (DATA.site_note) $("notice").innerHTML += `<div class="note">${esc(DATA.site_note)}</div>`;
   $("result-table").innerHTML = table(
     [
       "Run / model",
@@ -209,7 +210,9 @@ function render() {
         `${s.scored}/${s.expected}${s.infrastructure_errors ? " · " + s.infrastructure_errors + " infrastructure errors" : ""}`,
         s.complete
           ? `<strong class="good">${rate(s.success_rate)}</strong> (${s.successes}/${s.expected})`
-          : `<span class="partial">${rate(s.observed_success_rate)} partial</span> (${s.successes}/${s.scored} scored)`,
+          : s.scored
+            ? `<span class="partial">${rate(s.observed_success_rate)} partial</span> (${s.successes}/${s.scored} scored)`
+            : "Not evaluated",
         r.cost.reported_cost_usd == null
           ? "Not reported"
           : `$${num(r.cost.reported_cost_usd)}${r.cost.complete ? "" : " known subtotal"} · once per run`,

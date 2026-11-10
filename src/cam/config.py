@@ -3,9 +3,11 @@
 from dataclasses import asdict, dataclass, field
 
 MODES = ("demos", "interaction", "both")
+DEMO_FIRST_BENCHMARKS = ("mikasa_robo", "robomemarena")
 BOTH_PROTOCOLS = {
     "v1": "Free use of demonstrations and interaction",
     "v2": "Demonstrations first; interaction verifies and explores uncertainties",
+    "demo_first": "Demonstrations first; interaction verifies and explores uncertainties",
 }
 
 
@@ -27,7 +29,8 @@ def learning_setting(mode, both_protocol=None):
     if mode == "both" and both_protocol is not None:
         if both_protocol not in BOTH_PROTOCOLS:
             raise ValueError("both_protocol must be v1 or v2")
-        setting += "_" + both_protocol
+        if both_protocol != "demo_first":
+            setting += "_" + both_protocol
     return setting
 
 
@@ -68,12 +71,22 @@ class RunConfig:
     coding: CodingConfig = field(default_factory=CodingConfig)
     both_protocol: str | None = None
     physics_backend: str | None = None
+    recording: str = "full"
 
     def __post_init__(self):
+        if self.recording not in ("full", "results"):
+            raise ValueError("recording must be full or results")
+        if self.benchmark in DEMO_FIRST_BENCHMARKS and self.mode == "both":
+            if self.both_protocol in (None, "v2"):
+                object.__setattr__(self, "both_protocol", "demo_first")
+            elif self.both_protocol != "demo_first":
+                raise ValueError("This benchmark uses demo-first development; older protocols belong in legacy")
+        if self.both_protocol == "demo_first" and self.benchmark not in DEMO_FIRST_BENCHMARKS:
+            raise ValueError("The unversioned demo-first default is available for MIKASA and RoboMemArena")
         if self.physics_backend is not None and (
-            self.benchmark != "mikasa_robo_v2" or self.physics_backend not in ("cpu", "gpu")
+            self.benchmark not in ("mikasa_robo", "mikasa_robo_v2") or self.physics_backend not in ("cpu", "gpu")
         ):
-            raise ValueError("physics_backend is a MIKASA-Robo v2 override: cpu or gpu")
+            raise ValueError("physics_backend is a MIKASA-Robo override: cpu or gpu")
         if self.mode not in MODES or self.budget < 0:
             raise ValueError(
                 "Choose demos, interaction or both and a nonnegative budget"

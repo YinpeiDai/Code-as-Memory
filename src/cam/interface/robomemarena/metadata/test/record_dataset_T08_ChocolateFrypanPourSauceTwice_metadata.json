@@ -1,0 +1,275 @@
+{
+  "env_id": "T08_ChocolateFrypanPourSauceTwice",
+  "task_id": 8,
+  "bddl": "bddl/8_pick_chocolate_in_frypan_pour_tomato_sauce_twice.bddl",
+  "bddl_sha256": "60f565dafb922df9f47c5bb5a82b03cf84d3b0234d3a63b62ebc0db6f72952aa",
+  "benchmark_commit": "830a31ae7c08fb99f514843275cd264a2bf36f16",
+  "split": "test",
+  "identity": "official sweep run_all_tasks1_26.py: seed = 50 + ep",
+  "protocol": {
+    "seed_start": 50,
+    "trials": 50,
+    "max_steps": 2500,
+    "num_steps_wait": 10,
+    "post_goal_steps": 200,
+    "extra_pour_monitor_steps": 30,
+    "fail_on_extra_pour": true,
+    "resize_size": 256,
+    "render": [
+      480,
+      640
+    ]
+  },
+  "records": [
+    {
+      "episode": 0,
+      "seed": 50,
+      "difficulty": null
+    },
+    {
+      "episode": 1,
+      "seed": 51,
+      "difficulty": null
+    },
+    {
+      "episode": 2,
+      "seed": 52,
+      "difficulty": null
+    },
+    {
+      "episode": 3,
+      "seed": 53,
+      "difficulty": null
+    },
+    {
+      "episode": 4,
+      "seed": 54,
+      "difficulty": null
+    },
+    {
+      "episode": 5,
+      "seed": 55,
+      "difficulty": null
+    },
+    {
+      "episode": 6,
+      "seed": 56,
+      "difficulty": null
+    },
+    {
+      "episode": 7,
+      "seed": 57,
+      "difficulty": null
+    },
+    {
+      "episode": 8,
+      "seed": 58,
+      "difficulty": null
+    },
+    {
+      "episode": 9,
+      "seed": 59,
+      "difficulty": null
+    },
+    {
+      "episode": 10,
+      "seed": 60,
+      "difficulty": null
+    },
+    {
+      "episode": 11,
+      "seed": 61,
+      "difficulty": null
+    },
+    {
+      "episode": 12,
+      "seed": 62,
+      "difficulty": null
+    },
+    {
+      "episode": 13,
+      "seed": 63,
+      "difficulty": null
+    },
+    {
+      "episode": 14,
+      "seed": 64,
+      "difficulty": null
+    },
+    {
+      "episode": 15,
+      "seed": 65,
+      "difficulty": null
+    },
+    {
+      "episode": 16,
+      "seed": 66,
+      "difficulty": null
+    },
+    {
+      "episode": 17,
+      "seed": 67,
+      "difficulty": null
+    },
+    {
+      "episode": 18,
+      "seed": 68,
+      "difficulty": null
+    },
+    {
+      "episode": 19,
+      "seed": 69,
+      "difficulty": null
+    },
+    {
+      "episode": 20,
+      "seed": 70,
+      "difficulty": null
+    },
+    {
+      "episode": 21,
+      "seed": 71,
+      "difficulty": null
+    },
+    {
+      "episode": 22,
+      "seed": 72,
+      "difficulty": null
+    },
+    {
+      "episode": 23,
+      "seed": 73,
+      "difficulty": null
+    },
+    {
+      "episode": 24,
+      "seed": 74,
+      "difficulty": null
+    },
+    {
+      "episode": 25,
+      "seed": 75,
+      "difficulty": null
+    },
+    {
+      "episode": 26,
+      "seed": 76,
+      "difficulty": null
+    },
+    {
+      "episode": 27,
+      "seed": 77,
+      "difficulty": null
+    },
+    {
+      "episode": 28,
+      "seed": 78,
+      "difficulty": null
+    },
+    {
+      "episode": 29,
+      "seed": 79,
+      "difficulty": null
+    },
+    {
+      "episode": 30,
+      "seed": 80,
+      "difficulty": null
+    },
+    {
+      "episode": 31,
+      "seed": 81,
+      "difficulty": null
+    },
+    {
+      "episode": 32,
+      "seed": 82,
+      "difficulty": null
+    },
+    {
+      "episode": 33,
+      "seed": 83,
+      "difficulty": null
+    },
+    {
+      "episode": 34,
+      "seed": 84,
+      "difficulty": null
+    },
+    {
+      "episode": 35,
+      "seed": 85,
+      "difficulty": null
+    },
+    {
+      "episode": 36,
+      "seed": 86,
+      "difficulty": null
+    },
+    {
+      "episode": 37,
+      "seed": 87,
+      "difficulty": null
+    },
+    {
+      "episode": 38,
+      "seed": 88,
+      "difficulty": null
+    },
+    {
+      "episode": 39,
+      "seed": 89,
+      "difficulty": null
+    },
+    {
+      "episode": 40,
+      "seed": 90,
+      "difficulty": null
+    },
+    {
+      "episode": 41,
+      "seed": 91,
+      "difficulty": null
+    },
+    {
+      "episode": 42,
+      "seed": 92,
+      "difficulty": null
+    },
+    {
+      "episode": 43,
+      "seed": 93,
+      "difficulty": null
+    },
+    {
+      "episode": 44,
+      "seed": 94,
+      "difficulty": null
+    },
+    {
+      "episode": 45,
+      "seed": 95,
+      "difficulty": null
+    },
+    {
+      "episode": 46,
+      "seed": 96,
+      "difficulty": null
+    },
+    {
+      "episode": 47,
+      "seed": 97,
+      "difficulty": null
+    },
+    {
+      "episode": 48,
+      "seed": 98,
+      "difficulty": null
+    },
+    {
+      "episode": 49,
+      "seed": 99,
+      "difficulty": null
+    }
+  ]
+}

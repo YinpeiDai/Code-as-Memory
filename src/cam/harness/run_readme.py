@@ -54,7 +54,58 @@ calculation to generated action routines.
 
 """
 
-MIKASA_RGBD = """## MIKASA v2 observation interface
+RMBENCH_ROBOT_CHECKS = """## RMBench offline robot checks
+
+`cam.runtime.rmbench` exposes `RobotModel`, `dry_run(state, pose, arm=...)` and
+`safety_check(state, action=None, arm=...)`. Both helpers share a NumPy/SciPy
+kinematics core using only supplied state and a sanitized robot model. The model,
+code and `api.md` are pinned under `runtime/cam/runtime/rmbench/` and mirrored in
+`api_reference/runtime/rmbench/`. They expose no task implementation or state.
+
+`robot.dry_run(*pose, arm=...)` uses the latest public commanded joint targets;
+`robot.safety_check(state, action, arm=...)` uses explicit arguments. Both are
+local calculations without RPC, simulator/GPU use, native steps or training
+attempts. Offline coding commands are audited normally; no live-query RPC log is
+generated. Native planning starts from measured joints, which can differ from
+these commanded observations. IK/URDF limits do not certify a collision-free
+trajectory, real-hardware safety, or successful execution. These new preparations
+disable policy-visible native planner-failure feedback; the interface records
+`planner_failure_feedback: false`. Native motion/scoring stay unchanged, and
+policies must inspect public observations for movement. Older snapshots and
+scored runs retain their original interface. New API use requires fresh preparation.
+
+"""
+
+RMBENCH_OBSERVED_MOTION = """## RMBench observation-derived motion feedback
+
+The action interface pins `motion_feedback` schema
+`cam-rmbench-observed-motion/1`: after each nonterminal action, the public runtime
+compares both observed EEF poses with the submitted targets. Position error
+greater than 0.02 m or shortest quaternion rotation error greater than 0.1 rad
+raises catchable `MotionError`. Missing/invalid poses report unavailable feedback.
+The action has already counted and `robot.now()`/`frames()` include its returned
+observations; either arm or gripper may have moved. Terminal `EpisodeEnd` wins.
+
+This calculation uses only public observations inside the policy process. Native
+planner-status feedback stays disabled; neither a private planner flag nor an
+offline IK result triggers this exception. It indicates a missed target, not its
+cause. The published earlier policy code may be reused unchanged, but its old
+scores do not establish performance under this revised feedback. New evaluations
+require fresh timetags and separate results; historical snapshots stay intact.
+
+"""
+
+
+def rmbench_observed_motion_note(manifest):
+    enabled = any(
+        interface.get("action", {}).get("motion_feedback", {}).get("schema")
+        == "cam-rmbench-observed-motion/1"
+        for interface in manifest.get("interfaces", {}).values()
+    )
+    return RMBENCH_OBSERVED_MOTION if enabled else ""
+
+
+MIKASA_RGBD = """## MIKASA RGB-D observation interface
 
 Development and held-out evaluation both render native 256x256 RGB-D from the
 front (scene) and wrist cameras on every control step. `front_rgb`/`wrist_rgb`
@@ -146,7 +197,8 @@ runs/<benchmark>/<task>/<agent-model>/<setting>/<timetag>/
 ```
 
 Settings are `demo_only`, `interaction_only`, `demo_interaction_v1`, and
-`demo_interaction_v2`. Mode `both` requires `both_protocol: "v1"` (free evidence
+`demo_interaction_v2`. MIKASA and RoboMemArena use `demo_interaction` with demo-first defaults. Other benchmarks in
+mode `both` require `both_protocol: "v1"` (free evidence
 choice) or `"v2"` (demos first, interaction for verification). Both use the same
 six-tool harness. Short folders use `cc` for Claude Code
 and `cx` for Codex, e.g. `cc-opus5.5` or `cx-gpt6.1-sol`. Provider prefixes are
@@ -164,6 +216,32 @@ is not mounted into coding tools. Existing legacy run paths remain usable.
 
 
 def write_run_readme(root, manifest):
+    if manifest.get("evaluation_only"):
+        source = manifest["published_solution"]
+        (root / "README.md").write_text(f'''# Published CaM solution evaluation
+
+This run imports final code from `{source['benchmark']}/{source['experiment']}`.
+It performs no learning, loads no demonstration dataset, and makes no model calls.
+The source experiment and exact code hashes are in `inputs/published_solution.json`;
+`inputs/published_policy/` pins the imported code and memory schema. Original
+development notes are excluded, so this run's program hash differs from the
+historical full-policy hash even though its executable code and memory match.
+
+The policy is already frozen at R000. The current checkout's harness, installed
+simulator, environment and complete official test identities are pinned here.
+This is a new evaluation, not a copy of the source experiment's scored outcomes.
+
+```bash
+cam evaluate {shlex.quote(str(root))} --gpus 0 --workers-per-gpu 1
+cam status {shlex.quote(str(root))}
+```
+
+Results, videos and aligned observations/actions are written under
+`tasks/<task>/rollouts/test/R000/epNNN/`. Use `--resume` to skip scored episodes.
+Archive infrastructure failures with `cam recover-test` before identical retries.
+The policy sandbox gets only its frozen program, public runtime and observations.
+''' + rmbench_observed_motion_note(manifest))
+        return
     cfg = manifest["config"]
     coding = cfg["coding"]
     setting = learning_setting(cfg["mode"], cfg.get("both_protocol"))
@@ -179,11 +257,11 @@ def write_run_readme(root, manifest):
     tasks = ", ".join(manifest["tasks"])
     if (
         cfg["mode"] == "both"
-        and cfg.get("both_protocol") == "v2"
+        and cfg.get("both_protocol") in ("v2", "demo_first")
         and (cfg.get("training_seed_policy") == "disjoint_once" or manifest.get("benchmark_mode_guidance"))
     ):
         attempt_guidance = (
-            "The v2 prompt requires using all remaining attempts on the assigned "
+            "The demo-first prompt requires using all remaining attempts on the assigned "
             "training seeds to verify and strengthen the solution, even when it seems ready "
             "for testing. Successful verification does not require a code change."
         )
@@ -204,8 +282,8 @@ def write_run_readme(root, manifest):
         f"Pinned supplement: [{guidance['source']}](inputs/harness/{guidance['source']}). "
         "The exact text and source are recorded in `run.json` under "
         "`benchmark_mode_guidance` and included in each task's `prompt.md` and "
-        "`workspace/PROTOCOL.md`. It supplements shared v2 with demo-first "
-        "motion verification and the public robot safety APIs. It does not change "
+        "`workspace/PROTOCOL.md`. It supplements the shared learning-mode prompt "
+        "with benchmark-specific public-interface guidance. It does not change "
         "the tools, attempt accounting or native scoring.\n\n"
         if guidance else ""
     )
@@ -291,8 +369,13 @@ reports/                          aggregate JSON and CSV results
             "The controller uses native CPU IK; rendering still uses the GPU. "
             "Keep CPU and GPU scores separate.\n\n"
             if cfg.get("physics_backend") == "cpu" else ""
-        ) if cfg["benchmark"] == "mikasa_robo_v2" else "")
+        ) if cfg["benchmark"] in ("mikasa_robo", "mikasa_robo_v2") else "")
         + (MIKASA_DRY_RUN if cfg["benchmark"] in ("mikasa_robo", "mikasa_robo_v2") else "")
+        + (RMBENCH_ROBOT_CHECKS if any(
+            interface.get("action", {}).get("offline_robot", {}).get("schema") == "cam-rmbench-offline-robot/1"
+            for interface in manifest.get("interfaces", {}).values()
+        ) else "")
+        + rmbench_observed_motion_note(manifest)
         + ACCESS.replace("BENCHMARK", manifest["config"]["benchmark"]).replace(
             "PACKAGE", manifest["benchmark_package"]
         )

@@ -1,0 +1,1493 @@
+{
+  "schema": "cam-frozen-solutions-export/1",
+  "benchmark": "mikasa_robo_v2",
+  "tasks": 80,
+  "created_utc": "2026-11-10T02:48:29.620759+00:00",
+  "source_batch": "/data/daiyp/CaM/mikasa_robo/outputs/development_batches/20261109T033526_423350Z",
+  "checkpoint": 50,
+  "development_setting": "50 demos plus 50 demo-identity training attempts, CPU physics",
+  "rule": "Byte-identical copies of the final frozen policies used for the completed held-out evaluation. Original policies retained.",
+  "solutions": [
+    {
+      "task": "BatteriesCheckerEasy-6-VLA-v0",
+      "directory": "BatteriesCheckerEasy-6-VLA-v0",
+      "entrypoint": "BatteriesCheckerEasy-6-VLA-v0/tools/policy.py",
+      "checkpoint": 50,
+      "program_hash": "6bb71167fd66dc40fa0efe4267ba87822f12fd66ec01efe4d3b54791738397e9",
+      "source_policy": "/data/daiyp/CaM_public/dev_logs/mikasarobo/BatteriesCheckerEasy-6-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T162134_217391Z/tasks/BatteriesCheckerEasy-6-VLA-v0/policy",
+      "source_run": "/data/daiyp/CaM/mikasa_robo/runs/mikasa_robo_v2/BatteriesCheckerEasy-6-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T162134_217391Z",
+      "run_timetag": "20261108T162134_217391Z",
+      "files": {
+        "policy.md": "69c37f731a1050fd033a3040437272b05370dee062a786472ffc73628474d724",
+        "task_analysis.md": "3115ee95e3b6e99417e7edf8be7b0646039f473ba47a69bd25a348e7c11866a6",
+        "CHANGELOG.md": "f90254082840552da14f844fa84dbbdda3846e4ecd37e0de31c1653e1b2844fa",
+        "task.json": "4a665737da412f6807af76b9274bbe68607ed08d9f230741d7b2125726921854",
+        "freeze.json": "88841867357d8748226a5c8438b5f9f215484f6b1c0f3df1940d403ce75fa66e",
+        "tools/policy.py": "c922cca85a4c30c115f5ccc8fa6c5e1fb09e0e3080d15b4301171037afd660a4"
+      }
+    },
+    {
+      "task": "BatteriesCheckerHard-3-VLA-v0",
+      "directory": "BatteriesCheckerHard-3-VLA-v0",
+      "entrypoint": "BatteriesCheckerHard-3-VLA-v0/tools/policy.py",
+      "checkpoint": 50,
+      "program_hash": "d14d4da9f52c87ecca875048604bd2f721af87b75fc1e802c47aa5bb0faa453f",
+      "source_policy": "/data/daiyp/CaM_public/dev_logs/mikasarobo/BatteriesCheckerHard-3-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T162134_217391Z/tasks/BatteriesCheckerHard-3-VLA-v0/policy",
+      "source_run": "/data/daiyp/CaM/mikasa_robo/runs/mikasa_robo_v2/BatteriesCheckerHard-3-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T162134_217391Z",
+      "run_timetag": "20261108T162134_217391Z",
+      "files": {
+        "policy.md": "2618ccaba9dcc95e8559a41763fefc739f9ac28008ab9e1c85ace2cc62a77773",
+        "task_analysis.md": "09747e5baefbd71980632ba342ea1d8158742ddcf2469f469476e97bd4904d93",
+        "CHANGELOG.md": "eb517c286291363bdf5f21bd64b4788b521fb9bc7fb742dca282b1fb4824417a",
+        "task.json": "8194afb3b8afcb38563c53b5faabb83b5d9ba6fa6ed31d67a4e408c3f6464019",
+        "freeze.json": "4a75473065631615f37103e7abe62e6d6074324f7a93b1d755644ff09b38a3cd",
+        "tools/policy.py": "221288df26bbfc510d4c259dd188fe2a2d40426693a4dc4d5b76e6765847e5c6"
+      }
+    },
+    {
+      "task": "BatteriesCheckerHard-6-VLA-v0",
+      "directory": "BatteriesCheckerHard-6-VLA-v0",
+      "entrypoint": "BatteriesCheckerHard-6-VLA-v0/tools/policy.py",
+      "checkpoint": 50,
+      "program_hash": "0f9db6098fd8fec0c9a4f328a9b8d5b1e94906d0ed90423d4b1432cda7d8618b",
+      "source_policy": "/data/daiyp/CaM_public/dev_logs/mikasarobo/BatteriesCheckerHard-6-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T162134_217391Z/tasks/BatteriesCheckerHard-6-VLA-v0/policy",
+      "source_run": "/data/daiyp/CaM/mikasa_robo/runs/mikasa_robo_v2/BatteriesCheckerHard-6-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T162134_217391Z",
+      "run_timetag": "20261108T162134_217391Z",
+      "files": {
+        "policy.md": "0a570ae0fc12b249abf66b1e6d63b28cd5b0532155924e596e27a1fde74e5d38",
+        "task_analysis.md": "f9efb24b7edcf5e61ef54968eddfe2d3e10b390db4dc026004632fc33ecde6aa",
+        "CHANGELOG.md": "abc38b78c82927f6ccf410ae1ec6a92c1c6e6b1c182cf893ad0772a046cc3bd9",
+        "task.json": "c54980ea87c434aabc0a7c00cf705b35f277eff085d61769e72281fc30ef218d",
+        "freeze.json": "71afe74ee040a92f7bfbc242bd60133bd8ec0268a30461607b564dc13d50e3a4",
+        "tools/policy.py": "86a23153c81739566f90b3d58d60b2c57897c9cb6e4032a60ab265dd8930db78"
+      }
+    },
+    {
+      "task": "BlinkCountButtonPressEasy-Long-VLA-v0",
+      "directory": "BlinkCountButtonPressEasy-Long-VLA-v0",
+      "entrypoint": "BlinkCountButtonPressEasy-Long-VLA-v0/tools/policy.py",
+      "checkpoint": 50,
+      "program_hash": "267d0b33ae975afcc62f874db5e8d3d979667dab8658193e0cc3a806500ec2e2",
+      "source_policy": "/data/daiyp/CaM_public/dev_logs/mikasarobo/BlinkCountButtonPressEasy-Long-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T162134_217391Z/tasks/BlinkCountButtonPressEasy-Long-VLA-v0/policy",
+      "source_run": "/data/daiyp/CaM/mikasa_robo/runs/mikasa_robo_v2/BlinkCountButtonPressEasy-Long-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T162134_217391Z",
+      "run_timetag": "20261108T162134_217391Z",
+      "files": {
+        "policy.md": "e3bd0a6d80a90f0e5c633c6510c7d118c30be0d5a9db313e59b0d775ca577f20",
+        "task_analysis.md": "f9e91ba51cb4e521b826a83479359554282b830630de2a936c3dc2ccbdb0b91c",
+        "CHANGELOG.md": "d1eebaa5bbbba248461cb263852f365209de85d0317b433b3f0759c953903ce0",
+        "task.json": "2fbbc4454b26fdab4bf15c9ef0f48f6521362678f5c4e52d6b4b7d525e852b0b",
+        "freeze.json": "d6fa29149b8ef7d670d212975f914cfc10d3266215ef181e91e7c78dbc6e944f",
+        "tools/policy.py": "dd63b5092167c32d6239d2db5a832816ebc7d2819e59501ebf0c295b23a28d9c"
+      }
+    },
+    {
+      "task": "BlinkCountButtonPressHard-Long-VLA-v0",
+      "directory": "BlinkCountButtonPressHard-Long-VLA-v0",
+      "entrypoint": "BlinkCountButtonPressHard-Long-VLA-v0/tools/policy.py",
+      "checkpoint": 50,
+      "program_hash": "b5d05f64ce55a37849bbea08d0161a6e1ef46ddb9d6de70cfba4a19118fbc358",
+      "source_policy": "/data/daiyp/CaM_public/dev_logs/mikasarobo/BlinkCountButtonPressHard-Long-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T162134_217391Z/tasks/BlinkCountButtonPressHard-Long-VLA-v0/policy",
+      "source_run": "/data/daiyp/CaM/mikasa_robo/runs/mikasa_robo_v2/BlinkCountButtonPressHard-Long-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T162134_217391Z",
+      "run_timetag": "20261108T162134_217391Z",
+      "files": {
+        "policy.md": "21119043f71769ce065bf88c4d966661f18c08aacf7db8f9ada59b1debb501c5",
+        "task_analysis.md": "63f3527489bd6a9851153b837a93bf7cdcf98a74437bcaa707d23e1fd6862066",
+        "CHANGELOG.md": "b0086844ff9aa1bc4aa49107ef716422c162a64c680815f907c6e3b83c4a12ca",
+        "task.json": "ec9aaed1dc27bd8a2d22c02419fab7117a88404cccffb0620a37d2ea68ee6e02",
+        "freeze.json": "ef1cb8dd351644764ff9ae2d6aa5d5a78c2ba4984027fafe7bdf8a425d0376d4",
+        "tools/policy.py": "0a535ae7f602caf3c555380f716361474f164c519f82d7385ae9bb0fd2a50f48"
+      }
+    },
+    {
+      "task": "BlinkCountButtonPressHard-VLA-v0",
+      "directory": "BlinkCountButtonPressHard-VLA-v0",
+      "entrypoint": "BlinkCountButtonPressHard-VLA-v0/tools/policy.py",
+      "checkpoint": 50,
+      "program_hash": "1c86b9a0a64503a6c2f10697f5496dd272bffec58e48008c52a8bd85fea4d039",
+      "source_policy": "/data/daiyp/CaM_public/dev_logs/mikasarobo/BlinkCountButtonPressHard-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T162134_217391Z/tasks/BlinkCountButtonPressHard-VLA-v0/policy",
+      "source_run": "/data/daiyp/CaM/mikasa_robo/runs/mikasa_robo_v2/BlinkCountButtonPressHard-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T162134_217391Z",
+      "run_timetag": "20261108T162134_217391Z",
+      "files": {
+        "policy.md": "330151262ac25122ed7ac85bb906337601d6583be49b60d733d12c9f0954a5ec",
+        "task_analysis.md": "2148bf5c2c7155d46e09630c5a5e47e05c30d13f502b5550e2dbaeb49e6ccd10",
+        "CHANGELOG.md": "229dc236d08b604b0782dbd43c90b162787641e94065daf7288f56c0a9f8a32b",
+        "task.json": "1d05d82a4276430acf610e59bc666b1492657441916ad3faffff4f83d6b11675",
+        "freeze.json": "f52a2b0aefaec34f5c61874092649f3bba436aa91375b4bddeee2c575b31cad7",
+        "tools/policy.py": "e574d9d85ef019c61da410144192d593056afc7d9b615cb3208d687a9b7bded0"
+      }
+    },
+    {
+      "task": "BlinkCountButtonPressMedium-Long-VLA-v0",
+      "directory": "BlinkCountButtonPressMedium-Long-VLA-v0",
+      "entrypoint": "BlinkCountButtonPressMedium-Long-VLA-v0/tools/policy.py",
+      "checkpoint": 50,
+      "program_hash": "34cb8dfa21303acbda8f9859bec68d5baa9c537c213993060b4b432a1982d9ec",
+      "source_policy": "/data/daiyp/CaM_public/dev_logs/mikasarobo/BlinkCountButtonPressMedium-Long-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T184908_380329Z/tasks/BlinkCountButtonPressMedium-Long-VLA-v0/policy",
+      "source_run": "/data/daiyp/CaM/mikasa_robo/runs/mikasa_robo_v2/BlinkCountButtonPressMedium-Long-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T184908_380329Z",
+      "run_timetag": "20261108T184908_380329Z",
+      "files": {
+        "policy.md": "788ba12dde2953a73cc91f140f06f6af1eaae2894ebbed8e8ecf7c40ce9ef5a1",
+        "task_analysis.md": "ec4da2029be3f85c677471b5809eee495d3800332538cfd60d1cd68dff4b28be",
+        "CHANGELOG.md": "d527619c2c443a3175a237b0a1e802c7484a2f69f30a604b1b960ebda43ef9d3",
+        "task.json": "330f56e7580a801702d9ea752b811771b7eda5e81bf807883696fdd04da02eae",
+        "freeze.json": "7a4e48a26cfb45c866b600981e85e0e1fdec62ef7ccd666095a52542ede282ef",
+        "tools/policy.py": "f14c38101e0ba1dd9e0c508cb963671f2355c89c7249bb3eea4e752a37a4b7fa"
+      }
+    },
+    {
+      "task": "BlinkCountButtonPressMedium-VLA-v0",
+      "directory": "BlinkCountButtonPressMedium-VLA-v0",
+      "entrypoint": "BlinkCountButtonPressMedium-VLA-v0/tools/policy.py",
+      "checkpoint": 50,
+      "program_hash": "976782afa3f7468109c9f0810aef0b9cccf7e1340eb0c3b99fb7932e23472543",
+      "source_policy": "/data/daiyp/CaM_public/dev_logs/mikasarobo/BlinkCountButtonPressMedium-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T184908_380329Z/tasks/BlinkCountButtonPressMedium-VLA-v0/policy",
+      "source_run": "/data/daiyp/CaM/mikasa_robo/runs/mikasa_robo_v2/BlinkCountButtonPressMedium-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T184908_380329Z",
+      "run_timetag": "20261108T184908_380329Z",
+      "files": {
+        "policy.md": "337c215384e1a46de2b16bb1b5b773fb0d92c6a61eb94b3a9c0e3b90c8b52cfb",
+        "task_analysis.md": "7e91d1f79e32ff13b6cbd41d072c9e51c89b38d3f24b6825cbf23151cf5f4f9a",
+        "CHANGELOG.md": "73da80b1bc4bd7fcb7ab11516a9afc06d38578819410596f3c96e131dbf36845",
+        "task.json": "9b4ac79f9d5cb8c605bc6d497df6ec6b640f5dbd08ca7ce8b89cf9ab46f62f25",
+        "freeze.json": "a4971f08233d504b626c0da57a7ad835b9dbad783ce25ab88ce15c5d4f26fabc",
+        "tools/policy.py": "7a2a51b154cf06f0efd3db3e26e6251e54919f49dd37c0bf197133e675847572"
+      }
+    },
+    {
+      "task": "BunchOfColors3-Long-VLA-v0",
+      "directory": "BunchOfColors3-Long-VLA-v0",
+      "entrypoint": "BunchOfColors3-Long-VLA-v0/tools/policy.py",
+      "checkpoint": 50,
+      "program_hash": "44bc0550020adf2d2bacc024a79c1d84bbae02ea682b5dc17b1aec4de9d17bb4",
+      "source_policy": "/data/daiyp/CaM_public/dev_logs/mikasarobo/BunchOfColors3-Long-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T162134_217391Z/tasks/BunchOfColors3-Long-VLA-v0/policy",
+      "source_run": "/data/daiyp/CaM/mikasa_robo/runs/mikasa_robo_v2/BunchOfColors3-Long-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T162134_217391Z",
+      "run_timetag": "20261108T162134_217391Z",
+      "files": {
+        "policy.md": "f64b1456f3484a8e4650c4d5a4ccecb344065179ce6be4601fe4200e172819f2",
+        "task_analysis.md": "07b8970ad8a03eef655b7a33b7e1a4baaddac734616dc129482ed0ed550d5166",
+        "CHANGELOG.md": "01eb4e4118f71fb0498f2fba34854232557fc11d5002ce108bc7838913fce31a",
+        "task.json": "8ea1746d304870a20c6260af0a0fabccaaccdfa675b72a2d635cda6f858538af",
+        "freeze.json": "0c818505e734479cc403807a0ab6c8ba1f49f9a899e5d205b39bce63c24a8d69",
+        "tools/policy.py": "291976036617fe1d43ab0c67ade647c47ba7d2eeedb9683e37bbec593532775c"
+      }
+    },
+    {
+      "task": "BunchOfColors5-Long-VLA-v0",
+      "directory": "BunchOfColors5-Long-VLA-v0",
+      "entrypoint": "BunchOfColors5-Long-VLA-v0/tools/policy.py",
+      "checkpoint": 50,
+      "program_hash": "29f0ede154c602d891840862447a2e878648e06aaf0b6903cd15be985fd99af0",
+      "source_policy": "/data/daiyp/CaM_public/dev_logs/mikasarobo/BunchOfColors5-Long-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T162134_217391Z/tasks/BunchOfColors5-Long-VLA-v0/policy",
+      "source_run": "/data/daiyp/CaM/mikasa_robo/runs/mikasa_robo_v2/BunchOfColors5-Long-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T162134_217391Z",
+      "run_timetag": "20261108T162134_217391Z",
+      "files": {
+        "policy.md": "ee50faaf3d178aa5fee29243b727b468250f30ccbc240fef8b6bd95a627e69f7",
+        "task_analysis.md": "9e39b98211bb56171866da0753d2105cb6067a09f2f4e31e427202502be91b9f",
+        "CHANGELOG.md": "1c9846e16a33b5e4de06422cf53bf09a1bba33c2c939f54bbfa881ab2e697e2a",
+        "task.json": "3fa8a9de93781363aae836f11e4103414150b9bdf684c3e74a1b7cfe5e6b205c",
+        "freeze.json": "4e5dcfe63427d6ea955b22a4af83a167c431769bd0e1fe1e773cfdf1554ea574",
+        "tools/policy.py": "af336575d316af48c1df7acc70a4d1439c0a9fcd5901c53b0c7ecf0613f79451"
+      }
+    },
+    {
+      "task": "BunchOfColors5-VLA-v0",
+      "directory": "BunchOfColors5-VLA-v0",
+      "entrypoint": "BunchOfColors5-VLA-v0/tools/policy.py",
+      "checkpoint": 50,
+      "program_hash": "ce49287727cd38ccd5a32c1fbbbe84a6d52b45a04fcca6afce182b53c2f184d5",
+      "source_policy": "/data/daiyp/CaM_public/dev_logs/mikasarobo/BunchOfColors5-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T162134_217391Z/tasks/BunchOfColors5-VLA-v0/policy",
+      "source_run": "/data/daiyp/CaM/mikasa_robo/runs/mikasa_robo_v2/BunchOfColors5-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T162134_217391Z",
+      "run_timetag": "20261108T162134_217391Z",
+      "files": {
+        "policy.md": "a5e211bcea99aef870f4ae9d0133721ff1daddcee2b34c362478c672f92864c3",
+        "task_analysis.md": "fc841eb997f56e1d8f69bd8d473e390d0f2fbbf255b9b6e257b59f5e09517bf0",
+        "CHANGELOG.md": "80926f2899bb7b99272cc6fa4992725cb0ca06262d6840d1a1adf98029a531eb",
+        "task.json": "620a11345a2356a3d31e1f5112e3d0e256264f73d29e1dfbb22469245c1fcbca",
+        "freeze.json": "da3e5989883b3e7da3ae1b88af02cc5e657044b5079937f4c3f879c0ada1d43d",
+        "tools/policy.py": "ce366ceefc148393e10dbb96756a221d34ed39f5c0dd8f8b95cfdf357e9c794b"
+      }
+    },
+    {
+      "task": "BunchOfColors7-Long-VLA-v0",
+      "directory": "BunchOfColors7-Long-VLA-v0",
+      "entrypoint": "BunchOfColors7-Long-VLA-v0/tools/policy.py",
+      "checkpoint": 50,
+      "program_hash": "d9cf68ee13352a1d919ebbadb9534199e8efb470fe3769ae2ad9ca0a1affa38e",
+      "source_policy": "/data/daiyp/CaM_public/dev_logs/mikasarobo/BunchOfColors7-Long-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T162134_217391Z/tasks/BunchOfColors7-Long-VLA-v0/policy",
+      "source_run": "/data/daiyp/CaM/mikasa_robo/runs/mikasa_robo_v2/BunchOfColors7-Long-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T162134_217391Z",
+      "run_timetag": "20261108T162134_217391Z",
+      "files": {
+        "policy.md": "0aa3320a55cb67b2771d1755a5b47f91eb0703a16888948b939a395183e22d99",
+        "task_analysis.md": "3caacc8e2d4a9394940eb5219e4b7a850002e3acb97e62561a551ebf708b5ea0",
+        "CHANGELOG.md": "441b756f34b5d8a629f14e9efd163579ef4aae18b3dc94285e94f052441fce3f",
+        "task.json": "617340d05daa89a1ba9e42246e7af5ade88bab34b056230edf9825b595a41a6d",
+        "freeze.json": "2d541ef1c5bf08bd46ea3b89bc5e6fc5e158d5a33ebfb6e69d07262ead5b6080",
+        "tools/policy.py": "91e0aedb81f20adc518d071605f647fcb6fdddf7eab82b137430667df5d21aeb",
+        "tools/perception.py": "edcfbb59fbbd879be77fe10d1d1ce4c177117f87f46263147f7bbbb88e4014c3",
+        "tools/control.py": "b6486e24a3395dfb8e03fc830d91f9d4105cbafec87e9d666155bb1860b96a9a"
+      }
+    },
+    {
+      "task": "BunchOfColors7-VLA-v0",
+      "directory": "BunchOfColors7-VLA-v0",
+      "entrypoint": "BunchOfColors7-VLA-v0/tools/policy.py",
+      "checkpoint": 50,
+      "program_hash": "9117b5528ad9f49aa00c5b1d8a5becee8eeb5131a6fdec1c2b40b6e000b5cecc",
+      "source_policy": "/data/daiyp/CaM_public/dev_logs/mikasarobo/BunchOfColors7-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T184908_380329Z/tasks/BunchOfColors7-VLA-v0/policy",
+      "source_run": "/data/daiyp/CaM/mikasa_robo/runs/mikasa_robo_v2/BunchOfColors7-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T184908_380329Z",
+      "run_timetag": "20261108T184908_380329Z",
+      "files": {
+        "policy.md": "82076a7f627b8782f0fffcdbbd37f724d14929329702e4d5ad68291794ea267e",
+        "task_analysis.md": "80a702292f3c0babc0fb17e77eed85e131f1e672d2d8c7427f2cca025879b38d",
+        "CHANGELOG.md": "5509c0f492dff1bf309e311112099901b878ab70fd47635d82a5f48faa86e0fb",
+        "task.json": "72d9f7cbbe20da22d82e64dafdd49ec69da2150a03001c21dec94ae6525d75c8",
+        "freeze.json": "aab018af63c4f61ccc371c223ee4a0c6c94e08a8354529a7ad0bc18821bc0a09",
+        "tools/policy.py": "f5aed5bf9ddef33908cf82e491050a587547e0766185efd0f2e2c065f7a3a1d9"
+      }
+    },
+    {
+      "task": "ChainOfColors3-Long-VLA-v0",
+      "directory": "ChainOfColors3-Long-VLA-v0",
+      "entrypoint": "ChainOfColors3-Long-VLA-v0/tools/policy.py",
+      "checkpoint": 50,
+      "program_hash": "c437f82a2df9dd8d05fb2b2a87eeae438e7f1626ba8fd5a668898e4c94d0de28",
+      "source_policy": "/data/daiyp/CaM_public/dev_logs/mikasarobo/ChainOfColors3-Long-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T184908_380329Z/tasks/ChainOfColors3-Long-VLA-v0/policy",
+      "source_run": "/data/daiyp/CaM/mikasa_robo/runs/mikasa_robo_v2/ChainOfColors3-Long-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T184908_380329Z",
+      "run_timetag": "20261108T184908_380329Z",
+      "files": {
+        "policy.md": "552fcb8947965a2a629e04ed5b6ca598edbe250d1f87a2bd9325ba9b64c4ab3f",
+        "task_analysis.md": "961219f3aefacd741732fe74e21c01b162d4ac07afd298023c1d25260f0fdf71",
+        "CHANGELOG.md": "28348349c1206293ae2ff777cde92e563717667cd254f2f0f534dad29b553591",
+        "task.json": "fadf865a1dc5d2f257579bc8c78ad7e3aea88ff5b86eb7ae6339f92c9de91b05",
+        "freeze.json": "556d93ad277b9dceb029240fcbdef4cb54f3ef366c4446d933803889b8af4563",
+        "tools/policy.py": "7dda645714114834940831b1fab7d8e17470759bcb3bcd0fa76b312435c50162"
+      }
+    },
+    {
+      "task": "ChainOfColors5-Long-VLA-v0",
+      "directory": "ChainOfColors5-Long-VLA-v0",
+      "entrypoint": "ChainOfColors5-Long-VLA-v0/tools/policy.py",
+      "checkpoint": 50,
+      "program_hash": "b72a8acbc799d2513857b08172a3e00391b4c64aa79acae24f110305273776a3",
+      "source_policy": "/data/daiyp/CaM_public/dev_logs/mikasarobo/ChainOfColors5-Long-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T184908_380329Z/tasks/ChainOfColors5-Long-VLA-v0/policy",
+      "source_run": "/data/daiyp/CaM/mikasa_robo/runs/mikasa_robo_v2/ChainOfColors5-Long-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T184908_380329Z",
+      "run_timetag": "20261108T184908_380329Z",
+      "files": {
+        "policy.md": "c718199ec81edd82de01a5c2d74c8419599af26f2d0a8b282530794e1884ad7d",
+        "task_analysis.md": "5c3cace2deec34f2cc1c0ceeab3dc839a6abc5c2b1414c1512221896d0362589",
+        "CHANGELOG.md": "4fe51e46161bac454cb0dd0e53083517543565eaed7b72179fcb8b95cebbf821",
+        "task.json": "290bb0dcd2f0f52f86cacb8e7167abbc85f7c30fb5ce62425357d1070af770dd",
+        "freeze.json": "a7edbac09300444dfe880997ebd2271b2a2bdc5cd3900728accff2d16d01e4e8",
+        "tools/policy.py": "13b61ea566084dcdb8471c7c4367a72fad17ab8bbb51d3cf079cc0899c12506b"
+      }
+    },
+    {
+      "task": "ChainOfColors5-VLA-v0",
+      "directory": "ChainOfColors5-VLA-v0",
+      "entrypoint": "ChainOfColors5-VLA-v0/tools/policy.py",
+      "checkpoint": 50,
+      "program_hash": "a7e46c0e439e1f56f04146f48b5831c950de1a287a1dfc6756d32178134f7955",
+      "source_policy": "/data/daiyp/CaM_public/dev_logs/mikasarobo/ChainOfColors5-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T184908_380329Z/tasks/ChainOfColors5-VLA-v0/policy",
+      "source_run": "/data/daiyp/CaM/mikasa_robo/runs/mikasa_robo_v2/ChainOfColors5-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T184908_380329Z",
+      "run_timetag": "20261108T184908_380329Z",
+      "files": {
+        "policy.md": "db5e59dbe85d44199f2f50bb79fbddbd7a6dde0d82e636f91b03d39c1b887edb",
+        "task_analysis.md": "4da1b039210df6f2e5f70f486e2c44dff7fda996571ccff82e89c99732056051",
+        "CHANGELOG.md": "9a6f464178356df80e459d4c2fe30d4aaf39f9f6aef2b1c39c991199a9df9ba3",
+        "task.json": "4438e437b846f62c140608cc77c248b2b7f715af1abad26f8e38468f28a1c295",
+        "freeze.json": "c34f71e1689d6550f1709371622a376aeea43ab1add2185574b925ed7d760c82",
+        "tools/policy.py": "9515f18b75396b7fb27b5b019a3436a92fd4aa790c5958f4c5649c50e8d93f1f"
+      }
+    },
+    {
+      "task": "ChainOfColors7-Long-VLA-v0",
+      "directory": "ChainOfColors7-Long-VLA-v0",
+      "entrypoint": "ChainOfColors7-Long-VLA-v0/tools/policy.py",
+      "checkpoint": 50,
+      "program_hash": "5b4cc6e585c4197e0e53bfe702c9eab0218cc17b4e3b196834c5a81b2f4f5d38",
+      "source_policy": "/data/daiyp/CaM_public/dev_logs/mikasarobo/ChainOfColors7-Long-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T184908_380329Z/tasks/ChainOfColors7-Long-VLA-v0/policy",
+      "source_run": "/data/daiyp/CaM/mikasa_robo/runs/mikasa_robo_v2/ChainOfColors7-Long-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T184908_380329Z",
+      "run_timetag": "20261108T184908_380329Z",
+      "files": {
+        "policy.md": "d8f2b2dff92be28ff867f9a9a7e82b773d567dbd308bd015322b9db8e11fa853",
+        "task_analysis.md": "1899b092815c2eff51429d9b08bb2aaf21d746000df6c2944d3791665ad3b137",
+        "CHANGELOG.md": "17a3999a93327ed0e6560f5198227cac04e72d7262d05ac5e0b3395bf6cd8184",
+        "task.json": "5f340b7b56cc1aeef301b1047b4d5dca8431256a07bee0af5bc2dcd75aa8af41",
+        "freeze.json": "353cbce7f21172924c1783329454eb7ef4dba5c2917605e148e086269f9ca33b",
+        "tools/policy.py": "bac611813b8deba4174bcd46ea46836d0b00b9045e9c3b851d67d6641f339695",
+        "tools/perception.py": "621601f77d3d1e129b3dd9298184ebfba4d8f43aac7ba7e388cb89871400a2c8"
+      }
+    },
+    {
+      "task": "ChainOfColors7-VLA-v0",
+      "directory": "ChainOfColors7-VLA-v0",
+      "entrypoint": "ChainOfColors7-VLA-v0/tools/policy.py",
+      "checkpoint": 50,
+      "program_hash": "c1d6b9f9a9321b104ea34435b487074b6344b797bd4f6ef9b35c7f2c3a3dc047",
+      "source_policy": "/data/daiyp/CaM_public/dev_logs/mikasarobo/ChainOfColors7-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T184908_380329Z/tasks/ChainOfColors7-VLA-v0/policy",
+      "source_run": "/data/daiyp/CaM/mikasa_robo/runs/mikasa_robo_v2/ChainOfColors7-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T184908_380329Z",
+      "run_timetag": "20261108T184908_380329Z",
+      "files": {
+        "policy.md": "e84140b729eba79ecaa0f121e27ab11afd2574fdbd2c32b3e4d3cbc066b0b1be",
+        "task_analysis.md": "c44493f4fe6872fdfc17c69595ee5a7a256366e6fa854c04b07b834d5e2331d8",
+        "CHANGELOG.md": "80f3b314e7fe23f2168ff0b845ce59392eebc133cded6a37ef89b2df853e483d",
+        "task.json": "373fea0c9ae0f4a5e0f859b718aad2ff721dbcd4498bfd39735547ac95858b6b",
+        "freeze.json": "059a63e3248a874371c881ee0a082fd4e99a6e66a9f8b8a0b9c09c9474aecfb0",
+        "tools/policy.py": "6e1a1ffc78b8606a3f5abec19363c3e89802936d72a16e19f5c813ef0a0ac695",
+        "tools/motion.py": "db7ef32aa06bd4237cb6deef7a216efad5ddf9957e2978e80d1b5095b2daff79",
+        "tools/perception.py": "9fb2cb32e5fa30803f4c178ccfcdf0eaa6693bcd1acac0377c891028e2243caa"
+      }
+    },
+    {
+      "task": "FindImposterColor5-VLA-v0",
+      "directory": "FindImposterColor5-VLA-v0",
+      "entrypoint": "FindImposterColor5-VLA-v0/tools/policy.py",
+      "checkpoint": 50,
+      "program_hash": "7cfa4875ca14bb48198befed6978205f9058854dbb0ba11b146ea0df50af645c",
+      "source_policy": "/data/daiyp/CaM_public/dev_logs/mikasarobo/FindImposterColor5-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T184908_380329Z/tasks/FindImposterColor5-VLA-v0/policy",
+      "source_run": "/data/daiyp/CaM/mikasa_robo/runs/mikasa_robo_v2/FindImposterColor5-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T184908_380329Z",
+      "run_timetag": "20261108T184908_380329Z",
+      "files": {
+        "policy.md": "41f4aaf0ae8570244d4cb7906f4d70201d4626ef359b04460ccf945ec337abbe",
+        "task_analysis.md": "bb549c8274f48cc3889fe02ee8cf0e20ccafd619321532013f33c227cfee976a",
+        "CHANGELOG.md": "336e048861b0e27980ad5b3c919ecde25678c6bea53a3c61f63d30d3e2b76836",
+        "task.json": "5f31663c434c2230a8ce0c67a39f225695ca084e6f3e40751869ce92581c417a",
+        "freeze.json": "67deb156cf8c0d35107e954fbb6f05444f9c9222db0e625715914e4c07f6d097",
+        "tools/policy.py": "9ab45fe542e3f62173f769e0239a5f057f2b049c03d7d330e9844fff3fc418c0"
+      }
+    },
+    {
+      "task": "FindImposterColor9-VLA-v0",
+      "directory": "FindImposterColor9-VLA-v0",
+      "entrypoint": "FindImposterColor9-VLA-v0/tools/policy.py",
+      "checkpoint": 50,
+      "program_hash": "e0235c6f85e432e6668f8711f7e185a3666d24297c206f01b3b7d1f713187993",
+      "source_policy": "/data/daiyp/CaM_public/dev_logs/mikasarobo/FindImposterColor9-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T184908_380329Z/tasks/FindImposterColor9-VLA-v0/policy",
+      "source_run": "/data/daiyp/CaM/mikasa_robo/runs/mikasa_robo_v2/FindImposterColor9-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T184908_380329Z",
+      "run_timetag": "20261108T184908_380329Z",
+      "files": {
+        "policy.md": "0e5d2632eb3bb0e97cff6850937f0843daa742d21da7821a170ed3af4a9c2d04",
+        "task_analysis.md": "365adc481d2fb0067e1a76ce869da9ba4cf3f0625b7045741674d749a22263c4",
+        "CHANGELOG.md": "b55fea7133fc2140d428125ba2131ec38bbaa45421afd64e232c25481aaeae8f",
+        "task.json": "39e3b2f33120de61e526dea86bb8bc22c216970bff39a8a1043e096b12ebd28e",
+        "freeze.json": "a337deb12e3169170454a2b7e76d8857dc3b851aacfc9aa0905ada9e81bbece7",
+        "tools/policy.py": "61d98923d50bd219e04cfcb2854c9acd62c2f48fa2bbe302e58d6dc10ea40bcb",
+        "tools/perception.py": "aaf346c38feb3627df6c71b6313e5d4b96d0850c686529472da8602e8ec63e9f"
+      }
+    },
+    {
+      "task": "FindImposterShape3-VLA-v0",
+      "directory": "FindImposterShape3-VLA-v0",
+      "entrypoint": "FindImposterShape3-VLA-v0/tools/policy.py",
+      "checkpoint": 50,
+      "program_hash": "2dd499395a761c04abac9abcd6a8a72eeb5cae47439d09556a6ddd2d40916b8d",
+      "source_policy": "/data/daiyp/CaM_public/dev_logs/mikasarobo/FindImposterShape3-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T184908_380329Z/tasks/FindImposterShape3-VLA-v0/policy",
+      "source_run": "/data/daiyp/CaM/mikasa_robo/runs/mikasa_robo_v2/FindImposterShape3-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T184908_380329Z",
+      "run_timetag": "20261108T184908_380329Z",
+      "files": {
+        "policy.md": "98a0aa8cc4259e60494b22f8eb5db20f9409c5f68adba5b7a45bb9a9b7f78d48",
+        "task_analysis.md": "f75ffafdc272ee73a3f87f647af9296274d66894d3efc75312d4b668f5be97d7",
+        "CHANGELOG.md": "1e5d3f81c782b8b8e18a5240be0d9951ecb819c46c86b9df857b49ccdfa3881b",
+        "task.json": "00d63c73a631a051ae820f8529c5c319b8911f1daf012fb939d31fbdfaededab",
+        "freeze.json": "f8046cc5f17042e6bc8384a127438d9d1962d96076f02dc8df247bf34bcfe092",
+        "tools/policy.py": "784f55416d520a0911b4b9cf7e9d666ba0cb1fa48ab9c1b14d70c0d7f551ea7e"
+      }
+    },
+    {
+      "task": "FindImposterShape5-VLA-v0",
+      "directory": "FindImposterShape5-VLA-v0",
+      "entrypoint": "FindImposterShape5-VLA-v0/tools/policy.py",
+      "checkpoint": 50,
+      "program_hash": "e54bdbe0c0bcf5470d49be26034246ce07b594aef5ec45dcaae51346095c4797",
+      "source_policy": "/data/daiyp/CaM_public/dev_logs/mikasarobo/FindImposterShape5-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T184908_380329Z/tasks/FindImposterShape5-VLA-v0/policy",
+      "source_run": "/data/daiyp/CaM/mikasa_robo/runs/mikasa_robo_v2/FindImposterShape5-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T184908_380329Z",
+      "run_timetag": "20261108T184908_380329Z",
+      "files": {
+        "policy.md": "919b52c494a88280c6cae6c5a956d14f429aa67f935e987b5ce1b9f7679f3c06",
+        "task_analysis.md": "0e4b7c9ea4f1f483f4213f185343eb2e42a1b4897f12432b9c62384211ab8e11",
+        "CHANGELOG.md": "4075e6aec743230242932e29e5d359b92a493a2575f645062c11dae019ec8e56",
+        "task.json": "e522bfb022c50c350c98ef6b33a7aaf3f129c07e8730a02d98a49dc5c559c367",
+        "freeze.json": "a8faf8a2e8fec556a4a08d182b733503c1d7ee908474f89d0b1338c46e5437bb",
+        "tools/policy.py": "bfeaaa45f666b31cbb653e49a8fdf845135f34cc817e9132a12a1303767464b5",
+        "tools/perception.py": "086550632e06adebcf5b8f6f5ad5b4c3beaec25ce7f3fa310ed1e7cec34a474c"
+      }
+    },
+    {
+      "task": "FindImposterShape9-VLA-v0",
+      "directory": "FindImposterShape9-VLA-v0",
+      "entrypoint": "FindImposterShape9-VLA-v0/tools/policy.py",
+      "checkpoint": 50,
+      "program_hash": "611102e97c381e7979074c712f5682d0c4600ed7619bff9c10a439362a7c9e3b",
+      "source_policy": "/data/daiyp/CaM_public/dev_logs/mikasarobo/FindImposterShape9-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T184908_380329Z/tasks/FindImposterShape9-VLA-v0/policy",
+      "source_run": "/data/daiyp/CaM/mikasa_robo/runs/mikasa_robo_v2/FindImposterShape9-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T184908_380329Z",
+      "run_timetag": "20261108T184908_380329Z",
+      "files": {
+        "policy.md": "afa0dfda5852445f46af23581f169eca867d3f90280915c63cd4fb652136301d",
+        "task_analysis.md": "e40851707f63dac2516ef8ad0bc692f5413b3a0caeec693281fcf7a6db28b184",
+        "CHANGELOG.md": "a72c9f30c54fdc43d1975cc8a92e02b05db1867ed0392cfc7cd867cda519ec8b",
+        "task.json": "3eaf7bce756db524f1fa57b670a977888a406526c011389ecd18e23909a39bc4",
+        "freeze.json": "5421ffe0e6097fe109eec313b397dde4343a393f29d93b5fc2d057eafd67b66d",
+        "tools/policy.py": "f6b1922618a581d70b78bb6ff7091b0d0db95def5f24dc2b3b6d756a81d8476e",
+        "tools/perception.py": "dd107fecf6264ba64bf0ab8723ba0d6e00ec4c6ace1198f627465caccb188605"
+      }
+    },
+    {
+      "task": "FindImposterShapeAndColor3x2-VLA-v0",
+      "directory": "FindImposterShapeAndColor3x2-VLA-v0",
+      "entrypoint": "FindImposterShapeAndColor3x2-VLA-v0/tools/policy.py",
+      "checkpoint": 50,
+      "program_hash": "820ab9be13f05c57229e5c7a418cb48e21f3a4f2f5d0e37588ddd67e7f385f25",
+      "source_policy": "/data/daiyp/CaM_public/dev_logs/mikasarobo/FindImposterShapeAndColor3x2-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T184908_380329Z/tasks/FindImposterShapeAndColor3x2-VLA-v0/policy",
+      "source_run": "/data/daiyp/CaM/mikasa_robo/runs/mikasa_robo_v2/FindImposterShapeAndColor3x2-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T184908_380329Z",
+      "run_timetag": "20261108T184908_380329Z",
+      "files": {
+        "policy.md": "92611a54a7b426d48570db3e2aa734a4a2aad5a7dc381c68e834db289bb249d6",
+        "task_analysis.md": "20096c159a70d217afa4185cf66d17e03dfaf9d2048834795d94256fbc67826e",
+        "CHANGELOG.md": "36580cac7b3b7f7636253b7f5055525debf5a5cb212c6446ab75a9d7ef9b7d9b",
+        "task.json": "13407139a2e286207e88ca3de6aba4ddd1a5b243b562303d56718325d8da2282",
+        "freeze.json": "4590429840ff8a4ba60559851d6dc65e8b9b3a440a58b4621eb53ea2397fb70f",
+        "tools/policy.py": "249b357c5f58c585659e68bef63f988bf52e1713ccf9f6cb1613b601678abcbf"
+      }
+    },
+    {
+      "task": "FindImposterShapeAndColor3x3-VLA-v0",
+      "directory": "FindImposterShapeAndColor3x3-VLA-v0",
+      "entrypoint": "FindImposterShapeAndColor3x3-VLA-v0/tools/policy.py",
+      "checkpoint": 50,
+      "program_hash": "89ac7124020b0c0682ae8d32bb06de017c1984c4a8579a437d3b5a94a45f8667",
+      "source_policy": "/data/daiyp/CaM_public/dev_logs/mikasarobo/FindImposterShapeAndColor3x3-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T184908_380329Z/tasks/FindImposterShapeAndColor3x3-VLA-v0/policy",
+      "source_run": "/data/daiyp/CaM/mikasa_robo/runs/mikasa_robo_v2/FindImposterShapeAndColor3x3-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T184908_380329Z",
+      "run_timetag": "20261108T184908_380329Z",
+      "files": {
+        "policy.md": "02ef7036e7cc05ae434235628d8be8dda1086148359ae3caeda96d50d3152c49",
+        "task_analysis.md": "6d1cf988ed8da3ba242906acb58c70baff78364db588302a6dd3154156f0c2e2",
+        "CHANGELOG.md": "d8a78f7cbf7617daff69a782d1e7a3f233e19510dd869c6175e378eee0da8274",
+        "task.json": "6ba104c0271dc1f786c9ed286229907343c0fccce74a4bc35cd1de3a36db2e27",
+        "freeze.json": "0be66119cd03f1be526695bdb1bd14e88edda2c26020ab2d964f4fdebf275347",
+        "tools/policy.py": "60fd556db4c5d9bf3550189d1a3fa96306d708c4c04144149b332b4c72e261ec",
+        "tools/perception.py": "0fc043b8daba49bd9f63c30a8c07492c5b3b5f5cbd000e065c85b74d3882eedd"
+      }
+    },
+    {
+      "task": "FindImposterShapeAndColor5x3-VLA-v0",
+      "directory": "FindImposterShapeAndColor5x3-VLA-v0",
+      "entrypoint": "FindImposterShapeAndColor5x3-VLA-v0/tools/policy.py",
+      "checkpoint": 50,
+      "program_hash": "6d83a1f70671a4e7da1ca41462eab895945644e1b60429cf75b1a61157c96874",
+      "source_policy": "/data/daiyp/CaM_public/dev_logs/mikasarobo/FindImposterShapeAndColor5x3-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T184908_380329Z/tasks/FindImposterShapeAndColor5x3-VLA-v0/policy",
+      "source_run": "/data/daiyp/CaM/mikasa_robo/runs/mikasa_robo_v2/FindImposterShapeAndColor5x3-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T184908_380329Z",
+      "run_timetag": "20261108T184908_380329Z",
+      "files": {
+        "policy.md": "367563b46548b12ef344e6c3423cf018ac4f52d59f8a3a71f8b3abc6aec2a23e",
+        "task_analysis.md": "d6d8044a763f7e8f3331b84d1275cb35c820a2efcb5053f123526ef6b4eaa95d",
+        "CHANGELOG.md": "a79f44dfa468cf6404ed1f5216461b2989c88e4b7eda244b61123d5310fc508a",
+        "task.json": "ea0a669ddbc33ccba787f72cf447ef04cd461861d7d945c78a322db1017c8d5c",
+        "freeze.json": "59933a6ec5a6a71df1dcd1626a3b0a7ce79e360e733c1bfd1ca7d1434dfc740a",
+        "tools/policy.py": "f5cd4a52d53420551807558801d4778dc62b18ea3e10ce5c0440e8e87e115d7c",
+        "tools/templates.py": "e4365637c5b4bd8614a1a1e3bb3aa90be41f76d1ab983c8ef338de9e83bcfbf2",
+        "tools/vision.py": "c648481c8295c008accf37671019e679f4b1b3254f5130771c24dae88be78f6c"
+      }
+    },
+    {
+      "task": "GatherAndRecall1-VLA-v0",
+      "directory": "GatherAndRecall1-VLA-v0",
+      "entrypoint": "GatherAndRecall1-VLA-v0/tools/policy.py",
+      "checkpoint": 50,
+      "program_hash": "802fc7ce4021e33069ab369c601077c4c8b5e3e7889375d96961e2e0e5fbc52c",
+      "source_policy": "/data/daiyp/CaM_public/dev_logs/mikasarobo/GatherAndRecall1-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T184908_380329Z/tasks/GatherAndRecall1-VLA-v0/policy",
+      "source_run": "/data/daiyp/CaM/mikasa_robo/runs/mikasa_robo_v2/GatherAndRecall1-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T184908_380329Z",
+      "run_timetag": "20261108T184908_380329Z",
+      "files": {
+        "policy.md": "bb1a0a29eb296787472a1a7cac4538b07623d8d7e93b231367e7ea1faabcffda",
+        "task_analysis.md": "17ddd8d3b8fda77eedc6d3789574f007b148c88dd0743e9f25860fda90c45933",
+        "CHANGELOG.md": "e41f4c0bc730d3fe95da07b09fae6ad3e656496644797661e77f9b2ad5c8acfc",
+        "task.json": "f3c750c3f4a0a66055b70fa3bbc5e7cb936e348e3219d127c9352124e4f59097",
+        "freeze.json": "ae205ae7775b5eca1edc1722552feb12c47372253894de4b625e067ab443f7f9",
+        "tools/policy.py": "954daa3016c1fcfd6c34549c7d42c5a918681b37f302ed059b327efae89b18fc",
+        "tools/perception.py": "5d246a8d18f9926626374a41fe0c48d35cae0342ad9d5f75e17fc94e2ca23f59",
+        "tools/control.py": "72e17dea5d454279040550903e7c7202be8b7d7349237b006f4103684035ad05"
+      }
+    },
+    {
+      "task": "GatherAndRecall3-VLA-v0",
+      "directory": "GatherAndRecall3-VLA-v0",
+      "entrypoint": "GatherAndRecall3-VLA-v0/tools/policy.py",
+      "checkpoint": 50,
+      "program_hash": "439e2d4a3a2da764331abb874521fb232cdca1072365504769779eb18bbf9ea3",
+      "source_policy": "/data/daiyp/CaM_public/dev_logs/mikasarobo/GatherAndRecall3-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T184908_380329Z/tasks/GatherAndRecall3-VLA-v0/policy",
+      "source_run": "/data/daiyp/CaM/mikasa_robo/runs/mikasa_robo_v2/GatherAndRecall3-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T184908_380329Z",
+      "run_timetag": "20261108T184908_380329Z",
+      "files": {
+        "policy.md": "8ef2a34c1eda1089f709352c2e0de8563cec704bdf795117526ed8dc8669786a",
+        "task_analysis.md": "de32504b0778bbe57a367681b9989698dc4a050cf8a5199bae7a0a981c9da980",
+        "CHANGELOG.md": "6f80ce5846697858fba107f25a7d57a78d51c4a581472fa05581d0ff824539a7",
+        "task.json": "ac62c2ecda79d271690436a9d37cf5777625244f5f53547364bd251e6f862317",
+        "freeze.json": "80345fcd6b9f6d24ef26d2a6d0b079eb8c2f2bf25dfce538d85b128a076d8b6a",
+        "tools/policy.py": "081a880d03564a80ae9579f559f56a99ac821fd8c8788298d85b5ef8092a4646",
+        "tools/perception.py": "560bf942a7dcacb103993b1b320748ec09a59f71e5aa5a59abeb400619eda30b",
+        "tools/control.py": "00814b66495256af4a5db2ffa098de7640cad59ffd19df02b01be34396d41a7c"
+      }
+    },
+    {
+      "task": "GatherAndRecall5-VLA-v0",
+      "directory": "GatherAndRecall5-VLA-v0",
+      "entrypoint": "GatherAndRecall5-VLA-v0/tools/policy.py",
+      "checkpoint": 50,
+      "program_hash": "4d687abf9033e516442365e08224d002ac07cec673f360f0b6050cb111506218",
+      "source_policy": "/data/daiyp/CaM_public/dev_logs/mikasarobo/GatherAndRecall5-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T184908_380329Z/tasks/GatherAndRecall5-VLA-v0/policy",
+      "source_run": "/data/daiyp/CaM/mikasa_robo/runs/mikasa_robo_v2/GatherAndRecall5-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T184908_380329Z",
+      "run_timetag": "20261108T184908_380329Z",
+      "files": {
+        "policy.md": "2205d1c6305fcc57c2f7328f74ce206b94c7a67c96a425b80441df38f499f2dd",
+        "task_analysis.md": "99043494fad413a56b6045707408079e1c6a439f9d9968a71278c10237370ebd",
+        "CHANGELOG.md": "e4dcb67150b1d33caebe1205a48a24fd4660e3167f4d1b10770f9daf24fcc759",
+        "task.json": "3a8ea070f44fdb5b5d900cf34b36b9b13b1b9563bdc631ecc4d0070b6a22cebb",
+        "freeze.json": "1615dc960b211f969742ebfbfa05106b76c0357861d2b55c1c55b9fdbf18fbcb",
+        "tools/policy.py": "68b4bc49eaf9e958358364f6e49013b7143910175b1bb8c716f9a62f10b65691",
+        "tools/motion.py": "3820c296af3b7313c6ddad9bb1fec9ef60f25ab3b7a45ccf7b585dffd2307fa5",
+        "tools/perception.py": "ff1d5c8b1aa128b0e20d3bce65c38f448b3829d192474fe082a0e122213daa43"
+      }
+    },
+    {
+      "task": "GatherAndRecall7-VLA-v0",
+      "directory": "GatherAndRecall7-VLA-v0",
+      "entrypoint": "GatherAndRecall7-VLA-v0/tools/policy.py",
+      "checkpoint": 50,
+      "program_hash": "43465132eff2e376a521e9348e361b16c2b6cca395c3e793d59b2e1be6eb0427",
+      "source_policy": "/data/daiyp/CaM_public/dev_logs/mikasarobo/GatherAndRecall7-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T184908_380329Z/tasks/GatherAndRecall7-VLA-v0/policy",
+      "source_run": "/data/daiyp/CaM/mikasa_robo/runs/mikasa_robo_v2/GatherAndRecall7-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T184908_380329Z",
+      "run_timetag": "20261108T184908_380329Z",
+      "files": {
+        "policy.md": "ac19faea4eb011a734bce2f78fd449338dad992b3d4130e9927055626375d462",
+        "task_analysis.md": "fd30a599f967ba850c99b0ead3bd30b1bd175c365ec819f7798994104c00826a",
+        "CHANGELOG.md": "633e73b0c3f46f1798db585803762209fa977498c5bbdac32e39968f4fc565b2",
+        "task.json": "1cdec37ccdd4b43c15c6354643ae2dadce2fa8bec469f8127905b28a2a8a937a",
+        "freeze.json": "ec2846d4c3a79227e03eac1f1ebffd44ebff7f292a7eef613a58dae1dd86ccb4",
+        "tools/policy.py": "8b2d534b051c7f1cc91ca31304c34ebd758e7a82fcb31bc2f3dad3e6f781cd05"
+      }
+    },
+    {
+      "task": "GatherAndRecall9-VLA-v0",
+      "directory": "GatherAndRecall9-VLA-v0",
+      "entrypoint": "GatherAndRecall9-VLA-v0/tools/policy.py",
+      "checkpoint": 50,
+      "program_hash": "c7b8074d8e7fd3ad002ccf134afe4c4be95db2f7c68b9302751f2e2ac95c5122",
+      "source_policy": "/data/daiyp/CaM_public/dev_logs/mikasarobo/GatherAndRecall9-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T184908_380329Z/tasks/GatherAndRecall9-VLA-v0/policy",
+      "source_run": "/data/daiyp/CaM/mikasa_robo/runs/mikasa_robo_v2/GatherAndRecall9-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T184908_380329Z",
+      "run_timetag": "20261108T184908_380329Z",
+      "files": {
+        "policy.md": "fd9cb5635708066a1c68820d1da0999966f7f5bbe3230b022cdb88540790130b",
+        "task_analysis.md": "36a2c49455acb1465aa4c3fe37989cb1e3c25adb77fd584de25409cb0aad5fad",
+        "CHANGELOG.md": "3bea413f8d4eed8eda4e2627f08857df5a137cc9f0f34501b7a8988143f994e7",
+        "task.json": "e3be47cb5a62298a7e4348496112a89193a3641ae80ad12f94017edff288f57b",
+        "freeze.json": "40153cc04c04f75101e8670567f30aa59bb035f21d379a7c155f937c4a3bb2dd",
+        "tools/policy.py": "cdb9dcbd1493a2c6dff64ec14ba207fcbbaf90e2c4204522a5fc9004ff71f35a"
+      }
+    },
+    {
+      "task": "InterceptFast-VLA-v0",
+      "directory": "InterceptFast-VLA-v0",
+      "entrypoint": "InterceptFast-VLA-v0/tools/policy.py",
+      "checkpoint": 50,
+      "program_hash": "1b0af3fffaeb41620ddbfdbd0206146da2d54ea59ec1abe56ed57dff4507b42c",
+      "source_policy": "/data/daiyp/CaM_public/dev_logs/mikasarobo/InterceptFast-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T184908_380329Z/tasks/InterceptFast-VLA-v0/policy",
+      "source_run": "/data/daiyp/CaM/mikasa_robo/runs/mikasa_robo_v2/InterceptFast-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T184908_380329Z",
+      "run_timetag": "20261108T184908_380329Z",
+      "files": {
+        "policy.md": "8b46fd5f0ebb76b1ee5b6b35912932dd0be5d4620b9b193739695c8dfdf0a338",
+        "task_analysis.md": "ba52313674bd66be7ca9fc220bf170b7a498b177e411c5e29276d7250fbfc7d2",
+        "CHANGELOG.md": "48c24d46a5883187ccb105aa7b1453c810699e779a470f395b00564765fa8032",
+        "task.json": "4509db66a2cbb25e8008e23d7ad1fe410f74154116da0464e9be5ab488813a9a",
+        "freeze.json": "233e398da515f8d51c8574d56586102e997383b06d7399ba5290867f2406d02f",
+        "tools/policy.py": "55c15c42674630994fd23eba8f013fc75e7f9c11b7f158f4e049394a99ffe423"
+      }
+    },
+    {
+      "task": "InterceptGrabFast-VLA-v0",
+      "directory": "InterceptGrabFast-VLA-v0",
+      "entrypoint": "InterceptGrabFast-VLA-v0/tools/policy.py",
+      "checkpoint": 50,
+      "program_hash": "34ec4ffba9c4b52b8bb96d4b75fa51ef2481cc58460f9ecc69c5a6a2291fbb4b",
+      "source_policy": "/data/daiyp/CaM_public/dev_logs/mikasarobo/InterceptGrabFast-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T184908_380329Z/tasks/InterceptGrabFast-VLA-v0/policy",
+      "source_run": "/data/daiyp/CaM/mikasa_robo/runs/mikasa_robo_v2/InterceptGrabFast-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T184908_380329Z",
+      "run_timetag": "20261108T184908_380329Z",
+      "files": {
+        "policy.md": "995b03d678a1d6d63a5bdd9961ad68706dee9943c2ea528ee14a4b6b2b114b8c",
+        "task_analysis.md": "aa7898fc6c8cffc61b5af70160677c7eb34629f8d0ba358fbfb793d73f6313c1",
+        "CHANGELOG.md": "9ca07c35ca3fe54f3e40229853b3fc137fc35a5e483d4e74dfa6891171a71735",
+        "task.json": "89a7ed5d58716e6274fca4d716eb97e47953b1c6d583b05779c05880f720d49e",
+        "freeze.json": "8ce6323dd69b38edf744169ebe2068155a0fec56868a56d33afac572f6ca3d6e",
+        "tools/policy.py": "6547e9d99d0e1addbd0e73d4189e19a9c78d7ccf1a4d4e00fa8d77c3817832eb"
+      }
+    },
+    {
+      "task": "InterceptGrabMedium-VLA-v0",
+      "directory": "InterceptGrabMedium-VLA-v0",
+      "entrypoint": "InterceptGrabMedium-VLA-v0/tools/policy.py",
+      "checkpoint": 50,
+      "program_hash": "a8e98dace112e15ed5a73fb575949d96899fd2b66cb0d28a1ad65b1018ad73fc",
+      "source_policy": "/data/daiyp/CaM_public/dev_logs/mikasarobo/InterceptGrabMedium-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T184908_380329Z/tasks/InterceptGrabMedium-VLA-v0/policy",
+      "source_run": "/data/daiyp/CaM/mikasa_robo/runs/mikasa_robo_v2/InterceptGrabMedium-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T184908_380329Z",
+      "run_timetag": "20261108T184908_380329Z",
+      "files": {
+        "policy.md": "367ac57350f50c5cb4d389acf47d8ee2283a671f75770b31f33ac66af44392f3",
+        "task_analysis.md": "eb51f0d4c5157e1bf4b099346a212327a4429c20b855d8b2e5e642e030beb691",
+        "CHANGELOG.md": "67890ae4d63e36b69ade56c99479fb2eae35a5fc10df2d033e45455a43f95c04",
+        "task.json": "522c7ba700eac24bd72cdc30eaf84f2838c928885126662ffb21d89279d63513",
+        "freeze.json": "3caed48e3da9293a1a61f2820cc68b7e1965a4eda0f801373702e6675ab91157",
+        "tools/policy.py": "bdf0ce5276ca48d86a090d954d1c4937563f7c4f5a0142cbcb94335966fe6cf8",
+        "tools/perception.py": "7f83749bda87840fb88287b05d2919d3659dd1bbcad399a89a769f02d173ea59",
+        "tools/control.py": "cab6b0b0bf9a636f65b9fd292fb855b918fdf162ad16405f114dfbcfba22ec0f"
+      }
+    },
+    {
+      "task": "InterceptGrabSlow-VLA-v0",
+      "directory": "InterceptGrabSlow-VLA-v0",
+      "entrypoint": "InterceptGrabSlow-VLA-v0/tools/policy.py",
+      "checkpoint": 50,
+      "program_hash": "6911b0aac2a0f32c06c501abb4b6750578338717cc7afa7e0243ef10b0ca0106",
+      "source_policy": "/data/daiyp/CaM_public/dev_logs/mikasarobo/InterceptGrabSlow-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T184908_380329Z/tasks/InterceptGrabSlow-VLA-v0/policy",
+      "source_run": "/data/daiyp/CaM/mikasa_robo/runs/mikasa_robo_v2/InterceptGrabSlow-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T184908_380329Z",
+      "run_timetag": "20261108T184908_380329Z",
+      "files": {
+        "policy.md": "70c238cd969f844ed90bef2bbcb2c26c70972ea6d6b66083f40f003ac41a2bf0",
+        "task_analysis.md": "15fa17869ff6a4c6511761635c7574ddd56290e35ec527330e3489f4ad58865d",
+        "CHANGELOG.md": "33fa2b19da3c037cf8f713946e1d87b21e016881047fc27e65549b431fb42e52",
+        "task.json": "11ce822cabb4d311c17d957c4d78bb54e14f64cbc09ba2c3270db7845039d337",
+        "freeze.json": "740591bd816630fa42a1d8b5e91bba6699ad81652b9c574791ef34cae540eb9a",
+        "tools/policy.py": "56a6cff53aef8d4cbe073160642a0c2598d940d5c2ccb3901a0a18e6efce2289"
+      }
+    },
+    {
+      "task": "InterceptMedium-VLA-v0",
+      "directory": "InterceptMedium-VLA-v0",
+      "entrypoint": "InterceptMedium-VLA-v0/tools/policy.py",
+      "checkpoint": 50,
+      "program_hash": "1d23c53f2688937453650a7451cfcae4cc1e889f3c1938ef5079c7e32169d6ca",
+      "source_policy": "/data/daiyp/CaM_public/dev_logs/mikasarobo/InterceptMedium-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T184908_380329Z/tasks/InterceptMedium-VLA-v0/policy",
+      "source_run": "/data/daiyp/CaM/mikasa_robo/runs/mikasa_robo_v2/InterceptMedium-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T184908_380329Z",
+      "run_timetag": "20261108T184908_380329Z",
+      "files": {
+        "policy.md": "b386fd28d51c29de753ed01067a13ab939059e19fc23e4d8bd4924c515a0b12c",
+        "task_analysis.md": "f120b99c893f8e974958c1a02ff2679193f15a0ad77eda5fc93acaea500fa7fd",
+        "CHANGELOG.md": "5e9e2eddadda6f28109c96174f93f5c3070fbe8018e035d20264e9d838c45942",
+        "task.json": "376a2b98be4780f95994cf067831ce7d49fc7961d26d53e7cad65395e3012f90",
+        "freeze.json": "2dfb5e0dd4a6dd0adf86f7157d50fe63709a802eef4eed8cfe2d8c117d14c216",
+        "tools/policy.py": "407f212d9ba1ea53b051444bbdfdc4aced98a7b601da24338e699eb023cc32ec"
+      }
+    },
+    {
+      "task": "InterceptSlow-VLA-v0",
+      "directory": "InterceptSlow-VLA-v0",
+      "entrypoint": "InterceptSlow-VLA-v0/tools/policy.py",
+      "checkpoint": 50,
+      "program_hash": "265ce13873998cf1ded4e768ebdc572e17395a6a089b1ccb5440fb5f82a90307",
+      "source_policy": "/data/daiyp/CaM_public/dev_logs/mikasarobo/InterceptSlow-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T184908_380329Z/tasks/InterceptSlow-VLA-v0/policy",
+      "source_run": "/data/daiyp/CaM/mikasa_robo/runs/mikasa_robo_v2/InterceptSlow-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T184908_380329Z",
+      "run_timetag": "20261108T184908_380329Z",
+      "files": {
+        "policy.md": "42c0e0b429a497435bca4ddbfaa7cb15a9da85ea613800d24909eac358c2d209",
+        "task_analysis.md": "26043f80b9b05d0b372cde5ddca5fd43b55adcffb6da88b88d2ffa6ef31b46e2",
+        "CHANGELOG.md": "f75d855cbf7aa5b623453abd2350aab0dfdb8656ca10394a460f3ecb2b0c511d",
+        "task.json": "7c73ac67e1d6350c5115908f24955b895d48f0afbc20fab33d5a66884d80fabc",
+        "freeze.json": "1e1f90d9d56944291d838f6bf36bc921d013d1fe0412e08147433b5bca949c79",
+        "tools/policy.py": "f4cdc932771a778f6a97f5e19c8dc9db62d62dd2a6d34f76d19532f86db300b6"
+      }
+    },
+    {
+      "task": "RememberColor3-Long-VLA-v0",
+      "directory": "RememberColor3-Long-VLA-v0",
+      "entrypoint": "RememberColor3-Long-VLA-v0/tools/policy.py",
+      "checkpoint": 50,
+      "program_hash": "afd4fb0e300d11788be1852e96b801441d50d91e1df64a877ce6d5f97c0ae592",
+      "source_policy": "/data/daiyp/CaM_public/dev_logs/mikasarobo/RememberColor3-Long-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T184908_380329Z/tasks/RememberColor3-Long-VLA-v0/policy",
+      "source_run": "/data/daiyp/CaM/mikasa_robo/runs/mikasa_robo_v2/RememberColor3-Long-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T184908_380329Z",
+      "run_timetag": "20261108T184908_380329Z",
+      "files": {
+        "policy.md": "b0f7915f961f217ffeea9c45d424aee9c0e84d8aa4b665814a478eaefe8b9373",
+        "task_analysis.md": "a205a1fda12a918897217609c526e927824bfe20ee1b97bdf555ef18a8c9db66",
+        "CHANGELOG.md": "af9446dd01f64a79f7c1e1dc8939094633c758d5c771e06d21d0f2005c92577c",
+        "task.json": "6554c19ad8e28865723aca9397ed13523f0b6aeffc4329b3fd3d48c763835664",
+        "freeze.json": "4030928dbdda699ba811d95a1a913cea50ac935d3ecffc35600e34aa154b7bf2",
+        "tools/policy.py": "37f897e4453d78708c9fb756850d87be47c3e0b17bdd95bec0a296291447ab90"
+      }
+    },
+    {
+      "task": "RememberColor5-Long-VLA-v0",
+      "directory": "RememberColor5-Long-VLA-v0",
+      "entrypoint": "RememberColor5-Long-VLA-v0/tools/policy.py",
+      "checkpoint": 50,
+      "program_hash": "a1cb621000f6e708ef6385b60353fea0a5e96f396b23aadb2b3b2e450807e02d",
+      "source_policy": "/data/daiyp/CaM_public/dev_logs/mikasarobo/RememberColor5-Long-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T184908_380329Z/tasks/RememberColor5-Long-VLA-v0/policy",
+      "source_run": "/data/daiyp/CaM/mikasa_robo/runs/mikasa_robo_v2/RememberColor5-Long-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T184908_380329Z",
+      "run_timetag": "20261108T184908_380329Z",
+      "files": {
+        "policy.md": "cef9c77dca3d2bf0641f78d4bb27e414f598f100fa1d38628fdb44dc74304610",
+        "task_analysis.md": "93e961314b62558b815b45111fa30837db76590d1d18c787dafd91c5e643d47e",
+        "CHANGELOG.md": "406a601452c1769f98f4c7c3db1d51424ffda9017d238f1abceda723567f4ac4",
+        "task.json": "4734d838c51abd0da2ef56c66ce553ab964dcc9b6bdbfa3c4dcfc3d6113b5bb7",
+        "freeze.json": "c5650bca7e09cdd02893ff993acbe76ad67af22e87f275e6296bd70a436a6e58",
+        "tools/policy.py": "c50ba94089903a714b5565073eb2dec1344749db0055dbab26ec2176119177d6"
+      }
+    },
+    {
+      "task": "RememberColor5-VLA-v0",
+      "directory": "RememberColor5-VLA-v0",
+      "entrypoint": "RememberColor5-VLA-v0/tools/policy.py",
+      "checkpoint": 50,
+      "program_hash": "44114fbe86b9a0fbdce20fbe472952b0562fbfd614d0c2872a9943f477f10d92",
+      "source_policy": "/data/daiyp/CaM_public/dev_logs/mikasarobo/RememberColor5-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T184908_380329Z/tasks/RememberColor5-VLA-v0/policy",
+      "source_run": "/data/daiyp/CaM/mikasa_robo/runs/mikasa_robo_v2/RememberColor5-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T184908_380329Z",
+      "run_timetag": "20261108T184908_380329Z",
+      "files": {
+        "policy.md": "de616f4c7497fc81096c02a8788f4fa41f4fd0d236762643af43d39c442f56d1",
+        "task_analysis.md": "c0a50b05590f9cedc84d164e7a961afcbb7b1471fa3166eeab6f2d3a71dc053c",
+        "CHANGELOG.md": "6ef9500d9086d5ea066867317d5ac436f8c6a53af0314e17635d8da0ce2a9f5e",
+        "task.json": "2285c85048531304823627e46e62c6e8eb2c8cdbffaa6d0a443959764a5634a4",
+        "freeze.json": "4517ce64e58b41583b3331e86ac22e1dd2e96c553290787384ec1b86f6fcd946",
+        "tools/policy.py": "a304d188017d2b05c3f84b78ae064cf4f39260e841b18253470cebcfb1bff8b0"
+      }
+    },
+    {
+      "task": "RememberColor9-Long-VLA-v0",
+      "directory": "RememberColor9-Long-VLA-v0",
+      "entrypoint": "RememberColor9-Long-VLA-v0/tools/policy.py",
+      "checkpoint": 50,
+      "program_hash": "bf63e0de73ce0e91f221eb3de3d1cd9dc3d4e704de28ab1109f46a4ef32c9f38",
+      "source_policy": "/data/daiyp/CaM_public/dev_logs/mikasarobo/RememberColor9-Long-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T184908_380329Z/tasks/RememberColor9-Long-VLA-v0/policy",
+      "source_run": "/data/daiyp/CaM/mikasa_robo/runs/mikasa_robo_v2/RememberColor9-Long-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T184908_380329Z",
+      "run_timetag": "20261108T184908_380329Z",
+      "files": {
+        "policy.md": "e54581bb31e2525d9413226c8e7299c1981265b5bab764a79bf4467ec4e99dd5",
+        "task_analysis.md": "480ed6d52bdbf05fb4c5344f2d1dfcc3664a7fff1ef2c3c5edaff44db60c3d24",
+        "CHANGELOG.md": "3ff9ea07b83fb6ad94d1bb70f4faf2c24bd68f38b8904551bbf93867c37a9c09",
+        "task.json": "8a286faef543bfbc5e45ca12bcd52c7b4f4bc95e2ce0f5d20b9a1054f6134125",
+        "freeze.json": "8f6859ffd8bb3ba8e6fc2ddc1481fb01d2aa793f25681f5d1a81290e6117530f",
+        "tools/policy.py": "dea54275e91bad6fd43adc4421d5c4dd20a8a04bd2e18336faee0a38566b6eb2"
+      }
+    },
+    {
+      "task": "RememberColor9-VLA-v0",
+      "directory": "RememberColor9-VLA-v0",
+      "entrypoint": "RememberColor9-VLA-v0/tools/policy.py",
+      "checkpoint": 50,
+      "program_hash": "44b80c7e06883d96049c3ed76a17d275e07710a10f989a5edcca9edd2804aa64",
+      "source_policy": "/data/daiyp/CaM_public/dev_logs/mikasarobo/RememberColor9-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T184908_380329Z/tasks/RememberColor9-VLA-v0/policy",
+      "source_run": "/data/daiyp/CaM/mikasa_robo/runs/mikasa_robo_v2/RememberColor9-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T184908_380329Z",
+      "run_timetag": "20261108T184908_380329Z",
+      "files": {
+        "policy.md": "7769fa78b8a6fac0d14a6f65d582b234723f3edfad500cb1be2164ef090a59ce",
+        "task_analysis.md": "c8d0ece4795f25ec7a031dba09cdd833918e5b52ddccbc23903ebcc2e67caf4b",
+        "CHANGELOG.md": "da74bb40472f5787b7763718352c6d3030e703bb42a849bf9c2d20c44d7af66c",
+        "task.json": "5e56af0981a11ce0278cc9a3b03a96f1448eb457c9670427e949e6febf438a38",
+        "freeze.json": "80f20ca28d7a42b22faf1c52d764e7bc8ee4f7e2109a217bcab288ded9cb0e19",
+        "tools/policy.py": "e86972b860752abb875506399992e4f89aea3d6de2d63a6719e55f3b9b6825d0"
+      }
+    },
+    {
+      "task": "RememberShape3-Long-VLA-v0",
+      "directory": "RememberShape3-Long-VLA-v0",
+      "entrypoint": "RememberShape3-Long-VLA-v0/tools/policy.py",
+      "checkpoint": 50,
+      "program_hash": "24835ff858420cdabb246790d29f0f0cb9b995ed891da4a24b36fbf73cb7266d",
+      "source_policy": "/data/daiyp/CaM_public/dev_logs/mikasarobo/RememberShape3-Long-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T184908_380329Z/tasks/RememberShape3-Long-VLA-v0/policy",
+      "source_run": "/data/daiyp/CaM/mikasa_robo/runs/mikasa_robo_v2/RememberShape3-Long-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T184908_380329Z",
+      "run_timetag": "20261108T184908_380329Z",
+      "files": {
+        "policy.md": "cbda023ea9ce6b4354c9f051fefdde3fc3671433c4b4056607327c1543fe27e9",
+        "task_analysis.md": "3c4119b198ea2c95bbcfe41c3bc33c892a862c54dde085cb834b3eb81ff961f7",
+        "CHANGELOG.md": "5097aaf59734f456cdde0d1a906f0abd3fa1fa5d6fa187e5ef47cf3266d54a06",
+        "task.json": "ada640ce3967bfea9bd4ce590b903b531050133182b8f285f0d7280fd1c6c5d8",
+        "freeze.json": "eb91d43953efd7df0f9caddf3689df9510a355a2485596c30387c249ce16cf52",
+        "tools/policy.py": "81d5c23cc0eeb81872fa4c70384c8bb0047facec88762535666a5683c9df9417",
+        "tools/perception.py": "e7bfad85fc8f9c3f1c104b879782b6c06a4c18fa85d3aac6e987f65b9009b5f1"
+      }
+    },
+    {
+      "task": "RememberShape3-VLA-v0",
+      "directory": "RememberShape3-VLA-v0",
+      "entrypoint": "RememberShape3-VLA-v0/tools/policy.py",
+      "checkpoint": 50,
+      "program_hash": "07425349990cc7da993e920b2c87f360f74a127a35d6ea30e6a24dfcdc90a655",
+      "source_policy": "/data/daiyp/CaM_public/dev_logs/mikasarobo/RememberShape3-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T184908_380329Z/tasks/RememberShape3-VLA-v0/policy",
+      "source_run": "/data/daiyp/CaM/mikasa_robo/runs/mikasa_robo_v2/RememberShape3-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T184908_380329Z",
+      "run_timetag": "20261108T184908_380329Z",
+      "files": {
+        "policy.md": "17f9f7c9b49cd6ff8f14403582684e5a38a3e77353af3cc22b5d0d4c7d0cc11c",
+        "task_analysis.md": "5bef5dcd0cd2bd3f3a34d7133acbca4662c0a17b3f412313ef94cdb564391713",
+        "CHANGELOG.md": "96d2d5d021c2003000e3e542767aaeb4df6fbe133c17fffca30f8c327487ec6b",
+        "task.json": "c3d1bb526911d7ce1a8ccb3dbb717470fedbe02117f42764ab43cd48aa32f623",
+        "freeze.json": "2263e55a9989221f9ed6b8bc3668e5bff28678ef62b08e8605d892ac930aa249",
+        "tools/policy.py": "b210bb5f969d7c80451f70bdbaf8fdb9455626d38cf92683073df9dfea379483",
+        "tools/perception.py": "bfafe28551e1420a010740092156ca649f213b3b32ec74322d58bea1b5075fe2"
+      }
+    },
+    {
+      "task": "RememberShape5-Long-VLA-v0",
+      "directory": "RememberShape5-Long-VLA-v0",
+      "entrypoint": "RememberShape5-Long-VLA-v0/tools/policy.py",
+      "checkpoint": 50,
+      "program_hash": "cad77e04560f91dbbddaeda5c9bcf6b7d1b236629986c0acfdf390106d62b797",
+      "source_policy": "/data/daiyp/CaM_public/dev_logs/mikasarobo/RememberShape5-Long-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T184908_380329Z/tasks/RememberShape5-Long-VLA-v0/policy",
+      "source_run": "/data/daiyp/CaM/mikasa_robo/runs/mikasa_robo_v2/RememberShape5-Long-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T184908_380329Z",
+      "run_timetag": "20261108T184908_380329Z",
+      "files": {
+        "policy.md": "38ac18d13e566801d9f0cadb9238be5a96be2cf7c64e2a71796270140ea32253",
+        "task_analysis.md": "cc918108095787e3b106e17b8df545e60a638a668aaf946b17d237476eb258a7",
+        "CHANGELOG.md": "aa65cb986482da1c04c85bdc744cd45306f821c43e27220728e438c1249f1aba",
+        "task.json": "d2aafb794ca67c4470579770bfd5f263eeb6dc48086a01cc3e017e97fda74ca1",
+        "freeze.json": "b7ae3baa03cc4e786679d646a9e296ed62d96116008973c945c226b8d391c4d5",
+        "tools/policy.py": "8062fa3abd0c9fb1b54c8b40f81c634894ec1928b0f265221f62d5043ed5189d",
+        "tools/perception.py": "2442fff2b4a68feeed746867bdac1143eb057248e415ffe4ded6b940b6d99a07"
+      }
+    },
+    {
+      "task": "RememberShape5-VLA-v0",
+      "directory": "RememberShape5-VLA-v0",
+      "entrypoint": "RememberShape5-VLA-v0/tools/policy.py",
+      "checkpoint": 50,
+      "program_hash": "1f731aaeea3f4b6f7f5218a296b77868c9aefda4f4ebf799302103ed9bf159a7",
+      "source_policy": "/data/daiyp/CaM_public/dev_logs/mikasarobo/RememberShape5-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T184908_380329Z/tasks/RememberShape5-VLA-v0/policy",
+      "source_run": "/data/daiyp/CaM/mikasa_robo/runs/mikasa_robo_v2/RememberShape5-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T184908_380329Z",
+      "run_timetag": "20261108T184908_380329Z",
+      "files": {
+        "policy.md": "a798589616c941dc6b0fa971a42fca32dc7d039035e26283993fb79a062bb7fc",
+        "task_analysis.md": "4e0213a671149d883711bcbb871f02d472496e3dfa3b111904137ddb2d1002db",
+        "CHANGELOG.md": "75159c3e80c4f56ce7351c88ec7b781cb3cc119c877cfe12fd5427db11bafa3b",
+        "task.json": "07d9202b695dfe36688ebc3779f962f736c772d5ef7c3bbe32b0de96e3344a66",
+        "freeze.json": "f3720b5cfdc2e02ac4714d6b19c04c51b1034cc92b2044b25aa86730caf43e92",
+        "tools/policy.py": "fa48e60a4ca77c0668c87ad4cf4cf1e842b1748d4679492355054bf8b07c7b0b"
+      }
+    },
+    {
+      "task": "RememberShape9-Long-VLA-v0",
+      "directory": "RememberShape9-Long-VLA-v0",
+      "entrypoint": "RememberShape9-Long-VLA-v0/tools/policy.py",
+      "checkpoint": 50,
+      "program_hash": "92bba09865d2b246892053674a16fa645e735359b7cfa4754538c6e8bc086d14",
+      "source_policy": "/data/daiyp/CaM_public/dev_logs/mikasarobo/RememberShape9-Long-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T184908_380329Z/tasks/RememberShape9-Long-VLA-v0/policy",
+      "source_run": "/data/daiyp/CaM/mikasa_robo/runs/mikasa_robo_v2/RememberShape9-Long-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T184908_380329Z",
+      "run_timetag": "20261108T184908_380329Z",
+      "files": {
+        "policy.md": "b068823a3308081f094f198d4179346bd5810b76e6eb9035aa4ad94ca6f45afc",
+        "task_analysis.md": "8835241765432becce2aa5ffd65d58ec483f277d9ab208346bbde4333c1c7f11",
+        "CHANGELOG.md": "7e19cad4e07cde91171b61f0f5e7d9da9620464e3376f965a8495aeaa73ca623",
+        "task.json": "6aec39fd69d893d0265783902a4317de792063cf584e40aec17ac84745dc9926",
+        "freeze.json": "9cdc1541788da46b3b8c3469f05abe2d19da4770463c53f7a2d82bfdff7d3111",
+        "tools/policy.py": "a332e86eb2bb43ea45f8fff76b6fefd5cf8a797c793999386dbb64aeaf3df908",
+        "tools/shapes.py": "8c7831e04495a2a5367b3d9e5cb0d1cd14d6316b6d9595ba0f270f6c37f7a583",
+        "tools/vision.py": "d5c6c5620e0647abfad2057d7199caea6633859de1e9e4c75fbca8cedefeaa58"
+      }
+    },
+    {
+      "task": "RememberShape9-VLA-v0",
+      "directory": "RememberShape9-VLA-v0",
+      "entrypoint": "RememberShape9-VLA-v0/tools/policy.py",
+      "checkpoint": 50,
+      "program_hash": "2c588d2bfa9e5d26c26ec1f36b16a37f5765f095b9acf1903d72ddb53c6a233e",
+      "source_policy": "/data/daiyp/CaM_public/dev_logs/mikasarobo/RememberShape9-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T184908_380329Z/tasks/RememberShape9-VLA-v0/policy",
+      "source_run": "/data/daiyp/CaM/mikasa_robo/runs/mikasa_robo_v2/RememberShape9-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T184908_380329Z",
+      "run_timetag": "20261108T184908_380329Z",
+      "files": {
+        "policy.md": "6880dd084eb8c514cab373893216e3571d3df688dd838feed14ba534e711bcc1",
+        "task_analysis.md": "497646a383b03c71d61a94410831f4a487b360004cdfa3fec4854317c4eea620",
+        "CHANGELOG.md": "4db6530070883ffac2945e3e153c5dde6f37439532480ff87fdc241f6735905a",
+        "task.json": "7ba531da544069b937a9f8844625a679be565cdb3490e1060d5336cfd2b7053b",
+        "freeze.json": "1ead173c65d72cccc7531c0f6c98652dd518f68cb00f4654a41a0df31603b720",
+        "tools/policy.py": "d51b8b3e0e4f7a8d79fd60580b7b54c8a615143e1cf0f38d222014a6d625b0c8"
+      }
+    },
+    {
+      "task": "RememberShapeAndColor3x2-Long-VLA-v0",
+      "directory": "RememberShapeAndColor3x2-Long-VLA-v0",
+      "entrypoint": "RememberShapeAndColor3x2-Long-VLA-v0/tools/policy.py",
+      "checkpoint": 50,
+      "program_hash": "bbea747976ac40c38a6f8839558c593641d976083776d827af056595386e390a",
+      "source_policy": "/data/daiyp/CaM_public/dev_logs/mikasarobo/RememberShapeAndColor3x2-Long-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T184908_380329Z/tasks/RememberShapeAndColor3x2-Long-VLA-v0/policy",
+      "source_run": "/data/daiyp/CaM/mikasa_robo/runs/mikasa_robo_v2/RememberShapeAndColor3x2-Long-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T184908_380329Z",
+      "run_timetag": "20261108T184908_380329Z",
+      "files": {
+        "policy.md": "2b1e0f99c7113e9a93233a81dce78613882e5f5d4f2db6db530d14ee927c9ba9",
+        "task_analysis.md": "78bdf8228921367ce63c41f1516eb4b69ee98554bb73fe581bb66d2b4ec56b81",
+        "CHANGELOG.md": "7c150c9ac5c9c33f78b99505e059c0a3de23b7984bc48d32a75dc59b36803d4d",
+        "task.json": "f0e473b94d09a2330b55925fe2a633120c4a3f3b76b849f1cc33a91526651683",
+        "freeze.json": "1688d72e6e6a4700bbae55d206c7937dcf14bfb48106a7e3d1c591830e373b1a",
+        "tools/policy.py": "24140532d2b2cadfdd96eb75e75987c683874e6a90283dc60e9ab6e1e14592cd"
+      }
+    },
+    {
+      "task": "RememberShapeAndColor3x2-VLA-v0",
+      "directory": "RememberShapeAndColor3x2-VLA-v0",
+      "entrypoint": "RememberShapeAndColor3x2-VLA-v0/tools/policy.py",
+      "checkpoint": 50,
+      "program_hash": "6d34558960102ef7f5b38dd4ea63bfb400d1cd88357cecea180470820947d002",
+      "source_policy": "/data/daiyp/CaM_public/dev_logs/mikasarobo/RememberShapeAndColor3x2-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T184908_380329Z/tasks/RememberShapeAndColor3x2-VLA-v0/policy",
+      "source_run": "/data/daiyp/CaM/mikasa_robo/runs/mikasa_robo_v2/RememberShapeAndColor3x2-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T184908_380329Z",
+      "run_timetag": "20261108T184908_380329Z",
+      "files": {
+        "policy.md": "d10fd36ab9d5b5760667006229923d2ae4f1c8f362c71cb4f81bc3e4d484a4b8",
+        "task_analysis.md": "6ebe496284c506555ab5dc89eff4bb0704607c957acae07030ce5ba9267e1bbe",
+        "CHANGELOG.md": "ed519ec4a86140952b0cee616525768f2e995aceee6c27a43cf218bd9bcee0f3",
+        "task.json": "13cd7322019128549b6c4842f8d2ebd5d59f883b0903a65bc9b307c1ae1b036f",
+        "freeze.json": "5918e1a2de4e43dc0760e4d00ebcc691a2b78c3f50d9173ee287e1c8e4cf603c",
+        "tools/policy.py": "ad7d7aa2354cee12035ae73ef91db48998771f4b45d204465b2a70c8aaa0a66f"
+      }
+    },
+    {
+      "task": "RememberShapeAndColor3x3-Long-VLA-v0",
+      "directory": "RememberShapeAndColor3x3-Long-VLA-v0",
+      "entrypoint": "RememberShapeAndColor3x3-Long-VLA-v0/tools/policy.py",
+      "checkpoint": 50,
+      "program_hash": "93e61663a7c59a42413e5000735f88e31e5f40cec7e00d5c1aff14a742234939",
+      "source_policy": "/data/daiyp/CaM_public/dev_logs/mikasarobo/RememberShapeAndColor3x3-Long-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T184908_380329Z/tasks/RememberShapeAndColor3x3-Long-VLA-v0/policy",
+      "source_run": "/data/daiyp/CaM/mikasa_robo/runs/mikasa_robo_v2/RememberShapeAndColor3x3-Long-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T184908_380329Z",
+      "run_timetag": "20261108T184908_380329Z",
+      "files": {
+        "policy.md": "4a1989a020ebc0f59805b86a6be325f61bd10e7073b8783b413303e18f0a7fa3",
+        "task_analysis.md": "1bb96fbb568c1674b0dccd38669d1471d90f697bd19b426083fad58a670a9441",
+        "CHANGELOG.md": "72e29748678c4e0815d48ed03c2c15c2ed44b0a8384ffc6712d33ad48d82ce48",
+        "task.json": "30b64b28157f4db1d6ab0731d5616aeeff44646107b019766e29c7cab6084b9c",
+        "freeze.json": "559c8894b33110e49c9f09370162dce70b5f549d26ceb4469ba080e65a194afc",
+        "tools/policy.py": "8932c9646cd47b15c7e986956affc60d575c8686dacf472ca4c6f90e21afee1a",
+        "tools/perception.py": "6c5fead9cbedd1a56b5f422770ce51aa6fa7b041578d8b6515c730410a9f03b0",
+        "tools/control.py": "695e5593a3d8fdb63429924b0834c68414c4aa2a37e68af6b7c376b5cd49f6b8"
+      }
+    },
+    {
+      "task": "RememberShapeAndColor3x3-VLA-v0",
+      "directory": "RememberShapeAndColor3x3-VLA-v0",
+      "entrypoint": "RememberShapeAndColor3x3-VLA-v0/tools/policy.py",
+      "checkpoint": 50,
+      "program_hash": "b052c2d1b8243ec06c742dd3ef64977d9db7168cf6e325a6e7234b13a9203391",
+      "source_policy": "/data/daiyp/CaM_public/dev_logs/mikasarobo/RememberShapeAndColor3x3-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T184908_380329Z/tasks/RememberShapeAndColor3x3-VLA-v0/policy",
+      "source_run": "/data/daiyp/CaM/mikasa_robo/runs/mikasa_robo_v2/RememberShapeAndColor3x3-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T184908_380329Z",
+      "run_timetag": "20261108T184908_380329Z",
+      "files": {
+        "policy.md": "d2126d06e5333b150e9a237e0a7acb46a91db93062fc26faaed6ac2a70452543",
+        "task_analysis.md": "9679a51c4534e57386bebb1b3d6b5861b5396a504651622601893569bc9d97f7",
+        "CHANGELOG.md": "7cc398df438ec096e4f3ca3f6688c527a051fe172f0c37860845ca1bb010a586",
+        "task.json": "118a57b12c9ea0188ccda9f3e52631b15549a62d197b0c3fd7d5388008798030",
+        "freeze.json": "c0ebfac3035a641d29422923a7144086bda2e9340848b6629923f28a631f150a",
+        "tools/policy.py": "cf545518477746c53bd2d0382392234638229f657289ea6f64fc1fc3888a8832"
+      }
+    },
+    {
+      "task": "RememberShapeAndColor5x3-Long-VLA-v0",
+      "directory": "RememberShapeAndColor5x3-Long-VLA-v0",
+      "entrypoint": "RememberShapeAndColor5x3-Long-VLA-v0/tools/policy.py",
+      "checkpoint": 50,
+      "program_hash": "efd9a6ca3b6182643316470cf057dd85031e61018d54fb5ce0312b39f898a6a4",
+      "source_policy": "/data/daiyp/CaM_public/dev_logs/mikasarobo/RememberShapeAndColor5x3-Long-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T184908_380329Z/tasks/RememberShapeAndColor5x3-Long-VLA-v0/policy",
+      "source_run": "/data/daiyp/CaM/mikasa_robo/runs/mikasa_robo_v2/RememberShapeAndColor5x3-Long-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T184908_380329Z",
+      "run_timetag": "20261108T184908_380329Z",
+      "files": {
+        "policy.md": "c52321ebf4dafa992e0b6aa4917b3576e46922d196d14cd022ec5474be69a7e2",
+        "task_analysis.md": "d6e7c48f4a4786a52d13bdf42d79f0526faf3cebe8b0a8e05eea87024c65ca6d",
+        "CHANGELOG.md": "7698f2a4601025dd274274e0dc2dfd13c30115e0e6a0b75d7a81ae4f1cda4c29",
+        "task.json": "4c701954449632241342d27acdb5a6a5b73453434c5ba7c3cf99b25c851f403c",
+        "freeze.json": "706e919f80933fb27f28fec56e77bce12851aef9f0d230b07b19036fa588496d",
+        "tools/policy.py": "55ef1e2fb773999eb8b4c32e43c2828de570baa65026f7e139b79c61d5578867",
+        "tools/shapes.py": "71d86d970036a19b5b9c46e1641abee2d65f1ff97a2325a03305d3adf0850677",
+        "tools/actions.py": "29f7d2893ee08b2483ad355ae10b78bbd8ef26483c1430c349168c45ca70b3bb",
+        "tools/vision.py": "0a3232d2610786bae71dc2ac15fcd3939576d16653129dc21bc61f7b435a40f1"
+      }
+    },
+    {
+      "task": "RememberShapeAndColor5x3-VLA-v0",
+      "directory": "RememberShapeAndColor5x3-VLA-v0",
+      "entrypoint": "RememberShapeAndColor5x3-VLA-v0/tools/policy.py",
+      "checkpoint": 50,
+      "program_hash": "13f8aaae3f3efc0146e49d0dc38e4dd4b19908f9290336acf6641f2d7686e7b5",
+      "source_policy": "/data/daiyp/CaM_public/dev_logs/mikasarobo/RememberShapeAndColor5x3-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T184908_380329Z/tasks/RememberShapeAndColor5x3-VLA-v0/policy",
+      "source_run": "/data/daiyp/CaM/mikasa_robo/runs/mikasa_robo_v2/RememberShapeAndColor5x3-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T184908_380329Z",
+      "run_timetag": "20261108T184908_380329Z",
+      "files": {
+        "policy.md": "3db6f60b657f5699e7dee76b0ceed34171e63e6a0f7012ed4899f38c92a0338a",
+        "task_analysis.md": "c466e7dd48f4d80a511697ead5d619185044f5e4fb3e0ab79503a9bfa2174b5b",
+        "CHANGELOG.md": "ec21273014ad10c3ff45f138db8565cca4f3933d67abc1272a02adff3dca80ea",
+        "task.json": "f6036fbe1b1e69db1a6340bfa15c72158983381fe9fe519e5a639e13ef2368c3",
+        "freeze.json": "be324ed037646d882e9af8b8ad116800b32f0c8104c2725ec04547f90f4b3d61",
+        "tools/policy.py": "3b9b6f9f84daaf1be9cca4e0afb3ee86902c50d954445ca065800b656260ccff",
+        "tools/vision.py": "d1f80a76b1e964df6e98a3fb71f46d014aee6e3a8fcdf83ba6cc1c6f81abb039"
+      }
+    },
+    {
+      "task": "RotateLenientPos-VLA-v0",
+      "directory": "RotateLenientPos-VLA-v0",
+      "entrypoint": "RotateLenientPos-VLA-v0/tools/policy.py",
+      "checkpoint": 50,
+      "program_hash": "0cb0d870e2dacaf0856ae22e011e5601e683ff5e96e2c8983698a707f237813f",
+      "source_policy": "/data/daiyp/CaM_public/dev_logs/mikasarobo/RotateLenientPos-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T184908_380329Z/tasks/RotateLenientPos-VLA-v0/policy",
+      "source_run": "/data/daiyp/CaM/mikasa_robo/runs/mikasa_robo_v2/RotateLenientPos-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T184908_380329Z",
+      "run_timetag": "20261108T184908_380329Z",
+      "files": {
+        "policy.md": "1dbd0720ffae90ebe7b2e2ca0b3b54e56b951ddd3076e2b64977104a51bcd740",
+        "task_analysis.md": "27c4db19dda5d96a91100aef43a98839137ff0646d7510ac26955d12123f5507",
+        "CHANGELOG.md": "4389da04da7c2dfcb27d6ab331b6994997a785f9f5b82af3ea2d695f011a46c2",
+        "task.json": "951017fe6b6106cb1556ad709b5cd965d30d5bd51cb343163b0aa92c7376ac31",
+        "freeze.json": "2fd2ea626475186c07548dcd569441e9aa917906f1abcf54b30fa0cb3cff6df4",
+        "tools/policy.py": "789dfc20fe3e8ef67537a86bd4d4d88c5f3cd1ee4c227264c5110a5fd7a6a5d3"
+      }
+    },
+    {
+      "task": "RotateLenientPosNeg-VLA-v0",
+      "directory": "RotateLenientPosNeg-VLA-v0",
+      "entrypoint": "RotateLenientPosNeg-VLA-v0/tools/policy.py",
+      "checkpoint": 50,
+      "program_hash": "c8eb2c80ebea73c17c62297ed71387dccf08961246e5ae2e496c71cd0e9bdae0",
+      "source_policy": "/data/daiyp/CaM_public/dev_logs/mikasarobo/RotateLenientPosNeg-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T184908_380329Z/tasks/RotateLenientPosNeg-VLA-v0/policy",
+      "source_run": "/data/daiyp/CaM/mikasa_robo/runs/mikasa_robo_v2/RotateLenientPosNeg-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T184908_380329Z",
+      "run_timetag": "20261108T184908_380329Z",
+      "files": {
+        "policy.md": "b8170c217a6d4b6bb3997e10da6eda88e8bb1ce57061567b5c0e9201fae618ac",
+        "task_analysis.md": "cf8f1babbcb1aabccdd9dd8b841ab3665954edaa9256ea19e91704883b9ef194",
+        "CHANGELOG.md": "9f8e65c3fbf94c02ec01b9c4b41b151c8a3b02609c8e4c52991411cccde1dba1",
+        "task.json": "ff5986c6379afb7d5fd79a4d5148335a64c65325b2264e245a9fcca2e9d78f15",
+        "freeze.json": "018c0af85d9eaff3b6e6ca5f900b5892cc2751d889b598698afe40a6a5b9674a",
+        "tools/policy.py": "0b85a02d855bacf75bb5ff45996b01ef09f16872ff545d84da9cc35074f693f8",
+        "tools/perception.py": "42ca03e37e2296d0aa2bac16e88334106441082bbdd119fc9737e5318eca561e",
+        "tools/control.py": "24ab4a95d0cc6e3457448393a5d74a719b855429aa2fbf5e054214cde1e6abce"
+      }
+    },
+    {
+      "task": "RotateStrictPos-VLA-v0",
+      "directory": "RotateStrictPos-VLA-v0",
+      "entrypoint": "RotateStrictPos-VLA-v0/tools/policy.py",
+      "checkpoint": 50,
+      "program_hash": "5ed4bdfea6649f05430238e85616b6960f20def0e38f768847679e0fb79c9281",
+      "source_policy": "/data/daiyp/CaM_public/dev_logs/mikasarobo/RotateStrictPos-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T184908_380329Z/tasks/RotateStrictPos-VLA-v0/policy",
+      "source_run": "/data/daiyp/CaM/mikasa_robo/runs/mikasa_robo_v2/RotateStrictPos-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T184908_380329Z",
+      "run_timetag": "20261108T184908_380329Z",
+      "files": {
+        "policy.md": "b3f89b2c8ab03871ec394018fe3b346827f3ca8adfb0fe7e401f615884d6e070",
+        "task_analysis.md": "400344a56b19f8a3af224d5c4b212010c6381aea7d01894271b27d271f859de2",
+        "CHANGELOG.md": "ae157e34f87aa0f428e43f3c845c8937e431ebd7af1ec59f37afb0ad1c1be0e0",
+        "task.json": "a04f5972a15981cb388a257f3209daa1bb6fc46e4d8a9a58887946c5c27b0321",
+        "freeze.json": "498f590fc13fde1dccb2732f8b544cfdeb94718d20b51f9c2f6fd29790a756ec",
+        "tools/policy.py": "eb0d00941a76eb4712112d0cb3ed15160103986a25258d188a0263719a1e03dd"
+      }
+    },
+    {
+      "task": "RotateStrictPosNeg-VLA-v0",
+      "directory": "RotateStrictPosNeg-VLA-v0",
+      "entrypoint": "RotateStrictPosNeg-VLA-v0/tools/policy.py",
+      "checkpoint": 50,
+      "program_hash": "2d3174851e5b4399db7aba473377b981b2698e216422aaaef38d196d235eaefc",
+      "source_policy": "/data/daiyp/CaM_public/dev_logs/mikasarobo/RotateStrictPosNeg-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T184908_380329Z/tasks/RotateStrictPosNeg-VLA-v0/policy",
+      "source_run": "/data/daiyp/CaM/mikasa_robo/runs/mikasa_robo_v2/RotateStrictPosNeg-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T184908_380329Z",
+      "run_timetag": "20261108T184908_380329Z",
+      "files": {
+        "policy.md": "843c47eafa5973ade3a1e05a9d03979ed5a9253ff9f396d8cfcfae1afaed74c5",
+        "task_analysis.md": "a165241346debc5745950d551bab651809aee2fda3e7e0c3f98087e9f8006e3c",
+        "CHANGELOG.md": "1eb27be8572931f9d99458999a90683710cb5ec6ec1108f32a4b2e19e37852be",
+        "task.json": "4e0bd6a6e7941e176164f37f571703e739c04e3ed5ae8db333b1e70f6b82086d",
+        "freeze.json": "e8944989127423ed2efd2c127a4e1a46f52cdff37a72f692efed6134dc251c34",
+        "tools/policy.py": "880b9ba8f5bf02d6a96e9b51e66fd3a766fa1b59448c895d2b279d1320237ee1"
+      }
+    },
+    {
+      "task": "SeqOfColors3-Long-VLA-v0",
+      "directory": "SeqOfColors3-Long-VLA-v0",
+      "entrypoint": "SeqOfColors3-Long-VLA-v0/tools/policy.py",
+      "checkpoint": 50,
+      "program_hash": "ae497ca222fd4112650557ce170510724a620a57f8acd45dfe7d294cc86b42ff",
+      "source_policy": "/data/daiyp/CaM_public/dev_logs/mikasarobo/SeqOfColors3-Long-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T184908_380329Z/tasks/SeqOfColors3-Long-VLA-v0/policy",
+      "source_run": "/data/daiyp/CaM/mikasa_robo/runs/mikasa_robo_v2/SeqOfColors3-Long-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T184908_380329Z",
+      "run_timetag": "20261108T184908_380329Z",
+      "files": {
+        "policy.md": "08cb115b1e256923c3f855ae730262e4d387b4fd70b168abb2d1131b962562c8",
+        "task_analysis.md": "61f46de2f169be4cb40915e698e794023f752e340e513dcfce4329ea1ab07dae",
+        "CHANGELOG.md": "71cabd05f4c7b9e99b916b9bde15c83eb77c8da9f0f9eda92ade164f7ba253ed",
+        "task.json": "23ba691ff11cec64c328cc6796da050c048086689745cd2b4bc0d39d4fcc965b",
+        "freeze.json": "adcba4e77168e1ff873a760739406d614fdc0a93b5ead83f075b36ed795b290b",
+        "tools/policy.py": "72b0eb50c6742b56dc132a3c22d9ff3d740092fa8685ca021de9bcd4e318e570",
+        "tools/acts.py": "6e968d3f2f2f7dd02e48b9b87562ad554b91f06e7cd1b73742ff0af5444753ec",
+        "tools/perception.py": "ed54a84b90f972a34e3ebdf9a65348e62f91875cd0fade22e45d7760e286e945",
+        "tools/control.py": "5b13386a2a932938fc57ee9b68ce283d83c0aaf1130d7fcbf73b88bb8aefe0f6"
+      }
+    },
+    {
+      "task": "SeqOfColors5-Long-VLA-v0",
+      "directory": "SeqOfColors5-Long-VLA-v0",
+      "entrypoint": "SeqOfColors5-Long-VLA-v0/tools/policy.py",
+      "checkpoint": 50,
+      "program_hash": "5500eeddec8874c3362d2532594920e815f6d78f95973d8514b0d1612cfdd2c0",
+      "source_policy": "/data/daiyp/CaM_public/dev_logs/mikasarobo/SeqOfColors5-Long-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T184908_380329Z/tasks/SeqOfColors5-Long-VLA-v0/policy",
+      "source_run": "/data/daiyp/CaM/mikasa_robo/runs/mikasa_robo_v2/SeqOfColors5-Long-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T184908_380329Z",
+      "run_timetag": "20261108T184908_380329Z",
+      "files": {
+        "policy.md": "e5d5b91a840707e3b007c5de35cb27998c766f89dfef2373e3aa8ce7c105e48a",
+        "task_analysis.md": "7f7429de06761725413fc7d914e5b71c55b0b3f59f5a037446b740f1a83f3fbf",
+        "CHANGELOG.md": "1a8438508f005e6379cc2acc62359fc671459bf0a3e912620347cb1ae0eeb8a0",
+        "task.json": "2c66da943bbfa29fa5c92654f909ef6c9258232077e8433148be496889c71cf1",
+        "freeze.json": "0cdc1464ddcca0e18aeee439d3fb9dabdf869c5966ed9cc3660bb28a426cf74e",
+        "tools/policy.py": "85522b1023a6597932f7275c008f497f197fa2a20f01ce5d5c5aac04f60077c5"
+      }
+    },
+    {
+      "task": "SeqOfColors5-VLA-v0",
+      "directory": "SeqOfColors5-VLA-v0",
+      "entrypoint": "SeqOfColors5-VLA-v0/tools/policy.py",
+      "checkpoint": 50,
+      "program_hash": "445cf0ab56eff738682af10112cff89ddf75d1ada7b01ba7835ab7fdb143e0bc",
+      "source_policy": "/data/daiyp/CaM_public/dev_logs/mikasarobo/SeqOfColors5-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T184908_380329Z/tasks/SeqOfColors5-VLA-v0/policy",
+      "source_run": "/data/daiyp/CaM/mikasa_robo/runs/mikasa_robo_v2/SeqOfColors5-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T184908_380329Z",
+      "run_timetag": "20261108T184908_380329Z",
+      "files": {
+        "policy.md": "db983a0f71af968bfe788e1d4db050816166772a449f3667eefd6a8d0c1ceb2e",
+        "task_analysis.md": "ecbffaf27c9ab3648319a87b2f1d95ca519bfb3f9dec6ccef282c3324f75c784",
+        "CHANGELOG.md": "3bb848a1fc296d8603a6f0aaf8c2c506374c88060c1d7ce6e28360161ba31a8a",
+        "task.json": "235b272bba9a76e0fa993a6ee01c5936b8cc471b6c56c09fbb660a96fd266a67",
+        "freeze.json": "f3eb76a3d322d6eb871ae4b722ab7fa27b33dd3be21ff21677ae0b3f14efd6e0",
+        "tools/policy.py": "d0107e75f17e45f9a59c8f814902a28ce54ed67eab12997553e871062f45f630"
+      }
+    },
+    {
+      "task": "SeqOfColors7-Long-VLA-v0",
+      "directory": "SeqOfColors7-Long-VLA-v0",
+      "entrypoint": "SeqOfColors7-Long-VLA-v0/tools/policy.py",
+      "checkpoint": 50,
+      "program_hash": "1d629ad6448244c63efcd490826aa6a8796b0f311c693d46a7cf4f7cd0e0c018",
+      "source_policy": "/data/daiyp/CaM_public/dev_logs/mikasarobo/SeqOfColors7-Long-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T184908_380329Z/tasks/SeqOfColors7-Long-VLA-v0/policy",
+      "source_run": "/data/daiyp/CaM/mikasa_robo/runs/mikasa_robo_v2/SeqOfColors7-Long-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T184908_380329Z",
+      "run_timetag": "20261108T184908_380329Z",
+      "files": {
+        "policy.md": "b49b41a18d5052a93b15bd9bd42034534404e36d93063b508357d300bb6be20d",
+        "task_analysis.md": "7e10050995e0739bb16f9082fdfb231b1824fb02d225209faf511736e6118216",
+        "CHANGELOG.md": "310fdf86677be4a99223f041fb8a24277fe2ae56beb67b2eb80d6ab5eb064489",
+        "task.json": "57e3c14db40e7dce232f955ae4c026d51631c565e0c1a59208b7bb92709204d2",
+        "freeze.json": "60e40e313df40ce6ab0af2aa50fbff353704ccfd1c2f17e6b4599724a6c2993c",
+        "tools/policy.py": "fc26e8023e029b772e2567c0a40c08544d88c604c0e3252e1f6aa0f170ba310a",
+        "tools/perception.py": "188bab9a95077d444e95a9e902a3b5e09e9ea2107adf76609271f79b6cd7b2c4",
+        "tools/control.py": "5f43d4aa35465c65bbfa42cd294d33f7b71e8d2508135b08993f951be1daa86d"
+      }
+    },
+    {
+      "task": "SeqOfColors7-VLA-v0",
+      "directory": "SeqOfColors7-VLA-v0",
+      "entrypoint": "SeqOfColors7-VLA-v0/tools/policy.py",
+      "checkpoint": 50,
+      "program_hash": "0c5efbc0193800c953054bee02bab4d46e49497360980561502a284c13a5b087",
+      "source_policy": "/data/daiyp/CaM_public/dev_logs/mikasarobo/SeqOfColors7-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T184908_380329Z/tasks/SeqOfColors7-VLA-v0/policy",
+      "source_run": "/data/daiyp/CaM/mikasa_robo/runs/mikasa_robo_v2/SeqOfColors7-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T184908_380329Z",
+      "run_timetag": "20261108T184908_380329Z",
+      "files": {
+        "policy.md": "f230f4b585650435b2cd8514134e9610060ef0ecd451859f5d4adeca358d37e2",
+        "task_analysis.md": "ed2bc836ed22f0500baf9bbe97f3172f744f46766b2aaffda3c89b98a45bdbe7",
+        "CHANGELOG.md": "8345009216badb39749da363d5f8255cbda3163b91dfed7bc746f45335651330",
+        "task.json": "00fdb9400bc7c8934fcf4854cafd0887e7473163c7e114ac85c3cbe2f7a67bbd",
+        "freeze.json": "2dca66ba920532620690e13e43822c6c14813f1d5f84c69a2bee27eb414116f5",
+        "tools/policy.py": "975e4a681a8de3da9eb534db4b96b7417153858aa0a49976f181e40dbbe5faa2"
+      }
+    },
+    {
+      "task": "ShellGameColorLampTouch-VLA-v0",
+      "directory": "ShellGameColorLampTouch-VLA-v0",
+      "entrypoint": "ShellGameColorLampTouch-VLA-v0/tools/policy.py",
+      "checkpoint": 50,
+      "program_hash": "b9660191a24647c19e14271891d894a7df8a487f20c25d1908a4bd5f6c381ed7",
+      "source_policy": "/data/daiyp/CaM_public/dev_logs/mikasarobo/ShellGameColorLampTouch-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T184908_380329Z/tasks/ShellGameColorLampTouch-VLA-v0/policy",
+      "source_run": "/data/daiyp/CaM/mikasa_robo/runs/mikasa_robo_v2/ShellGameColorLampTouch-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T184908_380329Z",
+      "run_timetag": "20261108T184908_380329Z",
+      "files": {
+        "policy.md": "93c7019eaf02c46891c7236e65213ba59ddb38739a839612b91ab253dfca47ec",
+        "task_analysis.md": "c70fd67313e58935608bfa0c61c1c3a7db32facf3c5eba31c65975182f6ad056",
+        "CHANGELOG.md": "c30d1dda6e27cb7da1984359c00ec8ca08cac53d5e234fccc348ae21131ee699",
+        "task.json": "da1458c3a359ceb3e744e1ad0f320b2b1d1094eba5226c5758dd892e7cc5ba35",
+        "freeze.json": "e2ef55c774f8ba93d5d5add02c10873bf97b157c1853fc4b79ed5245450842ab",
+        "tools/policy.py": "6e8d733c21b23c16203c34e000d546dffc0fba602583e3ca772b1fcd7d0c30a8"
+      }
+    },
+    {
+      "task": "ShellGamePush-VLA-v0",
+      "directory": "ShellGamePush-VLA-v0",
+      "entrypoint": "ShellGamePush-VLA-v0/tools/policy.py",
+      "checkpoint": 50,
+      "program_hash": "3a9f69e0b71d3b7d70c6bb89ab9ee14c2f060983b1ed8b8d4bea726178f17863",
+      "source_policy": "/data/daiyp/CaM_public/dev_logs/mikasarobo/ShellGamePush-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T184908_380329Z/tasks/ShellGamePush-VLA-v0/policy",
+      "source_run": "/data/daiyp/CaM/mikasa_robo/runs/mikasa_robo_v2/ShellGamePush-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T184908_380329Z",
+      "run_timetag": "20261108T184908_380329Z",
+      "files": {
+        "policy.md": "c2889ec5ef4c33e4900fd8eaa9b45d7e10895312ea8b54ddcc05eccbca789b0a",
+        "task_analysis.md": "85a5f4912db27721158b7072595aced52c02868fa9ff2b0b26ec1cee73021265",
+        "CHANGELOG.md": "ade09c87ee6d273d475d66015c53c16c16eef6297bba12adf00ee5802fa20d8e",
+        "task.json": "b1f6b42ce474e97291e35f0310afd0c9a75ab161f6516740e8a214870229bf55",
+        "freeze.json": "6a2676433f52a3136d9a038eb18c7662a4a2631d0138fa379cdc7ec30ff92a70",
+        "tools/policy.py": "500c4f4462419249bae4784ce211edac1979f7865ab8490ef20522a40247f433"
+      }
+    },
+    {
+      "task": "ShellGameShuffleColorLampTouch-Long-VLA-v0",
+      "directory": "ShellGameShuffleColorLampTouch-Long-VLA-v0",
+      "entrypoint": "ShellGameShuffleColorLampTouch-Long-VLA-v0/tools/policy.py",
+      "checkpoint": 50,
+      "program_hash": "1ff31f1a1c85ae978f2ff2d8f29e99d597ee23c240334c37567644b3a6004326",
+      "source_policy": "/data/daiyp/CaM_public/dev_logs/mikasarobo/ShellGameShuffleColorLampTouch-Long-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T184908_380329Z/tasks/ShellGameShuffleColorLampTouch-Long-VLA-v0/policy",
+      "source_run": "/data/daiyp/CaM/mikasa_robo/runs/mikasa_robo_v2/ShellGameShuffleColorLampTouch-Long-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T184908_380329Z",
+      "run_timetag": "20261108T184908_380329Z",
+      "files": {
+        "policy.md": "2548cd1ed5760a831e3881a5380b99074236794943c55bbd44f45985c5591c31",
+        "task_analysis.md": "2dac686aaf932ba38260ead4b555c804465c75469fbc40a8c5cfd8e309fe3b0f",
+        "CHANGELOG.md": "51b78fc078e489d36105c660d0950f70d34ea44bf6c554f68c3d85f3aa840ccc",
+        "task.json": "2f3ee1a6ccb11b761058ec2b126ecf49a9a5f6319b1fa9e1760372919784f41c",
+        "freeze.json": "30da33fdeec0893cb72c3e73bac3533888c7064f157738ae1fa167db8e6bf891",
+        "tools/policy.py": "b0e89a7f4643ef8789ae45ca9e3ddee9f51202cb763b12a1258b5b1cf433c4c4"
+      }
+    },
+    {
+      "task": "ShellGameShuffleColorLampTouch-VLA-v0",
+      "directory": "ShellGameShuffleColorLampTouch-VLA-v0",
+      "entrypoint": "ShellGameShuffleColorLampTouch-VLA-v0/tools/policy.py",
+      "checkpoint": 50,
+      "program_hash": "4cbf9c514c416a5fa72395bc7963c8ed46519ddac51d7c1ab94ecb0e3f4aaeb3",
+      "source_policy": "/data/daiyp/CaM_public/dev_logs/mikasarobo/ShellGameShuffleColorLampTouch-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T184908_380329Z/tasks/ShellGameShuffleColorLampTouch-VLA-v0/policy",
+      "source_run": "/data/daiyp/CaM/mikasa_robo/runs/mikasa_robo_v2/ShellGameShuffleColorLampTouch-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T184908_380329Z",
+      "run_timetag": "20261108T184908_380329Z",
+      "files": {
+        "policy.md": "aeaf8604a71d45e30c7c3f536e7ddeb332c1946570a60f33f25bc9477d5f6a8e",
+        "task_analysis.md": "2205e747e04973c00bb55078ad49c9c3d988d28d6fc20368bb5e9932c6ebcaf9",
+        "CHANGELOG.md": "677dc84cfd0a497272a71fdbba0f27ae64bb31094238837de893066d9c469934",
+        "task.json": "51a556ce2fcc3eb975a761213d3b4470c0e58f881ba9d4ba69b344d92c1d3293",
+        "freeze.json": "4fc31ded2a43f2c4f7a9e72cd322e6297fc03530cff97387934284d5ffef2d47",
+        "tools/policy.py": "424e2a560db4b38153c831c7a4aee498d2d07ca97608485c78dde5e4a4329f2b"
+      }
+    },
+    {
+      "task": "ShellGameShuffleTouch-Long-VLA-v0",
+      "directory": "ShellGameShuffleTouch-Long-VLA-v0",
+      "entrypoint": "ShellGameShuffleTouch-Long-VLA-v0/tools/policy.py",
+      "checkpoint": 50,
+      "program_hash": "5dfd831e4a129cb46a40786667ba79dc4703fe5f0dbef71e6226df211889ed2c",
+      "source_policy": "/data/daiyp/CaM_public/dev_logs/mikasarobo/ShellGameShuffleTouch-Long-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T184908_380329Z/tasks/ShellGameShuffleTouch-Long-VLA-v0/policy",
+      "source_run": "/data/daiyp/CaM/mikasa_robo/runs/mikasa_robo_v2/ShellGameShuffleTouch-Long-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T184908_380329Z",
+      "run_timetag": "20261108T184908_380329Z",
+      "files": {
+        "policy.md": "d449764cfce3802bf33e6a7de4c893d2e735fc7461647ae3010159aa757701dd",
+        "task_analysis.md": "1aaf8a812bfa03cc618f539644307a10eac326238c56983e8d77f0df453aba53",
+        "CHANGELOG.md": "955966f7e4c6b381c8a1599ec09ef80436afeb3d20e8a5ad0daa1da43b4bae61",
+        "task.json": "190c0c042eec03d0598e207b3f09939085c8d02ad42f003165232a3f5a156627",
+        "freeze.json": "95e311cfa172fa81f9ce27c0e0a05acf6f3789bec2cc4c5215d243e24e953204",
+        "tools/policy.py": "17c7c0b52d92e9567cd0895f12c07202f81981f075de3aba527062142d034665"
+      }
+    },
+    {
+      "task": "ShellGameShuffleTouch-VLA-v0",
+      "directory": "ShellGameShuffleTouch-VLA-v0",
+      "entrypoint": "ShellGameShuffleTouch-VLA-v0/tools/policy.py",
+      "checkpoint": 50,
+      "program_hash": "9c1c6fbbebc1c631ffa6a8960d11712cfe86e8500b2fbe81e69500a2242b3e1d",
+      "source_policy": "/data/daiyp/CaM_public/dev_logs/mikasarobo/ShellGameShuffleTouch-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T184908_380329Z/tasks/ShellGameShuffleTouch-VLA-v0/policy",
+      "source_run": "/data/daiyp/CaM/mikasa_robo/runs/mikasa_robo_v2/ShellGameShuffleTouch-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T184908_380329Z",
+      "run_timetag": "20261108T184908_380329Z",
+      "files": {
+        "policy.md": "0aebe2099ff7a9fd737f5e93949f6232d19ba9370557baea7b66357598871650",
+        "task_analysis.md": "e7725af8dda94761753458ef6fd979d0992b6ffa2de6accead9aabb9f1031ea7",
+        "CHANGELOG.md": "19517d5235419e197428cd55a65918deee71fc3cacd312248c5b4543e53e499b",
+        "task.json": "ca058350d260d4fbb1773075545011c55d18a56bfd04bd173f17c69af90cfa9c",
+        "freeze.json": "f8cced1299ba02f0437965b59109048198797dfb7bfa1ea667b27ef45634580d",
+        "tools/policy.py": "f376e21963360297d29183a209913ff037cfd2f5943149b2dee1de378899e920",
+        "tools/perception.py": "15184f9eb12446552ad293ad5fa224fea48ac6d5ea67ca0c173f3fc867038664",
+        "tools/control.py": "f8d0642ed60924ee3920551f42537ac5ddd516d582c8d78e0ff0a1890004d173"
+      }
+    },
+    {
+      "task": "TimedTransferEasy-Long-VLA-v0",
+      "directory": "TimedTransferEasy-Long-VLA-v0",
+      "entrypoint": "TimedTransferEasy-Long-VLA-v0/tools/policy.py",
+      "checkpoint": 50,
+      "program_hash": "64d1dddd15b476ba79d8e8084507bde3771fab0cde185220e211e9421e14a7af",
+      "source_policy": "/data/daiyp/CaM_public/dev_logs/mikasarobo/TimedTransferEasy-Long-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T184908_380329Z/tasks/TimedTransferEasy-Long-VLA-v0/policy",
+      "source_run": "/data/daiyp/CaM/mikasa_robo/runs/mikasa_robo_v2/TimedTransferEasy-Long-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T184908_380329Z",
+      "run_timetag": "20261108T184908_380329Z",
+      "files": {
+        "policy.md": "b45f05a39140bc1f19b43491d0635017cc7f6f480a895d72738ba3161ba19923",
+        "task_analysis.md": "d8a6530373c7b65422e3bfda936f823ae4956d1486286dc1ea9731c47f379435",
+        "CHANGELOG.md": "6d1c5c753528e02c2c5a486a2d62c0b54000ca7fdfaa155842f16f316d2893cf",
+        "task.json": "e31173d2705afebe65f4310d7b05d4458abc1beb85f1d4d13ecab24f5db4a5c8",
+        "freeze.json": "b3e2df0c12cee2fbed29fc66f141c824c18cd1dd7fa60e423987c76d921a1bac",
+        "tools/policy.py": "ce8adea452a30aa2e9bcf57e635af9c8e2e39eaa137b1a82d30a8b4fcdddb8b9"
+      }
+    },
+    {
+      "task": "TimedTransferHard-Long-VLA-v0",
+      "directory": "TimedTransferHard-Long-VLA-v0",
+      "entrypoint": "TimedTransferHard-Long-VLA-v0/tools/policy.py",
+      "checkpoint": 50,
+      "program_hash": "c73bd43175213bfbf72b6d8bf5d2607c4b8cbd7a085a449274fb45e4195c7de5",
+      "source_policy": "/data/daiyp/CaM_public/dev_logs/mikasarobo/TimedTransferHard-Long-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T184908_380329Z/tasks/TimedTransferHard-Long-VLA-v0/policy",
+      "source_run": "/data/daiyp/CaM/mikasa_robo/runs/mikasa_robo_v2/TimedTransferHard-Long-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T184908_380329Z",
+      "run_timetag": "20261108T184908_380329Z",
+      "files": {
+        "policy.md": "dedf0c2d88fdf59ba8c9a35e91710ff2b36ff4c92aec28f59a3f50e149afec2f",
+        "task_analysis.md": "59e9a767af2c6ad8e140e096248236e2dd34aa2a1632125ca79ba33ca4f91180",
+        "CHANGELOG.md": "a20a91a5921a6c0623f7c29aa26d2664aa37688cdc30d9c2614cd41b3baa3d98",
+        "task.json": "5b6ac94f4e43ca400386be5cfdf498a40ebdef44093c0f8e46878af628c20840",
+        "freeze.json": "afeacaa317f1a7cc5b83c2282f8d7116f329512e9dbcfa44546b618188e09fce",
+        "tools/policy.py": "892aa0c92084e3e31399209037ad278ae6f95c5f25fb2a8a417a5e14aaeb8360"
+      }
+    },
+    {
+      "task": "TimedTransferHard-VLA-v0",
+      "directory": "TimedTransferHard-VLA-v0",
+      "entrypoint": "TimedTransferHard-VLA-v0/tools/policy.py",
+      "checkpoint": 50,
+      "program_hash": "6c3f566b47c034a77ee69bd8f980ca67c5aa66b04094bdf82919c14899fa78cd",
+      "source_policy": "/data/daiyp/CaM_public/dev_logs/mikasarobo/TimedTransferHard-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T184908_380329Z/tasks/TimedTransferHard-VLA-v0/policy",
+      "source_run": "/data/daiyp/CaM/mikasa_robo/runs/mikasa_robo_v2/TimedTransferHard-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T184908_380329Z",
+      "run_timetag": "20261108T184908_380329Z",
+      "files": {
+        "policy.md": "0c84c4243db7bae91327338d65c246a28791170881f0f5d47bffebc9db81eeec",
+        "task_analysis.md": "be0ed15cafa6c53ee0b73fe5a864875554da3e5f1b09e08f3ab25448690f52cf",
+        "CHANGELOG.md": "5413495a0c8aaa7b5d89c465f3bb5c2ec8cb22992fc26646c905c70c1d9f94fb",
+        "task.json": "c14e3f2c9ffb9b6b375b127f5ee4abb6977c5be3342cdd9768125b8c7cf59726",
+        "freeze.json": "e9924d31aef77c7d75e222d0e3f13f163105d317056eae98095fac1e6aea32e3",
+        "tools/policy.py": "e193da9442bf1905be2fe5c08d96c2a84d0f7cc41e96ad100b10fd38d4bdeeff"
+      }
+    },
+    {
+      "task": "TimedTransferMedium-Long-VLA-v0",
+      "directory": "TimedTransferMedium-Long-VLA-v0",
+      "entrypoint": "TimedTransferMedium-Long-VLA-v0/tools/policy.py",
+      "checkpoint": 50,
+      "program_hash": "5c7483df56c90951027ffa01b08a9617e9f3bb3672e9e8716ff2da5dd6282dc0",
+      "source_policy": "/data/daiyp/CaM_public/dev_logs/mikasarobo/TimedTransferMedium-Long-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T184908_380329Z/tasks/TimedTransferMedium-Long-VLA-v0/policy",
+      "source_run": "/data/daiyp/CaM/mikasa_robo/runs/mikasa_robo_v2/TimedTransferMedium-Long-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T184908_380329Z",
+      "run_timetag": "20261108T184908_380329Z",
+      "files": {
+        "policy.md": "1ff7d7ddd8a11e22cba31d5b6204225f0aae542ed3a4f34e7fe29ae0e2e12f27",
+        "task_analysis.md": "e3ed6135f7d04c79cb02e3758fb145c6dbc455ba5744148c8b60a62c96baa227",
+        "CHANGELOG.md": "3be1071874fb4a9c3ce4ed9bef39a01053d14a7dc6859b533235c40c7f28b88d",
+        "task.json": "ec05af75d490505b68ed9c0eb29d67a9a5bbb0ef7738b0584159fbe8e1ab1265",
+        "freeze.json": "da0c30e886022fd58efcf40e0af505394ee197ccc43211a6f3ffa0a4e70ecad8",
+        "tools/policy.py": "67db9d99a0c79c19aa1f525c0abc050d6a0e90b04bef895a651d26fb115eaa19"
+      }
+    },
+    {
+      "task": "TimedTransferMedium-VLA-v0",
+      "directory": "TimedTransferMedium-VLA-v0",
+      "entrypoint": "TimedTransferMedium-VLA-v0/tools/policy.py",
+      "checkpoint": 50,
+      "program_hash": "c4de889d5d90ab7e3679c21e4443efe30ee9de801e87edf9ce00b3b699465e2f",
+      "source_policy": "/data/daiyp/CaM_public/dev_logs/mikasarobo/TimedTransferMedium-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T184908_380329Z/tasks/TimedTransferMedium-VLA-v0/policy",
+      "source_run": "/data/daiyp/CaM/mikasa_robo/runs/mikasa_robo_v2/TimedTransferMedium-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T184908_380329Z",
+      "run_timetag": "20261108T184908_380329Z",
+      "files": {
+        "policy.md": "81798813c052cf05804b3de86f6a976fff847304d82a5af9cea0f70314176555",
+        "task_analysis.md": "5fa21b1413e9ec8341328c8df7b9312d82c318fce18e055e10d432deed35c724",
+        "CHANGELOG.md": "e89cf0231bc0667da8854c470dfc5d4dd058378399d44343eab09444b9868aeb",
+        "task.json": "1162d419644682de7077688d1af5bd4a7804ee56c711dbe7da71358756e737db",
+        "freeze.json": "eee1a93a2ce4294b6e48024772dd82bdf89336cf4a71808b6b21626aca53b0c9",
+        "tools/policy.py": "c4464cf13d2dc0a8dea84ed593b0eaf485211310c9c656360f528100a328c730"
+      }
+    },
+    {
+      "task": "TraceShapeEasy-VLA-v0",
+      "directory": "TraceShapeEasy-VLA-v0",
+      "entrypoint": "TraceShapeEasy-VLA-v0/tools/policy.py",
+      "checkpoint": 50,
+      "program_hash": "5e9bf87512fae39f68386ec2608e7c16b9529428c7704688bd95e03ff707dbd4",
+      "source_policy": "/data/daiyp/CaM_public/dev_logs/mikasarobo/TraceShapeEasy-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T184908_380329Z/tasks/TraceShapeEasy-VLA-v0/policy",
+      "source_run": "/data/daiyp/CaM/mikasa_robo/runs/mikasa_robo_v2/TraceShapeEasy-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T184908_380329Z",
+      "run_timetag": "20261108T184908_380329Z",
+      "files": {
+        "policy.md": "896cd65665871c707dd514ee2c73b055445a05b8eef2c62f6ef6de702982062f",
+        "task_analysis.md": "b95add73e59a16bf98339101e141e3b0c978158004fe2f31b2b06a7d888e798d",
+        "CHANGELOG.md": "dfdfeb8b9ed4af61c0d7354ce201d6b0a4f3cc26a16da63285f6d508aeb29070",
+        "task.json": "39eefc4100e328894f16faa058c59abbca30441386a55616736156f41d67ce28",
+        "freeze.json": "2d057f05280595a4d1f710b913bb79b2124fcde930d71536b6956febb60a17d0",
+        "tools/policy.py": "c1ff5979705fd34b3b9c4de7409442a3d54eac70ba2ef8995f5e90c9193c74f2"
+      }
+    },
+    {
+      "task": "TraceShapeHard-VLA-v0",
+      "directory": "TraceShapeHard-VLA-v0",
+      "entrypoint": "TraceShapeHard-VLA-v0/tools/policy.py",
+      "checkpoint": 50,
+      "program_hash": "b52a33b47c415ec3a2713a45253ee131fae639428fdebf37e917e80d8f4cddea",
+      "source_policy": "/data/daiyp/CaM_public/dev_logs/mikasarobo/TraceShapeHard-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T184908_380329Z/tasks/TraceShapeHard-VLA-v0/policy",
+      "source_run": "/data/daiyp/CaM/mikasa_robo/runs/mikasa_robo_v2/TraceShapeHard-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T184908_380329Z",
+      "run_timetag": "20261108T184908_380329Z",
+      "files": {
+        "policy.md": "3e98e2dcdbee5f3328d8eb2d238a9c39cec559359a8b0ba82dc4222a7176ebe7",
+        "task_analysis.md": "9354e495ef40487be8e64c432ed2c031e7f58abfbafaae2c1ba22011660c99c3",
+        "CHANGELOG.md": "fa42bc639818e265cedaa940b2fed6a586d9b1760b06e7ac921f614f6e366537",
+        "task.json": "fe3de706346481e1c86413daf9e6e149c9d6aa8043de59b81dc5c8934386a92b",
+        "freeze.json": "fd57355b4ba6f4545d8faa80c03baeb72af991c62d71ed7a53bbd803b08d81a7",
+        "tools/policy.py": "1520cd8dd0941aed575e337cb95c47a871247f59ba501019af47cc9fd537d876"
+      }
+    },
+    {
+      "task": "TraceShapeMedium-VLA-v0",
+      "directory": "TraceShapeMedium-VLA-v0",
+      "entrypoint": "TraceShapeMedium-VLA-v0/tools/policy.py",
+      "checkpoint": 50,
+      "program_hash": "7d13bfb7a57dd740bee783424f3cfbe6fadf32ceffe0704875aa25b46567c789",
+      "source_policy": "/data/daiyp/CaM_public/dev_logs/mikasarobo/TraceShapeMedium-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T184908_380329Z/tasks/TraceShapeMedium-VLA-v0/policy",
+      "source_run": "/data/daiyp/CaM/mikasa_robo/runs/mikasa_robo_v2/TraceShapeMedium-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T184908_380329Z",
+      "run_timetag": "20261108T184908_380329Z",
+      "files": {
+        "policy.md": "ecddff5feef4c9b6c0cf4841e57c8f10e0635f46e61744b734b5d9b9122bac87",
+        "task_analysis.md": "8ce4e35f488dab37556189a0c2db79a06b1609461d904884525ad068a92fecc6",
+        "CHANGELOG.md": "d177884503a52723d3a4e2014d5da713f48642394682be9097bebbca28ac8d1c",
+        "task.json": "75926e04d5e1ea1a7f6bcbe0f95de1289c38f351563710023406130b1a79d96c",
+        "freeze.json": "25c3d009910531366d0fba01be9299af1031dc6fc7a9dbb95b98b04979b05c72",
+        "tools/policy.py": "d8927a45e6fe7639577c04fe91b68b61d2e13fc5faf52910629f772c1265ea8e"
+      }
+    },
+    {
+      "task": "TraceShapeSeqEasy-VLA-v0",
+      "directory": "TraceShapeSeqEasy-VLA-v0",
+      "entrypoint": "TraceShapeSeqEasy-VLA-v0/tools/policy.py",
+      "checkpoint": 50,
+      "program_hash": "02effb38aa650dc12e6c218fb0b9aae3a638710f8670bb75340618bc3c9aac58",
+      "source_policy": "/data/daiyp/CaM_public/dev_logs/mikasarobo/TraceShapeSeqEasy-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T184908_380329Z/tasks/TraceShapeSeqEasy-VLA-v0/policy",
+      "source_run": "/data/daiyp/CaM/mikasa_robo/runs/mikasa_robo_v2/TraceShapeSeqEasy-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T184908_380329Z",
+      "run_timetag": "20261108T184908_380329Z",
+      "files": {
+        "policy.md": "3b67ecc740a7cb41f395cfbfa4fe46a12cae8a3c93beb877f27ed73195946042",
+        "task_analysis.md": "98704887873a85bb42a4260cb293df330d30dd923dee24fce179e3970b026326",
+        "CHANGELOG.md": "843757bfd788301f3fe546d2792150d47426eac43ae067e360922369f771734a",
+        "task.json": "bdc6634b8045c9410a663642339b1f0c4a27f2ec88153b02a56cc9519c83ea55",
+        "freeze.json": "4b739aa9fe076c5557db705f15fb14b097584a2da0520ad66246a07934b3904f",
+        "tools/policy.py": "c1c0da8b004a8e3aede7c49f2ff5f9708917b0ebb7979a37aab7509dd677c9e4"
+      }
+    },
+    {
+      "task": "TraceShapeSeqHard-VLA-v0",
+      "directory": "TraceShapeSeqHard-VLA-v0",
+      "entrypoint": "TraceShapeSeqHard-VLA-v0/tools/policy.py",
+      "checkpoint": 50,
+      "program_hash": "699765bfc33aca0cd4238572676a30ef61cb82adce39c64e5459a488a536d02f",
+      "source_policy": "/data/daiyp/CaM_public/dev_logs/mikasarobo/TraceShapeSeqHard-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T184908_380329Z/tasks/TraceShapeSeqHard-VLA-v0/policy",
+      "source_run": "/data/daiyp/CaM/mikasa_robo/runs/mikasa_robo_v2/TraceShapeSeqHard-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T184908_380329Z",
+      "run_timetag": "20261108T184908_380329Z",
+      "files": {
+        "policy.md": "ab09b7b16472ffce0b055d94ab7b4014babb1ad6aebb50d5e59652382cbabb26",
+        "task_analysis.md": "f8b1b018663caf4fc72b815d308271b1558e9baac26852b5dbf425d7cfdfe10a",
+        "CHANGELOG.md": "1385eb5d6a50c870cc6728533d9431733cf3aa29b5ea62da7fa3fedb2e5e4b8d",
+        "task.json": "3c6b3a60d8795d6c8b3179243f3600ed12caf73545efd82e2831aa2de99dc9a8",
+        "freeze.json": "792bf599cbe2fa8bbbc124b3c22dbe27da12e6b0166c48eadac04133f430f6c7",
+        "tools/policy.py": "9d189d8e03873eb43036fbb5a0485da5acb5f75fc5adfbf8b4a0d6112491ea13",
+        "tools/perception.py": "ad55ce30e00455032bc43fac0ced6bc45b443ef68261a57ad0d61f599530ec48",
+        "tools/control.py": "5449477459f69985c4d48c19492d0915e3db99005db96c3e8eb68dc0229f9540"
+      }
+    },
+    {
+      "task": "TraceShapeSeqMedium-VLA-v0",
+      "directory": "TraceShapeSeqMedium-VLA-v0",
+      "entrypoint": "TraceShapeSeqMedium-VLA-v0/tools/policy.py",
+      "checkpoint": 50,
+      "program_hash": "645447a85e75a98a7110958050c76f1b4ffb61f4b5b7c6af81e2239f145dedfe",
+      "source_policy": "/data/daiyp/CaM_public/dev_logs/mikasarobo/TraceShapeSeqMedium-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T184908_380329Z/tasks/TraceShapeSeqMedium-VLA-v0/policy",
+      "source_run": "/data/daiyp/CaM/mikasa_robo/runs/mikasa_robo_v2/TraceShapeSeqMedium-VLA-v0/cc-opus5.5/demo_interaction_v2/20261108T184908_380329Z",
+      "run_timetag": "20261108T184908_380329Z",
+      "files": {
+        "policy.md": "baa410724ec53f7f771dfcdda808199fcd6e5fcf03f758924345840207087ffa",
+        "task_analysis.md": "a9fea7828d23922a294da7e5cf4bdbc41dce956fc20604fb8c9d25088dfbf39b",
+        "CHANGELOG.md": "befb527ab894c2454866b782f5271d22719f260e22616d2ae5de80940183a878",
+        "task.json": "633a9d3769f13d06aa537f470021e68520ec5d3bcdcc762282635868659a4e8d",
+        "freeze.json": "e262ce226415ed5d3c8ef7a125f9b771b595be5911884f01c45e5843d780de57",
+        "tools/policy.py": "d34057be288289d4dbbd915b0ed661d00cbe5f07c9f3ea6ccd0c62aaa83fa920"
+      }
+    }
+  ]
+}

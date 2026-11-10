@@ -1,0 +1,1933 @@
+{
+  "schema": "cam-solutions/1",
+  "benchmark": "robomemarena",
+  "experiment": "demo_only_50",
+  "benchmark_source_sha256": "f215d0060a534dc5a7281bd1b965a0b06f3e71d784dcf331a9b9a484d8dd94a1",
+  "comparison_note": "The 25-demo run includes the revised shared offline final-review prompt. The interaction run includes the RoboMemArena v2 manipulation/recovery supplement, designed after host review of the baseline. Learners received no held-out feedback. These comparisons change prompts as well as demo/interaction assignments. T04 has 32 demos and 32 interactions in the larger arms; all other tasks have 50. The 25-demo arm has exactly 25 per task. Interactions use each assigned demo seed once.",
+  "description": "Final frozen Python code; historical code bytes and memory schemas preserved.",
+  "source_coding": {
+    "agent": "claude_code",
+    "model": "us.anthropic.claude-opus-5-5"
+  },
+  "tasks": {
+    "T01_CookiesTomatoBasket": {
+      "task_spec": {
+        "task": "T01_CookiesTomatoBasket",
+        "runtime": "python",
+        "memory": [
+          {
+            "name": "stage",
+            "type": "label",
+            "description": "init, pick_cookies, place_cookies, pick_tomato, place_tomato or done"
+          },
+          {
+            "name": "cookies",
+            "type": "position",
+            "description": "cookie box top centre [x, y, top_z] (world m) measured from agentview depth"
+          },
+          {
+            "name": "tomato",
+            "type": "position",
+            "description": "tomato sauce can top centre [x, y, top_z] (world m)"
+          },
+          {
+            "name": "basket",
+            "type": "position",
+            "description": "target basket rim centre [x, y, rim_z]; chosen once and reused for both objects (same basket)"
+          },
+          {
+            "name": "other_basket",
+            "type": "position",
+            "description": "the second, unused basket [x, y, rim_z], or null"
+          },
+          {
+            "name": "table_z",
+            "type": "number",
+            "description": "table surface height (m)"
+          },
+          {
+            "name": "attempts",
+            "type": "count",
+            "description": "retries of the current pick"
+          },
+          {
+            "name": "cookies_done",
+            "type": "boolean",
+            "description": "first object placed"
+          },
+          {
+            "name": "decisions",
+            "type": "count",
+            "description": "decisions taken in this episode"
+          },
+          {
+            "name": "log",
+            "type": "text",
+            "description": "note about the last decision"
+          }
+        ]
+      },
+      "code_sha256": {
+        "control.py": "bb38e2cb60925a53f6c0815e48ebadcef7a02744c5b7d5973539d8bc3ce264c7",
+        "perception.py": "3f4fa243913fc376339830040412a27e79a646eb43db3f85f6dba8f73aa96281",
+        "policy.py": "6f74576e20502c52c87ad57fecfc7bdd18b47d24f0730d9c7752a8ee1825a67b"
+      },
+      "source_run_tag": "20261108T141119_562792Z",
+      "source_program_hash": "ef3b1b1bf48321631133856bd69561e62825a8cf1e8951956287ff6ee61bd130",
+      "source_harness_sha256": "436f4129c774d8dbadd5ca0a3b7529fda1affe521faefe9b9ea068ba9b9110f9",
+      "source_development": "dev_logs/robomemarena/demo_only_50/T01_CookiesTomatoBasket",
+      "source_evaluation": "eval/robomemarena/demo_only_50/T01_CookiesTomatoBasket",
+      "assigned_demos": 50,
+      "training_attempts": 0,
+      "source_checkpoint": 0,
+      "test_records_sha256": "a51f4a9eafecabd11e7641acf4f7a05425c9a38c009d20964bb1d7039c30b4bc",
+      "interface_sha256": "0ac444913ef6c2cd8e2bf7a10f107f390a92a795250353c89a1b1114ac6ecdc0",
+      "archived_result": {
+        "expected": 50,
+        "scored": 50,
+        "successes": 50
+      }
+    },
+    "T02_ButterPopcornBasket": {
+      "task_spec": {
+        "task": "T02_ButterPopcornBasket",
+        "runtime": "python",
+        "memory": [
+          {
+            "name": "phase",
+            "type": "label",
+            "description": "current stage: start, pick_butter, place_butter, pick_popcorn, place_popcorn, verify"
+          },
+          {
+            "name": "butter",
+            "type": "position",
+            "description": "butter grasp xy (world m), from agentview depth at start / re-detection"
+          },
+          {
+            "name": "popcorn",
+            "type": "position",
+            "description": "popcorn grasp xy (world m)"
+          },
+          {
+            "name": "basket",
+            "type": "position",
+            "description": "xy of the basket chosen for the butter (nearest to butter); reused for popcorn"
+          },
+          {
+            "name": "table_z",
+            "type": "number",
+            "description": "table surface height (m) from agentview depth"
+          },
+          {
+            "name": "butter_tries",
+            "type": "count",
+            "description": "butter pick attempts"
+          },
+          {
+            "name": "popcorn_tries",
+            "type": "count",
+            "description": "popcorn pick attempts"
+          },
+          {
+            "name": "placed",
+            "type": "set",
+            "description": "objects released over the basket"
+          },
+          {
+            "name": "log",
+            "type": "text",
+            "description": "short decision history"
+          }
+        ]
+      },
+      "code_sha256": {
+        "policy.py": "070518c250e6b62ec3a2e63726ec9f1dae9e2831ca04f7644472904e3c078f8d"
+      },
+      "source_run_tag": "20261108T141119_562792Z",
+      "source_program_hash": "02813f7cf9d7cee4b81cbdf35403db7c16965367d3aea4610a9ff90982e3b7ce",
+      "source_harness_sha256": "436f4129c774d8dbadd5ca0a3b7529fda1affe521faefe9b9ea068ba9b9110f9",
+      "source_development": "dev_logs/robomemarena/demo_only_50/T02_ButterPopcornBasket",
+      "source_evaluation": "eval/robomemarena/demo_only_50/T02_ButterPopcornBasket",
+      "assigned_demos": 50,
+      "training_attempts": 0,
+      "source_checkpoint": 0,
+      "test_records_sha256": "a51f4a9eafecabd11e7641acf4f7a05425c9a38c009d20964bb1d7039c30b4bc",
+      "interface_sha256": "0ac444913ef6c2cd8e2bf7a10f107f390a92a795250353c89a1b1114ac6ecdc0",
+      "archived_result": {
+        "expected": 50,
+        "scored": 50,
+        "successes": 50
+      }
+    },
+    "T03_CreamPuddingBasket": {
+      "task_spec": {
+        "task": "T03_CreamPuddingBasket",
+        "runtime": "python",
+        "memory": [
+          {
+            "name": "stage",
+            "type": "label",
+            "description": "start | survey | hover | check_grasp | check_place | verify_wait: what the next decision must evaluate"
+          },
+          {
+            "name": "target",
+            "type": "label",
+            "description": "object currently being handled: cream or chocolate"
+          },
+          {
+            "name": "cream_xy",
+            "type": "position",
+            "description": "latest world xy (m) of the cream box from wrist RGB-D"
+          },
+          {
+            "name": "choc_xy",
+            "type": "position",
+            "description": "latest world xy (m) of the chocolate box from wrist RGB-D"
+          },
+          {
+            "name": "basket_xy",
+            "type": "position",
+            "description": "world xy (m) of the basket chosen at the start (robot-side basket); reused for the chocolate (the same basket)"
+          },
+          {
+            "name": "table_z",
+            "type": "number",
+            "description": "table surface height (m) from wrist depth"
+          },
+          {
+            "name": "placed",
+            "type": "set",
+            "description": "objects released over the basket and not seen back on the table"
+          },
+          {
+            "name": "tries",
+            "type": "count",
+            "description": "failed grasp/transport attempts for the current target"
+          },
+          {
+            "name": "log",
+            "type": "text",
+            "description": "short note on the last decision"
+          }
+        ]
+      },
+      "code_sha256": {
+        "control.py": "69af08511745038e66a466335bd2fac2375ca001e5858c99a95849169a4d3fbd",
+        "perception.py": "96f6ee332a8f84367c82c4bf787d08ab56a2135ca2f4ca72d443e523e451ecb1",
+        "policy.py": "8b2844b0e23a58ebdaf58f36b310a07aedf835090c069cd61a4dcf1a5445c89c"
+      },
+      "source_run_tag": "20261108T141119_562792Z",
+      "source_program_hash": "16e4a73bc9b55581e169f95af12209ddd99efc7e714d2cfab75c365d26dd2565",
+      "source_harness_sha256": "436f4129c774d8dbadd5ca0a3b7529fda1affe521faefe9b9ea068ba9b9110f9",
+      "source_development": "dev_logs/robomemarena/demo_only_50/T03_CreamPuddingBasket",
+      "source_evaluation": "eval/robomemarena/demo_only_50/T03_CreamPuddingBasket",
+      "assigned_demos": 50,
+      "training_attempts": 0,
+      "source_checkpoint": 0,
+      "test_records_sha256": "a51f4a9eafecabd11e7641acf4f7a05425c9a38c009d20964bb1d7039c30b4bc",
+      "interface_sha256": "0ac444913ef6c2cd8e2bf7a10f107f390a92a795250353c89a1b1114ac6ecdc0",
+      "archived_result": {
+        "expected": 50,
+        "scored": 50,
+        "successes": 50
+      }
+    },
+    "T04_ButterNonEmptyDrawer": {
+      "task_spec": {
+        "task": "T04_ButterNonEmptyDrawer",
+        "runtime": "python",
+        "memory": [
+          {
+            "name": "stage",
+            "type": "label",
+            "description": "next step of the plan: open | close | reopen | pick | placed | wait (null at episode start)"
+          },
+          {
+            "name": "cabinet",
+            "type": "position",
+            "description": "cabinet top surface from frame 0 depth: [x centre, front edge y, top z] (m)"
+          },
+          {
+            "name": "butter",
+            "type": "position",
+            "description": "butter [x, y, top z] from frame 0 depth (prior if not seen)"
+          },
+          {
+            "name": "order",
+            "type": "list",
+            "description": "drawer check order parsed from the instruction"
+          },
+          {
+            "name": "checked",
+            "type": "list",
+            "description": "drawers already opened, inspected and closed, in order"
+          },
+          {
+            "name": "occ_top",
+            "type": "number",
+            "description": "raised depth points seen inside the top drawer while it was open"
+          },
+          {
+            "name": "occ_middle",
+            "type": "number",
+            "description": "raised depth points seen inside the middle drawer while it was open"
+          },
+          {
+            "name": "occ_bottom",
+            "type": "number",
+            "description": "raised depth points seen inside the bottom drawer while it was open"
+          },
+          {
+            "name": "target",
+            "type": "label",
+            "description": "drawer chosen for the butter (the one that held an object)"
+          },
+          {
+            "name": "open_handle",
+            "type": "position",
+            "description": "hand position when the target drawer was reopened (handle at open limit)"
+          },
+          {
+            "name": "retries",
+            "type": "count",
+            "description": "retries used for the current stage"
+          },
+          {
+            "name": "notes",
+            "type": "text",
+            "description": "last decision rationale / measured outcome"
+          }
+        ]
+      },
+      "code_sha256": {
+        "policy.py": "eab642f57f6cab7af14cec930461cacdaabebf412a82921dd113847160aa552b"
+      },
+      "source_run_tag": "20261108T141119_562792Z",
+      "source_program_hash": "61362e31cf32b3d3b5f08f0ab6711f2cc9a08ed8e7f0b511694a583603e9ef73",
+      "source_harness_sha256": "436f4129c774d8dbadd5ca0a3b7529fda1affe521faefe9b9ea068ba9b9110f9",
+      "source_development": "dev_logs/robomemarena/demo_only_50/T04_ButterNonEmptyDrawer",
+      "source_evaluation": "eval/robomemarena/demo_only_50/T04_ButterNonEmptyDrawer",
+      "assigned_demos": 32,
+      "training_attempts": 0,
+      "source_checkpoint": 0,
+      "test_records_sha256": "a51f4a9eafecabd11e7641acf4f7a05425c9a38c009d20964bb1d7039c30b4bc",
+      "interface_sha256": "0ac444913ef6c2cd8e2bf7a10f107f390a92a795250353c89a1b1114ac6ecdc0",
+      "archived_result": {
+        "expected": 50,
+        "scored": 50,
+        "successes": 50
+      }
+    },
+    "T05_ButterEmptyDrawer": {
+      "task_spec": {
+        "task": "T05_ButterEmptyDrawer",
+        "runtime": "python",
+        "memory": [
+          {
+            "name": "stage",
+            "type": "label",
+            "description": "current phase: start, open_top, open_middle, open_bottom, target_open, fetch_butter, place, done"
+          },
+          {
+            "name": "cabinet",
+            "type": "position",
+            "description": "perceived top-drawer handle grasp point [x, y] (world m) from frame-0 agentview depth"
+          },
+          {
+            "name": "butter",
+            "type": "position",
+            "description": "perceived butter grasp point [x, y, z]"
+          },
+          {
+            "name": "occ_top",
+            "type": "count",
+            "description": "raised depth points seen inside the opened top drawer (-1 unknown)"
+          },
+          {
+            "name": "occ_middle",
+            "type": "count",
+            "description": "raised depth points seen inside the opened middle drawer"
+          },
+          {
+            "name": "occ_bottom",
+            "type": "count",
+            "description": "raised depth points seen inside the opened bottom drawer"
+          },
+          {
+            "name": "target",
+            "type": "label",
+            "description": "drawer chosen as empty (middle > bottom > top among empty ones)"
+          },
+          {
+            "name": "retries",
+            "type": "count",
+            "description": "retries of the current stage"
+          },
+          {
+            "name": "log",
+            "type": "text",
+            "description": "short perception/decision log"
+          }
+        ]
+      },
+      "code_sha256": {
+        "policy.py": "96f721b439f9072659e09e18bf8e49d9ba8277b0c571a7161bf524a608344332"
+      },
+      "source_run_tag": "20261108T141119_562792Z",
+      "source_program_hash": "71289e7f3b72637a4d43f8f8376b2787ce29427ed51e082a26ad8c90e6e8a86a",
+      "source_harness_sha256": "436f4129c774d8dbadd5ca0a3b7529fda1affe521faefe9b9ea068ba9b9110f9",
+      "source_development": "dev_logs/robomemarena/demo_only_50/T05_ButterEmptyDrawer",
+      "source_evaluation": "eval/robomemarena/demo_only_50/T05_ButterEmptyDrawer",
+      "assigned_demos": 50,
+      "training_attempts": 0,
+      "source_checkpoint": 0,
+      "test_records_sha256": "a51f4a9eafecabd11e7641acf4f7a05425c9a38c009d20964bb1d7039c30b4bc",
+      "interface_sha256": "0ac444913ef6c2cd8e2bf7a10f107f390a92a795250353c89a1b1114ac6ecdc0",
+      "archived_result": {
+        "expected": 50,
+        "scored": 50,
+        "successes": 50
+      }
+    },
+    "T06_PourSauceCookiesTwice": {
+      "task_spec": {
+        "task": "T06_PourSauceCookiesTwice",
+        "runtime": "python",
+        "memory": [
+          {
+            "name": "phase",
+            "type": "label",
+            "description": "start | grasp | pour | done"
+          },
+          {
+            "name": "bottle",
+            "type": "position",
+            "description": "visible sauce-bottle centroid [x, y] world m, from agentview depth"
+          },
+          {
+            "name": "cookies",
+            "type": "position",
+            "description": "visible cookies-box centroid [x, y] world m, perceived at episode start"
+          },
+          {
+            "name": "drainer",
+            "type": "position",
+            "description": "bowl-drainer centroid [x, y] world m, perceived at episode start"
+          },
+          {
+            "name": "grasp_attempts",
+            "type": "count",
+            "description": "grasp attempts issued"
+          },
+          {
+            "name": "pours_done",
+            "type": "count",
+            "description": "pour motions issued while holding the bottle"
+          },
+          {
+            "name": "notes",
+            "type": "text",
+            "description": "short perception log"
+          }
+        ]
+      },
+      "code_sha256": {
+        "policy.py": "72676422b1d9192989889568c419f281ca8c611e45655dcf29b0809a7d96f718"
+      },
+      "source_run_tag": "20261108T141119_562792Z",
+      "source_program_hash": "858f20f003e167a902c34206121b27416dbe17de92844ed518dd5379e8beae0c",
+      "source_harness_sha256": "436f4129c774d8dbadd5ca0a3b7529fda1affe521faefe9b9ea068ba9b9110f9",
+      "source_development": "dev_logs/robomemarena/demo_only_50/T06_PourSauceCookiesTwice",
+      "source_evaluation": "eval/robomemarena/demo_only_50/T06_PourSauceCookiesTwice",
+      "assigned_demos": 50,
+      "training_attempts": 0,
+      "source_checkpoint": 0,
+      "test_records_sha256": "a51f4a9eafecabd11e7641acf4f7a05425c9a38c009d20964bb1d7039c30b4bc",
+      "interface_sha256": "0ac444913ef6c2cd8e2bf7a10f107f390a92a795250353c89a1b1114ac6ecdc0",
+      "archived_result": {
+        "expected": 50,
+        "scored": 50,
+        "successes": 50
+      }
+    },
+    "T07_PourSauceFrypanTwice": {
+      "task_spec": {
+        "task": "T07_PourSauceFrypanTwice",
+        "runtime": "python",
+        "memory": [
+          {
+            "name": "phase",
+            "type": "label",
+            "description": "next phase to execute: hover, descend, grasp, lift, move, tilt, untilt, to_drainer, lower, release, retreat, idle (reopen = grasp retry)"
+          },
+          {
+            "name": "bottle",
+            "type": "position",
+            "description": "sauce bottle visible-point centroid [x,y,top_z] in world metres, from agentview depth at the first decision (refreshed on grasp retry)"
+          },
+          {
+            "name": "frypan",
+            "type": "position",
+            "description": "frypan rim-circle centre [x,y,rim_z] in world metres from the first agentview depth frame"
+          },
+          {
+            "name": "drainer",
+            "type": "position",
+            "description": "bowl drainer compartment target [x,y,wall_top_z] (fallback placement)"
+          },
+          {
+            "name": "pours",
+            "type": "count",
+            "description": "number of completed tilt/hold pours over the frypan"
+          },
+          {
+            "name": "grasp_tries",
+            "type": "count",
+            "description": "number of grasp retries performed"
+          },
+          {
+            "name": "log",
+            "type": "text",
+            "description": "short note of the last decision"
+          }
+        ]
+      },
+      "code_sha256": {
+        "policy.py": "95a9c320695fb6f3212f06279325ed38f646d2523674b261af93ad9b42793f6a"
+      },
+      "source_run_tag": "20261108T141119_562792Z",
+      "source_program_hash": "5b7bce35c144393977929ade4b0123d80c5eba983bf3ddb71c6b77d1696957d4",
+      "source_harness_sha256": "436f4129c774d8dbadd5ca0a3b7529fda1affe521faefe9b9ea068ba9b9110f9",
+      "source_development": "dev_logs/robomemarena/demo_only_50/T07_PourSauceFrypanTwice",
+      "source_evaluation": "eval/robomemarena/demo_only_50/T07_PourSauceFrypanTwice",
+      "assigned_demos": 50,
+      "training_attempts": 0,
+      "source_checkpoint": 0,
+      "test_records_sha256": "a51f4a9eafecabd11e7641acf4f7a05425c9a38c009d20964bb1d7039c30b4bc",
+      "interface_sha256": "0ac444913ef6c2cd8e2bf7a10f107f390a92a795250353c89a1b1114ac6ecdc0",
+      "archived_result": {
+        "expected": 50,
+        "scored": 50,
+        "successes": 50
+      }
+    },
+    "T08_ChocolateFrypanPourSauceTwice": {
+      "task_spec": {
+        "task": "T08_ChocolateFrypanPourSauceTwice",
+        "runtime": "python",
+        "memory": [
+          {
+            "name": "phase",
+            "type": "count",
+            "description": "index of the next plan step"
+          },
+          {
+            "name": "stage",
+            "type": "label",
+            "description": "tag of the plan step just issued"
+          },
+          {
+            "name": "retries",
+            "type": "count",
+            "description": "grasp retries used"
+          },
+          {
+            "name": "choc",
+            "type": "position",
+            "description": "chocolate box centre [x,y] (world m), from first agentview depth"
+          },
+          {
+            "name": "bottle",
+            "type": "position",
+            "description": "sauce bottle cap centre [x,y]"
+          },
+          {
+            "name": "pan",
+            "type": "position",
+            "description": "frypan rim circle centre [x,y]"
+          },
+          {
+            "name": "drain",
+            "type": "positions",
+            "description": "drainer [x centre, y centre, y min, y max]"
+          },
+          {
+            "name": "table_z",
+            "type": "number",
+            "description": "table top height (m)"
+          },
+          {
+            "name": "pending",
+            "type": "label",
+            "description": "object to re-perceive and re-pick after a failed grasp"
+          },
+          {
+            "name": "notes",
+            "type": "text",
+            "description": "perception fallbacks / retry notes"
+          }
+        ]
+      },
+      "code_sha256": {
+        "policy.py": "1c68552bc5178ae2bf2f8b8f15598bcabee5d87cc5c2ac5c8ae220bc004e56ac"
+      },
+      "source_run_tag": "20261108T141119_562792Z",
+      "source_program_hash": "c7c35734c2c1d33c9b64ab454d7bd0c981bb3d5a1af30e2f4b40a1dc139ef8be",
+      "source_harness_sha256": "436f4129c774d8dbadd5ca0a3b7529fda1affe521faefe9b9ea068ba9b9110f9",
+      "source_development": "dev_logs/robomemarena/demo_only_50/T08_ChocolateFrypanPourSauceTwice",
+      "source_evaluation": "eval/robomemarena/demo_only_50/T08_ChocolateFrypanPourSauceTwice",
+      "assigned_demos": 50,
+      "training_attempts": 0,
+      "source_checkpoint": 0,
+      "test_records_sha256": "a51f4a9eafecabd11e7641acf4f7a05425c9a38c009d20964bb1d7039c30b4bc",
+      "interface_sha256": "0ac444913ef6c2cd8e2bf7a10f107f390a92a795250353c89a1b1114ac6ecdc0",
+      "archived_result": {
+        "expected": 50,
+        "scored": 50,
+        "successes": 50
+      }
+    },
+    "T09_ButterFrypanPourSauceTwice": {
+      "task_spec": {
+        "task": "T09_ButterFrypanPourSauceTwice",
+        "runtime": "python",
+        "memory": [
+          {
+            "name": "phase",
+            "type": "label",
+            "description": "current plan phase: butter_pick, butter_redetect, butter_release, sauce_pick, sauce_redetect, pour1, pour2, pour3, drainer, done (None at episode start)"
+          },
+          {
+            "name": "table_z",
+            "type": "number",
+            "description": "table-top height (m) measured from the first agentview depth frame"
+          },
+          {
+            "name": "butter",
+            "type": "position",
+            "description": "butter [x, y, top z] in world metres (first frame, refreshed on retries)"
+          },
+          {
+            "name": "sauce",
+            "type": "position",
+            "description": "tomato-sauce bottle [x, y, top z] (median of visible points)"
+          },
+          {
+            "name": "pan",
+            "type": "position",
+            "description": "frypan rim centre [x, y] from a fixed-radius circle fit on the first frame"
+          },
+          {
+            "name": "drainer",
+            "type": "position",
+            "description": "bowl drainer box centre [x, y, top z]"
+          },
+          {
+            "name": "butter_tries",
+            "type": "count",
+            "description": "butter grasp attempts so far"
+          },
+          {
+            "name": "sauce_tries",
+            "type": "count",
+            "description": "sauce grasp attempts so far"
+          },
+          {
+            "name": "pours",
+            "type": "count",
+            "description": "completed pour motions"
+          },
+          {
+            "name": "notes",
+            "type": "text",
+            "description": "diagnostic note from the last decision"
+          }
+        ]
+      },
+      "code_sha256": {
+        "acts.py": "93684ec69f53f43df1e3f857897fa0eea262b6a28d0b70ffe1ee794abda3a535",
+        "control.py": "a1096006f40c36e6bf3e8163cf6fef93b0483536a46ea00a75cb37aefd879f21",
+        "perception.py": "086c7b0a53d6c75ce7eb0b0b129922f0faa0d2ddfcf0b6b1d371e8d3ffa5a76c",
+        "policy.py": "d983274aa86d05dea3f930e8970f12cc072b787078b980b790f894f43d271515"
+      },
+      "source_run_tag": "20261108T141119_562792Z",
+      "source_program_hash": "4b39e2862e8f8a306024e2f1725d99f5752d84385d30cde2725f9747de0aaab0",
+      "source_harness_sha256": "436f4129c774d8dbadd5ca0a3b7529fda1affe521faefe9b9ea068ba9b9110f9",
+      "source_development": "dev_logs/robomemarena/demo_only_50/T09_ButterFrypanPourSauceTwice",
+      "source_evaluation": "eval/robomemarena/demo_only_50/T09_ButterFrypanPourSauceTwice",
+      "assigned_demos": 50,
+      "training_attempts": 0,
+      "source_checkpoint": 0,
+      "test_records_sha256": "a51f4a9eafecabd11e7641acf4f7a05425c9a38c009d20964bb1d7039c30b4bc",
+      "interface_sha256": "0ac444913ef6c2cd8e2bf7a10f107f390a92a795250353c89a1b1114ac6ecdc0",
+      "archived_result": {
+        "expected": 50,
+        "scored": 50,
+        "successes": 50
+      }
+    },
+    "T10_PourWineMugTwice": {
+      "task_spec": {
+        "task": "T10_PourWineMugTwice",
+        "runtime": "python",
+        "memory": [
+          {
+            "name": "bottle",
+            "type": "position",
+            "description": "wine bottle xy (world m) from agentview RGB-D at the first decision (visible-surface median)"
+          },
+          {
+            "name": "mug",
+            "type": "position",
+            "description": "mug xy (world m) from agentview RGB-D at the first decision (visible-surface median)"
+          },
+          {
+            "name": "phase",
+            "type": "label",
+            "description": "current phase: pregrasp_high, rotate_grasp, above, descend, close, lift, prepour, pour, unpour"
+          },
+          {
+            "name": "pours",
+            "type": "count",
+            "description": "completed tilt-and-hold pours over the mug (task needs 2)"
+          },
+          {
+            "name": "upright",
+            "type": "list",
+            "description": "start gripper orientation rotvec (used for the first approach)"
+          },
+          {
+            "name": "regrasps",
+            "type": "count",
+            "description": "failed grasp / lost bottle recoveries"
+          },
+          {
+            "name": "retries",
+            "type": "count",
+            "description": "retries of the current phase when the servo did not converge"
+          },
+          {
+            "name": "log",
+            "type": "text",
+            "description": "last decision summary for diagnosis"
+          }
+        ]
+      },
+      "code_sha256": {
+        "policy.py": "cbba9765f7bcfc0efcb8378df09ecccc0f3e4b3b09b227a6b3e87badcbafebf4"
+      },
+      "source_run_tag": "20261108T141119_562792Z",
+      "source_program_hash": "d844cf20555a7969e197007d2627da472704a2f73acfac592ef6cfa038c9b15c",
+      "source_harness_sha256": "436f4129c774d8dbadd5ca0a3b7529fda1affe521faefe9b9ea068ba9b9110f9",
+      "source_development": "dev_logs/robomemarena/demo_only_50/T10_PourWineMugTwice",
+      "source_evaluation": "eval/robomemarena/demo_only_50/T10_PourWineMugTwice",
+      "assigned_demos": 50,
+      "training_attempts": 0,
+      "source_checkpoint": 0,
+      "test_records_sha256": "a51f4a9eafecabd11e7641acf4f7a05425c9a38c009d20964bb1d7039c30b4bc",
+      "interface_sha256": "0ac444913ef6c2cd8e2bf7a10f107f390a92a795250353c89a1b1114ac6ecdc0",
+      "archived_result": {
+        "expected": 50,
+        "scored": 50,
+        "successes": 50
+      }
+    },
+    "T11_CookiesTopButterMiddle": {
+      "task_spec": {
+        "task": "T11_CookiesTopButterMiddle",
+        "runtime": "python",
+        "memory": [
+          {
+            "name": "phase",
+            "type": "label",
+            "description": "current stage: open_top, pick_cookies, place_cookies, close_top, open_mid, pick_butter, place_butter, done"
+          },
+          {
+            "name": "tries",
+            "type": "count",
+            "description": "failed attempts of the current stage"
+          },
+          {
+            "name": "rechecks",
+            "type": "count",
+            "description": "times the butter was found still on the table after placing and re-picked"
+          },
+          {
+            "name": "handle",
+            "type": "position",
+            "description": "closed top-drawer handle grasp point [x,y,z] (world m), perceived at episode start"
+          },
+          {
+            "name": "mid_z",
+            "type": "number",
+            "description": "middle-drawer handle grasp height (m)"
+          },
+          {
+            "name": "cookies",
+            "type": "position",
+            "description": "cookies grasp point [x,y] on the table"
+          },
+          {
+            "name": "butter",
+            "type": "position",
+            "description": "butter grasp point [x,y] on the table"
+          },
+          {
+            "name": "slip_y",
+            "type": "number",
+            "description": "tcp y (m) where the fingers last slipped off a drawer handle while pulling (drawer fully open); used to set the approach stand-off on a retry"
+          },
+          {
+            "name": "log",
+            "type": "text",
+            "description": "short trace of stage outcomes"
+          }
+        ]
+      },
+      "code_sha256": {
+        "policy.py": "ab6f3ec7522d49fb0ffa904a2e4f8301d9e871ebd1beec15a00cd4a5146b2c4e"
+      },
+      "source_run_tag": "20261108T141119_562792Z",
+      "source_program_hash": "670cdc96c57ef4b88a0694a0ebfbd8d60fc13b5b751d974db8ea35c6b6acbb3d",
+      "source_harness_sha256": "436f4129c774d8dbadd5ca0a3b7529fda1affe521faefe9b9ea068ba9b9110f9",
+      "source_development": "dev_logs/robomemarena/demo_only_50/T11_CookiesTopButterMiddle",
+      "source_evaluation": "eval/robomemarena/demo_only_50/T11_CookiesTopButterMiddle",
+      "assigned_demos": 50,
+      "training_attempts": 0,
+      "source_checkpoint": 0,
+      "test_records_sha256": "a51f4a9eafecabd11e7641acf4f7a05425c9a38c009d20964bb1d7039c30b4bc",
+      "interface_sha256": "0ac444913ef6c2cd8e2bf7a10f107f390a92a795250353c89a1b1114ac6ecdc0",
+      "archived_result": {
+        "expected": 50,
+        "scored": 50,
+        "successes": 36
+      }
+    },
+    "T12_CookiesChocolateMiddleDrawer": {
+      "task_spec": {
+        "task": "T12_CookiesChocolateMiddleDrawer",
+        "runtime": "python",
+        "memory": [
+          {
+            "name": "phase",
+            "type": "label",
+            "description": "next sub-task: open_drawer, pick, place, verify or wait"
+          },
+          {
+            "name": "handle",
+            "type": "position",
+            "description": "middle-drawer handle grasp point [x,y,z] perceived at the first decision (closed drawer)"
+          },
+          {
+            "name": "cookies_grasp",
+            "type": "position",
+            "description": "cookies top-down grasp point [x,y,z] from the initial agentview cloud"
+          },
+          {
+            "name": "chocolate_grasp",
+            "type": "position",
+            "description": "chocolate top-down grasp point [x,y,z] from the initial agentview cloud"
+          },
+          {
+            "name": "drawer_open",
+            "type": "boolean",
+            "description": "the drawer was verified open (or given up after retries)"
+          },
+          {
+            "name": "placed",
+            "type": "list",
+            "description": "objects already released into the drawer, in order"
+          },
+          {
+            "name": "order",
+            "type": "list",
+            "description": "object order parsed from the instruction"
+          },
+          {
+            "name": "attempts",
+            "type": "count",
+            "description": "failed attempts at the current sub-task"
+          },
+          {
+            "name": "notes",
+            "type": "text",
+            "description": "perception/diagnostic notes"
+          },
+          {
+            "name": "drawer_level",
+            "type": "label",
+            "description": "drawer named in the instruction (only middle calibrated)"
+          },
+          {
+            "name": "decisions",
+            "type": "count",
+            "description": "decisions taken so far"
+          },
+          {
+            "name": "handle_now_dy",
+            "type": "number",
+            "description": "handle displacement if the drawer was found partially open"
+          },
+          {
+            "name": "drawer_front",
+            "type": "number",
+            "description": "measured drawer front-panel y relative to the closed-handle y after opening (about -0.165 when fully open)"
+          }
+        ]
+      },
+      "code_sha256": {
+        "policy.py": "5a53c2410ca13de8c3dce8e544f8d287f081756d40d7336738a5d65a3c8ee137"
+      },
+      "source_run_tag": "20261108T141119_562792Z",
+      "source_program_hash": "f1ff291ba703778d8139513203c6222dd45345de056ae191f18a6fd0561e0016",
+      "source_harness_sha256": "436f4129c774d8dbadd5ca0a3b7529fda1affe521faefe9b9ea068ba9b9110f9",
+      "source_development": "dev_logs/robomemarena/demo_only_50/T12_CookiesChocolateMiddleDrawer",
+      "source_evaluation": "eval/robomemarena/demo_only_50/T12_CookiesChocolateMiddleDrawer",
+      "assigned_demos": 50,
+      "training_attempts": 0,
+      "source_checkpoint": 0,
+      "test_records_sha256": "a51f4a9eafecabd11e7641acf4f7a05425c9a38c009d20964bb1d7039c30b4bc",
+      "interface_sha256": "0ac444913ef6c2cd8e2bf7a10f107f390a92a795250353c89a1b1114ac6ecdc0",
+      "archived_result": {
+        "expected": 50,
+        "scored": 50,
+        "successes": 38
+      }
+    },
+    "T13_CookiesButterMiddleDrawer": {
+      "task_spec": {
+        "task": "T13_CookiesButterMiddleDrawer",
+        "runtime": "python",
+        "memory": [
+          {
+            "name": "handle",
+            "type": "position",
+            "description": "world xyz of the middle-drawer handle, from the cabinet seen in the first agentview RGB-D frame"
+          },
+          {
+            "name": "cookie",
+            "type": "position",
+            "description": "world xyz grasp point of the cookies box (agentview blob + calibrated bias)"
+          },
+          {
+            "name": "butter",
+            "type": "position",
+            "description": "world xyz grasp point of the butter box (re-perceived before the butter pick)"
+          },
+          {
+            "name": "phase",
+            "type": "label",
+            "description": "current step of the drawer/cookies/butter sequence"
+          },
+          {
+            "name": "retries",
+            "type": "count",
+            "description": "number of recovery retries used"
+          },
+          {
+            "name": "notes",
+            "type": "text",
+            "description": "last perception/decision note for diagnosis"
+          }
+        ]
+      },
+      "code_sha256": {
+        "policy.py": "6f0f0c91e8f4557062de6a98e1d1bf2b6ee9c9cf5c50120d99e597741caca21d"
+      },
+      "source_run_tag": "20261108T141119_562792Z",
+      "source_program_hash": "0fb20896850d63f7421523093f99dd28500bdf953b4246afc66cf5a3a1d4d91f",
+      "source_harness_sha256": "436f4129c774d8dbadd5ca0a3b7529fda1affe521faefe9b9ea068ba9b9110f9",
+      "source_development": "dev_logs/robomemarena/demo_only_50/T13_CookiesButterMiddleDrawer",
+      "source_evaluation": "eval/robomemarena/demo_only_50/T13_CookiesButterMiddleDrawer",
+      "assigned_demos": 50,
+      "training_attempts": 0,
+      "source_checkpoint": 0,
+      "test_records_sha256": "a51f4a9eafecabd11e7641acf4f7a05425c9a38c009d20964bb1d7039c30b4bc",
+      "interface_sha256": "0ac444913ef6c2cd8e2bf7a10f107f390a92a795250353c89a1b1114ac6ecdc0",
+      "archived_result": {
+        "expected": 50,
+        "scored": 50,
+        "successes": 41
+      }
+    },
+    "T14_CookiesChocolateDrawers": {
+      "task_spec": {
+        "task": "T14_CookiesChocolateDrawers",
+        "runtime": "python",
+        "memory": [
+          {
+            "name": "phase",
+            "type": "label",
+            "description": "current task phase: open_top, pick_cookies, place_cookies, close_top, open_mid, pick_choc, place_choc, clear_cookies, clear_choc, done"
+          },
+          {
+            "name": "handle",
+            "type": "position",
+            "description": "[x, y, z] grasp point of the closed top-drawer handle (m), from the first agentview depth frame"
+          },
+          {
+            "name": "mid_handle_z",
+            "type": "number",
+            "description": "z (m) of the second (middle) drawer handle grasp point; same x,y as handle"
+          },
+          {
+            "name": "cookies",
+            "type": "position",
+            "description": "cookies grasp point [x, y, z] (m)"
+          },
+          {
+            "name": "chocolate",
+            "type": "position",
+            "description": "chocolate grasp point [x, y, z] (m)"
+          },
+          {
+            "name": "top_pull",
+            "type": "position",
+            "description": "measured TCP where the top-drawer pull stalled (opened drawer handle)"
+          },
+          {
+            "name": "mid_pull",
+            "type": "position",
+            "description": "measured TCP where the second-drawer pull stalled"
+          },
+          {
+            "name": "holding_handle",
+            "type": "boolean",
+            "description": "gripper still closed on a drawer handle at the end of the last phase"
+          },
+          {
+            "name": "attempts",
+            "type": "count",
+            "description": "retries spent on the current phase"
+          },
+          {
+            "name": "decisions",
+            "type": "count",
+            "description": "decisions taken so far"
+          },
+          {
+            "name": "log",
+            "type": "text",
+            "description": "short history of measured outcomes"
+          }
+        ]
+      },
+      "code_sha256": {
+        "policy.py": "b2f6a0ad24eac76e969dc0ad30d314a0d74a677c493b3b4b28e04371e601e489"
+      },
+      "source_run_tag": "20261108T141119_562792Z",
+      "source_program_hash": "4207cd1a89ba1c176bc83664c2e24ecc91f27a2055f7863541b931eb6ff198cd",
+      "source_harness_sha256": "436f4129c774d8dbadd5ca0a3b7529fda1affe521faefe9b9ea068ba9b9110f9",
+      "source_development": "dev_logs/robomemarena/demo_only_50/T14_CookiesChocolateDrawers",
+      "source_evaluation": "eval/robomemarena/demo_only_50/T14_CookiesChocolateDrawers",
+      "assigned_demos": 50,
+      "training_attempts": 0,
+      "source_checkpoint": 0,
+      "test_records_sha256": "a51f4a9eafecabd11e7641acf4f7a05425c9a38c009d20964bb1d7039c30b4bc",
+      "interface_sha256": "0ac444913ef6c2cd8e2bf7a10f107f390a92a795250353c89a1b1114ac6ecdc0",
+      "archived_result": {
+        "expected": 50,
+        "scored": 50,
+        "successes": 43
+      }
+    },
+    "T15_ButterFrypanPourMilkTwice": {
+      "task_spec": {
+        "task": "T15_ButterFrypanPourMilkTwice",
+        "runtime": "python",
+        "memory": [
+          {
+            "name": "stage",
+            "type": "label",
+            "description": "next stage of the butter/pour stage machine"
+          },
+          {
+            "name": "table_z",
+            "type": "number",
+            "description": "perceived table height (m)"
+          },
+          {
+            "name": "butter",
+            "type": "position",
+            "description": "perceived butter centroid xy (m), agentview RGB-D"
+          },
+          {
+            "name": "pan",
+            "type": "position",
+            "description": "perceived frypan rim-circle centre xy (m)"
+          },
+          {
+            "name": "milk",
+            "type": "position",
+            "description": "perceived milk carton visible-surface centroid xy (m)"
+          },
+          {
+            "name": "butter_tries",
+            "type": "count",
+            "description": "butter grasp retries used"
+          },
+          {
+            "name": "milk_tries",
+            "type": "count",
+            "description": "milk grasp retries used"
+          },
+          {
+            "name": "pours",
+            "type": "count",
+            "description": "pour tilts commanded so far"
+          },
+          {
+            "name": "decisions",
+            "type": "count",
+            "description": "decisions taken this episode"
+          },
+          {
+            "name": "note",
+            "type": "text",
+            "description": "last decision diagnostic"
+          }
+        ]
+      },
+      "code_sha256": {
+        "control.py": "4a55282e5dd0e7b1da3d28a52fc4ce2d7acae9b64a1dffb5615f0b3095454a81",
+        "perception.py": "a90bd970f876e42bb9ed71d8374f23de299a1dba68898f2603e1d8f8b876a5b8",
+        "policy.py": "d8343e8f0d96119ef6d8f1ad441c5c00f85e60530ec980c309f69d4b9c7ba642"
+      },
+      "source_run_tag": "20261108T141119_562792Z",
+      "source_program_hash": "67d46acc61da78c96c49fddf951fcacc19040bba8f8d25feeafbc898b91843c1",
+      "source_harness_sha256": "436f4129c774d8dbadd5ca0a3b7529fda1affe521faefe9b9ea068ba9b9110f9",
+      "source_development": "dev_logs/robomemarena/demo_only_50/T15_ButterFrypanPourMilkTwice",
+      "source_evaluation": "eval/robomemarena/demo_only_50/T15_ButterFrypanPourMilkTwice",
+      "assigned_demos": 50,
+      "training_attempts": 0,
+      "source_checkpoint": 0,
+      "test_records_sha256": "a51f4a9eafecabd11e7641acf4f7a05425c9a38c009d20964bb1d7039c30b4bc",
+      "interface_sha256": "0ac444913ef6c2cd8e2bf7a10f107f390a92a795250353c89a1b1114ac6ecdc0",
+      "archived_result": {
+        "expected": 50,
+        "scored": 50,
+        "successes": 50
+      }
+    },
+    "T16_PourMilkMugTwice": {
+      "task_spec": {
+        "task": "T16_PourMilkMugTwice",
+        "runtime": "python",
+        "memory": [
+          {
+            "name": "phase",
+            "type": "label",
+            "description": "current stage: init, descend, grasp, check_grasp, relocate, to_mug, pour, pour_check, to_drainer, lower, release, retreat, done"
+          },
+          {
+            "name": "pours_done",
+            "type": "count",
+            "description": "completed pours, counted from observed tcp tilt > 50 deg held >= 55 steps"
+          },
+          {
+            "name": "grasp_attempts",
+            "type": "count",
+            "description": "failed grasps / drops so far"
+          },
+          {
+            "name": "retries",
+            "type": "count",
+            "description": "pours that did not reach the hold requirement"
+          },
+          {
+            "name": "notes",
+            "type": "text",
+            "description": "short event log"
+          },
+          {
+            "name": "milk_grasp",
+            "type": "position",
+            "description": "grasp tcp target [x,y,z] from the milk perception"
+          },
+          {
+            "name": "mug_xy",
+            "type": "position",
+            "description": "mug feature [x,y] (median of visible mug points) from frame 0"
+          },
+          {
+            "name": "drainer_xyz",
+            "type": "position",
+            "description": "drainer near-compartment centre [x,y] and rim top z"
+          }
+        ]
+      },
+      "code_sha256": {
+        "policy.py": "8b5909b1db0e5b0dccd9bab0dc51dd1a59e9d12fdfe04eb64abd115f1c00a1c1"
+      },
+      "source_run_tag": "20261108T141119_562792Z",
+      "source_program_hash": "60f53521f3bc11bbf745a9af1d913f81803a4651031e01dd88e27731c6a19442",
+      "source_harness_sha256": "436f4129c774d8dbadd5ca0a3b7529fda1affe521faefe9b9ea068ba9b9110f9",
+      "source_development": "dev_logs/robomemarena/demo_only_50/T16_PourMilkMugTwice",
+      "source_evaluation": "eval/robomemarena/demo_only_50/T16_PourMilkMugTwice",
+      "assigned_demos": 50,
+      "training_attempts": 0,
+      "source_checkpoint": 0,
+      "test_records_sha256": "a51f4a9eafecabd11e7641acf4f7a05425c9a38c009d20964bb1d7039c30b4bc",
+      "interface_sha256": "0ac444913ef6c2cd8e2bf7a10f107f390a92a795250353c89a1b1114ac6ecdc0",
+      "archived_result": {
+        "expected": 50,
+        "scored": 50,
+        "successes": 50
+      }
+    },
+    "T17_ButterChocolateMiddleDrawer": {
+      "task_spec": {
+        "task": "T17_ButterChocolateMiddleDrawer",
+        "runtime": "python",
+        "memory": [
+          {
+            "name": "stage",
+            "type": "label",
+            "description": "open_drawer | butter | chocolate | done"
+          },
+          {
+            "name": "handle",
+            "type": "position",
+            "description": "middle-drawer handle grasp point (closed drawer) from the first agentview RGB-D frame, world m"
+          },
+          {
+            "name": "butter",
+            "type": "position",
+            "description": "butter grasp xy (world m) from agentview depth, re-detected after a failed pick"
+          },
+          {
+            "name": "chocolate",
+            "type": "position",
+            "description": "chocolate pudding grasp xy (world m)"
+          },
+          {
+            "name": "drawer_tries",
+            "type": "count",
+            "description": "drawer opening attempts issued"
+          },
+          {
+            "name": "butter_tries",
+            "type": "count",
+            "description": "butter pick-place attempts issued"
+          },
+          {
+            "name": "choc_tries",
+            "type": "count",
+            "description": "chocolate pick-place attempts issued"
+          },
+          {
+            "name": "notes",
+            "type": "text",
+            "description": "short log of perception and stage outcomes"
+          }
+        ]
+      },
+      "code_sha256": {
+        "policy.py": "15faef720f18c41953f21582a434d6114ab041d6a9518911c28a9270c543e258"
+      },
+      "source_run_tag": "20261108T141119_562792Z",
+      "source_program_hash": "cb9dc4d09ea183e4ba761db76b722fa592c861a1ea3a0e58474b5ba6b5c2e697",
+      "source_harness_sha256": "436f4129c774d8dbadd5ca0a3b7529fda1affe521faefe9b9ea068ba9b9110f9",
+      "source_development": "dev_logs/robomemarena/demo_only_50/T17_ButterChocolateMiddleDrawer",
+      "source_evaluation": "eval/robomemarena/demo_only_50/T17_ButterChocolateMiddleDrawer",
+      "assigned_demos": 50,
+      "training_attempts": 0,
+      "source_checkpoint": 0,
+      "test_records_sha256": "a51f4a9eafecabd11e7641acf4f7a05425c9a38c009d20964bb1d7039c30b4bc",
+      "interface_sha256": "0ac444913ef6c2cd8e2bf7a10f107f390a92a795250353c89a1b1114ac6ecdc0",
+      "archived_result": {
+        "expected": 50,
+        "scored": 50,
+        "successes": 37
+      }
+    },
+    "T18_ChocolateButterCabinet": {
+      "task_spec": {
+        "task": "T18_ChocolateButterCabinet",
+        "runtime": "python",
+        "memory": [
+          {
+            "name": "phase",
+            "type": "label",
+            "description": "start | scan | picked | placed | done"
+          },
+          {
+            "name": "cab1",
+            "type": "position",
+            "description": "cabinet1 (source, holds the boxes) top centre [x, y, top_z] from frame-0 agentview RGB-D"
+          },
+          {
+            "name": "cab2",
+            "type": "position",
+            "description": "cabinet2 (destination) top centre [x, y, top_z]"
+          },
+          {
+            "name": "chocolate",
+            "type": "position",
+            "description": "last wrist-scan position of the chocolate pudding [x, y, top_z] or null"
+          },
+          {
+            "name": "butter",
+            "type": "position",
+            "description": "last wrist-scan position of the butter [x, y, top_z] or null"
+          },
+          {
+            "name": "target",
+            "type": "label",
+            "description": "object currently being picked/placed"
+          },
+          {
+            "name": "tries",
+            "type": "count",
+            "description": "failed scans/grasps for the current object"
+          },
+          {
+            "name": "placed",
+            "type": "list",
+            "description": "objects already released on cabinet2, in order"
+          },
+          {
+            "name": "notes",
+            "type": "text",
+            "description": "last perception/decision note"
+          }
+        ]
+      },
+      "code_sha256": {
+        "policy.py": "b7846ae1d35071abafbc03428c7a235649ca9a4afb077c442e70c027d07ae528"
+      },
+      "source_run_tag": "20261108T141119_562792Z",
+      "source_program_hash": "16ab5d0f5dab76fa6756b06e9074e09c19ac2e22d6452835cb2a763183c882b1",
+      "source_harness_sha256": "436f4129c774d8dbadd5ca0a3b7529fda1affe521faefe9b9ea068ba9b9110f9",
+      "source_development": "dev_logs/robomemarena/demo_only_50/T18_ChocolateButterCabinet",
+      "source_evaluation": "eval/robomemarena/demo_only_50/T18_ChocolateButterCabinet",
+      "assigned_demos": 50,
+      "training_attempts": 0,
+      "source_checkpoint": 0,
+      "test_records_sha256": "a51f4a9eafecabd11e7641acf4f7a05425c9a38c009d20964bb1d7039c30b4bc",
+      "interface_sha256": "0ac444913ef6c2cd8e2bf7a10f107f390a92a795250353c89a1b1114ac6ecdc0",
+      "archived_result": {
+        "expected": 50,
+        "scored": 50,
+        "successes": 48
+      }
+    },
+    "T19_SauceMilkJuiceCabinet": {
+      "task_spec": {
+        "task": "T19_SauceMilkJuiceCabinet",
+        "runtime": "python",
+        "memory": [
+          {
+            "name": "phase",
+            "type": "label",
+            "description": "init | survey | approach | pick | place | done"
+          },
+          {
+            "name": "stage",
+            "type": "count",
+            "description": "index of the next object in the ordered goal (0 sauce, 1 milk, 2 juice, 3 done)"
+          },
+          {
+            "name": "top",
+            "type": "number",
+            "description": "cabinet top height (m) measured from agentview depth at the first decision"
+          },
+          {
+            "name": "cab1",
+            "type": "positions",
+            "description": "source cabinet1 top box [[xmin,ymin],[xmax,ymax]] from the first agentview frame"
+          },
+          {
+            "name": "cab2",
+            "type": "positions",
+            "description": "target cabinet2 top box [[xmin,ymin],[xmax,ymax]] from the first agentview frame"
+          },
+          {
+            "name": "target",
+            "type": "position",
+            "description": "current object grasp estimate [x, y, top_z] from the wrist camera"
+          },
+          {
+            "name": "fails",
+            "type": "count",
+            "description": "consecutive detection/grasp failures for the current object"
+          },
+          {
+            "name": "seen",
+            "type": "count",
+            "description": "reserved counter"
+          },
+          {
+            "name": "log",
+            "type": "text",
+            "description": "short trace of decisions"
+          }
+        ]
+      },
+      "code_sha256": {
+        "policy.py": "e552d42540b7b7d25300290693b6321f359a29ee846a47efe03b6346e2245e45"
+      },
+      "source_run_tag": "20261108T141119_562792Z",
+      "source_program_hash": "4eec5dfbff14ddc27cb2735eec800090fed944559544befd2e1c4c3337073467",
+      "source_harness_sha256": "436f4129c774d8dbadd5ca0a3b7529fda1affe521faefe9b9ea068ba9b9110f9",
+      "source_development": "dev_logs/robomemarena/demo_only_50/T19_SauceMilkJuiceCabinet",
+      "source_evaluation": "eval/robomemarena/demo_only_50/T19_SauceMilkJuiceCabinet",
+      "assigned_demos": 50,
+      "training_attempts": 0,
+      "source_checkpoint": 0,
+      "test_records_sha256": "a51f4a9eafecabd11e7641acf4f7a05425c9a38c009d20964bb1d7039c30b4bc",
+      "interface_sha256": "0ac444913ef6c2cd8e2bf7a10f107f390a92a795250353c89a1b1114ac6ecdc0",
+      "archived_result": {
+        "expected": 50,
+        "scored": 50,
+        "successes": 20
+      }
+    },
+    "T20_CookiesChocolateMicrowave": {
+      "task_spec": {
+        "task": "T20_CookiesChocolateMicrowave",
+        "runtime": "python",
+        "memory": [
+          {
+            "name": "stage",
+            "type": "count",
+            "description": "index of the next plan stage (open door, cookies in, chocolate in)"
+          },
+          {
+            "name": "table_z",
+            "type": "number",
+            "description": "perceived table height (m), from the first agentview depth frame"
+          },
+          {
+            "name": "handle",
+            "type": "position",
+            "description": "microwave handle feature [x, y, z]: median x, 10th-pct y, mid z of the handle bar"
+          },
+          {
+            "name": "cookies",
+            "type": "position",
+            "description": "cookies box top-surface centroid [x, y, z] at episode start (brighter box)"
+          },
+          {
+            "name": "chocolate",
+            "type": "position",
+            "description": "chocolate box top-surface centroid [x, y, z] at episode start (darker box)"
+          },
+          {
+            "name": "retries",
+            "type": "count",
+            "description": "number of empty-grasp retries used"
+          },
+          {
+            "name": "pending",
+            "type": "label",
+            "description": "box to re-perceive at the next decision after an empty grasp, else empty"
+          },
+          {
+            "name": "log",
+            "type": "text",
+            "description": "perception notes and retry events"
+          }
+        ]
+      },
+      "code_sha256": {
+        "policy.py": "8616c608c7d78adeb4a00fdc5b69535598e9c652d4225d66fa8b607c968d658f"
+      },
+      "source_run_tag": "20261108T141119_562792Z",
+      "source_program_hash": "e50768ec2638b6f3612d9de650d85e02a729ab8ccb48398848d8a7b50ffc02b3",
+      "source_harness_sha256": "436f4129c774d8dbadd5ca0a3b7529fda1affe521faefe9b9ea068ba9b9110f9",
+      "source_development": "dev_logs/robomemarena/demo_only_50/T20_CookiesChocolateMicrowave",
+      "source_evaluation": "eval/robomemarena/demo_only_50/T20_CookiesChocolateMicrowave",
+      "assigned_demos": 50,
+      "training_attempts": 0,
+      "source_checkpoint": 0,
+      "test_records_sha256": "a51f4a9eafecabd11e7641acf4f7a05425c9a38c009d20964bb1d7039c30b4bc",
+      "interface_sha256": "0ac444913ef6c2cd8e2bf7a10f107f390a92a795250353c89a1b1114ac6ecdc0",
+      "archived_result": {
+        "expected": 50,
+        "scored": 50,
+        "successes": 50
+      }
+    },
+    "T21_ButterChocolateMicrowave": {
+      "task_spec": {
+        "task": "T21_ButterChocolateMicrowave",
+        "runtime": "python",
+        "memory": [
+          {
+            "name": "stage",
+            "type": "label",
+            "description": "stage executed by the current decision (A..W, or recovery Dr/Lr)"
+          },
+          {
+            "name": "handle",
+            "type": "position",
+            "description": "microwave handle push target [x,y,z] measured from first agentview RGB-D frame"
+          },
+          {
+            "name": "butter",
+            "type": "position",
+            "description": "[x,y] grasp point of the first object to place (butter)"
+          },
+          {
+            "name": "choc",
+            "type": "position",
+            "description": "[x,y] grasp point of the second object (chocolate)"
+          },
+          {
+            "name": "table_dz",
+            "type": "number",
+            "description": "measured table height minus nominal 0.431 m"
+          },
+          {
+            "name": "place",
+            "type": "position",
+            "description": "location where the butter was carried into the microwave; destination for the chocolate"
+          },
+          {
+            "name": "butter_release",
+            "type": "position",
+            "description": "measured tcp when butter was released"
+          },
+          {
+            "name": "hold",
+            "type": "position",
+            "description": "position held while turning the gripper sideways"
+          },
+          {
+            "name": "scene_ok",
+            "type": "boolean",
+            "description": "initial perception found microwave and both objects"
+          },
+          {
+            "name": "retries",
+            "type": "count",
+            "description": "object regrasp attempts used"
+          },
+          {
+            "name": "door_tries",
+            "type": "count",
+            "description": "door re-open attempts used"
+          },
+          {
+            "name": "decisions",
+            "type": "count",
+            "description": "decisions taken so far"
+          },
+          {
+            "name": "notes",
+            "type": "text",
+            "description": "perception/check log"
+          },
+          {
+            "name": "order",
+            "type": "list",
+            "description": "object order parsed from the goal"
+          },
+          {
+            "name": "mw_box",
+            "type": "positions",
+            "description": "microwave top-surface extent [xmin,xmax,ymin,ymax] from the first frame"
+          },
+          {
+            "name": "door_ref",
+            "type": "count",
+            "description": "closed-door front-plane point count in the first frame"
+          }
+        ]
+      },
+      "code_sha256": {
+        "control.py": "383a237927b827c4a191b19280088d8c04498559e634e103a506f61941011a1c",
+        "perception.py": "852370e2f9d0a1626b5fca164c4ffc0e69a87ce3e7de5462f04ae76b8ca5896e",
+        "policy.py": "f8c4de62e499802c549730ded1957f93f3f725efb1d890ac01c82fa92519d8c0"
+      },
+      "source_run_tag": "20261108T141119_562792Z",
+      "source_program_hash": "39d211e41bc608be9d578fe364a9bb7ab646166113ed325c0ad56f396c474e02",
+      "source_harness_sha256": "436f4129c774d8dbadd5ca0a3b7529fda1affe521faefe9b9ea068ba9b9110f9",
+      "source_development": "dev_logs/robomemarena/demo_only_50/T21_ButterChocolateMicrowave",
+      "source_evaluation": "eval/robomemarena/demo_only_50/T21_ButterChocolateMicrowave",
+      "assigned_demos": 50,
+      "training_attempts": 0,
+      "source_checkpoint": 0,
+      "test_records_sha256": "a51f4a9eafecabd11e7641acf4f7a05425c9a38c009d20964bb1d7039c30b4bc",
+      "interface_sha256": "0ac444913ef6c2cd8e2bf7a10f107f390a92a795250353c89a1b1114ac6ecdc0",
+      "archived_result": {
+        "expected": 50,
+        "scored": 50,
+        "successes": 50
+      }
+    },
+    "T22_PourSauceCookiesMicrowave": {
+      "task_spec": {
+        "task": "T22_PourSauceCookiesMicrowave",
+        "runtime": "python",
+        "memory": [
+          {
+            "name": "stage",
+            "type": "label",
+            "description": "stage whose action was issued last (to_sauce, grasp_sauce, pour, place_sauce, to_handle, grasp_handle, pull_door, leave_door, to_cookie, grasp_cookie, insert, deeper, idle, reopen:<obj>, regrasp_handle)"
+          },
+          {
+            "name": "table_z",
+            "type": "number",
+            "description": "table-top height (m) from the first agentview depth frame"
+          },
+          {
+            "name": "sauce",
+            "type": "position",
+            "description": "tomato-sauce can visible centroid [x,y,top z] (m), first frame or re-perception after a missed grasp"
+          },
+          {
+            "name": "cookie",
+            "type": "position",
+            "description": "cookie-box visible centroid [x,y,top z] (m)"
+          },
+          {
+            "name": "mw_ref",
+            "type": "position",
+            "description": "microwave reference [front-face x (camera side), front-most y (handle), table z]"
+          },
+          {
+            "name": "retries",
+            "type": "count",
+            "description": "number of grasp/door recoveries used"
+          },
+          {
+            "name": "pours",
+            "type": "count",
+            "description": "completed pour tilts (2 after the pour stage)"
+          },
+          {
+            "name": "door_angle",
+            "type": "number",
+            "description": "last measured handle angle about the fitted door hinge (deg; closed about -18, open about -113)"
+          },
+          {
+            "name": "log",
+            "type": "text",
+            "description": "short perception/check notes"
+          }
+        ]
+      },
+      "code_sha256": {
+        "control.py": "826d2480ac1c56d11d5f13a497ccbc5a0b9fa369523775120fc4dd2869b66c20",
+        "perception.py": "c9a37800d414a1d9afd4ff5f2024a23f5deec6cdc5449c5f198a90e2c2e55f60",
+        "policy.py": "e985a4172e2e88b05dfee85f063bc508afdcaea38f10b0a2771ded2d91d6007c"
+      },
+      "source_run_tag": "20261108T141119_562792Z",
+      "source_program_hash": "91f55f0cab683629bc34c85f0a5fbdfc658ebe767f84caf4e603687e5f0f16bf",
+      "source_harness_sha256": "436f4129c774d8dbadd5ca0a3b7529fda1affe521faefe9b9ea068ba9b9110f9",
+      "source_development": "dev_logs/robomemarena/demo_only_50/T22_PourSauceCookiesMicrowave",
+      "source_evaluation": "eval/robomemarena/demo_only_50/T22_PourSauceCookiesMicrowave",
+      "assigned_demos": 50,
+      "training_attempts": 0,
+      "source_checkpoint": 0,
+      "test_records_sha256": "a51f4a9eafecabd11e7641acf4f7a05425c9a38c009d20964bb1d7039c30b4bc",
+      "interface_sha256": "0ac444913ef6c2cd8e2bf7a10f107f390a92a795250353c89a1b1114ac6ecdc0",
+      "archived_result": {
+        "expected": 50,
+        "scored": 50,
+        "successes": 50
+      }
+    },
+    "T23_CreamPopcornMicrowave": {
+      "task_spec": {
+        "task": "T23_CreamPopcornMicrowave",
+        "runtime": "python",
+        "memory": [
+          {
+            "name": "phase",
+            "type": "label",
+            "description": "next step of the plan (start, approach_handle, ..., carry_pop, release_pop, wait)"
+          },
+          {
+            "name": "handle",
+            "type": "position",
+            "description": "microwave door-handle grasp point perceived at the first decision (world m)"
+          },
+          {
+            "name": "cream",
+            "type": "position",
+            "description": "cream grasp point perceived at the first decision (world m)"
+          },
+          {
+            "name": "popcorn",
+            "type": "position",
+            "description": "popcorn grasp point perceived at the first decision (world m)"
+          },
+          {
+            "name": "cream_spot",
+            "type": "position",
+            "description": "measured TCP where the cream was released inside the microwave; popcorn target is anchored to it"
+          },
+          {
+            "name": "retries",
+            "type": "count",
+            "description": "number of grasp retries used"
+          },
+          {
+            "name": "door_open",
+            "type": "boolean",
+            "description": "agentview check that the door panel is in its open position"
+          },
+          {
+            "name": "note",
+            "type": "text",
+            "description": "short diagnostic of the last perception/check"
+          }
+        ]
+      },
+      "code_sha256": {
+        "policy.py": "8c311dab8720ab439206f34d55c734226a57994d99e27bae38ebe4b818731797"
+      },
+      "source_run_tag": "20261108T141119_562792Z",
+      "source_program_hash": "5928ba01b758d3d69f5300b826dc8eb5801f9c6acb64954a98e175d964de5af4",
+      "source_harness_sha256": "436f4129c774d8dbadd5ca0a3b7529fda1affe521faefe9b9ea068ba9b9110f9",
+      "source_development": "dev_logs/robomemarena/demo_only_50/T23_CreamPopcornMicrowave",
+      "source_evaluation": "eval/robomemarena/demo_only_50/T23_CreamPopcornMicrowave",
+      "assigned_demos": 50,
+      "training_attempts": 0,
+      "source_checkpoint": 0,
+      "test_records_sha256": "a51f4a9eafecabd11e7641acf4f7a05425c9a38c009d20964bb1d7039c30b4bc",
+      "interface_sha256": "0ac444913ef6c2cd8e2bf7a10f107f390a92a795250353c89a1b1114ac6ecdc0",
+      "archived_result": {
+        "expected": 50,
+        "scored": 50,
+        "successes": 41
+      }
+    },
+    "T24_CookiesPopcornMicrowave": {
+      "task_spec": {
+        "task": "T24_CookiesPopcornMicrowave",
+        "runtime": "python",
+        "memory": [
+          {
+            "name": "phase",
+            "type": "label",
+            "description": "current stage: start, door, pick_first, regrasp_*, place_first, retreat, pick_second, place_second, release_second, done"
+          },
+          {
+            "name": "first_obj",
+            "type": "label",
+            "description": "object to put into the microwave first (parsed from goal)"
+          },
+          {
+            "name": "second_obj",
+            "type": "label",
+            "description": "object to put where the first one was placed"
+          },
+          {
+            "name": "microwave",
+            "type": "position",
+            "description": "perceived microwave handle grasp point [x,y,z] (from the closed microwave at the first frame)"
+          },
+          {
+            "name": "first_xy",
+            "type": "position",
+            "description": "grasp point [x,y] of the first object (perceived at start; refined on regrasp)"
+          },
+          {
+            "name": "second_xy",
+            "type": "position",
+            "description": "grasp point [x,y] of the second object (perceived at start; refined on regrasp)"
+          },
+          {
+            "name": "cookies_placed_at",
+            "type": "position",
+            "description": "measured tcp [x,y,z] where the first object was released inside the microwave"
+          },
+          {
+            "name": "retries",
+            "type": "count",
+            "description": "grasp retries in the current pick phase"
+          },
+          {
+            "name": "notes",
+            "type": "text",
+            "description": "perception diagnostics"
+          }
+        ]
+      },
+      "code_sha256": {
+        "policy.py": "40f340983f71c61b25ae541f01145fa63080136664513197f7c747ca41559ca4"
+      },
+      "source_run_tag": "20261108T141119_562792Z",
+      "source_program_hash": "9a28e116084600ab38aa292b93b29eaa8795a0133eade7a996052adac228e440",
+      "source_harness_sha256": "436f4129c774d8dbadd5ca0a3b7529fda1affe521faefe9b9ea068ba9b9110f9",
+      "source_development": "dev_logs/robomemarena/demo_only_50/T24_CookiesPopcornMicrowave",
+      "source_evaluation": "eval/robomemarena/demo_only_50/T24_CookiesPopcornMicrowave",
+      "assigned_demos": 50,
+      "training_attempts": 0,
+      "source_checkpoint": 0,
+      "test_records_sha256": "a51f4a9eafecabd11e7641acf4f7a05425c9a38c009d20964bb1d7039c30b4bc",
+      "interface_sha256": "0ac444913ef6c2cd8e2bf7a10f107f390a92a795250353c89a1b1114ac6ecdc0",
+      "archived_result": {
+        "expected": 50,
+        "scored": 50,
+        "successes": 50
+      }
+    },
+    "T25_ButterCreamPlate": {
+      "task_spec": {
+        "task": "T25_ButterCreamPlate",
+        "runtime": "python",
+        "memory": [
+          {
+            "name": "stage",
+            "type": "label",
+            "description": "hover | grasp | verify_grasp | verify_place | done"
+          },
+          {
+            "name": "order",
+            "type": "list",
+            "description": "objects to move, in goal order (parsed from instruction)"
+          },
+          {
+            "name": "index",
+            "type": "count",
+            "description": "index into order of the object being handled"
+          },
+          {
+            "name": "attempts",
+            "type": "count",
+            "description": "pick attempts for the current object"
+          },
+          {
+            "name": "butter_xy",
+            "type": "position",
+            "description": "last detected butter xy (world m, agentview RGB-D)"
+          },
+          {
+            "name": "cream_xy",
+            "type": "position",
+            "description": "last detected cream xy (world m)"
+          },
+          {
+            "name": "plate2_xy",
+            "type": "position",
+            "description": "target plate (plate2) centre xy (world m)"
+          },
+          {
+            "name": "grasp_xy",
+            "type": "position",
+            "description": "xy (world m) commanded for the current grasp (wrist-refined when available)"
+          },
+          {
+            "name": "rechecks",
+            "type": "count",
+            "description": "times the done stage found an object off plate2 and restarted its pick"
+          },
+          {
+            "name": "notes",
+            "type": "text",
+            "description": "last diagnostic note"
+          }
+        ]
+      },
+      "code_sha256": {
+        "acts.py": "c8b76aa3b5aa8f41ad17464afc44977355af10a6ea356d2146c2593409cefb73",
+        "control.py": "1db118b605b676ffd76927408d90178beb555e8324cf2dfa619e128221d643ea",
+        "perception.py": "bacf84d166ec574478f20250e46d3b94a9bffc3b536db4a61eb69b8040d43d75",
+        "policy.py": "cf5a330bb36a302fc21de83c07d7ef583abd6709e6c39258450d9d53b4967164"
+      },
+      "source_run_tag": "20261108T141119_562792Z",
+      "source_program_hash": "b971026adecc19a043966cbf0839fa8003a3f1a8db9999673323ce923881b067",
+      "source_harness_sha256": "436f4129c774d8dbadd5ca0a3b7529fda1affe521faefe9b9ea068ba9b9110f9",
+      "source_development": "dev_logs/robomemarena/demo_only_50/T25_ButterCreamPlate",
+      "source_evaluation": "eval/robomemarena/demo_only_50/T25_ButterCreamPlate",
+      "assigned_demos": 50,
+      "training_attempts": 0,
+      "source_checkpoint": 0,
+      "test_records_sha256": "a51f4a9eafecabd11e7641acf4f7a05425c9a38c009d20964bb1d7039c30b4bc",
+      "interface_sha256": "0ac444913ef6c2cd8e2bf7a10f107f390a92a795250353c89a1b1114ac6ecdc0",
+      "archived_result": {
+        "expected": 50,
+        "scored": 50,
+        "successes": 42
+      }
+    },
+    "T26_ChocolateCreamPlate": {
+      "task_spec": {
+        "task": "T26_ChocolateCreamPlate",
+        "runtime": "python",
+        "memory": [
+          {
+            "name": "stage",
+            "type": "label",
+            "description": "last chosen phase: start, pick_choc, place_choc, pick_cream, place_cream, done"
+          },
+          {
+            "name": "holding",
+            "type": "label",
+            "description": "object the last pick tried to grasp ('choc'/'cream'), cleared when the finger gap shows nothing held or after placing"
+          },
+          {
+            "name": "picks",
+            "type": "count",
+            "description": "pick attempts so far (capped at 8)"
+          },
+          {
+            "name": "waits",
+            "type": "count",
+            "description": "wait decisions after both objects were seen on plate2"
+          },
+          {
+            "name": "plate2",
+            "type": "position",
+            "description": "plate2 centre [x, y] detected on the first frame (before it is covered)"
+          },
+          {
+            "name": "choc",
+            "type": "position",
+            "description": "last detected chocolate pudding [x, y, top_z] (raw agentview estimate)"
+          },
+          {
+            "name": "cream",
+            "type": "position",
+            "description": "last detected cream cheese [x, y, top_z] (raw agentview estimate)"
+          },
+          {
+            "name": "note",
+            "type": "text",
+            "description": "human-readable reason for the last decision"
+          }
+        ]
+      },
+      "code_sha256": {
+        "control.py": "9ade6b2f37dbafaa56f737dffed2734d485929680734644c7a0d77992a1ffe4a",
+        "perception.py": "418a56ebfc7cc7440d9f6b62a5c0fa5b4bbb8d06f9efd82e47893e00057720c4",
+        "policy.py": "f3084f7eb9a5bbaade27ddbfb022dda0e7932b11ccece6f19917286e3f645cd6"
+      },
+      "source_run_tag": "20261108T141119_562792Z",
+      "source_program_hash": "25a3f5d1fa1ea77a952f6e2974398b2a50e9b08ad2fa67d6c4e95a25650728f6",
+      "source_harness_sha256": "436f4129c774d8dbadd5ca0a3b7529fda1affe521faefe9b9ea068ba9b9110f9",
+      "source_development": "dev_logs/robomemarena/demo_only_50/T26_ChocolateCreamPlate",
+      "source_evaluation": "eval/robomemarena/demo_only_50/T26_ChocolateCreamPlate",
+      "assigned_demos": 50,
+      "training_attempts": 0,
+      "source_checkpoint": 0,
+      "test_records_sha256": "a51f4a9eafecabd11e7641acf4f7a05425c9a38c009d20964bb1d7039c30b4bc",
+      "interface_sha256": "0ac444913ef6c2cd8e2bf7a10f107f390a92a795250353c89a1b1114ac6ecdc0",
+      "archived_result": {
+        "expected": 50,
+        "scored": 50,
+        "successes": 33
+      }
+    }
+  },
+  "evaluation_config": {
+    "benchmark": "robomemarena",
+    "mode": "demos",
+    "budget": 0,
+    "training_seed_count": null,
+    "training_seed_policy": "demo_cycle",
+    "depth": true,
+    "builtin_demo": false,
+    "perceptual_variations": false,
+    "max_decisions": 40,
+    "max_action_steps": 2500,
+    "policy_timeout": 1800,
+    "both_protocol": null,
+    "physics_backend": null
+  }
+}

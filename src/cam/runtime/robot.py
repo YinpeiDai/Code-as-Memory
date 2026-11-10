@@ -15,6 +15,44 @@ class MotionError(Exception):
     pass
 
 
+def _rmbench_observed_motion_error(frame, action, spec):
+    """Compare public post-action EEF poses with the submitted world targets.
+
+    This runs inside the policy process. It has no planner/simulator access and
+    cannot identify why a target was missed. Gripper execution is not checked.
+    """
+    if frame is None:
+        return "Cannot verify RMBench motion: no post-action observation returned."
+    errors = []
+    for arm, start in (("left", 0), ("right", 8)):
+        observed = np.asarray(getattr(frame, arm + "_ee_pose", []), dtype=float)
+        target = np.asarray(action[start:start + 7], dtype=float)
+        if observed.shape != (7,) or not np.isfinite(observed).all():
+            errors.append(f"{arm}: cannot verify motion; invalid or missing public EEF pose")
+            continue
+        q_observed, q_target = observed[3:], target[3:]
+        norms = np.array([np.linalg.norm(q_observed), np.linalg.norm(q_target)])
+        if not np.isfinite(norms).all() or np.any(norms == 0):
+            errors.append(f"{arm}: cannot verify motion; invalid pose quaternion")
+            continue
+        position_error = float(np.linalg.norm(observed[:3] - target[:3]))
+        # q and -q describe the same rotation; compare the shortest SO(3) angle.
+        dot = abs(float(np.dot(q_observed / norms[0], q_target / norms[1])))
+        rotation_error = float(2 * np.arccos(np.clip(dot, 0.0, 1.0)))
+        if (position_error > spec["position_tolerance_m"]
+                or rotation_error > spec["rotation_tolerance_rad"]):
+            errors.append(
+                f"{arm}: target not reached (position error {position_error:.6f} m, "
+                f"rotation error {rotation_error:.6f} rad; tolerances "
+                f"{spec['position_tolerance_m']:g} m, {spec['rotation_tolerance_rad']:g} rad)"
+            )
+    if errors:
+        return ("Observed RMBench motion: " + "; ".join(errors)
+                + ". Action counted; either arm or gripper may have moved. "
+                "Inspect robot.now() before recovery.")
+    return None
+
+
 class Robot:
     """now(), frames(), step(*action); one native benchmark step per step() call.
 
@@ -31,6 +69,14 @@ class Robot:
     argument to execute it. No state/time advance, collision or dynamics check.
     The benchmark's public dry-run reference documents the result and limits.
     The older call without mode retains the v2 absolute IK query where available.
+
+    RMBench: ``robot.dry_run(*world_pose_wxyz, arm="left" or "right")`` uses
+    only the current public joint observation and a sanitized offline model.
+    No RPC, native planner or simulator is called. See the RMBench API reference.
+    When enabled in the action specification, step() raises MotionError if a
+    public post-action EEF pose misses its requested target. The action already
+    counted and now()/frames() include its observations; this is not a planner
+    status query. Episode completion takes precedence over this check.
     """
 
     def __init__(self, current, reader, writer, action_spec=None, max_steps=1500):
@@ -45,6 +91,8 @@ class Robot:
         self._high = tuple(spec.get("high") or [None] * len(names))
         self._ignored = tuple(spec.get("ignored") or ())
         self._motion_preview = spec.get("motion_preview")
+        self._offline_robot = spec.get("offline_robot", {})
+        self._motion_feedback = spec.get("motion_feedback", {})
         self._max_steps = max_steps
 
     @property
@@ -97,7 +145,28 @@ class Robot:
                 action[i] = min(action[i], self._high[i])
         return action
 
-    def dry_run(self, *pose, mode=None, **named):
+    def dry_run(self, *pose, mode=None, arm=None, robot_state=None, **named):
+        if self._offline_robot.get("schema") == "cam-rmbench-offline-robot/1":
+            if mode not in (None, "absolute") or arm not in ("left", "right"):
+                raise MotionError("RMBench dry_run requires arm='left' or 'right' and an absolute world pose")
+            names = ("x", "y", "z", "qw", "qx", "qy", "qz")
+            if named:
+                if pose or set(named) != set(names):
+                    raise MotionError("Pass seven pose components positionally or by name: " + ", ".join(names))
+                pose = [named[name] for name in names]
+            if robot_state is None:
+                robot_state = {"joints": getattr(self.now(), arm + "_joints"), "joint_source": "commanded"}
+            self._dry_runs += 1
+            if self._dry_runs > self._max_steps:
+                raise MotionError("Action-tool dry_run limit exceeded")
+            from cam.runtime.rmbench import dry_run
+
+            try:
+                return dry_run(robot_state, pose, arm=arm)
+            except ValueError as exc:
+                raise MotionError(str(exc)) from None
+        if arm is not None or robot_state is not None:
+            raise MotionError("arm and robot_state dry_run arguments are only available for RMBench")
         if mode is not None and mode not in ("absolute", "delta"):
             raise MotionError("mode must be 'absolute' or 'delta'")
         if mode is not None and not self._motion_preview:
@@ -128,13 +197,18 @@ class Robot:
         return result["dry_run"]
 
     def safety_check(self, robot_state, action=None, **options):
-        """MIKASA-only offline check on caller-supplied state; no RPC or step.
+        """Offline robot check on caller-supplied state; no RPC or step.
 
         See api_reference/runtime/mikasa_robo/safety_check.md. During offline
         development import safety_check from cam.runtime.mikasa_robo instead.
+        RMBench uses cam.runtime.rmbench and requires arm='left' or 'right'.
         """
+        if self._offline_robot.get("schema") == "cam-rmbench-offline-robot/1":
+            from cam.runtime.rmbench import safety_check
+
+            return safety_check(robot_state, action, **options)
         if not self._motion_preview:
-            raise MotionError("Offline safety_check is only available for MIKASA")
+            raise MotionError("Offline safety_check is only available for MIKASA and RMBench")
         from cam.runtime.mikasa_robo import safety_check
 
         return safety_check(robot_state, action, **options)
@@ -146,9 +220,16 @@ class Robot:
             raise MotionError("Action-tool step limit exceeded")
         send(self._writer, {"kind": "step", "action": action})
         result = receive(self._reader)
-        self._produced.extend(Frame(f) for f in result.get("frames", []))
+        frames = [Frame(f) for f in result.get("frames", [])]
+        self._produced.extend(frames)
         if result["status"] in ("success", "fail", "timeout", "error"):
             raise EpisodeEnd(result["status"])
         if result.get("motion_error"):
             raise MotionError(result["motion_error"])
+        if self._motion_feedback.get("schema") == "cam-rmbench-observed-motion/1":
+            error = _rmbench_observed_motion_error(
+                frames[-1] if frames else None, action, self._motion_feedback
+            )
+            if error:
+                raise MotionError(error)
         return self.now()

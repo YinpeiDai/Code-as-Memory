@@ -12,11 +12,11 @@ import traceback
 
 import numpy as np
 
-from cam.benchmarks.base import check_frames, normalize_action
-from cam.benchmarks.registry import get_adapter
+from cam.interface.base import check_frames, normalize_action
+from cam.interface.registry import get_adapter
 from cam.core.budget import Ledger, program_hash
 from cam.core.history import select_checkpoint
-from cam.harness.capture import Capture
+from cam.harness.capture import Capture, ResultsCapture
 from cam.harness.isolation import command, limits, terminate
 from cam.harness.preflight import stream_initial
 from cam.io import read, write
@@ -60,11 +60,12 @@ def execute(
     metrics = None
     goal = error = None
     stage = "environment_creation"
+    record_media = config.get("recording", "full") == "full"
     try:
         environment_options = {}
         if config.get("physics_backend") is not None:
-            if adapter.name != "mikasa_robo_v2":
-                raise ValueError("A physics backend override requires MIKASA-Robo v2")
+            if adapter.name not in ("mikasa_robo", "mikasa_robo_v2"):
+                raise ValueError("A physics backend override requires MIKASA-Robo")
             environment_options["physics_backend"] = config["physics_backend"]
         env = adapter.make_environment(metadata, task, episode, split, config["depth"], **environment_options)
         stage = "environment_reset"
@@ -75,12 +76,11 @@ def execute(
         check_frames(frames, sensors)
         if not frames:
             raise ValueError("The benchmark returned no initial observation")
-        capture = Capture(folder, sensors, interface["video"])
+        capture = Capture(folder, sensors, interface["video"]) if record_media else ResultsCapture()
         capture.append(frames)
         stage = "worker_initialization"
         stderr = (folder / "policy_stderr.txt").open("wb")
-        worker = subprocess.Popen(
-            [
+        audit_command = [
                 "/usr/bin/strace",
                 "-f",
                 "-qq",
@@ -88,7 +88,9 @@ def execute(
                 "trace=%file,%network,%process",
                 "-o",
                 str(folder / "private_policy_access.strace"),
-                *command(
+            ] if record_media else []
+        worker = subprocess.Popen(
+            [*audit_command, *command(
                     program,
                     runtime,
                     ["python3.11", "-m", "cam.runtime.policy_worker"],
@@ -320,7 +322,9 @@ def execute(
             "api_calls": 0,
             "api_cost_usd": 0,
             "observation_fields": list(sensors),
-            "video_frames": capture.n if capture else 0,
+            "video_frames": capture.n if capture and record_media else 0,
+            "observation_frames": capture.n if capture else 0,
+            "recording": config.get("recording", "full"),
             "program_hash": program_hash(program),
         }
         if metrics is not None:
@@ -328,12 +332,13 @@ def execute(
                 result["native_metrics"] = metrics
             else:
                 write(folder / "private_native_metrics.json", metrics)
-        if adapter.name == "mikasa_robo_v2":
+        if adapter.name in ("mikasa_robo", "mikasa_robo_v2"):
             result["physics_backend"] = getattr(env, "physics_backend", None)
-        np.save(
-            folder / "actions.npy",
-            np.asarray(actions, dtype=float).reshape(-1, len(spec["names"])),
-        )
+        if record_media:
+            np.save(
+                folder / "actions.npy",
+                np.asarray(actions, dtype=float).reshape(-1, len(spec["names"])),
+            )
         write(folder / "result.json", result)
     return result
 
