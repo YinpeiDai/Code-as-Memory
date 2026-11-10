@@ -32,7 +32,7 @@ action-tool execution and simulation. [Measurement details and figure sources](d
 
 ## Successful held-out episodes
 
-Click a preview to open the MP4. Each video shows the recorded task goal, phase,
+Click a preview to open the MP4. Each video shows the phase,
 end-effector trail, and relevant memory and perceived positions.
 [Video sources and presentation details](docs/media/README.md).
 

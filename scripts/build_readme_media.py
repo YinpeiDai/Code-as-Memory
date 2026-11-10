@@ -27,7 +27,7 @@ ROOT = Path(__file__).resolve().parents[1]
 ARCHIVE = ROOT / "public_runs"
 OUTPUT = ROOT / "docs/media"
 CACHE = ARCHIVE / "website/cache/readme_memory"
-WIDTH, HEIGHT, VIEW, HEADER, BODY_BOTTOM, FPS = 1080, 650, 480, 48, 554, 10
+WIDTH, HEIGHT, VIEW, HEADER, BODY_BOTTOM, FPS = 1080, 554, 480, 48, 554, 10
 INK, MUTED, TEAL, GOLD = "#E5EDF6", "#91A3B8", "#55DDC1", "#F2C879"
 BG, PANEL, HIGHLIGHT = "#101B2B", "#142235", "#21473F"
 FONT_ROOT = Path("/usr/share/fonts/truetype/dejavu")
@@ -35,7 +35,6 @@ CODE = ImageFont.truetype(str(FONT_ROOT / "DejaVuSansMono.ttf"), 32)
 LABEL = ImageFont.truetype(str(FONT_ROOT / "DejaVuSans.ttf"), 22)
 SMALL = ImageFont.truetype(str(FONT_ROOT / "DejaVuSans.ttf"), 18)
 BOLD = ImageFont.truetype(str(FONT_ROOT / "DejaVuSans-Bold.ttf"), 23)
-GOAL_FONT = ImageFont.truetype(str(FONT_ROOT / "DejaVuSans.ttf"), 20)
 TRAIL_COLORS = {"tcp": (96, 178, 255), "left_ee_pose": (255, 190, 93), "right_ee_pose": (96, 178, 255)}
 
 # Benchmark, setting, task, output slug, nominal playback multiplier.
@@ -247,17 +246,6 @@ def syntax(draw, position, text):
         pass  # Individual lines of a multiline list still get their token colors.
 
 
-def wrap_text(text, font, width):
-    lines = [""]
-    for word in text.split():
-        candidate = (lines[-1] + " " + word).strip()
-        if font.getlength(candidate) > width and lines[-1]:
-            lines.append(word)
-        else:
-            lines[-1] = candidate
-    return lines
-
-
 def draw_trails(canvas, poses, phase, index, K, E, scale, offset, size):
     """Only recorded history, restarting at phase boundaries; no future trajectory."""
     start = index
@@ -285,7 +273,7 @@ def draw_trails(canvas, poses, phase, index, K, E, scale, offset, size):
     canvas.paste(Image.alpha_composite(canvas.convert("RGBA"), overlay).convert("RGB"))
 
 
-def render(rgb, task, row, fields, position, changed, camera, h5, frame_index, success, poses, phases, goal):
+def render(rgb, task, row, fields, position, changed, camera, h5, frame_index, success, poses, phases):
     canvas = Image.new("RGB", (WIDTH, HEIGHT), BG)
     draw = ImageDraw.Draw(canvas)
     draw.rectangle((VIEW, 0, WIDTH, HEIGHT), fill=PANEL)
@@ -347,11 +335,6 @@ def render(rgb, task, row, fields, position, changed, camera, h5, frame_index, s
         draw.text((VIEW + 24, 414), "PERCEIVED POSITION · METERS", font=SMALL, fill=MUTED)
         draw.text((VIEW + 24, 440), name, font=LABEL, fill=INK)
         syntax(draw, (VIEW + 24, 472), literal(value))
-    draw.line((0, BODY_BOTTOM + 1, WIDTH, BODY_BOTTOM + 1), fill="#34465B", width=1)
-    goal_lines = wrap_text("Goal: " + goal, GOAL_FONT, WIDTH - 32)
-    assert len(goal_lines) <= 3, goal_lines
-    for j, text in enumerate(goal_lines):
-        draw.text((16, BODY_BOTTOM + 12 + j * 24), text, font=GOAL_FONT, fill=INK)
     return canvas
 
 
@@ -425,7 +408,7 @@ def build(example, episodes):
                     rgb = cv2.cvtColor(bgr[:, :raw_width], cv2.COLOR_BGR2RGB)
                     row = rows[row_index] if row_index >= 0 else None
                     frame = render(rgb, task, row, fields, position, changed, camera, h5, index,
-                                   index == frame_count - 1, poses, phases, outcome["goal"])
+                                   index == frame_count - 1, poses, phases)
                     process.stdin.write(frame.tobytes())
                     if output_index in snapshots:
                         frame.save(work / f"state_{output_index:04d}.png")
@@ -503,7 +486,7 @@ if __name__ == "__main__":
                     "selection": "Lowest numbered successful held-out episode for each selected task.",
                     "presentation": "H.264 MP4, front/overview video with recorded memory excerpts and perceived positions. Changed fields highlight for one second; changed states last at least 1.4 seconds. Final observation holds for 1.4 seconds. Timing is illustrative, not real-time robot latency.",
                     "memory_format": "Original selected values; positions rounded to two decimals in world-frame meters. Position panels select retained estimates from logged memory, not hidden object state or newly executed perception. VideoUnmaskSwap colors are parsed from memory.note; T04 colored maps drawer names to the first component of memory.scores (colored-pixel counts). No memory is inferred between decisions or after episode termination.",
-                    "annotations": "Demo/execution labels follow recorded observation phase, with a gold border and Watch the video caption for demo frames. EEF trails project at most 160 past recorded poses and reset at phase boundaries; two-arm poses use separate colors. Point markers project remembered locations or action targets. Display surface heights: PatternLock 0.0m, VideoUnmaskSwap 0.04m, swap_blocks 0.778m, T07 bottle 0.48m and pan 0.43m. Official goal text comes verbatim from the selected result.json.",
+                    "annotations": "Demo/execution labels follow recorded observation phase, with a gold border and Watch the video caption for demo frames. EEF trails project at most 160 past recorded poses and reset at phase boundaries; two-arm poses use separate colors. Point markers project remembered locations or action targets. Display surface heights: PatternLock 0.0m, VideoUnmaskSwap 0.04m, swap_blocks 0.778m, T07 bottle 0.48m and pan 0.43m. Goal text comes verbatim from the selected result.json and appears only in the surrounding README/gallery text, not in video frames.",
                     "builder_sha256": digest(Path(__file__)), "clips": clips}
         (OUTPUT / "manifest.json").write_text(json.dumps(manifest, indent=2) + "\n")
         write_gallery(clips, OUTPUT / "index.html")

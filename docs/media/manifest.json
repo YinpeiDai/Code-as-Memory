@@ -4,8 +4,8 @@
   "selection": "Lowest numbered successful held-out episode for each selected task.",
   "presentation": "H.264 MP4, front/overview video with recorded memory excerpts and perceived positions. Changed fields highlight for one second; changed states last at least 1.4 seconds. Final observation holds for 1.4 seconds. Timing is illustrative, not real-time robot latency.",
   "memory_format": "Original selected values; positions rounded to two decimals in world-frame meters. Position panels select retained estimates from logged memory, not hidden object state or newly executed perception. VideoUnmaskSwap colors are parsed from memory.note; T04 colored maps drawer names to the first component of memory.scores (colored-pixel counts). No memory is inferred between decisions or after episode termination.",
-  "annotations": "Demo/execution labels follow recorded observation phase, with a gold border and Watch the video caption for demo frames. EEF trails project at most 160 past recorded poses and reset at phase boundaries; two-arm poses use separate colors. Point markers project remembered locations or action targets. Display surface heights: PatternLock 0.0m, VideoUnmaskSwap 0.04m, swap_blocks 0.778m, T07 bottle 0.48m and pan 0.43m. Official goal text comes verbatim from the selected result.json.",
-  "builder_sha256": "83d8534c4756032535a697f12628d8cf2a629e5328d472488e083ac596a7d1c5",
+  "annotations": "Demo/execution labels follow recorded observation phase, with a gold border and Watch the video caption for demo frames. EEF trails project at most 160 past recorded poses and reset at phase boundaries; two-arm poses use separate colors. Point markers project remembered locations or action targets. Display surface heights: PatternLock 0.0m, VideoUnmaskSwap 0.04m, swap_blocks 0.778m, T07 bottle 0.48m and pan 0.43m. Goal text comes verbatim from the selected result.json and appears only in the surrounding README/gallery text, not in video frames.",
+  "builder_sha256": "9fb4507dc965120e7cafcec8342de095cddd065be420811993b078b144e9dc17",
   "clips": [
     {
       "benchmark": "robomme",
@@ -38,14 +38,14 @@
       ],
       "trail_history_frames": 160,
       "preview": "robomme-pattern-lock.mp4",
-      "preview_sha256": "5fd2941d655480d78607aac45f00005cb0dafa937a81eaa3d52d28b59b68f912",
+      "preview_sha256": "eb50416a47cd48bcef8120877edd550533082ba1e03018506e43dae62b5b246b",
       "preview_dimensions": [
         1080,
-        650
+        554
       ],
       "preview_format": "video/mp4",
       "poster": "robomme-pattern-lock.jpg",
-      "poster_sha256": "a558a326c4a08f2f949b770e40001caa2922f2104a6dbb57813621073062c181",
+      "poster_sha256": "340751abf61b6f76907e0589d638dab25e220fafde0093751b63a29d1b824165",
       "poster_output_frame": 49,
       "preview_fps": 10,
       "nominal_playback_multiplier": 1,
@@ -237,14 +237,14 @@
       ],
       "trail_history_frames": 160,
       "preview": "robomme-hidden-objects.mp4",
-      "preview_sha256": "0b8a7162959e487ddbe1a31cdea765f277c92b5f6af4b6b933448c3499d26c25",
+      "preview_sha256": "60417072082b9d49de21189fe121b5e25c8d50d9c2cd5b2a48029a7d908ad9fb",
       "preview_dimensions": [
         1080,
-        650
+        554
       ],
       "preview_format": "video/mp4",
       "poster": "robomme-hidden-objects.jpg",
-      "poster_sha256": "2552707c3b85b0ab912571a9fa106cbae1c2e0f5ba046e7c7fbd8372ea169589",
+      "poster_sha256": "c7314d9371dd36a538d552c072d5a0f909f385f8c4959756871de021389862d3",
       "poster_output_frame": 89,
       "preview_fps": 10,
       "nominal_playback_multiplier": 1.5,
@@ -474,14 +474,14 @@
       ],
       "trail_history_frames": 160,
       "preview": "rmbench-swap-blocks.mp4",
-      "preview_sha256": "9218f03364bbda65752e19bbab784f374b1788ba65552219949ff886bd06c927",
+      "preview_sha256": "5407ee6c9d94940e426143c7332a314f2151b8bdd8ae3a0a7eb3ec70b5366f2d",
       "preview_dimensions": [
         1080,
-        650
+        554
       ],
       "preview_format": "video/mp4",
       "poster": "rmbench-swap-blocks.jpg",
-      "poster_sha256": "e88bc2721e175f4b12ffceb85956d357a928ffb7d7b71196afc977bf5606ac30",
+      "poster_sha256": "7ed0ed00333f13dbf68b01cc245d9993124ca4c7e838876a31c820f18512f698",
       "poster_output_frame": 62,
       "preview_fps": 10,
       "nominal_playback_multiplier": 0.25,
@@ -816,14 +816,14 @@
       ],
       "trail_history_frames": 160,
       "preview": "rmbench-cover-blocks.mp4",
-      "preview_sha256": "4dcc8a4454fc89318620ebb31a6c89eabfd7f17a2e6d07ebca2e2fb2fb9ddf6b",
+      "preview_sha256": "3a7000e43e94aa5f4fb6fafc9aff6f92257427176f045aedf03d7accf8fe02ad",
       "preview_dimensions": [
         1080,
-        650
+        554
       ],
       "preview_format": "video/mp4",
       "poster": "rmbench-cover-blocks.jpg",
-      "poster_sha256": "c1dec8d06d4873120970222d6abb0a3b3a876663b997ca5ae301c5ccaac826a9",
+      "poster_sha256": "9b6aae739066e86dcba215f405dce875b54a94634b56fb887c9b7ade6b883503",
       "poster_output_frame": 62,
       "preview_fps": 10,
       "nominal_playback_multiplier": 0.5,
@@ -1135,14 +1135,14 @@
       ],
       "trail_history_frames": 160,
       "preview": "mikasa-batteries.mp4",
-      "preview_sha256": "b4d191c41524151c15285e1d9fab7819217ca206045cccdafec592980bc0ee5b",
+      "preview_sha256": "67ca73debc5b08f0c3692e96145cb7d9b804f2bd0f96ce30bd6a00022e6edf05",
       "preview_dimensions": [
         1080,
-        650
+        554
       ],
       "preview_format": "video/mp4",
       "poster": "mikasa-batteries.jpg",
-      "poster_sha256": "77a6fef40e897a8febccbe2ab97393c036d3503e5b17191f16448ff7355ca5c7",
+      "poster_sha256": "2931739eb1b8c16084d930e1b3e9d52f41722919f314b3f16dc031b8d50d4781",
       "poster_output_frame": 90,
       "preview_fps": 10,
       "nominal_playback_multiplier": 1.25,
@@ -1575,14 +1575,14 @@
       ],
       "trail_history_frames": 160,
       "preview": "mikasa-color-sequence.mp4",
-      "preview_sha256": "5d8273b327428d41e53ba466f473c8d8ff19d7020541dd16468664eebfe6e665",
+      "preview_sha256": "0938bc47113824ba88ed8692b0cdd32ee3965a3ebdfa94d3222730b9f904d262",
       "preview_dimensions": [
         1080,
-        650
+        554
       ],
       "preview_format": "video/mp4",
       "poster": "mikasa-color-sequence.jpg",
-      "poster_sha256": "c452e052896e084233986a60a5c551900c5872054f30242da85363bcd38e0514",
+      "poster_sha256": "484b82b4c030c8c528120e3fa711579e1406972d6b7d65aba0bc533c4480a18d",
       "poster_output_frame": 54,
       "preview_fps": 10,
       "nominal_playback_multiplier": 1,
@@ -1847,14 +1847,14 @@
       ],
       "trail_history_frames": 160,
       "preview": "robomemarena-drawers.mp4",
-      "preview_sha256": "11aceb6c28ec48058651535809798f93a01b1e6ed62368e466945f3fee5c87ec",
+      "preview_sha256": "768562322e3101f3b410a02b6c781d024d03d7a1a9fc50a551bc064dba0490b2",
       "preview_dimensions": [
         1080,
-        650
+        554
       ],
       "preview_format": "video/mp4",
       "poster": "robomemarena-drawers.jpg",
-      "poster_sha256": "f38e3866313b10bb1ae3e122ab2cf00e54b0cd1b418d0df3f38a86b734285229",
+      "poster_sha256": "ceb1961fc36eb905e01f66128770c8bdde91e18ecae5a75f4516f928cfe43a5e",
       "poster_output_frame": 100,
       "preview_fps": 10,
       "nominal_playback_multiplier": 3,
@@ -2330,14 +2330,14 @@
       ],
       "trail_history_frames": 160,
       "preview": "robomemarena-pour-twice.mp4",
-      "preview_sha256": "70146465f201316ad0acf1b7ab18cfd628fef505c5da3751df0ce7ba53de0cd4",
+      "preview_sha256": "6816858a3af1bc5c50ba2c0db914e501f7e4537832475f4303496605e12fce92",
       "preview_dimensions": [
         1080,
-        650
+        554
       ],
       "preview_format": "video/mp4",
       "poster": "robomemarena-pour-twice.jpg",
-      "poster_sha256": "a74de77ad85b4f9634d6560a33c33193dc3c9370c7d567fa127cf1d723de1caa",
+      "poster_sha256": "dee7b8448c89a7c7ae2b6461a1345480ade5c5f4db1dadbff96e1f373f75035e",
       "poster_output_frame": 75,
       "preview_fps": 10,
       "nominal_playback_multiplier": 2,

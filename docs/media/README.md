@@ -20,8 +20,16 @@ with playback controls, open [index.html](index.html) in a browser after cloning
 
 Recorded demo frames have a gold border, **Demo phase**, and **Watch the video**;
 other frames show **Execution phase**. Only the two RoboMME examples contain a
-separate video-demo phase. Each official task goal is copied verbatim from the
-episode result, including native wording. SeqOfColors3 also has the documented
+separate video-demo phase. Task goals appear only in the surrounding README/gallery
+text, not inside videos. They match the recorded episode goals verbatim.
+The six RMBench, MIKASA-Robo and RoboMemArena goals were also checked against
+their official repositories at the pinned revisions:
+
+- RMBench: the `seen` instructions for [swap_blocks](https://github.com/RoboTwin-Platform/RMBench/blob/7d1cdfc7661c273a7a5c5f6126e2d1a7f0a3f4b7/description/task_instruction/swap_blocks.json) and [cover_blocks](https://github.com/RoboTwin-Platform/RMBench/blob/7d1cdfc7661c273a7a5c5f6126e2d1a7f0a3f4b7/description/task_instruction/cover_blocks.json), including the original spelling.
+- MIKASA-Robo: `LANGUAGE_INSTRUCTION` in [BatteriesCheckerEasy](https://github.com/CognitiveAISystems/MIKASA-Robo/blob/509b875f3d207c287497c0a897661062de928bb0/mikasa_robo_suite/vla/memory_envs/batteries_checker_easy_vla.py) and [SeqOfColors](https://github.com/CognitiveAISystems/MIKASA-Robo/blob/509b875f3d207c287497c0a897661062de928bb0/mikasa_robo_suite/vla/memory_envs/seq_of_colors_vla.py).
+- RoboMemArena: `TASK_PROMPTS["task4"]` and `TASK_PROMPTS["task7"]` in [eval_common.py](https://github.com/OpenHelix-Team/RoboMemArena/blob/830a31ae7c08fb99f514843275cd264a2bf36f16/evaluation_benchmark/scripts/eval_common.py).
+
+SeqOfColors3 also has the separately documented
 [cue-order clarification](../../src/cam/prompts/mikasa_robo/seq_of_colors3.md).
 
 Memory changes only at recorded decision boundaries, synchronized through the
@@ -42,7 +50,7 @@ action-boundary recordings yield connecting segments. Teal markers show remember
 positions or action targets. RMBench uses its wide head camera; RoboMME and MIKASA
 use `front`, and RoboMemArena uses `agentview`. The wrist view is replaced by memory.
 
-Videos are 1080×650 at 10 fps with 32-pixel code text. Changed fields highlight for
+Videos are 1080×554 at 10 fps with 32-pixel code text. Changed fields highlight for
 one second, each changed state stays visible for at least 1.4 seconds, and the
 terminal frame holds for 1.4 seconds. Playback speed varies for readability;
 RMBench's source records action boundaries. These are illustrations, not timing
