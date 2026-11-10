@@ -5,9 +5,9 @@ Interaction uses each assigned demonstration identity once (50/32 attempts).
 The 25-demo setting uses 25 per task and no interaction. All 50 expected held-out
 episodes per policy are scored; the metric is whole-task success (TSR), not PSR.
 
-[25-demo code](../../../solutions/robomemarena/demo_only_25/README.md) ·
-[50-demo code](../../../solutions/robomemarena/demo_only_50/README.md) ·
-[Interaction code](../../../solutions/robomemarena/demo_interaction_50/README.md)
+[25-demo code](../../solutions/robomemarena/demo_only_25/README.md) ·
+[50-demo code](../../solutions/robomemarena/demo_only_50/README.md) ·
+[Interaction code](../../solutions/robomemarena/demo_interaction_50/README.md)
 
 The 25-demo arm uses revised offline-review instructions, and interaction adds
 manipulation/recovery guidance. These comparisons change prompts as well as data
@@ -54,4 +54,4 @@ Counts were checked against the original `result.json` records under
 Catalogs under `configs/solutions/robomemarena/` retain code hashes and source provenance.
 New sanity checks and current-interface reruns do not replace these outcomes.
 
-[Run or develop this benchmark](README.md) · [All benchmark results](../../results.md)
+[Run or develop this benchmark](../benchmarks/robomemarena.md) · [All benchmark results](../results.md)

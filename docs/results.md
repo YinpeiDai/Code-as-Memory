@@ -11,7 +11,7 @@ New sanity checks and current-interface reruns never replace original scores.
 |---|---:|---:|
 | 25 demos only | 795 / 800 / 800 | 99.38% |
 
-[All 16 tasks and provenance](benchmarks/robomme/results.md).
+[All 16 tasks and provenance](results/robomme.md).
 
 ## MIKASA-Robo
 
@@ -36,7 +36,7 @@ evaluation; it is not a fresh 90-task rerun. Its 80 imported tasks still lack fu
 historical development/video evidence. Neither full-90 aggregate includes the
 fresh five-task campaign's results.
 
-[Both scopes, per-task results, code and provenance](benchmarks/mikasa_robo/results.md).
+[Both scopes, per-task results, code and provenance](results/mikasa_robo.md).
 
 ## RMBench
 
@@ -45,7 +45,7 @@ fresh five-task campaign's results.
 | 25 demos only | 927 / 1,000 / 1,000 | 92.70% |
 | Up to 50 demos only | 1,000 / 1,000 / 1,000 | 100.00% |
 
-[All ten tasks, exact demo counts and interface provenance](benchmarks/rmbench/results.md).
+[All ten tasks, exact demo counts and interface provenance](results/rmbench.md).
 
 ## RoboMemArena
 
@@ -55,7 +55,7 @@ fresh five-task campaign's results.
 | Up to 50 demos only | 1,179 / 1,300 / 1,300 | 90.69% |
 | Up to 50 demos + matching interactions | 1,271 / 1,300 / 1,300 | 97.77% |
 
-[All 26 tasks, budgets and prompt differences](benchmarks/robomemarena/results.md).
+[All 26 tasks, budgets and prompt differences](results/robomemarena.md).
 
 ## Figures and comparison scope
 

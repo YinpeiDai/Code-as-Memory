@@ -47,7 +47,7 @@ The paper quotes VLA baselines from MemoryVLA++ and GMP from its per-task traini
 with tuned horizons. Task identities match across legacy and current releases,
 but simulator versions, sensing and training budgets differ.
 The full 90-task historical and GPU-updated aggregates remain separate from this
-fresh five-task comparison. [Both MIKASA scopes and per-task results](../benchmarks/mikasa_robo/results.md).
+fresh five-task comparison. [Both MIKASA scopes and per-task results](../results/mikasa_robo.md).
 
 **RoboMemArena:** The plotted baselines come from the leaderboard's
 literature-reported/unverified section, not independently verified submissions.

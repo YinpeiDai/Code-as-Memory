@@ -19,5 +19,5 @@ GPU physics. All tasks use GPU rendering.
 `CAM_MIKASA_ROBO_ASSETS` overrides `envs/mikasa_robo/assets`. Preparation preserves
 the upstream build files, package versions, and asset hashes.
 
-[Run MIKASA-Robo](../../docs/benchmarks/mikasa_robo/README.md) ·
+[Run MIKASA-Robo](../../docs/benchmarks/mikasa_robo.md) ·
 [Simulator interface](../../src/cam/interface/mikasa_robo/README.md)

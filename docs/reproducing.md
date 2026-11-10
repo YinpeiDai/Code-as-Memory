@@ -5,6 +5,17 @@ Use [installation and data](getting_started.md) to set up the repository and the
 current prompt and interface. Published scores refer to their original frozen
 runs; rerunning a policy creates separate evidence.
 
+## Demonstration and interaction budgets
+
+In the **50-demo + interaction** setting, each task receives 50 training
+demonstrations and **at most 50 simulator training attempts in total**, shared
+across all code revisions during development. Attempt starts use the reset seeds
+of those same 50 demonstrations, once per seed. Starting an attempt consumes its
+budget even if it fails; a code revision does not reset the budget. RoboMemArena's
+T04 uses 32 demonstrations and 32 attempts. Demo-only settings permit zero
+simulator training attempts. Held-out evaluation uses separate seeds only after
+the policy freezes and makes no model calls.
+
 ## Prepare, develop, freeze, evaluate
 
 1. Install the common harness and the benchmark’s environment under `envs/`.
@@ -38,7 +49,7 @@ starting paid development sessions.
 The MIKASA row covers all 90 tasks. We also run the five task identities used
 in prior VLA publications, under the `mikasa_robo_vla_suite` configuration and
 solution namespace. Both scopes use the same MIKASA environment, public interface
-and demonstration package. See [their purpose and results](benchmarks/mikasa_robo/results.md).
+and demonstration package. See [their purpose and results](results/mikasa_robo.md).
 
 ```bash
 DATA="$PWD/public_runs/demos/mikasa_robo"
@@ -76,7 +87,7 @@ settings develop fresh policies independently; they are not imports from the
 |---|---|---:|---:|
 | 25 demos only | `experiments/demo_only_25.json` | 25 | 0 |
 | 50 demos only | `experiments/demo_only_50.json` | 50 | 0 |
-| 50 demos + interaction | `experiments/demo_interaction_50.json` | 50 | 50 |
+| 50 demos + interaction | `experiments/demo_interaction_50.json` | 50 | 50 total, one per demo seed |
 
 Use the existing MIKASA demo package (`DATA` above). Start all three settings
 with shared GPU admission and eight total coding workers:

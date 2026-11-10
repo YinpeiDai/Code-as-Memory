@@ -61,7 +61,14 @@ DATA/
 MIKASA's full 90-task experiment and its five-task publication comparison
 (`mikasa_robo_vla_suite`) share the MIKASA environment and demonstration package.
 The comparison plans select only ShellGameTouch, InterceptMedium and
-RememberColor3/5/9. See [both MIKASA scopes](benchmarks/mikasa_robo/README.md).
+RememberColor3/5/9. See [both MIKASA scopes](benchmarks/mikasa_robo.md).
+
+For **demo + interaction**, each task gets 50 demonstrations and a total budget
+of **50 simulator training attempts** for the entire development process: one
+attempt using the reset seed of each assigned training demonstration. Failed
+attempts count toward the same budget; seeds are not reused. RoboMemArena's T04
+uses its actual 32 demos and 32 attempts. Demo-only settings allow zero simulator
+training attempts. Held-out evaluation uses separate seeds after freezing.
 
 ```bash
 uv sync --locked --inexact --extra data

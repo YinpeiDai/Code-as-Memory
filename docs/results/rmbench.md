@@ -5,8 +5,8 @@ for `battery_try`, 49 for `blocks_ranking_try`, 48 for `observe_and_pickup`, and
 50 for each remaining task. Each policy has 100 scored/expected held-out episodes.
 The selected 50-demo `swap_blocks` policy is the fresh rerun; earlier results remain archived.
 
-[25-demo code](../../../solutions/rmbench/demo_only_25/README.md) ·
-[50-demo code](../../../solutions/rmbench/demo_only_50/README.md)
+[25-demo code](../../solutions/rmbench/demo_only_25/README.md) ·
+[50-demo code](../../solutions/rmbench/demo_only_50/README.md)
 
 These are historical results under their pinned interfaces. Current evaluation
 uses public post-action poses for `MotionError`; the compatibility catalogs preserve
@@ -38,4 +38,4 @@ Counts were checked against the original `result.json` records under
 Catalogs under `configs/solutions/rmbench/` retain code hashes and source provenance.
 New sanity checks and current-interface reruns do not replace these outcomes.
 
-[Run or develop this benchmark](README.md) · [All benchmark results](../../results.md)
+[Run or develop this benchmark](../benchmarks/rmbench.md) · [All benchmark results](../results.md)

@@ -41,5 +41,5 @@ are copied unchanged from campaign `20261110T190922_491466Z`. The catalog pins
 memory schemas, code checksums, source runs/checkpoints, prompt/harness hashes,
 physics backends, assigned budgets and original results.
 
-[MIKASA results and comparison scope](../../../docs/benchmarks/mikasa_robo/results.md) ·
-[Develop both MIKASA scopes](../../../docs/benchmarks/mikasa_robo/README.md)
+[MIKASA results and comparison scope](../../../docs/results/mikasa_robo.md) ·
+[Develop both MIKASA scopes](../../../docs/benchmarks/mikasa_robo.md)

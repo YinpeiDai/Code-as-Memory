@@ -23,7 +23,7 @@ and the prior-publication five-task subset under
 `solutions/mikasa_robo_vla_suite/{demo_only_25,demo_only_50,demo_interaction_50}/`.
 Both use the MIKASA environment and the same commands. The subset's catalogs pin
 `suite: "mikasa_robo_vla_suite"`, keeping its evaluations distinct from full-90
-results while selecting the `mikasa_robo` simulator. See [scope and scores](benchmarks/mikasa_robo/results.md).
+results while selecting the `mikasa_robo` simulator. See [scope and scores](results/mikasa_robo.md).
 
 RMBench automatically selects the `*_observed_motion.json` compatibility catalog
 for the current interface. Historical catalogs remain intact. The current

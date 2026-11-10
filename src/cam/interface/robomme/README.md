@@ -9,7 +9,7 @@ steps into policy observations. Native scoring remains in the official simulator
 - `guide.md`: public task-independent guidance composed into learner prompts.
 
 Install [envs/robomme](../../../../envs/robomme/README.md), then follow the
-[RoboMME commands](../../../../docs/benchmarks/robomme/README.md).
+[RoboMME commands](../../../../docs/benchmarks/robomme.md).
 The [shared boundary](../base.py) validates every public frame and action.
 Simulator imports must stay inside native environment methods. Only explicitly
 published helpers may be copied into the isolated policy runtime.

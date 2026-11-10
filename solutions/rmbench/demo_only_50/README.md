@@ -23,7 +23,7 @@ is needed to evaluate frozen code. A new run never replaces the published score.
 Shared core + shared demo-only instructions + the RMBench public interface. No RMBench-specific motion supplement is selected. Offline robot helpers are available in the interface. Historical prompts and the retired supplement remain archived.
 
 Use `configs/rmbench/experiments/demo_only_50.json`, a downloaded demonstration package,
-and the [development commands](../../../docs/benchmarks/rmbench/README.md).
+and the [development commands](../../../docs/benchmarks/rmbench.md).
 Each new preparation saves its exact prompt. Historical prompt/configuration
 provenance remains attached to the source run; current wording is not a claim
 of exact historical reproduction.

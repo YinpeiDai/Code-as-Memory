@@ -23,7 +23,7 @@ is needed to evaluate frozen code. A new run never replaces the published score.
 Shared core + shared demo-only instructions + the RoboMME public interface. Historical prompt bytes remain with the source development logs.
 
 Use `configs/robomme/experiments/demo_only_25.json`, a downloaded demonstration package,
-and the [development commands](../../../docs/benchmarks/robomme/README.md).
+and the [development commands](../../../docs/benchmarks/robomme.md).
 Each new preparation saves its exact prompt. Historical prompt/configuration
 provenance remains attached to the source run; current wording is not a claim
 of exact historical reproduction.

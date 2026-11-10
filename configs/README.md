@@ -18,7 +18,7 @@ These are two scopes of one benchmark, sharing its environment and demo package.
 
 [Five-task plans, exact budgets and commands](mikasa_robo_vla_suite/README.md) ·
 [Reproducing both scopes](../docs/reproducing.md) ·
-[MIKASA results](../docs/benchmarks/mikasa_robo/results.md)
+[MIKASA results](../docs/results/mikasa_robo.md)
 
 Only final Python programs and setting READMEs belong in `solutions/`.
 Historical imports and catalog hashes remain unchanged. RMBench's

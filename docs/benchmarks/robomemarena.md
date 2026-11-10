@@ -1,10 +1,19 @@
 # RoboMemArena
 
-The larger assignment has 50 demos per task except T04, which has 32. Interaction uses those same identities exactly once (50/32 attempts). The 25-demo arm uses the revised offline-review prompt; the interaction arm adds manipulation/recovery guidance. These comparisons change prompts as well as data or interaction.
+The larger assignment has 50 demos per task except T04, which has 32.
+Demo + interaction permits **50 simulator training attempts total per task**,
+one reset using each of the 50 training-demo seeds. T04 instead gets 32 attempts,
+one per assigned demo seed. The budget spans all code revisions; failed attempts
+count and consumed seeds are not reused. Held-out evaluation seeds are separate.
+See the shared [experiment budget protocol](../reproducing.md#demonstration-and-interaction-budgets).
+
+The 25-demo arm uses the revised offline-review prompt; the interaction arm adds
+manipulation/recovery guidance. These comparisons change prompts as well as data
+or interaction.
 
 ## Run a published policy
 
-Install the [dedicated environment](../../../envs/robomemarena/README.md), then:
+Install the [dedicated environment](../../envs/robomemarena/README.md), then:
 
 ```bash
 cam prepare validate_runs --solution solutions/robomemarena/demo_interaction_50 --tasks T01_CookiesTomatoBasket
@@ -36,6 +45,6 @@ same downloaded pool; preparation extracts its exact `selected_25.json` assignme
 
 Shared core + shared learning-mode instructions + the RoboMemArena public interface. Interaction also uses `prompts/robomemarena/both.md`. New demo-only preparations include the final offline review.
 
-[Public interface](../../../src/cam/interface/robomemarena/guide.md) ·
-[Solutions](../../../solutions/robomemarena/) · [Per-task results and provenance](results.md) ·
-[Reproduction rules](../../reproducing.md)
+[Public interface](../../src/cam/interface/robomemarena/guide.md) ·
+[Solutions](../../solutions/robomemarena/) · [Per-task results and provenance](../results/robomemarena.md) ·
+[Reproduction rules](../reproducing.md)

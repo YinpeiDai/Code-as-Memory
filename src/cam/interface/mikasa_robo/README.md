@@ -16,7 +16,7 @@ backend per task in `run.json`, and episode results record the actual backend.
 - `api/`: sanitized offline robot helpers and public API reference.
 
 Install [envs/mikasa_robo](../../../../envs/mikasa_robo/README.md), then follow the
-[MIKASA-Robo commands](../../../../docs/benchmarks/mikasa_robo/README.md).
+[MIKASA-Robo commands](../../../../docs/benchmarks/mikasa_robo.md).
 The [shared boundary](../base.py) validates every public frame and action.
 Simulator imports must stay inside native environment methods. Only explicitly
 published helpers may be copied into the isolated policy runtime.

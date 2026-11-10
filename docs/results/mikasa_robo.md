@@ -11,8 +11,10 @@ report their scores separately.
 ## Five-task publication comparison
 
 All 15 policies were developed fresh with Claude Code / Opus 5.5. Demo-only
-settings use zero simulator training attempts; interaction uses one attempt on
-each of the 50 assigned demo identities. The 25-demo arm receives only its exact
+settings use zero simulator training attempts; interaction has **50 total training
+attempts per task**, one using the reset seed of each of the 50 assigned training
+demos. Failed attempts count; seeds are used once across the entire development
+process. The 25-demo arm receives only its exact
 materialized subset. Every arm evaluates the same 50 held-out identities per task,
 with native scoring and limits, after freezing and without model calls.
 
@@ -36,9 +38,9 @@ The byte-identical frozen solutions and immutable catalogs are published here:
 
 | Setting | Code | Schemas, checksums and provenance |
 |---|---|---|
-| 25 demos only | [Solutions](../../../solutions/mikasa_robo_vla_suite/demo_only_25/README.md) | [Catalog](../../../configs/solutions/mikasa_robo_vla_suite/demo_only_25.json) |
-| 50 demos only | [Solutions](../../../solutions/mikasa_robo_vla_suite/demo_only_50/README.md) | [Catalog](../../../configs/solutions/mikasa_robo_vla_suite/demo_only_50.json) |
-| 50 demos + interaction | [Solutions](../../../solutions/mikasa_robo_vla_suite/demo_interaction_50/README.md) | [Catalog](../../../configs/solutions/mikasa_robo_vla_suite/demo_interaction_50.json) |
+| 25 demos only | [Solutions](../../solutions/mikasa_robo_vla_suite/demo_only_25/README.md) | [Catalog](../../configs/solutions/mikasa_robo_vla_suite/demo_only_25.json) |
+| 50 demos only | [Solutions](../../solutions/mikasa_robo_vla_suite/demo_only_50/README.md) | [Catalog](../../configs/solutions/mikasa_robo_vla_suite/demo_only_50.json) |
+| 50 demos + interaction | [Solutions](../../solutions/mikasa_robo_vla_suite/demo_interaction_50/README.md) | [Catalog](../../configs/solutions/mikasa_robo_vla_suite/demo_interaction_50.json) |
 
 Development logs, immutable checkpoints and all rollouts remain under
 `runs/mikasa_robo_vla_suite/20261110T190922_491466Z/` in this workspace.
@@ -65,8 +67,8 @@ comparison above. This is a mixed-provenance aggregate, not a new 90-task rerun.
 Its catalog, selected result inventory and exact copied policies are retained in
 `runs/mikasa_robo_full90/20261110T191044_604595Z_shellgame_gpu/`.
 
-The [original 90 published policies](../../../solutions/mikasa_robo/demo_interaction_50/README.md)
-and [catalog](../../../configs/solutions/mikasa_robo/demo_interaction_50.json)
+The [original 90 published policies](../../solutions/mikasa_robo/demo_interaction_50/README.md)
+and [catalog](../../configs/solutions/mikasa_robo/demo_interaction_50.json)
 remain unchanged. They used 50 demos and 50 training interactions per task with
 CPU physics. Full development/video evidence covers the initial ten tasks;
 80 imported tasks contribute 3,970/4,000 results without full historical source,
@@ -176,4 +178,4 @@ Original records remain under `public_runs/eval/mikasa_robo/demo_interaction_50/
 (locally `/data/daiyp/CaM_public`). The five-task comparison's 750 results are
 never added to either 4,500-episode full-benchmark total.
 
-[Run or develop MIKASA](README.md) · [All benchmark results](../../results.md)
+[Run or develop MIKASA](../benchmarks/mikasa_robo.md) · [All benchmark results](../results.md)

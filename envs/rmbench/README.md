@@ -26,5 +26,5 @@ GPU memory, and identical rollouts can differ slightly through native numerics.
 Preparation pins simulator sources and links assets. No demo replay or seed search
 is required to run a published solution or develop from downloaded demonstrations.
 
-Continue with the [RMBench guide](../../docs/benchmarks/rmbench/README.md) or
+Continue with the [RMBench guide](../../docs/benchmarks/rmbench.md) or
 [public interface](../../src/cam/interface/rmbench/README.md).

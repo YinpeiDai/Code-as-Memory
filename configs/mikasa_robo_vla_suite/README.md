@@ -17,7 +17,9 @@ Every configuration uses `benchmark: "mikasa_robo"` and
 `suite: "mikasa_robo_vla_suite"`. The demo count belongs to the experiment plan;
 the run configuration defines the learning mode, interaction budget and model.
 The 25-demo plan materializes the exact selected subset before learner admission.
-Interaction uses each assigned demo identity once. Policies start blank with
+Interaction permits 50 training attempts total per task across all code revisions,
+using the reset seed of each of the 50 assigned training demos once. Failed
+attempts count toward that budget. Policies start blank with
 Claude Code / Opus 5.5; held-out evaluation makes no model calls.
 
 Use the MIKASA environment and its existing `mikasa_robo-50-demos` package.
@@ -47,4 +49,4 @@ development budget, source hashes and results. They are evaluation catalogs,
 not fresh-development configurations.
 
 [Reproduction commands](../../docs/reproducing.md#mikasa-five-task-publication-comparison) ·
-[Results for both MIKASA scopes](../../docs/benchmarks/mikasa_robo/results.md)
+[Results for both MIKASA scopes](../../docs/results/mikasa_robo.md)

@@ -4,7 +4,7 @@ The published 25-demo experiment used its original runner and prompt. A current-
 
 ## Run a published policy
 
-Install the [dedicated environment](../../../envs/robomme/README.md), then:
+Install the [dedicated environment](../../envs/robomme/README.md), then:
 
 ```bash
 cam prepare validate_runs --solution solutions/robomme/demo_only_25 --tasks BinFill
@@ -35,6 +35,6 @@ of frozen policies.
 
 Shared core + shared demo-only instructions + the RoboMME public interface. Historical prompt bytes remain with the source development logs.
 
-[Public interface](../../../src/cam/interface/robomme/guide.md) ·
-[Solutions](../../../solutions/robomme/) · [Per-task results and provenance](results.md) ·
-[Reproduction rules](../../reproducing.md)
+[Public interface](../../src/cam/interface/robomme/guide.md) ·
+[Solutions](../../solutions/robomme/) · [Per-task results and provenance](../results/robomme.md) ·
+[Reproduction rules](../reproducing.md)

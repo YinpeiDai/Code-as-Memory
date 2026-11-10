@@ -23,7 +23,7 @@ is needed to evaluate frozen code. A new run never replaces the published score.
 Shared core + shared learning-mode instructions + the RoboMemArena public interface. Interaction also uses `prompts/robomemarena/both.md`. New demo-only preparations include the final offline review.
 
 Use `configs/robomemarena/experiments/demo_only_25.json`, a downloaded demonstration package,
-and the [development commands](../../../docs/benchmarks/robomemarena/README.md).
+and the [development commands](../../../docs/benchmarks/robomemarena.md).
 Each new preparation saves its exact prompt. Historical prompt/configuration
 provenance remains attached to the source run; current wording is not a claim
 of exact historical reproduction.

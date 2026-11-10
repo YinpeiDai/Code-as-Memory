@@ -4,7 +4,7 @@ The larger assignment has 49 demos for battery_try, 49 for blocks_ranking_try, 4
 
 ## Run a published policy
 
-Install the [dedicated environment](../../../envs/rmbench/README.md), then:
+Install the [dedicated environment](../../envs/rmbench/README.md), then:
 
 ```bash
 cam prepare validate_runs --solution solutions/rmbench/demo_only_50 --tasks swap_blocks
@@ -36,6 +36,6 @@ same downloaded pool; preparation extracts its exact `selected_25.json` assignme
 
 Shared core + shared demo-only instructions + the RMBench public interface. No RMBench-specific motion supplement is selected. Offline robot helpers are available in the interface. Historical prompts and the retired supplement remain archived.
 
-[Public interface](../../../src/cam/interface/rmbench/guide.md) ·
-[Solutions](../../../solutions/rmbench/) · [Per-task results and provenance](results.md) ·
-[Reproduction rules](../../reproducing.md)
+[Public interface](../../src/cam/interface/rmbench/guide.md) ·
+[Solutions](../../solutions/rmbench/) · [Per-task results and provenance](../results/rmbench.md) ·
+[Reproduction rules](../reproducing.md)

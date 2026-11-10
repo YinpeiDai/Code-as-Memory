@@ -1,6 +1,6 @@
 # CaM · Robot Memory as Code
 
-[Results](#results) · [Try it](#try-it) · [Demonstrations](docs/getting_started.md#demonstration-packages) · [Documentation](docs/README.md)
+[Results](#results) · [Try it](#try-it) · [Demonstrations](docs/getting_started.md#demonstration-packages) · [Experiment details](docs/reproducing.md)
 
 **CaM learns robot memory as code.**
 
@@ -90,17 +90,20 @@ python scripts/evaluate_solutions.py solutions/robomme/demo_only_25 \
 
 | Benchmark | Published memory programs | Run and reproduce |
 |---|---|---|
-| RoboMME | [25 demonstrations](solutions/robomme/demo_only_25/) | [Guide](docs/benchmarks/robomme/README.md) |
-| RMBench | [50 demonstrations](solutions/rmbench/demo_only_50/) | [Guide](docs/benchmarks/rmbench/README.md) |
-| MIKASA-Robo | [50 demonstrations + interaction](solutions/mikasa_robo/demo_interaction_50/) | [Guide](docs/benchmarks/mikasa_robo/README.md) |
-| RoboMemArena | [50 demonstrations + interaction](solutions/robomemarena/demo_interaction_50/) | [Guide](docs/benchmarks/robomemarena/README.md) |
+| RoboMME | [25 demonstrations](solutions/robomme/demo_only_25/) | [Guide](docs/benchmarks/robomme.md) |
+| RMBench | [50 demonstrations](solutions/rmbench/demo_only_50/) | [Guide](docs/benchmarks/rmbench.md) |
+| MIKASA-Robo | [50 demonstrations + 50 training attempts](solutions/mikasa_robo/demo_interaction_50/) | [Guide](docs/benchmarks/mikasa_robo.md) |
+| RoboMemArena | [Up to 50 demonstrations + matching training attempts](solutions/robomemarena/demo_interaction_50/) | [Guide](docs/benchmarks/robomemarena.md) |
 
 ## Reproduce development
 
 The demonstrations are successful trajectories collected through replay:
 **25 per task for RoboMME and up to 50 per task for the other benchmarks**.
-CaM develops memory code using only the assigned trajectories and, when interaction
-is enabled, training rollouts from those same demonstration seeds.
+**Demo + interaction means 50 demonstrations and at most 50 simulator training
+attempts per task across the entire development process.** Each attempt resets
+to one of those 50 training-demonstration seeds, used once. Failed attempts also
+consume the budget. RoboMemArena's T04 has 32 demonstrations and 32 attempts.
+Held-out evaluation uses separate seeds after the policy is frozen.
 
 [Download the demonstrations and configure your coding client](docs/getting_started.md),
 then choose a data path and a directory for development logs:
@@ -116,7 +119,6 @@ python scripts/develop_batch.py start configs/robomme/experiments/demo_only_25.j
 [Five-episode sanity checks](docs/solutions.md#sanity-checks) ·
 [Live dashboard and experiment galleries](docs/website.md)
 
-[All documentation](docs/README.md) · [Architecture](docs/architecture.md) ·
-[Selected revalidation tasks](docs/validatd_task.md)
+[Benchmark guides](docs/benchmarks/) · [Architecture](docs/architecture.md)
 
 Apache-2.0. Benchmark code and assets retain their upstream licenses; see [NOTICE](NOTICE).

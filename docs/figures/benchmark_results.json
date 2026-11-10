@@ -664,7 +664,7 @@
       "catalog_sha256": "097f7a0b004fb544df635fd3fd468ba66b86ccbbf3a0f8d538371bb8926937d7",
       "campaign": "runs/mikasa_robo_vla_suite/20261110T190922_491466Z",
       "scope": "Five MIKASA task identities, 50 demos + 50 training attempts per task, 50 held-out episodes per task",
-      "results": "docs/benchmarks/mikasa_robo/results.md"
+      "results": "docs/results/mikasa_robo.md"
     }
   }
 }

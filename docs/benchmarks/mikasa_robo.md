@@ -1,15 +1,21 @@
 # MIKASA-Robo
 
-We run both the full **90-task benchmark** and the **five-task publication
-comparison**. The latter follows the task selection in
+We publish code solutions for all **90 MIKASA-Robo tasks** and also develop fresh
+policies for a **five-task VLA comparison subset**. The subset follows the task selection in
 [SimpleMemVLA, Table 3](https://arxiv.org/pdf/2609.05533v2): ShellGameTouch,
 InterceptMedium and RememberColor3/5/9, using their standard `-VLA-v0` IDs.
 The full benchmark measures broad coverage; the subset supports comparison on
 the same task identities as prior work. It is named `mikasa_robo_vla_suite` in
 code, and shares MIKASA's simulator, environment, demo package and public interface.
 Training budgets, sensing and simulator protocols still differ from prior methods.
+The subset is part of MIKASA-Robo, not an additional benchmark.
 
-[Results for both scopes, including every task](results.md).
+| Scope | Published code solutions |
+|---|---|
+| Full benchmark: all 90 tasks | [50 demos + interaction](../../solutions/mikasa_robo/demo_interaction_50/) |
+| VLA subset: five tasks, three settings (15 policies) | [25 demos only](../../solutions/mikasa_robo_vla_suite/demo_only_25/), [50 demos only](../../solutions/mikasa_robo_vla_suite/demo_only_50/), [50 demos + interaction](../../solutions/mikasa_robo_vla_suite/demo_interaction_50/) |
+
+[Results for both scopes, including every task](../results/mikasa_robo.md).
 
 New preparations use GPU physics for `ShellGameTouch-VLA-v0`; other tasks default
 to CPU. Training and evaluation share this routing. Original scores and snapshots
@@ -21,11 +27,11 @@ The original published setting has 90 policies and 4,500 result records, develop
 with 50 demos and 50 interactions per task under CPU physics. Full historical
 development/video evidence covers ten tasks; the other 80 are imported results
 with incomplete provenance. The original and GPU-updated aggregates are explained
-in [results](results.md#full-90-task-benchmark).
+in [results](../results/mikasa_robo.md#full-90-task-benchmark).
 
 ### Run a published policy
 
-Install the [dedicated environment](../../../envs/mikasa_robo/README.md), then:
+Install the [dedicated environment](../../envs/mikasa_robo/README.md), then:
 
 ```bash
 cam prepare runs --solution solutions/mikasa_robo/demo_interaction_50 --tasks SeqOfColors3-VLA-v0
@@ -51,13 +57,19 @@ python scripts/develop_batch.py start configs/mikasa_robo/experiments/demo_inter
 Omit `--tasks` for the full benchmark, or append `--tasks SeqOfColors3-VLA-v0` for a single task.
 Full held-out evaluation starts as each policy freezes.
 
-## Five-task publication comparison
+## Five-task VLA comparison subset
 
 | Setting | Demos/task | Training attempts/task | Held-out episodes/task |
 |---|---:|---:|---:|
 | `demo_only_25` | 25 | 0 | 50 |
 | `demo_only_50` | 50 | 0 | 50 |
-| `demo_interaction_50` | 50 | 50, one per demo identity | 50 |
+| `demo_interaction_50` | 50 | 50 total, one per training-demo seed | 50 |
+
+The interaction budget covers the entire development process for each task:
+**50 simulator attempts using the seeds of the 50 assigned training demos**,
+each seed once. Failed attempts consume the same budget, and editing the policy
+does not replenish it. Held-out evaluation seeds are separate.
+See the shared [experiment budget protocol](../reproducing.md#demonstration-and-interaction-budgets).
 
 The completed settings scored **153/250**, **175/250**, and **250/250**,
 respectively. All 15 policies started blank with Claude Code / Opus 5.5 and the
@@ -91,8 +103,8 @@ The campaign saves progress, development histories, full rollouts, and exports
 exact frozen code/catalogs when each setting completes. Check progress with
 `python scripts/develop_suite.py status CAMPAIGN`.
 
-[Individual setting plans](../../../configs/mikasa_robo_vla_suite/README.md) ·
-[Published solutions](../../../solutions/mikasa_robo_vla_suite/)
+[Individual setting plans](../../configs/mikasa_robo_vla_suite/README.md) ·
+[Published solutions](../../solutions/mikasa_robo_vla_suite/)
 
 ## Prompt and interface
 
@@ -101,6 +113,6 @@ adds `prompts/mikasa_robo/both.md`. Full-90's SeqOfColors3 also gets its authori
 cue-order clarification. Historical full-90 policies used earlier prompt revisions;
 each new preparation pins its exact prompt, and does not replace historical evidence.
 
-[Public interface](../../../src/cam/interface/mikasa_robo/guide.md) ·
-[Solutions](../../../solutions/mikasa_robo/) · [Result provenance](results.md) ·
-[Reproduction rules](../../reproducing.md)
+[Public interface](../../src/cam/interface/mikasa_robo/guide.md) ·
+[Solutions](../../solutions/mikasa_robo/) · [Result provenance](../results/mikasa_robo.md) ·
+[Reproduction rules](../reproducing.md)

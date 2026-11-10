@@ -10,7 +10,7 @@ steps into policy observations. Native scoring remains in the official simulator
 - `api/`: sanitized offline robot helpers and public API reference.
 
 Install [envs/rmbench](../../../../envs/rmbench/README.md), then follow the
-[RMBench commands](../../../../docs/benchmarks/rmbench/README.md).
+[RMBench commands](../../../../docs/benchmarks/rmbench.md).
 The [shared boundary](../base.py) validates every public frame and action.
 Simulator imports must stay inside native environment methods. Only explicitly
 published helpers may be copied into the isolated policy runtime.

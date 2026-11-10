@@ -19,5 +19,5 @@ with the pinned benchmark and simulator; NVIDIA/Vulkan rendering must work.
 snapshot into every new run. Existing prepared runs retain their original
 interpreter and snapshots.
 
-[Run RoboMME](../../docs/benchmarks/robomme/README.md) ·
+[Run RoboMME](../../docs/benchmarks/robomme.md) ·
 [Simulator interface](../../src/cam/interface/robomme/README.md)

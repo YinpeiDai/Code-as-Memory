@@ -15,6 +15,6 @@ All code and catalogs are byte-identical to the frozen campaign exports.
 Each setting README contains evaluation commands and development provenance.
 No demonstrations or model calls are required to evaluate published code.
 
-[Both MIKASA scopes and per-task results](../../docs/benchmarks/mikasa_robo/results.md) ·
+[Both MIKASA scopes and per-task results](../../docs/results/mikasa_robo.md) ·
 [Reproduction](../../docs/reproducing.md#mikasa-five-task-publication-comparison) ·
 [Immutable catalogs](../../configs/solutions/mikasa_robo_vla_suite/)
