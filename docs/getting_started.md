@@ -33,6 +33,15 @@ All four packages are published and transfer-verified. `cam download-demos`
 uses the immutable revision and metadata hashes recorded in
 `configs/<benchmark>/datasets/release.json`.
 
+We replay the released MIKASA-Robo and RoboMemArena expert trajectories in their
+simulators to capture aligned **256×256 RGB-D demonstrations** through the same
+public observation interface used at rollout time. This gives CaM consistent RGB,
+depth, camera calibration and robot-state inputs. RoboMME retains its released
+RGB-D recordings; RMBench regenerates official-expert trajectories at the released
+training seeds and captures RGB-D at its native **320×240** resolution.
+The downloadable packages already contain these prepared demonstrations; users
+do not need to replay trajectories during installation or experiment preparation.
+
 Set `DATA` to a downloaded, extracted **prepared** package:
 
 ```text
@@ -48,6 +57,11 @@ DATA/
 | MIKASA-Robo | [mikasa_robo-50-demos](https://huggingface.co/datasets/Yinpei/mikasa_robo-50-demos) | 4,500 (50/task) |
 | RMBench | [rmbench-50-demos](https://huggingface.co/datasets/Yinpei/rmbench-50-demos) | 496 (48–50/task) |
 | RoboMemArena | [robomemarena-50-demos](https://huggingface.co/datasets/Yinpei/robomemarena-50-demos) | 1,282 (T04: 32; others: 50) |
+
+MIKASA's full 90-task experiment and its five-task publication comparison
+(`mikasa_robo_vla_suite`) share the MIKASA environment and demonstration package.
+The comparison plans select only ShellGameTouch, InterceptMedium and
+RememberColor3/5/9. See [both MIKASA scopes](benchmarks/mikasa_robo/README.md).
 
 ```bash
 uv sync --locked --inexact --extra data

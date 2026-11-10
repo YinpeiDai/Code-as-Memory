@@ -121,7 +121,7 @@ def main(argv=None):
     sanity = sub.add_parser("check-solutions", help="Run five complete episodes per published policy, saving logs and results")
     sanity.add_argument("--solutions", type=Path, default=Path("solutions"))
     sanity.add_argument("--output", type=Path, default=Path("validate_runs/eval_sanity_check"))
-    sanity.add_argument("--benchmarks", nargs="+")
+    sanity.add_argument("--benchmarks", nargs="+", help="Solution namespaces, including mikasa_robo_vla_suite")
     sanity.add_argument("--tasks", nargs="+")
     sanity.add_argument("--gpus", nargs="+", type=int, default=[0, 1])
     sanity.add_argument("--workers-per-gpu", type=int, default=10)

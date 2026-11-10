@@ -4,7 +4,10 @@ Final Python programs, grouped by benchmark and setting. Open a setting README
 for its result, exact evaluation command, and development-prompt provenance.
 
 - [RoboMME](robomme/demo_only_25/README.md)
-- [MIKASA-Robo](mikasa_robo/demo_interaction_50/README.md)
+- MIKASA-Robo: [full 90 tasks](mikasa_robo/demo_interaction_50/README.md);
+  five publication tasks with [25 demos](mikasa_robo_vla_suite/demo_only_25/README.md),
+  [50 demos](mikasa_robo_vla_suite/demo_only_50/README.md), or
+  [50 demos + interaction](mikasa_robo_vla_suite/demo_interaction_50/README.md)
 - RMBench: [25 demos](rmbench/demo_only_25/README.md), [50 demos](rmbench/demo_only_50/README.md)
 - RoboMemArena: [25 demos](robomemarena/demo_only_25/README.md), [50 demos](robomemarena/demo_only_50/README.md), [interaction](robomemarena/demo_interaction_50/README.md)
 

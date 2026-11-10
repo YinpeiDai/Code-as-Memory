@@ -9,7 +9,7 @@ import re
 
 from cam.interface.base import source_hash
 from cam.interface.registry import get_adapter
-from cam.config import RunConfig
+from cam.config import COMPARISON_SUITES, RunConfig
 from cam.core.workspace import FIELD_TYPES
 from cam.harness.prepare import _prepare, write_runs_readme
 from cam.io import read, sha256, task_name
@@ -34,6 +34,13 @@ def load_solutions(solution, catalog=None, tasks=None):
         raise ValueError("Expected a cam-solutions/1 catalog")
     for key in ("benchmark", "experiment"):
         task_name(spec[key])
+    config = RunConfig.from_dict(spec["evaluation_config"])
+    if config.benchmark != spec["benchmark"] or config.mode != "demos" or config.budget != 0:
+        raise ValueError("Published evaluation requires a zero-training configuration")
+    if config.suite != spec.get("suite"):
+        raise ValueError("Published catalog and evaluation configuration must name the same suite")
+    if config.suite and set(spec["tasks"]) - set(COMPARISON_SUITES[config.suite]["tasks"]):
+        raise ValueError(f"Published tasks are outside comparison suite {config.suite}")
     tasks = list(spec["tasks"]) if tasks is None else tasks
     if not tasks or len(set(tasks)) != len(tasks) or set(tasks) - spec["tasks"].keys():
         raise ValueError("Choose distinct published tasks")
@@ -81,8 +88,6 @@ def prepare_solutions(base, solution, tasks=None, benchmark_source=None, timetag
     config = RunConfig.from_dict(spec["evaluation_config"])
     if recording is not None:
         config = replace(config, recording=recording)
-    if config.benchmark != spec["benchmark"] or config.mode != "demos" or config.budget != 0:
-        raise ValueError("Published evaluation requires a zero-training configuration")
     adapter = get_adapter(config.benchmark, benchmark_source)
     if source_hash(adapter) != spec["benchmark_source_sha256"]:
         raise ValueError("Published solution and installed benchmark source do not match")
@@ -112,5 +117,5 @@ def prepare_solutions(base, solution, tasks=None, benchmark_source=None, timetag
         _prepare(root, None, config, [task], adapter, selected, published=one)
         runs.append({"task": task, "root": str(root)})
     return {"schema": "cam-preparation/1", "benchmark": spec["benchmark"],
-            "setting": spec["experiment"], "evaluation_only": True,
+            "suite": config.suite, "setting": spec["experiment"], "evaluation_only": True,
             "timetag": timetag, "runs": runs}

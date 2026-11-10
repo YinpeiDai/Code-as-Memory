@@ -2,6 +2,7 @@
 
 from pathlib import Path
 import shutil
+from copy import deepcopy
 
 import pytest
 
@@ -13,6 +14,7 @@ from cam.harness.jobs import learn_task
 from cam.harness.prepare import validate_run
 from cam.harness.solutions import load_solutions, prepare_solutions, record_hash
 from cam.io import read, sha256, write
+from cam.config import COMPARISON_SUITES
 
 
 @pytest.fixture
@@ -181,3 +183,44 @@ def test_rmbench_observed_motion_catalogs_preserve_code_and_historical_provenanc
                 k: v for k, v in old["tasks"][task].items() if k != "interface_sha256"
             }
             assert loaded["files"][task]["tools/policy.py"] == (solution / task / "policy.py").read_bytes()
+
+
+@pytest.mark.parametrize("arm,demos,attempts,successes", [
+    ("demo_only_25", 25, 0, [10, 44, 50, 48, 1]),
+    ("demo_only_50", 50, 0, [43, 41, 45, 31, 15]),
+    ("demo_interaction_50", 50, 50, [50] * 5),
+])
+def test_shipped_mikasa_comparison_policies(arm, demos, attempts, successes):
+    repo = Path(__file__).resolve().parents[1]
+    name = "mikasa_robo_vla_suite"
+    spec, tasks, loaded = load_solutions(repo / "solutions" / name / arm)
+    assert tasks == list(COMPARISON_SUITES[name]["tasks"])
+    assert spec["suite"] == spec["evaluation_config"]["suite"] == name
+    assert spec["benchmark"] == spec["evaluation_config"]["benchmark"] == "mikasa_robo"
+    assert spec["evaluation_config"]["budget"] == 0 and loaded["provenance"]["learning_performed"] is False
+    for task, successes in zip(tasks, successes):
+        row = spec["tasks"][task]
+        assert row["assigned_demos"] == demos
+        assert row["training_attempts"] == row["source_checkpoint"] == attempts
+        assert row["archived_result"] == {"successes": successes, "scored": 50, "expected": 50, "success_rate": successes / 50}
+        assert row["physics_backend"] == ("gpu" if task == "ShellGameTouch-VLA-v0" else "cpu")
+        assert all(len(row[k]) == 64 for k in ("source_harness_sha256", "source_prompt_sha256", "source_program_hash"))
+
+
+@pytest.mark.parametrize("fault", ["missing_suite", "missing_config_suite", "extra_task", "wrong_benchmark"])
+def test_reject_comparison_catalog_namespace_mismatch(tmp_path, fault):
+    repo = Path(__file__).resolve().parents[1]
+    solution = repo / "solutions/mikasa_robo_vla_suite/demo_only_25"
+    spec = read(repo / "configs/solutions/mikasa_robo_vla_suite/demo_only_25.json")
+    if fault == "missing_suite":
+        spec.pop("suite")
+    elif fault == "missing_config_suite":
+        spec["evaluation_config"].pop("suite")
+    elif fault == "extra_task":
+        spec["tasks"]["TakeItBack-VLA-v0"] = deepcopy(next(iter(spec["tasks"].values())))
+    else:
+        spec["evaluation_config"]["benchmark"] = "robomme"
+    catalog = tmp_path / "catalog.json"
+    write(catalog, spec)
+    with pytest.raises(ValueError, match="suite"):
+        load_solutions(solution, catalog, tasks=["ShellGameTouch-VLA-v0"])

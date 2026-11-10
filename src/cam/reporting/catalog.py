@@ -258,7 +258,7 @@ def index_directory(data_root):
 
     if archive:
         # Public archives may have a native historical layout or results only.
-        for benchmark in BENCHMARKS:
+        for benchmark in (*BENCHMARKS, *COMPARISON_SUITES):
             for setting_dir in sorted((root / "eval" / benchmark).glob("*")):
                 if not setting_dir.is_dir() or setting_dir.name.startswith("_"):
                     continue
@@ -275,6 +275,8 @@ def index_directory(data_root):
                         historical = root / "dev_logs" / benchmark / setting / task
                         has_dev = (historical / "agents").exists()
                         run = {"id": stable_id(benchmark, setting, task), "benchmark": benchmark,
+                               "simulator_benchmark": spec.get("benchmark", COMPARISON_SUITES.get(benchmark, {}).get("benchmark", benchmark)),
+                               "suite": spec.get("suite"), "physics_backend": task_spec.get("physics_backend"),
                                "setting": setting, "task": task, "tag": task_spec.get("source_run_tag", "published"),
                                "path": _within(root, task_dir), "scope": "evaluation", "frozen": True,
                                "development_status": "archived" if has_dev else "unavailable",

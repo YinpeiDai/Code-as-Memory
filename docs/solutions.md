@@ -18,6 +18,13 @@ code hashes, test identities, simulator source, and the public interface, import
 unchanged code, and freezes R000. No demos, learning, or model calls are involved.
 Each preparation is a new evaluation run; source-run provenance remains explicit.
 
+MIKASA provides both [full-90 policies](../solutions/mikasa_robo/demo_interaction_50/)
+and the prior-publication five-task subset under
+`solutions/mikasa_robo_vla_suite/{demo_only_25,demo_only_50,demo_interaction_50}/`.
+Both use the MIKASA environment and the same commands. The subset's catalogs pin
+`suite: "mikasa_robo_vla_suite"`, keeping its evaluations distinct from full-90
+results while selecting the `mikasa_robo` simulator. See [scope and scores](benchmarks/mikasa_robo/results.md).
+
 RMBench automatically selects the `*_observed_motion.json` compatibility catalog
 for the current interface. Historical catalogs remain intact. The current
 `MotionError` compares requested targets with public post-action EEF poses;
@@ -35,6 +42,8 @@ cam check-solutions --output validate_runs/eval_sanity_check \
 ```
 
 Use `--benchmarks rmbench` and/or `--tasks swap_blocks` to select a subset.
+Use `--benchmarks mikasa_robo_vla_suite` for all 15 five-task MIKASA policies;
+`--benchmarks mikasa_robo` selects the 90 full-benchmark policies.
 The batch saves `status.json`, `results.json`, `PROGRESS.md`, pinned preparations,
 per-episode logs, and results. It writes no video, observation H5, array dump, or
 syscall trace. `--resume BATCH` preserves completed episodes and continues an

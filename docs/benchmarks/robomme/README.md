@@ -36,5 +36,5 @@ of frozen policies.
 Shared core + shared demo-only instructions + the RoboMME public interface. Historical prompt bytes remain with the source development logs.
 
 [Public interface](../../../src/cam/interface/robomme/guide.md) ·
-[Solutions](../../../solutions/robomme/) · [Result provenance](../../results.md) ·
+[Solutions](../../../solutions/robomme/) · [Per-task results and provenance](results.md) ·
 [Reproduction rules](../../reproducing.md)

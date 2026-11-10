@@ -56,13 +56,15 @@ def test_directory_does_not_merge_suite_with_full_mikasa(tmp_path):
     assert all(r["simulator_benchmark"] == "mikasa_robo" for r in indexed["runs"])
 
 
-def test_export_keeps_exact_frozen_bytes_and_records_partial_coverage(run_factory, tmp_path):
+def test_export_keeps_exact_frozen_bytes_and_records_partial_coverage(run_factory, tmp_path, monkeypatch):
     # A synthetic simulator-free run exercises the same frozen export path.
+    monkeypatch.setitem(COMPARISON_SUITES, NAME, {"benchmark": "robomme", "tasks": ("BinFill",)})
     root = run_factory()
     task = root / "tasks/BinFill"
     frozen = freeze(read(task / "state/config.json"))
     original = (task / "policy/tools/policy.py").read_bytes()
     plan = read(root / "run.json")
+    plan["config"]["suite"] = NAME
     plan["physics_backend_by_task"] = {"BinFill": "cpu"}
     write(root / "run.json", plan)
     campaign = tmp_path / "campaign"

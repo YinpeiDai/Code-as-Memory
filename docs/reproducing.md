@@ -35,9 +35,14 @@ starting paid development sessions.
 | MIKASA-Robo | `configs/mikasa_robo/experiments/demo_interaction_50.json` | `solutions/mikasa_robo/demo_interaction_50` |
 | RoboMemArena | `configs/robomemarena/experiments/demo_interaction_50.json` | `solutions/robomemarena/demo_interaction_50` |
 
+The MIKASA row covers all 90 tasks. We also run the five task identities used
+in prior VLA publications, under the `mikasa_robo_vla_suite` configuration and
+solution namespace. Both scopes use the same MIKASA environment, public interface
+and demonstration package. See [their purpose and results](benchmarks/mikasa_robo/results.md).
+
 ```bash
 DATA="$PWD/public_runs/demos/mikasa_robo"
-LOGS="$PWD/validate_runs/mikasa_reproduction"
+LOGS="$PWD/runs/mikasa_reproduction"
 uv sync --locked --inexact --extra data
 cam download-demos --benchmark mikasa_robo --output "$DATA" --videos
 
@@ -60,12 +65,68 @@ Across GPUs 0 and 1, normal evaluation admits up to ten episode workers total.
 See [running solutions](solutions.md) for evaluation without development and the
 separate five-episode sanity check, which uses ten workers per GPU.
 
+## MIKASA five-task publication comparison
+
+The subset is ShellGameTouch, InterceptMedium and RememberColor3/5/9 (standard
+`-VLA-v0` IDs), following the task selection in prior publications. Its three
+settings develop fresh policies independently; they are not imports from the
+90-task solutions. All have 50 held-out episodes per task, for 750 total.
+
+| Setting | Plan under `configs/mikasa_robo_vla_suite/` | Assigned demos/task | Training attempts/task |
+|---|---|---:|---:|
+| 25 demos only | `experiments/demo_only_25.json` | 25 | 0 |
+| 50 demos only | `experiments/demo_only_50.json` | 50 | 0 |
+| 50 demos + interaction | `experiments/demo_interaction_50.json` | 50 | 50 |
+
+Use the existing MIKASA demo package (`DATA` above). Start all three settings
+with shared GPU admission and eight total coding workers:
+
+```bash
+python scripts/develop_suite.py start configs/mikasa_robo_vla_suite/suite.json \
+  --dataset "$DATA" --output runs --gpus 0 1
+# CAMPAIGN is the directory printed by start.
+python scripts/develop_suite.py status "$CAMPAIGN"
+```
+
+The controller assigns 3/3/2 coding workers, materializes only the selected 25
+demonstrations for that arm, and queues full evaluation immediately when each
+policy freezes. Evaluation uses five workers per GPU and makes no model calls.
+Every interaction arm uses each assigned demo identity once. ShellGameTouch uses
+GPU physics/IK; the other four use CPU physics/IK, in both training and evaluation.
+
+For one setting, use its plan with the batch launcher:
+
+```bash
+python scripts/develop_batch.py start configs/mikasa_robo_vla_suite/experiments/demo_only_25.json \
+  --dataset "$DATA" --output runs/mikasa_vla_25 --workers 8 --gpus 0 1 \
+  --evaluate-on-freeze --evaluation-workers-per-gpu 5
+```
+
+Use the suite controller when running settings concurrently so they share the
+eight-worker limit and GPU leases. Completed campaign arms export exact frozen
+code and catalogs inside the campaign; the published completed experiment is
+already in `solutions/mikasa_robo_vla_suite/<setting>/` and
+`configs/solutions/mikasa_robo_vla_suite/<setting>.json`.
+
+To evaluate those published solutions without development or a demo download:
+
+```bash
+python scripts/evaluate_solutions.py solutions/mikasa_robo_vla_suite/demo_interaction_50 \
+  --output runs/mikasa_robo_vla_suite_eval --gpus 0 1 --workers-per-gpu 5
+```
+
+Substitute `demo_only_25` or `demo_only_50` for the other settings. Imports freeze
+at R000 while retaining the original development budget and provenance in the
+catalog. New evaluations remain separate from published results and full-90 scores.
+[Plan details](../configs/mikasa_robo_vla_suite/README.md).
+
 ## Released settings
 
 | Benchmark | Demonstrations per task | Training interaction |
 |---|---:|---|
 | RoboMME | 25 | None |
-| MIKASA-Robo | 50 | 50 attempts, each assigned demo identity once; CPU physics |
+| MIKASA-Robo, original full 90 tasks | 50 | 50 attempts, each assigned demo identity once; CPU physics |
+| MIKASA-Robo, five publication tasks | 25 or 50 | None, or 50 attempts using each assigned identity once |
 | RMBench | 25 or up to 50 | None |
 | RoboMemArena | 25 or up to 50 | None, or one attempt per assigned demo identity |
 

@@ -37,5 +37,5 @@ same downloaded pool; preparation extracts its exact `selected_25.json` assignme
 Shared core + shared demo-only instructions + the RMBench public interface. No RMBench-specific motion supplement is selected. Offline robot helpers are available in the interface. Historical prompts and the retired supplement remain archived.
 
 [Public interface](../../../src/cam/interface/rmbench/guide.md) ·
-[Solutions](../../../solutions/rmbench/) · [Result provenance](../../results.md) ·
+[Solutions](../../../solutions/rmbench/) · [Per-task results and provenance](results.md) ·
 [Reproduction rules](../../reproducing.md)

@@ -37,5 +37,5 @@ same downloaded pool; preparation extracts its exact `selected_25.json` assignme
 Shared core + shared learning-mode instructions + the RoboMemArena public interface. Interaction also uses `prompts/robomemarena/both.md`. New demo-only preparations include the final offline review.
 
 [Public interface](../../../src/cam/interface/robomemarena/guide.md) ·
-[Solutions](../../../solutions/robomemarena/) · [Result provenance](../../results.md) ·
+[Solutions](../../../solutions/robomemarena/) · [Per-task results and provenance](results.md) ·
 [Reproduction rules](../../reproducing.md)

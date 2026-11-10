@@ -4,6 +4,11 @@
 This setting contains 90 final policies. Their executable Python bytes are
 preserved; schemas and provenance are in the [solution catalog](../../../configs/solutions/mikasa_robo/demo_interaction_50.json).
 
+We also developed fresh policies on the five task identities used in prior VLA
+publications. Their [three settings](../../mikasa_robo_vla_suite/README.md) and
+[results](../../../docs/benchmarks/mikasa_robo/results.md) are part of MIKASA and
+are reported separately from this full-90 historical release.
+
 Each task uses 50 demos and one interaction on each of those exact identities, with CPU physics. All 90 policies and 4,500 result records are available. Full development/video evidence covers the initial ten tasks; the other 80 are imported results. Their missing historical source snapshots and reset-seed evidence are not independently verified.
 
 ## Evaluate

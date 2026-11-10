@@ -1,5 +1,5 @@
 {
-  "selection_reason": "mikasa_robo_vla_suite: the five requested VLA comparison tasks, 50 assigned demos, 50 attempts using each demo identity once. Fresh policies; GPU physics for ShellGameTouch, CPU for the other tasks.",
+  "selection_reason": "mikasa_robo_vla_suite: the five MIKASA task identities used in prior VLA publications, 50 assigned demos, 50 attempts using each demo identity once. Fresh policies; GPU physics for ShellGameTouch, CPU for the other tasks.",
   "benchmarks": {
     "mikasa_robo": {
       "config": "configs/mikasa_robo_vla_suite/both_claude_code.json",

@@ -30,8 +30,9 @@ def evaluate(args):
         batch = output / "batches" / tag
         prepared = prepare_solutions(output / "runs", args.solution, args.tasks, timetag=tag)
         rows = prepared["runs"]
-        benchmark = args.solution.parent.name
+        benchmark = prepared.get("suite") or prepared["benchmark"]
         plan = {"solution": str(args.solution.resolve()), "runs": rows,
+                "simulator_benchmark": prepared["benchmark"], "suite": prepared.get("suite"),
                 "benchmarks": {benchmark: {"tasks": [r["task"] for r in rows]}}, "created": time.time()}
         write(batch / "plan.json", plan)
     with locked(batch / ".scheduler.lock"):

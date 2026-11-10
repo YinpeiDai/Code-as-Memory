@@ -15,7 +15,7 @@ The learned program carries memory across observations and runs with
 ![CaM and selected published baselines across RoboMME, RMBench, MIKASA-Robo, and RoboMemArena](docs/figures/benchmark_comparison.png)
 
 The comparison uses nine shared RMBench tasks and five shared MIKASA task identities
-(CaM: **100.0%**, with the CPU-physics correction). Published methods use different
+(CaM: **250/250, 100.0%**, from fresh 50-demo-plus-interaction policies). Published methods use different
 training and evaluation protocols; full-suite results and provenance are in the docs.
 
 [More results, coverage, and provenance →](docs/results.md)

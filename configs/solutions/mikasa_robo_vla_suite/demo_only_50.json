@@ -1,0 +1,407 @@
+{
+  "schema": "cam-solutions/1",
+  "benchmark": "mikasa_robo",
+  "suite": "mikasa_robo_vla_suite",
+  "experiment": "demo_only_50",
+  "benchmark_source_sha256": "7de3d740a51c91002ddc66af5dfd35b13350b4605fc8c588fef1da252d96b8dc",
+  "evaluation_config": {
+    "benchmark": "mikasa_robo",
+    "mode": "demos",
+    "budget": 0,
+    "training_seed_count": null,
+    "training_seed_policy": "demo_cycle",
+    "depth": true,
+    "builtin_demo": false,
+    "perceptual_variations": false,
+    "max_decisions": 40,
+    "max_action_steps": 2200,
+    "policy_timeout": 1800,
+    "coding": {
+      "agent": "claude_code",
+      "model": "us.anthropic.claude-opus-5-5",
+      "provider": "bedrock",
+      "reasoning_effort": "high",
+      "aws_profile": "sagemaker",
+      "aws_region": "us-east-1",
+      "timeout": 21600,
+      "model_catalog": null
+    },
+    "both_protocol": null,
+    "physics_backend": "cpu",
+    "recording": "full",
+    "suite": "mikasa_robo_vla_suite"
+  },
+  "description": "Fresh comparison-suite policies; exact frozen executable bytes and original scored outcomes.",
+  "tasks": {
+    "ShellGameTouch-VLA-v0": {
+      "task_spec": {
+        "task": "ShellGameTouch-VLA-v0",
+        "runtime": "python",
+        "memory": [
+          {
+            "name": "stage",
+            "type": "label",
+            "description": "cue | touch | fallback | hold: which stage runs next"
+          },
+          {
+            "name": "ball",
+            "type": "position",
+            "description": "world xyz of the red ball surface seen during the cue (front camera), kept after it is hidden"
+          },
+          {
+            "name": "ball_cam",
+            "type": "label",
+            "description": "camera that saw the ball"
+          },
+          {
+            "name": "mug",
+            "type": "position",
+            "description": "world xyz (top) of the mug chosen as covering the ball"
+          },
+          {
+            "name": "grasp",
+            "type": "position",
+            "description": "TCP target for the edge touch"
+          },
+          {
+            "name": "side",
+            "type": "number",
+            "description": "+1 grasp on mug's +x edge, -1 on -x edge"
+          },
+          {
+            "name": "mugs_seen",
+            "type": "positions",
+            "description": "all mug top-disc centres detected when mugs appeared"
+          },
+          {
+            "name": "attempts",
+            "type": "count",
+            "description": "number of touch attempts issued"
+          },
+          {
+            "name": "notes",
+            "type": "text",
+            "description": "perception/stage log"
+          }
+        ]
+      },
+      "code_sha256": {
+        "policy.py": "9f3e7f14a77dc5b35b022f38217535692be3194b5ebc46a8274d21bc45f28113"
+      },
+      "source_run": "/data/daiyp/CaM_validation_run_v2/mikasa_robo_vla_suite/20261110T190922_491466Z/arms/demo_only_50/dev_logs/mikasa_robo_vla_suite/ShellGameTouch-VLA-v0/cc-opus5.5/demo_only_50/20261110T190925_659384Z",
+      "source_run_tag": "20261110T190925_659384Z",
+      "source_checkpoint": 0,
+      "source_program_hash": "eb0e931dbfa4d8a40e8d2f296f761f113fac04fc6b1cd286592debd809bbaaff",
+      "source_harness_sha256": "3e7098a2e3256c68989739d047ae1599f50da08a9d1cdb846230510e42b39c49",
+      "source_prompt_sha256": "ac7c1174f3c62d0724ad7529b87e7010251aa39e8f4af5cc65a6ec2c7dc1f2ea",
+      "assigned_demos": 50,
+      "training_attempts": 0,
+      "physics_backend": "gpu",
+      "interface_sha256": "d186ceefeb91510e39c2feaf745f8a83bfa3ac25adef8675c478ec5ab2000cf8",
+      "test_records_sha256": "1c9cb8c822e4a74915f8b8bfec7b2193986ae1fd6477be55de3f64ef3cccc7ac",
+      "archived_result": {
+        "expected": 50,
+        "scored": 50,
+        "successes": 43,
+        "success_rate": 0.86
+      }
+    },
+    "InterceptMedium-VLA-v0": {
+      "task_spec": {
+        "task": "InterceptMedium-VLA-v0",
+        "runtime": "python",
+        "memory": [
+          {
+            "name": "target_xy",
+            "type": "position",
+            "description": "Target-disc centre [x, y] (m, world) detected once from the front RGB-D red ring; persists because the hand may later occlude it."
+          },
+          {
+            "name": "stage",
+            "type": "label",
+            "description": "start | no_target | intercept: which policy stage has been dispatched."
+          },
+          {
+            "name": "decisions",
+            "type": "count",
+            "description": "Number of perceive_decide calls so far in this episode."
+          },
+          {
+            "name": "last_outcome",
+            "type": "text",
+            "description": "Truncated summary returned by the previous act tool (stage reached, ball estimate, release events, gains)."
+          }
+        ]
+      },
+      "code_sha256": {
+        "policy.py": "414ee1cf8dd86940100c6f658c5a32249cb988813adf8924063721dbb7e54f31"
+      },
+      "source_run": "/data/daiyp/CaM_validation_run_v2/mikasa_robo_vla_suite/20261110T190922_491466Z/arms/demo_only_50/dev_logs/mikasa_robo_vla_suite/InterceptMedium-VLA-v0/cc-opus5.5/demo_only_50/20261110T190925_659384Z",
+      "source_run_tag": "20261110T190925_659384Z",
+      "source_checkpoint": 0,
+      "source_program_hash": "8845621246593b2b57f34b147f50dbc410dc40a526688cc94ca1ee269a960b54",
+      "source_harness_sha256": "3e7098a2e3256c68989739d047ae1599f50da08a9d1cdb846230510e42b39c49",
+      "source_prompt_sha256": "9b6d71ba77b98b99bba2998086365a228bcbea07eba1289f9ede524decf6e824",
+      "assigned_demos": 50,
+      "training_attempts": 0,
+      "physics_backend": "cpu",
+      "interface_sha256": "ae8160e9cdfda93c6ee3728ba1a8776ab879a519d47e22a4a68b1823f710dbe8",
+      "test_records_sha256": "4c1ba5ce95c7bf31a85a01cb48e153b7ff5a150c17cdde7b83c4f7e7731f393b",
+      "archived_result": {
+        "expected": 50,
+        "scored": 50,
+        "successes": 41,
+        "success_rate": 0.82
+      }
+    },
+    "RememberColor3-VLA-v0": {
+      "task_spec": {
+        "task": "RememberColor3-VLA-v0",
+        "runtime": "python",
+        "memory": [
+          {
+            "name": "stage",
+            "type": "label",
+            "description": "wait | touch | done"
+          },
+          {
+            "name": "cue_color",
+            "type": "label",
+            "description": "colour of the single cue cube seen before the delay"
+          },
+          {
+            "name": "cue_step",
+            "type": "count",
+            "description": "frame step when the cue was first seen"
+          },
+          {
+            "name": "cue_pixels",
+            "type": "count",
+            "description": "max front-view pixel count of the cue cube (confidence)"
+          },
+          {
+            "name": "cue_frames",
+            "type": "count",
+            "description": "number of frames in which the cue was seen"
+          },
+          {
+            "name": "cubes_step",
+            "type": "count",
+            "description": "frame step when all three candidate cubes appeared"
+          },
+          {
+            "name": "target_color",
+            "type": "label",
+            "description": "colour to touch (cue colour)"
+          },
+          {
+            "name": "target",
+            "type": "position",
+            "description": "top-face centre [x,y,top_z] of the target cube (world, m)"
+          },
+          {
+            "name": "cube_positions",
+            "type": "positions",
+            "description": "top-face centres of red, green, blue cubes"
+          },
+          {
+            "name": "decisions",
+            "type": "count",
+            "description": "number of decisions made"
+          },
+          {
+            "name": "log",
+            "type": "text",
+            "description": "anomalies (cue conflicts, fallbacks)"
+          }
+        ]
+      },
+      "code_sha256": {
+        "policy.py": "598c6eab004a09eadbbb14a49317346d3744f1f4983aadf3f3a50a01299962d9"
+      },
+      "source_run": "/data/daiyp/CaM_validation_run_v2/mikasa_robo_vla_suite/20261110T190922_491466Z/arms/demo_only_50/dev_logs/mikasa_robo_vla_suite/RememberColor3-VLA-v0/cc-opus5.5/demo_only_50/20261110T190925_659384Z",
+      "source_run_tag": "20261110T190925_659384Z",
+      "source_checkpoint": 0,
+      "source_program_hash": "2cc04df8a55cc374f2aa51a38ec507d66da604a689a379e01163d6ebdfe9571a",
+      "source_harness_sha256": "3e7098a2e3256c68989739d047ae1599f50da08a9d1cdb846230510e42b39c49",
+      "source_prompt_sha256": "4184682aec7dc5dd39db165c077c8d255795f1a235866f6bca13a078dededf80",
+      "assigned_demos": 50,
+      "training_attempts": 0,
+      "physics_backend": "cpu",
+      "interface_sha256": "837edd7b455e53a26c0247d161075e4f96da9d7829bdc5e0d999fb39e54a49ee",
+      "test_records_sha256": "0e180c2f5667999707fc67460b2287fc218fcc3324f380e9cbacdd968e7ac111",
+      "archived_result": {
+        "expected": 50,
+        "scored": 50,
+        "successes": 45,
+        "success_rate": 0.9
+      }
+    },
+    "RememberColor5-VLA-v0": {
+      "task_spec": {
+        "task": "RememberColor5-VLA-v0",
+        "runtime": "python",
+        "memory": [
+          {
+            "name": "stage",
+            "type": "label",
+            "description": "wait | reach | press | straddle"
+          },
+          {
+            "name": "cue_color",
+            "type": "label",
+            "description": "colour of the single cue cube seen before the answer cubes"
+          },
+          {
+            "name": "cue_step",
+            "type": "count",
+            "description": "frame step at which the cue colour was last recorded"
+          },
+          {
+            "name": "cue_pixels",
+            "type": "count",
+            "description": "front-camera pixel count of the cue cube (confidence)"
+          },
+          {
+            "name": "target",
+            "type": "position",
+            "description": "world [x, y, z_top] of the matching answer cube"
+          },
+          {
+            "name": "target_source",
+            "type": "label",
+            "description": "camera used to localise the target (front or wrist)"
+          },
+          {
+            "name": "home_rpy",
+            "type": "position",
+            "description": "initial TCP roll/pitch/yaw held during the motion"
+          },
+          {
+            "name": "press_steps",
+            "type": "count",
+            "description": "steps spent in the press stage"
+          },
+          {
+            "name": "blocked_steps",
+            "type": "count",
+            "description": "press steps with no vertical motion above the cube base (contact)"
+          },
+          {
+            "name": "fallback_steps",
+            "type": "count",
+            "description": "steps spent in the straddle fallback"
+          },
+          {
+            "name": "last_z",
+            "type": "number",
+            "description": "TCP z at the previous decision"
+          },
+          {
+            "name": "colors_seen",
+            "type": "set",
+            "description": "cube colours detected on the answer frame"
+          },
+          {
+            "name": "note",
+            "type": "text",
+            "description": "last decision diagnostic"
+          }
+        ]
+      },
+      "code_sha256": {
+        "policy.py": "48a59b844675ebd3f0c659ea3a3fd686779f3b5b5aa1a4083808193bdb29a489"
+      },
+      "source_run": "/data/daiyp/CaM_validation_run_v2/mikasa_robo_vla_suite/20261110T190922_491466Z/arms/demo_only_50/dev_logs/mikasa_robo_vla_suite/RememberColor5-VLA-v0/cc-opus5.5/demo_only_50/20261110T190925_659384Z",
+      "source_run_tag": "20261110T190925_659384Z",
+      "source_checkpoint": 0,
+      "source_program_hash": "659866a078b12de9cabc797ccb786ce104d2126b4d641cbf9bd3bfb57e2c1f53",
+      "source_harness_sha256": "3e7098a2e3256c68989739d047ae1599f50da08a9d1cdb846230510e42b39c49",
+      "source_prompt_sha256": "b7e67f58abc91701165f0853b28276cb0ba2958298ed444a3c3dd850f39f8361",
+      "assigned_demos": 50,
+      "training_attempts": 0,
+      "physics_backend": "cpu",
+      "interface_sha256": "837edd7b455e53a26c0247d161075e4f96da9d7829bdc5e0d999fb39e54a49ee",
+      "test_records_sha256": "18917eb2977221a9fbb2758de2b929f0935cc1a35d1f77c690192d1bd4b2c76d",
+      "archived_result": {
+        "expected": 50,
+        "scored": 50,
+        "successes": 31,
+        "success_rate": 0.62
+      }
+    },
+    "RememberColor9-VLA-v0": {
+      "task_spec": {
+        "task": "RememberColor9-VLA-v0",
+        "runtime": "python",
+        "memory": [
+          {
+            "name": "stage",
+            "type": "label",
+            "description": "observe | wait | touch | retry | grasp | done"
+          },
+          {
+            "name": "cue_color",
+            "type": "label",
+            "description": "colour class of the single cue cube (majority over cue frames)"
+          },
+          {
+            "name": "cue_votes",
+            "type": "text",
+            "description": "colour:frame-count votes from frames showing 1-2 colour classes before the ring appears"
+          },
+          {
+            "name": "target_color",
+            "type": "label",
+            "description": "colour chosen among the ring cubes"
+          },
+          {
+            "name": "target_xy",
+            "type": "position",
+            "description": "world xy of the chosen cube top-face centre, measured when the ring first appears"
+          },
+          {
+            "name": "attempts",
+            "type": "count",
+            "description": "number of touch actions issued"
+          },
+          {
+            "name": "steps_seen",
+            "type": "count",
+            "description": "latest native step index observed"
+          },
+          {
+            "name": "ring_step",
+            "type": "number",
+            "description": "step at which the 9-cube ring was first seen"
+          },
+          {
+            "name": "log",
+            "type": "text",
+            "description": "diagnostic trace of stage transitions and act outcomes"
+          }
+        ]
+      },
+      "code_sha256": {
+        "policy.py": "d0702dab7effebf2289595a72825a20b73496545192e033768b12dd7844b4091"
+      },
+      "source_run": "/data/daiyp/CaM_validation_run_v2/mikasa_robo_vla_suite/20261110T190922_491466Z/arms/demo_only_50/dev_logs/mikasa_robo_vla_suite/RememberColor9-VLA-v0/cc-opus5.5/demo_only_50/20261110T190925_659384Z",
+      "source_run_tag": "20261110T190925_659384Z",
+      "source_checkpoint": 0,
+      "source_program_hash": "3c8035cf7fbe30407ff1f040e5ebe8fa18c6bba6098e0ec814222de2c95bb72e",
+      "source_harness_sha256": "3e7098a2e3256c68989739d047ae1599f50da08a9d1cdb846230510e42b39c49",
+      "source_prompt_sha256": "3381881f1b271e783924cf79cafe18419cb1fb1b4b68b708b10b167ffefda9dc",
+      "assigned_demos": 50,
+      "training_attempts": 0,
+      "physics_backend": "cpu",
+      "interface_sha256": "837edd7b455e53a26c0247d161075e4f96da9d7829bdc5e0d999fb39e54a49ee",
+      "test_records_sha256": "501f5174c790337c2ec256758e7c322a44655edb7344d5555705b28c1cd85a4f",
+      "archived_result": {
+        "expected": 50,
+        "scored": 50,
+        "successes": 15,
+        "success_rate": 0.3
+      }
+    }
+  }
+}

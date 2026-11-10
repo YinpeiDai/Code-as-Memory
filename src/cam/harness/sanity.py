@@ -66,7 +66,7 @@ def check_solutions(solutions, output, benchmarks=None, tasks=None, gpus=(0, 1),
                 if len(ids) != episodes:
                     raise ValueError(f"{task} has fewer than {episodes} assigned tests")
                 key = "/".join((folder.parent.name, folder.name, task))
-                rows[key] = {"benchmark": spec["benchmark"], "setting": folder.name,
+                rows[key] = {"benchmark": spec["benchmark"], "suite": spec.get("suite"), "setting": folder.name,
                              "task": task, "solution": str(folder), "catalog": str(catalog),
                              "status": "pending", "episodes": ids, "results": []}
             write(catalog, spec)
@@ -127,7 +127,7 @@ def check_solutions(solutions, output, benchmarks=None, tasks=None, gpus=(0, 1),
                  f"Episodes: {state['completed']}/{state['expected']}; runnable: {state['passed']}; execution errors: {state['failed']}.", "",
                  "| Benchmark | Setting | Task | Check | Runnable | Task successes |", "|---|---|---|---|---|---|"]
         for r in rows:
-            lines.append(f"| {r['benchmark']} | {r['setting']} | {r['task']} | {r['status']} | "
+            lines.append(f"| {r.get('suite') or r['benchmark']} | {r['setting']} | {r['task']} | {r['status']} | "
                          f"{sum(e['runnable'] for e in r['results'])}/{episodes} | {sum(e.get('success', False) for e in r['results'])}/{episodes} |")
         temporary = batch / "PROGRESS.md.partial"
         temporary.write_text("\n".join(lines) + "\n")

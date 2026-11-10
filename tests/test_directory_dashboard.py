@@ -61,3 +61,21 @@ def test_all_queued_policies_are_visible_before_preparation(tmp_path):
     assert data['groups'][0]['summary']['expected'] == 80
     assert data['groups'][0]['summary']['scored'] == 0
     assert data['groups'][0]['summary']['success_rate'] is None
+
+
+def test_archived_comparison_results_keep_suite_namespace(tmp_path):
+    (tmp_path / "dev_logs").mkdir()
+    task = "ShellGameTouch-VLA-v0"
+    suite = "mikasa_robo_vla_suite"
+    for name, comparison, success in [("mikasa_robo", None, False), (suite, suite, True)]:
+        write(tmp_path / "configs/solutions" / name / "demo_interaction_50.json", {
+            "schema": "cam-solutions/1", "benchmark": "mikasa_robo", "suite": comparison,
+            "experiment": "demo_interaction_50", "tasks": {task: {
+                "physics_backend": "gpu" if comparison else "cpu", "archived_result": {"expected": 1}}}})
+        write(tmp_path / "eval" / name / "demo_interaction_50" / task / "R050/ep000/result.json",
+              {"episode": 0, "success": success, "status": "success" if success else "timeout", "scorable": True})
+    indexed = index_directory(tmp_path)
+    assert len(indexed["runs"]) == len(indexed["groups"]) == 2
+    assert {g["benchmark"]: g["summary"]["successes"] for g in indexed["groups"]} == {"mikasa_robo": 0, suite: 1}
+    assert all(r["simulator_benchmark"] == "mikasa_robo" for r in indexed["runs"])
+    assert {r["benchmark"]: r["physics_backend"] for r in indexed["runs"]} == {"mikasa_robo": "cpu", suite: "gpu"}

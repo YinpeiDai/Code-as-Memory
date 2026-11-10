@@ -29,8 +29,9 @@
       "interaction_count": 50
     }
   },
-  "reference": "https://arxiv.org/pdf/2609.05533",
+  "reference": "https://arxiv.org/pdf/2609.05533v2",
   "expected_policies": 15,
   "evaluation_episodes_per_task": 50,
-  "comparison_note": "Same five task identities; report CaM RGB-D, physics/IK backends, data and interaction budgets explicitly. These runs do not establish an identical training or evaluation protocol to the cited VLA methods."
+  "comparison_note": "Same five task identities; report CaM RGB-D, physics/IK backends, data and interaction budgets explicitly. These runs do not establish an identical training or evaluation protocol to the cited VLA methods.",
+  "description": "Five-task MIKASA selection used by prior VLA publications; shares the full benchmark simulator and demo pool. Both full-90 and five-task results are reported with separate coverage."
 }

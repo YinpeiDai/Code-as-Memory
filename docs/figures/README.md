@@ -23,7 +23,7 @@ CaM's exact success/episode counts. Sources were checked on November 10, 2026.
 |---|---|---|
 | RoboMME | 795/800; 16 tasks | [Official leaderboard](https://robomme.github.io/leaderboard.html), mean of 16 per-task values |
 | RMBench | 900/900; nine tasks | [SimpleMemVLA v2](https://arxiv.org/pdf/2609.05533v2), Figure 3 and Table 1 |
-| MIKASA-Robo | 100%; five task identities, author-reported CPU-physics correction | [SimpleMemVLA v2](https://arxiv.org/pdf/2609.05533v2), Figure 3 and Table 3 |
+| MIKASA-Robo | 250/250; fresh five-task publication comparison, 50 demos + 50 interactions | [SimpleMemVLA v2](https://arxiv.org/pdf/2609.05533v2), Figure 3 and Table 3 |
 | RoboMemArena | 1,271/1,300; 26 tasks | [Official leaderboard](https://robomemarena.github.io/leaderboard.html), reported TSR |
 
 **RoboMME:** MEMI is the **MEMI-Astra-Act** variant. The separate
@@ -36,17 +36,18 @@ CaM's full ten-task suite is 1,000/1,000. EventVLA retains the paper's reported
 67.8% overall; its displayed integer per-task values average to 67.89%.
 
 **MIKASA-Robo:** The shared identities are ShellGameTouch, InterceptMedium,
-RememberColor3, RememberColor5, and RememberColor9. The figure uses the author's
-reported 100% correction after identifying a CPU physics issue. Corrected episode
-counts and rerun artifacts have not been attached; the JSON retains the original
-225/250 result separately as `archived_result`. The archived experiment evaluates their current
-`-VLA-v0` implementations with 50 episodes each, 50 assigned demonstrations plus
-50 training interactions, CPU physics, and its public observation/action
-interface. The paper quotes VLA baselines from MemoryVLA++ and GMP from its
-per-task training with tuned horizons. Task identities match across legacy and
-current releases, but simulator versions, sensing and training budgets do not.
-CaM's full 90-task
-suite is 4,444/4,500 (98.76%); it is not the five-task comparison score.
+RememberColor3, RememberColor5, and RememberColor9. The figure now uses the fresh
+`mikasa_robo_vla_suite/demo_interaction_50` result, **250/250**, verified against
+its [immutable catalog](../../configs/solutions/mikasa_robo_vla_suite/demo_interaction_50.json).
+Each policy uses 50 assigned demos, 50 training attempts and 50 held-out episodes,
+with 256×256 RGB-D. ShellGameTouch uses GPU physics/IK; the others use CPU physics/IK.
+The JSON retains the original 225/250 slice as `archived_result` and the earlier
+author-reported physics correction as `previous_figure_result`.
+The paper quotes VLA baselines from MemoryVLA++ and GMP from its per-task training
+with tuned horizons. Task identities match across legacy and current releases,
+but simulator versions, sensing and training budgets differ.
+The full 90-task historical and GPU-updated aggregates remain separate from this
+fresh five-task comparison. [Both MIKASA scopes and per-task results](../benchmarks/mikasa_robo/results.md).
 
 **RoboMemArena:** The plotted baselines come from the leaderboard's
 literature-reported/unverified section, not independently verified submissions.

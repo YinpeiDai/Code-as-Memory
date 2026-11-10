@@ -426,8 +426,45 @@
             }
           },
           "success_percent": 100.0,
-          "source": "cam_author_cpu_physics_correction",
-          "result_note": "Author-reported correction for the five-task comparison after identifying a CPU physics issue. Corrected episode counts and rerun artifacts were not supplied with the README update; archived results are retained separately."
+          "source": "cam_mikasa_vla_suite",
+          "result_note": "Fresh 50-demo-plus-50-interaction policies on the five-task publication subset, all 250 held-out episodes scored. ShellGameTouch uses GPU physics; the other four tasks use CPU. Distinct from the historical full-90 slice and the earlier GPU-correction aggregate.",
+          "previous_figure_result": {
+            "success_percent": 100.0,
+            "source": "cam_author_cpu_physics_correction",
+            "result_note": "Author-reported correction for the five-task comparison after identifying a CPU physics issue. Corrected episode counts and rerun artifacts were not supplied with the README update; archived results are retained separately."
+          },
+          "suite": "mikasa_robo_vla_suite",
+          "successes": 250,
+          "episodes": 250,
+          "scored": 250,
+          "expected": 250,
+          "per_task": {
+            "ShellGameTouch-VLA-v0": {
+              "successes": 50,
+              "episodes": 50,
+              "physics_backend": "gpu"
+            },
+            "InterceptMedium-VLA-v0": {
+              "successes": 50,
+              "episodes": 50,
+              "physics_backend": "cpu"
+            },
+            "RememberColor3-VLA-v0": {
+              "successes": 50,
+              "episodes": 50,
+              "physics_backend": "cpu"
+            },
+            "RememberColor5-VLA-v0": {
+              "successes": 50,
+              "episodes": 50,
+              "physics_backend": "cpu"
+            },
+            "RememberColor9-VLA-v0": {
+              "successes": 50,
+              "episodes": 50,
+              "physics_backend": "cpu"
+            }
+          }
         }
       ]
     },
@@ -620,6 +657,14 @@
       "scope": "MIKASA-Robo five-task comparison",
       "success_percent": 100.0,
       "note": "Repository author reports 100% after identifying a CPU physics issue and requests updating the README figure. This report does not replace archived episode records or establish a new 90-task aggregate."
+    },
+    "cam_mikasa_vla_suite": {
+      "title": "CaM fresh MIKASA five-task publication comparison",
+      "catalog": "configs/solutions/mikasa_robo_vla_suite/demo_interaction_50.json",
+      "catalog_sha256": "097f7a0b004fb544df635fd3fd468ba66b86ccbbf3a0f8d538371bb8926937d7",
+      "campaign": "runs/mikasa_robo_vla_suite/20261110T190922_491466Z",
+      "scope": "Five MIKASA task identities, 50 demos + 50 training attempts per task, 50 held-out episodes per task",
+      "results": "docs/benchmarks/mikasa_robo/results.md"
     }
   }
 }
