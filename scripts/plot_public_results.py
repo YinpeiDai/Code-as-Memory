@@ -46,36 +46,22 @@ def save(fig, name):
 
 def benchmark_comparison():
     data = json.loads((OUT / "benchmark_results.json").read_text())
-    fig = plt.figure(figsize=(17, 6.4))
-    fig.text(.035, .94, "Robot Memory as Code", fontsize=25, weight="bold")
-    fig.text(.035, .884, "Success across four benchmarks", fontsize=15, color=MUTED)
-    fig.text(.965, .934, "CaM", color=ACCENT, fontsize=24, weight="bold", ha="right")
-    details = ["16 tasks · 800 CaM episodes", "9 shared tasks · 900 CaM episodes",
-               "5 shared tasks · 250 CaM episodes", "26 tasks · task success rate (TSR)"]
-    for i, (panel, detail) in enumerate(zip(data["panels"], details)):
-        ax = fig.add_axes([.035 + i * .245, .17, .205, .59])
+    fig = plt.figure(figsize=(17, 5.2))
+    for i, panel in enumerate(data["panels"]):
+        ax = fig.add_axes([.025 + i * .245, .07, .215, .80])
         ax.set_xlim(0, 100)
-        ax.set_ylim(-.5, 5.7)
-        ax.set_title(panel["title"], loc="left", fontsize=17, weight="bold", pad=27)
-        ax.text(0, 1.025, detail, transform=ax.transAxes, fontsize=9.5, color=MUTED)
+        ax.set_ylim(-.4, 5.7)
+        ax.set_title(panel["title"], loc="left", fontsize=23, weight="bold", pad=18)
         for y, row in zip(np.linspace(5, 0, len(panel["methods"])), panel["methods"]):
             cam = row["method"] == "CaM"
             color = ACCENT if cam else BASE
-            ax.barh(y, 100, height=.29, color=PALE, edgecolor="none", zorder=1)
-            ax.barh(y, row["success_percent"], height=.29, color=color, edgecolor="none", zorder=2)
-            ax.text(0, y + .27, row["method"], fontsize=12, weight="bold" if cam else "normal",
+            ax.barh(y, 100, height=.32, color=PALE, edgecolor="none", zorder=1)
+            ax.barh(y, row["success_percent"], height=.32, color=color, edgecolor="none", zorder=2)
+            ax.text(0, y + .27, row["method"], fontsize=18, weight="bold" if cam else "normal",
                     color=ACCENT if cam else INK, va="bottom")
             ax.text(100, y + .27, rounded(row["success_percent"]) + "%", ha="right", va="bottom",
-                    fontsize=12, color=ACCENT if cam else INK, weight="bold" if cam else "normal")
-        ax.set_yticks([])
-        ax.set_xticks([0, 50, 100])
-        ax.tick_params(axis="x", length=0, pad=9, labelsize=10)
-        ax.spines["left"].set_visible(False)
-        ax.spines["bottom"].set_visible(False)
-        ax.set_xlabel("Success (%)", fontsize=10, labelpad=9)
-    fig.text(.035, .052, "Baselines are published reports; training, sensing, interaction budgets and evaluation protocols differ.",
-             fontsize=10, color=MUTED)
-    fig.text(.965, .052, "Sources & full results: docs/results.md", fontsize=10, color=MUTED, ha="right")
+                    fontsize=18, color=ACCENT if cam else INK, weight="bold" if cam else "normal")
+        ax.set_axis_off()
     save(fig, "benchmark_comparison")
 
 
