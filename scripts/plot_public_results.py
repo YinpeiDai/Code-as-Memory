@@ -67,8 +67,8 @@ def benchmark_comparison():
         demo_counts = {task["demonstrations"] for task in cam_row["per_task"].values()}
         demo_label = f"{max(demo_counts)} demos / task"
         if len(demo_counts) > 1:
-            demo_label = "Up to " + demo_label
-        fig.text(left, .235, demo_label, fontsize=18, color=INK)
+            demo_label = "≤" + demo_label
+        fig.text(left, .235, "Use only " + demo_label, fontsize=18, color=INK)
         cost = costs[panel["benchmark"]]
         footer = fig.add_axes([left, .035, width, .16])
         footer.set_xlim(0, 1)

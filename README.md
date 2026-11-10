@@ -2,7 +2,7 @@
 
 **What if robot memory could just be an executable Python program?**
 
-**Code-as-Memory (CaM)** introduces **executable code as explicit, persistent robot memory**. A coding agent distills demonstrations into a Python program that maintains and updates memory through structured variables (e.g., `dict`, `list`), enabling robots to **remember, reason, and act** without relying on neural memory mechanisms.
+**Code-as-Memory (CaM)** introduces **executable code as explicit, persistent robot memory**. A coding agent distills demonstrations into a Python program that maintains and updates memory through structured variables (e.g., `dict`, `list`), enabling robots to **perceive, remember, reason and act** entirely through Python execution, without relying on any external models during inference.
 
 ⚡ **No Training. No Model Calls. Near-Zero Latency.**
 - **No model training** during development
