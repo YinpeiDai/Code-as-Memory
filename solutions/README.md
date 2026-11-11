@@ -15,4 +15,4 @@ for its result, exact evaluation command, and development-prompt provenance.
 Required memory declarations and integrity/provenance metadata are in
 [configs/solutions](../configs/solutions/). `cam prepare --solution` imports and
 freezes unchanged final code without demonstrations, learning, or model calls.
-See [running solutions](../docs/getting_started.md#run-published-solutions).
+See [running solutions](../docs/getting_started.md#run-published-robot-memory-solutions).

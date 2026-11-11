@@ -52,7 +52,7 @@ See [interface adaptations](interface.md) for observations and action convention
 
 ## Learning settings
 
-**Demo only:** develop memory fields, update rules and actions from the assigned
+**Demo-only:** develop memory fields, update rules and actions from the assigned
 demonstrations using offline analysis and checks. Simulator
 training attempts are **zero**.
 
@@ -61,23 +61,15 @@ program, then use **50 total simulator attempts per task** to test and refine it
 memory updates and actions.
 Each attempt uses the reset seed of one of the **50 assigned training demos,
 exactly once**. There are no new training seeds or retries. Failed attempts count;
-code revisions do not reset the budget. RoboMemArena T04 uses its actual **32 demos
-and 32 attempts**. Held-out seeds are separate.
+code revisions do not reset the budget. Held-out evaluation seeds are separate.
 
 | Published setting | Demo-only assignments | Demo + interaction |
 |---|---|---|
 | RoboMME | 25/task | — |
-| MIKASA-Robo five-task VLA suite | 25, 50 or up to 250/task | 50 demos + 50 attempts/task |
-| RMBench | 25 or up to 50/task | — |
-| RoboMemArena | 25 or up to 50/task | 50 demos + 50 attempts/task; T04: 32 + 32 |
+| MIKASA-Robo five-task VLA suite | 25, 50 or 250/task | 50 demos + 50 attempts/task |
+| RMBench | 25 or 50/task | — |
+| RoboMemArena | 25 or 50/task | 50 demos + 50 attempts/task|
 
-RMBench's larger pool has 49 demos for `battery_try` and `blocks_ranking_try`,
-48 for `observe_and_pickup`, and 50 for the other tasks.
-MIKASA's primary comparison uses ShellGameTouch, InterceptMedium and
-RememberColor3/5/9, following prior publications. Full-90 solutions remain available
-separately; both scopes share the simulator and public interface. The additional
-`mikasa_robo_vla_suite_250` experiment uses up to 250 successful RGB-D demos per
-task with zero interaction; see [exact counts and results](results/mikasa_robo.md#five-task-publication-comparison).
 
 ## Offline demonstrations
 
@@ -94,7 +86,7 @@ training data, replaying trajectories where needed and retaining successful ones
 MIKASA-Robo and RoboMemArena replays use the same public observation interface
 as evaluation.
 
-## Run published solutions
+## Run published robot memory solutions
 
 We have published the robot memory programs developed during our experiments.
 You can evaluate them directly on each benchmark to see their performance.
@@ -151,7 +143,7 @@ unscorable crashes with identical inputs. Scored failures are never replaced.
 A passing check means error-free execution; task success is reported separately.
 See [recovery](reproducing.md#artifacts-and-recovery) for other evaluation runs.
 
-## Develop your own solution
+## Develop your own robot memory solutions
 
 After downloading our demonstrations, you can reproduce our experiments by
 developing your own code solutions. Configure and authenticate your coding client
@@ -211,7 +203,7 @@ See [benchmark guides](benchmarks/README.md) for task names and complete command
 [Yinpei/CaM_develop_logs](https://huggingface.co/datasets/Yinpei/CaM_develop_logs)
 records how the robot memory programs were developed: agent logs, prompts, code
 revisions, results and available videos for RoboMME, RMBench, RoboMemArena and
-the five-task MIKASA VLA suite.
+the five-task MIKASA VLA suite for people to review.
 
 Install `zstd` and the Hugging Face CLI, then run from the repository root:
 
@@ -225,10 +217,5 @@ for archive in public_runs/releases/development_logs/archives/*.tar.zst; do
 done
 ```
 
-The archives preserve recorded log and code bytes. Demonstration data and external
-simulator assets are excluded; download demos separately for fresh development.
-The additional [up-to-250 MIKASA archive](https://huggingface.co/datasets/Yinpei/CaM_develop_logs/blob/main/archives/mikasa_robo_vla_suite_demo_only_250.tar.zst)
-extracts to `public_runs/dev_logs/mikasa_robo_vla_suite/demo_only_250` and retains
-code history, intermediate analysis images and generated held-out rollouts, including
-observation H5s. The original four archives omit all H5s; manifests record each
-archive's scope.
+The archives preserve recorded log and code bytes during our experiments. Demonstration data and external
+simulator assets are excluded; download demos separately for fresh development on your own.

@@ -14,7 +14,7 @@ CaM achieves **near-perfect performance across four popular robot memory benchma
 
 ![CaM offline-demo and demo-plus-interaction settings: budgets, success rates and development API costs across four Robot Memory benchmarks](docs/figures/benchmark_comparison.webp)
 
-**Settings:** The official training-demo counts per task are 100 for RoboMME, 250 for MIKASA-Robo, 50 for RMBench, and 100 for RoboMemArena. **CaM** learns from offline demos (25/task for RoboMME, 250 for MIKASA-Robo, 50 for RMBench/RoboMemArena). **CaM w/ rollouts** use 50 demos/task and allows up to 50 rollout attempts to interact with simulators using the same demo seeds. Reported costs reflect only development-time API usage (Opus 5.5), with no API calls during inference.
+**Settings:** The official training-demo counts per task are 100 for RoboMME, 250 for MIKASA-Robo, 50 for RMBench, and 100 for RoboMemArena. **CaM** learns from offline demos (25/task for RoboMME, 250 for MIKASA-Robo, 50 for RMBench/RoboMemArena). **CaM w/ rollouts** use 50 demos/task and allows up to 50 rollout attempts to interact with simulators using the same demo seeds. Reported costs reflect only development-time API usage (Opus 5.5).
 
 [More results can be found here →](docs/results.md)
 

@@ -2,7 +2,7 @@
 
 Start with [installation, learning settings and data](getting_started.md).
 To evaluate released policies without development, see
-[running published solutions](getting_started.md#run-published-solutions).
+[running published solutions](getting_started.md#run-published-robot-memory-solutions).
 New runs use the current harness and remain separate from published scores.
 
 ## Demonstration and interaction budgets
