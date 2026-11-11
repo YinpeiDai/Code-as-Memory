@@ -18,7 +18,7 @@ from cam.interface.registry import checkout, get_adapter, simulator_python
 from cam.config import COMPARISON_SUITES, RunConfig
 from cam.core.budget import Ledger, program_hash
 from cam.core.history import freeze, materialize, payload, snapshot
-from cam.data.extract import load_dataset_manifest, validate_dataset
+from cam.data.extract import load_dataset_manifest, raw_data_reference, validate_dataset
 from cam.io import copy_tree, read, sha256, tree_hash, write
 from cam.prompts import benchmark_mode_guidance, render, task_clarification
 from cam.harness.run_readme import write_run_readme, write_runs_readme
@@ -476,7 +476,7 @@ if __name__ == "__main__":
             "h5_scanned": bool(validate_data and not published),
             "hashes_checked": bool(validate_data and not published),
         },
-        "raw_data_reference": selected["raw_data"],
+        "raw_data_reference": raw_data_reference(selected),
         "benchmark_package": adapter.package,
         "benchmark_hash": tree_hash(benchmark),
         "benchmark_source_reference": str(adapter.source),

@@ -46,6 +46,7 @@ def published_manifest(root, manifest, adapter=None):
     Normalize the historical ``source`` field to the harness's ``raw_data`` key.
     """
     from cam.interface.base import source_hash
+    from cam.data.extract import raw_data_reference
     adapter = adapter or get_adapter("robomme")
     for task, item in manifest["tasks"].items():
         for split in ("train", "test"):
@@ -53,7 +54,7 @@ def published_manifest(root, manifest, adapter=None):
             if sha256(path) != item.get(split + "_metadata_sha256"):
                 raise ValueError(f"Published RoboMME {split} identities changed: {task}")
     return {**manifest, "schema": "cam-dataset/1", "benchmark_hash": source_hash(adapter),
-            "raw_data": manifest.get("raw_data") or manifest["source"],
+            "raw_data": raw_data_reference(manifest),
             "compatibility": {"source_schema": manifest["schema"],
                               "source_manifest_sha256": sha256(Path(root) / "manifest.json"),
                               "metadata_hashes_verified": True,

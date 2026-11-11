@@ -114,7 +114,8 @@ def test_extraction_resume_reuses_only_verified_files(dataset, raw):
         )
 
 
-def test_historical_robomme_package_uses_explicit_metadata_compatibility(dataset, monkeypatch, tmp_path):
+@pytest.mark.parametrize('public_release', [False, True])
+def test_historical_robomme_package_uses_explicit_metadata_compatibility(dataset, monkeypatch, tmp_path, public_release):
     from cam.interface.registry import get_adapter
     from cam.interface.robomme import data as module
     from cam.data.extract import load_dataset_manifest
@@ -124,6 +125,11 @@ def test_historical_robomme_package_uses_explicit_metadata_compatibility(dataset
     manifest = read(root / 'manifest.json')
     manifest['schema'] = 'cap-regular-extraction/2'
     manifest['source'] = manifest.pop('raw_data')
+    reference = manifest['source']
+    if public_release:
+        del manifest['source']
+        manifest['download'] = {'repo_id': 'example/robomme-25-demos', 'revision': 'a' * 40}
+        reference = 'hf://datasets/example/robomme-25-demos@' + 'a' * 40
     item = manifest['tasks']['BinFill']
     for split in ('train', 'test'):
         item[split + '_metadata_sha256'] = sha256(source / 'env_metadata' / split / 'record_dataset_BinFill_metadata.json')
@@ -139,7 +145,7 @@ def test_historical_robomme_package_uses_explicit_metadata_compatibility(dataset
     item['sha256'] = sha256(file)
     write(root / 'manifest.json', manifest)
     current = load_dataset_manifest(root, adapter)
-    assert current['raw_data'] == manifest['source']
+    assert current['raw_data'] == reference
     assert current['compatibility']['h5_reads'] == 0
     assert not current['compatibility']['h5_bytes_changed']
     module.validate_dataset(root)
@@ -148,7 +154,7 @@ def test_historical_robomme_package_uses_explicit_metadata_compatibility(dataset
     prepared = prepare(tmp_path / 'historical_run', root,
                        RunConfig(benchmark='robomme', mode='demos', budget=0),
                        benchmark_source=source)
-    assert prepared['raw_data_reference'] == manifest['source']
+    assert prepared['raw_data_reference'] == reference
     monkeypatch.setattr(trajectory, 'ROOT', root / 'h5')
     with trajectory.Trajectory('BinFill',0) as tr:
         assert tr.T == 3
@@ -157,3 +163,26 @@ def test_historical_robomme_package_uses_explicit_metadata_compatibility(dataset
     write(root / 'manifest.json',manifest)
     with pytest.raises(ValueError,match='identities changed'):
         load_dataset_manifest(root,adapter)
+
+
+def test_public_manifest_preparation_without_private_acquisition_path(dataset, monkeypatch, tmp_path):
+    from cam.config import RunConfig
+    from cam.harness.prepare import prepare
+
+    root, source = dataset
+    manifest = read(root / 'manifest.json')
+    del manifest['raw_data']
+    manifest['download'] = {'repo_id': 'example/demo-pool', 'revision': 'b' * 40}
+    write(root / 'manifest.json', manifest)
+    original_hash = sha256(root / 'manifest.json')
+
+    def unexpected_h5_read(*args, **kwargs):
+        raise AssertionError('Published-manifest preparation must not open H5 files')
+
+    monkeypatch.setattr(h5py, 'File', unexpected_h5_read)
+    prepared = prepare(tmp_path / 'public_run', root,
+                       RunConfig(benchmark='robomme', mode='demos', budget=0),
+                       benchmark_source=source)
+    assert prepared['raw_data_reference'] == 'hf://datasets/example/demo-pool@' + 'b' * 40
+    assert sha256(root / 'manifest.json') == original_hash
+    assert prepared['dataset_validation']['h5_scanned'] is False

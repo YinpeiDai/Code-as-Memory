@@ -4,6 +4,21 @@ from cam.io import read
 from cam.interface.registry import data_protocol
 
 
+def raw_data_reference(manifest):
+    """Use recorded acquisition provenance, or the immutable public demo release.
+
+    Published pools omit private acquisition paths. Their pinned release is a
+    reference to the distributed demonstrations, not to the historical raw data.
+    """
+    original = manifest.get('raw_data') or manifest.get('source')
+    if original:
+        return original
+    release = manifest.get('download', {})
+    if release.get('repo_id') and release.get('revision'):
+        return f"hf://datasets/{release['repo_id']}@{release['revision']}"
+    raise ValueError('Dataset must record its acquisition source or pinned public release')
+
+
 def extract(raw_data, output, benchmark='robomme', count=25, tasks=None, depth=True,
             videos=True, workers=2, benchmark_source=None, resume=False, reuse=None,
             max_successful=None, replay_cache=None, single_pass=False, validation_episodes=0):
