@@ -23,7 +23,7 @@ from cam.harness.isolation import (
 )
 from cam.core import budget, history
 from cam.harness.prepare import pinned_environment
-from cam.harness.gpu import simulator_slot
+from cam.harness.gpu import simulator_slot, wait_for_admission
 from cam.io import read
 
 
@@ -316,6 +316,7 @@ class Service:
                 OPENBLAS_NUM_THREADS="1",
             )
             with simulator_slot(self.gpu) as gpu, (self.audit / (ident + "_broker.log")).open("wb") as log:
+                wait_for_admission(gpu)
                 env["CUDA_VISIBLE_DEVICES"] = str(gpu)
                 write(self.audit / (ident + "_gpu.json"), {"gpu": gpu, "acquired": time.time()})
                 proc = subprocess.Popen(

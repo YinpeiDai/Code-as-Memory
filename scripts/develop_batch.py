@@ -261,7 +261,8 @@ def start(args):
             "selection_reason": spec["selection_reason"], "benchmarks": benches,
             "environment": env, "python": sys.executable, "runs": str((output / "dev_logs" if output else ROOT / "runs").resolve()),
             "harness_hash": tree_hash(checkout / "src/cam"),
-            "held_out_evaluation": evaluation["enabled"], "evaluation": evaluation}
+            "held_out_evaluation": evaluation["enabled"], "evaluation": evaluation,
+            "gpu_admission": {"min_free_mib": 8192, "launch_spacing_seconds": 5}}
     if getattr(args, "resource_root", None):
         plan["resource_root"] = str(args.resource_root.resolve())
     write(batch / "plan.json", plan)
@@ -394,6 +395,10 @@ def worker(batch):
                "OMP_NUM_THREADS": "1", "OPENBLAS_NUM_THREADS": "1",
                "CAM_SIMULATOR_LOCK_DIR": str(resources / "gpu_locks"),
                "CAM_SIMULATOR_GPUS": ",".join(map(str, plan["gpus"]))}
+        admission = plan.get("gpu_admission", {})
+        env.update(CAM_GPU_ADMISSION_DIR=str(resources / "gpu_admission"),
+                   CAM_GPU_MIN_FREE_MIB=str(admission.get("min_free_mib", 8192)),
+                   CAM_GPU_LAUNCH_SPACING_SECONDS=str(admission.get("launch_spacing_seconds", 5)))
         (resources / "gpu_locks").mkdir(exist_ok=True)
         (batch / "logs").mkdir(exist_ok=True)
         tasks = {f"{name}/{task}": {"benchmark": name, "task": task, "status": "waiting_data"}

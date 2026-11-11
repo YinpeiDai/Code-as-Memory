@@ -7,9 +7,9 @@ import queue
 import threading
 import time
 import traceback
-import subprocess
 
 from cam.harness.jobs import gpu_slots, locked, subprocess_job
+from cam.harness.gpu import free_mib
 from cam.harness.solutions import load_solutions, prepare_solutions
 from cam.interface.registry import get_adapter, simulator_python
 from cam.io import read, write
@@ -19,14 +19,6 @@ def executable_result(result):
     """Task failure is runnable; policy and infrastructure errors fail the check."""
     return bool(result.get("scorable") and result.get("step_calls", 0) > 0
                 and result.get("status") in ("success", "fail", "timeout", "decision_limit"))
-
-
-def free_mib(gpu):
-    probe = subprocess.run([
-        "nvidia-smi", "--id=" + str(gpu), "--query-gpu=memory.free",
-        "--format=csv,noheader,nounits",
-    ], capture_output=True, text=True, timeout=15, check=True)
-    return int(probe.stdout.strip())
 
 
 def check_solutions(solutions, output, benchmarks=None, tasks=None, gpus=(0, 1),

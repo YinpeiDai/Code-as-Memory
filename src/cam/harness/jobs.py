@@ -436,6 +436,9 @@ def evaluate(
 
     def worker(job, gpu, queue_folder):
         key, task, maximum, episode, folder = job
+        from cam.harness.gpu import wait_for_admission
+
+        wait_for_admission(gpu)
         code = subprocess_job(
             root,
             [
