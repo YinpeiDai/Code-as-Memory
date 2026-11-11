@@ -1,5 +1,8 @@
 # Getting started
 
+Build and evaluate robot memory as executable Python: learn what to remember
+from demonstrations, retain it during an episode, and use it to guide actions.
+
 ## Environment installation
 
 Install the shared Python 3.11 harness from the repository root:
@@ -29,27 +32,33 @@ Only the four top-level simulator submodules are needed.
 
 ## How CaM works
 
-Code-as-Memory turns demonstrations into an executable Python program for
-perception, memory and robot actions:
+Code-as-Memory represents robot memory in executable Python. The learned program
+stores reusable task knowledge: what to observe, what to remember and how to act.
+Its explicit memory variables retain observations and progress within an episode,
+so the robot can use information that is no longer visible.
 
-1. **Develop:** a coding agent studies assigned demonstrations, writes the policy
-   and checks it offline. Demo + interaction also permits counted training rollouts.
-2. **Freeze:** the harness saves the final program, its declared memory fields and
+1. **Develop:** a coding agent studies assigned demonstrations and writes a memory
+   program, including its memory fields, update rules and actions. It checks the
+   program offline; demo + interaction also permits counted training rollouts
+   using the same training seeds.
+2. **Freeze:** the harness saves the final memory program, its declared fields and
    exact source/configuration provenance.
-3. **Evaluate:** the program reads camera and robot observations, updates its memory
-   and sends actions through the simulator interface. Memory persists within an
-   episode and resets for the next one. Evaluation makes **zero model/API calls**.
+3. **Evaluate:** the program combines new observations with remembered information,
+   updates its memory and chooses robot actions. Episode memory resets for each
+   new episode; the learned code stays fixed. Evaluation makes **zero model/API calls**.
 
 The trusted harness owns resets, budgets and scoring.
 See [interface adaptations](interface.md) for observations and action conventions.
 
 ## Learning settings
 
-**Demo only:** develop from the assigned 25 or up-to-50 demonstrations using offline
-analysis and checks. Simulator training attempts are **zero**.
+**Demo only:** develop memory fields, update rules and actions from the assigned
+25 or up-to-50 demonstrations using offline analysis and checks. Simulator
+training attempts are **zero**.
 
-**Demo + interaction:** inspect the demonstrations and build an initial policy
-first, then use **50 total simulator attempts per task** to verify and improve it.
+**Demo + interaction:** inspect the demonstrations and build an initial memory
+program, then use **50 total simulator attempts per task** to test and refine its
+memory updates and actions.
 Each attempt uses the reset seed of one of the **50 assigned training demos,
 exactly once**. There are no new training seeds or retries. Failed attempts count;
 code revisions do not reset the budget. RoboMemArena T04 uses its actual **32 demos
@@ -73,86 +82,10 @@ object to your client, model and account settings. Authenticate that client befo
 starting development. [Experiment plans and batch commands](reproducing.md#concurrent-development)
 handle concurrent development and evaluation after each policy freezes.
 
-## Demonstration packages
-
-The original benchmark data sources and the prepared packages used by CaM are:
-
-| Benchmark | Original data source | Prepared CaM package | Available demos |
-|---|---|---|---:|
-| RoboMME | [Official H5 recordings](https://huggingface.co/datasets/Yinpei/robomme_data_h5) | [robomme-25-demos](https://huggingface.co/datasets/Yinpei/robomme-25-demos) | 400 (25/task) |
-| MIKASA-Robo | [Official RLDS trajectories](https://huggingface.co/datasets/mikasa-robo/mikasa-robo-vla-rlds) | [mikasa_robo-50-demos](https://huggingface.co/datasets/Yinpei/mikasa_robo-50-demos) | 4,500 (50/task) |
-| RMBench | [Official demonstration release](https://huggingface.co/datasets/TianxingChen/RMBench) | [rmbench-50-demos](https://huggingface.co/datasets/Yinpei/rmbench-50-demos) | 496 (48–50/task) |
-| RoboMemArena | [Official expert trajectories](https://huggingface.co/datasets/RoboMemArenaBenchmark/RoboMemArena) | [robomemarena-50-demos](https://huggingface.co/datasets/Yinpei/robomemarena-50-demos) | 1,282 (T04: 32; others: 50) |
-
-We replay MIKASA-Robo and RoboMemArena expert trajectories to record unified
-**256×256 RGB-D demonstrations through the same public interface used online**.
-RoboMME retains its released RGB-D recordings. RMBench regenerates official-expert
-trajectories at the released training seeds, capturing native **320×240 RGB-D**.
-The prepared packages already contain these captures; no replay is needed.
-
-Download a prepared package, for example RoboMME:
-
-```bash
-uv sync --locked --inexact --extra data
-DATA="$PWD/public_runs/demos/robomme"
-cam download-demos --benchmark robomme --output "$DATA" --videos
-```
-
-The command verifies the pinned release in `configs/<benchmark>/datasets/release.json`.
-`DATA` contains `manifest.json`, task H5s under `h5/`, and `selected_25.json`.
-Use `--tasks TASK` for selected tasks; `--videos` includes available preview videos.
-The MIKASA package supplies both its five-task comparison and full benchmark.
-
-A learner assigned 25 demos receives only those 25. Batch plans materialize the
-selected subset automatically; for manual preparation from a larger pool, use:
-
-```bash
-cam subset --dataset "$DATA" --output runs/assigned25 \
-  --selection "$DATA/selected_25.json" --count 25 --manifest-only
-```
-
-Pass `runs/assigned25` as the dataset afterward. RoboMME already contains its
-exact 25/task assignment and needs no additional subset.
-
-### Start development
-
-With the RoboMME package above and an authenticated coding client:
-
-```bash
-cam prepare runs --dataset "$DATA" \
-  --config configs/robomme/demos.json --tasks BinFill
-# RUN is the leaf run path printed by prepare.
-cam learn "$RUN" --gpus 0 1
-```
-
-For demo + interaction, use the matching benchmark's `both.json` and demo package.
-See [benchmark guides](benchmarks/README.md) for task names and complete commands.
-
-### Development logs
-
-[Yinpei/CaM_develop_logs](https://huggingface.co/datasets/Yinpei/CaM_develop_logs)
-contains the recorded agent logs, prompts, code revisions, results and available
-videos for RoboMME, RMBench, RoboMemArena and the five-task MIKASA VLA suite.
-
-Install `zstd` and the Hugging Face CLI, then run from the repository root:
-
-```bash
-hf download Yinpei/CaM_develop_logs --repo-type dataset \
-  --local-dir public_runs/releases/development_logs
-(cd public_runs/releases/development_logs && sha256sum -c SHA256SUMS)
-mkdir -p public_runs/dev_logs
-for archive in public_runs/releases/development_logs/archives/*.tar.zst; do
-  tar --zstd -xf "$archive" -C public_runs/dev_logs
-done
-```
-
-The archives preserve recorded log and code bytes. Their manifests list omitted
-H5s and external assets; download demonstrations separately and prepare a new run
-to reproduce development.
-
 ## Run published solutions
 
-Published policies need **no demonstrations, learning or model credentials**.
+Published robot memory programs need **no demonstration download, further
+development or model credentials** for evaluation.
 Code lives in `solutions/<benchmark>/<setting>/`; schemas, checksums and provenance
 live in `configs/solutions/`. Preparation verifies compatibility and freezes the
 unchanged imported policy as checkpoint R000.
@@ -205,3 +138,83 @@ Use `--resume BATCH` to continue; add `--retry-infrastructure` to archive and re
 unscorable crashes with identical inputs. Scored failures are never replaced.
 A passing check means error-free execution; task success is reported separately.
 See [recovery](reproducing.md#artifacts-and-recovery) for other evaluation runs.
+
+## Demonstration packages
+
+These trajectories provide the observation and action histories used to develop
+robot memory programs:
+
+| Benchmark | Original data source | Prepared CaM package | Available demos |
+|---|---|---|---:|
+| RoboMME | [Official H5 recordings](https://huggingface.co/datasets/Yinpei/robomme_data_h5) | [robomme-25-demos](https://huggingface.co/datasets/Yinpei/robomme-25-demos) | 400 (25/task) |
+| MIKASA-Robo | [Official RLDS trajectories](https://huggingface.co/datasets/mikasa-robo/mikasa-robo-vla-rlds) | [mikasa_robo-50-demos](https://huggingface.co/datasets/Yinpei/mikasa_robo-50-demos) | 4,500 (50/task) |
+| RMBench | [Official demonstration release](https://huggingface.co/datasets/TianxingChen/RMBench) | [rmbench-50-demos](https://huggingface.co/datasets/Yinpei/rmbench-50-demos) | 496 (48–50/task) |
+| RoboMemArena | [Official expert trajectories](https://huggingface.co/datasets/RoboMemArenaBenchmark/RoboMemArena) | [robomemarena-50-demos](https://huggingface.co/datasets/Yinpei/robomemarena-50-demos) | 1,282 (T04: 32; others: 50) |
+
+We replay MIKASA-Robo and RoboMemArena expert trajectories to record unified
+**256×256 RGB-D demonstrations through the same public interface used online**.
+RoboMME retains its released RGB-D recordings. RMBench regenerates official-expert
+trajectories at the released training seeds, capturing native **320×240 RGB-D**.
+The prepared packages already contain these captures; no replay is needed.
+
+Download a prepared package, for example RoboMME:
+
+```bash
+uv sync --locked --inexact --extra data
+DATA="$PWD/public_runs/demos/robomme"
+cam download-demos --benchmark robomme --output "$DATA" --videos
+```
+
+The command verifies the pinned release in `configs/<benchmark>/datasets/release.json`.
+`DATA` contains `manifest.json`, task H5s under `h5/`, and `selected_25.json`.
+Use `--tasks TASK` for selected tasks; `--videos` includes available preview videos.
+The MIKASA package supplies both its five-task comparison and full benchmark.
+
+A learner assigned 25 demos receives only those 25. Batch plans materialize the
+selected subset automatically; for manual preparation from a larger pool, use:
+
+```bash
+cam subset --dataset "$DATA" --output runs/assigned25 \
+  --selection "$DATA/selected_25.json" --count 25 --manifest-only
+```
+
+Pass `runs/assigned25` as the dataset afterward. RoboMME already contains its
+exact 25/task assignment and needs no additional subset.
+
+### Start development
+
+Develop a robot memory program with the RoboMME package above and an authenticated
+coding client:
+
+```bash
+cam prepare runs --dataset "$DATA" \
+  --config configs/robomme/demos.json --tasks BinFill
+# RUN is the leaf run path printed by prepare.
+cam learn "$RUN" --gpus 0 1
+```
+
+For demo + interaction, use the matching benchmark's `both.json` and demo package.
+See [benchmark guides](benchmarks/README.md) for task names and complete commands.
+
+### Development logs
+
+[Yinpei/CaM_develop_logs](https://huggingface.co/datasets/Yinpei/CaM_develop_logs)
+records how the robot memory programs were developed: agent logs, prompts, code
+revisions, results and available videos for RoboMME, RMBench, RoboMemArena and
+the five-task MIKASA VLA suite.
+
+Install `zstd` and the Hugging Face CLI, then run from the repository root:
+
+```bash
+hf download Yinpei/CaM_develop_logs --repo-type dataset \
+  --local-dir public_runs/releases/development_logs
+(cd public_runs/releases/development_logs && sha256sum -c SHA256SUMS)
+mkdir -p public_runs/dev_logs
+for archive in public_runs/releases/development_logs/archives/*.tar.zst; do
+  tar --zstd -xf "$archive" -C public_runs/dev_logs
+done
+```
+
+The archives preserve recorded log and code bytes. Their manifests list omitted
+H5s and external assets; download demonstrations separately and prepare a new run
+to reproduce development.

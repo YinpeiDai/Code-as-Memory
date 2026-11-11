@@ -1,7 +1,5 @@
 # 🧠 Code-as-Memory: Self-improved Robot Memory via Coding Agents
 
-[Results](docs/results.md) · [Try it](#try-it-directly) · [Demonstrations](docs/getting_started.md#demonstration-packages) · [Experiment details](docs/reproducing.md)
-
 **Can robot memory just be an executable Python program?**
 
 **Code-as-Memory (CaM)** introduces **executable code as explicit, persistent robot memory**. A coding agent distills demonstrations into a Python program that maintains and updates memory through structured variables (e.g., `dict`, `list`), enabling robots to **perceive, remember, reason and act** entirely through Python execution, without relying on any external models during inference.
@@ -16,17 +14,10 @@ CaM achieves **near-perfect performance across four robot memory benchmarks**, s
 
 ![CaM success rates and API costs across RMBench, MIKASA-robo, RoboMME, and RoboMemArena](docs/figures/benchmark_comparison.png)
 
-
-The comparison uses nine shared RMBench tasks and five shared MIKASA task identities
-(CaM: **250/250, 100.0%**, from fresh 50-demo-plus-interaction policies). Published methods use different
-training and evaluation protocols; full-suite results and provenance are in the docs.
-
 [More results can be found here →](docs/results.md)
 
 
 ## Rollout Examples
-
-[Local video gallery and recording notes](docs/media/README.md).
 
 ### RMBench
 
