@@ -1,0 +1,23 @@
+{
+  "benchmark": "mikasa_robo",
+  "mode": "demos",
+  "budget": 0,
+  "depth": true,
+  "builtin_demo": false,
+  "max_decisions": 40,
+  "max_action_steps": 2200,
+  "policy_timeout": 1800,
+  "coding": {
+    "agent": "claude_code",
+    "model": "us.anthropic.claude-opus-5-5",
+    "provider": "bedrock",
+    "reasoning_effort": "high",
+    "timeout": 21600,
+    "aws_profile": "sagemaker",
+    "aws_region": "us-east-1"
+  },
+  "training_seed_count": null,
+  "physics_backend": "cpu",
+  "training_seed_policy": "demo_cycle",
+  "suite": "mikasa_robo_vla_suite_250"
+}

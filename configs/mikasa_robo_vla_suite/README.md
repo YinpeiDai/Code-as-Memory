@@ -13,7 +13,12 @@ full-benchmark denominator.
 | [50 demos](experiments/demo_only_50.json) | [demos.json](demos.json) | 50 | 0 |
 | [50 demos + interaction](experiments/demo_interaction_50.json) | [both.json](both.json) | 50 | 50 |
 
-Every configuration uses `benchmark: "mikasa_robo"` and
+The separate [`mikasa_robo_vla_suite_250` plan](../mikasa_robo_vla_suite_250/experiments/demo_only_250.json)
+uses up to 250 successful RGB-D demos with zero interaction: 237 for ShellGameTouch,
+56 for InterceptMedium, 250 each for RememberColor3/5, and 246 for RememberColor9.
+It starts fresh policies and records the actual counts in its own run namespace.
+
+The three original settings use `benchmark: "mikasa_robo"` and
 `suite: "mikasa_robo_vla_suite"`. The demo count belongs to the experiment plan;
 the run configuration defines the learning mode, interaction budget and model.
 The 25-demo plan materializes the exact selected subset before learner admission.
@@ -22,8 +27,9 @@ using the reset seed of each of the 50 assigned training demos once. Failed
 attempts count toward that budget. Policies start blank with
 Claude Code / Opus 5.5; held-out evaluation makes no model calls.
 
-Use the MIKASA environment and its existing `mikasa_robo-50-demos` package.
-No separate simulator or dataset download is required. Configurations retain
+The three original settings use the MIKASA environment and its existing
+`mikasa_robo-50-demos` package. The up-to-250 plan requires its separately prepared
+RGB-D dataset. Configurations retain
 the CPU default; the public interface resolves ShellGameTouch to GPU physics/IK
 and the other four tasks to CPU, recording the actual backend per task.
 

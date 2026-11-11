@@ -8,11 +8,13 @@
 
 - **No model training** during development
 - **Zero model/API calls** during inference
-- **<5 ms mean policy computation per control step** in the [RoboMME replay study](docs/figures/README.md#robomme-policy-computation)
+- **<5 ms mean policy computation per control step** (refer to [RoboMME replay study](docs/figures/README.md#robomme-policy-computation))
 
 CaM achieves **near-perfect performance across four robot memory benchmarks**, significantly outperforming prior approaches with low **computational cost, financial expense, and inference latency**.
 
-![CaM success rates and API costs across RMBench, MIKASA-robo, RoboMME, and RoboMemArena](docs/figures/benchmark_comparison.png)
+![CaM offline-demo and demo-plus-interaction settings: budgets, success rates and development API costs across four Robot Memory benchmarks](docs/figures/benchmark_comparison.png)
+
+**Settings:** The official training-demo counts per task are 100 for RoboMME, 250 for MIKASA-Robo, 50 for RMBench, and 100 for RoboMemArena. **CaM** learns from offline demos (25/task for RoboMME, up to 250 for MIKASA-Robo, up to 50 for RMBench/RoboMemArena). **CaM w/ rollout** uses up to 50 demos/task and allows the same number of training rollout using demo seeds to interact with simulators. Reported costs reflect only development-time API usage (Opus 5.5), with no API calls during inference.
 
 [More results can be found here →](docs/results.md)
 
@@ -83,23 +85,16 @@ are needed for this step.
 
 | Benchmark | Published memory programs | Run and reproduce |
 |---|---|---|
-| RoboMME | [25 demonstrations](solutions/robomme/demo_only_25/) | [Guide](docs/benchmarks/robomme.md) |
-| RMBench | [50 demonstrations](solutions/rmbench/demo_only_50/) | [Guide](docs/benchmarks/rmbench.md) |
-| MIKASA-Robo | [Five-task VLA suite: 50 demonstrations + 50 training attempts](solutions/mikasa_robo_vla_suite/demo_interaction_50/) | [Guide](docs/benchmarks/mikasa_robo.md) |
-| RoboMemArena | [Up to 50 demonstrations + matching training attempts](solutions/robomemarena/demo_interaction_50/) | [Guide](docs/benchmarks/robomemarena.md) |
+| RoboMME | [Learning from 25 demos](solutions/robomme/demo_only_25/) | [Guide](docs/benchmarks/robomme.md) |
+| RMBench | [Learning from  50 demos](solutions/rmbench/demo_only_50/) | [Guide](docs/benchmarks/rmbench.md) |
+| MIKASA-Robo | [Learning from 50 demos + 50 rollouts](solutions/mikasa_robo_vla_suite/demo_interaction_50/) | [Guide](docs/benchmarks/mikasa_robo.md) |
+| RoboMemArena | [Learning from 50 demos + 50 rollouts](solutions/robomemarena/demo_interaction_50/) | [Guide](docs/benchmarks/robomemarena.md) |
 
 ## Reproduce development
 
-[Download the development logs, code, results and videos](https://huggingface.co/datasets/Yinpei/CaM_develop_logs)
-(5.54 GB compressed; [download instructions](docs/getting_started.md#development-logs)).
+[Download the development logs and code solutions](https://huggingface.co/datasets/Yinpei/CaM_develop_logs).
 
-The prepared demonstration packages contain successful trajectories:
-**25 per task for RoboMME and up to 50 per task for the other benchmarks**.
-**Demo + interaction means 50 demonstrations and at most 50 simulator training
-attempts per task across the entire development process.** Each attempt resets
-to one of those 50 training-demonstration seeds, used once. Failed attempts also
-consume the budget. RoboMemArena's T04 has 32 demonstrations and 32 attempts.
-Held-out evaluation uses separate seeds after the policy is frozen.
+The prepared packages include successful relayed trajectoris, and memory-based code polices development for different settings. Final evaluation uses separate, unseen seeds after the policy is frozen.
 
 [Download the demonstrations and configure your coding client](docs/getting_started.md),
 then choose a data path and a directory for development logs:
@@ -109,11 +104,6 @@ python scripts/develop_batch.py start configs/robomme/experiments/demo_only_25.j
   --dataset /path/to/demos/robomme --output runs/robomme_development \
   --workers 8 --gpus 0 1
 ```
-
-**Eight concurrent development jobs; five evaluation jobs per GPU.**
-[Batch evaluation, prompts, and reproduction details](docs/reproducing.md) ·
-[Five-episode sanity checks](docs/getting_started.md#sanity-checks) ·
-[Live dashboard and experiment galleries](docs/website.md)
 
 [Benchmark guides](docs/benchmarks/README.md) · [Architecture](docs/architecture.md)
 

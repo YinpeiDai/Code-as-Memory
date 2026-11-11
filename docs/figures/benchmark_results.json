@@ -154,12 +154,12 @@
     },
     {
       "benchmark": "mikasa_robo",
-      "title": "MIKASA-robo",
+      "title": "MIKASA-Robo",
       "task_count": 5,
       "metric": "Success (%)",
       "methods": [
         {
-          "method": "π₀",
+          "method": "\u03c0\u2080",
           "success_percent": 29.4,
           "task_count": 5,
           "source": "simplemem_v2",
@@ -222,6 +222,49 @@
             "RememberColor5-VLA-v0": 58,
             "RememberColor9-VLA-v0": 59
           }
+        },
+        {
+          "method": "CaM",
+          "setting": "demo_only_250",
+          "success_percent": 78.8,
+          "successes": 197,
+          "episodes": 250,
+          "task_count": 5,
+          "source": "cam_mikasa_vla_suite_250",
+          "per_task": {
+            "InterceptMedium-VLA-v0": {
+              "successes": 30,
+              "episodes": 50,
+              "demonstrations": 56,
+              "physics_backend": "cpu"
+            },
+            "RememberColor3-VLA-v0": {
+              "successes": 50,
+              "episodes": 50,
+              "demonstrations": 250,
+              "physics_backend": "cpu"
+            },
+            "RememberColor5-VLA-v0": {
+              "successes": 49,
+              "episodes": 50,
+              "demonstrations": 250,
+              "physics_backend": "cpu"
+            },
+            "RememberColor9-VLA-v0": {
+              "successes": 18,
+              "episodes": 50,
+              "demonstrations": 246,
+              "physics_backend": "cpu"
+            },
+            "ShellGameTouch-VLA-v0": {
+              "successes": 50,
+              "episodes": 50,
+              "demonstrations": 237,
+              "physics_backend": "gpu"
+            }
+          },
+          "suite": "mikasa_robo_vla_suite_250",
+          "result_note": "Fresh up-to-250-demo-only policies; successful RGB-D assignments are 237/56/250/250/246 for ShellGameTouch, InterceptMedium and RememberColor3/5/9. Zero interactions. Demo-only guidance also differs from the 50-demo interaction arm; this is not an isolated intervention on interaction budget."
         },
         {
           "method": "CaM",
@@ -567,6 +610,174 @@
         },
         {
           "method": "CaM",
+          "setting": "demo_only_50",
+          "success_percent": 90.6923076923077,
+          "successes": 1179,
+          "episodes": 1300,
+          "task_count": 26,
+          "source": "cam_robomemarena_demo_only_50",
+          "per_task": {
+            "T01_CookiesTomatoBasket": {
+              "successes": 50,
+              "episodes": 50,
+              "demonstrations": 50,
+              "csr_percent": 100.0
+            },
+            "T02_ButterPopcornBasket": {
+              "successes": 50,
+              "episodes": 50,
+              "demonstrations": 50,
+              "csr_percent": 100.0
+            },
+            "T03_CreamPuddingBasket": {
+              "successes": 50,
+              "episodes": 50,
+              "demonstrations": 50,
+              "csr_percent": 100.0
+            },
+            "T04_ButterNonEmptyDrawer": {
+              "successes": 50,
+              "episodes": 50,
+              "demonstrations": 32,
+              "csr_percent": 100.0
+            },
+            "T05_ButterEmptyDrawer": {
+              "successes": 50,
+              "episodes": 50,
+              "demonstrations": 50,
+              "csr_percent": 100.0
+            },
+            "T06_PourSauceCookiesTwice": {
+              "successes": 50,
+              "episodes": 50,
+              "demonstrations": 50,
+              "csr_percent": 100.0
+            },
+            "T07_PourSauceFrypanTwice": {
+              "successes": 50,
+              "episodes": 50,
+              "demonstrations": 50,
+              "csr_percent": 100.0
+            },
+            "T08_ChocolateFrypanPourSauceTwice": {
+              "successes": 50,
+              "episodes": 50,
+              "demonstrations": 50,
+              "csr_percent": 100.0
+            },
+            "T09_ButterFrypanPourSauceTwice": {
+              "successes": 50,
+              "episodes": 50,
+              "demonstrations": 50,
+              "csr_percent": 100.0
+            },
+            "T10_PourWineMugTwice": {
+              "successes": 50,
+              "episodes": 50,
+              "demonstrations": 50,
+              "csr_percent": 100.0
+            },
+            "T11_CookiesTopButterMiddle": {
+              "successes": 36,
+              "episodes": 50,
+              "demonstrations": 50,
+              "csr_percent": 86.0
+            },
+            "T12_CookiesChocolateMiddleDrawer": {
+              "successes": 38,
+              "episodes": 50,
+              "demonstrations": 50,
+              "csr_percent": 92.0
+            },
+            "T13_CookiesButterMiddleDrawer": {
+              "successes": 41,
+              "episodes": 50,
+              "demonstrations": 50,
+              "csr_percent": 94.0
+            },
+            "T14_CookiesChocolateDrawers": {
+              "successes": 43,
+              "episodes": 50,
+              "demonstrations": 50,
+              "csr_percent": 94.4
+            },
+            "T15_ButterFrypanPourMilkTwice": {
+              "successes": 50,
+              "episodes": 50,
+              "demonstrations": 50,
+              "csr_percent": 100.0
+            },
+            "T16_PourMilkMugTwice": {
+              "successes": 50,
+              "episodes": 50,
+              "demonstrations": 50,
+              "csr_percent": 100.0
+            },
+            "T17_ButterChocolateMiddleDrawer": {
+              "successes": 37,
+              "episodes": 50,
+              "demonstrations": 50,
+              "csr_percent": 91.33333333333334
+            },
+            "T18_ChocolateButterCabinet": {
+              "successes": 48,
+              "episodes": 50,
+              "demonstrations": 50,
+              "csr_percent": 96.0
+            },
+            "T19_SauceMilkJuiceCabinet": {
+              "successes": 20,
+              "episodes": 50,
+              "demonstrations": 50,
+              "csr_percent": 51.33333333333333
+            },
+            "T20_CookiesChocolateMicrowave": {
+              "successes": 50,
+              "episodes": 50,
+              "demonstrations": 50,
+              "csr_percent": 100.0
+            },
+            "T21_ButterChocolateMicrowave": {
+              "successes": 50,
+              "episodes": 50,
+              "demonstrations": 50,
+              "csr_percent": 100.0
+            },
+            "T22_PourSauceCookiesMicrowave": {
+              "successes": 50,
+              "episodes": 50,
+              "demonstrations": 50,
+              "csr_percent": 100.0
+            },
+            "T23_CreamPopcornMicrowave": {
+              "successes": 41,
+              "episodes": 50,
+              "demonstrations": 50,
+              "csr_percent": 88.66666666666666
+            },
+            "T24_CookiesPopcornMicrowave": {
+              "successes": 50,
+              "episodes": 50,
+              "demonstrations": 50,
+              "csr_percent": 100.0
+            },
+            "T25_ButterCreamPlate": {
+              "successes": 42,
+              "episodes": 50,
+              "demonstrations": 50,
+              "csr_percent": 84.0
+            },
+            "T26_ChocolateCreamPlate": {
+              "successes": 33,
+              "episodes": 50,
+              "demonstrations": 50,
+              "csr_percent": 75.0
+            }
+          },
+          "csr_percent": 94.33589743589742
+        },
+        {
+          "method": "CaM",
           "success_percent": 97.76923076923077,
           "successes": 1271,
           "episodes": 1300,
@@ -577,134 +788,161 @@
             "T01_CookiesTomatoBasket": {
               "successes": 50,
               "episodes": 50,
-              "demonstrations": 50
+              "demonstrations": 50,
+              "csr_percent": 100.0
             },
             "T02_ButterPopcornBasket": {
               "successes": 50,
               "episodes": 50,
-              "demonstrations": 50
+              "demonstrations": 50,
+              "csr_percent": 100.0
             },
             "T03_CreamPuddingBasket": {
               "successes": 50,
               "episodes": 50,
-              "demonstrations": 50
+              "demonstrations": 50,
+              "csr_percent": 100.0
             },
             "T04_ButterNonEmptyDrawer": {
               "successes": 50,
               "episodes": 50,
-              "demonstrations": 32
+              "demonstrations": 32,
+              "csr_percent": 100.0
             },
             "T05_ButterEmptyDrawer": {
               "successes": 50,
               "episodes": 50,
-              "demonstrations": 50
+              "demonstrations": 50,
+              "csr_percent": 100.0
             },
             "T06_PourSauceCookiesTwice": {
               "successes": 50,
               "episodes": 50,
-              "demonstrations": 50
+              "demonstrations": 50,
+              "csr_percent": 100.0
             },
             "T07_PourSauceFrypanTwice": {
               "successes": 50,
               "episodes": 50,
-              "demonstrations": 50
+              "demonstrations": 50,
+              "csr_percent": 100.0
             },
             "T08_ChocolateFrypanPourSauceTwice": {
               "successes": 50,
               "episodes": 50,
-              "demonstrations": 50
+              "demonstrations": 50,
+              "csr_percent": 100.0
             },
             "T09_ButterFrypanPourSauceTwice": {
               "successes": 50,
               "episodes": 50,
-              "demonstrations": 50
+              "demonstrations": 50,
+              "csr_percent": 100.0
             },
             "T10_PourWineMugTwice": {
               "successes": 50,
               "episodes": 50,
-              "demonstrations": 50
+              "demonstrations": 50,
+              "csr_percent": 100.0
             },
             "T11_CookiesTopButterMiddle": {
               "successes": 50,
               "episodes": 50,
-              "demonstrations": 50
+              "demonstrations": 50,
+              "csr_percent": 100.0
             },
             "T12_CookiesChocolateMiddleDrawer": {
               "successes": 50,
               "episodes": 50,
-              "demonstrations": 50
+              "demonstrations": 50,
+              "csr_percent": 100.0
             },
             "T13_CookiesButterMiddleDrawer": {
               "successes": 50,
               "episodes": 50,
-              "demonstrations": 50
+              "demonstrations": 50,
+              "csr_percent": 100.0
             },
             "T14_CookiesChocolateDrawers": {
               "successes": 50,
               "episodes": 50,
-              "demonstrations": 50
+              "demonstrations": 50,
+              "csr_percent": 100.0
             },
             "T15_ButterFrypanPourMilkTwice": {
               "successes": 50,
               "episodes": 50,
-              "demonstrations": 50
+              "demonstrations": 50,
+              "csr_percent": 100.0
             },
             "T16_PourMilkMugTwice": {
               "successes": 50,
               "episodes": 50,
-              "demonstrations": 50
+              "demonstrations": 50,
+              "csr_percent": 100.0
             },
             "T17_ButterChocolateMiddleDrawer": {
               "successes": 50,
               "episodes": 50,
-              "demonstrations": 50
+              "demonstrations": 50,
+              "csr_percent": 100.0
             },
             "T18_ChocolateButterCabinet": {
               "successes": 48,
               "episodes": 50,
-              "demonstrations": 50
+              "demonstrations": 50,
+              "csr_percent": 96.0
             },
             "T19_SauceMilkJuiceCabinet": {
               "successes": 25,
               "episodes": 50,
-              "demonstrations": 50
+              "demonstrations": 50,
+              "csr_percent": 60.0
             },
             "T20_CookiesChocolateMicrowave": {
               "successes": 50,
               "episodes": 50,
-              "demonstrations": 50
+              "demonstrations": 50,
+              "csr_percent": 100.0
             },
             "T21_ButterChocolateMicrowave": {
               "successes": 50,
               "episodes": 50,
-              "demonstrations": 50
+              "demonstrations": 50,
+              "csr_percent": 100.0
             },
             "T22_PourSauceCookiesMicrowave": {
               "successes": 50,
               "episodes": 50,
-              "demonstrations": 50
+              "demonstrations": 50,
+              "csr_percent": 100.0
             },
             "T23_CreamPopcornMicrowave": {
               "successes": 50,
               "episodes": 50,
-              "demonstrations": 50
+              "demonstrations": 50,
+              "csr_percent": 100.0
             },
             "T24_CookiesPopcornMicrowave": {
               "successes": 50,
               "episodes": 50,
-              "demonstrations": 50
+              "demonstrations": 50,
+              "csr_percent": 100.0
             },
             "T25_ButterCreamPlate": {
               "successes": 48,
               "episodes": 50,
-              "demonstrations": 50
+              "demonstrations": 50,
+              "csr_percent": 96.0
             },
             "T26_ChocolateCreamPlate": {
               "successes": 50,
               "episodes": 50,
-              "demonstrations": 50
+              "demonstrations": 50,
+              "csr_percent": 100.0
             }
-          }
+          },
+          "csr_percent": 98.15384615384616
         }
       ]
     }
@@ -754,14 +992,27 @@
     },
     "cam_api_costs": {
       "path": "docs/figures/benchmark_costs.json",
-      "sha256": "dd38a84c219074c4d8a7742681addad016195d2e4f87cc62a38eb55c05c4c613",
-      "note": "Total final session estimates across the selected development setting. RMBench cost includes all ten tasks; the success-rate panel uses nine shared tasks."
+      "sha256": "a0430393236ed19abd5d2f62e74b50210260b476d04974b52be333e080555865",
+      "note": "Final session estimates for each of the six plotted CaM settings. RMBench costs cover all ten tasks; its baseline comparison covers nine. Per-task report, session and evaluation digests retained in this manifest."
     },
     "robomme_leaderboard_embodied_astra": {
       "url": "https://robomme.github.io/leaderboard.html",
       "snapshot_sha256": "5d01a87ed6f51c54bb2c40603b0cc104cc00eb0f90a234dbe539c1b26ad9b227",
       "reported_method": "Embodied-Astra (Jedlicki et al.)",
       "note": "Unweighted mean of the 16 reported task success rates is 92.125%; displayed as 92.13% with decimal half-up rounding."
+    },
+    "cam_mikasa_vla_suite_250": {
+      "path": "validate_runs/mikasa_robo_vla_suite_250demo",
+      "run_timestamp": "20261111T061919_990098Z",
+      "evidence": "benchmark_costs.json",
+      "note": "All five frozen policies and 250 held-out results verified from original reports and result.json files; final session costs cross-checked against events.jsonl. Separate from the historical full-90 evaluation.",
+      "results": "docs/results/mikasa_robo.md"
+    },
+    "cam_robomemarena_demo_only_50": {
+      "path": "public_runs/dev_logs/robomemarena/demo_only_50",
+      "evidence": "benchmark_costs.json",
+      "note": "All 26 frozen policies and 1,300 held-out results verified from original reports and result.json files. CSR uses saved native stage scores, including partial progress on failed episodes.",
+      "results": "docs/results/robomemarena.md"
     }
   }
 }

@@ -1,7 +1,9 @@
 # RoboMME results
 
-The 16 tasks use 25 demonstrations each and no training interaction. These are the
-original frozen runs: **795/800 successes (99.38%)**. Every expected episode is scored.
+The [original benchmark release](https://github.com/RoboMME/robomme_benchmark)
+provides **100 training demonstrations per task** (1,600 across 16 tasks).
+CaM uses **25 demonstrations per task** and no training interaction. These are the
+original frozen runs: **795/800 successes (99.38%)**. Evaluation is complete.
 The published experiment used its original runner and prompt; current-harness
 reruns are separate evidence.
 
@@ -10,7 +12,7 @@ reruns are separate evidence.
 
 ## Per-task results
 
-Successful / scored episodes; each denominator also equals the expected count.
+Successful/total held-out episodes.
 
 | Task | 25 demos only |
 |---|---:|

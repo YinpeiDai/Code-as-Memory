@@ -1,8 +1,10 @@
 # RMBench results
 
-Both settings use no training interaction. The larger pool has 49 demonstrations
+The [original simulation training protocol](https://arxiv.org/html/2603.01229v1#S5.SS1)
+uses **50 expert demonstrations per task**. CaM uses **25 or up to 50 demos/task**,
+with no training interaction. The larger pool has 49 demonstrations
 for `battery_try`, 49 for `blocks_ranking_try`, 48 for `observe_and_pickup`, and
-50 for each remaining task. Each policy has 100 scored/expected held-out episodes.
+50 for each remaining task. Each policy is evaluated on all 100 held-out episodes.
 
 [25-demo code](../../solutions/rmbench/demo_only_25/README.md) ·
 [50-demo code](../../solutions/rmbench/demo_only_50/README.md)
@@ -13,7 +15,7 @@ the code and original provenance without relabelling these scores. Current devel
 
 ## Per-task results
 
-Successful / scored episodes; each denominator also equals the expected count.
+Successful/total held-out episodes.
 
 | Task | 25 demos only | Up to 50 demos only |
 |---|---:|---:|

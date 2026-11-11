@@ -1,15 +1,18 @@
 # Results and provenance
 
 Results are reported separately for each benchmark, setting and evaluation scope.
-Every denominator below is both the scored and expected episode count. Per-task
+Tables report **successful/total** held-out episodes; every listed evaluation is complete. Per-task
 tables, solution links and evidence limitations are on each benchmark's result page.
 New sanity checks and current-interface reruns never replace original scores.
 
 ## RoboMME
 
-| Setting | Successful / scored / expected | Success rate |
+The original release provides [**100 training demos/task**](https://github.com/RoboMME/robomme_benchmark).
+CaM uses **25/task** with zero interaction.
+
+| Setting | Successful/total | Success rate |
 |---|---:|---:|
-| 25 demos only | 795 / 800 / 800 | 99.38% |
+| 25 demos only | 795/800 | 99.38% |
 
 [All 16 tasks and provenance](results/robomme.md).
 
@@ -21,13 +24,22 @@ The subset follows [SimpleMemVLA, Table 3](https://arxiv.org/pdf/2609.05533v2)
 and is named `mikasa_robo_vla_suite` in code. It uses the same simulator and public
 interface; the separate namespace keeps its policies and scores distinct.
 
-| Scope | Setting / result version | Successful / scored / expected | Success rate |
+The original VLA release provides [**250 training demos/task**](https://mikasarobo.github.io/datasets.html).
+CaM uses **25, 50 or up to 250/task**, with interaction budgets shown below.
+
+| Scope | Setting / result version | Successful/total | Success rate |
 |---|---|---:|---:|
-| Five publication tasks | 25 demos only | 153 / 250 / 250 | 61.2% |
-| Five publication tasks | 50 demos only | 175 / 250 / 250 | 70.0% |
-| Five publication tasks | 50 demos + 50 interactions | 250 / 250 / 250 | 100% |
-| Full 90 tasks | Original published 50 demos + interaction | 4,444 / 4,500 / 4,500 | 98.76% |
-| Full 90 tasks | Aggregate with GPU ShellGameTouch update | 4,469 / 4,500 / 4,500 | 99.31% |
+| Five publication tasks | 25 demos only | 153/250 | 61.2% |
+| Five publication tasks | 50 demos only | 175/250 | 70.0% |
+| Five publication tasks | Up to 250 demos only | 197/250 | 78.8% |
+| Five publication tasks | 50 demos + 50 interactions | 250/250 | 100% |
+| Full 90 tasks | Original published 50 demos + interaction | 4,444/4,500 | 98.76% |
+| Full 90 tasks | Aggregate with GPU ShellGameTouch update | 4,469/4,500 | 99.31% |
+
+The up-to-250 arm, `mikasa_robo_vla_suite_250`, uses 237/56/250/250/246 successful
+RGB-D demos for ShellGameTouch, InterceptMedium and RememberColor3/5/9, respectively,
+with zero interaction. Its updated demo-only guidance and provenance are recorded
+on the [MIKASA results page](results/mikasa_robo.md#five-task-publication-comparison).
 
 The GPU-updated aggregate is not a new full-suite rerun. Full-90 scores remain
 separate from the five-task comparison.
@@ -36,20 +48,31 @@ separate from the five-task comparison.
 
 ## RMBench
 
-| Setting | Successful / scored / expected | Success rate |
+The original simulation protocol uses [**50 training demos/task**](https://arxiv.org/html/2603.01229v1#S5.SS1).
+CaM uses **25 or up to 50/task** with zero interaction; the larger assignment has
+48–50 successful demos per task.
+
+| Setting | Successful/total | Success rate |
 |---|---:|---:|
-| 25 demos only | 927 / 1,000 / 1,000 | 92.70% |
-| Up to 50 demos only | 1,000 / 1,000 / 1,000 | 100.00% |
+| 25 demos only | 927/1,000 | 92.70% |
+| Up to 50 demos only | 1,000/1,000 | 100.00% |
 
 [All ten tasks, exact demo counts and interface provenance](results/rmbench.md).
 
 ## RoboMemArena
 
-| Setting | Successful / scored / expected | Whole-task success (TSR) |
-|---|---:|---:|
-| 25 demos only | 1,070 / 1,300 / 1,300 | 82.31% |
-| Up to 50 demos only | 1,179 / 1,300 / 1,300 | 90.69% |
-| Up to 50 demos + matching interactions | 1,271 / 1,300 / 1,300 | 97.77% |
+The original dataset provides [**100 full-task training demos/task**](https://arxiv.org/html/2605.10921v1#S3.SS3).
+CaM uses **25 or up to 50/task**; T04 has 32 in the larger assignment. Interaction
+uses one attempt per assigned demo (50/task, or 32 for T04).
+
+| Setting | Successful/total | Whole-task success (TSR) | Cumulative success (CSR) |
+|---|---:|---:|---:|
+| 25 demos only | 1,070/1,300 | 82.31% | 91.69% |
+| Up to 50 demos only | 1,179/1,300 | 90.69% | 94.34% |
+| Up to 50 demos + matching interactions | 1,271/1,300 | 97.77% | 98.15% |
+
+CSR averages the native completed-stage percentage across episodes, giving
+partial credit for progress within a task.
 
 [All 26 tasks, budgets and prompt differences](results/robomemarena.md).
 
@@ -64,10 +87,12 @@ and all 26 RoboMemArena tasks. Sources are the
 Training budgets, sensing, simulator versions and evaluation protocols differ.
 RoboMemArena baseline entries are literature-reported/unverified by its maintainers.
 
-Development API costs are **$22.72** for RMBench, **$33.81** for the MIKASA VLA suite,
-**$29.44** for RoboMME and **$278.57** for RoboMemArena; evaluation makes zero API
-calls. These are usage estimates excluding compute and data preparation.
-RMBench's cost covers all ten developed tasks; its figure compares nine.
+The figure separates demo-only learning (25 demos for RoboMME, up to 250 for
+MIKASA and up to 50 for RMBench/RoboMemArena) from demos + interaction on MIKASA
+and RoboMemArena. Each setting shows its own success and development API cost.
+MIKASA's interaction arm uses 50 demos + 50 attempts.
+See [exact budgets, costs and sources](figures/README.md). Evaluation makes zero
+API calls; development costs exclude compute and data preparation.
 
 The [RoboMME computation study](figures/robomme_efficiency.png) measures **1.413 ms
 mean policy computation per control step**, including action helpers and excluding

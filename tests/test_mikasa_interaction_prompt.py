@@ -39,13 +39,19 @@ def test_guidance_is_only_for_mikasa_both_v2(mode, budget, protocol):
             assert "Maximum simulator attempts: " + str(budget) in prompt
 
 
-@pytest.mark.parametrize("benchmark", ["mikasa_robo_v2", "robomemarena"])
-def test_preparation_pins_guidance_and_records_its_provenance(run_factory, monkeypatch, benchmark):
+@pytest.mark.parametrize("benchmark,mode,budget", [
+    ("mikasa_robo_v2", "both", 2),
+    ("robomemarena", "both", 2),
+    ("mikasa_robo", "demos", 0),
+])
+def test_preparation_pins_guidance_and_records_its_provenance(run_factory, monkeypatch, benchmark, mode, budget):
     # The synthetic RoboMME fixture exercises full preparation without MIKASA
     # data, benchmark implementation, a native simulator, or a coding client.
-    relative = BENCHMARK_MODE_GUIDANCE[(benchmark, "both", "demo_first" if benchmark == "robomemarena" else "v2")]
-    monkeypatch.setitem(BENCHMARK_MODE_GUIDANCE, ("robomme", "both", "v2"), relative)
-    root = run_factory("both", 2, both_protocol="v2")
+    protocol = None if mode == "demos" else "demo_first" if benchmark == "robomemarena" else "v2"
+    relative = BENCHMARK_MODE_GUIDANCE[(benchmark, mode, protocol)]
+    fixture_protocol = "v2" if mode == "both" else None
+    monkeypatch.setitem(BENCHMARK_MODE_GUIDANCE, ("robomme", mode, fixture_protocol), relative)
+    root = run_factory(mode, budget, both_protocol=fixture_protocol)
     manifest = validate_run(root)
     entry = manifest["benchmark_mode_guidance"]
     task = root / "tasks/BinFill"
@@ -57,3 +63,27 @@ def test_preparation_pins_guidance_and_records_its_provenance(run_factory, monke
     pinned.write_text("Changed guidance\n")
     with pytest.raises(ValueError, match="Pinned source changed"):
         validate_run(root)
+
+
+@pytest.mark.parametrize("benchmark", ["mikasa_robo", "mikasa_robo_v2", "robomme", "rmbench", "robomemarena"])
+def test_demo_only_notes_preserve_shared_prompt_and_zero_attempts(benchmark):
+    class Adapter:
+        guide = "mikasa_robo/guide.md"
+
+        def task_guide(self, task):
+            raise AssertionError("Private task information must not enter the prompt")
+
+        diagnostic_task_contract = task_guide
+
+    config = RunConfig(benchmark=benchmark, mode="demos", budget=0)
+    supplement = (ROOT / "mikasa_robo/demos.md").read_text()
+    interaction = (ROOT / "mikasa_robo/both.md").read_text()
+    expected = benchmark in ("mikasa_robo", "mikasa_robo_v2")
+    for task in ("ShellGameTouch-VLA-v0", "InterceptMedium-VLA-v0", "RememberColor3-VLA-v0", "RememberColor5-VLA-v0", "RememberColor9-VLA-v0"):
+        prompt = render(config, task, [{"episode": i} for i in range(250)], [], adapter=Adapter())
+        assert prompt.count(supplement) == int(expected)
+        assert interaction not in prompt
+        assert (ROOT / "modes/demos.md").read_text() in prompt
+        assert "Assigned expert demonstrations: 250;" in prompt
+        assert "Maximum simulator attempts: 0 total." in prompt
+        assert "`rollout` is disabled" in prompt

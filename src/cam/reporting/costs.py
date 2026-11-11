@@ -11,6 +11,39 @@ TOKEN_KEYS = (
     "cache_read_input_tokens",
 )
 
+# Standard list prices effective 2026-10-22, USD per million tokens.
+# Explicit profiles avoid applying global prices to regional Bedrock inference.
+PRICING_SOURCE = "https://assets.claude.com/5633dc848caa431115468f31c7085d695bbfb9cc.pdf"
+LIVE_RATES = {
+    ("bedrock", "us.anthropic.claude-opus-5-5"): (4.4, 22, 5.5, 8.8, 0.22),
+    ("bedrock", "global.anthropic.claude-opus-5-5"): (4, 20, 5, 8, 0.20),
+    ("anthropic", "claude-opus-5-5"): (4, 20, 5, 8, 0.20),
+}
+
+
+def estimate_requests(requests, coding):
+    """Viewer-only standard-rate estimate; never replace saved reported costs."""
+    rates = LIVE_RATES.get((coding.get("provider"), coding.get("model")))
+    if rates is None or not requests:
+        return None
+    total = 0.0
+    for request in requests:
+        if request.get("model") != "claude-opus-5-5":
+            return None  # Mixed or unknown models need their own verified rates.
+        usage = request.get("usage", {})
+        if not usage:
+            return None
+        if usage.get("service_tier", "standard") != "standard":
+            return None
+        creation = usage.get("cache_creation", {})
+        long_writes = creation.get("ephemeral_1h_input_tokens", 0)
+        short_writes = creation.get("ephemeral_5m_input_tokens", 0)
+        short_writes += max(0, usage.get("cache_creation_input_tokens", 0) - short_writes - long_writes)
+        tokens = (usage.get("input_tokens", 0), usage.get("output_tokens", 0),
+                  short_writes, long_writes, usage.get("cache_read_input_tokens", 0))
+        total += sum(count * rate for count, rate in zip(tokens, rates)) / 1_000_000
+    return total
+
 
 def write(path, value):
     path.parent.mkdir(parents=True, exist_ok=True)

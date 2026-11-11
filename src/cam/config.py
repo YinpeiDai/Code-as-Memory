@@ -5,13 +5,14 @@ from dataclasses import asdict, dataclass, field
 MODES = ("demos", "interaction", "both")
 DEMO_FIRST_BENCHMARKS = ("mikasa_robo", "robomemarena")
 COMPARISON_SUITES = {
-    "mikasa_robo_vla_suite": {
+    name: {
         "benchmark": "mikasa_robo",
         "tasks": (
             "ShellGameTouch-VLA-v0", "InterceptMedium-VLA-v0",
             "RememberColor3-VLA-v0", "RememberColor5-VLA-v0", "RememberColor9-VLA-v0",
         ),
-    },
+    }
+    for name in ("mikasa_robo_vla_suite", "mikasa_robo_vla_suite_250")
 }
 BOTH_PROTOCOLS = {
     "v1": "Free use of demonstrations and interaction",

@@ -71,6 +71,11 @@ The suite shares eight coding workers (3/3/2) and evaluates each policy after
 freeze. ShellGameTouch uses GPU physics/IK; other MIKASA tasks use CPU by default,
 in both training and evaluation. The backend is selected by the interface.
 
+The separate [`mikasa_robo_vla_suite_250` plan](../configs/mikasa_robo_vla_suite_250/experiments/demo_only_250.json)
+develops fresh demo-only policies using up to 250 successful RGB-D replays per task.
+Run it with `scripts/develop_batch.py start` and its separately prepared dataset;
+the 50-demo package is insufficient. See [actual counts and results](results/mikasa_robo.md#five-task-publication-comparison).
+
 The full 90-task plan remains at
 `configs/mikasa_robo/experiments/demo_interaction_50.json`. Keep its results
 separate from the five-task comparison.

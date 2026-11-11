@@ -7,7 +7,7 @@ its benchmark's public interface guide from `src/cam/interface/<benchmark>/`.
 | Benchmark | Additional guidance |
 |---|---|
 | [RoboMME](robomme/README.md) | Public observation/action API and the shared learning mode |
-| [MIKASA-Robo](mikasa_robo/README.md) | Demo-first interaction guidance; one documented cue-order clarification |
+| [MIKASA-Robo](mikasa_robo/README.md) | Demo-only memory/motion notes; demo-first interaction guidance; one documented cue-order clarification |
 | [RMBench](rmbench/README.md) | Public motion/observation API; shared demo-only prompt |
 | [RoboMemArena](robomemarena/README.md) | Demo-first interaction guidance with full assigned-budget use |
 

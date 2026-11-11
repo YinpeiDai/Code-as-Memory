@@ -16,6 +16,8 @@ TASK_CLARIFICATIONS = {
 BENCHMARK_MODE_GUIDANCE = {
     # RMBench uses the shared demo-only prompt, including its final offline
     # code review. Its retired supplement is archived in legacy/rmbench/prompts/.
+    ("mikasa_robo", "demos", None): "mikasa_robo/demos.md",
+    ("mikasa_robo_v2", "demos", None): "mikasa_robo/demos.md",
     ("mikasa_robo", "both", "demo_first"): "mikasa_robo/both.md",
     ("mikasa_robo_v2", "both", "v2"): "mikasa_robo/both.md",
     ("robomemarena", "both", "demo_first"): "robomemarena/both.md",

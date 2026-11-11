@@ -20,6 +20,13 @@ By default, the viewer selects the best published setting and latest run per tas
 Use **Show all settings** or **Show history** for other experiments, and
 **Refresh log** to update an open transcript.
 
+Development cards and task pages show the coding agent/model, API cost and work
+time. Running timers update each second; usage refreshes automatically. Work time
+counts coding sessions only, with concurrent jobs counted separately in the total.
+Live costs use logged tokens and [verified standard list prices](https://assets.claude.com/5633dc848caa431115468f31c7085d695bbfb9cc.pdf)
+where available, then use the client's reported total. Estimates are labelled;
+missing costs remain unavailable, and simulator compute is excluded.
+
 Generated files stay inside the selected root:
 
 | Path | Contents |

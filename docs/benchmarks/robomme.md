@@ -1,7 +1,9 @@
 # RoboMME
 
-Sixteen tasks, with 25 demonstrations each, no training interaction and 50
-held-out episodes per policy. Use the released demo package without replay.
+The [original training release](https://github.com/RoboMME/robomme_benchmark)
+provides **100 demonstrations per task**, or **1,600 across 16 tasks**.
+CaM uses **25 demos/task**, no training interaction and 50 held-out episodes per
+policy. Use the prepared CaM demo package without replay.
 
 ## Run a published policy
 

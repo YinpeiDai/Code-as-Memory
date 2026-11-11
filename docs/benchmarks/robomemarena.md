@@ -1,6 +1,11 @@
 # RoboMemArena
 
-The larger assignment has 50 demos per task except T04, which has 32.
+The [original benchmark dataset](https://arxiv.org/html/2605.10921v1#S3.SS3)
+provides **100 successful full-task demonstrations per task**, or **2,600 across
+26 tasks**. Its subtask segments belong to those trajectories and are not extra
+independent demonstrations.
+
+CaM's larger assignment has **50 demos/task**, except **T04, which has 32**.
 Demo + interaction permits **50 simulator training attempts total per task**,
 one reset using each of the 50 training-demo seeds. T04 instead gets 32 attempts,
 one per assigned demo seed. The budget spans all code revisions; failed attempts

@@ -15,6 +15,7 @@ import time
 
 from cam.io import read, write
 from cam.config import COMPARISON_SUITES
+from cam.reporting.costs import PRICING_SOURCE, estimate_requests
 
 BENCHMARKS = ("robomme", "mikasa_robo", "rmbench", "robomemarena")
 BEST_SETTINGS = {"robomme": "demo_only_25", "mikasa_robo": "demo_interaction_50",
@@ -137,6 +138,48 @@ def _state(folder, frozen):
     return "prepared"
 
 
+def development_metrics(folder, coding, status, now=None):
+    """Read session costs and work time without changing the experiment logs."""
+    now = time.time() if now is None else now
+    sessions = sorted((folder / "logs").glob("session_*"))
+    costs, seconds, estimated, active = [], [], False, 0
+    for session in sessions:
+        launch = load(session / "launch.json")
+        completion = load(session / "completion.json")
+        usage = load(session / "usage.json")
+        if not usage:
+            usage = next((row for row in completion.get("usage", {}).get("sessions", [])
+                          if row.get("session") == session.name), {})
+        cost = usage.get("reported_cost_usd")
+        if cost is None:
+            cost = estimate_requests(load(session / "requests.json", []), {**coding, **launch})
+            estimated |= cost is not None
+        if cost is not None:
+            costs.append(cost)
+        duration = completion.get("seconds")
+        started = launch.get("started") or load(session / "process.json").get("started")
+        if duration is None and started is not None:
+            ended = completion.get("finished")
+            if not completion and session == sessions[-1] and status in ("running", "starting"):
+                ended = now
+                active += 1
+            elif ended is None and status == "frozen" and session == sessions[-1]:
+                ended = load(folder / "policy/freeze.json").get("frozen_at")
+            if ended is not None:
+                duration = max(0, ended - started)
+        if duration is not None:
+            seconds.append(duration)
+    return {
+        "api_cost_usd": sum(costs) if costs else None,
+        "cost_estimated": estimated,
+        "cost_complete": bool(sessions) and len(costs) == len(sessions),
+        "pricing_source": PRICING_SOURCE if estimated else None,
+        "work_seconds": sum(seconds) if seconds else None,
+        "time_complete": bool(sessions) and len(seconds) == len(sessions),
+        "active_sessions": active, "updated": now,
+    }
+
+
 def _episode(path, root, run_id, benchmark, setting, task, kind):
     raw = load(path)
     if not raw or "episode" not in raw:
@@ -223,6 +266,7 @@ def index_directory(data_root):
                     "expected": sanity.get("expected", len(plan.get("test_episodes", {}).get(task, []))),
                     "assigned_demos": plan.get("demonstrations_per_task", {}).get(task, 0),
                     "budget": config.get("budget", 0), "model": config.get("coding", {}).get("model", ""),
+                    "coding_agent": config.get("coding", {}).get("agent"),
                     "prompt": _within(root, folder / "prompt.md") if (folder / "prompt.md").is_file() else None,
                     "manifest": _within(root, directory / "run.json"),
                     "logs": _files(folder, ["logs/session_*/events.jsonl", "logs/session_*/*.txt", "logs/session_*/*.log"], root),
@@ -239,6 +283,8 @@ def index_directory(data_root):
                     item["evaluation_status"] = batch.get("task_status", {}).get(key, item["evaluation_status"])
             if item["evaluation_only"]:
                 item["development_status"] = "published policy"
+            else:
+                item["development"] = development_metrics(folder, config.get("coding", {}), item["development_status"])
             # A run's assigned demos are portable inside its own preparation.
             manifest = load(directory / "inputs/dataset.json")
             assignment = manifest.get("tasks", {}).get(task, {})

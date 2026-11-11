@@ -8,29 +8,48 @@ which reports VLA baselines from MemoryVLA++ and a per-task GMP reference.
 it uses the same MIKASA simulator and public interface. We ran both scopes and
 report their scores separately.
 
+The [original VLA training release](https://mikasarobo.github.io/datasets.html)
+provides **250 demonstrations per task** (22,500 across 90 tasks; 1,250 for the
+five-task subset). CaM's comparison uses **25, 50 or up to 250 demos/task**, with
+the actual assignments and interaction budgets reported below.
+
 ## Five-task publication comparison
 
-The 15 policies started blank. Demo-only permits zero simulator attempts;
+All 20 policies started blank. Demo-only permits zero simulator attempts;
 interaction uses **50 attempts per task**, one per assigned demo seed across all
 revisions. The 25-demo arm receives only its selected subset. Each policy freezes
 before evaluation on the same 50 held-out identities, with native scoring and no
 model calls.
 
-| Task | 25 demos only | 50 demos only | 50 demos + 50 interactions |
-|---|---:|---:|---:|
-| `ShellGameTouch-VLA-v0` | 10/50 | 43/50 | 50/50 |
-| `InterceptMedium-VLA-v0` | 44/50 | 41/50 | 50/50 |
-| `RememberColor3-VLA-v0` | 50/50 | 45/50 | 50/50 |
-| `RememberColor5-VLA-v0` | 48/50 | 31/50 | 50/50 |
-| `RememberColor9-VLA-v0` | 1/50 | 15/50 | 50/50 |
-| **Total** | **153/250 (61.2%)** | **175/250 (70.0%)** | **250/250 (100%)** |
+| Task | 25 demos only | 50 demos only | Up to 250 demos only | 50 demos + 50 interactions |
+|---|---:|---:|---:|---:|
+| `ShellGameTouch-VLA-v0` | 10/50 | 43/50 | 50/50 | 50/50 |
+| `InterceptMedium-VLA-v0` | 44/50 | 41/50 | 30/50 | 50/50 |
+| `RememberColor3-VLA-v0` | 50/50 | 45/50 | 50/50 | 50/50 |
+| `RememberColor5-VLA-v0` | 48/50 | 31/50 | 49/50 | 50/50 |
+| `RememberColor9-VLA-v0` | 1/50 | 15/50 | 18/50 | 50/50 |
+| **Total** | **153/250 (61.2%)** | **175/250 (70.0%)** | **197/250 (78.8%)** | **250/250 (100%)** |
 
-Coverage is **750/750 scored episodes**, with zero policy or infrastructure errors.
+All **1,000 held-out episodes** across the four settings completed, with zero
+policy or infrastructure errors. Table entries are successful/total episodes.
 All arms use 256×256 RGB-D and GPU rendering. ShellGameTouch uses GPU physics/IK;
 the other four use CPU physics/IK. Matching the published task set does not imply
 identical training budgets, sensing, simulator versions or evaluation protocols.
 
-The byte-identical frozen solutions and immutable catalogs are published here:
+The [`mikasa_robo_vla_suite_250` plan](../../configs/mikasa_robo_vla_suite_250/experiments/demo_only_250.json)
+uses only successful RGB-D replays from the 250 released training demos per task:
+**237** for ShellGameTouch, **56** for InterceptMedium, **250** each for
+RememberColor3/5, and **246** for RememberColor9 (**1,039 total**). Failed replays
+are excluded. This arm adds the approved
+[MIKASA demo-only guidance](../../src/cam/prompts/mikasa_robo/demos.md). Its score is
+**8.8 percentage points** above the 50-demo result; the data budget and prompt
+both differ. InterceptMedium decreases from 41/50 to 30/50.
+
+The new arm's development API cost is **$20.01**, as reported by the coding client,
+excluding compute and data preparation. Its batch is `20261111T061919_990098Z`;
+logs, frozen policies and rollouts remain under
+`validate_runs/mikasa_robo_vla_suite_250demo/`. The published solution and download
+links below cover the three original settings:
 
 | Setting | Code | Schemas, checksums and provenance |
 |---|---|---|
@@ -38,17 +57,17 @@ The byte-identical frozen solutions and immutable catalogs are published here:
 | 50 demos only | [Solutions](../../solutions/mikasa_robo_vla_suite/demo_only_50/README.md) | [Catalog](../../configs/solutions/mikasa_robo_vla_suite/demo_only_50.json) |
 | 50 demos + interaction | [Solutions](../../solutions/mikasa_robo_vla_suite/demo_interaction_50/README.md) | [Catalog](../../configs/solutions/mikasa_robo_vla_suite/demo_interaction_50.json) |
 
-[Download development logs](../getting_started.md#development-logs) for all 15
+[Download development logs](../getting_started.md#development-logs) for the original 15
 policies, including prompts, revisions and the 250 training rollouts. The catalogs
 record source checkpoints, code/prompt hashes, assigned budgets, physics backends
-and scored/expected counts.
+and evaluation coverage.
 
 ## Full 90-task benchmark
 
-| Result version | Successful / scored / expected | Success rate |
+| Result version | Successful/total | Success rate |
 |---|---:|---:|
-| Original published archive | 4,444 / 4,500 / 4,500 | 98.76% |
-| Aggregate with updated GPU ShellGameTouch | 4,469 / 4,500 / 4,500 | 99.31% |
+| Original published archive | 4,444/4,500 | 98.76% |
+| Aggregate with updated GPU ShellGameTouch | 4,469/4,500 | 99.31% |
 
 The GPU-updated aggregate is not a new full-suite rerun. Both versions remain
 separate from the five-task comparison.
@@ -57,7 +76,7 @@ separate from the five-task comparison.
 
 ### Original per-task results
 
-Successful / scored episodes; every denominator also equals the expected count.
+Successful/total held-out episodes.
 Only ShellGameTouch changes to 50/50 in the updated aggregate described above.
 
 | Task | 50 demos + 50 interactions |
@@ -155,6 +174,6 @@ Only ShellGameTouch changes to 50/50 in the updated aggregate described above.
 | **Total** | **4,444/4,500 (98.76%)** |
 
 Original records remain under `public_runs/eval/mikasa_robo/demo_interaction_50/`.
-The five-task comparison's 750 results are kept separate.
+The five-task comparison's 1,000 results are kept separate.
 
 [Run or develop MIKASA](../benchmarks/mikasa_robo.md) · [All benchmark results](../results.md)

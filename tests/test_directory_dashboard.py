@@ -1,8 +1,64 @@
 """Directory indexing retains coverage, evidence boundaries and portable links."""
+import os
 import shutil
+
+import pytest
 
 from cam.io import write
 from cam.reporting.catalog import index_directory
+
+
+def test_live_development_cost_time_and_agent_then_freeze(tmp_path, monkeypatch):
+    from cam.reporting import catalog
+
+    coding = {"agent": "claude_code", "model": "us.anthropic.claude-opus-5-5", "provider": "bedrock"}
+    root = tmp_path / "demo_only_56" / "run"
+    folder = root / "tasks/Example"
+    session = folder / "logs/session_000"
+    write(root / "run.json", {"config": {"benchmark": "mikasa_robo", "coding": coding},
+                              "tasks": ["Example"], "test_episodes": {"Example": [0]}})
+    write(session / "launch.json", {**coding, "started": 100})
+    write(session / "process.json", {"pid": os.getpid(), "started": 101})
+    request = {"model": "claude-opus-5-5", "usage": {
+        "input_tokens": 1_000_000, "output_tokens": 1_000_000,
+        "cache_creation_input_tokens": 3_000_000, "cache_read_input_tokens": 1_000_000,
+        "cache_creation": {"ephemeral_5m_input_tokens": 1_000_000, "ephemeral_1h_input_tokens": 2_000_000}}}
+    write(session / "requests.json", [request])
+    monkeypatch.setattr(catalog.time, 'time', lambda: 160)
+    run = index_directory(tmp_path)['runs'][0]
+    assert run['coding_agent'] == 'claude_code'
+    metrics = run['development']
+    assert metrics['api_cost_usd'] == pytest.approx(49.72)
+    assert metrics['cost_estimated'] and metrics['cost_complete']
+    assert metrics['work_seconds'] == 60 and metrics['active_sessions'] == 1
+
+    write(session / "completion.json", {"seconds": 75, "finished": 175})
+    write(session / "usage.json", {"reported_cost_usd": 48.5})
+    write(folder / "policy/freeze.json", {"frozen_at": 175})
+    monkeypatch.setattr(catalog.time, 'time', lambda: 600)
+    metrics = index_directory(tmp_path)['runs'][0]['development']
+    assert metrics['api_cost_usd'] == 48.5 and not metrics['cost_estimated']
+    assert metrics['work_seconds'] == 75 and metrics['active_sessions'] == 0
+
+
+def test_development_resume_excludes_idle_time_and_unknown_prices(tmp_path):
+    from cam.reporting.catalog import development_metrics
+
+    first = tmp_path / 'logs/session_000'
+    write(first / 'launch.json', {'started': 100})
+    write(first / 'completion.json', {'seconds': 30, 'finished': 130})
+    write(first / 'usage.json', {'reported_cost_usd': 0.25})
+    second = tmp_path / 'logs/session_001'
+    write(second / 'launch.json', {'started': 200, 'provider': 'unknown', 'model': 'unknown'})
+    write(second / 'requests.json', [{'model': 'unknown', 'usage': {'input_tokens': 100}}])
+    metrics = development_metrics(tmp_path, {}, 'running', now=220)
+    assert metrics['work_seconds'] == 50 and metrics['active_sessions'] == 1
+    assert metrics['api_cost_usd'] == 0.25 and not metrics['cost_complete']
+    interrupted = development_metrics(tmp_path, {}, 'interrupted', now=1000)
+    assert interrupted['work_seconds'] == 30 and not interrupted['time_complete']
+    assert interrupted['active_sessions'] == 0
+    (first / 'usage.json').unlink()
+    assert development_metrics(tmp_path, {}, 'interrupted')['api_cost_usd'] is None
 
 
 def test_sanity_groups_live_counts_and_portable_ids(tmp_path):

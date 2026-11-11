@@ -10,12 +10,14 @@ from pathlib import Path
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
+from matplotlib.patches import Patch
 import numpy as np
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "docs/figures"
 INK, MUTED, LINE = "#18273B", "#65758A", "#E5EBF3"
 ACCENT, BASE, PALE = "#008D7F", "#9BAFCB", "#F0F4F8"
+OFFLINE = "#3167B2"
 plt.rcParams.update({
     "font.family": "DejaVu Sans", "font.size": 12, "text.color": INK,
     "axes.labelcolor": MUTED, "xtick.color": MUTED, "ytick.color": MUTED,
@@ -46,41 +48,69 @@ def save(fig, name):
 def benchmark_comparison():
     data = json.loads((OUT / "benchmark_results.json").read_text())
     costs = json.loads((OUT / "benchmark_costs.json").read_text())["benchmarks"]
-    fig = plt.figure(figsize=(17, 6.8))
-    for i, panel in enumerate(data["panels"]):
+    fig = plt.figure(figsize=(17, 8.8))
+    fig.legend(handles=[Patch(color=BASE, label="Baselines"),
+                        Patch(color=OFFLINE, label="CaM: demos only"),
+                        Patch(color=ACCENT, label="CaM: demos + interaction")],
+               loc="upper center", bbox_to_anchor=(.51, .995), frameon=False,
+               ncol=3, fontsize=19, handlelength=1.1, columnspacing=1.6)
+    panels = {panel["benchmark"]: panel for panel in data["panels"]}
+    excluded_methods = {("mikasa_robo", "MemoryVLA"), ("robomemarena", "FrameSamp+Modul")}
+    for i, benchmark in enumerate(("rmbench", "robomme", "mikasa_robo", "robomemarena")):
+        panel = panels[benchmark]
         left, width = .025 + i * .245, .215
-        ax = fig.add_axes([left, .29, width, .612])
+        ax = fig.add_axes([left, .235, width, .575])
+        rows = [row for row in panel["methods"]
+                if (benchmark, row["method"]) not in excluded_methods]
+        positions = np.arange(len(rows) - 1, -1, -1)
+        colors = [BASE if row["method"] != "CaM" else
+                  ACCENT if row["setting"].startswith("demo_interaction") else OFFLINE
+                  for row in rows]
+        ax.barh(positions, 100, height=.28, color=PALE, edgecolor="none", zorder=1)
+        ax.barh(positions, [row["success_percent"] for row in rows], height=.28,
+                color=colors, edgecolor="none", zorder=2)
         ax.set_xlim(0, 100)
-        ax.set_ylim(-.4, 5.7)
-        ax.set_title(panel["title"], loc="left", fontsize=23, weight="bold", pad=18)
-        for y, row in zip(np.linspace(5, 0, len(panel["methods"])), panel["methods"]):
-            cam = row["method"] == "CaM"
-            color = ACCENT if cam else BASE
-            ax.barh(y, 100, height=.32, color=PALE, edgecolor="none", zorder=1)
-            ax.barh(y, row["success_percent"], height=.32, color=color, edgecolor="none", zorder=2)
-            ax.text(0, y + .27, row["method"], fontsize=18, weight="bold" if cam else "normal",
-                    color=ACCENT if cam else INK, va="bottom")
-            ax.text(100, y + .27, rounded(row["success_percent"], row.get("display_decimals", 1)) + "%", ha="right", va="bottom",
-                    fontsize=18, color=ACCENT if cam else INK, weight="bold" if cam else "normal")
+        ax.set_ylim(-.35, len(rows) - .2)
+        ax.set_title(panel["title"], loc="left", fontsize=25, weight="bold", pad=8)
+        for y, row, color in zip(positions, rows, colors):
+            text_color = INK if color == BASE else color
+            weight = "normal" if color == BASE else "bold"
+            method = "CaM w/ rollouts" if color == ACCENT else row["method"]
+            ax.text(0, y + .23, method, va="bottom", fontsize=19,
+                    color=text_color, weight=weight)
+            label = rounded(row["success_percent"], row.get("display_decimals", 1)).rstrip("0").rstrip(".")
+            ax.text(100, y + .23, label + "%", ha="right", va="bottom",
+                    fontsize=19 if color == BASE else 21, color=text_color, weight=weight)
         ax.set_axis_off()
-        cam_row = next(row for row in panel["methods"] if row["method"] == "CaM")
-        demo_counts = {task["demonstrations"] for task in cam_row["per_task"].values()}
-        demo_label = f"{max(demo_counts)} demos / task"
-        if len(demo_counts) > 1:
-            demo_label = "≤" + demo_label
-        fig.text(left, .235, "Use only " + demo_label, fontsize=18, color=INK)
-        cost = costs[panel["benchmark"]]
-        footer = fig.add_axes([left, .035, width, .16])
-        footer.set_xlim(0, 1)
-        footer.set_ylim(0, 1)
-        footer.plot([0, 1], [1, 1], color=LINE, lw=1.5)
-        footer.text(0, .73, "API cost (Opus 5.5)", fontsize=18, weight="bold", color=ACCENT)
-        for y, label, value in ((.38, "Development", cost["development_api_cost_usd"]),
-                                (.02, "Inference", cost["inference_api_cost_usd"])):
-            footer.text(0, y, label, fontsize=18, color=INK)
-            footer.text(1, y, "$0" if value == 0 else f"${value:.2f}",
-                        ha="right", fontsize=20, weight="bold", color=ACCENT)
-        footer.set_axis_off()
+
+        # A compact, color-matched results key keeps the bar labels readable.
+        key = fig.add_axes([left, .035, width, .17])
+        key.set_xlim(0, 1)
+        key.set_ylim(0, 1)
+        key.plot([0, 1], [1, 1], color=LINE, lw=1.2)
+        key.text(0, .82, "# Demos", fontsize=19, color=MUTED)
+        key.text(1, .82, "API cost", ha="right", fontsize=19, color=MUTED)
+        settings = [row for row in rows if row["method"] == "CaM"]
+        for y, row in zip((.51, .10), settings):
+            interaction = row["setting"].startswith("demo_interaction")
+            color = ACCENT if interaction else OFFLINE
+            cost = costs[panel["benchmark"]][row["setting"]]
+            task_costs = {task["task"]: task for task in cost["tasks"]}
+            for task, result in row["per_task"].items():
+                audited = task_costs[task]["evaluation"]
+                if any(result[k] != audited[k] for k in ("successes", "episodes")):
+                    raise ValueError(f"Figure and audited evaluation disagree: {task}")
+            if (row["successes"] != sum(t["successes"] for t in row["per_task"].values())
+                or row["episodes"] != sum(t["episodes"] for t in row["per_task"].values())
+                or not np.isclose(row["success_percent"], 100 * row["successes"] / row["episodes"])):
+                raise ValueError("Figure totals do not match per-task results")
+            demos = {task["demonstrations"] for task in row["per_task"].values()}
+            budget = str(max(demos))
+            key.scatter(.015, y + .03, s=100, marker="s", color=color, clip_on=False)
+            key.text(.06, y, budget, fontsize=21, color=color, weight="bold", va="center")
+            key.text(1, y, f'${cost["development_api_cost_usd"]:.2f}', ha="right",
+                     va="center", fontsize=21, color=color, weight="bold")
+        key.set_axis_off()
     save(fig, "benchmark_comparison")
 
 

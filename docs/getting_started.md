@@ -53,7 +53,7 @@ See [interface adaptations](interface.md) for observations and action convention
 ## Learning settings
 
 **Demo only:** develop memory fields, update rules and actions from the assigned
-25 or up-to-50 demonstrations using offline analysis and checks. Simulator
+demonstrations using offline analysis and checks. Simulator
 training attempts are **zero**.
 
 **Demo + interaction:** inspect the demonstrations and build an initial memory
@@ -75,7 +75,9 @@ RMBench's larger pool has 49 demos for `battery_try` and `blocks_ranking_try`,
 48 for `observe_and_pickup`, and 50 for the other tasks.
 MIKASA's primary comparison uses ShellGameTouch, InterceptMedium and
 RememberColor3/5/9, following prior publications. Full-90 solutions remain available
-separately; both scopes share the simulator and demo pool.
+separately; both scopes share the simulator and public interface. The additional
+`mikasa_robo_vla_suite_250` experiment uses up to 250 successful RGB-D demos per
+task with zero interaction; see [exact counts and results](results/mikasa_robo.md#five-task-publication-comparison).
 
 Choose a mode-named configuration under `configs/<benchmark>/` and set its `coding`
 object to your client, model and account settings. Authenticate that client before
@@ -144,12 +146,15 @@ See [recovery](reproducing.md#artifacts-and-recovery) for other evaluation runs.
 These trajectories provide the observation and action histories used to develop
 robot memory programs:
 
-| Benchmark | Original data source | Prepared CaM package | Available demos |
-|---|---|---|---:|
-| RoboMME | [Official H5 recordings](https://huggingface.co/datasets/Yinpei/robomme_data_h5) | [robomme-25-demos](https://huggingface.co/datasets/Yinpei/robomme-25-demos) | 400 (25/task) |
-| MIKASA-Robo | [Official RLDS trajectories](https://huggingface.co/datasets/mikasa-robo/mikasa-robo-vla-rlds) | [mikasa_robo-50-demos](https://huggingface.co/datasets/Yinpei/mikasa_robo-50-demos) | 4,500 (50/task) |
-| RMBench | [Official demonstration release](https://huggingface.co/datasets/TianxingChen/RMBench) | [rmbench-50-demos](https://huggingface.co/datasets/Yinpei/rmbench-50-demos) | 496 (48–50/task) |
-| RoboMemArena | [Official expert trajectories](https://huggingface.co/datasets/RoboMemArenaBenchmark/RoboMemArena) | [robomemarena-50-demos](https://huggingface.co/datasets/Yinpei/robomemarena-50-demos) | 1,282 (T04: 32; others: 50) |
+| Benchmark | Original demos/task | Original data source | Prepared CaM package | CaM demos |
+|---|---:|---|---|---:|
+| RoboMME | [100](https://github.com/RoboMME/robomme_benchmark) | [Official H5 recordings](https://huggingface.co/datasets/Yinpei/robomme_data_h5) | [robomme-25-demos](https://huggingface.co/datasets/Yinpei/robomme-25-demos) | 400 (25/task) |
+| MIKASA-Robo | [250](https://mikasarobo.github.io/datasets.html) | [Official RLDS trajectories](https://huggingface.co/datasets/mikasa-robo/mikasa-robo-vla-rlds) | [mikasa_robo-50-demos](https://huggingface.co/datasets/Yinpei/mikasa_robo-50-demos) | 4,500 (50/task) |
+| RMBench | [50](https://arxiv.org/html/2603.01229v1#S5.SS1) | [Official demonstration release](https://huggingface.co/datasets/TianxingChen/RMBench) | [rmbench-50-demos](https://huggingface.co/datasets/Yinpei/rmbench-50-demos) | 496 (48–50/task) |
+| RoboMemArena | [100](https://arxiv.org/html/2605.10921v1#S3.SS3) | [Official expert trajectories](https://huggingface.co/datasets/RoboMemArenaBenchmark/RoboMemArena) | [robomemarena-50-demos](https://huggingface.co/datasets/Yinpei/robomemarena-50-demos) | 1,282 (T04: 32; others: 50) |
+
+Original counts describe the upstream training data or benchmark training budget;
+CaM counts describe the prepared packages assigned to our learners.
 
 We replay MIKASA-Robo and RoboMemArena expert trajectories to record unified
 **256×256 RGB-D demonstrations through the same public interface used online**.

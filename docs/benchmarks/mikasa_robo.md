@@ -4,9 +4,14 @@ Our primary comparison is the **five-task VLA subset** used in
 [SimpleMemVLA, Table 3](https://arxiv.org/pdf/2609.05533v2): ShellGameTouch,
 InterceptMedium and RememberColor3/5/9 (standard `-VLA-v0` IDs).
 We also publish solutions for **all 90 tasks**. Both scopes use the same simulator,
-public interface and demo pool; `mikasa_robo_vla_suite` keeps the five-task policies
+public interface; `mikasa_robo_vla_suite` keeps the five-task policies
 and results separate. Matching task identities does not make training budgets,
 sensing or evaluation protocols identical to prior work.
+
+The [original VLA training release](https://mikasarobo.github.io/datasets.html)
+provides **250 demonstrations per task**: **22,500 across 90 tasks**, including
+**1,250 for the five-task subset**. CaM's assigned budgets are listed below;
+the up-to-250 arm keeps only successful RGB-D replays.
 
 Install the [MIKASA environment](../../envs/mikasa_robo/README.md) and see
 [per-task results for both scopes](../results/mikasa_robo.md).
@@ -19,7 +24,12 @@ for other tasks. All use 256×256 RGB-D with GPU rendering.
 |---|---:|---:|---:|
 | [demo_only_25](../../solutions/mikasa_robo_vla_suite/demo_only_25/) | 25 | 0 | 50 |
 | [demo_only_50](../../solutions/mikasa_robo_vla_suite/demo_only_50/) | 50 | 0 | 50 |
+| [mikasa_robo_vla_suite_250](../../configs/mikasa_robo_vla_suite_250/experiments/demo_only_250.json) | Up to 250 | 0 | 50 |
 | [demo_interaction_50](../../solutions/mikasa_robo_vla_suite/demo_interaction_50/) | 50 | 50 | 50 |
+
+The up-to-250 arm uses 237/56/250/250/246 successful RGB-D demos for ShellGameTouch,
+InterceptMedium and RememberColor3/5/9, respectively, and scores **197/250 (78.8%)**.
+See [results and prompt provenance](../results/mikasa_robo.md#five-task-publication-comparison).
 
 Interaction permits **50 total attempts using the seeds of the 50 assigned
 training demos, each once**, across all policy revisions. Failed attempts count;
@@ -35,7 +45,7 @@ python scripts/evaluate_solutions.py solutions/mikasa_robo_vla_suite/demo_intera
 ```
 
 Replace the setting with `demo_only_25` or `demo_only_50` as needed.
-To develop all three settings from blank policies:
+To develop the three original settings from blank policies:
 
 ```bash
 python scripts/develop_suite.py start configs/mikasa_robo_vla_suite/suite.json \
@@ -65,8 +75,9 @@ original and GPU-updated aggregates separately from the VLA suite.
 
 ## Prompt and interface
 
-Development combines the shared core/mode, MIKASA public interface and
-[`both.md`](../../src/cam/prompts/mikasa_robo/both.md) for interaction.
+Development combines the shared core/mode and MIKASA public interface with
+[`demos.md`](../../src/cam/prompts/mikasa_robo/demos.md) for current demo-only runs
+or [`both.md`](../../src/cam/prompts/mikasa_robo/both.md) for interaction.
 SeqOfColors3 also has its documented
 [cue-order clarification](../../src/cam/prompts/mikasa_robo/seq_of_colors3.md).
 Each preparation pins its exact prompt.
