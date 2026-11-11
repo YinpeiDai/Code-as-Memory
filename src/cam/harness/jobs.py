@@ -14,7 +14,7 @@ import time
 
 from cam.config import CodingConfig, default_evaluation_budgets
 from cam.core.history import freeze, select_checkpoint
-from cam.harness.isolation import run, terminate
+from cam.harness.isolation import run, supervised_command, terminate
 from cam.harness.preflight import transport_preflight
 from cam.harness.prepare import STARTER, pinned_environment, starter, validate_run
 from cam.io import read, sha256, write
@@ -132,7 +132,7 @@ def learn_task(root, task, gpu, resume=False):
                 (session / "stderr.txt").open("wb") as errors,
             ):
                 proc = subprocess.Popen(
-                    call.argv,
+                    supervised_command(call.argv),
                     cwd=call.cwd,
                     env=call.environment,
                     stdin=subprocess.PIPE,
@@ -187,7 +187,7 @@ def learn_task(root, task, gpu, resume=False):
                 service.sync("final")
                 service.archive("final")
                 valid, out, err = run(
-                    service.public,
+                    service.ws / "program",
                     service.runtime,
                     ["python3.11", "-m", "cam.runtime.policy_worker", "--validate"],
                     timeout=120,
@@ -303,7 +303,7 @@ def subprocess_job(root, argv, log, gpu, timeout, python=None):
     )
     with log.open("xb") as stream:
         proc = subprocess.Popen(
-            [python or sys.executable, str(root / "runner.py"), *argv],
+            supervised_command([python or sys.executable, str(root / "runner.py"), *argv]),
             env=env,
             stdout=stream,
             stderr=subprocess.STDOUT,

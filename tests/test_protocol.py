@@ -84,6 +84,33 @@ def test_mcp_edit_validate_snapshot_preserves_audit(run_factory):
         service.lock.close()
 
 
+@pytest.mark.isolation
+def test_validation_rejects_dependency_on_development_scratch(run_factory):
+    import numpy as np
+    from cam.harness.isolation import run
+
+    root = run_factory("interaction", 1)
+    task = root / "tasks/BinFill"
+    policy = task / "workspace/tools/policy.py"
+    policy.write_text("DATA = np.load('/workspace/scratch/data.npy')\n" + policy.read_text())
+    np.save(task / "workspace/scratch/data.npy", np.zeros(3))
+    # This policy loads successfully only in the development workspace.
+    code, _, _ = run(task / "workspace", root / "runtime",
+                     ["python3.11", "-m", "cam.runtime.policy_worker", "--validate"], readonly=True)
+    assert code == 0
+    service = Service(root, "BinFill", 0)
+    try:
+        validation = json.loads(service.call("validate", {})["content"][0]["text"])
+        assert not validation["valid"]
+        assert "FileNotFoundError" in validation["output"] + validation["errors"]
+        rollout = service.call("rollout", {})
+        assert rollout["isError"] and "Validation failed" in rollout["content"][0]["text"]
+        assert service.ledger.rows() == []
+        assert not (task / "rollouts").exists()
+    finally:
+        service.lock.close()
+
+
 def test_demo_count_does_not_expand_allowed_interaction_seeds(raw, tmp_path):
     from cam.config import RunConfig
     from cam.data.extract import extract

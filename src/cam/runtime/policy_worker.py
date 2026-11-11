@@ -8,7 +8,7 @@ from cam.core.workspace import Workspace
 from cam.core.code_policy import validate, decide
 from cam.runtime.observations import Frame, Observations
 from cam.runtime.robot import Robot, EpisodeEnd
-from cam.core.tools import ACT, outcome
+from cam.core.tools import ACT, ToolTimeout, outcome
 from cam.runtime.wire import send, receive
 
 
@@ -75,6 +75,10 @@ def main():
         send(writer, {"kind": "done", "status": "decision_limit"})
     except EpisodeEnd as exc:
         send(writer, {"kind": "done", "status": exc.status})
+    except ToolTimeout as exc:
+        send(writer, {"kind": "done", "status": "policy_timeout", "error": str(exc)})
+        if "--validate" in sys.argv:
+            raise SystemExit(1)
     except BaseException:
         send(
             writer,

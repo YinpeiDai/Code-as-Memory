@@ -163,6 +163,85 @@ def test_exact_rates_partial_denominators_and_paired_efficiency():
     )
 
 
+@pytest.mark.isolation
+@pytest.mark.parametrize("query", ["step", "dry_run"])
+def test_tool_timeout_ends_episode_without_reusing_pending_reply(run_factory, tmp_path, monkeypatch, query):
+    import time
+    from cam.harness import broker
+
+    class SlowAdapter(Adapter):
+        def advance(self, *args, **kwargs):
+            time.sleep(0.2)
+            result = super().advance(*args, **kwargs)
+            result.status = "running"
+            return result
+
+        def dry_run(self, *args):
+            time.sleep(0.2)
+            return {"reachable": True}
+
+    root = run_factory(max_decisions=3)
+    task = root / "tasks/BinFill"
+    if query == "dry_run":
+        policy = task / "program/tools/policy.py"
+        # Use an explicit six-component kinematic query.
+        policy.write_text('''def perceive_decide(obs, goal, memory, last):
+    """Select a query."""
+    return {"memory": {}, "act": {"tool": "act_query", "args": {}}}
+def act_query(robot):
+    """Wait for a slow kinematic reply."""
+    return robot.dry_run(0, 0, 0, 0, 0, 0)
+''')
+    original = broker.command
+
+    def short_tool_limit(program, runtime, argv, **kwargs):
+        return original(program, runtime, ["python3.11", "-c",
+            "from cam.core.tools import TIME_LIMIT; TIME_LIMIT['act']=0.05; "
+            "from cam.runtime.policy_worker import main; main()"], **kwargs)
+
+    monkeypatch.setattr(broker, "command", short_tool_limit)
+    result = execute(SlowAdapter(), tmp_path, "BinFill", 0, "test", task / "program",
+                     root / "runtime", tmp_path / "timed_out", read(root / "run.json")["config"])
+    assert result["status"] == "policy_timeout" and result["scorable"]
+    assert result["decisions"] == 1
+    assert result["step_calls"] + result["dry_run_calls"] == 1
+
+
+@pytest.mark.isolation
+@pytest.mark.parametrize("failure", [True, False])
+def test_wall_timer_does_not_relabel_simulator_failure(run_factory, tmp_path, monkeypatch, failure):
+    from cam.harness import broker
+
+    timers = []
+    class Timer:
+        def __init__(self, seconds, callback):
+            self.callback = callback
+            timers.append(self)
+        def start(self): pass
+        def cancel(self): pass
+        def join(self): pass
+
+    class ExpiringAdapter(Adapter):
+        def advance(self, *args, **kwargs):
+            timers[0].callback()
+            if failure:
+                raise RuntimeError("synthetic simulator failure at deadline")
+            result = super().advance(*args, **kwargs)
+            result.status = "running"
+            return result
+
+    root = run_factory()
+    monkeypatch.setattr(broker.threading, "Timer", Timer)
+    folder = tmp_path / "deadline"
+    result = execute(ExpiringAdapter(), tmp_path, "BinFill", 0, "test",
+                     root / "tasks/BinFill/program", root / "runtime", folder,
+                     read(root / "run.json")["config"])
+    assert result["status"] == ("harness_error" if failure else "policy_timeout")
+    assert result["scorable"] is not failure
+    if failure:
+        assert "synthetic simulator failure" in (folder / "private_broker_error.txt").read_text()
+
+
 def test_broker_initialization_failure_consumes_attempt(run_factory, monkeypatch):
     from cam.harness import broker
     from cam.core.budget import Ledger

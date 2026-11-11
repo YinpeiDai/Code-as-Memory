@@ -29,6 +29,22 @@ class PolicyError(Exception):
     pass
 
 
+def policy_message(worker):
+    try:
+        return receive(worker.stdout, 2 * 1024**2)
+    except (ValueError, BrokenPipeError) as exc:
+        raise PolicyError("Policy worker closed its channel: " + str(exc)) from exc
+
+
+def policy_reply(worker, message):
+    try:
+        send(worker.stdin, message)
+    except BrokenPipeError:
+        # A fatal tool timeout can exit while a simulator reply is outstanding.
+        # Read the worker's final status next; EOF is classified by policy_message.
+        pass
+
+
 def policy_limits():
     limits()
     ctypes.CDLL(None).prctl(1, signal.SIGKILL, 0, 0, 0)
@@ -117,7 +133,7 @@ def execute(
             selector.register(worker.stdout, selectors.EVENT_READ)
             if not selector.select(timeout=30):
                 raise TimeoutError("Isolated worker readiness timeout")
-        ready = receive(worker.stdout, 2 * 1024**2)
+        ready = policy_message(worker)
         if ready != {"kind": "ready"}:
             if ready.get("status") == "policy_error":
                 raise PolicyError(ready.get("error"))
@@ -141,12 +157,7 @@ def execute(
             import json
 
             while True:
-                try:
-                    message = receive(worker.stdout, 2 * 1024**2)
-                except (ValueError, BrokenPipeError) as exc:
-                    raise PolicyError(
-                        "Policy worker closed its channel: " + str(exc)
-                    ) from exc
+                message = policy_message(worker)
                 kind = message.get("kind")
                 if kind == "decision":
                     if len(rows) >= config["max_decisions"]:
@@ -163,7 +174,7 @@ def execute(
                 if kind == "done":
                     if status not in TERMINAL:
                         status = message.get("status", "policy_error")
-                        if status not in ("decision_limit", "policy_error"):
+                        if status not in ("decision_limit", "policy_error", "policy_timeout"):
                             raise PolicyError(
                                 "A policy cannot declare simulator success"
                             )
@@ -188,7 +199,7 @@ def execute(
                         reply = {"dry_run": adapter.dry_run(env, [float(v) for v in pose], context)}
                         dry_run_log.write(json.dumps({"call": calls, "dry_run": dry_runs, "pose": pose, "result": reply["dry_run"]}) + "\n")
                         dry_run_log.flush()
-                    send(worker.stdin, reply)
+                    policy_reply(worker, reply)
                     continue
                 if kind == "motion_preview" and status not in TERMINAL:
                     # MIKASA robot-only query, never a task-state or scoring query.
@@ -196,7 +207,7 @@ def execute(
                         adapter.name not in ("mikasa_robo", "mikasa_robo_v2")
                         or not spec.get("motion_preview") or not hasattr(adapter, "preview_motion")
                     ):
-                        send(worker.stdin, {"error": "Motion dry-run is not available for this benchmark"})
+                        policy_reply(worker, {"error": "Motion dry-run is not available for this benchmark"})
                         continue
                     values, mode = message.get("values"), message.get("mode")
                     if (
@@ -216,7 +227,7 @@ def execute(
                         "mode": mode, "values": values, "result": result,
                     }, allow_nan=False) + "\n")
                     dry_run_log.flush()
-                    send(worker.stdin, {"dry_run": result})
+                    policy_reply(worker, {"dry_run": result})
                     continue
                 if kind != "step" or status in TERMINAL:
                     raise PolicyError("Unsupported simulator request")
@@ -259,21 +270,11 @@ def execute(
                         progress(steps, calls)
                 capture.append(frames)
                 stage = "policy_execution"
-                try:
-                    send(
-                        worker.stdin,
-                        {
-                            "frames": encoded(frames),
-                            "status": status,
-                            "motion_error": result.motion_error,
-                        },
-                    )
-                except BrokenPipeError as exc:
-                    if status in TERMINAL:
-                        break
-                    raise PolicyError(
-                        "Policy exited while waiting for observations"
-                    ) from exc
+                policy_reply(worker, {
+                    "frames": encoded(frames),
+                    "status": status,
+                    "motion_error": result.motion_error,
+                })
     except PolicyError as exc:
         # A terminal native outcome remains authoritative if the worker closes afterward.
         if status not in TERMINAL:
@@ -285,7 +286,7 @@ def execute(
         if timer:
             timer.cancel()
             timer.join()
-        if expired.is_set() and status not in TERMINAL:
+        if expired.is_set() and status in ("running", "policy_error"):
             status, error = "policy_timeout", "Policy wall-clock limit exceeded"
         if worker:
             terminate(worker)

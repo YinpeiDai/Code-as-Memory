@@ -63,6 +63,97 @@ def test_failed_cam_probe_prevents_paid_client(run_factory, monkeypatch):
     assert result["status"] == "failed" and result["error"] == "MCP startup failed"
 
 
+@pytest.mark.isolation
+@pytest.mark.parametrize("scratch_dependency", [True, False])
+def test_final_validation_uses_only_publishable_program(run_factory, monkeypatch, scratch_dependency):
+    import os
+    import sys
+    import numpy as np
+    from cam.harness import jobs
+    from cam.core.budget import Ledger
+    from cam.providers.clients import Invocation
+
+    root = run_factory()
+    task = root / "tasks/BinFill"
+    policy = task / "workspace/tools/policy.py"
+    policy.write_text("# Finished policy\n" + policy.read_text())
+    if scratch_dependency:
+        policy.write_text("DATA = np.load('/workspace/scratch/data.npy')\n" + policy.read_text())
+        np.save(task / "workspace/scratch/data.npy", np.zeros(3))
+    monkeypatch.setattr(jobs, "invocation", lambda *args: Invocation(
+        [sys.executable, "-c", "import sys; sys.stdin.read()"], os.environ.copy(), root))
+    monkeypatch.setattr("cam.providers.probe.probe_cam", lambda *args: None)
+    result = jobs.learn_task(root, "BinFill", 0)
+    assert result["status"] == ("failed" if scratch_dependency else "finished")
+    assert (task / "policy").exists() is not scratch_dependency
+    assert Ledger(task / "state/ledger.sqlite").config().get("sealed", False) is not scratch_dependency
+    if scratch_dependency:
+        assert "Final isolated validation failed" in result["error"]
+
+
+def test_killed_learning_supervisor_stops_client_and_releases_service_lock(run_factory, tmp_path):
+    import fcntl
+    import os
+    import signal
+    import subprocess
+    import sys
+    import time
+
+    root = run_factory()
+    task = root / "tasks/BinFill"
+    marker = tmp_path / "client.json"
+    client = f'''import json, os, subprocess, sys, time
+from pathlib import Path
+from cam.harness.service import Service
+sys.stdin.read()
+service = Service(Path({str(root)!r}), "BinFill", 0)
+child = subprocess.Popen([sys.executable, "-c", "import time; time.sleep(60)"])
+Path({str(marker)!r}).write_text(json.dumps([os.getpid(), child.pid]))
+time.sleep(60)
+'''
+    supervisor_code = f'''import os, sys
+from pathlib import Path
+from cam.harness import jobs
+from cam.providers.clients import Invocation
+import cam.providers.probe as probe
+jobs.invocation = lambda *args: Invocation([sys.executable, "-c", {client!r}], os.environ.copy(), Path({str(root)!r}))
+probe.probe_cam = lambda *args: None
+jobs.learn_task(Path({str(root)!r}), "BinFill", 0)
+'''
+    supervisor = subprocess.Popen([sys.executable, "-c", supervisor_code], start_new_session=True)
+    client_pids = []
+    def alive(pid):
+        try:
+            return Path(f"/proc/{pid}/stat").read_text().rsplit(")", 1)[1].split()[0] != "Z"
+        except (FileNotFoundError, ProcessLookupError):
+            return False
+    try:
+        deadline = time.monotonic() + 10
+        while not marker.exists() and time.monotonic() < deadline:
+            time.sleep(0.05)
+        assert marker.exists(), "Fake coding client did not start"
+        client_pids = read(marker)
+        supervisor.kill()
+        supervisor.wait(timeout=5)
+        deadline = time.monotonic() + 5
+        while any(alive(pid) for pid in client_pids) and time.monotonic() < deadline:
+            time.sleep(0.05)
+        assert not any(alive(pid) for pid in client_pids), "Coding processes outlived SIGKILLed supervisor"
+        for path in (task / "state/learning.lock", task / "audit/service.lock"):
+            with path.open("a") as lock:
+                fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
+    finally:
+        if supervisor.poll() is None:
+            supervisor.kill()
+        supervisor.wait()
+        process = task / "logs/session_000/process.json"
+        if process.exists():
+            try:
+                os.killpg(read(process)["pid"], signal.SIGKILL)
+            except ProcessLookupError:
+                pass
+
+
 def test_usage_preserves_unknown_cost_and_deduplicates(tmp_path):
     logs = tmp_path / "claude"
     session = logs / "session_000"

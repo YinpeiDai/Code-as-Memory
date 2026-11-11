@@ -40,7 +40,11 @@ def recover_test(root, task, episode, maximum, reason):
             / f"R{maximum:03d}_ep{episode:03d}_{time.time_ns()}"
         )
         destination.parent.mkdir(parents=True, exist_ok=True)
-        shutil.move(folder, destination)
+        if folder.exists():
+            shutil.move(folder, destination)
+        else:
+            # A worker can die before execute creates its episode directory.
+            destination.mkdir()
         write(
             destination / "recovery.json",
             {

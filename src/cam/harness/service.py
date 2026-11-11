@@ -258,8 +258,9 @@ class Service:
             self.sync("agent snapshot")
             return text({"saved": True, **self.usage()})
         if name == "validate":
+            self.sync("before validation")
             code, out, err = run(
-                self.public,
+                self.ws / "program",
                 self.runtime,
                 ["python3.11", "-m", "cam.runtime.policy_worker", "--validate"],
                 timeout=120,
@@ -287,7 +288,7 @@ class Service:
                 )
             self.sync("before rollout")
             code, out, err = run(
-                self.public,
+                self.ws / "program",
                 self.runtime,
                 ["python3.11", "-m", "cam.runtime.policy_worker", "--validate"],
                 timeout=120,
@@ -299,7 +300,7 @@ class Service:
                         {
                             "type": "text",
                             "text": "Validation failed before simulator initialization:\n"
-                            + err.decode(errors="replace"),
+                            + (out + err).decode(errors="replace"),
                         }
                     ],
                     "isError": True,

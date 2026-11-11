@@ -160,8 +160,8 @@ def parent_death():
         os._exit(125)
 
 
-def watch_parent_process():
-    """Keep an MCP server tied to its client process, not a short-lived launch thread.
+def watch_parent_process(expected_parent=None, process_group=False):
+    """Tie a worker to its owner process, not a short-lived launch thread.
 
     Linux PR_SET_PDEATHSIG follows the spawning thread. Coding clients can retire
     that thread while remaining alive, so the MCP service watches a process pidfd
@@ -169,8 +169,10 @@ def watch_parent_process():
     exec, never from a subprocess preexec_fn.
     """
     parent = os.getppid()
-    if parent == 1:
+    if parent == 1 or (expected_parent is not None and parent != expected_parent):
         os._exit(125)
+    if process_group and os.getpgrp() != os.getpid():
+        raise RuntimeError("A supervised command must start in its own process group")
     try:
         descriptor = os.pidfd_open(parent)
     except AttributeError:
@@ -179,6 +181,8 @@ def watch_parent_process():
         # mistake another process for the client after reparenting.
         descriptor = None
     except ProcessLookupError:
+        os._exit(125)
+    if os.getppid() != parent:
         os._exit(125)
 
     def watch():
@@ -190,6 +194,24 @@ def watch_parent_process():
                 select.select([descriptor], [], [])
             finally:
                 os.close(descriptor)
-        os.kill(os.getpid(), signal.SIGKILL)
+        if process_group:
+            os.killpg(os.getpid(), signal.SIGKILL)
+        else:
+            os.kill(os.getpid(), signal.SIGKILL)
 
     threading.Thread(target=watch, name="cam-client-lifetime", daemon=True).start()
+
+
+def supervised_command(argv):
+    """Wrap a new-session command so owner death kills its entire process group.
+
+    The watcher runs after exec, avoiding preexec locks and Linux's spawning-thread
+    lifetime semantics. An explicit parent identity closes the startup death race.
+    """
+    return [sys.executable, str(Path(__file__).resolve()), str(os.getpid()), *argv]
+
+
+if __name__ == "__main__":
+    watch_parent_process(expected_parent=int(sys.argv[1]), process_group=True)
+    code = subprocess.call(sys.argv[2:])
+    raise SystemExit(code if code >= 0 else 128 - code)

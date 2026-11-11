@@ -132,6 +132,44 @@ sys.stdin.read(1)
                 pass
 
 
+def test_supervised_command_survives_launch_thread_and_rejects_wrong_owner(tmp_path):
+    import os
+    from pathlib import Path
+    import select
+    import subprocess
+    import sys
+    from cam.harness.isolation import supervised_command
+
+    child = "import sys; print('ready', flush=True); sys.stdin.read(1); sys.exit(7)"
+    parent = f'''import subprocess, sys, threading
+from cam.harness.isolation import supervised_command
+children = []
+def launch():
+    children.append(subprocess.Popen(supervised_command([sys.executable, '-c', {child!r}]), start_new_session=True, stdin=subprocess.PIPE))
+t = threading.Thread(target=launch)
+t.start(); t.join()
+sys.stdin.read(1)
+children[0].stdin.write(b'x'); children[0].stdin.close()
+sys.exit(children[0].wait(timeout=5))
+'''
+    proc = subprocess.Popen([sys.executable, "-c", parent], stdin=subprocess.PIPE, stdout=subprocess.PIPE)
+    try:
+        assert select.select([proc.stdout], [], [], 10)[0]
+        assert proc.stdout.readline().strip() == b"ready"
+        proc.stdin.write(b"x")
+        proc.stdin.close()
+        assert proc.wait(timeout=5) == 7
+    finally:
+        if proc.poll() is None:
+            proc.kill()
+        proc.wait()
+    marker = tmp_path / "must_not_start"
+    argv = supervised_command([sys.executable, "-c", f"from pathlib import Path; Path({str(marker)!r}).touch()"])
+    argv[2] = str(os.getpid() + 1)  # Simulate reparenting before the watcher starts.
+    assert subprocess.run(argv, start_new_session=True, timeout=5).returncode == 125
+    assert not marker.exists()
+
+
 @pytest.mark.isolation
 def test_long_video_rgbd_transport(tmp_path):
     runtime = make_runtime(tmp_path / "runtime")

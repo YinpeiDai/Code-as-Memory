@@ -259,14 +259,16 @@ def dumps(x, limit: int) -> str:
 
 
 def outcome(fn, *args) -> str:
-    """Runs a tool call for the policy and returns its result, or the error, as text. EpisodeEnd propagates."""
+    """Return a result or recoverable error. EpisodeEnd and ToolTimeout propagate.
+
+    A timeout may interrupt an RPC with a reply still pending; never reuse that
+    channel for another action or decision.
+    """
     try:
         return dumps(fn(*args), RESULT_CHARS)
     except ToolError as e:
         return f"error: {e}"
     except MotionError as e:
         return f"error: {e}"
-    except ToolTimeout as e:
-        return f"the tool failed: {e}"
     except Exception as e:  # a fault inside the tool: shown, and kept for diagnosis
         return f"the tool failed: {type(e).__name__}: {str(e)[:400]}"

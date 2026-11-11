@@ -43,3 +43,58 @@ def test_recovery_preserves_training_budget_and_scored_tests(run_factory):
     write(path, {"scorable": False, "status": "harness_error"})
     result = recover_test(root, "BinFill", 0, 1, "synthetic infrastructure repair")
     assert not path.exists() and result["archived"]
+
+
+@pytest.mark.parametrize("crash", ["legacy_row", "new_row", "before_folder", "before_status_save"])
+def test_sanity_retries_crashed_workers_without_replacing_scored_failures(run_factory, tmp_path, monkeypatch, crash):
+    from pathlib import Path
+    from cam.core.history import freeze
+    from cam.harness import sanity
+
+    root = run_factory()
+    task = root / "tasks/BinFill"
+    freeze(read(task / "state/config.json"))
+    folder = task / "rollouts/test/R000/ep000"
+    if crash != "before_folder":
+        folder.mkdir(parents=True)
+        (folder / "policy_stderr.txt").write_text("original worker crash")
+    scored_path = task / "rollouts/test/R000/ep001/result.json"
+    scored = {"episode": 1, "status": "fail", "success": False, "scorable": True, "step_calls": 2}
+    write(scored_path, scored)
+    original = scored_path.read_bytes()
+    crashed = {"episode": 0, "status": "worker_error", "success": False, "runnable": False}
+    if crash == "new_row":
+        crashed.update(scorable=False, result=str(folder / "result.json"))
+    results = [] if crash == "before_status_save" else [crashed]
+    results.append({**scored, "runnable": True, "result": str(scored_path)})
+    batch = tmp_path / "sanity/batch"
+    key = "robomme/demo_only_3/BinFill"
+    write(batch / "status.json", {
+        "schema": "cam-solution-check/2", "purpose": "published_policy_execution_check",
+        "status": "needs_attention", "expected": 2, "expected_policies": 1,
+        "episodes_per_policy": 2, "tasks": {key: {
+            "benchmark": "robomme", "setting": "demo_only_3", "task": "BinFill",
+            "status": "failed", "episodes": [0, 1], "results": results, "run": str(root),
+        }},
+    })
+    calls = []
+    def rerun(run, argv, *args, **kwargs):
+        calls.append(argv)
+        assert argv[3] == "0" and not folder.exists()
+        write(folder / "result.json", {**scored, "episode": 0})
+        return 0
+    monkeypatch.setattr(sanity, "subprocess_job", rerun)
+    monkeypatch.setattr(sanity, "free_mib", lambda gpu: 100000)
+    monkeypatch.setattr(sanity.time, "sleep", lambda seconds: None)
+    kwargs = dict(resume=batch, episodes=2, gpus=(0,), workers_per_gpu=1)
+    sanity.check_solutions(tmp_path / "unused", batch.parent, **kwargs)
+    assert not calls
+    result = sanity.check_solutions(tmp_path / "unused", batch.parent, retry_infrastructure=True, **kwargs)
+    assert result["status"] == "complete" and result["passed"] == 2
+    assert len(calls) == 1 and scored_path.read_bytes() == original
+    row = read(batch / "status.json")["tasks"][key]
+    receipt = row["infrastructure_retries"][0]
+    archived = Path(receipt["archived"])
+    assert (archived / "recovery.json").exists()
+    if crash != "before_folder":
+        assert (archived / "policy_stderr.txt").read_text() == "original worker crash"

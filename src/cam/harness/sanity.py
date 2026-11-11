@@ -85,16 +85,24 @@ def check_solutions(solutions, output, benchmarks=None, tasks=None, gpus=(0, 1),
         with locked(batch / ".scheduler.lock"):
             write(batch / f"status_before_recovery_{time.time_ns()}.json", state)
             for row in state["tasks"].values():
-                retained = []
-                for result in row["results"]:
-                    if result.get("scorable") is False and result.get("result"):
-                        recovery = recover_test(row["run"], row["task"], result["episode"], 0,
+                if not row.get("run"):
+                    continue
+                recorded = {r["episode"]: r for r in row["results"]}
+                retried = set()
+                for episode in row["episodes"]:
+                    folder = Path(row["run"]) / "tasks" / row["task"] / "rollouts/test/R000" / f"ep{episode:03d}"
+                    result = recorded.get(episode, {})
+                    on_disk = read(folder / "result.json") if (folder / "result.json").exists() else None
+                    retry = (on_disk.get("scorable") is False if on_disk is not None else
+                             folder.exists() or result.get("scorable") is False or result.get("status") == "worker_error")
+                    if retry:
+                        recovery = recover_test(row["run"], row["task"], episode, 0,
                             "Release sanity check: retry unscorable simulator infrastructure failure with identical inputs")
-                        row.setdefault("infrastructure_retries", []).append({"result": result, **recovery})
-                    else:
-                        retained.append(result)
-                if len(retained) != len(row["results"]):
-                    row.update(results=retained, status="pending")
+                        row.setdefault("infrastructure_retries", []).append({"episode": episode, "result": result, **recovery})
+                        retried.add(episode)
+                if retried:
+                    row.update(results=[r for r in row["results"] if r["episode"] not in retried], status="pending")
+                    row.pop("preparation_error", None)
             state.update(status="running", gpus=list(gpus), workers_per_gpu=workers_per_gpu)
             state.setdefault("recovery_launches", []).append({"time": time.time(), "gpus": list(gpus),
                 "workers_per_gpu": workers_per_gpu, "min_free_gib": min_free_gib})
@@ -190,7 +198,8 @@ def check_solutions(solutions, output, benchmarks=None, tasks=None, gpus=(0, 1),
                         item.update(runnable=executable_result(result), result=str(result_path))
                     else:
                         item = {"episode": episode, "status": "worker_error", "success": False,
-                                "runnable": False, "error": "No result produced; inspect episode process log"}
+                                "scorable": False, "result": str(result_path), "runnable": False,
+                                "error": "No result produced; inspect episode process log"}
                     with guard:
                         row["results"].append(item)
                         save()
