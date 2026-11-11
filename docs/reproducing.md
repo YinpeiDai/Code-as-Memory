@@ -18,7 +18,7 @@ The larger RMBench pool has 49 demos for `battery_try` and `blocks_ranking_try`,
 48 for `observe_and_pickup`, and 50 for the other seven tasks. For 25-demo plans,
 the launcher materializes the exact `selected_25.json` assignment; the learner
 never receives the larger pool. Manual preparations must first use
-[`cam subset`](getting_started.md#demonstration-packages).
+[`cam subset`](getting_started.md#download-demonstrations).
 Normal preparation reads released manifests without replaying demonstrations.
 
 ## Concurrent development

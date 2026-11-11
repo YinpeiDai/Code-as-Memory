@@ -24,7 +24,7 @@ Then install the environment for the benchmark you want to run:
 | RMBench | `bash envs/rmbench/install.sh` |
 | RoboMemArena | `uv sync --locked --project envs/robomemarena --python 3.10` |
 
-Install system `bubblewrap`, `strace`, and `ffmpeg`. The chosen simulator requires
+Install the system packages `bubblewrap`, `strace`, and `ffmpeg`. The chosen simulator requires
 NVIDIA/Vulkan or EGL support; [environment guides](../envs/README.md) describe
 assets and interpreter overrides. `cam doctor --simulator` checks the four simulator
 environments without resetting them or contacting a model.
@@ -79,15 +79,25 @@ separately; both scopes share the simulator and public interface. The additional
 `mikasa_robo_vla_suite_250` experiment uses up to 250 successful RGB-D demos per
 task with zero interaction; see [exact counts and results](results/mikasa_robo.md#five-task-publication-comparison).
 
-Choose a mode-named configuration under `configs/<benchmark>/` and set its `coding`
-object to your client, model and account settings. Authenticate that client before
-starting development. [Experiment plans and batch commands](reproducing.md#concurrent-development)
-handle concurrent development and evaluation after each policy freezes.
+## Offline demonstrations
+
+We prepare RGB-D observation and action trajectories from each benchmark's official
+training data, replaying trajectories where needed and retaining successful ones.
+
+| Benchmark | RGB-D preparation | Prepared package |
+|---|---|---|
+| RoboMME | Retain the [released RGB-D recordings](https://huggingface.co/datasets/Yinpei/robomme_data_h5). | [robomme-25-demos](https://huggingface.co/datasets/Yinpei/robomme-25-demos) |
+| MIKASA-Robo | Replay [official trajectories](https://huggingface.co/datasets/mikasa-robo/mikasa-robo-vla-rlds) into **256×256 RGB-D**. | [mikasa_robo-50-demos](https://huggingface.co/datasets/Yinpei/mikasa_robo-50-demos) |
+| RMBench | Regenerate [official expert trajectories](https://huggingface.co/datasets/TianxingChen/RMBench) at the released training seeds, capturing **320×240 RGB-D**. | [rmbench-50-demos](https://huggingface.co/datasets/Yinpei/rmbench-50-demos) |
+| RoboMemArena | Replay [expert trajectories](https://huggingface.co/datasets/RoboMemArenaBenchmark/RoboMemArena) into **256×256 RGB-D**. | [robomemarena-50-demos](https://huggingface.co/datasets/Yinpei/robomemarena-50-demos) |
+
+MIKASA-Robo and RoboMemArena replays use the same public observation interface
+as evaluation.
 
 ## Run published solutions
 
-Published robot memory programs need **no demonstration download, further
-development or model credentials** for evaluation.
+We have published the robot memory programs developed during our experiments.
+You can evaluate them directly on each benchmark to see their performance.
 Code lives in `solutions/<benchmark>/<setting>/`; schemas, checksums and provenance
 live in `configs/solutions/`. Preparation verifies compatibility and freezes the
 unchanged imported policy as checkpoint R000.
@@ -141,28 +151,15 @@ unscorable crashes with identical inputs. Scored failures are never replaced.
 A passing check means error-free execution; task success is reported separately.
 See [recovery](reproducing.md#artifacts-and-recovery) for other evaluation runs.
 
-## Demonstration packages
+## Develop your own solution
 
-These trajectories provide the observation and action histories used to develop
-robot memory programs:
+After downloading our demonstrations, you can reproduce our experiments by
+developing your own code solutions. Configure and authenticate your coding client
+to develop a new robot memory program.
 
-| Benchmark | Original demos/task | Original data source | Prepared CaM package | CaM demos |
-|---|---:|---|---|---:|
-| RoboMME | [100](https://github.com/RoboMME/robomme_benchmark) | [Official H5 recordings](https://huggingface.co/datasets/Yinpei/robomme_data_h5) | [robomme-25-demos](https://huggingface.co/datasets/Yinpei/robomme-25-demos) | 400 (25/task) |
-| MIKASA-Robo | [250](https://mikasarobo.github.io/datasets.html) | [Official RLDS trajectories](https://huggingface.co/datasets/mikasa-robo/mikasa-robo-vla-rlds) | [mikasa_robo-50-demos](https://huggingface.co/datasets/Yinpei/mikasa_robo-50-demos) | 4,500 (50/task) |
-| RMBench | [50](https://arxiv.org/html/2603.01229v1#S5.SS1) | [Official demonstration release](https://huggingface.co/datasets/TianxingChen/RMBench) | [rmbench-50-demos](https://huggingface.co/datasets/Yinpei/rmbench-50-demos) | 496 (48–50/task) |
-| RoboMemArena | [100](https://arxiv.org/html/2605.10921v1#S3.SS3) | [Official expert trajectories](https://huggingface.co/datasets/RoboMemArenaBenchmark/RoboMemArena) | [robomemarena-50-demos](https://huggingface.co/datasets/Yinpei/robomemarena-50-demos) | 1,282 (T04: 32; others: 50) |
+### Download demonstrations
 
-Original counts describe the upstream training data or benchmark training budget;
-CaM counts describe the prepared packages assigned to our learners.
-
-We replay MIKASA-Robo and RoboMemArena expert trajectories to record unified
-**256×256 RGB-D demonstrations through the same public interface used online**.
-RoboMME retains its released RGB-D recordings. RMBench regenerates official-expert
-trajectories at the released training seeds, capturing native **320×240 RGB-D**.
-The prepared packages already contain these captures; no replay is needed.
-
-Download a prepared package, for example RoboMME:
+For example, download the RoboMME package:
 
 ```bash
 uv sync --locked --inexact --extra data
@@ -188,8 +185,12 @@ exact 25/task assignment and needs no additional subset.
 
 ### Start development
 
-Develop a robot memory program with the RoboMME package above and an authenticated
-coding client:
+Choose a mode-named configuration under `configs/<benchmark>/` and set its `coding`
+object to your client, model and account settings. Authenticate that client before
+starting development. [Experiment plans and batch commands](reproducing.md#concurrent-development)
+handle concurrent development and evaluation after each policy freezes.
+
+For RoboMME, use the downloaded package:
 
 ```bash
 cam prepare runs --dataset "$DATA" \

@@ -1,7 +1,8 @@
 """Render publication figures from the committed, sourced measurements.
 
 Run: python scripts/plot_public_results.py
-Writes PNG, SVG and PDF to docs/figures. No experiment or network calls.
+Writes PNG, SVG and PDF to docs/figures, plus a lossless WebP for Figure 1.
+No experiment or network calls.
 """
 from decimal import Decimal, ROUND_HALF_UP
 import json
@@ -11,6 +12,7 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import numpy as np
+from PIL import Image
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "docs/figures"
@@ -39,6 +41,9 @@ def save(fig, name):
         elif suffix == "svg":
             metadata = {"Creator": "CaM / scripts/plot_public_results.py", "Date": None}
         fig.savefig(path, dpi=220, facecolor="white", metadata=metadata)
+        if suffix == "png" and name == "benchmark_comparison":
+            with Image.open(path) as png:
+                png.save(OUT / f"{name}.webp", lossless=True, quality=100, method=6)
         if suffix == "svg":
             path.write_text("\n".join(line.rstrip() for line in path.read_text().splitlines()) + "\n")
     plt.close(fig)

@@ -78,7 +78,7 @@ partial credit for progress within a task.
 
 ## Figures and comparison scope
 
-The [comparison figure](figures/benchmark_comparison.png) uses all 16 RoboMME tasks,
+The [comparison figure](figures/benchmark_comparison.webp) uses all 16 RoboMME tasks,
 nine RMBench tasks (excluding `place_block_mat`), the five-task MIKASA VLA suite,
 and all 26 RoboMemArena tasks. Sources are the
 [RoboMME leaderboard](https://robomme.github.io/leaderboard.html),
@@ -103,7 +103,7 @@ simulation, IPC, H5 decoding and startup. See [measurements and figure reproduct
 [Published code](../solutions/README.md) and [immutable catalogs](../configs/solutions/)
 retain policy bytes, schemas, checksums and source provenance. Download
 [development logs](getting_started.md#development-logs) and
-[demonstrations](getting_started.md#demonstration-packages) separately.
+[demonstrations](getting_started.md#download-demonstrations) separately.
 
 Each benchmark's result page records exact demo counts and material prompt or
 interface differences. Published scores use their pinned runs; current-interface

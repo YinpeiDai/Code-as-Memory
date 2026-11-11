@@ -2,8 +2,10 @@
 
 | Figure | Preview | Vector exports | Measurements |
 |---|---|---|---|
-| Four benchmarks | [PNG](benchmark_comparison.png) | [SVG](benchmark_comparison.svg) · [PDF](benchmark_comparison.pdf) | [JSON](benchmark_results.json) |
+| Four benchmarks | [WebP](benchmark_comparison.webp) · [PNG](benchmark_comparison.png) | [SVG](benchmark_comparison.svg) · [PDF](benchmark_comparison.pdf) | [JSON](benchmark_results.json) |
 | RoboMME performance, computation and API cost | [PNG](robomme_efficiency.png) | [SVG](robomme_efficiency.svg) · [PDF](robomme_efficiency.pdf) | [JSON](robomme_comparison.json) |
+
+The README uses a lossless WebP preview with the same pixels and dimensions as the PNG.
 
 Regenerate the exports from the installed root environment:
 
