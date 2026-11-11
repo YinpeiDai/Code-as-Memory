@@ -10,7 +10,6 @@ from pathlib import Path
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
-from matplotlib.patches import Patch
 import numpy as np
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -48,18 +47,13 @@ def save(fig, name):
 def benchmark_comparison():
     data = json.loads((OUT / "benchmark_results.json").read_text())
     costs = json.loads((OUT / "benchmark_costs.json").read_text())["benchmarks"]
-    fig = plt.figure(figsize=(17, 8.8))
-    fig.legend(handles=[Patch(color=BASE, label="Baselines"),
-                        Patch(color=OFFLINE, label="CaM: demos only"),
-                        Patch(color=ACCENT, label="CaM: demos + interaction")],
-               loc="upper center", bbox_to_anchor=(.51, .995), frameon=False,
-               ncol=3, fontsize=19, handlelength=1.1, columnspacing=1.6)
+    fig = plt.figure(figsize=(17, 7.8))
     panels = {panel["benchmark"]: panel for panel in data["panels"]}
     excluded_methods = {("mikasa_robo", "MemoryVLA"), ("robomemarena", "FrameSamp+Modul")}
     for i, benchmark in enumerate(("rmbench", "robomme", "mikasa_robo", "robomemarena")):
         panel = panels[benchmark]
         left, width = .025 + i * .245, .215
-        ax = fig.add_axes([left, .235, width, .575])
+        ax = fig.add_axes([left, .265, width, .65])
         rows = [row for row in panel["methods"]
                 if (benchmark, row["method"]) not in excluded_methods]
         positions = np.arange(len(rows) - 1, -1, -1)
@@ -84,7 +78,7 @@ def benchmark_comparison():
         ax.set_axis_off()
 
         # A compact, color-matched results key keeps the bar labels readable.
-        key = fig.add_axes([left, .035, width, .17])
+        key = fig.add_axes([left, .04, width, .19])
         key.set_xlim(0, 1)
         key.set_ylim(0, 1)
         key.plot([0, 1], [1, 1], color=LINE, lw=1.2)
