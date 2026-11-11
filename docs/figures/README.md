@@ -3,170 +3,87 @@
 | Figure | Preview | Vector exports | Measurements |
 |---|---|---|---|
 | Four benchmarks | [PNG](benchmark_comparison.png) | [SVG](benchmark_comparison.svg) · [PDF](benchmark_comparison.pdf) | [JSON](benchmark_results.json) |
-| RoboMME performance, latency and API cost | [PNG](robomme_efficiency.png) | [SVG](robomme_efficiency.svg) · [PDF](robomme_efficiency.pdf) | [JSON](robomme_comparison.json) |
+| RoboMME performance, computation and API cost | [PNG](robomme_efficiency.png) | [SVG](robomme_efficiency.svg) · [PDF](robomme_efficiency.pdf) | [JSON](robomme_comparison.json) |
 
-From the installed root environment, regenerate all six exports without a
-simulator, archive download, or model call:
+Regenerate the exports from the installed root environment:
 
 ```bash
 python scripts/plot_public_results.py
 ```
 
-## Baseline sources and scope
+## Comparison scope
 
-The comparison uses whole-task success, equal task weights, and the best published
-CaM setting for each benchmark. Values are rounded to one decimal for display,
-except Embodied Astra's requested two-decimal label (92.13%; exact mean 92.125%).
-The JSON retains source URLs, snapshot hashes, available per-task values, and
-CaM's exact success/episode counts. Sources were checked on November 10, 2026.
-
-Labels below the CaM bars show assigned demonstrations **per task**: 25 for
-RoboMME, 50 for the MIKASA VLA suite, and up to 50 for RMBench and RoboMemArena.
-RMBench has 49 for `battery_try` and `blocks_ranking_try`, and 48 for
-`observe_and_pickup`; RoboMemArena T04 has 32. All other tasks in those settings
-have 50. Exact counts are retained in each CaM row's `per_task` JSON records.
+Figures use whole-task success, equal task weights and CaM's best published
+setting. JSON files retain exact counts, per-task measurements and source hashes.
 
 | Benchmark | CaM figure coverage | Baseline source |
 |---|---|---|
-| RMBench | 900/900; nine tasks | [SimpleMemVLA v2](https://arxiv.org/pdf/2609.05533v2), Figure 3 and Table 1 |
-| MIKASA-Robo | 250/250; fresh five-task publication comparison, 50 demos + 50 interactions | [SimpleMemVLA v2](https://arxiv.org/pdf/2609.05533v2), Figure 3 and Table 3 |
-| RoboMME | 795/800; 16 tasks | [Official leaderboard](https://robomme.github.io/leaderboard.html), mean of 16 per-task values |
-| RoboMemArena | 1,271/1,300; 26 tasks | [Official leaderboard](https://robomemarena.github.io/leaderboard.html), reported TSR |
+| RMBench | 900/900; nine tasks, up to 50 demos | [SimpleMemVLA v2](https://arxiv.org/pdf/2609.05533v2), Figure 3 / Table 1 |
+| MIKASA-Robo | 250/250; five-task VLA suite, 50 demos + 50 interactions | [SimpleMemVLA v2](https://arxiv.org/pdf/2609.05533v2), Figure 3 / Table 3 |
+| RoboMME | 795/800; 16 tasks, 25 demos | [Official leaderboard](https://robomme.github.io/leaderboard.html) |
+| RoboMemArena | 1,271/1,300; 26 tasks, up to 50 demos + matching interactions | [Official leaderboard](https://robomemarena.github.io/leaderboard.html) |
 
-**RoboMME:** MEMI is the **MEMI-Astra-Act** variant. The separate
-MEMI-Astra-Plan result uses an oracle action planner and is not plotted.
+RMBench excludes `place_block_mat` to match the paper's task list; CaM's full
+suite is 1,000/1,000. EventVLA uses the paper's reported 67.8% overall.
+MIKASA uses ShellGameTouch, InterceptMedium and RememberColor3/5/9; its full-90
+results remain separate. Demo counts are per task, including the
+[documented smaller-pool exceptions](../getting_started.md#learning-settings).
 
-**RMBench:** The shared list excludes `place_block_mat`. The remaining tasks are
-`observe_and_pickup`, `rearrange_blocks`, `put_back_block`, `swap_blocks`, `swap_T`,
-`battery_try`, `blocks_ranking_try`, `cover_blocks`, and `press_button`.
-CaM's full ten-task suite is 1,000/1,000. EventVLA retains the paper's reported
-67.8% overall; its displayed integer per-task values average to 67.89%.
+RoboMME's MEMI entry is MEMI-Astra-Act; the oracle-planner variant is excluded.
+RoboMemArena baselines come from its literature-reported/unverified leaderboard
+and use whole-task TSR. Training budgets, sensing, action interfaces, simulator
+versions and evaluation counts differ across methods. See [per-benchmark results](../results.md).
 
-**MIKASA-Robo:** The shared identities are ShellGameTouch, InterceptMedium,
-RememberColor3, RememberColor5, and RememberColor9. The figure now uses the fresh
-`mikasa_robo_vla_suite/demo_interaction_50` result, **250/250**, verified against
-its [immutable catalog](../../configs/solutions/mikasa_robo_vla_suite/demo_interaction_50.json).
-Each policy uses 50 assigned demos, 50 training attempts and 50 held-out episodes,
-with 256×256 RGB-D. ShellGameTouch uses GPU physics/IK; the others use CPU physics/IK.
-The JSON retains the original 225/250 slice as `archived_result` and the earlier
-author-reported physics correction as `previous_figure_result`.
-The paper quotes VLA baselines from MemoryVLA++ and GMP from its per-task training
-with tuned horizons. Task identities match across legacy and current releases,
-but simulator versions, sensing and training budgets differ.
-The full 90-task historical and GPU-updated aggregates remain separate from this
-fresh five-task comparison. [Both MIKASA scopes and per-task results](../results/mikasa_robo.md).
+## API costs
 
-**RoboMemArena:** The plotted baselines come from the leaderboard's
-literature-reported/unverified section, not independently verified submissions.
-Evaluation counts and protocols vary across methods. CaM reports whole-task
-success (TSR), not partial-progress success (PSR).
-
-Across all panels, these are selected published reports rather than a controlled
-comparison: demonstrations, interaction budgets, sensing, action interfaces,
-simulator revisions and evaluation counts differ. See [results and provenance](../results.md)
-for CaM's historical evidence and imported MIKASA results.
-
-## Development and inference API costs
-
-The main figure includes CaM's total API cost for each selected development
-setting. Costs are final Claude CLI session estimates in USD, excluding local
-compute, demonstration preparation, and other experiment settings. They are not
-audited bills. Inference makes no model calls; every selected evaluation result
-records zero API calls and **$0** API cost.
-
-| Benchmark | Development scope | Development API cost | Inference API cost |
+| Benchmark | Development scope | Development API cost | Evaluation API cost |
 |---|---|---:|---:|
-| RMBench | All ten tasks, `demo_only_50` | $22.72 | $0 |
-| MIKASA-robo | Five-task VLA suite, `demo_interaction_50` | $33.81 | $0 |
-| RoboMME | All 16 tasks, `demo_only_25` | $29.44 | $0 |
-| RoboMemArena | All 26 tasks, `demo_interaction_50` | $278.57 | $0 |
+| RMBench | Ten tasks, `demo_only_50` | $22.72 | $0 |
+| MIKASA-Robo | Five-task VLA suite, `demo_interaction_50` | $33.81 | $0 |
+| RoboMME | 16 tasks, `demo_only_25` | $29.44 | $0 |
+| RoboMemArena | 26 tasks, `demo_interaction_50` | $278.57 | $0 |
 
-RMBench's development total includes `place_block_mat`, while the success-rate
-comparison uses the nine tasks shared with the paper. MIKASA's cost is for the
-five-task VLA suite, not the historical 90-task collection.
+Costs are finalized coding-client usage estimates, excluding compute, data
+preparation and other settings. RMBench's cost covers ten tasks while its success
+figure covers nine. Evaluation makes zero model calls. The
+[cost manifest](benchmark_costs.json) retains exact totals, per-task costs,
+source hashes and evaluation coverage.
 
-[The cost manifest](benchmark_costs.json) retains exact totals, per-task costs,
-source paths, hashes and evaluation coverage. Each development report was checked
-against its original session events; all **3,350** selected evaluation records
-were checked. MIKASA's development-only archive retains its original held-out
-artifact locations in `ARCHIVE.md`; the collector follows those locations and
-checks that the original and archived reports match exactly.
-
-To repeat the read-only audit with the public archive and its referenced
-held-out artifacts available:
+With the public archive and its referenced evaluation artifacts, repeat the audit:
 
 ```bash
 python scripts/collect_figure_costs.py --archive public_runs \
-  --output "public_runs/website/cache/figure_costs/$(date -u +%Y%m%dT%H%M%SZ).json"
+  --output "runs/figure_studies/costs/$(date -u +%Y%m%dT%H%M%SZ).json"
 ```
 
-## RoboMME performance, latency and API cost
+## RoboMME policy computation
 
-The comparison covers CaM, MEMI-Astra-Act, Embodied Astra, SimpleMemVLA,
-PonderPounce and FrameSamp+Modul. Its [JSON](robomme_comparison.json) retains
-source URLs, download hashes, coverage, hardware, per-task timing and raw-study
-paths. Unreported values remain `null` and are displayed as **N/R**.
+CaM averages **1.413 ms of policy computation per native control step**. This
+includes perception, memory updates and generated action helpers; it excludes
+simulation, waiting inside `robot.step`, IPC, H5 decoding, imports and startup.
 
-**Performance** uses original [RoboMME leaderboard](https://robomme.github.io/leaderboard.html)
-results. CaM achieves **795/800 (99.375%)**. Different methods have different
-training, sensing, action interfaces and evaluation protocols.
+The study replays the first five recorded test episodes per task, without outcome
+filtering: **80 episodes, 16 policies and 19,080 control steps**. Replayed decisions,
+memory, commands and action outcomes match their recordings. Each episode has one
+warm-up and three timed repeats on an AMD EPYC 9334 CPU with single-threaded math
+libraries. The mean divides summed per-episode median computation by recorded steps.
+It is amortized computation: an initial perception segment reached 881.3 ms.
 
-**Policy computation** is expressed as mean milliseconds per native control step.
-The baseline values come from [Table 2 of the official blog](https://robomme.github.io/blog/),
-which measures **RoboMME-Plus**, not original RoboMME. They are approximate
-references: FrameSamp+Modul 6.59 ms, SimpleMemVLA 69.12 ms, PonderPounce 199.39 ms,
-and Embodied Astra 343.80 ms. That table uses 2× RTX 6000 Ada GPUs and a 32-core
-AMD EPYC CPU. MEMI-Astra-Act has no timing entry there. We do not infer its latency
-from a different Astra system or claim a controlled speedup across these setups.
+Baseline timing comes from [Table 2 of the RoboMME blog](https://robomme.github.io/blog/),
+measured on **RoboMME-Plus** with 2× RTX 6000 Ada GPUs and a 32-core AMD EPYC CPU.
+It is an approximate reference across different protocols and hardware.
+MEMI-Astra-Act has no reported timing there. Unreported measurements are **N/R**.
+The leaderboard's API costs cover evaluation; baseline development spending is
+unreported. The [comparison JSON](robomme_comparison.json) records each scope.
 
-CaM's new measurement includes both **perception/memory decisions and generated
-action helpers**. These helpers can run perception, track objects, fit motion,
-and compute subsequent commands. Simulator work and waiting inside `robot.step`
-are excluded, along with IPC, H5 decoding, imports and startup.
-
-The profiler replays the first five recorded test episodes per task, without
-filtering by outcome: **80 episodes, 16 policies, 19,080 native control steps and
-19,000 emitted commands**. Every replayed decision, memory write, command and
-completed action outcome matches its original recording. Each episode has one
-warm-up and three timed repetitions on an AMD EPYC 9334 CPU, with
-OpenMP/OpenBLAS/MKL limited to one thread. The total is the sum of each episode's
-median complete policy computation time, divided by its recorded native steps.
-
-This gives **1.412990 ms per control step**, or **337.0 ms of policy computation
-per episode on average**. The figure labels this mean **<2 ms**; the bar and JSON
-retain the exact measurement. This is amortized computation, not a guaranteed response
-deadline: a measured initial perception segment reached **881.3 ms**. Samples are
-the first five episode identities per task, not all 800 test episodes. README
-videos also change playback speed and hold memory states for readability.
-
-The earlier [decision-only study](robomme_efficiency.json) remains available:
-225 decisions, median 4.365912 ms, mean 79.703524 ms, P95 476.848693 ms. It excludes
-action helpers and uses a different denominator. Its 4.37 ms median must not be
-presented as the complete policy latency or compared directly with per-step means.
-
-**API cost** separates development from evaluation. CaM's **$29.4412816** sums the
-16 finalized development `costs/api_cost.json` reports; all 800 original evaluation
-results record **$0 and zero API calls**. These are API usage estimates, not
-audited bills. The leaderboard reports $706 for MEMI-Astra-Act's RoboMME result
-and $310 for Embodied Astra's RoboMME evaluation; its metric notes define API
-cost over the 800 test episodes. The open-model blog evaluations make no API
-calls. None of these sources separately reports the baselines' total development
-API spending, so those cells are **N/R**, never assumed zero. GPU/CPU compute,
-data preparation and foundation-model pretraining are excluded from every API
-cost cell; zero API cost does not mean free training or inference.
-
-Full timing traces, progress and the exact profiler source are saved under
-`validate_runs/figure_studies/robomme_full_policy/20261110T210600Z/`.
-Source snapshots are under
-`validate_runs/figure_studies/robomme_baseline_comparison/20261110T210538Z/`.
-Reproduce the CPU study in a fresh directory with the original public archive:
+Reproduce the CPU replay study in a fresh directory:
 
 ```bash
 OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 \
 python scripts/profile_robomme_policy.py --archive public_runs \
-  --output "validate_runs/figure_studies/robomme_full_policy/$(date -u +%Y%m%dT%H%M%SZ)" \
+  --output "runs/figure_studies/robomme_policy/$(date -u +%Y%m%dT%H%M%SZ)" \
   --episodes 5 --repeats 3
 ```
 
-This executes frozen code against recorded observations. It starts no simulator,
-uses no model, changes no policy, and produces no new success scores.
+This uses recorded observations and frozen policies, without simulators or models,
+and produces timing measurements rather than new success scores.

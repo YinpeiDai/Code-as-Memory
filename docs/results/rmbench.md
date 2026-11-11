@@ -3,15 +3,13 @@
 Both settings use no training interaction. The larger pool has 49 demonstrations
 for `battery_try`, 49 for `blocks_ranking_try`, 48 for `observe_and_pickup`, and
 50 for each remaining task. Each policy has 100 scored/expected held-out episodes.
-The selected 50-demo `swap_blocks` policy is the fresh rerun; earlier results remain archived.
 
 [25-demo code](../../solutions/rmbench/demo_only_25/README.md) ·
 [50-demo code](../../solutions/rmbench/demo_only_50/README.md)
 
 These are historical results under their pinned interfaces. Current evaluation
 uses public post-action poses for `MotionError`; the compatibility catalogs preserve
-the code and original provenance without relabelling these scores. Current demo-only
-development uses the shared guidance without the retired motion supplement.
+the code and original provenance without relabelling these scores. Current development uses shared demo-only guidance.
 
 ## Per-task results
 
@@ -34,7 +32,7 @@ Successful / scored episodes; each denominator also equals the expected count.
 ## Evidence
 
 Counts were checked against the original `result.json` records under
-`public_runs/eval/rmbench/` (locally `/data/daiyp/CaM_public/eval/rmbench/`).
+`public_runs/eval/rmbench/`.
 Catalogs under `configs/solutions/rmbench/` retain code hashes and source provenance.
 New sanity checks and current-interface reruns do not replace these outcomes.
 

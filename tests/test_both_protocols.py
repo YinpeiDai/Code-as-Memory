@@ -5,7 +5,7 @@ from pathlib import Path
 
 import pytest
 
-from cam.config import BOTH_PROTOCOLS, CodingConfig, RunConfig, default_evaluation_budgets, learning_setting
+from cam.config import CodingConfig, RunConfig, default_evaluation_budgets, learning_setting
 from cam.core.budget import Ledger
 from cam.harness.prepare import prepare_runs, validate_run
 from cam.harness.service import TOOLS
@@ -30,24 +30,22 @@ def test_version_cannot_silently_affect_other_modes(mode, budget):
 
 def test_all_versioned_templates_and_client_independent_prompts():
     configs = Path(__file__).resolve().parents[1] / "configs"
-    templates = sorted(configs.glob("*/both_*.json"))
+    templates = sorted(configs.glob("*/both*.json"))
     assert templates
-    benchmark_clients = set()
+    versioned = set()
     for path in templates:
         config = RunConfig.from_dict(read(path))
-        # MIKASA assigns 50 demos and one attempt on each demo identity.
-        assert config.budget == (50 if config.benchmark in ("mikasa_robo", "mikasa_robo_v2", "robomemarena") else 25)
-        assert path.name == (f"both_{config.coding.agent}.json" if config.benchmark in ("mikasa_robo", "robomemarena")
-                             else f"both_{config.both_protocol}_{config.coding.agent}.json")
+        # MIKASA and RoboMemArena assign 50 demos and one attempt on each demo identity.
+        single = config.benchmark in ("mikasa_robo", "robomemarena")
+        assert config.budget == (50 if single else 25)
+        # Configurations are named by mode; the coding client lives in `coding`.
+        assert path.name == ("both.json" if single else f"both_{config.both_protocol}.json")
         assert RunConfig.from_dict(config.to_dict()) == config
-        benchmark_clients.add((config.benchmark, config.coding.agent))
-    for benchmark, client in benchmark_clients:
-        if benchmark in ("mikasa_robo", "robomemarena"):
-            continue
-        versions = [
-            read(configs / benchmark / f"both_{version}_{client}.json")
-            for version in ("v1", "v2")
-        ]
+        if not single:
+            versioned.add(config.benchmark)
+    assert versioned
+    for benchmark in versioned:
+        versions = [read(configs / benchmark / f"both_{version}.json") for version in ("v1", "v2")]
         assert {k: v for k, v in versions[0].items() if k != "both_protocol"} == {
             k: v for k, v in versions[1].items() if k != "both_protocol"
         }

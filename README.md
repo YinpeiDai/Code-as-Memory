@@ -1,8 +1,8 @@
-# 🧠 Code-as-Memory: Robots That Remember with Code
+# 🧠 Code-as-Memory: Self-improved Robot Memory via Coding Agents
 
-[Results](docs/results.md) · [Try it](#try-it) · [Demonstrations](docs/getting_started.md#demonstration-packages) · [Experiment details](docs/reproducing.md)
+[Results](docs/results.md) · [Try it](#try-it-directly) · [Demonstrations](docs/getting_started.md#demonstration-packages) · [Experiment details](docs/reproducing.md)
 
-**What if robot memory could just be an executable Python program?**
+**Can robot memory just be an executable Python program?**
 
 **Code-as-Memory (CaM)** introduces **executable code as explicit, persistent robot memory**. A coding agent distills demonstrations into a Python program that maintains and updates memory through structured variables (e.g., `dict`, `list`), enabling robots to **perceive, remember, reason and act** entirely through Python execution, without relying on any external models during inference.
 
@@ -10,9 +10,9 @@
 
 - **No model training** during development
 - **Zero model/API calls** during inference
-- **<5 ms inference latency** through lightweight Python execution
+- **<5 ms mean policy computation per control step** in the [RoboMME replay study](docs/figures/README.md#robomme-policy-computation)
 
-CaM achieves **near-perfect performance across four robot memory benchmarks**, outperforming prior approaches at a fraction of the **computational cost, financial expense, and inference latency**.
+CaM achieves **near-perfect performance across four robot memory benchmarks**, significantly outperforming prior approaches with low **computational cost, financial expense, and inference latency**.
 
 ![CaM success rates and API costs across RMBench, MIKASA-robo, RoboMME, and RoboMemArena](docs/figures/benchmark_comparison.png)
 
@@ -25,6 +25,8 @@ training and evaluation protocols; full-suite results and provenance are in the 
 
 
 ## Rollout Examples
+
+[Local video gallery and recording notes](docs/media/README.md).
 
 ### RMBench
 
@@ -82,23 +84,17 @@ https://github.com/user-attachments/assets/145fa12c-932b-417a-b427-e35c7bcfc10f
 
 https://github.com/user-attachments/assets/f1019d46-e3c0-4bfb-9147-c4ff4dbbe232
 
-## Try it
+## Try it directly
 
 [Install the shared harness and a benchmark environment](docs/getting_started.md),
-then evaluate its published memory programs. No demonstrations or model credentials
+then evaluate our published memory programs. No demonstrations or model credentials
 are needed for this step.
-
-```bash
-# All 16 RoboMME tasks; five concurrent evaluation jobs per GPU.
-python scripts/evaluate_solutions.py solutions/robomme/demo_only_25 \
-  --output validate_runs/robomme --gpus 0 1 --workers-per-gpu 5
-```
 
 | Benchmark | Published memory programs | Run and reproduce |
 |---|---|---|
 | RoboMME | [25 demonstrations](solutions/robomme/demo_only_25/) | [Guide](docs/benchmarks/robomme.md) |
 | RMBench | [50 demonstrations](solutions/rmbench/demo_only_50/) | [Guide](docs/benchmarks/rmbench.md) |
-| MIKASA-Robo | [50 demonstrations + 50 training attempts](solutions/mikasa_robo/demo_interaction_50/) | [Guide](docs/benchmarks/mikasa_robo.md) |
+| MIKASA-Robo | [Five-task VLA suite: 50 demonstrations + 50 training attempts](solutions/mikasa_robo_vla_suite/demo_interaction_50/) | [Guide](docs/benchmarks/mikasa_robo.md) |
 | RoboMemArena | [Up to 50 demonstrations + matching training attempts](solutions/robomemarena/demo_interaction_50/) | [Guide](docs/benchmarks/robomemarena.md) |
 
 ## Reproduce development
@@ -106,7 +102,7 @@ python scripts/evaluate_solutions.py solutions/robomme/demo_only_25 \
 [Download the development logs, code, results and videos](https://huggingface.co/datasets/Yinpei/CaM_develop_logs)
 (5.54 GB compressed; [download instructions](docs/getting_started.md#development-logs)).
 
-The demonstrations are successful trajectories collected through replay:
+The prepared demonstration packages contain successful trajectories:
 **25 per task for RoboMME and up to 50 per task for the other benchmarks**.
 **Demo + interaction means 50 demonstrations and at most 50 simulator training
 attempts per task across the entire development process.** Each attempt resets
@@ -119,15 +115,15 @@ then choose a data path and a directory for development logs:
 
 ```bash
 python scripts/develop_batch.py start configs/robomme/experiments/demo_only_25.json \
-  --dataset /path/to/demos/robomme --output validate_runs/robomme_development \
+  --dataset /path/to/demos/robomme --output runs/robomme_development \
   --workers 8 --gpus 0 1
 ```
 
 **Eight concurrent development jobs; five evaluation jobs per GPU.**
 [Batch evaluation, prompts, and reproduction details](docs/reproducing.md) ·
-[Five-episode sanity checks](docs/solutions.md#sanity-checks) ·
+[Five-episode sanity checks](docs/getting_started.md#sanity-checks) ·
 [Live dashboard and experiment galleries](docs/website.md)
 
-[Benchmark guides](docs/benchmarks/) · [Architecture](docs/architecture.md)
+[Benchmark guides](docs/benchmarks/README.md) · [Architecture](docs/architecture.md)
 
 Apache-2.0. Benchmark code and assets retain their upstream licenses; see [NOTICE](NOTICE).

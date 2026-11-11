@@ -27,6 +27,8 @@ The four interface packages are `robomme`, `mikasa_robo`, `rmbench`, and
 `interface/registry.py` locates adapters and simulator interpreters. Importing an
 adapter must not import or create its simulator. Native imports belong inside
 simulator methods, in the benchmark’s dedicated environment.
+See [simulator interface adaptations](interface.md) for what each wrapper
+preserves and changes relative to the original benchmark.
 
 The root environment runs the host and isolated policies. `envs/<benchmark>/.venv`
 runs only that benchmark’s trusted simulator broker. Preparation records both
@@ -37,8 +39,7 @@ simulator packages never enter the coding sandbox.
 Configurations remain necessary: client settings and experiment plans describe
 reproducible runs; solution catalogs contain required memory schemas, code hashes,
 interface hashes, and provenance. Executable solutions contain Python only, with
-one README per setting. Historical documentation and superseded plans are kept
-locally under ignored `legacy/`, outside the installed package.
+one README per setting.
 
 To add an interface, implement the protocol in `interface/base.py`, declare exact
 public sensors/actions, supply a data protocol and dedicated environment, register

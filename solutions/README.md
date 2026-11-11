@@ -4,14 +4,14 @@ Final Python programs, grouped by benchmark and setting. Open a setting README
 for its result, exact evaluation command, and development-prompt provenance.
 
 - [RoboMME](robomme/demo_only_25/README.md)
-- MIKASA-Robo: [full 90 tasks](mikasa_robo/demo_interaction_50/README.md);
-  five publication tasks with [25 demos](mikasa_robo_vla_suite/demo_only_25/README.md),
+- MIKASA-Robo five-task VLA suite: [25 demos](mikasa_robo_vla_suite/demo_only_25/README.md),
   [50 demos](mikasa_robo_vla_suite/demo_only_50/README.md), or
-  [50 demos + interaction](mikasa_robo_vla_suite/demo_interaction_50/README.md)
+  [50 demos + interaction](mikasa_robo_vla_suite/demo_interaction_50/README.md);
+  also [all 90 tasks](mikasa_robo/demo_interaction_50/README.md)
 - RMBench: [25 demos](rmbench/demo_only_25/README.md), [50 demos](rmbench/demo_only_50/README.md)
 - RoboMemArena: [25 demos](robomemarena/demo_only_25/README.md), [50 demos](robomemarena/demo_only_50/README.md), [interaction](robomemarena/demo_interaction_50/README.md)
 
 Required memory declarations and integrity/provenance metadata are in
 [configs/solutions](../configs/solutions/). `cam prepare --solution` imports and
 freezes unchanged final code without demonstrations, learning, or model calls.
-See [running solutions](../docs/solutions.md).
+See [running solutions](../docs/getting_started.md#run-published-solutions).

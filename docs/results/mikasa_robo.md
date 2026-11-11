@@ -1,7 +1,7 @@
 # MIKASA-Robo results
 
-We evaluate MIKASA at two scopes: the full 90-task benchmark for broad coverage,
-and the five task identities used by prior VLA publications for comparison.
+Our primary MIKASA comparison uses the five task identities evaluated by prior
+VLA publications. We also report the full 90-task benchmark for broad coverage.
 The subset follows [SimpleMemVLA, Table 3](https://arxiv.org/pdf/2609.05533v2),
 which reports VLA baselines from MemoryVLA++ and a per-task GMP reference.
 `mikasa_robo_vla_suite` names this subset in configurations and solution paths;
@@ -10,13 +10,11 @@ report their scores separately.
 
 ## Five-task publication comparison
 
-All 15 policies were developed fresh with Claude Code / Opus 5.5. Demo-only
-settings use zero simulator training attempts; interaction has **50 total training
-attempts per task**, one using the reset seed of each of the 50 assigned training
-demos. Failed attempts count; seeds are used once across the entire development
-process. The 25-demo arm receives only its exact
-materialized subset. Every arm evaluates the same 50 held-out identities per task,
-with native scoring and limits, after freezing and without model calls.
+The 15 policies started blank. Demo-only permits zero simulator attempts;
+interaction uses **50 attempts per task**, one per assigned demo seed across all
+revisions. The 25-demo arm receives only its selected subset. Each policy freezes
+before evaluation on the same 50 held-out identities, with native scoring and no
+model calls.
 
 | Task | 25 demos only | 50 demos only | 50 demos + 50 interactions |
 |---|---:|---:|---:|
@@ -31,8 +29,6 @@ Coverage is **750/750 scored episodes**, with zero policy or infrastructure erro
 All arms use 256×256 RGB-D and GPU rendering. ShellGameTouch uses GPU physics/IK;
 the other four use CPU physics/IK. Matching the published task set does not imply
 identical training budgets, sensing, simulator versions or evaluation protocols.
-This fresh comparison is distinct from the older five-task slice of the full
-benchmark (225/250, including ShellGameTouch at 25/50 on CPU).
 
 The byte-identical frozen solutions and immutable catalogs are published here:
 
@@ -42,16 +38,10 @@ The byte-identical frozen solutions and immutable catalogs are published here:
 | 50 demos only | [Solutions](../../solutions/mikasa_robo_vla_suite/demo_only_50/README.md) | [Catalog](../../configs/solutions/mikasa_robo_vla_suite/demo_only_50.json) |
 | 50 demos + interaction | [Solutions](../../solutions/mikasa_robo_vla_suite/demo_interaction_50/README.md) | [Catalog](../../configs/solutions/mikasa_robo_vla_suite/demo_interaction_50.json) |
 
-Development logs, immutable checkpoints and all rollouts remain under
-`runs/mikasa_robo_vla_suite/20261110T190922_491466Z/` in this workspace.
-An upload-ready copy of all 15 development histories is in
-`public_runs/dev_logs/mikasa_robo_vla_suite/<setting>/<task>/<timestamp>/`,
-including transcripts, revisions, source snapshots and all 250 training rollouts.
-Its `README.md`, `MANIFEST.json` and `CHECKSUMS.sha256` describe the contents and
-verify each file. Demo H5s and held-out rollout media remain in their existing
-locations; the original run files and scores are unchanged.
-Each catalog records its source run, checkpoint, harness/prompt hashes, assigned
-demos, training attempts, physics backend and per-task scored/expected counts.
+[Download development logs](../getting_started.md#development-logs) for all 15
+policies, including prompts, revisions and the 250 training rollouts. The catalogs
+record source checkpoints, code/prompt hashes, assigned budgets, physics backends
+and scored/expected counts.
 
 ## Full 90-task benchmark
 
@@ -60,20 +50,10 @@ demos, training attempts, physics backend and per-task scored/expected counts.
 | Original published archive | 4,444 / 4,500 / 4,500 | 98.76% |
 | Aggregate with updated GPU ShellGameTouch | 4,469 / 4,500 / 4,500 | 99.31% |
 
-The updated aggregate retains 89 historical task results and replaces only
-ShellGameTouch's historical 25/50 with the current frozen policy's GPU 50/50.
-That policy is from an earlier development run, distinct from the fresh five-task
-comparison above. This is a mixed-provenance aggregate, not a new 90-task rerun.
-Its catalog, selected result inventory and exact copied policies are retained in
-`runs/mikasa_robo_full90/20261110T191044_604595Z_shellgame_gpu/`.
-
-The [original 90 published policies](../../solutions/mikasa_robo/demo_interaction_50/README.md)
-and [catalog](../../configs/solutions/mikasa_robo/demo_interaction_50.json)
-remain unchanged. They used 50 demos and 50 training interactions per task with
-CPU physics. Full development/video evidence covers the initial ten tasks;
-80 imported tasks contribute 3,970/4,000 results without full historical source,
-reset-seed, development or video evidence. Current compatibility targets are not
-verified historical provenance.
+The GPU-updated aggregate is not a new full-suite rerun. Both versions remain
+separate from the five-task comparison.
+[All 90 published policies](../../solutions/mikasa_robo/demo_interaction_50/README.md) ·
+[Original result catalog](../../configs/solutions/mikasa_robo/demo_interaction_50.json).
 
 ### Original per-task results
 
@@ -174,8 +154,7 @@ Only ShellGameTouch changes to 50/50 in the updated aggregate described above.
 | `TraceShapeSeqMedium-VLA-v0` | 50/50 |
 | **Total** | **4,444/4,500 (98.76%)** |
 
-Original records remain under `public_runs/eval/mikasa_robo/demo_interaction_50/`
-(locally `/data/daiyp/CaM_public`). The five-task comparison's 750 results are
-never added to either 4,500-episode full-benchmark total.
+Original records remain under `public_runs/eval/mikasa_robo/demo_interaction_50/`.
+The five-task comparison's 750 results are kept separate.
 
 [Run or develop MIKASA](../benchmarks/mikasa_robo.md) · [All benchmark results](../results.md)

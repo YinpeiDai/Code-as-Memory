@@ -45,14 +45,13 @@ def test_default_templates_are_demo_first_without_version_labels():
     repo = Path(__file__).resolve().parents[1]
     class Adapter:
         guide = 'robomemarena/guide.md'
-    for client in ('claude_code', 'codex'):
-        cfg = RunConfig.from_dict(read(repo/f'configs/robomemarena/both_{client}.json'))
-        assert cfg.both_protocol == 'demo_first' and cfg.setting == 'demo_interaction'
-        assert cfg.budget == cfg.training_seed_count == 50 and cfg.training_seed_policy == 'demo_cycle'
-        assert cfg.depth and not cfg.builtin_demo
-        demos = [{'episode': i} for i in range(50)]
-        prompt = render(cfg, 'T01_CookiesTomatoBasket', demos, demos, adapter=Adapter())
-        assert 'v2' not in prompt and 'once' in prompt
-        assert benchmark_mode_guidance(cfg)['source'] == 'cam/prompts/robomemarena/both.md'
+    cfg = RunConfig.from_dict(read(repo/'configs/robomemarena/both.json'))
+    assert cfg.both_protocol == 'demo_first' and cfg.setting == 'demo_interaction'
+    assert cfg.budget == cfg.training_seed_count == 50 and cfg.training_seed_policy == 'demo_cycle'
+    assert cfg.depth and not cfg.builtin_demo
+    demos = [{'episode': i} for i in range(50)]
+    prompt = render(cfg, 'T01_CookiesTomatoBasket', demos, demos, adapter=Adapter())
+    assert 'v2' not in prompt and 'once' in prompt
+    assert benchmark_mode_guidance(cfg)['source'] == 'cam/prompts/robomemarena/both.md'
     with pytest.raises(ValueError, match='demo-first'):
         RunConfig(benchmark='robomemarena', mode='both', budget=50, both_protocol='v1')

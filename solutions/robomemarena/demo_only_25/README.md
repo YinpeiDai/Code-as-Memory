@@ -9,7 +9,7 @@ The larger assignment has 50 demos per task except T04, which has 32. Interactio
 ## Evaluate
 
 ```bash
-cam prepare validate_runs --solution solutions/robomemarena/demo_only_25 --tasks T01_CookiesTomatoBasket
+cam prepare runs --solution solutions/robomemarena/demo_only_25 --tasks T01_CookiesTomatoBasket
 # RUN is the printed task run path.
 cam evaluate "$RUN" --budgets 0 --gpus 0 1 --workers-per-gpu 5
 ```
@@ -24,6 +24,4 @@ Shared core + shared learning-mode instructions + the RoboMemArena public interf
 
 Use `configs/robomemarena/experiments/demo_only_25.json`, a downloaded demonstration package,
 and the [development commands](../../../docs/benchmarks/robomemarena.md).
-Each new preparation saves its exact prompt. Historical prompt/configuration
-provenance remains attached to the source run; current wording is not a claim
-of exact historical reproduction.
+Each preparation pins its exact prompt; original runs retain their own provenance.

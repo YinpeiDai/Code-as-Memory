@@ -11,8 +11,8 @@ CaM uses RoboMME's simulator package. Its nested baseline repositories under
 submodule command above and leave the upstream benchmark sources unchanged.
 
 This lock retains the pinned RoboMME/ManiSkill source, PyTorch 2.9.1, and SAPIEN
-3.0.3 from the former root simulator extra. The common root environment now
-contains only the harness and policy libraries. RoboMME tasks use assets shipped
+3.0.3 in the dedicated environment. The root environment contains the harness and
+policy libraries. RoboMME tasks use assets shipped
 with the pinned benchmark and simulator; NVIDIA/Vulkan rendering must work.
 
 `CAM_ROBOMME_PYTHON` overrides the interpreter. The host pins it and the package

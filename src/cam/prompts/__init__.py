@@ -104,15 +104,6 @@ def render(config, task, episodes, training_episodes=None, adapter=None, interfa
             "exactly once within this budget. No new training seeds or retries. "
             "The host selects the identity; rollout accepts no seed or episode override."
         )
-    physics = ""
-    if config.benchmark in ("mikasa_robo", "mikasa_robo_v2"):
-        from cam.interface.mikasa_robo.adapter import physics_backend_for_task
-
-        physics = (
-            f"Physics backend: {physics_backend_for_task(task, config.physics_backend)} "
-            "for both training and held-out execution; "
-            "host-selected and fixed for this run. Rendering uses the GPU independently.\n"
-        )
     initialization = (
         "Continue the supplied existing Python policy for this same task in a user-requested repair. "
         "Review and fix code bugs, keeping its task strategy unless a code bug requires a change. "
@@ -126,7 +117,7 @@ Benchmark: {config.benchmark}; learning mode: {config.mode}.
 Allowed simulator training episode IDs: {training_ids}.
 Maximum simulator attempts: {config.budget} total. {schedule}
 Sensors: {sensors}; task-provided reset video: {config.builtin_demo}.
-{physics}Limits: {config.max_decisions} decisions per episode; {config.max_action_steps} step calls per action.
+Limits: {config.max_decisions} decisions per episode; {config.max_action_steps} step calls per action.
 Use only the CaM tools: command, read_image, usage, snapshot, validate, rollout.
 The writable directory is /workspace; save analysis files in /workspace/scratch.
 Read the supplied api_reference before implementing the policy.

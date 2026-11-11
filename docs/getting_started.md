@@ -1,14 +1,8 @@
-# Installation and data
+# Getting started
 
-The root Python 3.11 environment contains the shared harness, policy runtime,
-analysis libraries, and website. Each simulator uses its own environment:
+## Environment installation
 
-| Benchmark | Install from the repository root |
-|---|---|
-| RoboMME | `uv sync --locked --project envs/robomme --python 3.11` |
-| MIKASA-Robo | `bash envs/mikasa_robo/install.sh` |
-| RMBench | `bash envs/rmbench/install.sh` |
-| RoboMemArena | `uv sync --locked --project envs/robomemarena --python 3.10` |
+Install the shared Python 3.11 harness from the repository root:
 
 ```bash
 git clone https://github.com/YinpeiDai/Code-as-Memory.git
@@ -18,89 +12,127 @@ uv sync --locked --inexact --extra dev
 source .venv/bin/activate
 ```
 
-For an existing checkout, run `git submodule update --init` first. CaM needs only
-the four top-level simulator submodules. Nested baseline repositories, including
-SimpleMemVLA, are unused; recursive initialization is unnecessary.
-Install system `bubblewrap`, `strace`, and `ffmpeg`.
-NVIDIA/Vulkan or EGL support is required by the chosen simulator. Each
-[environment README](../envs/README.md) describes assets and interpreter overrides.
-`cam doctor --simulator` checks the four dedicated environments without resetting
-simulators or contacting a model.
+Then install the environment for the benchmark you want to run:
+
+| Benchmark | Installation command |
+|---|---|
+| RoboMME | `uv sync --locked --project envs/robomme --python 3.11` |
+| MIKASA-Robo | `bash envs/mikasa_robo/install.sh` |
+| RMBench | `bash envs/rmbench/install.sh` |
+| RoboMemArena | `uv sync --locked --project envs/robomemarena --python 3.10` |
+
+Install system `bubblewrap`, `strace`, and `ffmpeg`. The chosen simulator requires
+NVIDIA/Vulkan or EGL support; [environment guides](../envs/README.md) describe
+assets and interpreter overrides. `cam doctor --simulator` checks the four simulator
+environments without resetting them or contacting a model.
+Only the four top-level simulator submodules are needed.
+
+## How CaM works
+
+Code-as-Memory turns demonstrations into an executable Python program for
+perception, memory and robot actions:
+
+1. **Develop:** a coding agent studies assigned demonstrations, writes the policy
+   and checks it offline. Demo + interaction also permits counted training rollouts.
+2. **Freeze:** the harness saves the final program, its declared memory fields and
+   exact source/configuration provenance.
+3. **Evaluate:** the program reads camera and robot observations, updates its memory
+   and sends actions through the simulator interface. Memory persists within an
+   episode and resets for the next one. Evaluation makes **zero model/API calls**.
+
+The trusted harness owns resets, budgets and scoring.
+See [interface adaptations](interface.md) for observations and action conventions.
+
+## Learning settings
+
+**Demo only:** develop from the assigned 25 or up-to-50 demonstrations using offline
+analysis and checks. Simulator training attempts are **zero**.
+
+**Demo + interaction:** inspect the demonstrations and build an initial policy
+first, then use **50 total simulator attempts per task** to verify and improve it.
+Each attempt uses the reset seed of one of the **50 assigned training demos,
+exactly once**. There are no new training seeds or retries. Failed attempts count;
+code revisions do not reset the budget. RoboMemArena T04 uses its actual **32 demos
+and 32 attempts**. Held-out seeds are separate.
+
+| Published setting | Demo-only assignments | Demo + interaction |
+|---|---|---|
+| RoboMME | 25/task | — |
+| MIKASA-Robo five-task VLA suite | 25 or 50/task | 50 demos + 50 attempts/task |
+| RMBench | 25 or up to 50/task | — |
+| RoboMemArena | 25 or up to 50/task | 50 demos + 50 attempts/task; T04: 32 + 32 |
+
+RMBench's larger pool has 49 demos for `battery_try` and `blocks_ranking_try`,
+48 for `observe_and_pickup`, and 50 for the other tasks.
+MIKASA's primary comparison uses ShellGameTouch, InterceptMedium and
+RememberColor3/5/9, following prior publications. Full-90 solutions remain available
+separately; both scopes share the simulator and demo pool.
+
+Choose a mode-named configuration under `configs/<benchmark>/` and set its `coding`
+object to your client, model and account settings. Authenticate that client before
+starting development. [Experiment plans and batch commands](reproducing.md#concurrent-development)
+handle concurrent development and evaluation after each policy freezes.
 
 ## Demonstration packages
 
-All four packages are published and transfer-verified. `cam download-demos`
-uses the immutable revision and metadata hashes recorded in
-`configs/<benchmark>/datasets/release.json`.
+The original benchmark data sources and the prepared packages used by CaM are:
 
-We replay the released MIKASA-Robo and RoboMemArena expert trajectories in their
-simulators to capture aligned **256×256 RGB-D demonstrations** through the same
-public observation interface used at rollout time. This gives CaM consistent RGB,
-depth, camera calibration and robot-state inputs. RoboMME retains its released
-RGB-D recordings; RMBench regenerates official-expert trajectories at the released
-training seeds and captures RGB-D at its native **320×240** resolution.
-The downloadable packages already contain these prepared demonstrations; users
-do not need to replay trajectories during installation or experiment preparation.
+| Benchmark | Original data source | Prepared CaM package | Available demos |
+|---|---|---|---:|
+| RoboMME | [Official H5 recordings](https://huggingface.co/datasets/Yinpei/robomme_data_h5) | [robomme-25-demos](https://huggingface.co/datasets/Yinpei/robomme-25-demos) | 400 (25/task) |
+| MIKASA-Robo | [Official RLDS trajectories](https://huggingface.co/datasets/mikasa-robo/mikasa-robo-vla-rlds) | [mikasa_robo-50-demos](https://huggingface.co/datasets/Yinpei/mikasa_robo-50-demos) | 4,500 (50/task) |
+| RMBench | [Official demonstration release](https://huggingface.co/datasets/TianxingChen/RMBench) | [rmbench-50-demos](https://huggingface.co/datasets/Yinpei/rmbench-50-demos) | 496 (48–50/task) |
+| RoboMemArena | [Official expert trajectories](https://huggingface.co/datasets/RoboMemArenaBenchmark/RoboMemArena) | [robomemarena-50-demos](https://huggingface.co/datasets/Yinpei/robomemarena-50-demos) | 1,282 (T04: 32; others: 50) |
 
-Set `DATA` to a downloaded, extracted **prepared** package:
+We replay MIKASA-Robo and RoboMemArena expert trajectories to record unified
+**256×256 RGB-D demonstrations through the same public interface used online**.
+RoboMME retains its released RGB-D recordings. RMBench regenerates official-expert
+trajectories at the released training seeds, capturing native **320×240 RGB-D**.
+The prepared packages already contain these captures; no replay is needed.
 
-```text
-DATA/
-  manifest.json
-  h5/record_dataset_<Task>.h5
-  rollouts/                         optional preview videos
-```
-
-| Benchmark | Public dataset | Released demonstrations |
-|---|---|---:|
-| RoboMME | [robomme-25-demos](https://huggingface.co/datasets/Yinpei/robomme-25-demos) | 400 (25/task) |
-| MIKASA-Robo | [mikasa_robo-50-demos](https://huggingface.co/datasets/Yinpei/mikasa_robo-50-demos) | 4,500 (50/task) |
-| RMBench | [rmbench-50-demos](https://huggingface.co/datasets/Yinpei/rmbench-50-demos) | 496 (48–50/task) |
-| RoboMemArena | [robomemarena-50-demos](https://huggingface.co/datasets/Yinpei/robomemarena-50-demos) | 1,282 (T04: 32; others: 50) |
-
-MIKASA's full 90-task experiment and its five-task publication comparison
-(`mikasa_robo_vla_suite`) share the MIKASA environment and demonstration package.
-The comparison plans select only ShellGameTouch, InterceptMedium and
-RememberColor3/5/9. See [both MIKASA scopes](benchmarks/mikasa_robo.md).
-
-For **demo + interaction**, each task gets 50 demonstrations and a total budget
-of **50 simulator training attempts** for the entire development process: one
-attempt using the reset seed of each assigned training demonstration. Failed
-attempts count toward the same budget; seeds are not reused. RoboMemArena's T04
-uses its actual 32 demos and 32 attempts. Demo-only settings allow zero simulator
-training attempts. Held-out evaluation uses separate seeds after freezing.
+Download a prepared package, for example RoboMME:
 
 ```bash
 uv sync --locked --inexact --extra data
-cam download-demos --benchmark robomme --output public_runs/demos/robomme --videos
+DATA="$PWD/public_runs/demos/robomme"
+cam download-demos --benchmark robomme --output "$DATA" --videos
 ```
 
-Use `--tasks TASK_NAME` to download selected task H5s. `--videos` includes existing
-preview videos (RoboMME and MIKASA); all packages contain frames in H5. The command
-pins a verified release revision and downloads its manifest and `selected_25.json`.
-An interrupted download can be resumed with the same command.
+The command verifies the pinned release in `configs/<benchmark>/datasets/release.json`.
+`DATA` contains `manifest.json`, task H5s under `h5/`, and `selected_25.json`.
+Use `--tasks TASK` for selected tasks; `--videos` includes available preview videos.
+The MIKASA package supplies both its five-task comparison and full benchmark.
 
-For a 25-demo batch plan, the launcher creates standalone H5s containing the exact
-selected identities under the experiment's `datasets/` directory before learning.
-Only that assignment enters the learner sandbox. The downloaded pool stays intact.
-For a manual preparation from a larger pool, run:
+A learner assigned 25 demos receives only those 25. Batch plans materialize the
+selected subset automatically; for manual preparation from a larger pool, use:
 
 ```bash
-cam subset --dataset "$DATA" --output /path/to/experiment/assigned25 \
+cam subset --dataset "$DATA" --output runs/assigned25 \
   --selection "$DATA/selected_25.json" --count 25 --manifest-only
 ```
 
-Then pass `assigned25` to `cam prepare`. RoboMME already contains its exact 25/task
-assignment. Normal preparation uses the released manifest without replaying demos.
-Use the [benchmark interface guides](benchmarks/) for observation formats.
+Pass `runs/assigned25` as the dataset afterward. RoboMME already contains its
+exact 25/task assignment and needs no additional subset.
 
-## Development logs
+### Start development
+
+With the RoboMME package above and an authenticated coding client:
+
+```bash
+cam prepare runs --dataset "$DATA" \
+  --config configs/robomme/demos.json --tasks BinFill
+# RUN is the leaf run path printed by prepare.
+cam learn "$RUN" --gpus 0 1
+```
+
+For demo + interaction, use the matching benchmark's `both.json` and demo package.
+See [benchmark guides](benchmarks/README.md) for task names and complete commands.
+
+### Development logs
 
 [Yinpei/CaM_develop_logs](https://huggingface.co/datasets/Yinpei/CaM_develop_logs)
 contains the recorded agent logs, prompts, code revisions, results and available
 videos for RoboMME, RMBench, RoboMemArena and the five-task MIKASA VLA suite.
-The four archives total **5.54 GB compressed** (about 10.60 GB of file contents).
-H5 data and the separate historical `mikasa_robo/` collection are excluded.
 
 Install `zstd` and the Hugging Face CLI, then run from the repository root:
 
@@ -114,25 +146,62 @@ for archive in public_runs/releases/development_logs/archives/*.tar.zst; do
 done
 ```
 
-Original log and code bytes are preserved. The archive manifests list omitted H5
-files and external asset/evaluation links; historical absolute paths remain in
-the logs. Download demonstrations separately and use a fresh preparation to
-reproduce development. These archives preserve evidence from the recorded runs.
+The archives preserve recorded log and code bytes. Their manifests list omitted
+H5s and external assets; download demonstrations separately and prepare a new run
+to reproduce development.
 
-## One task
+## Run published solutions
+
+Published policies need **no demonstrations, learning or model credentials**.
+Code lives in `solutions/<benchmark>/<setting>/`; schemas, checksums and provenance
+live in `configs/solutions/`. Preparation verifies compatibility and freezes the
+unchanged imported policy as checkpoint R000.
+
+For one task:
 
 ```bash
-cam prepare validate_runs --dataset "$DATA" \
-  --config configs/robomme/demos.json --tasks BinFill
-# RUN is the leaf path printed by prepare.
-cam learn "$RUN" --gpus 0 1
+cam prepare runs --solution solutions/rmbench/demo_only_50 --tasks swap_blocks
+# RUN is the task run printed by prepare.
 cam evaluate "$RUN" --budgets 0 --gpus 0 1 --workers-per-gpu 5
-cam site --data-root validate_runs
-cam serve validate_runs/website --port 8936
+cam report "$RUN"
 ```
 
-For a different benchmark, use the matching configuration and task. Configure
-and authenticate the coding client before `learn`; it starts paid sessions.
-Published solutions need neither demonstrations nor coding credentials:
-[run a solution](solutions.md). For concurrent all-task development, use the
-batch commands in the [reproduction guide](reproducing.md#concurrent-development).
+For all tasks and held-out episodes in a setting:
+
+```bash
+python scripts/evaluate_solutions.py solutions/mikasa_robo_vla_suite/demo_interaction_50 \
+  --output runs/mikasa_vla_eval --gpus 0 1 --workers-per-gpu 5
+```
+
+Choose another [published setting](../solutions/README.md) by replacing the solution
+path. Use `--resume BATCH` to continue an interrupted batch. New evaluations are
+reported separately from historical scores, with scored failures retained.
+
+### View evaluation results
+
+Each task run saves aggregate metrics in `reports/summary.json`, per-episode rows
+in `reports/episodes.csv`, and original episode results under `tasks/<task>/rollouts/test/`.
+Batch `plan.json` lists the task run paths; `status.json` tracks progress.
+To browse results and available rollout videos:
+
+```bash
+cam site --data-root runs
+cam serve runs/website --port 8936
+```
+
+Open `http://localhost:8936`. See [published results](results.md) for the reference scores.
+
+### Sanity checks
+
+For a five-episode execution check of every policy, with logs/results only:
+
+```bash
+cam check-solutions --output runs/eval_sanity_check \
+  --episodes 5 --gpus 0 1 --workers-per-gpu 10
+```
+
+Filter with `--benchmarks mikasa_robo_vla_suite` or `--tasks TASK`.
+Use `--resume BATCH` to continue; add `--retry-infrastructure` to archive and retry
+unscorable crashes with identical inputs. Scored failures are never replaced.
+A passing check means error-free execution; task success is reported separately.
+See [recovery](reproducing.md#artifacts-and-recovery) for other evaluation runs.

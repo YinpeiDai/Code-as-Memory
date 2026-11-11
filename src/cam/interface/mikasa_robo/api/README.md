@@ -21,5 +21,4 @@ Initial PD-demand estimates require joint velocities and a target. Neither these
 estimates nor supplied torque comparisons predict future contact forces.
 
 Unit and sandbox checks: `pytest tests/test_mikasa_dry_run.py` and
-`pytest tests/test_mikasa_offline_safety.py`. Native replay/debug checks are archived
-locally under `legacy/`. Prepare fresh runs after changing the interface.
+`pytest tests/test_mikasa_offline_safety.py`. Prepare fresh runs after changing the interface.

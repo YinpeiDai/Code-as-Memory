@@ -42,14 +42,14 @@ def adapter():
 
 
 @pytest.mark.parametrize("requested", [None, "cpu", "gpu"])
-def test_task_physics_routing_and_prompt_agree_for_all_ninety_tasks(adapter, requested):
+def test_task_physics_routing_stays_out_of_prompts_for_all_ninety_tasks(adapter, requested):
     cfg = RunConfig(benchmark="mikasa_robo", mode="demos", physics_backend=requested)
     tasks = adapter.tasks()
     assert len(tasks) == 90 and "ShellGameTouch-VLA-v0" in tasks
     for task in tasks:
         expected = "gpu" if task == "ShellGameTouch-VLA-v0" else requested or "cpu"
         assert mikasa.physics_backend_for_task(task, requested) == expected
-        assert f"Physics backend: {expected} for both training and held-out execution" in render(
+        assert "Physics backend:" not in render(
             cfg, task, [], adapter=adapter
         )
     with pytest.raises(ValueError, match="physics_backend"):

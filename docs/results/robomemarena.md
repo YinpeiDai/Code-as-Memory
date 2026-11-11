@@ -11,7 +11,7 @@ episodes per policy are scored; the metric is whole-task success (TSR), not PSR.
 
 The 25-demo arm uses revised offline-review instructions, and interaction adds
 manipulation/recovery guidance. These comparisons change prompts as well as data
-or interaction. The original prompt hashes and intermediate histories remain archived.
+or interaction. Each source run retains its exact prompt.
 
 ## Per-task results
 
@@ -50,7 +50,7 @@ Successful / scored episodes; each denominator also equals the expected count.
 ## Evidence
 
 Counts were checked against the original `result.json` records under
-`public_runs/eval/robomemarena/` (locally `/data/daiyp/CaM_public/eval/robomemarena/`).
+`public_runs/eval/robomemarena/`.
 Catalogs under `configs/solutions/robomemarena/` retain code hashes and source provenance.
 New sanity checks and current-interface reruns do not replace these outcomes.
 

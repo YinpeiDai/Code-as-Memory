@@ -34,7 +34,7 @@ def test_default_prompt_and_assignment(adapter):
     assert {(r['episode'], r['seed']) for r in schedule} == {(r['episode'], r['seed']) for r in demos}
     prompt = render(cfg, TASK, demos, schedule, adapter=adapter, interface=adapter.interface(TASK, True))
     assert benchmark_mode_guidance(cfg)['source'] == 'cam/prompts/mikasa_robo/both.md'
-    assert 'v2' not in prompt and 'Physics backend: cpu' in prompt
+    assert 'v2' not in prompt and 'Physics backend:' not in prompt
     assert 'exactly once' in prompt and 'safety_check' in prompt
     with pytest.raises(ValueError, match='demo-first'):
         RunConfig(benchmark='mikasa_robo', mode='both', budget=50, both_protocol='v1')

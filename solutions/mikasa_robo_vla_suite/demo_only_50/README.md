@@ -37,9 +37,8 @@ settings receive no simulator training feedback. The 25-demo assignment contains
 only its selected identities. Held-out diagnostics never enter learner feedback.
 
 Executable bytes and the [catalog](../../../configs/solutions/mikasa_robo_vla_suite/demo_only_50.json)
-are copied unchanged from campaign `20261110T190922_491466Z`. The catalog pins
-memory schemas, code checksums, source runs/checkpoints, prompt/harness hashes,
-physics backends, assigned budgets and original results.
+match the frozen campaign exports. The catalog pins schemas, checksums, source
+checkpoints, prompt/harness hashes, backends, budgets and original results.
 
 [MIKASA results and comparison scope](../../../docs/results/mikasa_robo.md) ·
 [Develop both MIKASA scopes](../../../docs/benchmarks/mikasa_robo.md)

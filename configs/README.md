@@ -23,8 +23,7 @@ These are two scopes of one benchmark, sharing its environment and demo package.
 Only final Python programs and setting READMEs belong in `solutions/`.
 Historical imports and catalog hashes remain unchanged. RMBench's
 `*_observed_motion.json` catalogs target the current public interface; original
-catalogs remain provenance for historical scores. Superseded experimental plans
-are archived locally under ignored `legacy/`.
+catalogs remain provenance for historical scores.
 
 Run configuration filenames describe the learning mode. Set the `coding` object
 inside a configuration to choose your client, model, provider and account settings;
