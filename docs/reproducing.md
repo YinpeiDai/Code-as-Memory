@@ -73,8 +73,13 @@ in both training and evaluation. The backend is selected by the interface.
 
 The separate [`mikasa_robo_vla_suite_250` plan](../configs/mikasa_robo_vla_suite_250/experiments/demo_only_250.json)
 develops fresh demo-only policies using up to 250 successful RGB-D replays per task.
-Run it with `scripts/develop_batch.py start` and its separately prepared dataset;
-the 50-demo package is insufficient. See [actual counts and results](results/mikasa_robo.md#five-task-publication-comparison).
+First [download its RGB-D package](https://huggingface.co/datasets/Yinpei/mikasa_robo-vla-suite-250-demos)
+to `public_runs/demos/mikasa_robo_vla_suite_250_demo`, then follow the
+[download and batch commands](benchmarks/mikasa_robo.md#up-to-250-demos-only).
+The 50-demo package is insufficient. Its published policies are in
+`solutions/mikasa_robo_vla_suite/demo_only_250/`, with development evidence in
+`public_runs/dev_logs/mikasa_robo_vla_suite/demo_only_250/`.
+See [actual counts and results](results/mikasa_robo.md#five-task-publication-comparison).
 
 The full 90-task plan remains at
 `configs/mikasa_robo/experiments/demo_interaction_50.json`. Keep its results

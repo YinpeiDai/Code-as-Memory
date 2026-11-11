@@ -45,39 +45,43 @@ are excluded. This arm adds the approved
 **8.8 percentage points** above the 50-demo result; the data budget and prompt
 both differ. InterceptMedium decreases from 41/50 to 30/50.
 
-The new arm's development API cost is **$20.01**, as reported by the coding client,
-excluding compute and data preparation. Its batch is `20261111T061919_990098Z`;
-logs, frozen policies and rollouts remain under
-`validate_runs/mikasa_robo_vla_suite_250demo/`. The published solution and download
-links below cover the three original settings:
+The up-to-250 arm's development API cost is **$20.01**, as reported by the coding
+client, excluding compute and data preparation. Its frozen programs are published
+unchanged below. Development logs, code history, intermediate analysis and rollouts
+are available in the
+[development archive](https://huggingface.co/datasets/Yinpei/CaM_develop_logs/blob/main/archives/mikasa_robo_vla_suite_demo_only_250.tar.zst),
+which extracts to `public_runs/dev_logs/mikasa_robo_vla_suite/demo_only_250`.
+Download the [RGB-D demos](https://huggingface.co/datasets/Yinpei/mikasa_robo-vla-suite-250-demos)
+separately to `public_runs/demos/mikasa_robo_vla_suite_250_demo`;
+see the [download command](../benchmarks/mikasa_robo.md#up-to-250-demos-only).
 
 | Setting | Code | Schemas, checksums and provenance |
 |---|---|---|
 | 25 demos only | [Solutions](../../solutions/mikasa_robo_vla_suite/demo_only_25/README.md) | [Catalog](../../configs/solutions/mikasa_robo_vla_suite/demo_only_25.json) |
 | 50 demos only | [Solutions](../../solutions/mikasa_robo_vla_suite/demo_only_50/README.md) | [Catalog](../../configs/solutions/mikasa_robo_vla_suite/demo_only_50.json) |
+| Up to 250 demos only | [Solutions](../../solutions/mikasa_robo_vla_suite/demo_only_250/README.md) | [Catalog](../../configs/solutions/mikasa_robo_vla_suite/demo_only_250.json) |
 | 50 demos + interaction | [Solutions](../../solutions/mikasa_robo_vla_suite/demo_interaction_50/README.md) | [Catalog](../../configs/solutions/mikasa_robo_vla_suite/demo_interaction_50.json) |
 
-[Download development logs](../getting_started.md#development-logs) for the original 15
-policies, including prompts, revisions and the 250 training rollouts. The catalogs
+[Download development logs](../getting_started.md#development-logs) for all 20 policies.
+The archives retain prompts, revisions and generated files, with demonstration
+data and external simulator assets excluded. The catalogs
 record source checkpoints, code/prompt hashes, assigned budgets, physics backends
 and evaluation coverage.
 
 ## Full 90-task benchmark
 
-| Result version | Successful/total | Success rate |
+| Setting | Successful/total | Success rate |
 |---|---:|---:|
-| Original published archive | 4,444/4,500 | 98.76% |
-| Aggregate with updated GPU ShellGameTouch | 4,469/4,500 | 99.31% |
+| 50 demos + 50 interactions | 4,469/4,500 | 99.31% |
 
-The GPU-updated aggregate is not a new full-suite rerun. Both versions remain
-separate from the five-task comparison.
+Scores use the ShellGameTouch evaluation with GPU physics and the archived
+results for the other 89 tasks.
 [All 90 published policies](../../solutions/mikasa_robo/demo_interaction_50/README.md) ·
-[Original result catalog](../../configs/solutions/mikasa_robo/demo_interaction_50.json).
+[Policy catalog and archived provenance](../../configs/solutions/mikasa_robo/demo_interaction_50.json).
 
-### Original per-task results
+### Per-task results
 
 Successful/total held-out episodes.
-Only ShellGameTouch changes to 50/50 in the updated aggregate described above.
 
 | Task | 50 demos + 50 interactions |
 |---|---:|
@@ -157,7 +161,7 @@ Only ShellGameTouch changes to 50/50 in the updated aggregate described above.
 | `ShellGameShuffleColorLampTouch-VLA-v0` | 50/50 |
 | `ShellGameShuffleTouch-Long-VLA-v0` | 50/50 |
 | `ShellGameShuffleTouch-VLA-v0` | 50/50 |
-| `ShellGameTouch-VLA-v0` | 25/50 |
+| `ShellGameTouch-VLA-v0` | 50/50 |
 | `TakeItBack-VLA-v0` | 50/50 |
 | `TimedTransferEasy-Long-VLA-v0` | 50/50 |
 | `TimedTransferEasy-VLA-v0` | 50/50 |
@@ -171,7 +175,7 @@ Only ShellGameTouch changes to 50/50 in the updated aggregate described above.
 | `TraceShapeSeqEasy-VLA-v0` | 50/50 |
 | `TraceShapeSeqHard-VLA-v0` | 50/50 |
 | `TraceShapeSeqMedium-VLA-v0` | 50/50 |
-| **Total** | **4,444/4,500 (98.76%)** |
+| **Total** | **4,469/4,500 (99.31%)** |
 
 Original records remain under `public_runs/eval/mikasa_robo/demo_interaction_50/`.
 The five-task comparison's 1,000 results are kept separate.

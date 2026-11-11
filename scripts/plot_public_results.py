@@ -52,13 +52,13 @@ def save(fig, name):
 def benchmark_comparison():
     data = json.loads((OUT / "benchmark_results.json").read_text())
     costs = json.loads((OUT / "benchmark_costs.json").read_text())["benchmarks"]
-    fig = plt.figure(figsize=(17, 7.8))
+    fig = plt.figure(figsize=(17, 7.1))
     panels = {panel["benchmark"]: panel for panel in data["panels"]}
     excluded_methods = {("mikasa_robo", "MemoryVLA"), ("robomemarena", "FrameSamp+Modul")}
     for i, benchmark in enumerate(("rmbench", "robomme", "mikasa_robo", "robomemarena")):
         panel = panels[benchmark]
         left, width = .025 + i * .245, .215
-        ax = fig.add_axes([left, .265, width, .65])
+        ax = fig.add_axes([left, .20, width, .715])
         rows = [row for row in panel["methods"]
                 if (benchmark, row["method"]) not in excluded_methods]
         positions = np.arange(len(rows) - 1, -1, -1)
@@ -83,12 +83,12 @@ def benchmark_comparison():
         ax.set_axis_off()
 
         # A compact, color-matched results key keeps the bar labels readable.
-        key = fig.add_axes([left, .04, width, .19])
+        key = fig.add_axes([left, .018, width, .14])
         key.set_xlim(0, 1)
         key.set_ylim(0, 1)
         key.plot([0, 1], [1, 1], color=LINE, lw=1.2)
-        key.text(0, .82, "# Demos", fontsize=19, color=MUTED)
-        key.text(1, .82, "API cost", ha="right", fontsize=19, color=MUTED)
+        key.text(0, .82, "# Demos", fontsize=15, color=MUTED)
+        key.text(1, .82, "API cost", ha="right", fontsize=15, color=MUTED)
         settings = [row for row in rows if row["method"] == "CaM"]
         for y, row in zip((.51, .10), settings):
             interaction = row["setting"].startswith("demo_interaction")
@@ -105,10 +105,10 @@ def benchmark_comparison():
                 raise ValueError("Figure totals do not match per-task results")
             demos = {task["demonstrations"] for task in row["per_task"].values()}
             budget = str(max(demos))
-            key.scatter(.015, y + .03, s=100, marker="s", color=color, clip_on=False)
-            key.text(.06, y, budget, fontsize=21, color=color, weight="bold", va="center")
+            key.scatter(.015, y + .03, s=64, marker="s", color=color, clip_on=False)
+            key.text(.06, y, budget, fontsize=17, color=color, weight="bold", va="center")
             key.text(1, y, f'${cost["development_api_cost_usd"]:.2f}', ha="right",
-                     va="center", fontsize=21, color=color, weight="bold")
+                     va="center", fontsize=17, color=color, weight="bold")
         key.set_axis_off()
     save(fig, "benchmark_comparison")
 

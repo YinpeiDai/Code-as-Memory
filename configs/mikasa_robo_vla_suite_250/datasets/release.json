@@ -1,0 +1,11 @@
+{
+  "schema": "cam-demo-release/1",
+  "repo_id": "Yinpei/mikasa_robo-vla-suite-250-demos",
+  "revision": "186b955291af1de526b7f4d9825f2c3a8a006305",
+  "manifest_sha256": "c205bc01a4295ca4585263850f8c1d85177768528ba9cf0777db567621649d6f",
+  "checksums_sha256": "82184aa68fd831064569996b462c8456f29fa80b673ea92e5084f77549f31147",
+  "tasks": 5,
+  "episodes": 1039,
+  "videos": 1039,
+  "verified_files": 1048
+}

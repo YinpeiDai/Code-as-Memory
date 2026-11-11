@@ -5,13 +5,14 @@ ShellGameTouch, InterceptMedium and RememberColor3/5/9 (`-VLA-v0` IDs).
 They share the full benchmark's simulator and public interface. We ran both
 this comparison and the full 90-task benchmark; their policies and counts remain distinct.
 
-| Setting | Policies | Successful / scored / expected | Success rate |
+| Setting | Policies | Successful/total | Success rate |
 |---|---:|---:|---:|
-| [25 demos only](demo_only_25/README.md) | 5 | 153 / 250 / 250 | 61.2% |
-| [50 demos only](demo_only_50/README.md) | 5 | 175 / 250 / 250 | 70.0% |
-| [50 demos + 50 interactions](demo_interaction_50/README.md) | 5 | 250 / 250 / 250 | 100% |
+| [25 demos only](demo_only_25/README.md) | 5 | 153/250 | 61.2% |
+| [50 demos only](demo_only_50/README.md) | 5 | 175/250 | 70.0% |
+| [Up to 250 demos only](demo_only_250/README.md) | 5 | 197/250 | 78.8% |
+| [50 demos + 50 interactions](demo_interaction_50/README.md) | 5 | 250/250 | 100% |
 
-All code and catalogs are byte-identical to the frozen campaign exports.
+All published policy code is byte-identical to its frozen development checkpoint.
 Each setting README contains evaluation commands and development provenance.
 No demonstrations or model calls are required to evaluate published code.
 

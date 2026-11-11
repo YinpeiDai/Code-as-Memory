@@ -1,7 +1,7 @@
 """Audit figure API costs from saved sessions and results, without running policies.
 
 python scripts/collect_figure_costs.py --archive public_runs \
-    --mikasa-250 validate_runs/mikasa_robo_vla_suite_250demo --output /new/path/costs.json
+    --output /new/path/costs.json
 The archive is read-only; the output must be a new file.
 """
 import argparse
@@ -14,7 +14,7 @@ from pathlib import Path
 from cam.reporting.costs import Usage
 
 
-def collect(archive, mikasa_250):
+def collect(archive, mikasa_250=None):
     def source(path):
         return {"path": str(path.relative_to(archive) if path.is_relative_to(archive) else path),
                 "sha256": hashlib.sha256(path.read_bytes()).hexdigest()}
@@ -78,13 +78,13 @@ def collect(archive, mikasa_250):
         ("robomme", "robomme", "demo_only_25", 16, 50),
         ("robomemarena", "robomemarena", "demo_only_50", 26, 50),
         ("robomemarena", "robomemarena", "demo_interaction_50", 26, 50),
-        ("mikasa_robo", "mikasa_robo_vla_suite_250", "demo_only_250", 5, 50),
+        ("mikasa_robo", "mikasa_robo_vla_suite", "demo_only_250", 5, 50),
     ]
     benchmarks = {}
     for benchmark, directory, setting, expected_tasks, expected_episodes in settings:
         root = archive / "dev_logs" / directory / setting
-        if directory == "mikasa_robo_vla_suite_250":
-            root = mikasa_250 / "dev_logs" / directory
+        if setting == "demo_only_250" and mikasa_250 is not None:
+            root = mikasa_250 / "dev_logs/mikasa_robo_vla_suite_250"
         tasks = []
         if benchmark == "robomme":
             for report in sorted(root.glob("*/costs/api_cost.json")):
@@ -102,8 +102,10 @@ def collect(archive, mikasa_250):
         else:
             pattern = ("*/20261110T190926_055654Z/reports/summary.json"
                        if directory == "mikasa_robo_vla_suite" else "*/reports/summary.json")
-            if directory == "mikasa_robo_vla_suite_250":
-                pattern = "*/cc-opus5.5/demo_only_*/20261111T061919_990098Z/reports/summary.json"
+            if setting == "demo_only_250":
+                pattern = "*/20261111T061919_990098Z/reports/summary.json"
+                if mikasa_250 is not None:
+                    pattern = "*/cc-opus5.5/demo_only_*/20261111T061919_990098Z/reports/summary.json"
             for report in sorted(root.glob(pattern)):
                 summary = json.loads(report.read_text())
                 if len(summary["development"]) != 1:
@@ -158,7 +160,7 @@ def collect(archive, mikasa_250):
             result["csr_percent"] = math.fsum(t["evaluation"]["csr_percent"] for t in tasks) / len(tasks)
         benchmarks.setdefault(benchmark, {})[setting] = result
     return {"schema": "cam-benchmark-api-costs/2", "archive": "public_runs",
-            "mikasa_250_root": str(mikasa_250),
+            "mikasa_250_root": str(mikasa_250 or archive / "dev_logs/mikasa_robo_vla_suite/demo_only_250"),
             "cost_basis": "Final Claude CLI session estimates; not audited billing. USD. "
                           "Excludes local compute, data preparation, and other experiment settings.",
             "development_scope": "Total across all tasks in each selected development setting: "
@@ -172,11 +174,11 @@ def collect(archive, mikasa_250):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--archive", type=Path, required=True)
-    parser.add_argument("--mikasa-250", type=Path, required=True,
-                        help="Root of the completed up-to-250-demo MIKASA experiment")
+    parser.add_argument("--mikasa-250", type=Path,
+                        help="Optional original MIKASA experiment root; defaults to its public archive")
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
-    data = collect(args.archive.absolute(), args.mikasa_250.absolute())
+    data = collect(args.archive.absolute(), args.mikasa_250.absolute() if args.mikasa_250 else None)
     args.output.parent.mkdir(parents=True, exist_ok=True)
     with args.output.open("x") as stream:
         json.dump(data, stream, indent=2)

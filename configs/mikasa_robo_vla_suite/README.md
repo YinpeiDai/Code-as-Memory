@@ -29,7 +29,11 @@ Claude Code / Opus 5.5; held-out evaluation makes no model calls.
 
 The three original settings use the MIKASA environment and its existing
 `mikasa_robo-50-demos` package. The up-to-250 plan requires its separately prepared
-RGB-D dataset. Configurations retain
+RGB-D dataset from [Hugging Face](https://huggingface.co/datasets/Yinpei/mikasa_robo-vla-suite-250-demos)
+at `public_runs/demos/mikasa_robo_vla_suite_250_demo`; see the
+[download command](../../docs/benchmarks/mikasa_robo.md#up-to-250-demos-only).
+Its published policies are in `solutions/mikasa_robo_vla_suite/demo_only_250/`.
+Configurations retain
 the CPU default; the public interface resolves ShellGameTouch to GPU physics/IK
 and the other four tasks to CPU, recording the actual backend per task.
 

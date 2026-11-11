@@ -7,8 +7,7 @@ original frozen runs: **795/800 successes (99.38%)**. Evaluation is complete.
 The published experiment used its original runner and prompt; current-harness
 reruns are separate evidence.
 
-[Code and provenance](../../solutions/robomme/demo_only_25/README.md) ·
-[Immutable catalog](../../configs/solutions/robomme/demo_only_25.json)
+[Code solutions](../../solutions/robomme/demo_only_25/README.md) ·
 
 ## Per-task results
 

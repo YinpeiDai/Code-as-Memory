@@ -8,7 +8,7 @@ New sanity checks and current-interface reruns never replace original scores.
 ## RoboMME
 
 The original release provides [**100 training demos/task**](https://github.com/RoboMME/robomme_benchmark).
-CaM uses **25/task** with zero interaction.
+CaM uses only **25/task** with zero interaction.
 
 | Setting | Successful/total | Success rate |
 |---|---:|---:|
@@ -27,22 +27,22 @@ interface; the separate namespace keeps its policies and scores distinct.
 The original VLA release provides [**250 training demos/task**](https://mikasarobo.github.io/datasets.html).
 CaM uses **25, 50 or up to 250/task**, with interaction budgets shown below.
 
-| Scope | Setting / result version | Successful/total | Success rate |
+| Scope | Setting | Successful/total | Success rate |
 |---|---|---:|---:|
 | Five publication tasks | 25 demos only | 153/250 | 61.2% |
 | Five publication tasks | 50 demos only | 175/250 | 70.0% |
 | Five publication tasks | Up to 250 demos only | 197/250 | 78.8% |
 | Five publication tasks | 50 demos + 50 interactions | 250/250 | 100% |
-| Full 90 tasks | Original published 50 demos + interaction | 4,444/4,500 | 98.76% |
-| Full 90 tasks | Aggregate with GPU ShellGameTouch update | 4,469/4,500 | 99.31% |
+| Full 90 tasks | 50 demos + 50 interactions | 4,469/4,500 | 99.31% |
 
-The up-to-250 arm, `mikasa_robo_vla_suite_250`, uses 237/56/250/250/246 successful
+The up-to-250 arm, `mikasa_robo_vla_suite_250`, uses 237/56/250/250/246 successfully replayed
 RGB-D demos for ShellGameTouch, InterceptMedium and RememberColor3/5/9, respectively,
-with zero interaction. Its updated demo-only guidance and provenance are recorded
-on the [MIKASA results page](results/mikasa_robo.md#five-task-publication-comparison).
-
-The GPU-updated aggregate is not a new full-suite rerun. Full-90 scores remain
-separate from the five-task comparison.
+with zero interaction. Its [frozen solutions](../solutions/mikasa_robo_vla_suite/demo_only_250/)
+are available for direct evaluation. Demo-only guidance, data and log locations are
+recorded on the [MIKASA results page](results/mikasa_robo.md#five-task-publication-comparison).
+The [RGB-D package](https://huggingface.co/datasets/Yinpei/mikasa_robo-vla-suite-250-demos)
+and [development logs](https://huggingface.co/datasets/Yinpei/CaM_develop_logs)
+are available separately.
 
 [Both scopes, per-task results, code and provenance](results/mikasa_robo.md).
 
@@ -69,7 +69,7 @@ uses one attempt per assigned demo (50/task, or 32 for T04).
 |---|---:|---:|---:|
 | 25 demos only | 1,070/1,300 | 82.31% | 91.69% |
 | Up to 50 demos only | 1,179/1,300 | 90.69% | 94.34% |
-| Up to 50 demos + matching interactions | 1,271/1,300 | 97.77% | 98.15% |
+| Up to 50 demos + 50 interactions | 1,271/1,300 | 97.77% | 98.15% |
 
 CSR averages the native completed-stage percentage across episodes, giving
 partial credit for progress within a task.

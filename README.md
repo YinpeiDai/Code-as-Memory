@@ -1,6 +1,6 @@
 # 🧠 Code-as-Memory: Self-improved Robot Memory via Coding Agents
 
-**Can robot memory just be an executable Python program?**
+<h3><strong><em>Can robot memory just be an executable Python program?</em></strong></h3>
 
 **Code-as-Memory (CaM)** introduces **executable code as explicit, persistent robot memory**. A coding agent distills demonstrations into a Python program that maintains and updates memory through structured variables (e.g., `dict`, `list`), enabling robots to **perceive, remember, reason and act** entirely through Python execution, without relying on any external models during inference.
 
@@ -8,13 +8,13 @@
 
 - **No model training** during development
 - **Zero model/API calls** during inference
-- **<5 ms mean policy computation per control step** (refer to [RoboMME replay study](docs/figures/README.md#robomme-policy-computation))
+- **<5 ms average policy computation per control step**
 
-CaM achieves **near-perfect performance across four robot memory benchmarks**, significantly outperforming prior approaches with low **computational cost, financial expense, and inference latency**.
+CaM achieves **near-perfect performance across four popular robot memory benchmarks**, significantly outperforming prior approaches with much lower **computational cost, financial expense, and inference latency**.
 
 ![CaM offline-demo and demo-plus-interaction settings: budgets, success rates and development API costs across four Robot Memory benchmarks](docs/figures/benchmark_comparison.webp)
 
-**Settings:** The official training-demo counts per task are 100 for RoboMME, 250 for MIKASA-Robo, 50 for RMBench, and 100 for RoboMemArena. **CaM** learns from offline demos (25/task for RoboMME, up to 250 for MIKASA-Robo, up to 50 for RMBench/RoboMemArena). **CaM w/ rollouts** use up to 50 demos/task and allows the same number of training rollouts using demo seeds to interact with simulators. Reported costs reflect only development-time API usage (Opus 5.5), with no API calls during inference.
+**Settings:** The official training-demo counts per task are 100 for RoboMME, 250 for MIKASA-Robo, 50 for RMBench, and 100 for RoboMemArena. **CaM** learns from offline demos (25/task for RoboMME, 250 for MIKASA-Robo, 50 for RMBench/RoboMemArena). **CaM w/ rollouts** use 50 demos/task and allows up to 50 rollout attempts to interact with simulators using the same demo seeds. Reported costs reflect only development-time API usage (Opus 5.5), with no API calls during inference.
 
 [More results can be found here →](docs/results.md)
 

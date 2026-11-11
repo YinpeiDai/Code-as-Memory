@@ -8,6 +8,10 @@ Keep these files with the source: they are required for reproduction.
 - `mikasa_robo_vla_suite/`: five-task comparison plans for 25 demos, 50 demos,
   and 50 demos plus 50 interactions. The simulator benchmark remains `mikasa_robo`;
   the explicit `suite` field keeps paths and reported results separate from all 90 tasks.
+- `mikasa_robo_vla_suite_250/`: the same five tasks with up to 250 successful
+  RGB-D demos and zero interaction. Its dataset is
+  `public_runs/demos/mikasa_robo_vla_suite_250_demo`; published code and its catalog
+  use the `mikasa_robo_vla_suite/demo_only_250` setting.
 
 ## MIKASA: two evaluation scopes
 

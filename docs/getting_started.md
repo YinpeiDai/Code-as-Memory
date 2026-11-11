@@ -67,7 +67,7 @@ and 32 attempts**. Held-out seeds are separate.
 | Published setting | Demo-only assignments | Demo + interaction |
 |---|---|---|
 | RoboMME | 25/task | — |
-| MIKASA-Robo five-task VLA suite | 25 or 50/task | 50 demos + 50 attempts/task |
+| MIKASA-Robo five-task VLA suite | 25, 50 or up to 250/task | 50 demos + 50 attempts/task |
 | RMBench | 25 or up to 50/task | — |
 | RoboMemArena | 25 or up to 50/task | 50 demos + 50 attempts/task; T04: 32 + 32 |
 
@@ -87,7 +87,7 @@ training data, replaying trajectories where needed and retaining successful ones
 | Benchmark | RGB-D preparation | Prepared package |
 |---|---|---|
 | RoboMME | Retain the [released RGB-D recordings](https://huggingface.co/datasets/Yinpei/robomme_data_h5). | [robomme-25-demos](https://huggingface.co/datasets/Yinpei/robomme-25-demos) |
-| MIKASA-Robo | Replay [official trajectories](https://huggingface.co/datasets/mikasa-robo/mikasa-robo-vla-rlds) into **256×256 RGB-D**. | [mikasa_robo-50-demos](https://huggingface.co/datasets/Yinpei/mikasa_robo-50-demos) |
+| MIKASA-Robo | Replay [official trajectories](https://huggingface.co/datasets/mikasa-robo/mikasa-robo-vla-rlds) into **256×256 RGB-D**. | [50 demos/task](https://huggingface.co/datasets/Yinpei/mikasa_robo-50-demos) · [up to 250, five tasks](https://huggingface.co/datasets/Yinpei/mikasa_robo-vla-suite-250-demos) |
 | RMBench | Regenerate [official expert trajectories](https://huggingface.co/datasets/TianxingChen/RMBench) at the released training seeds, capturing **320×240 RGB-D**. | [rmbench-50-demos](https://huggingface.co/datasets/Yinpei/rmbench-50-demos) |
 | RoboMemArena | Replay [expert trajectories](https://huggingface.co/datasets/RoboMemArenaBenchmark/RoboMemArena) into **256×256 RGB-D**. | [robomemarena-50-demos](https://huggingface.co/datasets/Yinpei/robomemarena-50-demos) |
 
@@ -170,7 +170,11 @@ cam download-demos --benchmark robomme --output "$DATA" --videos
 The command verifies the pinned release in `configs/<benchmark>/datasets/release.json`.
 `DATA` contains `manifest.json`, task H5s under `h5/`, and `selected_25.json`.
 Use `--tasks TASK` for selected tasks; `--videos` includes available preview videos.
-The MIKASA package supplies both its five-task comparison and full benchmark.
+The MIKASA 50-demo package supplies both its five-task comparison and full benchmark.
+For the up-to-250 setting, download the separate
+[five-task package](https://huggingface.co/datasets/Yinpei/mikasa_robo-vla-suite-250-demos)
+to `public_runs/demos/mikasa_robo_vla_suite_250_demo` using the
+[MIKASA download command](benchmarks/mikasa_robo.md#up-to-250-demos-only).
 
 A learner assigned 25 demos receives only those 25. Batch plans materialize the
 selected subset automatically; for manual preparation from a larger pool, use:
@@ -221,6 +225,10 @@ for archive in public_runs/releases/development_logs/archives/*.tar.zst; do
 done
 ```
 
-The archives preserve recorded log and code bytes. Their manifests list omitted
-H5s and external assets; download demonstrations separately and prepare a new run
-to reproduce development.
+The archives preserve recorded log and code bytes. Demonstration data and external
+simulator assets are excluded; download demos separately for fresh development.
+The additional [up-to-250 MIKASA archive](https://huggingface.co/datasets/Yinpei/CaM_develop_logs/blob/main/archives/mikasa_robo_vla_suite_demo_only_250.tar.zst)
+extracts to `public_runs/dev_logs/mikasa_robo_vla_suite/demo_only_250` and retains
+code history, intermediate analysis images and generated held-out rollouts, including
+observation H5s. The original four archives omit all H5s; manifests record each
+archive's scope.

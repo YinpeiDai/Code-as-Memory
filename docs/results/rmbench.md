@@ -6,12 +6,8 @@ with no training interaction. The larger pool has 49 demonstrations
 for `battery_try`, 49 for `blocks_ranking_try`, 48 for `observe_and_pickup`, and
 50 for each remaining task. Each policy is evaluated on all 100 held-out episodes.
 
-[25-demo code](../../solutions/rmbench/demo_only_25/README.md) ·
-[50-demo code](../../solutions/rmbench/demo_only_50/README.md)
-
-These are historical results under their pinned interfaces. Current evaluation
-uses public post-action poses for `MotionError`; the compatibility catalogs preserve
-the code and original provenance without relabelling these scores. Current development uses shared demo-only guidance.
+[25 demo-only code solutions](../../solutions/rmbench/demo_only_25/README.md) ·
+[50 demo-only code solutions](../../solutions/rmbench/demo_only_50/README.md)
 
 ## Per-task results
 

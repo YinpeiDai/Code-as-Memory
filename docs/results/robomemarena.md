@@ -9,9 +9,9 @@ The 25-demo setting uses 25 per task and no interaction. Every policy is evaluat
 on all 50 held-out episodes. **TSR** is the whole-task success rate; **CSR** averages
 the native completed-stage percentage, including partial progress in failed episodes.
 
-[25-demo code](../../solutions/robomemarena/demo_only_25/README.md) ·
-[50-demo code](../../solutions/robomemarena/demo_only_50/README.md) ·
-[Interaction code](../../solutions/robomemarena/demo_interaction_50/README.md)
+[25 demo-only code solutions](../../solutions/robomemarena/demo_only_25/README.md) ·
+[50 demo-only code solutions](../../solutions/robomemarena/demo_only_50/README.md) ·
+[50 demo+interact code solutions ](../../solutions/robomemarena/demo_interaction_50/README.md)
 
 The 25-demo arm uses revised offline-review instructions, and interaction adds
 manipulation/recovery guidance. These comparisons change prompts as well as data

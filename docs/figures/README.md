@@ -65,12 +65,13 @@ With the public archive and its referenced evaluation artifacts, repeat the audi
 
 ```bash
 python scripts/collect_figure_costs.py --archive public_runs \
-  --mikasa-250 validate_runs/mikasa_robo_vla_suite_250demo \
   --output "runs/figure_studies/costs/$(date -u +%Y%m%dT%H%M%SZ).json"
 ```
 
-The up-to-250 MIKASA run is stored separately from the published archive; provide
-its local root with `--mikasa-250`. Rendering needs only the committed JSON files.
+The up-to-250 MIKASA evidence is under
+`public_runs/dev_logs/mikasa_robo_vla_suite/demo_only_250`. The optional
+`--mikasa-250` argument supports the original experiment root. Rendering needs
+only the committed JSON files; their original audit paths remain provenance.
 
 ## RoboMME policy computation
 

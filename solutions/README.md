@@ -5,7 +5,8 @@ for its result, exact evaluation command, and development-prompt provenance.
 
 - [RoboMME](robomme/demo_only_25/README.md)
 - MIKASA-Robo five-task VLA suite: [25 demos](mikasa_robo_vla_suite/demo_only_25/README.md),
-  [50 demos](mikasa_robo_vla_suite/demo_only_50/README.md), or
+  [50 demos](mikasa_robo_vla_suite/demo_only_50/README.md),
+  [up to 250 demos](mikasa_robo_vla_suite/demo_only_250/README.md), or
   [50 demos + interaction](mikasa_robo_vla_suite/demo_interaction_50/README.md);
   also [all 90 tasks](mikasa_robo/demo_interaction_50/README.md)
 - RMBench: [25 demos](rmbench/demo_only_25/README.md), [50 demos](rmbench/demo_only_50/README.md)

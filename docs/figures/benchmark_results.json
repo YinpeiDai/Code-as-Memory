@@ -1002,7 +1002,8 @@
       "note": "Unweighted mean of the 16 reported task success rates is 92.125%; displayed as 92.13% with decimal half-up rounding."
     },
     "cam_mikasa_vla_suite_250": {
-      "path": "validate_runs/mikasa_robo_vla_suite_250demo",
+      "path": "public_runs/dev_logs/mikasa_robo_vla_suite/demo_only_250",
+      "catalog": "configs/solutions/mikasa_robo_vla_suite/demo_only_250.json",
       "run_timestamp": "20261111T061919_990098Z",
       "evidence": "benchmark_costs.json",
       "note": "All five frozen policies and 250 held-out results verified from original reports and result.json files; final session costs cross-checked against events.jsonl. Separate from the historical full-90 evaluation.",
