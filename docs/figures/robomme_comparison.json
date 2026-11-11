@@ -1,0 +1,747 @@
+{
+  "schema": "cam-robomme-comparison/1",
+  "sources": [
+    {
+      "url": "https://robomme.github.io/leaderboard.html",
+      "snapshot": "validate_runs/figure_studies/robomme_baseline_comparison/20261110T210538Z/leaderboard.html",
+      "sha256": "5d01a87ed6f51c54bb2c40603b0cc104cc00eb0f90a234dbe539c1b26ad9b227"
+    },
+    {
+      "url": "https://robomme.github.io/blog/",
+      "snapshot": "validate_runs/figure_studies/robomme_baseline_comparison/20261110T210538Z/blog.html",
+      "sha256": "83a0dbcccdf25fdd1268bc3a489d31dcb570f030189795f5aa641b880704c673"
+    },
+    {
+      "url": "https://robomme.github.io/blog/app.js?v=4d541badee",
+      "snapshot": "validate_runs/figure_studies/robomme_baseline_comparison/20261110T210538Z/blog_app.js",
+      "sha256": "0dc4269641621bd99d65ce92a0f75ef9c65648e3774685efcbdb51948cd995ce"
+    },
+    {
+      "url": "https://robomme.github.io/blog/data/bundle.js?v=3ea944e8f0",
+      "snapshot": "validate_runs/figure_studies/robomme_baseline_comparison/20261110T210538Z/blog_bundle.js",
+      "sha256": "30afe43c374a0f58182100a652ab5a5d7f9c8e7b4712a382928bfed31c38d8b7"
+    }
+  ],
+  "baseline_timing_hardware": "2x NVIDIA RTX 6000 Ada GPUs and a 32-core AMD EPYC CPU, per blog Table 2.",
+  "scope_notes": [
+    "Performance uses original RoboMME leaderboard results.",
+    "Baseline policy timing is the blog RoboMME-Plus measurement, used as an approximate reference rather than a matched RoboMME measurement.",
+    "CaM timings include perception, memory decisions, and action-helper computation in offline replay; exclude simulator, IPC, H5 decoding, and startup.",
+    "Development and evaluation API costs are separate. Unreported development costs are null, never assumed zero.",
+    "API costs exclude local GPU/CPU compute, data preparation and foundation-model pretraining."
+  ],
+  "methods": [
+    {
+      "id": "cam",
+      "method": "CaM",
+      "success_percent": 99.375,
+      "success_benchmark": "RoboMME",
+      "successes": 795,
+      "evaluation_episodes": 800,
+      "success_source": "docs/results.md",
+      "policy_compute_ms_per_control_step": 1.4129902277777784,
+      "timing_benchmark": "RoboMME",
+      "timing_source": "validate_runs/figure_studies/robomme_full_policy/20261110T210600Z",
+      "development_api_cost_usd": 29.441281599999996,
+      "evaluation_api_cost_usd": 0,
+      "development_cost_status": "Finalized API usage estimates across 16 development tasks; excludes local compute.",
+      "evaluation_cost_benchmark": "RoboMME",
+      "evaluation_cost_source": "docs/figures/robomme_efficiency.json",
+      "policy_compute_display_upper_bound_ms": 2
+    },
+    {
+      "id": "memi-astra-act",
+      "method": "MEMI-Astra-Act",
+      "success_percent": 97.0,
+      "success_benchmark": "RoboMME",
+      "success_source": "https://robomme.github.io/leaderboard.html",
+      "per_task_success": {
+        "BinFill": 0.98,
+        "PickXtimes": 1.0,
+        "SwingXtimes": 1.0,
+        "StopCube": 0.96,
+        "VideoUnmask": 1.0,
+        "ButtonUnmask": 1.0,
+        "VideoUnmaskSwap": 0.96,
+        "ButtonUnmaskSwap": 0.92,
+        "PickHighlight": 1.0,
+        "VideoRepick": 0.92,
+        "VideoPlaceButton": 1.0,
+        "VideoPlaceOrder": 1.0,
+        "MoveCube": 0.96,
+        "InsertPeg": 0.84,
+        "PatternLock": 1.0,
+        "RouteStick": 0.98
+      },
+      "policy_compute_ms_per_control_step": null,
+      "timing_benchmark": null,
+      "timing_source": null,
+      "development_api_cost_usd": null,
+      "development_cost_status": "Not reported separately in the cited sources.",
+      "evaluation_api_cost_usd": 706,
+      "evaluation_cost_source": "https://robomme.github.io/leaderboard.html",
+      "evaluation_cost_benchmark": "RoboMME",
+      "evaluation_cost_note": "Maintainer-provided total API spending for this RoboMME result: US$706.",
+      "training_compute": {
+        "status": "not_applicable",
+        "note": "No model-weight training. Task-specific memory and policy prompts are optimized offline with the Astra API on RoboMME training demonstrations; API prompt optimization is outside H100 GPU-hours.",
+        "source": "https://github.com/RoboMME/robomme_benchmark/blob/1babf64480e28320e0f9db7992554616ceefda0e/doc/submission/memi-astra-act.md"
+      }
+    },
+    {
+      "id": "embodied-astra",
+      "method": "Embodied Astra",
+      "success_percent": 92.12499999999999,
+      "success_benchmark": "RoboMME",
+      "success_source": "https://robomme.github.io/leaderboard.html",
+      "per_task_success": {
+        "BinFill": 0.98,
+        "PickXtimes": 1.0,
+        "SwingXtimes": 0.98,
+        "StopCube": 0.54,
+        "VideoUnmask": 0.94,
+        "ButtonUnmask": 1.0,
+        "VideoUnmaskSwap": 0.96,
+        "ButtonUnmaskSwap": 0.98,
+        "PickHighlight": 0.98,
+        "VideoRepick": 1.0,
+        "VideoPlaceButton": 1.0,
+        "VideoPlaceOrder": 0.98,
+        "MoveCube": 0.54,
+        "InsertPeg": 0.92,
+        "PatternLock": 1.0,
+        "RouteStick": 0.94
+      },
+      "policy_compute_ms_per_control_step": 343.79738490947904,
+      "timing_benchmark": "RoboMME-Plus",
+      "timing_source": "https://robomme.github.io/blog/",
+      "development_api_cost_usd": null,
+      "development_cost_status": "Not reported separately in the cited sources.",
+      "evaluation_api_cost_usd": 310,
+      "evaluation_cost_source": "https://robomme.github.io/leaderboard.html",
+      "evaluation_cost_benchmark": "RoboMME",
+      "evaluation_cost_note": "Maintainer-provided total API spending for this RoboMME evaluation: US$310.",
+      "training_compute": {
+        "status": "not_applicable",
+        "note": "No RoboMME training or fine-tuning. Foundation-model pretraining and API inference are outside this column scope.",
+        "source": "https://github.com/jackbjed/embodied-astra-robomme/blob/main/submission/embodied-gpt-6-astra.md"
+      }
+    },
+    {
+      "id": "simplememvla",
+      "method": "SimpleMemVLA",
+      "success_percent": 88.25,
+      "success_benchmark": "RoboMME",
+      "success_source": "https://robomme.github.io/leaderboard.html",
+      "per_task_success": {
+        "BinFill": 0.78,
+        "PickXtimes": 1.0,
+        "SwingXtimes": 0.96,
+        "StopCube": 0.92,
+        "VideoUnmask": 1.0,
+        "ButtonUnmask": 1.0,
+        "VideoUnmaskSwap": 0.9,
+        "ButtonUnmaskSwap": 0.94,
+        "PickHighlight": 0.9,
+        "VideoRepick": 0.64,
+        "VideoPlaceButton": 0.86,
+        "VideoPlaceOrder": 0.9,
+        "MoveCube": 0.94,
+        "InsertPeg": 0.46,
+        "PatternLock": 0.94,
+        "RouteStick": 0.98
+      },
+      "policy_compute_ms_per_control_step": 69.11795592881107,
+      "timing_benchmark": "RoboMME-Plus",
+      "timing_source": "https://robomme.github.io/blog/",
+      "development_api_cost_usd": null,
+      "development_cost_status": "Not reported separately in the cited sources.",
+      "evaluation_api_cost_usd": 0,
+      "evaluation_cost_source": "https://robomme.github.io/blog/",
+      "evaluation_cost_benchmark": "RoboMME-Plus",
+      "evaluation_cost_note": "No API calls in the blog evaluation; excludes GPU compute.",
+      "training_compute": {
+        "gpu": "H100",
+        "gpus": 128,
+        "hours": [
+          20,
+          20
+        ],
+        "approximate": false,
+        "note": "RoboMME training: 128 H100 GPUs \u00d7 20 wall-clock hours (SimpleMemVLA Appendix A, Table 8).",
+        "source": "https://arxiv.org/html/2609.05533"
+      }
+    },
+    {
+      "id": "ponderpounce",
+      "method": "PonderPounce",
+      "success_percent": 60.833124999999995,
+      "success_benchmark": "RoboMME",
+      "success_source": "https://robomme.github.io/leaderboard.html",
+      "per_task_success": {
+        "BinFill": 0.5067,
+        "PickXtimes": 0.9333,
+        "SwingXtimes": 0.72,
+        "StopCube": 0.8267,
+        "VideoUnmask": 0.9467,
+        "ButtonUnmask": 0.9733,
+        "VideoUnmaskSwap": 0.2533,
+        "ButtonUnmaskSwap": 0.34,
+        "PickHighlight": 0.8533,
+        "VideoRepick": 0.4067,
+        "VideoPlaceButton": 0.8333,
+        "VideoPlaceOrder": 0.7933,
+        "MoveCube": 0.8133,
+        "InsertPeg": 0.06,
+        "PatternLock": 0.1267,
+        "RouteStick": 0.3467
+      },
+      "policy_compute_ms_per_control_step": 199.38608270807404,
+      "timing_benchmark": "RoboMME-Plus",
+      "timing_source": "https://robomme.github.io/blog/",
+      "development_api_cost_usd": null,
+      "development_cost_status": "Not reported separately in the cited sources.",
+      "evaluation_api_cost_usd": 0,
+      "evaluation_cost_source": "https://robomme.github.io/blog/",
+      "evaluation_cost_benchmark": "RoboMME-Plus",
+      "evaluation_cost_note": "No API calls in the blog evaluation; excludes GPU compute.",
+      "training_compute": {
+        "status": "not_reported",
+        "note": "RoboMME training steps are reported, but GPU count and training duration are not.",
+        "source": "https://arxiv.org/html/2608.24115"
+      }
+    },
+    {
+      "id": "framesamp-modul",
+      "method": "FrameSamp+Modul",
+      "success_percent": 44.514374999999994,
+      "success_benchmark": "RoboMME",
+      "success_source": "https://robomme.github.io/leaderboard.html",
+      "per_task_success": {
+        "BinFill": 0.3956,
+        "PickXtimes": 0.8733,
+        "SwingXtimes": 0.92,
+        "StopCube": 0.42,
+        "VideoUnmask": 0.3267,
+        "ButtonUnmask": 0.2511,
+        "VideoUnmaskSwap": 0.2444,
+        "ButtonUnmaskSwap": 0.1822,
+        "PickHighlight": 0.2289,
+        "VideoRepick": 0.3044,
+        "VideoPlaceButton": 0.6,
+        "VideoPlaceOrder": 0.32,
+        "MoveCube": 0.7778,
+        "InsertPeg": 0.0756,
+        "PatternLock": 0.5356,
+        "RouteStick": 0.6667
+      },
+      "policy_compute_ms_per_control_step": 6.590922887245322,
+      "timing_benchmark": "RoboMME-Plus",
+      "timing_source": "https://robomme.github.io/blog/",
+      "development_api_cost_usd": null,
+      "development_cost_status": "Not reported separately in the cited sources.",
+      "evaluation_api_cost_usd": 0,
+      "evaluation_cost_source": "https://robomme.github.io/blog/",
+      "evaluation_cost_benchmark": "RoboMME-Plus",
+      "evaluation_cost_note": "No API calls in the blog evaluation; excludes GPU compute.",
+      "training_compute": {
+        "gpu": "A40",
+        "gpus": 4,
+        "hours": [
+          72,
+          96
+        ],
+        "approximate": true,
+        "display_label": "\u224850",
+        "note": "Perceptual-memory family estimate: approximately 3\u20134 days on 4 A40 GPUs per run (RoboMME Appendix B.2.3).",
+        "source": "https://arxiv.org/html/2603.04639"
+      }
+    }
+  ],
+  "cam_measurement": {
+    "study_path": "validate_runs/figure_studies/robomme_full_policy/20261110T210600Z",
+    "summary": {
+      "schema": "cam-offline-full-policy-profile/1",
+      "episodes": 80,
+      "tasks": 16,
+      "native_control_steps": 19080,
+      "verified_commands": 19000,
+      "total_policy_compute_ms": 26959.853546000013,
+      "mean_compute_ms_per_control_step": 1.4129902277777784,
+      "mean_policy_compute_ms_per_episode": 336.99816932500016,
+      "decision_compute_ms": 19222.975852000003,
+      "action_helper_compute_ms": 7733.9029120000005,
+      "command_latency_median_ms": 0.00648,
+      "command_latency_p95_ms": 2.347341149999999,
+      "command_latency_max_ms": 881.262536,
+      "all_commands_and_decisions_match": true,
+      "scope": "Profile complete frozen RoboMME policy computation on recorded episodes.\n\nIncludes perceive_decide and act_* helpers. Robot I/O is replaced by recorded\nobservations, and every emitted command is checked against the recorded trace.\nThis is offline timing, not a new evaluation or a real-time controller test.\nH5 loading, simulator/robot time, IPC, imports and replay checks are excluded.\n",
+      "completed": 1794344993.9970872
+    },
+    "metadata": {
+      "schema": "cam-offline-full-policy-profile/1",
+      "created": 1794344763.9719186,
+      "scope": "Profile complete frozen RoboMME policy computation on recorded episodes.\n\nIncludes perceive_decide and act_* helpers. Robot I/O is replaced by recorded\nobservations, and every emitted command is checked against the recorded trace.\nThis is offline timing, not a new evaluation or a real-time controller test.\nH5 loading, simulator/robot time, IPC, imports and replay checks are excluded.\n",
+      "episodes_per_task": 5,
+      "repeats": 3,
+      "warmups": 1,
+      "tasks": [
+        "BinFill",
+        "ButtonUnmask",
+        "ButtonUnmaskSwap",
+        "InsertPeg",
+        "MoveCube",
+        "PatternLock",
+        "PickHighlight",
+        "PickXtimes",
+        "RouteStick",
+        "StopCube",
+        "SwingXtimes",
+        "VideoPlaceButton",
+        "VideoPlaceOrder",
+        "VideoRepick",
+        "VideoUnmask",
+        "VideoUnmaskSwap"
+      ],
+      "selection": "First N test episodes numerically, without outcome filtering.",
+      "git_revision": "30a5a2e9911346ec7fa7c0c3ec831922a3d0575f",
+      "python": "3.11.14",
+      "numpy": "1.26.4",
+      "script_sha256": "39e371649bf476dd56f5e9a0e42b7513f835317073de775f34b16ad6526759ad",
+      "hardware": {
+        "lscpu": [
+          {
+            "field": "Architecture:",
+            "data": "x86_64"
+          },
+          {
+            "field": "CPU op-mode(s):",
+            "data": "32-bit, 64-bit"
+          },
+          {
+            "field": "Address sizes:",
+            "data": "52 bits physical, 57 bits virtual"
+          },
+          {
+            "field": "Byte Order:",
+            "data": "Little Endian"
+          },
+          {
+            "field": "CPU(s):",
+            "data": "32"
+          },
+          {
+            "field": "On-line CPU(s) list:",
+            "data": "0-31"
+          },
+          {
+            "field": "Vendor ID:",
+            "data": "AuthenticAMD"
+          },
+          {
+            "field": "Model name:",
+            "data": "AMD EPYC 9334 32-Core Processor"
+          },
+          {
+            "field": "CPU family:",
+            "data": "25"
+          },
+          {
+            "field": "Model:",
+            "data": "17"
+          },
+          {
+            "field": "Thread(s) per core:",
+            "data": "1"
+          },
+          {
+            "field": "Core(s) per socket:",
+            "data": "32"
+          },
+          {
+            "field": "Socket(s):",
+            "data": "1"
+          },
+          {
+            "field": "Stepping:",
+            "data": "1"
+          },
+          {
+            "field": "Frequency boost:",
+            "data": "enabled"
+          },
+          {
+            "field": "CPU(s) scaling MHz:",
+            "data": "48%"
+          },
+          {
+            "field": "CPU max MHz:",
+            "data": "3910.2529"
+          },
+          {
+            "field": "CPU min MHz:",
+            "data": "1500.0000"
+          },
+          {
+            "field": "BogoMIPS:",
+            "data": "5391.59"
+          },
+          {
+            "field": "Flags:",
+            "data": "fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good amd_lbr_v2 nopl nonstop_tsc cpuid extd_apicid aperfmperf rapl pni pclmulqdq monitor ssse3 fma cx16 pcid sse4_1 sse4_2 movbe popcnt aes xsave avx f16c rdrand lahf_lm cmp_legacy extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs skinit wdt tce topoext perfctr_core perfctr_nb bpext perfctr_llc mwaitx cpb cat_l3 cdp_l3 hw_pstate ssbd mba perfmon_v2 ibrs ibpb stibp ibrs_enhanced vmmcall fsgsbase bmi1 avx2 smep bmi2 erms invpcid cqm rdt_a avx512f avx512dq rdseed adx smap avx512ifma clflushopt clwb avx512cd sha_ni avx512bw avx512vl xsaveopt xsavec xgetbv1 xsaves cqm_llc cqm_occup_llc cqm_mbm_total cqm_mbm_local user_shstk avx512_bf16 clzero irperf xsaveerptr rdpru wbnoinvd amd_ppin cppc arat npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold avic v_vmsave_vmload vgif x2avic v_spec_ctrl vnmi avx512vbmi umip pku ospke avx512_vbmi2 gfni vaes vpclmulqdq avx512_vnni avx512_bitalg avx512_vpopcntdq la57 rdpid overflow_recov succor smca fsrm flush_l1d debug_swap"
+          },
+          {
+            "field": "L1d cache:",
+            "data": "1 MiB (32 instances)"
+          },
+          {
+            "field": "L1i cache:",
+            "data": "1 MiB (32 instances)"
+          },
+          {
+            "field": "L2 cache:",
+            "data": "32 MiB (32 instances)"
+          },
+          {
+            "field": "L3 cache:",
+            "data": "128 MiB (4 instances)"
+          },
+          {
+            "field": "NUMA node(s):",
+            "data": "1"
+          },
+          {
+            "field": "NUMA node0 CPU(s):",
+            "data": "0-31"
+          },
+          {
+            "field": "Vulnerability Gather data sampling:",
+            "data": "Not affected"
+          },
+          {
+            "field": "Vulnerability Itlb multihit:",
+            "data": "Not affected"
+          },
+          {
+            "field": "Vulnerability L1tf:",
+            "data": "Not affected"
+          },
+          {
+            "field": "Vulnerability Mds:",
+            "data": "Not affected"
+          },
+          {
+            "field": "Vulnerability Meltdown:",
+            "data": "Not affected"
+          },
+          {
+            "field": "Vulnerability Mmio stale data:",
+            "data": "Not affected"
+          },
+          {
+            "field": "Vulnerability Reg file data sampling:",
+            "data": "Not affected"
+          },
+          {
+            "field": "Vulnerability Retbleed:",
+            "data": "Not affected"
+          },
+          {
+            "field": "Vulnerability Spec rstack overflow:",
+            "data": "Mitigation; Safe RET"
+          },
+          {
+            "field": "Vulnerability Spec store bypass:",
+            "data": "Mitigation; Speculative Store Bypass disabled via prctl"
+          },
+          {
+            "field": "Vulnerability Spectre v1:",
+            "data": "Mitigation; usercopy/swapgs barriers and __user pointer sanitization"
+          },
+          {
+            "field": "Vulnerability Spectre v2:",
+            "data": "Mitigation; Enhanced / Automatic IBRS; IBPB conditional; STIBP disabled; RSB filling; PBRSB-eIBRS Not affected; BHI Not affected"
+          },
+          {
+            "field": "Vulnerability Srbds:",
+            "data": "Not affected"
+          },
+          {
+            "field": "Vulnerability Tsx async abort:",
+            "data": "Not affected"
+          }
+        ]
+      },
+      "threads": {
+        "OMP_NUM_THREADS": "1",
+        "OPENBLAS_NUM_THREADS": "1",
+        "MKL_NUM_THREADS": "1"
+      },
+      "runtime_hashes": {
+        "src/cam/core/history.py": "85c20d0af2516fe6c30d4d6f10485f80cb6cfb9540f3a491ec5e8ba645668971",
+        "src/cam/core/code_policy.py": "66e1c36df482ef439a94a6356db1bb6fa733299882a8a4df6962218267213f84",
+        "src/cam/core/__init__.py": "a973eb2bde7faef0e443694e9f178ee440f89d9edd021d5982590ebcde4bba04",
+        "src/cam/core/budget.py": "b87f917fc67cb086ef1cde8922f3fc5a5b6077b9ecb50cc9ffd1b3582f2f8824",
+        "src/cam/core/workspace.py": "edc6907ae7f2fb837235dc1600b93756073d665aa5a745b379eb6f6827f769d6",
+        "src/cam/core/sandbox.py": "35e1cb61952416eff6021d9448172548e334fe981dab26a73395f0cb72a22e79",
+        "src/cam/core/tools.py": "94c9e432ea203e06bf1b717483904f30f6ffc18eca8b11bf8d1f3a66ba904572",
+        "src/cam/runtime/wire.py": "44f233c0239c7c50d40807de9dcf5c7732d83080ffd7d935ff19ec1461ee0fd8",
+        "src/cam/runtime/trajectory.py": "9e3318169d7977a23f159834ef5527f65608d1766869c7887f59a4f6ab0323a3",
+        "src/cam/runtime/policy_worker.py": "4a31c3b9a001f8e8c9a4d40402f8b98b469679ff7127025b520cc5e800be8e87",
+        "src/cam/runtime/__init__.py": "a973eb2bde7faef0e443694e9f178ee440f89d9edd021d5982590ebcde4bba04",
+        "src/cam/runtime/robot.py": "21ca078d39ae66150106b76d3e1a494f48e9f7b6f60f795cd82eb966490896ff",
+        "src/cam/runtime/observations.py": "43c624d8115bd05e5e64ea959723113a77d369be2a5b9ee402c7d49c2ff726da"
+      }
+    },
+    "artifacts": {
+      "study.json": "083f58fdf2a779a9935f6f4017c38c0dedf8ef0836a75de8233025b2d3223e54",
+      "samples.json": "c2bb5c669b329a3f8ef506d446f8ef57ce07de51998ec95376fad3cf1556b474",
+      "results.json": "21dad26c7ef92a3b0f0f549447996e854f286f03b37bcaa038dd587ad6876381",
+      "profile_robomme_policy.py": "39e371649bf476dd56f5e9a0e42b7513f835317073de775f34b16ad6526759ad",
+      "profile_robomme_decisions.py": "f370e6f4443f9061b92526ff5fbddd9318b3b82a666f607956af70cc13ce6e50"
+    },
+    "per_task": [
+      {
+        "task": "BinFill",
+        "episodes": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "control_steps": 1342,
+        "total_policy_compute_ms": 542.43883,
+        "mean_compute_ms_per_control_step": 0.4042018107302534,
+        "decision_compute_ms": 272.169208,
+        "action_helper_compute_ms": 269.94607
+      },
+      {
+        "task": "ButtonUnmask",
+        "episodes": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "control_steps": 918,
+        "total_policy_compute_ms": 183.21625600000002,
+        "mean_compute_ms_per_control_step": 0.19958197821350765,
+        "decision_compute_ms": 71.57792,
+        "action_helper_compute_ms": 111.628383
+      },
+      {
+        "task": "ButtonUnmaskSwap",
+        "episodes": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "control_steps": 1916,
+        "total_policy_compute_ms": 3885.8301009999996,
+        "mean_compute_ms_per_control_step": 2.0280950422755737,
+        "decision_compute_ms": 3872.291364,
+        "action_helper_compute_ms": 13.430152000000001
+      },
+      {
+        "task": "InsertPeg",
+        "episodes": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "control_steps": 1179,
+        "total_policy_compute_ms": 29.883070999999997,
+        "mean_compute_ms_per_control_step": 0.025346116200169633,
+        "decision_compute_ms": 20.521349999999998,
+        "action_helper_compute_ms": 9.343945000000001
+      },
+      {
+        "task": "MoveCube",
+        "episodes": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "control_steps": 1292,
+        "total_policy_compute_ms": 48.456073,
+        "mean_compute_ms_per_control_step": 0.03750470046439629,
+        "decision_compute_ms": 38.470032,
+        "action_helper_compute_ms": 9.992955
+      },
+      {
+        "task": "PatternLock",
+        "episodes": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "control_steps": 493,
+        "total_policy_compute_ms": 757.3645779999999,
+        "mean_compute_ms_per_control_step": 1.53623646653144,
+        "decision_compute_ms": 754.39676,
+        "action_helper_compute_ms": 2.959363
+      },
+      {
+        "task": "PickHighlight",
+        "episodes": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "control_steps": 1473,
+        "total_policy_compute_ms": 6525.630905999999,
+        "mean_compute_ms_per_control_step": 4.430163547861507,
+        "decision_compute_ms": 4884.133124,
+        "action_helper_compute_ms": 1639.2741769999998
+      },
+      {
+        "task": "PickXtimes",
+        "episodes": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "control_steps": 1817,
+        "total_policy_compute_ms": 126.16462200000001,
+        "mean_compute_ms_per_control_step": 0.06943567528893782,
+        "decision_compute_ms": 112.952685,
+        "action_helper_compute_ms": 13.211768000000001
+      },
+      {
+        "task": "RouteStick",
+        "episodes": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "control_steps": 952,
+        "total_policy_compute_ms": 25.344842,
+        "mean_compute_ms_per_control_step": 0.02662273319327731,
+        "decision_compute_ms": 7.573653,
+        "action_helper_compute_ms": 17.783428999999998
+      },
+      {
+        "task": "StopCube",
+        "episodes": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "control_steps": 800,
+        "total_policy_compute_ms": 5045.931108999999,
+        "mean_compute_ms_per_control_step": 6.307413886249999,
+        "decision_compute_ms": 0.462142,
+        "action_helper_compute_ms": 5045.469617
+      },
+      {
+        "task": "SwingXtimes",
+        "episodes": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "control_steps": 2512,
+        "total_policy_compute_ms": 96.290962,
+        "mean_compute_ms_per_control_step": 0.038332389331210186,
+        "decision_compute_ms": 72.197638,
+        "action_helper_compute_ms": 24.124540999999997
+      },
+      {
+        "task": "VideoPlaceButton",
+        "episodes": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "control_steps": 643,
+        "total_policy_compute_ms": 1784.1952279999998,
+        "mean_compute_ms_per_control_step": 2.7747981772939343,
+        "decision_compute_ms": 1770.6099230000002,
+        "action_helper_compute_ms": 13.602521
+      },
+      {
+        "task": "VideoPlaceOrder",
+        "episodes": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "control_steps": 745,
+        "total_policy_compute_ms": 2525.802818,
+        "mean_compute_ms_per_control_step": 3.3903393530201344,
+        "decision_compute_ms": 2520.64682,
+        "action_helper_compute_ms": 5.159692
+      },
+      {
+        "task": "VideoRepick",
+        "episodes": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "control_steps": 1663,
+        "total_policy_compute_ms": 2298.4582949999995,
+        "mean_compute_ms_per_control_step": 1.3821156313890557,
+        "decision_compute_ms": 1888.781232,
+        "action_helper_compute_ms": 409.588331
+      },
+      {
+        "task": "VideoUnmask",
+        "episodes": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "control_steps": 542,
+        "total_policy_compute_ms": 52.391148,
+        "mean_compute_ms_per_control_step": 0.09666263468634687,
+        "decision_compute_ms": 48.94553199999999,
+        "action_helper_compute_ms": 3.444621
+      },
+      {
+        "task": "VideoUnmaskSwap",
+        "episodes": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "control_steps": 793,
+        "total_policy_compute_ms": 3032.454707,
+        "mean_compute_ms_per_control_step": 3.824028634300126,
+        "decision_compute_ms": 2887.246469,
+        "action_helper_compute_ms": 144.94334700000002
+      }
+    ]
+  },
+  "cam_cost_source": "docs/figures/robomme_efficiency.json"
+}

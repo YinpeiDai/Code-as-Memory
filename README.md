@@ -1,80 +1,86 @@
-# CaM · Robot Memory as Code
+# 🧠 Code-as-Memory: Robots That Remember with Code
 
-[Results](#results) · [Try it](#try-it) · [Demonstrations](docs/getting_started.md#demonstration-packages) · [Experiment details](docs/reproducing.md)
+[Results](docs/results.md) · [Try it](#try-it) · [Demonstrations](docs/getting_started.md#demonstration-packages) · [Experiment details](docs/reproducing.md)
 
-**CaM learns robot memory as code.**
+**What if robot memory could just be an executable Python program?**
 
-A coding agent turns demonstrations and optional practice into a Python program
-that remembers, decides, and acts.
+**Code-as-Memory (CaM)** introduces **executable code as explicit, persistent robot memory**. A coding agent distills demonstrations into a Python program that maintains and updates memory through structured variables (e.g., `dict`, `list`), enabling robots to **perceive, remember, reason and act** entirely through Python execution, without relying on any external models during inference.
 
-The learned program carries memory across observations and runs with
-**zero model calls during evaluation**.
+⚡ **No Training. No Model Calls. Near-Zero Latency.**
 
-## Results
+- **No model training** during development
+- **Zero model/API calls** during inference
+- **<5 ms inference latency** through lightweight Python execution
 
-![CaM and selected published baselines across RoboMME, RMBench, MIKASA-Robo, and RoboMemArena](docs/figures/benchmark_comparison.png)
+CaM achieves **near-perfect performance across four robot memory benchmarks**, outperforming prior approaches at a fraction of the **computational cost, financial expense, and inference latency**.
+
+![CaM success rates and API costs across RMBench, MIKASA-robo, RoboMME, and RoboMemArena](docs/figures/benchmark_comparison.png)
+
 
 The comparison uses nine shared RMBench tasks and five shared MIKASA task identities
 (CaM: **250/250, 100.0%**, from fresh 50-demo-plus-interaction policies). Published methods use different
 training and evaluation protocols; full-suite results and provenance are in the docs.
 
-[More results, coverage, and provenance →](docs/results.md)
+[More results can be found here →](docs/results.md)
 
-## Learn once, execute as code
 
-RoboMME's 16 memory programs used **$29.44 in reported development API cost**.
-Their 800 held-out evaluations made **zero model calls**.
-
-![RoboMME memory-decision timing distribution and development versus evaluation API cost](docs/figures/robomme_efficiency.png)
-
-Timing measures perception and memory decisions on recorded observations, excluding
-action-tool execution and simulation. [Measurement details and figure sources](docs/figures/README.md).
-
-## Robot memory in action
-
-Selected successful held-out episodes, with the robot's recorded memory beside the
-front view. Highlighted fields show what changes; scene markers connect remembered
-locations to actions. [How the GIFs are made](docs/media/README.md).
-
-### RoboMME
-
-**Remember a pattern** · Store the path, then retrace it.
-
-[![PatternLock: annotated front view beside the remembered path](docs/media/robomme-pattern-lock.gif)](docs/media/robomme-pattern-lock.gif)
-
-**Track hidden objects** · Recall the targets after their containers move.
-
-[![VideoUnmaskSwap: annotated targets beside the remembered colors and next target index](docs/media/robomme-hidden-objects.gif)](docs/media/robomme-hidden-objects.gif)
+## Rollout Examples
 
 ### RMBench
 
-**Keep track of a swap** · Follow a three-move plan through an empty tray.
+**Task: swap_blocks**
 
-[![swap_blocks: annotated workspace beside the move list and current move index](docs/media/rmbench-swap-blocks.gif)](docs/media/rmbench-swap-blocks.gif)
+> **Task Goal:** There are three traies on the table, and two blocks are placed in two different traies. You may move only one block at a time, and each tray can hold at most one block. Swap the positions of the two blocks. Finally press the button.
 
-**Remember what is covered** · Retain the colors, then uncover them in order.
+https://github.com/user-attachments/assets/02ce7f4e-5902-4bbe-9a5f-9abf006fd6e2
 
-[![cover_blocks: annotated workspace beside the remembered color order](docs/media/rmbench-cover-blocks.gif)](docs/media/rmbench-cover-blocks.gif)
+**Task: cover_blocks**
+
+> **Task Goal:** On the table, red, green, and blue blocks are arranged randomly along with three lids. From the current viewpoint, cover the blocks from left to right using the lids, and then uncover them again in the sequence red, green, and blue.
+
+https://github.com/user-attachments/assets/8bc49f75-d240-40cf-b217-41bd53b903b4
 
 ### MIKASA-Robo
 
-**Remember which batteries work** · Keep each lamp result as testing continues.
+**Task: BatteriesCheckerEasy-3-VLA-v0**
 
-[![BatteriesChecker: annotated front view beside the battery results and remaining queue](docs/media/mikasa-batteries.gif)](docs/media/mikasa-batteries.gif)
+> **Task Goal:** Find all working batteries by inserting each one into the socket, observing the lamp result, and then pressing the button to confirm.
 
-**Recall a color sequence** · Turn an earlier cue into an ordered sequence of touches.
+https://github.com/user-attachments/assets/fa3f70b0-4bc0-47fa-a284-8898e2bf3766
 
-[![SeqOfColors3: annotated color targets beside the remembered sequence and touch count](docs/media/mikasa-color-sequence.gif)](docs/media/mikasa-color-sequence.gif)
+**Task: SeqOfColors3-VLA-v0**
+
+> **Task Goal:** Observe which colored cubes appear during the cue, wait, then touch all of them in any order and press the center button.
+
+https://github.com/user-attachments/assets/92a7bc82-3ee9-4226-a126-daa0627414f2
+
+### RoboMME
+
+**Task: PatternLock**
+
+> **Task Goal:** watch the video carefully, then use the stick attached to the robot to retrace the same pattern
+
+https://github.com/user-attachments/assets/ab737c73-8a91-4fd8-9b0d-ee3d25897a04
+
+**Task: VideoUnmaskSwap**
+
+> **Task Goal:** watch the video carefully, then pick up the container hiding the green cube, finally pick up another container hiding the blue cube
+
+https://github.com/user-attachments/assets/549ebd0c-9a4d-4802-b2fb-8c66f9871807
 
 ### RoboMemArena
 
-**Remember what is inside** · Keep drawer observations and return to the occupied one.
+**Task: T04_ButterNonEmptyDrawer**
 
-[![ButterNonEmptyDrawer: annotated front view beside drawer observations and the selected target](docs/media/robomemarena-drawers.gif)](docs/media/robomemarena-drawers.gif)
+> **Task Goal:** Open and close each drawer to check it, in this order: top, middle, bottom. Put butter into the drawer that already contains an object.
 
-**Count completed pours** · Update the remembered count between pours.
+https://github.com/user-attachments/assets/145fa12c-932b-417a-b427-e35c7bcfc10f
 
-[![PourSauceFrypanTwice: annotated front view beside the pour count and current phase](docs/media/robomemarena-pour-twice.gif)](docs/media/robomemarena-pour-twice.gif)
+**Task: T07_PourSauceFrypanTwice**
+
+> **Task Goal:** Pour tomato sauce over the frypan twice and place the sauce bottle into the bowl drainer.
+
+https://github.com/user-attachments/assets/f1019d46-e3c0-4bfb-9147-c4ff4dbbe232
 
 ## Try it
 
@@ -96,6 +102,9 @@ python scripts/evaluate_solutions.py solutions/robomme/demo_only_25 \
 | RoboMemArena | [Up to 50 demonstrations + matching training attempts](solutions/robomemarena/demo_interaction_50/) | [Guide](docs/benchmarks/robomemarena.md) |
 
 ## Reproduce development
+
+[Download the development logs, code, results and videos](https://huggingface.co/datasets/Yinpei/CaM_develop_logs)
+(5.54 GB compressed; [download instructions](docs/getting_started.md#development-logs)).
 
 The demonstrations are successful trajectories collected through replay:
 **25 per task for RoboMME and up to 50 per task for the other benchmarks**.

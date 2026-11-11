@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
   "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="1224pt" height="374.4pt" viewBox="0 0 1224 374.4" xmlns="http://www.w3.org/2000/svg" version="1.1">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="1224pt" height="489.6pt" viewBox="0 0 1224 489.6" xmlns="http://www.w3.org/2000/svg" version="1.1">
  <metadata>
   <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
    <cc:Work>
@@ -20,8 +20,8 @@
  </defs>
  <g id="figure_1">
   <g id="patch_1">
-   <path d="M 0 374.4
-L 1224 374.4
+   <path d="M 0 489.6
+L 1224 489.6
 L 1224 0
 L 0 0
 z
@@ -29,543 +29,677 @@ z
   </g>
   <g id="axes_1">
    <g id="patch_2">
-    <path d="M 30.6 90.89941
-L 293.76 90.89941
-L 293.76 75.186885
-L 30.6 75.186885
+    <path d="M 30.6 90.224451
+L 293.76 90.224451
+L 293.76 74.505883
+L 30.6 74.505883
 z
-" clip-path="url(#p5bf6a9f2eb)" style="fill: #f0f4f8"/>
+" clip-path="url(#p9d66177aeb)" style="fill: #f0f4f8"/>
    </g>
    <g id="patch_3">
-    <path d="M 30.6 152.276459
-L 293.76 152.276459
-L 293.76 136.563934
-L 30.6 136.563934
+    <path d="M 30.6 139.344976
+L 293.76 139.344976
+L 293.76 123.626408
+L 30.6 123.626408
 z
-" clip-path="url(#p5bf6a9f2eb)" style="fill: #f0f4f8"/>
+" clip-path="url(#p9d66177aeb)" style="fill: #f0f4f8"/>
    </g>
    <g id="patch_4">
-    <path d="M 30.6 213.653508
-L 293.76 213.653508
-L 293.76 197.940984
-L 30.6 197.940984
+    <path d="M 30.6 188.4655
+L 293.76 188.4655
+L 293.76 172.746932
+L 30.6 172.746932
 z
-" clip-path="url(#p5bf6a9f2eb)" style="fill: #f0f4f8"/>
+" clip-path="url(#p9d66177aeb)" style="fill: #f0f4f8"/>
    </g>
    <g id="patch_5">
-    <path d="M 30.6 275.030557
-L 293.76 275.030557
-L 293.76 259.318033
-L 30.6 259.318033
+    <path d="M 30.6 237.586025
+L 293.76 237.586025
+L 293.76 221.867457
+L 30.6 221.867457
 z
-" clip-path="url(#p5bf6a9f2eb)" style="fill: #f0f4f8"/>
+" clip-path="url(#p9d66177aeb)" style="fill: #f0f4f8"/>
    </g>
    <g id="patch_6">
-    <path d="M 30.6 336.407607
-L 293.76 336.407607
-L 293.76 320.695082
-L 30.6 320.695082
+    <path d="M 30.6 286.70655
+L 293.76 286.70655
+L 293.76 270.987982
+L 30.6 270.987982
 z
-" clip-path="url(#p5bf6a9f2eb)" style="fill: #f0f4f8"/>
+" clip-path="url(#p9d66177aeb)" style="fill: #f0f4f8"/>
    </g>
    <g id="patch_7">
-    <path d="M 30.6 90.89941
-L 147.744029 90.89941
-L 147.744029 75.186885
-L 30.6 75.186885
+    <path d="M 30.6 335.827074
+L 293.76 335.827074
+L 293.76 320.108506
+L 30.6 320.108506
 z
-" clip-path="url(#p5bf6a9f2eb)" style="fill: #9bafcb"/>
+" clip-path="url(#p9d66177aeb)" style="fill: #f0f4f8"/>
    </g>
    <g id="patch_8">
-    <path d="M 30.6 152.276459
-L 190.688452 152.276459
-L 190.688452 136.563934
-L 30.6 136.563934
+    <path d="M 30.6 90.224451
+L 141.1272 90.224451
+L 141.1272 74.505883
+L 30.6 74.505883
 z
-" clip-path="url(#p5bf6a9f2eb)" style="fill: #9bafcb"/>
+" clip-path="url(#p9d66177aeb)" style="fill: #9bafcb"/>
    </g>
    <g id="patch_9">
-    <path d="M 30.6 213.653508
-L 262.8387 213.653508
-L 262.8387 197.940984
-L 30.6 197.940984
+    <path d="M 30.6 139.344976
+L 209.02248 139.344976
+L 209.02248 123.626408
+L 30.6 123.626408
 z
-" clip-path="url(#p5bf6a9f2eb)" style="fill: #9bafcb"/>
+" clip-path="url(#p9d66177aeb)" style="fill: #9bafcb"/>
    </g>
    <g id="patch_10">
-    <path d="M 30.6 275.030557
-L 285.8652 275.030557
-L 285.8652 259.318033
-L 30.6 259.318033
+    <path d="M 30.6 188.4655
+L 214.28568 188.4655
+L 214.28568 172.746932
+L 30.6 172.746932
 z
-" clip-path="url(#p5bf6a9f2eb)" style="fill: #9bafcb"/>
+" clip-path="url(#p9d66177aeb)" style="fill: #9bafcb"/>
    </g>
    <g id="patch_11">
-    <path d="M 30.6 336.407607
-L 292.11525 336.407607
-L 292.11525 320.695082
-L 30.6 320.695082
+    <path d="M 30.6 237.586025
+L 249.0228 237.586025
+L 249.0228 221.867457
+L 30.6 221.867457
 z
-" clip-path="url(#p5bf6a9f2eb)" style="fill: #008d7f"/>
+" clip-path="url(#p9d66177aeb)" style="fill: #9bafcb"/>
+   </g>
+   <g id="patch_12">
+    <path d="M 30.6 286.70655
+L 277.9704 286.70655
+L 277.9704 270.987982
+L 30.6 270.987982
+z
+" clip-path="url(#p9d66177aeb)" style="fill: #9bafcb"/>
+   </g>
+   <g id="patch_13">
+    <path d="M 30.6 335.827074
+L 293.76 335.827074
+L 293.76 320.108506
+L 30.6 320.108506
+z
+" clip-path="url(#p9d66177aeb)" style="fill: #008d7f"/>
    </g>
    <g id="text_1">
-    <text style="font-size: 18px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #18273b" x="30.6" y="65.461486" transform="rotate(-0 30.6 65.461486)">FrameSamp+Modul</text>
+    <text style="font-size: 18px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #18273b" x="30.6" y="64.778407" transform="rotate(-0 30.6 64.778407)">Mem-0</text>
    </g>
    <g id="text_2">
-    <text style="font-size: 18px; font-family: 'DejaVu Sans'; text-anchor: end; fill: #18273b" x="293.76" y="65.461486" transform="rotate(-0 293.76 65.461486)">44.5%</text>
+    <text style="font-size: 18px; font-family: 'DejaVu Sans'; text-anchor: end; fill: #18273b" x="293.76" y="64.778407" transform="rotate(-0 293.76 64.778407)">42.0%</text>
    </g>
    <g id="text_3">
-    <text style="font-size: 18px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #18273b" x="30.6" y="126.838535" transform="rotate(-0 30.6 126.838535)">PonderPounce</text>
+    <text style="font-size: 18px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #18273b" x="30.6" y="113.898931" transform="rotate(-0 30.6 113.898931)">EventVLA</text>
    </g>
    <g id="text_4">
-    <text style="font-size: 18px; font-family: 'DejaVu Sans'; text-anchor: end; fill: #18273b" x="293.76" y="126.838535" transform="rotate(-0 293.76 126.838535)">60.8%</text>
+    <text style="font-size: 18px; font-family: 'DejaVu Sans'; text-anchor: end; fill: #18273b" x="293.76" y="113.898931" transform="rotate(-0 293.76 113.898931)">67.8%</text>
    </g>
    <g id="text_5">
-    <text style="font-size: 18px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #18273b" x="30.6" y="188.215585" transform="rotate(-0 30.6 188.215585)">SimpleMemVLA</text>
+    <text style="font-size: 18px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #18273b" x="30.6" y="163.019456" transform="rotate(-0 30.6 163.019456)">DIM-WAM</text>
    </g>
    <g id="text_6">
-    <text style="font-size: 18px; font-family: 'DejaVu Sans'; text-anchor: end; fill: #18273b" x="293.76" y="188.215585" transform="rotate(-0 293.76 188.215585)">88.3%</text>
+    <text style="font-size: 18px; font-family: 'DejaVu Sans'; text-anchor: end; fill: #18273b" x="293.76" y="163.019456" transform="rotate(-0 293.76 163.019456)">69.8%</text>
    </g>
    <g id="text_7">
-    <text style="font-size: 18px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #18273b" x="30.6" y="249.592634" transform="rotate(-0 30.6 249.592634)">MEMI-Astra-Act</text>
+    <text style="font-size: 18px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #18273b" x="30.6" y="212.139981" transform="rotate(-0 30.6 212.139981)">MemoryWAM</text>
    </g>
    <g id="text_8">
-    <text style="font-size: 18px; font-family: 'DejaVu Sans'; text-anchor: end; fill: #18273b" x="293.76" y="249.592634" transform="rotate(-0 293.76 249.592634)">97.0%</text>
+    <text style="font-size: 18px; font-family: 'DejaVu Sans'; text-anchor: end; fill: #18273b" x="293.76" y="212.139981" transform="rotate(-0 293.76 212.139981)">83.0%</text>
    </g>
    <g id="text_9">
-    <text style="font-weight: 700; font-size: 18px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #008d7f" x="30.6" y="310.969683" transform="rotate(-0 30.6 310.969683)">CaM</text>
+    <text style="font-size: 18px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #18273b" x="30.6" y="261.260505" transform="rotate(-0 30.6 261.260505)">SimpleMemVLA</text>
    </g>
    <g id="text_10">
-    <text style="font-weight: 700; font-size: 18px; font-family: 'DejaVu Sans'; text-anchor: end; fill: #008d7f" x="293.76" y="310.969683" transform="rotate(-0 293.76 310.969683)">99.4%</text>
+    <text style="font-size: 18px; font-family: 'DejaVu Sans'; text-anchor: end; fill: #18273b" x="293.76" y="261.260505" transform="rotate(-0 293.76 261.260505)">94.0%</text>
    </g>
    <g id="text_11">
-    <text style="font-weight: 700; font-size: 23px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #18273b" x="30.6" y="30.672" transform="rotate(-0 30.6 30.672)">RoboMME</text>
+    <text style="font-weight: 700; font-size: 18px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #008d7f" x="30.6" y="310.38103" transform="rotate(-0 30.6 310.38103)">CaM</text>
+   </g>
+   <g id="text_12">
+    <text style="font-weight: 700; font-size: 18px; font-family: 'DejaVu Sans'; text-anchor: end; fill: #008d7f" x="293.76" y="310.38103" transform="rotate(-0 293.76 310.38103)">100.0%</text>
+   </g>
+   <g id="text_13">
+    <text style="font-weight: 700; font-size: 23px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #18273b" x="30.6" y="29.9808" transform="rotate(-0 30.6 29.9808)">RMBench</text>
    </g>
   </g>
   <g id="axes_2">
-   <g id="patch_12">
-    <path d="M 330.48 90.89941
-L 593.64 90.89941
-L 593.64 75.186885
-L 330.48 75.186885
-z
-" clip-path="url(#pbbed36736d)" style="fill: #f0f4f8"/>
-   </g>
-   <g id="patch_13">
-    <path d="M 330.48 140.001049
-L 593.64 140.001049
-L 593.64 124.288525
-L 330.48 124.288525
-z
-" clip-path="url(#pbbed36736d)" style="fill: #f0f4f8"/>
-   </g>
-   <g id="patch_14">
-    <path d="M 330.48 189.102689
-L 593.64 189.102689
-L 593.64 173.390164
-L 330.48 173.390164
-z
-" clip-path="url(#pbbed36736d)" style="fill: #f0f4f8"/>
-   </g>
-   <g id="patch_15">
-    <path d="M 330.48 238.204328
-L 593.64 238.204328
-L 593.64 222.491803
-L 330.48 222.491803
-z
-" clip-path="url(#pbbed36736d)" style="fill: #f0f4f8"/>
-   </g>
-   <g id="patch_16">
-    <path d="M 330.48 287.305967
-L 593.64 287.305967
-L 593.64 271.593443
-L 330.48 271.593443
-z
-" clip-path="url(#pbbed36736d)" style="fill: #f0f4f8"/>
-   </g>
-   <g id="patch_17">
-    <path d="M 330.48 336.407607
-L 593.64 336.407607
-L 593.64 320.695082
-L 330.48 320.695082
-z
-" clip-path="url(#pbbed36736d)" style="fill: #f0f4f8"/>
-   </g>
-   <g id="patch_18">
-    <path d="M 330.48 90.89941
-L 441.0072 90.89941
-L 441.0072 75.186885
-L 330.48 75.186885
-z
-" clip-path="url(#pbbed36736d)" style="fill: #9bafcb"/>
-   </g>
-   <g id="patch_19">
-    <path d="M 330.48 140.001049
-L 508.90248 140.001049
-L 508.90248 124.288525
-L 330.48 124.288525
-z
-" clip-path="url(#pbbed36736d)" style="fill: #9bafcb"/>
-   </g>
-   <g id="patch_20">
-    <path d="M 330.48 189.102689
-L 514.16568 189.102689
-L 514.16568 173.390164
-L 330.48 173.390164
-z
-" clip-path="url(#pbbed36736d)" style="fill: #9bafcb"/>
-   </g>
-   <g id="patch_21">
-    <path d="M 330.48 238.204328
-L 548.9028 238.204328
-L 548.9028 222.491803
-L 330.48 222.491803
-z
-" clip-path="url(#pbbed36736d)" style="fill: #9bafcb"/>
-   </g>
-   <g id="patch_22">
-    <path d="M 330.48 287.305967
-L 577.8504 287.305967
-L 577.8504 271.593443
-L 330.48 271.593443
-z
-" clip-path="url(#pbbed36736d)" style="fill: #9bafcb"/>
-   </g>
-   <g id="patch_23">
-    <path d="M 330.48 336.407607
-L 593.64 336.407607
-L 593.64 320.695082
-L 330.48 320.695082
-z
-" clip-path="url(#pbbed36736d)" style="fill: #008d7f"/>
-   </g>
-   <g id="text_12">
-    <text style="font-size: 18px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #18273b" x="330.48" y="65.461486" transform="rotate(-0 330.48 65.461486)">Mem-0</text>
-   </g>
-   <g id="text_13">
-    <text style="font-size: 18px; font-family: 'DejaVu Sans'; text-anchor: end; fill: #18273b" x="593.64" y="65.461486" transform="rotate(-0 593.64 65.461486)">42.0%</text>
+   <g id="line2d_1">
+    <path d="M 30.6 394.128
+L 293.76 394.128
+" clip-path="url(#pc14ad1fdd8)" style="fill: none; stroke: #e5ebf3; stroke-width: 1.5; stroke-linecap: square"/>
    </g>
    <g id="text_14">
-    <text style="font-size: 18px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #18273b" x="330.48" y="114.563126" transform="rotate(-0 330.48 114.563126)">EventVLA</text>
+    <text style="font-weight: 700; font-size: 18px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #008d7f" x="30.6" y="415.27872" transform="rotate(-0 30.6 415.27872)">API cost (Opus 5.5)</text>
    </g>
    <g id="text_15">
-    <text style="font-size: 18px; font-family: 'DejaVu Sans'; text-anchor: end; fill: #18273b" x="593.64" y="114.563126" transform="rotate(-0 593.64 114.563126)">67.8%</text>
+    <text style="font-size: 18px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #18273b" x="30.6" y="442.69632" transform="rotate(-0 30.6 442.69632)">Development</text>
    </g>
    <g id="text_16">
-    <text style="font-size: 18px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #18273b" x="330.48" y="163.664765" transform="rotate(-0 330.48 163.664765)">DIM-WAM</text>
+    <text style="font-weight: 700; font-size: 20px; font-family: 'DejaVu Sans'; text-anchor: end; fill: #008d7f" x="293.76" y="442.69632" transform="rotate(-0 293.76 442.69632)">$22.72</text>
    </g>
    <g id="text_17">
-    <text style="font-size: 18px; font-family: 'DejaVu Sans'; text-anchor: end; fill: #18273b" x="593.64" y="163.664765" transform="rotate(-0 593.64 163.664765)">69.8%</text>
+    <text style="font-size: 18px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #18273b" x="30.6" y="470.89728" transform="rotate(-0 30.6 470.89728)">Inference</text>
    </g>
    <g id="text_18">
-    <text style="font-size: 18px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #18273b" x="330.48" y="212.766404" transform="rotate(-0 330.48 212.766404)">MemoryWAM</text>
-   </g>
-   <g id="text_19">
-    <text style="font-size: 18px; font-family: 'DejaVu Sans'; text-anchor: end; fill: #18273b" x="593.64" y="212.766404" transform="rotate(-0 593.64 212.766404)">83.0%</text>
-   </g>
-   <g id="text_20">
-    <text style="font-size: 18px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #18273b" x="330.48" y="261.868044" transform="rotate(-0 330.48 261.868044)">SimpleMemVLA</text>
-   </g>
-   <g id="text_21">
-    <text style="font-size: 18px; font-family: 'DejaVu Sans'; text-anchor: end; fill: #18273b" x="593.64" y="261.868044" transform="rotate(-0 593.64 261.868044)">94.0%</text>
-   </g>
-   <g id="text_22">
-    <text style="font-weight: 700; font-size: 18px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #008d7f" x="330.48" y="310.969683" transform="rotate(-0 330.48 310.969683)">CaM</text>
-   </g>
-   <g id="text_23">
-    <text style="font-weight: 700; font-size: 18px; font-family: 'DejaVu Sans'; text-anchor: end; fill: #008d7f" x="593.64" y="310.969683" transform="rotate(-0 593.64 310.969683)">100.0%</text>
-   </g>
-   <g id="text_24">
-    <text style="font-weight: 700; font-size: 23px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #18273b" x="330.48" y="30.672" transform="rotate(-0 330.48 30.672)">RMBench</text>
+    <text style="font-weight: 700; font-size: 20px; font-family: 'DejaVu Sans'; text-anchor: end; fill: #008d7f" x="293.76" y="470.89728" transform="rotate(-0 293.76 470.89728)">$0</text>
    </g>
   </g>
   <g id="axes_3">
-   <g id="patch_24">
-    <path d="M 630.36 90.89941
-L 893.52 90.89941
-L 893.52 75.186885
-L 630.36 75.186885
+   <g id="patch_14">
+    <path d="M 330.48 90.224451
+L 593.64 90.224451
+L 593.64 74.505883
+L 330.48 74.505883
 z
-" clip-path="url(#p13d2c39199)" style="fill: #f0f4f8"/>
+" clip-path="url(#p4776d19e12)" style="fill: #f0f4f8"/>
+   </g>
+   <g id="patch_15">
+    <path d="M 330.48 139.344976
+L 593.64 139.344976
+L 593.64 123.626408
+L 330.48 123.626408
+z
+" clip-path="url(#p4776d19e12)" style="fill: #f0f4f8"/>
+   </g>
+   <g id="patch_16">
+    <path d="M 330.48 188.4655
+L 593.64 188.4655
+L 593.64 172.746932
+L 330.48 172.746932
+z
+" clip-path="url(#p4776d19e12)" style="fill: #f0f4f8"/>
+   </g>
+   <g id="patch_17">
+    <path d="M 330.48 237.586025
+L 593.64 237.586025
+L 593.64 221.867457
+L 330.48 221.867457
+z
+" clip-path="url(#p4776d19e12)" style="fill: #f0f4f8"/>
+   </g>
+   <g id="patch_18">
+    <path d="M 330.48 286.70655
+L 593.64 286.70655
+L 593.64 270.987982
+L 330.48 270.987982
+z
+" clip-path="url(#p4776d19e12)" style="fill: #f0f4f8"/>
+   </g>
+   <g id="patch_19">
+    <path d="M 330.48 335.827074
+L 593.64 335.827074
+L 593.64 320.108506
+L 330.48 320.108506
+z
+" clip-path="url(#p4776d19e12)" style="fill: #f0f4f8"/>
+   </g>
+   <g id="patch_20">
+    <path d="M 330.48 90.224451
+L 407.84904 90.224451
+L 407.84904 74.505883
+L 330.48 74.505883
+z
+" clip-path="url(#p4776d19e12)" style="fill: #9bafcb"/>
+   </g>
+   <g id="patch_21">
+    <path d="M 330.48 139.344976
+L 438.90192 139.344976
+L 438.90192 123.626408
+L 330.48 123.626408
+z
+" clip-path="url(#p4776d19e12)" style="fill: #9bafcb"/>
+   </g>
+   <g id="patch_22">
+    <path d="M 330.48 188.4655
+L 447.32304 188.4655
+L 447.32304 172.746932
+L 330.48 172.746932
+z
+" clip-path="url(#p4776d19e12)" style="fill: #9bafcb"/>
+   </g>
+   <g id="patch_23">
+    <path d="M 330.48 237.586025
+L 508.90248 237.586025
+L 508.90248 221.867457
+L 330.48 221.867457
+z
+" clip-path="url(#p4776d19e12)" style="fill: #9bafcb"/>
+   </g>
+   <g id="patch_24">
+    <path d="M 330.48 286.70655
+L 525.2184 286.70655
+L 525.2184 270.987982
+L 330.48 270.987982
+z
+" clip-path="url(#p4776d19e12)" style="fill: #9bafcb"/>
    </g>
    <g id="patch_25">
-    <path d="M 630.36 140.001049
-L 893.52 140.001049
-L 893.52 124.288525
-L 630.36 124.288525
+    <path d="M 330.48 335.827074
+L 593.64 335.827074
+L 593.64 320.108506
+L 330.48 320.108506
 z
-" clip-path="url(#p13d2c39199)" style="fill: #f0f4f8"/>
+" clip-path="url(#p4776d19e12)" style="fill: #008d7f"/>
    </g>
-   <g id="patch_26">
-    <path d="M 630.36 189.102689
-L 893.52 189.102689
-L 893.52 173.390164
-L 630.36 173.390164
-z
-" clip-path="url(#p13d2c39199)" style="fill: #f0f4f8"/>
+   <g id="text_19">
+    <text style="font-size: 18px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #18273b" x="330.48" y="64.778407" transform="rotate(-0 330.48 64.778407)">π₀</text>
    </g>
-   <g id="patch_27">
-    <path d="M 630.36 238.204328
-L 893.52 238.204328
-L 893.52 222.491803
-L 630.36 222.491803
-z
-" clip-path="url(#p13d2c39199)" style="fill: #f0f4f8"/>
+   <g id="text_20">
+    <text style="font-size: 18px; font-family: 'DejaVu Sans'; text-anchor: end; fill: #18273b" x="593.64" y="64.778407" transform="rotate(-0 593.64 64.778407)">29.4%</text>
    </g>
-   <g id="patch_28">
-    <path d="M 630.36 287.305967
-L 893.52 287.305967
-L 893.52 271.593443
-L 630.36 271.593443
-z
-" clip-path="url(#p13d2c39199)" style="fill: #f0f4f8"/>
+   <g id="text_21">
+    <text style="font-size: 18px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #18273b" x="330.48" y="113.898931" transform="rotate(-0 330.48 113.898931)">MemoryVLA</text>
    </g>
-   <g id="patch_29">
-    <path d="M 630.36 336.407607
-L 893.52 336.407607
-L 893.52 320.695082
-L 630.36 320.695082
-z
-" clip-path="url(#p13d2c39199)" style="fill: #f0f4f8"/>
+   <g id="text_22">
+    <text style="font-size: 18px; font-family: 'DejaVu Sans'; text-anchor: end; fill: #18273b" x="593.64" y="113.898931" transform="rotate(-0 593.64 113.898931)">41.2%</text>
    </g>
-   <g id="patch_30">
-    <path d="M 630.36 90.89941
-L 707.72904 90.89941
-L 707.72904 75.186885
-L 630.36 75.186885
-z
-" clip-path="url(#p13d2c39199)" style="fill: #9bafcb"/>
+   <g id="text_23">
+    <text style="font-size: 18px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #18273b" x="330.48" y="163.019456" transform="rotate(-0 330.48 163.019456)">MemoryVLA++</text>
    </g>
-   <g id="patch_31">
-    <path d="M 630.36 140.001049
-L 738.78192 140.001049
-L 738.78192 124.288525
-L 630.36 124.288525
-z
-" clip-path="url(#p13d2c39199)" style="fill: #9bafcb"/>
-   </g>
-   <g id="patch_32">
-    <path d="M 630.36 189.102689
-L 747.20304 189.102689
-L 747.20304 173.390164
-L 630.36 173.390164
-z
-" clip-path="url(#p13d2c39199)" style="fill: #9bafcb"/>
-   </g>
-   <g id="patch_33">
-    <path d="M 630.36 238.204328
-L 808.78248 238.204328
-L 808.78248 222.491803
-L 630.36 222.491803
-z
-" clip-path="url(#p13d2c39199)" style="fill: #9bafcb"/>
-   </g>
-   <g id="patch_34">
-    <path d="M 630.36 287.305967
-L 825.0984 287.305967
-L 825.0984 271.593443
-L 630.36 271.593443
-z
-" clip-path="url(#p13d2c39199)" style="fill: #9bafcb"/>
-   </g>
-   <g id="patch_35">
-    <path d="M 630.36 336.407607
-L 893.52 336.407607
-L 893.52 320.695082
-L 630.36 320.695082
-z
-" clip-path="url(#p13d2c39199)" style="fill: #008d7f"/>
+   <g id="text_24">
+    <text style="font-size: 18px; font-family: 'DejaVu Sans'; text-anchor: end; fill: #18273b" x="593.64" y="163.019456" transform="rotate(-0 593.64 163.019456)">44.4%</text>
    </g>
    <g id="text_25">
-    <text style="font-size: 18px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #18273b" x="630.36" y="65.461486" transform="rotate(-0 630.36 65.461486)">π₀</text>
+    <text style="font-size: 18px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #18273b" x="330.48" y="212.139981" transform="rotate(-0 330.48 212.139981)">GMP</text>
    </g>
    <g id="text_26">
-    <text style="font-size: 18px; font-family: 'DejaVu Sans'; text-anchor: end; fill: #18273b" x="893.52" y="65.461486" transform="rotate(-0 893.52 65.461486)">29.4%</text>
+    <text style="font-size: 18px; font-family: 'DejaVu Sans'; text-anchor: end; fill: #18273b" x="593.64" y="212.139981" transform="rotate(-0 593.64 212.139981)">67.8%</text>
    </g>
    <g id="text_27">
-    <text style="font-size: 18px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #18273b" x="630.36" y="114.563126" transform="rotate(-0 630.36 114.563126)">MemoryVLA</text>
+    <text style="font-size: 18px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #18273b" x="330.48" y="261.260505" transform="rotate(-0 330.48 261.260505)">SimpleMemVLA</text>
    </g>
    <g id="text_28">
-    <text style="font-size: 18px; font-family: 'DejaVu Sans'; text-anchor: end; fill: #18273b" x="893.52" y="114.563126" transform="rotate(-0 893.52 114.563126)">41.2%</text>
+    <text style="font-size: 18px; font-family: 'DejaVu Sans'; text-anchor: end; fill: #18273b" x="593.64" y="261.260505" transform="rotate(-0 593.64 261.260505)">74.0%</text>
    </g>
    <g id="text_29">
-    <text style="font-size: 18px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #18273b" x="630.36" y="163.664765" transform="rotate(-0 630.36 163.664765)">MemoryVLA++</text>
+    <text style="font-weight: 700; font-size: 18px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #008d7f" x="330.48" y="310.38103" transform="rotate(-0 330.48 310.38103)">CaM</text>
    </g>
    <g id="text_30">
-    <text style="font-size: 18px; font-family: 'DejaVu Sans'; text-anchor: end; fill: #18273b" x="893.52" y="163.664765" transform="rotate(-0 893.52 163.664765)">44.4%</text>
+    <text style="font-weight: 700; font-size: 18px; font-family: 'DejaVu Sans'; text-anchor: end; fill: #008d7f" x="593.64" y="310.38103" transform="rotate(-0 593.64 310.38103)">100.0%</text>
    </g>
    <g id="text_31">
-    <text style="font-size: 18px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #18273b" x="630.36" y="212.766404" transform="rotate(-0 630.36 212.766404)">GMP</text>
-   </g>
-   <g id="text_32">
-    <text style="font-size: 18px; font-family: 'DejaVu Sans'; text-anchor: end; fill: #18273b" x="893.52" y="212.766404" transform="rotate(-0 893.52 212.766404)">67.8%</text>
-   </g>
-   <g id="text_33">
-    <text style="font-size: 18px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #18273b" x="630.36" y="261.868044" transform="rotate(-0 630.36 261.868044)">SimpleMemVLA</text>
-   </g>
-   <g id="text_34">
-    <text style="font-size: 18px; font-family: 'DejaVu Sans'; text-anchor: end; fill: #18273b" x="893.52" y="261.868044" transform="rotate(-0 893.52 261.868044)">74.0%</text>
-   </g>
-   <g id="text_35">
-    <text style="font-weight: 700; font-size: 18px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #008d7f" x="630.36" y="310.969683" transform="rotate(-0 630.36 310.969683)">CaM</text>
-   </g>
-   <g id="text_36">
-    <text style="font-weight: 700; font-size: 18px; font-family: 'DejaVu Sans'; text-anchor: end; fill: #008d7f" x="893.52" y="310.969683" transform="rotate(-0 893.52 310.969683)">100.0%</text>
-   </g>
-   <g id="text_37">
-    <text style="font-weight: 700; font-size: 23px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #18273b" x="630.36" y="30.672" transform="rotate(-0 630.36 30.672)">MIKASA-Robo</text>
+    <text style="font-weight: 700; font-size: 23px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #18273b" x="330.48" y="29.9808" transform="rotate(-0 330.48 29.9808)">MIKASA-robo</text>
    </g>
   </g>
   <g id="axes_4">
-   <g id="patch_36">
-    <path d="M 930.24 90.89941
-L 1193.4 90.89941
-L 1193.4 75.186885
-L 930.24 75.186885
+   <g id="line2d_2">
+    <path d="M 330.48 394.128
+L 593.64 394.128
+" clip-path="url(#pf3a159c231)" style="fill: none; stroke: #e5ebf3; stroke-width: 1.5; stroke-linecap: square"/>
+   </g>
+   <g id="text_32">
+    <text style="font-weight: 700; font-size: 18px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #008d7f" x="330.48" y="415.27872" transform="rotate(-0 330.48 415.27872)">API cost (Opus 5.5)</text>
+   </g>
+   <g id="text_33">
+    <text style="font-size: 18px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #18273b" x="330.48" y="442.69632" transform="rotate(-0 330.48 442.69632)">Development</text>
+   </g>
+   <g id="text_34">
+    <text style="font-weight: 700; font-size: 20px; font-family: 'DejaVu Sans'; text-anchor: end; fill: #008d7f" x="593.64" y="442.69632" transform="rotate(-0 593.64 442.69632)">$33.81</text>
+   </g>
+   <g id="text_35">
+    <text style="font-size: 18px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #18273b" x="330.48" y="470.89728" transform="rotate(-0 330.48 470.89728)">Inference</text>
+   </g>
+   <g id="text_36">
+    <text style="font-weight: 700; font-size: 20px; font-family: 'DejaVu Sans'; text-anchor: end; fill: #008d7f" x="593.64" y="470.89728" transform="rotate(-0 593.64 470.89728)">$0</text>
+   </g>
+  </g>
+  <g id="axes_5">
+   <g id="patch_26">
+    <path d="M 630.36 90.224451
+L 893.52 90.224451
+L 893.52 74.505883
+L 630.36 74.505883
 z
-" clip-path="url(#pb7491d4dff)" style="fill: #f0f4f8"/>
+" clip-path="url(#pd69e777fa5)" style="fill: #f0f4f8"/>
+   </g>
+   <g id="patch_27">
+    <path d="M 630.36 139.344976
+L 893.52 139.344976
+L 893.52 123.626408
+L 630.36 123.626408
+z
+" clip-path="url(#pd69e777fa5)" style="fill: #f0f4f8"/>
+   </g>
+   <g id="patch_28">
+    <path d="M 630.36 188.4655
+L 893.52 188.4655
+L 893.52 172.746932
+L 630.36 172.746932
+z
+" clip-path="url(#pd69e777fa5)" style="fill: #f0f4f8"/>
+   </g>
+   <g id="patch_29">
+    <path d="M 630.36 237.586025
+L 893.52 237.586025
+L 893.52 221.867457
+L 630.36 221.867457
+z
+" clip-path="url(#pd69e777fa5)" style="fill: #f0f4f8"/>
+   </g>
+   <g id="patch_30">
+    <path d="M 630.36 286.70655
+L 893.52 286.70655
+L 893.52 270.987982
+L 630.36 270.987982
+z
+" clip-path="url(#pd69e777fa5)" style="fill: #f0f4f8"/>
+   </g>
+   <g id="patch_31">
+    <path d="M 630.36 335.827074
+L 893.52 335.827074
+L 893.52 320.108506
+L 630.36 320.108506
+z
+" clip-path="url(#pd69e777fa5)" style="fill: #f0f4f8"/>
+   </g>
+   <g id="patch_32">
+    <path d="M 630.36 90.224451
+L 747.504029 90.224451
+L 747.504029 74.505883
+L 630.36 74.505883
+z
+" clip-path="url(#pd69e777fa5)" style="fill: #9bafcb"/>
+   </g>
+   <g id="patch_33">
+    <path d="M 630.36 139.344976
+L 790.448452 139.344976
+L 790.448452 123.626408
+L 630.36 123.626408
+z
+" clip-path="url(#pd69e777fa5)" style="fill: #9bafcb"/>
+   </g>
+   <g id="patch_34">
+    <path d="M 630.36 188.4655
+L 862.5987 188.4655
+L 862.5987 172.746932
+L 630.36 172.746932
+z
+" clip-path="url(#pd69e777fa5)" style="fill: #9bafcb"/>
+   </g>
+   <g id="patch_35">
+    <path d="M 630.36 237.586025
+L 872.79615 237.586025
+L 872.79615 221.867457
+L 630.36 221.867457
+z
+" clip-path="url(#pd69e777fa5)" style="fill: #9bafcb"/>
+   </g>
+   <g id="patch_36">
+    <path d="M 630.36 286.70655
+L 885.6252 286.70655
+L 885.6252 270.987982
+L 630.36 270.987982
+z
+" clip-path="url(#pd69e777fa5)" style="fill: #9bafcb"/>
    </g>
    <g id="patch_37">
-    <path d="M 930.24 140.001049
-L 1193.4 140.001049
-L 1193.4 124.288525
-L 930.24 124.288525
+    <path d="M 630.36 335.827074
+L 891.87525 335.827074
+L 891.87525 320.108506
+L 630.36 320.108506
 z
-" clip-path="url(#pb7491d4dff)" style="fill: #f0f4f8"/>
+" clip-path="url(#pd69e777fa5)" style="fill: #008d7f"/>
    </g>
-   <g id="patch_38">
-    <path d="M 930.24 189.102689
-L 1193.4 189.102689
-L 1193.4 173.390164
-L 930.24 173.390164
-z
-" clip-path="url(#pb7491d4dff)" style="fill: #f0f4f8"/>
-   </g>
-   <g id="patch_39">
-    <path d="M 930.24 238.204328
-L 1193.4 238.204328
-L 1193.4 222.491803
-L 930.24 222.491803
-z
-" clip-path="url(#pb7491d4dff)" style="fill: #f0f4f8"/>
-   </g>
-   <g id="patch_40">
-    <path d="M 930.24 287.305967
-L 1193.4 287.305967
-L 1193.4 271.593443
-L 930.24 271.593443
-z
-" clip-path="url(#pb7491d4dff)" style="fill: #f0f4f8"/>
-   </g>
-   <g id="patch_41">
-    <path d="M 930.24 336.407607
-L 1193.4 336.407607
-L 1193.4 320.695082
-L 930.24 320.695082
-z
-" clip-path="url(#pb7491d4dff)" style="fill: #f0f4f8"/>
-   </g>
-   <g id="patch_42">
-    <path d="M 930.24 90.89941
-L 1051.68834 90.89941
-L 1051.68834 75.186885
-L 930.24 75.186885
-z
-" clip-path="url(#pb7491d4dff)" style="fill: #9bafcb"/>
-   </g>
-   <g id="patch_43">
-    <path d="M 930.24 140.001049
-L 1071.0306 140.001049
-L 1071.0306 124.288525
-L 930.24 124.288525
-z
-" clip-path="url(#pb7491d4dff)" style="fill: #9bafcb"/>
-   </g>
-   <g id="patch_44">
-    <path d="M 930.24 189.102689
-L 1087.08336 189.102689
-L 1087.08336 173.390164
-L 930.24 173.390164
-z
-" clip-path="url(#pb7491d4dff)" style="fill: #9bafcb"/>
-   </g>
-   <g id="patch_45">
-    <path d="M 930.24 238.204328
-L 1097.60976 238.204328
-L 1097.60976 222.491803
-L 930.24 222.491803
-z
-" clip-path="url(#pb7491d4dff)" style="fill: #9bafcb"/>
-   </g>
-   <g id="patch_46">
-    <path d="M 930.24 287.305967
-L 1107.366923 287.305967
-L 1107.366923 271.593443
-L 930.24 271.593443
-z
-" clip-path="url(#pb7491d4dff)" style="fill: #9bafcb"/>
-   </g>
-   <g id="patch_47">
-    <path d="M 930.24 336.407607
-L 1187.529508 336.407607
-L 1187.529508 320.695082
-L 930.24 320.695082
-z
-" clip-path="url(#pb7491d4dff)" style="fill: #008d7f"/>
+   <g id="text_37">
+    <text style="font-size: 18px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #18273b" x="630.36" y="64.778407" transform="rotate(-0 630.36 64.778407)">FrameSamp+Modul</text>
    </g>
    <g id="text_38">
-    <text style="font-size: 18px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #18273b" x="930.24" y="65.461486" transform="rotate(-0 930.24 65.461486)">FrameSamp+Modul</text>
+    <text style="font-size: 18px; font-family: 'DejaVu Sans'; text-anchor: end; fill: #18273b" x="893.52" y="64.778407" transform="rotate(-0 893.52 64.778407)">44.5%</text>
    </g>
    <g id="text_39">
-    <text style="font-size: 18px; font-family: 'DejaVu Sans'; text-anchor: end; fill: #18273b" x="1193.4" y="65.461486" transform="rotate(-0 1193.4 65.461486)">46.2%</text>
+    <text style="font-size: 18px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #18273b" x="630.36" y="113.898931" transform="rotate(-0 630.36 113.898931)">PonderPounce</text>
    </g>
    <g id="text_40">
-    <text style="font-size: 18px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #18273b" x="930.24" y="114.563126" transform="rotate(-0 930.24 114.563126)">RoboFoundry</text>
+    <text style="font-size: 18px; font-family: 'DejaVu Sans'; text-anchor: end; fill: #18273b" x="893.52" y="113.898931" transform="rotate(-0 893.52 113.898931)">60.8%</text>
    </g>
    <g id="text_41">
-    <text style="font-size: 18px; font-family: 'DejaVu Sans'; text-anchor: end; fill: #18273b" x="1193.4" y="114.563126" transform="rotate(-0 1193.4 114.563126)">53.5%</text>
+    <text style="font-size: 18px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #18273b" x="630.36" y="163.019456" transform="rotate(-0 630.36 163.019456)">SimpleMemVLA</text>
    </g>
    <g id="text_42">
-    <text style="font-size: 18px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #18273b" x="930.24" y="163.664765" transform="rotate(-0 930.24 163.664765)">HarnessWAM</text>
+    <text style="font-size: 18px; font-family: 'DejaVu Sans'; text-anchor: end; fill: #18273b" x="893.52" y="163.019456" transform="rotate(-0 893.52 163.019456)">88.3%</text>
    </g>
    <g id="text_43">
-    <text style="font-size: 18px; font-family: 'DejaVu Sans'; text-anchor: end; fill: #18273b" x="1193.4" y="163.664765" transform="rotate(-0 1193.4 163.664765)">59.6%</text>
+    <text style="font-size: 18px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #18273b" x="630.36" y="212.139981" transform="rotate(-0 630.36 212.139981)">Embodied Astra</text>
    </g>
    <g id="text_44">
-    <text style="font-size: 18px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #18273b" x="930.24" y="212.766404" transform="rotate(-0 930.24 212.766404)">SimpleMemVLA</text>
+    <text style="font-size: 18px; font-family: 'DejaVu Sans'; text-anchor: end; fill: #18273b" x="893.52" y="212.139981" transform="rotate(-0 893.52 212.139981)">92.13%</text>
    </g>
    <g id="text_45">
-    <text style="font-size: 18px; font-family: 'DejaVu Sans'; text-anchor: end; fill: #18273b" x="1193.4" y="212.766404" transform="rotate(-0 1193.4 212.766404)">63.6%</text>
+    <text style="font-size: 18px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #18273b" x="630.36" y="261.260505" transform="rotate(-0 630.36 261.260505)">MEMI-Astra-Act</text>
    </g>
    <g id="text_46">
-    <text style="font-size: 18px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #18273b" x="930.24" y="261.868044" transform="rotate(-0 930.24 261.868044)">Astra (Codex)</text>
+    <text style="font-size: 18px; font-family: 'DejaVu Sans'; text-anchor: end; fill: #18273b" x="893.52" y="261.260505" transform="rotate(-0 893.52 261.260505)">97.0%</text>
    </g>
    <g id="text_47">
-    <text style="font-size: 18px; font-family: 'DejaVu Sans'; text-anchor: end; fill: #18273b" x="1193.4" y="261.868044" transform="rotate(-0 1193.4 261.868044)">67.3%</text>
+    <text style="font-weight: 700; font-size: 18px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #008d7f" x="630.36" y="310.38103" transform="rotate(-0 630.36 310.38103)">CaM</text>
    </g>
    <g id="text_48">
-    <text style="font-weight: 700; font-size: 18px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #008d7f" x="930.24" y="310.969683" transform="rotate(-0 930.24 310.969683)">CaM</text>
+    <text style="font-weight: 700; font-size: 18px; font-family: 'DejaVu Sans'; text-anchor: end; fill: #008d7f" x="893.52" y="310.38103" transform="rotate(-0 893.52 310.38103)">99.4%</text>
    </g>
    <g id="text_49">
-    <text style="font-weight: 700; font-size: 18px; font-family: 'DejaVu Sans'; text-anchor: end; fill: #008d7f" x="1193.4" y="310.969683" transform="rotate(-0 1193.4 310.969683)">97.8%</text>
+    <text style="font-weight: 700; font-size: 23px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #18273b" x="630.36" y="29.9808" transform="rotate(-0 630.36 29.9808)">RoboMME</text>
+   </g>
+  </g>
+  <g id="axes_6">
+   <g id="line2d_3">
+    <path d="M 630.36 394.128
+L 893.52 394.128
+" clip-path="url(#p8bcbec432a)" style="fill: none; stroke: #e5ebf3; stroke-width: 1.5; stroke-linecap: square"/>
    </g>
    <g id="text_50">
-    <text style="font-weight: 700; font-size: 23px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #18273b" x="930.24" y="30.672" transform="rotate(-0 930.24 30.672)">RoboMemArena</text>
+    <text style="font-weight: 700; font-size: 18px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #008d7f" x="630.36" y="415.27872" transform="rotate(-0 630.36 415.27872)">API cost (Opus 5.5)</text>
    </g>
+   <g id="text_51">
+    <text style="font-size: 18px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #18273b" x="630.36" y="442.69632" transform="rotate(-0 630.36 442.69632)">Development</text>
+   </g>
+   <g id="text_52">
+    <text style="font-weight: 700; font-size: 20px; font-family: 'DejaVu Sans'; text-anchor: end; fill: #008d7f" x="893.52" y="442.69632" transform="rotate(-0 893.52 442.69632)">$29.44</text>
+   </g>
+   <g id="text_53">
+    <text style="font-size: 18px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #18273b" x="630.36" y="470.89728" transform="rotate(-0 630.36 470.89728)">Inference</text>
+   </g>
+   <g id="text_54">
+    <text style="font-weight: 700; font-size: 20px; font-family: 'DejaVu Sans'; text-anchor: end; fill: #008d7f" x="893.52" y="470.89728" transform="rotate(-0 893.52 470.89728)">$0</text>
+   </g>
+  </g>
+  <g id="axes_7">
+   <g id="patch_38">
+    <path d="M 930.24 90.224451
+L 1193.4 90.224451
+L 1193.4 74.505883
+L 930.24 74.505883
+z
+" clip-path="url(#pf3ad39326f)" style="fill: #f0f4f8"/>
+   </g>
+   <g id="patch_39">
+    <path d="M 930.24 139.344976
+L 1193.4 139.344976
+L 1193.4 123.626408
+L 930.24 123.626408
+z
+" clip-path="url(#pf3ad39326f)" style="fill: #f0f4f8"/>
+   </g>
+   <g id="patch_40">
+    <path d="M 930.24 188.4655
+L 1193.4 188.4655
+L 1193.4 172.746932
+L 930.24 172.746932
+z
+" clip-path="url(#pf3ad39326f)" style="fill: #f0f4f8"/>
+   </g>
+   <g id="patch_41">
+    <path d="M 930.24 237.586025
+L 1193.4 237.586025
+L 1193.4 221.867457
+L 930.24 221.867457
+z
+" clip-path="url(#pf3ad39326f)" style="fill: #f0f4f8"/>
+   </g>
+   <g id="patch_42">
+    <path d="M 930.24 286.70655
+L 1193.4 286.70655
+L 1193.4 270.987982
+L 930.24 270.987982
+z
+" clip-path="url(#pf3ad39326f)" style="fill: #f0f4f8"/>
+   </g>
+   <g id="patch_43">
+    <path d="M 930.24 335.827074
+L 1193.4 335.827074
+L 1193.4 320.108506
+L 930.24 320.108506
+z
+" clip-path="url(#pf3ad39326f)" style="fill: #f0f4f8"/>
+   </g>
+   <g id="patch_44">
+    <path d="M 930.24 90.224451
+L 1051.68834 90.224451
+L 1051.68834 74.505883
+L 930.24 74.505883
+z
+" clip-path="url(#pf3ad39326f)" style="fill: #9bafcb"/>
+   </g>
+   <g id="patch_45">
+    <path d="M 930.24 139.344976
+L 1071.0306 139.344976
+L 1071.0306 123.626408
+L 930.24 123.626408
+z
+" clip-path="url(#pf3ad39326f)" style="fill: #9bafcb"/>
+   </g>
+   <g id="patch_46">
+    <path d="M 930.24 188.4655
+L 1087.08336 188.4655
+L 1087.08336 172.746932
+L 930.24 172.746932
+z
+" clip-path="url(#pf3ad39326f)" style="fill: #9bafcb"/>
+   </g>
+   <g id="patch_47">
+    <path d="M 930.24 237.586025
+L 1097.60976 237.586025
+L 1097.60976 221.867457
+L 930.24 221.867457
+z
+" clip-path="url(#pf3ad39326f)" style="fill: #9bafcb"/>
+   </g>
+   <g id="patch_48">
+    <path d="M 930.24 286.70655
+L 1107.366923 286.70655
+L 1107.366923 270.987982
+L 930.24 270.987982
+z
+" clip-path="url(#pf3ad39326f)" style="fill: #9bafcb"/>
+   </g>
+   <g id="patch_49">
+    <path d="M 930.24 335.827074
+L 1187.529508 335.827074
+L 1187.529508 320.108506
+L 930.24 320.108506
+z
+" clip-path="url(#pf3ad39326f)" style="fill: #008d7f"/>
+   </g>
+   <g id="text_55">
+    <text style="font-size: 18px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #18273b" x="930.24" y="64.778407" transform="rotate(-0 930.24 64.778407)">FrameSamp+Modul</text>
+   </g>
+   <g id="text_56">
+    <text style="font-size: 18px; font-family: 'DejaVu Sans'; text-anchor: end; fill: #18273b" x="1193.4" y="64.778407" transform="rotate(-0 1193.4 64.778407)">46.2%</text>
+   </g>
+   <g id="text_57">
+    <text style="font-size: 18px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #18273b" x="930.24" y="113.898931" transform="rotate(-0 930.24 113.898931)">RoboFoundry</text>
+   </g>
+   <g id="text_58">
+    <text style="font-size: 18px; font-family: 'DejaVu Sans'; text-anchor: end; fill: #18273b" x="1193.4" y="113.898931" transform="rotate(-0 1193.4 113.898931)">53.5%</text>
+   </g>
+   <g id="text_59">
+    <text style="font-size: 18px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #18273b" x="930.24" y="163.019456" transform="rotate(-0 930.24 163.019456)">HarnessWAM</text>
+   </g>
+   <g id="text_60">
+    <text style="font-size: 18px; font-family: 'DejaVu Sans'; text-anchor: end; fill: #18273b" x="1193.4" y="163.019456" transform="rotate(-0 1193.4 163.019456)">59.6%</text>
+   </g>
+   <g id="text_61">
+    <text style="font-size: 18px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #18273b" x="930.24" y="212.139981" transform="rotate(-0 930.24 212.139981)">SimpleMemVLA</text>
+   </g>
+   <g id="text_62">
+    <text style="font-size: 18px; font-family: 'DejaVu Sans'; text-anchor: end; fill: #18273b" x="1193.4" y="212.139981" transform="rotate(-0 1193.4 212.139981)">63.6%</text>
+   </g>
+   <g id="text_63">
+    <text style="font-size: 18px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #18273b" x="930.24" y="261.260505" transform="rotate(-0 930.24 261.260505)">Astra (Codex)</text>
+   </g>
+   <g id="text_64">
+    <text style="font-size: 18px; font-family: 'DejaVu Sans'; text-anchor: end; fill: #18273b" x="1193.4" y="261.260505" transform="rotate(-0 1193.4 261.260505)">67.3%</text>
+   </g>
+   <g id="text_65">
+    <text style="font-weight: 700; font-size: 18px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #008d7f" x="930.24" y="310.38103" transform="rotate(-0 930.24 310.38103)">CaM</text>
+   </g>
+   <g id="text_66">
+    <text style="font-weight: 700; font-size: 18px; font-family: 'DejaVu Sans'; text-anchor: end; fill: #008d7f" x="1193.4" y="310.38103" transform="rotate(-0 1193.4 310.38103)">97.8%</text>
+   </g>
+   <g id="text_67">
+    <text style="font-weight: 700; font-size: 23px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #18273b" x="930.24" y="29.9808" transform="rotate(-0 930.24 29.9808)">RoboMemArena</text>
+   </g>
+  </g>
+  <g id="axes_8">
+   <g id="line2d_4">
+    <path d="M 930.24 394.128
+L 1193.4 394.128
+" clip-path="url(#p506b623b3e)" style="fill: none; stroke: #e5ebf3; stroke-width: 1.5; stroke-linecap: square"/>
+   </g>
+   <g id="text_68">
+    <text style="font-weight: 700; font-size: 18px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #008d7f" x="930.24" y="415.27872" transform="rotate(-0 930.24 415.27872)">API cost (Opus 5.5)</text>
+   </g>
+   <g id="text_69">
+    <text style="font-size: 18px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #18273b" x="930.24" y="442.69632" transform="rotate(-0 930.24 442.69632)">Development</text>
+   </g>
+   <g id="text_70">
+    <text style="font-weight: 700; font-size: 20px; font-family: 'DejaVu Sans'; text-anchor: end; fill: #008d7f" x="1193.4" y="442.69632" transform="rotate(-0 1193.4 442.69632)">$278.57</text>
+   </g>
+   <g id="text_71">
+    <text style="font-size: 18px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #18273b" x="930.24" y="470.89728" transform="rotate(-0 930.24 470.89728)">Inference</text>
+   </g>
+   <g id="text_72">
+    <text style="font-weight: 700; font-size: 20px; font-family: 'DejaVu Sans'; text-anchor: end; fill: #008d7f" x="1193.4" y="470.89728" transform="rotate(-0 1193.4 470.89728)">$0</text>
+   </g>
+  </g>
+  <g id="text_73">
+   <text style="font-size: 18px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #18273b" x="30.6" y="374.544" transform="rotate(-0 30.6 374.544)">Use only ≤50 demos / task</text>
+  </g>
+  <g id="text_74">
+   <text style="font-size: 18px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #18273b" x="330.48" y="374.544" transform="rotate(-0 330.48 374.544)">Use only 50 demos / task</text>
+  </g>
+  <g id="text_75">
+   <text style="font-size: 18px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #18273b" x="630.36" y="374.544" transform="rotate(-0 630.36 374.544)">Use only 25 demos / task</text>
+  </g>
+  <g id="text_76">
+   <text style="font-size: 18px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #18273b" x="930.24" y="374.544" transform="rotate(-0 930.24 374.544)">Use only ≤50 demos / task</text>
   </g>
  </g>
  <defs>
-  <clipPath id="p5bf6a9f2eb">
-   <rect x="30.6" y="48.672" width="263.16" height="299.52"/>
+  <clipPath id="p9d66177aeb">
+   <rect x="30.6" y="47.9808" width="263.16" height="299.6352"/>
   </clipPath>
-  <clipPath id="pbbed36736d">
-   <rect x="330.48" y="48.672" width="263.16" height="299.52"/>
+  <clipPath id="pc14ad1fdd8">
+   <rect x="30.6" y="394.128" width="263.16" height="78.336"/>
   </clipPath>
-  <clipPath id="p13d2c39199">
-   <rect x="630.36" y="48.672" width="263.16" height="299.52"/>
+  <clipPath id="p4776d19e12">
+   <rect x="330.48" y="47.9808" width="263.16" height="299.6352"/>
   </clipPath>
-  <clipPath id="pb7491d4dff">
-   <rect x="930.24" y="48.672" width="263.16" height="299.52"/>
+  <clipPath id="pf3a159c231">
+   <rect x="330.48" y="394.128" width="263.16" height="78.336"/>
+  </clipPath>
+  <clipPath id="pd69e777fa5">
+   <rect x="630.36" y="47.9808" width="263.16" height="299.6352"/>
+  </clipPath>
+  <clipPath id="p8bcbec432a">
+   <rect x="630.36" y="394.128" width="263.16" height="78.336"/>
+  </clipPath>
+  <clipPath id="pf3ad39326f">
+   <rect x="930.24" y="47.9808" width="263.16" height="299.6352"/>
+  </clipPath>
+  <clipPath id="p506b623b3e">
+   <rect x="930.24" y="394.128" width="263.16" height="78.336"/>
   </clipPath>
  </defs>
 </svg>

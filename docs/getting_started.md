@@ -94,6 +94,31 @@ Then pass `assigned25` to `cam prepare`. RoboMME already contains its exact 25/t
 assignment. Normal preparation uses the released manifest without replaying demos.
 Use the [benchmark interface guides](benchmarks/) for observation formats.
 
+## Development logs
+
+[Yinpei/CaM_develop_logs](https://huggingface.co/datasets/Yinpei/CaM_develop_logs)
+contains the recorded agent logs, prompts, code revisions, results and available
+videos for RoboMME, RMBench, RoboMemArena and the five-task MIKASA VLA suite.
+The four archives total **5.54 GB compressed** (about 10.60 GB of file contents).
+H5 data and the separate historical `mikasa_robo/` collection are excluded.
+
+Install `zstd` and the Hugging Face CLI, then run from the repository root:
+
+```bash
+hf download Yinpei/CaM_develop_logs --repo-type dataset \
+  --local-dir public_runs/releases/development_logs
+(cd public_runs/releases/development_logs && sha256sum -c SHA256SUMS)
+mkdir -p public_runs/dev_logs
+for archive in public_runs/releases/development_logs/archives/*.tar.zst; do
+  tar --zstd -xf "$archive" -C public_runs/dev_logs
+done
+```
+
+Original log and code bytes are preserved. The archive manifests list omitted H5
+files and external asset/evaluation links; historical absolute paths remain in
+the logs. Download demonstrations separately and use a fresh preparation to
+reproduce development. These archives preserve evidence from the recorded runs.
+
 ## One task
 
 ```bash

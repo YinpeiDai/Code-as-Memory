@@ -3,185 +3,6 @@
   "retrieved_at": "2026-11-10T15:51:49.360976+00:00",
   "panels": [
     {
-      "benchmark": "robomme",
-      "title": "RoboMME",
-      "task_count": 16,
-      "metric": "Success (%)",
-      "methods": [
-        {
-          "method": "FrameSamp+Modul",
-          "success_percent": 44.514374999999994,
-          "task_count": 16,
-          "source": "robomme_leaderboard",
-          "reported_per_task": {
-            "BinFill": 0.3956,
-            "PickXtimes": 0.8733,
-            "SwingXtimes": 0.92,
-            "StopCube": 0.42,
-            "VideoUnmask": 0.3267,
-            "ButtonUnmask": 0.2511,
-            "VideoUnmaskSwap": 0.2444,
-            "ButtonUnmaskSwap": 0.1822,
-            "PickHighlight": 0.2289,
-            "VideoRepick": 0.3044,
-            "VideoPlaceButton": 0.6,
-            "VideoPlaceOrder": 0.32,
-            "MoveCube": 0.7778,
-            "InsertPeg": 0.0756,
-            "PatternLock": 0.5356,
-            "RouteStick": 0.6667
-          }
-        },
-        {
-          "method": "PonderPounce",
-          "success_percent": 60.833124999999995,
-          "task_count": 16,
-          "source": "robomme_leaderboard",
-          "reported_per_task": {
-            "BinFill": 0.5067,
-            "PickXtimes": 0.9333,
-            "SwingXtimes": 0.72,
-            "StopCube": 0.8267,
-            "VideoUnmask": 0.9467,
-            "ButtonUnmask": 0.9733,
-            "VideoUnmaskSwap": 0.2533,
-            "ButtonUnmaskSwap": 0.34,
-            "PickHighlight": 0.8533,
-            "VideoRepick": 0.4067,
-            "VideoPlaceButton": 0.8333,
-            "VideoPlaceOrder": 0.7933,
-            "MoveCube": 0.8133,
-            "InsertPeg": 0.06,
-            "PatternLock": 0.1267,
-            "RouteStick": 0.3467
-          }
-        },
-        {
-          "method": "SimpleMemVLA",
-          "success_percent": 88.25,
-          "task_count": 16,
-          "source": "robomme_leaderboard",
-          "reported_per_task": {
-            "BinFill": 0.78,
-            "PickXtimes": 1,
-            "SwingXtimes": 0.96,
-            "StopCube": 0.92,
-            "VideoUnmask": 1,
-            "ButtonUnmask": 1,
-            "VideoUnmaskSwap": 0.9,
-            "ButtonUnmaskSwap": 0.94,
-            "PickHighlight": 0.9,
-            "VideoRepick": 0.64,
-            "VideoPlaceButton": 0.86,
-            "VideoPlaceOrder": 0.9,
-            "MoveCube": 0.94,
-            "InsertPeg": 0.46,
-            "PatternLock": 0.94,
-            "RouteStick": 0.98
-          }
-        },
-        {
-          "method": "MEMI-Astra-Act",
-          "success_percent": 97.0,
-          "task_count": 16,
-          "source": "robomme_leaderboard",
-          "reported_per_task": {
-            "BinFill": 0.98,
-            "PickXtimes": 1,
-            "SwingXtimes": 1,
-            "StopCube": 0.96,
-            "VideoUnmask": 1,
-            "ButtonUnmask": 1,
-            "VideoUnmaskSwap": 0.96,
-            "ButtonUnmaskSwap": 0.92,
-            "PickHighlight": 1,
-            "VideoRepick": 0.92,
-            "VideoPlaceButton": 1,
-            "VideoPlaceOrder": 1,
-            "MoveCube": 0.96,
-            "InsertPeg": 0.84,
-            "PatternLock": 1,
-            "RouteStick": 0.98
-          }
-        },
-        {
-          "method": "CaM",
-          "success_percent": 99.375,
-          "successes": 795,
-          "episodes": 800,
-          "task_count": 16,
-          "source": "cam_published_archive",
-          "setting": "demo_only_25",
-          "per_task": {
-            "BinFill": {
-              "successes": 50,
-              "episodes": 50
-            },
-            "ButtonUnmask": {
-              "successes": 50,
-              "episodes": 50
-            },
-            "ButtonUnmaskSwap": {
-              "successes": 50,
-              "episodes": 50
-            },
-            "InsertPeg": {
-              "successes": 50,
-              "episodes": 50
-            },
-            "MoveCube": {
-              "successes": 50,
-              "episodes": 50
-            },
-            "PatternLock": {
-              "successes": 50,
-              "episodes": 50
-            },
-            "PickHighlight": {
-              "successes": 50,
-              "episodes": 50
-            },
-            "PickXtimes": {
-              "successes": 50,
-              "episodes": 50
-            },
-            "RouteStick": {
-              "successes": 50,
-              "episodes": 50
-            },
-            "StopCube": {
-              "successes": 47,
-              "episodes": 50
-            },
-            "SwingXtimes": {
-              "successes": 50,
-              "episodes": 50
-            },
-            "VideoPlaceButton": {
-              "successes": 50,
-              "episodes": 50
-            },
-            "VideoPlaceOrder": {
-              "successes": 48,
-              "episodes": 50
-            },
-            "VideoRepick": {
-              "successes": 50,
-              "episodes": 50
-            },
-            "VideoUnmask": {
-              "successes": 50,
-              "episodes": 50
-            },
-            "VideoUnmaskSwap": {
-              "successes": 50,
-              "episodes": 50
-            }
-          }
-        }
-      ]
-    },
-    {
       "benchmark": "rmbench",
       "title": "RMBench",
       "task_count": 9,
@@ -284,39 +105,48 @@
           "per_task": {
             "battery_try": {
               "successes": 100,
-              "episodes": 100
+              "episodes": 100,
+              "demonstrations": 49
             },
             "blocks_ranking_try": {
               "successes": 100,
-              "episodes": 100
+              "episodes": 100,
+              "demonstrations": 49
             },
             "cover_blocks": {
               "successes": 100,
-              "episodes": 100
+              "episodes": 100,
+              "demonstrations": 50
             },
             "observe_and_pickup": {
               "successes": 100,
-              "episodes": 100
+              "episodes": 100,
+              "demonstrations": 48
             },
             "press_button": {
               "successes": 100,
-              "episodes": 100
+              "episodes": 100,
+              "demonstrations": 50
             },
             "put_back_block": {
               "successes": 100,
-              "episodes": 100
+              "episodes": 100,
+              "demonstrations": 50
             },
             "rearrange_blocks": {
               "successes": 100,
-              "episodes": 100
+              "episodes": 100,
+              "demonstrations": 50
             },
             "swap_T": {
               "successes": 100,
-              "episodes": 100
+              "episodes": 100,
+              "demonstrations": 50
             },
             "swap_blocks": {
               "successes": 100,
-              "episodes": 100
+              "episodes": 100,
+              "demonstrations": 50
             }
           }
         }
@@ -324,7 +154,7 @@
     },
     {
       "benchmark": "mikasa_robo",
-      "title": "MIKASA-Robo",
+      "title": "MIKASA-robo",
       "task_count": 5,
       "metric": "Success (%)",
       "methods": [
@@ -428,41 +258,267 @@
           "success_percent": 100.0,
           "source": "cam_mikasa_vla_suite",
           "result_note": "Fresh 50-demo-plus-50-interaction policies on the five-task publication subset, all 250 held-out episodes scored. ShellGameTouch uses GPU physics; the other four tasks use CPU. Distinct from the historical full-90 slice and the earlier GPU-correction aggregate.",
+          "successes": 250,
+          "episodes": 250,
+          "per_task": {
+            "InterceptMedium-VLA-v0": {
+              "successes": 50,
+              "episodes": 50,
+              "physics_backend": "cpu",
+              "demonstrations": 50
+            },
+            "RememberColor3-VLA-v0": {
+              "successes": 50,
+              "episodes": 50,
+              "physics_backend": "cpu",
+              "demonstrations": 50
+            },
+            "RememberColor5-VLA-v0": {
+              "successes": 50,
+              "episodes": 50,
+              "physics_backend": "cpu",
+              "demonstrations": 50
+            },
+            "RememberColor9-VLA-v0": {
+              "successes": 50,
+              "episodes": 50,
+              "physics_backend": "cpu",
+              "demonstrations": 50
+            },
+            "ShellGameTouch-VLA-v0": {
+              "successes": 50,
+              "episodes": 50,
+              "physics_backend": "gpu",
+              "demonstrations": 50
+            }
+          },
           "previous_figure_result": {
             "success_percent": 100.0,
             "source": "cam_author_cpu_physics_correction",
             "result_note": "Author-reported correction for the five-task comparison after identifying a CPU physics issue. Corrected episode counts and rerun artifacts were not supplied with the README update; archived results are retained separately."
           },
           "suite": "mikasa_robo_vla_suite",
-          "successes": 250,
-          "episodes": 250,
           "scored": 250,
-          "expected": 250,
+          "expected": 250
+        }
+      ]
+    },
+    {
+      "benchmark": "robomme",
+      "title": "RoboMME",
+      "task_count": 16,
+      "metric": "Success (%)",
+      "methods": [
+        {
+          "method": "FrameSamp+Modul",
+          "success_percent": 44.514374999999994,
+          "task_count": 16,
+          "source": "robomme_leaderboard",
+          "reported_per_task": {
+            "BinFill": 0.3956,
+            "PickXtimes": 0.8733,
+            "SwingXtimes": 0.92,
+            "StopCube": 0.42,
+            "VideoUnmask": 0.3267,
+            "ButtonUnmask": 0.2511,
+            "VideoUnmaskSwap": 0.2444,
+            "ButtonUnmaskSwap": 0.1822,
+            "PickHighlight": 0.2289,
+            "VideoRepick": 0.3044,
+            "VideoPlaceButton": 0.6,
+            "VideoPlaceOrder": 0.32,
+            "MoveCube": 0.7778,
+            "InsertPeg": 0.0756,
+            "PatternLock": 0.5356,
+            "RouteStick": 0.6667
+          }
+        },
+        {
+          "method": "PonderPounce",
+          "success_percent": 60.833124999999995,
+          "task_count": 16,
+          "source": "robomme_leaderboard",
+          "reported_per_task": {
+            "BinFill": 0.5067,
+            "PickXtimes": 0.9333,
+            "SwingXtimes": 0.72,
+            "StopCube": 0.8267,
+            "VideoUnmask": 0.9467,
+            "ButtonUnmask": 0.9733,
+            "VideoUnmaskSwap": 0.2533,
+            "ButtonUnmaskSwap": 0.34,
+            "PickHighlight": 0.8533,
+            "VideoRepick": 0.4067,
+            "VideoPlaceButton": 0.8333,
+            "VideoPlaceOrder": 0.7933,
+            "MoveCube": 0.8133,
+            "InsertPeg": 0.06,
+            "PatternLock": 0.1267,
+            "RouteStick": 0.3467
+          }
+        },
+        {
+          "method": "SimpleMemVLA",
+          "success_percent": 88.25,
+          "task_count": 16,
+          "source": "robomme_leaderboard",
+          "reported_per_task": {
+            "BinFill": 0.78,
+            "PickXtimes": 1,
+            "SwingXtimes": 0.96,
+            "StopCube": 0.92,
+            "VideoUnmask": 1,
+            "ButtonUnmask": 1,
+            "VideoUnmaskSwap": 0.9,
+            "ButtonUnmaskSwap": 0.94,
+            "PickHighlight": 0.9,
+            "VideoRepick": 0.64,
+            "VideoPlaceButton": 0.86,
+            "VideoPlaceOrder": 0.9,
+            "MoveCube": 0.94,
+            "InsertPeg": 0.46,
+            "PatternLock": 0.94,
+            "RouteStick": 0.98
+          }
+        },
+        {
+          "method": "Embodied Astra",
+          "success_percent": 92.125,
+          "display_decimals": 2,
+          "reported_success_percent": 92.13,
+          "task_count": 16,
+          "source": "robomme_leaderboard_embodied_astra",
+          "reported_per_task": {
+            "BinFill": 0.98,
+            "PickXtimes": 1.0,
+            "SwingXtimes": 0.98,
+            "StopCube": 0.54,
+            "VideoUnmask": 0.94,
+            "ButtonUnmask": 1.0,
+            "VideoUnmaskSwap": 0.96,
+            "ButtonUnmaskSwap": 0.98,
+            "PickHighlight": 0.98,
+            "VideoRepick": 1.0,
+            "VideoPlaceButton": 1.0,
+            "VideoPlaceOrder": 0.98,
+            "MoveCube": 0.54,
+            "InsertPeg": 0.92,
+            "PatternLock": 1.0,
+            "RouteStick": 0.94
+          }
+        },
+        {
+          "method": "MEMI-Astra-Act",
+          "success_percent": 97.0,
+          "task_count": 16,
+          "source": "robomme_leaderboard",
+          "reported_per_task": {
+            "BinFill": 0.98,
+            "PickXtimes": 1,
+            "SwingXtimes": 1,
+            "StopCube": 0.96,
+            "VideoUnmask": 1,
+            "ButtonUnmask": 1,
+            "VideoUnmaskSwap": 0.96,
+            "ButtonUnmaskSwap": 0.92,
+            "PickHighlight": 1,
+            "VideoRepick": 0.92,
+            "VideoPlaceButton": 1,
+            "VideoPlaceOrder": 1,
+            "MoveCube": 0.96,
+            "InsertPeg": 0.84,
+            "PatternLock": 1,
+            "RouteStick": 0.98
+          }
+        },
+        {
+          "method": "CaM",
+          "success_percent": 99.375,
+          "successes": 795,
+          "episodes": 800,
+          "task_count": 16,
+          "source": "cam_published_archive",
+          "setting": "demo_only_25",
           "per_task": {
-            "ShellGameTouch-VLA-v0": {
+            "BinFill": {
               "successes": 50,
               "episodes": 50,
-              "physics_backend": "gpu"
+              "demonstrations": 25
             },
-            "InterceptMedium-VLA-v0": {
+            "ButtonUnmask": {
               "successes": 50,
               "episodes": 50,
-              "physics_backend": "cpu"
+              "demonstrations": 25
             },
-            "RememberColor3-VLA-v0": {
+            "ButtonUnmaskSwap": {
               "successes": 50,
               "episodes": 50,
-              "physics_backend": "cpu"
+              "demonstrations": 25
             },
-            "RememberColor5-VLA-v0": {
+            "InsertPeg": {
               "successes": 50,
               "episodes": 50,
-              "physics_backend": "cpu"
+              "demonstrations": 25
             },
-            "RememberColor9-VLA-v0": {
+            "MoveCube": {
               "successes": 50,
               "episodes": 50,
-              "physics_backend": "cpu"
+              "demonstrations": 25
+            },
+            "PatternLock": {
+              "successes": 50,
+              "episodes": 50,
+              "demonstrations": 25
+            },
+            "PickHighlight": {
+              "successes": 50,
+              "episodes": 50,
+              "demonstrations": 25
+            },
+            "PickXtimes": {
+              "successes": 50,
+              "episodes": 50,
+              "demonstrations": 25
+            },
+            "RouteStick": {
+              "successes": 50,
+              "episodes": 50,
+              "demonstrations": 25
+            },
+            "StopCube": {
+              "successes": 47,
+              "episodes": 50,
+              "demonstrations": 25
+            },
+            "SwingXtimes": {
+              "successes": 50,
+              "episodes": 50,
+              "demonstrations": 25
+            },
+            "VideoPlaceButton": {
+              "successes": 50,
+              "episodes": 50,
+              "demonstrations": 25
+            },
+            "VideoPlaceOrder": {
+              "successes": 48,
+              "episodes": 50,
+              "demonstrations": 25
+            },
+            "VideoRepick": {
+              "successes": 50,
+              "episodes": 50,
+              "demonstrations": 25
+            },
+            "VideoUnmask": {
+              "successes": 50,
+              "episodes": 50,
+              "demonstrations": 25
+            },
+            "VideoUnmaskSwap": {
+              "successes": 50,
+              "episodes": 50,
+              "demonstrations": 25
             }
           }
         }
@@ -520,107 +576,133 @@
           "per_task": {
             "T01_CookiesTomatoBasket": {
               "successes": 50,
-              "episodes": 50
+              "episodes": 50,
+              "demonstrations": 50
             },
             "T02_ButterPopcornBasket": {
               "successes": 50,
-              "episodes": 50
+              "episodes": 50,
+              "demonstrations": 50
             },
             "T03_CreamPuddingBasket": {
               "successes": 50,
-              "episodes": 50
+              "episodes": 50,
+              "demonstrations": 50
             },
             "T04_ButterNonEmptyDrawer": {
               "successes": 50,
-              "episodes": 50
+              "episodes": 50,
+              "demonstrations": 32
             },
             "T05_ButterEmptyDrawer": {
               "successes": 50,
-              "episodes": 50
+              "episodes": 50,
+              "demonstrations": 50
             },
             "T06_PourSauceCookiesTwice": {
               "successes": 50,
-              "episodes": 50
+              "episodes": 50,
+              "demonstrations": 50
             },
             "T07_PourSauceFrypanTwice": {
               "successes": 50,
-              "episodes": 50
+              "episodes": 50,
+              "demonstrations": 50
             },
             "T08_ChocolateFrypanPourSauceTwice": {
               "successes": 50,
-              "episodes": 50
+              "episodes": 50,
+              "demonstrations": 50
             },
             "T09_ButterFrypanPourSauceTwice": {
               "successes": 50,
-              "episodes": 50
+              "episodes": 50,
+              "demonstrations": 50
             },
             "T10_PourWineMugTwice": {
               "successes": 50,
-              "episodes": 50
+              "episodes": 50,
+              "demonstrations": 50
             },
             "T11_CookiesTopButterMiddle": {
               "successes": 50,
-              "episodes": 50
+              "episodes": 50,
+              "demonstrations": 50
             },
             "T12_CookiesChocolateMiddleDrawer": {
               "successes": 50,
-              "episodes": 50
+              "episodes": 50,
+              "demonstrations": 50
             },
             "T13_CookiesButterMiddleDrawer": {
               "successes": 50,
-              "episodes": 50
+              "episodes": 50,
+              "demonstrations": 50
             },
             "T14_CookiesChocolateDrawers": {
               "successes": 50,
-              "episodes": 50
+              "episodes": 50,
+              "demonstrations": 50
             },
             "T15_ButterFrypanPourMilkTwice": {
               "successes": 50,
-              "episodes": 50
+              "episodes": 50,
+              "demonstrations": 50
             },
             "T16_PourMilkMugTwice": {
               "successes": 50,
-              "episodes": 50
+              "episodes": 50,
+              "demonstrations": 50
             },
             "T17_ButterChocolateMiddleDrawer": {
               "successes": 50,
-              "episodes": 50
+              "episodes": 50,
+              "demonstrations": 50
             },
             "T18_ChocolateButterCabinet": {
               "successes": 48,
-              "episodes": 50
+              "episodes": 50,
+              "demonstrations": 50
             },
             "T19_SauceMilkJuiceCabinet": {
               "successes": 25,
-              "episodes": 50
+              "episodes": 50,
+              "demonstrations": 50
             },
             "T20_CookiesChocolateMicrowave": {
               "successes": 50,
-              "episodes": 50
+              "episodes": 50,
+              "demonstrations": 50
             },
             "T21_ButterChocolateMicrowave": {
               "successes": 50,
-              "episodes": 50
+              "episodes": 50,
+              "demonstrations": 50
             },
             "T22_PourSauceCookiesMicrowave": {
               "successes": 50,
-              "episodes": 50
+              "episodes": 50,
+              "demonstrations": 50
             },
             "T23_CreamPopcornMicrowave": {
               "successes": 50,
-              "episodes": 50
+              "episodes": 50,
+              "demonstrations": 50
             },
             "T24_CookiesPopcornMicrowave": {
               "successes": 50,
-              "episodes": 50
+              "episodes": 50,
+              "demonstrations": 50
             },
             "T25_ButterCreamPlate": {
               "successes": 48,
-              "episodes": 50
+              "episodes": 50,
+              "demonstrations": 50
             },
             "T26_ChocolateCreamPlate": {
               "successes": 50,
-              "episodes": 50
+              "episodes": 50,
+              "demonstrations": 50
             }
           }
         }
@@ -659,12 +741,27 @@
       "note": "Repository author reports 100% after identifying a CPU physics issue and requests updating the README figure. This report does not replace archived episode records or establish a new 90-task aggregate."
     },
     "cam_mikasa_vla_suite": {
+      "path": "public_runs/dev_logs/mikasa_robo_vla_suite/demo_interaction_50",
+      "run_timestamp": "20261110T190926_055654Z",
+      "evidence": "benchmark_costs.json",
+      "note": "Original result JSONs checked against frozen program hashes; exact per-task report, session and evaluation hashes are retained in the cost manifest. This separate 250-episode evaluation does not replace the historical 90-task aggregate.",
       "title": "CaM fresh MIKASA five-task publication comparison",
       "catalog": "configs/solutions/mikasa_robo_vla_suite/demo_interaction_50.json",
       "catalog_sha256": "097f7a0b004fb544df635fd3fd468ba66b86ccbbf3a0f8d538371bb8926937d7",
       "campaign": "runs/mikasa_robo_vla_suite/20261110T190922_491466Z",
       "scope": "Five MIKASA task identities, 50 demos + 50 training attempts per task, 50 held-out episodes per task",
       "results": "docs/results/mikasa_robo.md"
+    },
+    "cam_api_costs": {
+      "path": "docs/figures/benchmark_costs.json",
+      "sha256": "dd38a84c219074c4d8a7742681addad016195d2e4f87cc62a38eb55c05c4c613",
+      "note": "Total final session estimates across the selected development setting. RMBench cost includes all ten tasks; the success-rate panel uses nine shared tasks."
+    },
+    "robomme_leaderboard_embodied_astra": {
+      "url": "https://robomme.github.io/leaderboard.html",
+      "snapshot_sha256": "5d01a87ed6f51c54bb2c40603b0cc104cc00eb0f90a234dbe539c1b26ad9b227",
+      "reported_method": "Embodied-Astra (Jedlicki et al.)",
+      "note": "Unweighted mean of the 16 reported task success rates is 92.125%; displayed as 92.13% with decimal half-up rounding."
     }
   }
 }

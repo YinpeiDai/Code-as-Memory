@@ -1,0 +1,1451 @@
+{
+  "schema": "cam-benchmark-api-costs/1",
+  "archive": "public_runs",
+  "cost_basis": "Final Claude CLI session estimates; not audited billing. USD. Excludes local compute, data preparation, and other experiment settings.",
+  "development_scope": "Total across all tasks in each selected development setting: RMBench 10, MIKASA VLA suite 5, RoboMME 16, RoboMemArena 26.",
+  "verification": "Every session total matches its report. Every selected evaluation result is scored and records zero API calls and zero API cost. Result digests hash sorted relative-path, tab, file-SHA256, newline records.",
+  "benchmarks": {
+    "rmbench": {
+      "source_root": "dev_logs/rmbench/demo_only_50",
+      "setting": "demo_only_50",
+      "task_count": 10,
+      "development_api_cost_usd": 22.7170456,
+      "inference_api_cost_usd": 0,
+      "evaluation_successes": 1000,
+      "evaluation_episodes": 1000,
+      "tasks": [
+        {
+          "task": "battery_try",
+          "development_api_cost_usd": 1.9061139999999996,
+          "report": {
+            "path": "dev_logs/rmbench/demo_only_50/battery_try/reports/summary.json",
+            "sha256": "83ecc73a086c77495fa25b16284bc2b1c815cab78c962b7fa68d6e7cda521a53"
+          },
+          "sessions": [
+            {
+              "path": "dev_logs/rmbench/demo_only_50/battery_try/tasks/battery_try/logs/session_000/events.jsonl",
+              "sha256": "5a30e3118c17a667995d114cd398fbb596ef20054ed4c1971fa7c6dea7db0891",
+              "reported_cost_usd": 1.9061139999999996,
+              "final_session_count": 1
+            }
+          ],
+          "program_hash": "a1da65b5c9347b6c858e768a3d7bf0072221a68b4c7142cd3f3761b47381f102",
+          "evaluation_root": "dev_logs/rmbench/demo_only_50/battery_try",
+          "evaluation": {
+            "successes": 100,
+            "episodes": 100,
+            "api_calls": 0,
+            "api_cost_usd": 0,
+            "records_sha256": "3524ded323074686e1c3d81cf7bccd1f29ab348ef81cccc5ec58bbbd7f67a8d1"
+          }
+        },
+        {
+          "task": "blocks_ranking_try",
+          "development_api_cost_usd": 2.2936673999999995,
+          "report": {
+            "path": "dev_logs/rmbench/demo_only_50/blocks_ranking_try/reports/summary.json",
+            "sha256": "c68870221b04903eab5cc41e1947a401907eb8f2353254e0bf292eb82ff5d247"
+          },
+          "sessions": [
+            {
+              "path": "dev_logs/rmbench/demo_only_50/blocks_ranking_try/tasks/blocks_ranking_try/logs/session_000/events.jsonl",
+              "sha256": "e38172e64abe0f0909d006b5542daccfe8fdfca932c465ef49de6b1087f25a01",
+              "reported_cost_usd": 2.2936673999999995,
+              "final_session_count": 1
+            }
+          ],
+          "program_hash": "dced17cb2c516c630b792cb2b43f14074b9710bbc6e7b7597b6d16263a905ab2",
+          "evaluation_root": "dev_logs/rmbench/demo_only_50/blocks_ranking_try",
+          "evaluation": {
+            "successes": 100,
+            "episodes": 100,
+            "api_calls": 0,
+            "api_cost_usd": 0,
+            "records_sha256": "0687ff887ca27b3e6166701f93681629dff8b96afa64b57b1445dab1c326dbc7"
+          }
+        },
+        {
+          "task": "cover_blocks",
+          "development_api_cost_usd": 1.461013,
+          "report": {
+            "path": "dev_logs/rmbench/demo_only_50/cover_blocks/reports/summary.json",
+            "sha256": "76dfd72318963e498e7c71d204c91d04ac860114b279e2e3daf5acec929ee4f0"
+          },
+          "sessions": [
+            {
+              "path": "dev_logs/rmbench/demo_only_50/cover_blocks/tasks/cover_blocks/logs/session_000/events.jsonl",
+              "sha256": "9e47652685c41942002e452fb06c699b30d66a54781f74dbaf3ef03cdfcb2a8b",
+              "reported_cost_usd": 1.461013,
+              "final_session_count": 1
+            }
+          ],
+          "program_hash": "d93ca9528e3ad6fbfd3c22638a4f60c70347be685d110aa809613b27bb54c95d",
+          "evaluation_root": "dev_logs/rmbench/demo_only_50/cover_blocks",
+          "evaluation": {
+            "successes": 100,
+            "episodes": 100,
+            "api_calls": 0,
+            "api_cost_usd": 0,
+            "records_sha256": "485578c5f3db61a451e68bf124079a3baac5763c8ffbb9680ebc0ba1465bbe7e"
+          }
+        },
+        {
+          "task": "observe_and_pickup",
+          "development_api_cost_usd": 4.5094888,
+          "report": {
+            "path": "dev_logs/rmbench/demo_only_50/observe_and_pickup/reports/summary.json",
+            "sha256": "4e5b328f042b4fbe6edeb5d7ca07553033b9161cbdb949fa89fe81b3ee3cd639"
+          },
+          "sessions": [
+            {
+              "path": "dev_logs/rmbench/demo_only_50/observe_and_pickup/tasks/observe_and_pickup/logs/session_000/events.jsonl",
+              "sha256": "9a9c13efc4d0609c376c892da4cbe4691f876e80d47d2827646efe075b999d2e",
+              "reported_cost_usd": 4.5094888,
+              "final_session_count": 1
+            }
+          ],
+          "program_hash": "e8815da38726203f58bd0be0f1897afb4d52c08287b0f24d4e3d846c0021c13b",
+          "evaluation_root": "dev_logs/rmbench/demo_only_50/observe_and_pickup",
+          "evaluation": {
+            "successes": 100,
+            "episodes": 100,
+            "api_calls": 0,
+            "api_cost_usd": 0,
+            "records_sha256": "3c4587e6ec7b2be94779f63bda5c63eaafecf0840742c4a0505d91e0cd368923"
+          }
+        },
+        {
+          "task": "place_block_mat",
+          "development_api_cost_usd": 1.6620714,
+          "report": {
+            "path": "dev_logs/rmbench/demo_only_50/place_block_mat/reports/summary.json",
+            "sha256": "cb6e5f892de61df000d6fbe728a26bb99829a28c348103da75db12fbb03a8749"
+          },
+          "sessions": [
+            {
+              "path": "dev_logs/rmbench/demo_only_50/place_block_mat/tasks/place_block_mat/logs/session_000/events.jsonl",
+              "sha256": "ac8b627d96def6fe6e76a5e5a1b6a5d30e1871b11ddaf7953b0d91842f6ea90c",
+              "reported_cost_usd": 1.6620714,
+              "final_session_count": 1
+            }
+          ],
+          "program_hash": "b4e6a564036e248f9a6862464c7fae1b9c6ccbc34b80154b26a7c72b859947c8",
+          "evaluation_root": "dev_logs/rmbench/demo_only_50/place_block_mat",
+          "evaluation": {
+            "successes": 100,
+            "episodes": 100,
+            "api_calls": 0,
+            "api_cost_usd": 0,
+            "records_sha256": "748573af3f2ba5014d6da9aaea9da88d7ae53cf3f4054d55afff0cec0b4cd226"
+          }
+        },
+        {
+          "task": "press_button",
+          "development_api_cost_usd": 2.2321766,
+          "report": {
+            "path": "dev_logs/rmbench/demo_only_50/press_button/reports/summary.json",
+            "sha256": "419ce70a193bc47e486a5c1108d09e82565bb252da7bd81a90fc248e18c7dc4b"
+          },
+          "sessions": [
+            {
+              "path": "dev_logs/rmbench/demo_only_50/press_button/tasks/press_button/logs/session_000/events.jsonl",
+              "sha256": "a9912500516229bf45ac54232098e58b3221a5aeff8c47f093d2756d6164f443",
+              "reported_cost_usd": 2.2321766,
+              "final_session_count": 1
+            }
+          ],
+          "program_hash": "285a4e7c996ec5000ebafd1e18453d8a2f9401e8d5c9f2adf30c01b9f20a75f2",
+          "evaluation_root": "dev_logs/rmbench/demo_only_50/press_button",
+          "evaluation": {
+            "successes": 100,
+            "episodes": 100,
+            "api_calls": 0,
+            "api_cost_usd": 0,
+            "records_sha256": "d0eb6c402414ee68d63a2179492425680103a7e52fb771038a5565f67efcab4d"
+          }
+        },
+        {
+          "task": "put_back_block",
+          "development_api_cost_usd": 1.5685121999999998,
+          "report": {
+            "path": "dev_logs/rmbench/demo_only_50/put_back_block/reports/summary.json",
+            "sha256": "3301ba68fafeed4eef8e78c647f5a23dee2b55bfa6d8a9e410e9dd2172381790"
+          },
+          "sessions": [
+            {
+              "path": "dev_logs/rmbench/demo_only_50/put_back_block/tasks/put_back_block/logs/session_000/events.jsonl",
+              "sha256": "fdc555496b1784b977b9f3eb0125e6f80b9d2db5b5fa7bca5dbf8bfa1e1feee2",
+              "reported_cost_usd": 1.5685121999999998,
+              "final_session_count": 1
+            }
+          ],
+          "program_hash": "8b115352266b136558b3e987cbdc61831d8f912222aa888634d0056b16257ab8",
+          "evaluation_root": "dev_logs/rmbench/demo_only_50/put_back_block",
+          "evaluation": {
+            "successes": 100,
+            "episodes": 100,
+            "api_calls": 0,
+            "api_cost_usd": 0,
+            "records_sha256": "437c9413bd855a0b78cb53ea856b84c57c7f11944137fd088d3ab40b827e9603"
+          }
+        },
+        {
+          "task": "rearrange_blocks",
+          "development_api_cost_usd": 1.507837,
+          "report": {
+            "path": "dev_logs/rmbench/demo_only_50/rearrange_blocks/reports/summary.json",
+            "sha256": "1b28576b55ca061dcc28a853a0471d4b8f11d28513064dd636c6d8f4ffe40ce1"
+          },
+          "sessions": [
+            {
+              "path": "dev_logs/rmbench/demo_only_50/rearrange_blocks/tasks/rearrange_blocks/logs/session_000/events.jsonl",
+              "sha256": "9fe1eec6e2fabf0be3c397d5792b41239b0daad1e5061e561fa4874508a30278",
+              "reported_cost_usd": 1.507837,
+              "final_session_count": 1
+            }
+          ],
+          "program_hash": "ce03c0c3b6c8eb7162be12dca528ade9b22286aaaef64c00984ddb45f7d81abb",
+          "evaluation_root": "dev_logs/rmbench/demo_only_50/rearrange_blocks",
+          "evaluation": {
+            "successes": 100,
+            "episodes": 100,
+            "api_calls": 0,
+            "api_cost_usd": 0,
+            "records_sha256": "ca9c770370bc1b1867677c75183be09be3136ab2714c80eeb805e27e80d17bc8"
+          }
+        },
+        {
+          "task": "swap_T",
+          "development_api_cost_usd": 2.7066450000000004,
+          "report": {
+            "path": "dev_logs/rmbench/demo_only_50/swap_T/reports/summary.json",
+            "sha256": "e1a784ff5959fe703b012939fcc9ff80dea5de170298b6c28c2d7019f1aae4df"
+          },
+          "sessions": [
+            {
+              "path": "dev_logs/rmbench/demo_only_50/swap_T/tasks/swap_T/logs/session_000/events.jsonl",
+              "sha256": "9220cbd45e165f64c8c41ec739f1f857873db1022b6c4e039a2b3c850970371e",
+              "reported_cost_usd": 2.7066450000000004,
+              "final_session_count": 1
+            }
+          ],
+          "program_hash": "8dd4e60e4a6e518668e60f1cb85e8b32013fa969d794016bb9223e29dd6423ce",
+          "evaluation_root": "dev_logs/rmbench/demo_only_50/swap_T",
+          "evaluation": {
+            "successes": 100,
+            "episodes": 100,
+            "api_calls": 0,
+            "api_cost_usd": 0,
+            "records_sha256": "89f523389cd01c5a6650943c93683dffeb813d8dabe062ede3ac1ac1ce3d4821"
+          }
+        },
+        {
+          "task": "swap_blocks",
+          "development_api_cost_usd": 2.8695202,
+          "report": {
+            "path": "dev_logs/rmbench/demo_only_50/swap_blocks/reports/summary.json",
+            "sha256": "46e4535712c8f211e483d064e1a2aee10d08c15476fa43d19e40046b3ef5bb06"
+          },
+          "sessions": [
+            {
+              "path": "dev_logs/rmbench/demo_only_50/swap_blocks/tasks/swap_blocks/logs/session_000/events.jsonl",
+              "sha256": "df8d628aa59c3f5ed2e84e5c749a73fcf10380e9cc2d8302780a9e1a942d6f91",
+              "reported_cost_usd": 2.8695202,
+              "final_session_count": 1
+            }
+          ],
+          "program_hash": "c09ef1d293d96a44081872e118688248f9159c2e7814b13853127ddf3463dadd",
+          "evaluation_root": "dev_logs/rmbench/demo_only_50/swap_blocks",
+          "evaluation": {
+            "successes": 100,
+            "episodes": 100,
+            "api_calls": 0,
+            "api_cost_usd": 0,
+            "records_sha256": "1622aff01f0304212c61c96d0070deb91f6c7fc47622db8409936bcc543709fa"
+          }
+        }
+      ]
+    },
+    "mikasa_robo": {
+      "source_root": "dev_logs/mikasa_robo_vla_suite/demo_interaction_50",
+      "setting": "demo_interaction_50",
+      "task_count": 5,
+      "development_api_cost_usd": 33.80637720000001,
+      "inference_api_cost_usd": 0,
+      "evaluation_successes": 250,
+      "evaluation_episodes": 250,
+      "tasks": [
+        {
+          "task": "InterceptMedium-VLA-v0",
+          "development_api_cost_usd": 4.930940800000002,
+          "report": {
+            "path": "dev_logs/mikasa_robo_vla_suite/demo_interaction_50/InterceptMedium-VLA-v0/20261110T190926_055654Z/reports/summary.json",
+            "sha256": "0f4aafd90ab227e1898cb8729f50910fc7f6abe08bb0c31f3d503f3b71d8938c"
+          },
+          "sessions": [
+            {
+              "path": "dev_logs/mikasa_robo_vla_suite/demo_interaction_50/InterceptMedium-VLA-v0/20261110T190926_055654Z/tasks/InterceptMedium-VLA-v0/logs/session_000/events.jsonl",
+              "sha256": "f7220e4f4c0e9db345042a4b14a1caa699468b18fd8aa08de9703dcf67f84090",
+              "reported_cost_usd": 4.930940800000002,
+              "final_session_count": 1
+            }
+          ],
+          "program_hash": "8f9de5db0cc5e08fc0b38c604a998984f86d3171372de9186174fa1c71a7faa8",
+          "evaluation_root": "/data/daiyp/CaM_validation_run_v2/mikasa_robo_vla_suite/20261110T190922_491466Z/arms/demo_interaction_50/dev_logs/mikasa_robo_vla_suite/InterceptMedium-VLA-v0/cc-opus5.5/demo_interaction_50/20261110T190926_055654Z",
+          "evaluation": {
+            "successes": 50,
+            "episodes": 50,
+            "api_calls": 0,
+            "api_cost_usd": 0,
+            "records_sha256": "5c36dbd403eca26dccc560f2dbdc03d293dd0b1f9b905ea0bf6372fe9bc92601"
+          },
+          "physics_backend": "cpu"
+        },
+        {
+          "task": "RememberColor3-VLA-v0",
+          "development_api_cost_usd": 8.466597000000004,
+          "report": {
+            "path": "dev_logs/mikasa_robo_vla_suite/demo_interaction_50/RememberColor3-VLA-v0/20261110T190926_055654Z/reports/summary.json",
+            "sha256": "29ac2fbd30c5445f995d787fd3d1f9e7236f31bd4b4dd10d97dfa8bd3ca99011"
+          },
+          "sessions": [
+            {
+              "path": "dev_logs/mikasa_robo_vla_suite/demo_interaction_50/RememberColor3-VLA-v0/20261110T190926_055654Z/tasks/RememberColor3-VLA-v0/logs/session_000/events.jsonl",
+              "sha256": "039be6f38a0aa04b951e08e0272fd08791241aa3d1b4b8e388d6b01192ab2286",
+              "reported_cost_usd": 8.466597000000004,
+              "final_session_count": 1
+            }
+          ],
+          "program_hash": "67c602d690e412d22f8ce63bc853bc4cc47832cbf851a2c4700c8ba708b3806d",
+          "evaluation_root": "/data/daiyp/CaM_validation_run_v2/mikasa_robo_vla_suite/20261110T190922_491466Z/arms/demo_interaction_50/dev_logs/mikasa_robo_vla_suite/RememberColor3-VLA-v0/cc-opus5.5/demo_interaction_50/20261110T190926_055654Z",
+          "evaluation": {
+            "successes": 50,
+            "episodes": 50,
+            "api_calls": 0,
+            "api_cost_usd": 0,
+            "records_sha256": "4e713d7854546c5212ded74a08d8f7f25c1ff13185cb4a3fc9dbcf040fcd14a0"
+          },
+          "physics_backend": "cpu"
+        },
+        {
+          "task": "RememberColor5-VLA-v0",
+          "development_api_cost_usd": 3.506814,
+          "report": {
+            "path": "dev_logs/mikasa_robo_vla_suite/demo_interaction_50/RememberColor5-VLA-v0/20261110T190926_055654Z/reports/summary.json",
+            "sha256": "a7c341fd3d369d38852fe8623e8aa72557c53fafc8e120852e74057fd6e37887"
+          },
+          "sessions": [
+            {
+              "path": "dev_logs/mikasa_robo_vla_suite/demo_interaction_50/RememberColor5-VLA-v0/20261110T190926_055654Z/tasks/RememberColor5-VLA-v0/logs/session_000/events.jsonl",
+              "sha256": "0b98cc4c1098284d429c6a0f6e4c997dcc0d04c182d3dec48114db346d12ba2f",
+              "reported_cost_usd": 3.506814,
+              "final_session_count": 1
+            }
+          ],
+          "program_hash": "2c00ecc69d8bff1bd7ed8875a2e306a2273dd444959d9204fe2834e14f17c295",
+          "evaluation_root": "/data/daiyp/CaM_validation_run_v2/mikasa_robo_vla_suite/20261110T190922_491466Z/arms/demo_interaction_50/dev_logs/mikasa_robo_vla_suite/RememberColor5-VLA-v0/cc-opus5.5/demo_interaction_50/20261110T190926_055654Z",
+          "evaluation": {
+            "successes": 50,
+            "episodes": 50,
+            "api_calls": 0,
+            "api_cost_usd": 0,
+            "records_sha256": "f08f96e370b11a5b6493f3220cd4d587f6e5970cc1e49fb8842e2867c930032c"
+          },
+          "physics_backend": "cpu"
+        },
+        {
+          "task": "RememberColor9-VLA-v0",
+          "development_api_cost_usd": 9.160433400000002,
+          "report": {
+            "path": "dev_logs/mikasa_robo_vla_suite/demo_interaction_50/RememberColor9-VLA-v0/20261110T190926_055654Z/reports/summary.json",
+            "sha256": "93212b7b316ea4f495a1fd285f67a539bb445a1c76980c7b1c496ce744a1e244"
+          },
+          "sessions": [
+            {
+              "path": "dev_logs/mikasa_robo_vla_suite/demo_interaction_50/RememberColor9-VLA-v0/20261110T190926_055654Z/tasks/RememberColor9-VLA-v0/logs/session_000/events.jsonl",
+              "sha256": "987169843ad4db99678dde281a5549428a2cdf83f917f5ba437611eca610b97d",
+              "reported_cost_usd": 9.160433400000002,
+              "final_session_count": 1
+            }
+          ],
+          "program_hash": "59a82dcec51fc72424c877ae5802f556a0a8014a01e299dcc777c74c38a51afe",
+          "evaluation_root": "/data/daiyp/CaM_validation_run_v2/mikasa_robo_vla_suite/20261110T190922_491466Z/arms/demo_interaction_50/dev_logs/mikasa_robo_vla_suite/RememberColor9-VLA-v0/cc-opus5.5/demo_interaction_50/20261110T190926_055654Z",
+          "evaluation": {
+            "successes": 50,
+            "episodes": 50,
+            "api_calls": 0,
+            "api_cost_usd": 0,
+            "records_sha256": "8a02f323385227c8db0b5c5b614f62a91285c010a261e3f38d9f40771bd61e11"
+          },
+          "physics_backend": "cpu"
+        },
+        {
+          "task": "ShellGameTouch-VLA-v0",
+          "development_api_cost_usd": 7.741592000000001,
+          "report": {
+            "path": "dev_logs/mikasa_robo_vla_suite/demo_interaction_50/ShellGameTouch-VLA-v0/20261110T190926_055654Z/reports/summary.json",
+            "sha256": "65914990260323845dfab8b3d0d58562661938cd7ebcbe83c81a29eeffa45ffe"
+          },
+          "sessions": [
+            {
+              "path": "dev_logs/mikasa_robo_vla_suite/demo_interaction_50/ShellGameTouch-VLA-v0/20261110T190926_055654Z/tasks/ShellGameTouch-VLA-v0/logs/session_000/events.jsonl",
+              "sha256": "5e4d6b18a208453bc237a25512cda77148be689759e14eedfdf3c3d99edb6975",
+              "reported_cost_usd": 7.741592000000001,
+              "final_session_count": 1
+            }
+          ],
+          "program_hash": "713fdc88cdd57db9a0462dd02e96fc37d299f40c6a0c68c8b77b476a3700e26e",
+          "evaluation_root": "/data/daiyp/CaM_validation_run_v2/mikasa_robo_vla_suite/20261110T190922_491466Z/arms/demo_interaction_50/dev_logs/mikasa_robo_vla_suite/ShellGameTouch-VLA-v0/cc-opus5.5/demo_interaction_50/20261110T190926_055654Z",
+          "evaluation": {
+            "successes": 50,
+            "episodes": 50,
+            "api_calls": 0,
+            "api_cost_usd": 0,
+            "records_sha256": "d9eeb22fac01d5ca3cb1fd97ba6991827eebb50ab0b0d877dc22caf592d2b2b9"
+          },
+          "physics_backend": "gpu"
+        }
+      ]
+    },
+    "robomme": {
+      "source_root": "dev_logs/robomme/demo_only_25",
+      "setting": "demo_only_25",
+      "task_count": 16,
+      "development_api_cost_usd": 29.441281599999996,
+      "inference_api_cost_usd": 0,
+      "evaluation_successes": 795,
+      "evaluation_episodes": 800,
+      "tasks": [
+        {
+          "task": "BinFill",
+          "development_api_cost_usd": 2.3514518,
+          "report": {
+            "path": "dev_logs/robomme/demo_only_25/BinFill/costs/api_cost.json",
+            "sha256": "fe0e963e38b0576eed534559efefc9942c6dfd504ae6b7417ffe1e141b348ac9"
+          },
+          "sessions": [
+            {
+              "path": "dev_logs/robomme/demo_only_25/BinFill/agents/agent.jsonl",
+              "sha256": "c650f512b9c823bfc0a9e9ebaa38ce70a449efbc629dc58ef52bf18f9f75604e",
+              "reported_cost_usd": 2.3514518,
+              "final_session_count": 1
+            }
+          ],
+          "evaluation": {
+            "successes": 50,
+            "episodes": 50,
+            "api_calls": 0,
+            "api_cost_usd": 0,
+            "records_sha256": "c9d0924ccd2cc26f184aee580fe04ae21de28a8d30797b953e1a2e291fadeb50"
+          }
+        },
+        {
+          "task": "ButtonUnmask",
+          "development_api_cost_usd": 1.5677842000000002,
+          "report": {
+            "path": "dev_logs/robomme/demo_only_25/ButtonUnmask/costs/api_cost.json",
+            "sha256": "99b6e68bf969138a0e4e22db361770318fc8739440b873467857940ec9e30b77"
+          },
+          "sessions": [
+            {
+              "path": "dev_logs/robomme/demo_only_25/ButtonUnmask/agents/agent.jsonl",
+              "sha256": "7f6a191b3a8e2bf43c116dcca455ab301038a9692c7450a0fdef765ed0f9a071",
+              "reported_cost_usd": 1.5677842000000002,
+              "final_session_count": 1
+            }
+          ],
+          "evaluation": {
+            "successes": 50,
+            "episodes": 50,
+            "api_calls": 0,
+            "api_cost_usd": 0,
+            "records_sha256": "f592c2ef5b5cbd8f225ad4618bcf4d5dfc5204983cc1c5dd764ecd6129baba0f"
+          }
+        },
+        {
+          "task": "ButtonUnmaskSwap",
+          "development_api_cost_usd": 1.8305707999999998,
+          "report": {
+            "path": "dev_logs/robomme/demo_only_25/ButtonUnmaskSwap/costs/api_cost.json",
+            "sha256": "f0ef91f5947fe21c12e4a04f93e67b6ab57f0c184abf42df86efd7621d193ad7"
+          },
+          "sessions": [
+            {
+              "path": "dev_logs/robomme/demo_only_25/ButtonUnmaskSwap/agents/agent.jsonl",
+              "sha256": "22ee93afdebac227611b328ae3dd45bfc68f8ea7175ce53617b87e22c6768dea",
+              "reported_cost_usd": 1.8305707999999998,
+              "final_session_count": 1
+            }
+          ],
+          "evaluation": {
+            "successes": 50,
+            "episodes": 50,
+            "api_calls": 0,
+            "api_cost_usd": 0,
+            "records_sha256": "65f4cd96f419ce7b5f075553712ff11849490ab7038c369595e3ba9c49dbc628"
+          }
+        },
+        {
+          "task": "InsertPeg",
+          "development_api_cost_usd": 1.2896792000000001,
+          "report": {
+            "path": "dev_logs/robomme/demo_only_25/InsertPeg/costs/api_cost.json",
+            "sha256": "3c482a7e19cacdaeba2c7bb3e604726e4ab1543df4278fe0c9ab8cb6511b27df"
+          },
+          "sessions": [
+            {
+              "path": "dev_logs/robomme/demo_only_25/InsertPeg/agents/agent.jsonl",
+              "sha256": "15a4b441607448eba9364c8b523e9c4683d875f45270b0a6bc87fd66fab09ea2",
+              "reported_cost_usd": 1.2896792000000001,
+              "final_session_count": 1
+            }
+          ],
+          "evaluation": {
+            "successes": 50,
+            "episodes": 50,
+            "api_calls": 0,
+            "api_cost_usd": 0,
+            "records_sha256": "c3a671a97ca05435b3db1cc9095ac3e18dcebf1a8b604273fbd9a9f4992dce35"
+          }
+        },
+        {
+          "task": "MoveCube",
+          "development_api_cost_usd": 2.3864398,
+          "report": {
+            "path": "dev_logs/robomme/demo_only_25/MoveCube/costs/api_cost.json",
+            "sha256": "7c5d05ccf1fa0ea2bc50da0b2e4b7676759f6c845002615974680a40712149f5"
+          },
+          "sessions": [
+            {
+              "path": "dev_logs/robomme/demo_only_25/MoveCube/agents/agent.jsonl",
+              "sha256": "d9b359e3a0b01a55cf916724c0f05db8340b719e11387b934e87f3b25a6dad2c",
+              "reported_cost_usd": 2.3864398,
+              "final_session_count": 1
+            }
+          ],
+          "evaluation": {
+            "successes": 50,
+            "episodes": 50,
+            "api_calls": 0,
+            "api_cost_usd": 0,
+            "records_sha256": "2c914a109d689884c2db9acb02136b04e501c429686661fbff7f772764d90775"
+          }
+        },
+        {
+          "task": "PatternLock",
+          "development_api_cost_usd": 1.0455785999999998,
+          "report": {
+            "path": "dev_logs/robomme/demo_only_25/PatternLock/costs/api_cost.json",
+            "sha256": "d7145e6fece02e6b3ea770f74bca77dfeb2674e8fd14d6a645d915ec847502cd"
+          },
+          "sessions": [
+            {
+              "path": "dev_logs/robomme/demo_only_25/PatternLock/agents/agent.jsonl",
+              "sha256": "0fab2eb86791d65304bacb553270386ca0f0802821dc37b2c9325acad390616a",
+              "reported_cost_usd": 1.0455785999999998,
+              "final_session_count": 1
+            }
+          ],
+          "evaluation": {
+            "successes": 50,
+            "episodes": 50,
+            "api_calls": 0,
+            "api_cost_usd": 0,
+            "records_sha256": "782689c30c2290bd1d56c20e966cc7e50caaee10a466ca352a5cabca6a1e38d7"
+          }
+        },
+        {
+          "task": "PickHighlight",
+          "development_api_cost_usd": 1.5818223999999996,
+          "report": {
+            "path": "dev_logs/robomme/demo_only_25/PickHighlight/costs/api_cost.json",
+            "sha256": "482ae4925478a13b61dc4dea0e7802ff42bda8c362c988da1c910f5778d43f14"
+          },
+          "sessions": [
+            {
+              "path": "dev_logs/robomme/demo_only_25/PickHighlight/agents/agent.jsonl",
+              "sha256": "e85daae2c87b50854b6f4fba3c4311216923ab37aa9ce6c5a4e84200718b5495",
+              "reported_cost_usd": 1.5818223999999996,
+              "final_session_count": 1
+            }
+          ],
+          "evaluation": {
+            "successes": 50,
+            "episodes": 50,
+            "api_calls": 0,
+            "api_cost_usd": 0,
+            "records_sha256": "2619f28e145ddfe9b2ca68ef5d2c3e89812603f54722191a17dc076d6705c49f"
+          }
+        },
+        {
+          "task": "PickXtimes",
+          "development_api_cost_usd": 1.4445144,
+          "report": {
+            "path": "dev_logs/robomme/demo_only_25/PickXtimes/costs/api_cost.json",
+            "sha256": "aafb10b4d2a26d1ba0759ca3c2c66dd9c26e1f96ea043375d411d3ed88eac50a"
+          },
+          "sessions": [
+            {
+              "path": "dev_logs/robomme/demo_only_25/PickXtimes/agents/agent.jsonl",
+              "sha256": "934175ebf2dec22d118c2a0906f090340592af580aaea92456dc660df58b4faa",
+              "reported_cost_usd": 1.4445144,
+              "final_session_count": 1
+            }
+          ],
+          "evaluation": {
+            "successes": 50,
+            "episodes": 50,
+            "api_calls": 0,
+            "api_cost_usd": 0,
+            "records_sha256": "cb922ae4e8aab3d47b81f0bde81815ce7b92974b13f493ae982f5f90e5fd26f0"
+          }
+        },
+        {
+          "task": "RouteStick",
+          "development_api_cost_usd": 1.4536827999999995,
+          "report": {
+            "path": "dev_logs/robomme/demo_only_25/RouteStick/costs/api_cost.json",
+            "sha256": "c382624aec6f91b2d277a541f389b290a59b9800ee7f12b05e689676d8f3cf1f"
+          },
+          "sessions": [
+            {
+              "path": "dev_logs/robomme/demo_only_25/RouteStick/agents/agent.jsonl",
+              "sha256": "070eebedb1aa0a2278423a0917a18a6482de65ddbcfe4e1ef7aeeb2652653fbb",
+              "reported_cost_usd": 1.4536827999999995,
+              "final_session_count": 1
+            }
+          ],
+          "evaluation": {
+            "successes": 50,
+            "episodes": 50,
+            "api_calls": 0,
+            "api_cost_usd": 0,
+            "records_sha256": "e42a8a68fa2262fe6ed0d63c798695b78aab14455752bbeaa2062e6528a6b52a"
+          }
+        },
+        {
+          "task": "StopCube",
+          "development_api_cost_usd": 1.5553286,
+          "report": {
+            "path": "dev_logs/robomme/demo_only_25/StopCube/costs/api_cost.json",
+            "sha256": "f18edd51be6b8cf4f85213e6ec05f72ea0b269730edebc6ea78977196d502457"
+          },
+          "sessions": [
+            {
+              "path": "dev_logs/robomme/demo_only_25/StopCube/agents/agent.jsonl",
+              "sha256": "d64951f52e4e2e098533e9021900575069e52c9249de406b3e9f42a955e7d555",
+              "reported_cost_usd": 1.5553286,
+              "final_session_count": 1
+            }
+          ],
+          "evaluation": {
+            "successes": 47,
+            "episodes": 50,
+            "api_calls": 0,
+            "api_cost_usd": 0,
+            "records_sha256": "4791c8bda7479f853c59f373d558b5955fb137fd26e4931d27489b9cc5410af5"
+          }
+        },
+        {
+          "task": "SwingXtimes",
+          "development_api_cost_usd": 1.5611568,
+          "report": {
+            "path": "dev_logs/robomme/demo_only_25/SwingXtimes/costs/api_cost.json",
+            "sha256": "690d9217e31802600baca7b910d8f42f076a87368749aefcf6c93ffb43331050"
+          },
+          "sessions": [
+            {
+              "path": "dev_logs/robomme/demo_only_25/SwingXtimes/agents/agent.jsonl",
+              "sha256": "83451645f2f52028e9d6c14cc07897730ebeb25b82ddbcfceb60f90556638a3f",
+              "reported_cost_usd": 1.5611568,
+              "final_session_count": 1
+            }
+          ],
+          "evaluation": {
+            "successes": 50,
+            "episodes": 50,
+            "api_calls": 0,
+            "api_cost_usd": 0,
+            "records_sha256": "df85dd79ed590d6b0ef979ef535267d7c1fa3f3d22646e15cc21d3872a687d20"
+          }
+        },
+        {
+          "task": "VideoPlaceButton",
+          "development_api_cost_usd": 3.879111599999999,
+          "report": {
+            "path": "dev_logs/robomme/demo_only_25/VideoPlaceButton/costs/api_cost.json",
+            "sha256": "0cbfc3f208c6c51894c827fb0a90b55728a8ffa3f6f27fc24ef4a1bcde59c3dd"
+          },
+          "sessions": [
+            {
+              "path": "dev_logs/robomme/demo_only_25/VideoPlaceButton/agents/agent.jsonl",
+              "sha256": "cf4e4582dde5668ea409b1a2b0c0801ec89834b1d7c435ddddd73d1595ae705f",
+              "reported_cost_usd": 3.879111599999999,
+              "final_session_count": 1
+            }
+          ],
+          "evaluation": {
+            "successes": 50,
+            "episodes": 50,
+            "api_calls": 0,
+            "api_cost_usd": 0,
+            "records_sha256": "3eca44039254f4c6431c7f2a415c8c2bdf834d9137652aa79d32bea0a5eb2168"
+          }
+        },
+        {
+          "task": "VideoPlaceOrder",
+          "development_api_cost_usd": 2.1163925999999997,
+          "report": {
+            "path": "dev_logs/robomme/demo_only_25/VideoPlaceOrder/costs/api_cost.json",
+            "sha256": "f64ab917751699fc85f6740a7256252f4b9d4973de5571c8e4349f14eb0391da"
+          },
+          "sessions": [
+            {
+              "path": "dev_logs/robomme/demo_only_25/VideoPlaceOrder/agents/agent.jsonl",
+              "sha256": "170dc626c087a859d32eba41ecaddcb0ca103e3b85821bcab84af8706bbc8de1",
+              "reported_cost_usd": 2.1163925999999997,
+              "final_session_count": 1
+            }
+          ],
+          "evaluation": {
+            "successes": 48,
+            "episodes": 50,
+            "api_calls": 0,
+            "api_cost_usd": 0,
+            "records_sha256": "5e9c02306ac6987479fd7413ef0d8e1f7bcc1ea953250954fac748d1014b2375"
+          }
+        },
+        {
+          "task": "VideoRepick",
+          "development_api_cost_usd": 2.0366709999999997,
+          "report": {
+            "path": "dev_logs/robomme/demo_only_25/VideoRepick/costs/api_cost.json",
+            "sha256": "4bfcb213a7ee9e843e4bbba1518c58a18d4a341125bdde950d9ff98fcd62821e"
+          },
+          "sessions": [
+            {
+              "path": "dev_logs/robomme/demo_only_25/VideoRepick/agents/agent.jsonl",
+              "sha256": "63ef7230ee3a87ad4fa27c1b0f213a78c03f2bf503156f5ed291556a40b6805e",
+              "reported_cost_usd": 2.0366709999999997,
+              "final_session_count": 1
+            }
+          ],
+          "evaluation": {
+            "successes": 50,
+            "episodes": 50,
+            "api_calls": 0,
+            "api_cost_usd": 0,
+            "records_sha256": "791646eda23fc34823598bd778e26e5bbd937189766d1580f1d96eec52f99203"
+          }
+        },
+        {
+          "task": "VideoUnmask",
+          "development_api_cost_usd": 1.3936412,
+          "report": {
+            "path": "dev_logs/robomme/demo_only_25/VideoUnmask/costs/api_cost.json",
+            "sha256": "f4ea50e70c5a72e0dc96720828b9e18360d5db35d1295ac33403ccee321bc16f"
+          },
+          "sessions": [
+            {
+              "path": "dev_logs/robomme/demo_only_25/VideoUnmask/agents/agent.jsonl",
+              "sha256": "9a7248264293c5d2620db5ec00e7fb87ed6ee040b66284eda4cdc62cd2591a6e",
+              "reported_cost_usd": 1.3936412,
+              "final_session_count": 1
+            }
+          ],
+          "evaluation": {
+            "successes": 50,
+            "episodes": 50,
+            "api_calls": 0,
+            "api_cost_usd": 0,
+            "records_sha256": "0c0c1b00deee02a3485e6e36b2248cb1af2fece93cf0e0b7e941cdc4085b4442"
+          }
+        },
+        {
+          "task": "VideoUnmaskSwap",
+          "development_api_cost_usd": 1.9474558,
+          "report": {
+            "path": "dev_logs/robomme/demo_only_25/VideoUnmaskSwap/costs/api_cost.json",
+            "sha256": "26433c13ed88adeea5ed1eee1efd823b6cd9c390d8c9b8f0c15d1bbace933469"
+          },
+          "sessions": [
+            {
+              "path": "dev_logs/robomme/demo_only_25/VideoUnmaskSwap/agents/agent.jsonl",
+              "sha256": "49f67feac464e22772e2d2e2851ec4846fd7bd2fe0542406b0e51cce1c910f39",
+              "reported_cost_usd": 1.9474558,
+              "final_session_count": 1
+            }
+          ],
+          "evaluation": {
+            "successes": 50,
+            "episodes": 50,
+            "api_calls": 0,
+            "api_cost_usd": 0,
+            "records_sha256": "c4c8786fe53421347b885e1e36bce3fa782adf217e39c47fac7ee40e3498ac58"
+          }
+        }
+      ]
+    },
+    "robomemarena": {
+      "source_root": "dev_logs/robomemarena/demo_interaction_50",
+      "setting": "demo_interaction_50",
+      "task_count": 26,
+      "development_api_cost_usd": 278.568241,
+      "inference_api_cost_usd": 0,
+      "evaluation_successes": 1271,
+      "evaluation_episodes": 1300,
+      "tasks": [
+        {
+          "task": "T01_CookiesTomatoBasket",
+          "development_api_cost_usd": 11.000114599999998,
+          "report": {
+            "path": "dev_logs/robomemarena/demo_interaction_50/T01_CookiesTomatoBasket/reports/summary.json",
+            "sha256": "83e217f34ef2f5e1e174fb9f44b1b1cd6631b0f199e7203e8cd4bba8d8115706"
+          },
+          "sessions": [
+            {
+              "path": "dev_logs/robomemarena/demo_interaction_50/T01_CookiesTomatoBasket/tasks/T01_CookiesTomatoBasket/logs/session_000/events.jsonl",
+              "sha256": "b005e2708b5c3d9a3468b3e0a3580ebdaf30574b0f13d4e30ff753ddf72e6ecc",
+              "reported_cost_usd": 11.000114599999998,
+              "final_session_count": 1
+            }
+          ],
+          "program_hash": "5ec5c2e93b9b2a62d682a0b1d9f60f2a704676822cafd64f4cfb148398906464",
+          "evaluation_root": "dev_logs/robomemarena/demo_interaction_50/T01_CookiesTomatoBasket",
+          "evaluation": {
+            "successes": 50,
+            "episodes": 50,
+            "api_calls": 0,
+            "api_cost_usd": 0,
+            "records_sha256": "f121e2fb221c68651b879885d7c36a89af4a2a396ac7d49b5db0702f70844c15"
+          }
+        },
+        {
+          "task": "T02_ButterPopcornBasket",
+          "development_api_cost_usd": 11.257742399999998,
+          "report": {
+            "path": "dev_logs/robomemarena/demo_interaction_50/T02_ButterPopcornBasket/reports/summary.json",
+            "sha256": "d77fc1e04fb194017b8b9452a83c93bac968f263408de34b6e05431aeb6cc55e"
+          },
+          "sessions": [
+            {
+              "path": "dev_logs/robomemarena/demo_interaction_50/T02_ButterPopcornBasket/tasks/T02_ButterPopcornBasket/logs/session_000/events.jsonl",
+              "sha256": "245b6e912ce80c7ce2da0f9e39d2b710c08f55a9132c2f551a5b383b8e7c8961",
+              "reported_cost_usd": 11.257742399999998,
+              "final_session_count": 1
+            }
+          ],
+          "program_hash": "1d926c7d0e724d00e455ab30014660a4d668135d6389eca37a4a0fca15f29d7c",
+          "evaluation_root": "dev_logs/robomemarena/demo_interaction_50/T02_ButterPopcornBasket",
+          "evaluation": {
+            "successes": 50,
+            "episodes": 50,
+            "api_calls": 0,
+            "api_cost_usd": 0,
+            "records_sha256": "60f88d28204551c80d8e6421ab3388caece1fc17b299c43e0d0efaba0f465510"
+          }
+        },
+        {
+          "task": "T03_CreamPuddingBasket",
+          "development_api_cost_usd": 9.929796999999999,
+          "report": {
+            "path": "dev_logs/robomemarena/demo_interaction_50/T03_CreamPuddingBasket/reports/summary.json",
+            "sha256": "5ac9ad75fc8134396352f624b72ed219ad419936ef677ad9348ff61692ad435d"
+          },
+          "sessions": [
+            {
+              "path": "dev_logs/robomemarena/demo_interaction_50/T03_CreamPuddingBasket/tasks/T03_CreamPuddingBasket/logs/session_000/events.jsonl",
+              "sha256": "d64a8b90f97764ed96d69e41ade5dd6a1f889f2e57d91ccdf71c027605387ab1",
+              "reported_cost_usd": 9.929796999999999,
+              "final_session_count": 1
+            }
+          ],
+          "program_hash": "4310794835d9b62a992956396e2668a2d0250ce94b70ab0bccaa4dd6c7883c8b",
+          "evaluation_root": "dev_logs/robomemarena/demo_interaction_50/T03_CreamPuddingBasket",
+          "evaluation": {
+            "successes": 50,
+            "episodes": 50,
+            "api_calls": 0,
+            "api_cost_usd": 0,
+            "records_sha256": "194d17948557e44cf478fee28536a2182c2c4bdd412259a509d74e915fac7fd5"
+          }
+        },
+        {
+          "task": "T04_ButterNonEmptyDrawer",
+          "development_api_cost_usd": 4.555938200000001,
+          "report": {
+            "path": "dev_logs/robomemarena/demo_interaction_50/T04_ButterNonEmptyDrawer/reports/summary.json",
+            "sha256": "32d8a59526d4c6b7aa3e971cd171a7d5300490d6d0eadb124a1f6002e82f3403"
+          },
+          "sessions": [
+            {
+              "path": "dev_logs/robomemarena/demo_interaction_50/T04_ButterNonEmptyDrawer/tasks/T04_ButterNonEmptyDrawer/logs/session_000/events.jsonl",
+              "sha256": "a4909f82fcea3f1c750741160efa9554d8ce28aa17aa86234cb78a87994afb6a",
+              "reported_cost_usd": 4.555938200000001,
+              "final_session_count": 1
+            }
+          ],
+          "program_hash": "963b41f2537e17ff94bed545e8f8caebdf92ae749ba8e3a16ed9b336a7bd3a88",
+          "evaluation_root": "dev_logs/robomemarena/demo_interaction_50/T04_ButterNonEmptyDrawer",
+          "evaluation": {
+            "successes": 50,
+            "episodes": 50,
+            "api_calls": 0,
+            "api_cost_usd": 0,
+            "records_sha256": "56f0a0959a7168077dd81f763487c5161d774079e382c88743eb3b5313f728e5"
+          }
+        },
+        {
+          "task": "T05_ButterEmptyDrawer",
+          "development_api_cost_usd": 12.558050799999991,
+          "report": {
+            "path": "dev_logs/robomemarena/demo_interaction_50/T05_ButterEmptyDrawer/reports/summary.json",
+            "sha256": "4cfdff269acce33454e816cf3ead0e41dfa3555ec177cd3eb473a75aebe9b20c"
+          },
+          "sessions": [
+            {
+              "path": "dev_logs/robomemarena/demo_interaction_50/T05_ButterEmptyDrawer/tasks/T05_ButterEmptyDrawer/logs/session_000/events.jsonl",
+              "sha256": "e5294a8f497aad977374e51ea66111de30463c34fce9bc221435af2f93f0a46f",
+              "reported_cost_usd": 12.558050799999991,
+              "final_session_count": 1
+            }
+          ],
+          "program_hash": "1867a238b8c6361b23b48eb4a5505faa66f3eb281728ff82ed6e39d6508115b2",
+          "evaluation_root": "dev_logs/robomemarena/demo_interaction_50/T05_ButterEmptyDrawer",
+          "evaluation": {
+            "successes": 50,
+            "episodes": 50,
+            "api_calls": 0,
+            "api_cost_usd": 0,
+            "records_sha256": "8f5a258b75f8e3f24a607a0abe3ef2baf9e20864fb4f542ad18b7b762f188f6f"
+          }
+        },
+        {
+          "task": "T06_PourSauceCookiesTwice",
+          "development_api_cost_usd": 4.7946880000000025,
+          "report": {
+            "path": "dev_logs/robomemarena/demo_interaction_50/T06_PourSauceCookiesTwice/reports/summary.json",
+            "sha256": "c2cf7663f76a5b2ab05537bbb40b7e471f892aee2028a334081ed907ba813b32"
+          },
+          "sessions": [
+            {
+              "path": "dev_logs/robomemarena/demo_interaction_50/T06_PourSauceCookiesTwice/tasks/T06_PourSauceCookiesTwice/logs/session_000/events.jsonl",
+              "sha256": "d10180a33317ee5645eab9b464648c574474c5e6eb501b7de2333ae4099f495a",
+              "reported_cost_usd": 4.7946880000000025,
+              "final_session_count": 1
+            }
+          ],
+          "program_hash": "621154d06f23a119c44f356806a0977688ef663757398e941de3e00f5b4510a0",
+          "evaluation_root": "dev_logs/robomemarena/demo_interaction_50/T06_PourSauceCookiesTwice",
+          "evaluation": {
+            "successes": 50,
+            "episodes": 50,
+            "api_calls": 0,
+            "api_cost_usd": 0,
+            "records_sha256": "3365679211a0e03129830d56d2adec4057374ee300d700b2338651c328dd9286"
+          }
+        },
+        {
+          "task": "T07_PourSauceFrypanTwice",
+          "development_api_cost_usd": 6.630220800000001,
+          "report": {
+            "path": "dev_logs/robomemarena/demo_interaction_50/T07_PourSauceFrypanTwice/reports/summary.json",
+            "sha256": "c942d8ea716ea7e9f6c5a469ce76a97f45736fe4d63e08c88d83ec412959a94c"
+          },
+          "sessions": [
+            {
+              "path": "dev_logs/robomemarena/demo_interaction_50/T07_PourSauceFrypanTwice/tasks/T07_PourSauceFrypanTwice/logs/session_000/events.jsonl",
+              "sha256": "929e297493da8372a7d8d90fc2b9fd429c7154cb9847c7124bb9152dd8569439",
+              "reported_cost_usd": 6.630220800000001,
+              "final_session_count": 1
+            }
+          ],
+          "program_hash": "20525aa96f0da535a2c9bd35b38f3aa7f473b92309f8a58dc400d65aa4e4ede6",
+          "evaluation_root": "dev_logs/robomemarena/demo_interaction_50/T07_PourSauceFrypanTwice",
+          "evaluation": {
+            "successes": 50,
+            "episodes": 50,
+            "api_calls": 0,
+            "api_cost_usd": 0,
+            "records_sha256": "2383a44e9ec100ce47034b4f75e88a34d04ebb8c789c686fc5112b7edae75cec"
+          }
+        },
+        {
+          "task": "T08_ChocolateFrypanPourSauceTwice",
+          "development_api_cost_usd": 7.447221000000002,
+          "report": {
+            "path": "dev_logs/robomemarena/demo_interaction_50/T08_ChocolateFrypanPourSauceTwice/reports/summary.json",
+            "sha256": "a8ecf16f68c78b710f32895e6370d0d3e4e016b9883b28acadd64687e766fbcb"
+          },
+          "sessions": [
+            {
+              "path": "dev_logs/robomemarena/demo_interaction_50/T08_ChocolateFrypanPourSauceTwice/tasks/T08_ChocolateFrypanPourSauceTwice/logs/session_000/events.jsonl",
+              "sha256": "83a39068170de4c8ca2be0e040847b1fccb2cf45afe09c4d324b8140ca7343f5",
+              "reported_cost_usd": 7.447221000000002,
+              "final_session_count": 1
+            }
+          ],
+          "program_hash": "271afab1adc55dc572a55a79753e5f993f39f8920d950e05d86ecd8bda84cbfa",
+          "evaluation_root": "dev_logs/robomemarena/demo_interaction_50/T08_ChocolateFrypanPourSauceTwice",
+          "evaluation": {
+            "successes": 50,
+            "episodes": 50,
+            "api_calls": 0,
+            "api_cost_usd": 0,
+            "records_sha256": "a5367324322517ad3af4562caa0bd03349854d535dcd4ec79ddc9b08df90a35f"
+          }
+        },
+        {
+          "task": "T09_ButterFrypanPourSauceTwice",
+          "development_api_cost_usd": 13.8953522,
+          "report": {
+            "path": "dev_logs/robomemarena/demo_interaction_50/T09_ButterFrypanPourSauceTwice/reports/summary.json",
+            "sha256": "10bc3ae290bb81b58c31bf9df356f03083261ce6b52d7684bbfbd340ac4731d6"
+          },
+          "sessions": [
+            {
+              "path": "dev_logs/robomemarena/demo_interaction_50/T09_ButterFrypanPourSauceTwice/tasks/T09_ButterFrypanPourSauceTwice/logs/session_000/events.jsonl",
+              "sha256": "a12bb58974e0e56611dd5268aa7a8629d51af1dbe5dd7e3f4b076c9109588500",
+              "reported_cost_usd": 13.8953522,
+              "final_session_count": 1
+            }
+          ],
+          "program_hash": "62595cc2ad2d5f6b523680550ff310c62850daa4589ce608549417ab37167bc8",
+          "evaluation_root": "dev_logs/robomemarena/demo_interaction_50/T09_ButterFrypanPourSauceTwice",
+          "evaluation": {
+            "successes": 50,
+            "episodes": 50,
+            "api_calls": 0,
+            "api_cost_usd": 0,
+            "records_sha256": "f6d21b09f3574556acbf5bd2ed252deeb8c7bca18976b7ab7ddc61ea02b62b0c"
+          }
+        },
+        {
+          "task": "T10_PourWineMugTwice",
+          "development_api_cost_usd": 8.231197999999997,
+          "report": {
+            "path": "dev_logs/robomemarena/demo_interaction_50/T10_PourWineMugTwice/reports/summary.json",
+            "sha256": "f047840c2c70607d5b93763b41d5a4f4d614a40a4dd7887d692d41690a4658ed"
+          },
+          "sessions": [
+            {
+              "path": "dev_logs/robomemarena/demo_interaction_50/T10_PourWineMugTwice/tasks/T10_PourWineMugTwice/logs/session_000/events.jsonl",
+              "sha256": "402362571a11da18dc305d4454224afe6fd809b68c700b9be26561b4f53211a1",
+              "reported_cost_usd": 8.231197999999997,
+              "final_session_count": 1
+            }
+          ],
+          "program_hash": "383b4d6007a02ff37bf86bd275505478b6b6c68a38d50f99819f8d8c97b30b46",
+          "evaluation_root": "dev_logs/robomemarena/demo_interaction_50/T10_PourWineMugTwice",
+          "evaluation": {
+            "successes": 50,
+            "episodes": 50,
+            "api_calls": 0,
+            "api_cost_usd": 0,
+            "records_sha256": "b23dc5027594bbba0f6fa897f7128c16acd6b5f75328489801aa71fbc14f346c"
+          }
+        },
+        {
+          "task": "T11_CookiesTopButterMiddle",
+          "development_api_cost_usd": 11.683553599999998,
+          "report": {
+            "path": "dev_logs/robomemarena/demo_interaction_50/T11_CookiesTopButterMiddle/reports/summary.json",
+            "sha256": "7bad3b8a31792d39a9c552d2c6f175a861ba6456e4dd7bcb9444754f2adb13a7"
+          },
+          "sessions": [
+            {
+              "path": "dev_logs/robomemarena/demo_interaction_50/T11_CookiesTopButterMiddle/tasks/T11_CookiesTopButterMiddle/logs/session_000/events.jsonl",
+              "sha256": "3dab11b2cd5d46f5e2c8a52364ab4a02c9b8c1bd51a25bbd7c2129fea1db956a",
+              "reported_cost_usd": 11.683553599999998,
+              "final_session_count": 1
+            }
+          ],
+          "program_hash": "81723443f584df04dd6d6838f95398202d8bca1d1f52cd18d3fd33568b073edd",
+          "evaluation_root": "dev_logs/robomemarena/demo_interaction_50/T11_CookiesTopButterMiddle",
+          "evaluation": {
+            "successes": 50,
+            "episodes": 50,
+            "api_calls": 0,
+            "api_cost_usd": 0,
+            "records_sha256": "3afadefaa2f6fe012049eee71fae40e2198352368f0421cdcf1c678a05397da5"
+          }
+        },
+        {
+          "task": "T12_CookiesChocolateMiddleDrawer",
+          "development_api_cost_usd": 16.243485,
+          "report": {
+            "path": "dev_logs/robomemarena/demo_interaction_50/T12_CookiesChocolateMiddleDrawer/reports/summary.json",
+            "sha256": "552735be7e3492b725d02651290b5dc30048e64d1097cef008f374dcfe483529"
+          },
+          "sessions": [
+            {
+              "path": "dev_logs/robomemarena/demo_interaction_50/T12_CookiesChocolateMiddleDrawer/tasks/T12_CookiesChocolateMiddleDrawer/logs/session_000/events.jsonl",
+              "sha256": "3326880d196012f1cc9d6b3edbab7eebf34acf13c37bc652079904a942c63af2",
+              "reported_cost_usd": 16.243485,
+              "final_session_count": 1
+            }
+          ],
+          "program_hash": "d6e38b98b68f0789b567edc623ff25d1a5612d9bad4395f2ee4093511ba2adb6",
+          "evaluation_root": "dev_logs/robomemarena/demo_interaction_50/T12_CookiesChocolateMiddleDrawer",
+          "evaluation": {
+            "successes": 50,
+            "episodes": 50,
+            "api_calls": 0,
+            "api_cost_usd": 0,
+            "records_sha256": "1a72fa10a2acf8bb425bc1b5faf4a15af172ddeaffbbb5bad2775680fc2bd3ed"
+          }
+        },
+        {
+          "task": "T13_CookiesButterMiddleDrawer",
+          "development_api_cost_usd": 9.169890200000001,
+          "report": {
+            "path": "dev_logs/robomemarena/demo_interaction_50/T13_CookiesButterMiddleDrawer/reports/summary.json",
+            "sha256": "59c067fa1aabf2b19cf9ee43437266b517db8b0959462e2cc8087367e414115e"
+          },
+          "sessions": [
+            {
+              "path": "dev_logs/robomemarena/demo_interaction_50/T13_CookiesButterMiddleDrawer/tasks/T13_CookiesButterMiddleDrawer/logs/session_000/events.jsonl",
+              "sha256": "1ef2a18a761ce911ea1317cb9bfbb0dc449e63fd730a53ef4d8e0d0fd8d36361",
+              "reported_cost_usd": 9.169890200000001,
+              "final_session_count": 1
+            }
+          ],
+          "program_hash": "329f64223876875130f38969326b68befe41a6552ba6e9949f2aad39c408f330",
+          "evaluation_root": "dev_logs/robomemarena/demo_interaction_50/T13_CookiesButterMiddleDrawer",
+          "evaluation": {
+            "successes": 50,
+            "episodes": 50,
+            "api_calls": 0,
+            "api_cost_usd": 0,
+            "records_sha256": "accaddd6a219b6a2ecd6771c7ef3542e7d66325469de6958b4a3e3045409569b"
+          }
+        },
+        {
+          "task": "T14_CookiesChocolateDrawers",
+          "development_api_cost_usd": 12.606167599999996,
+          "report": {
+            "path": "dev_logs/robomemarena/demo_interaction_50/T14_CookiesChocolateDrawers/reports/summary.json",
+            "sha256": "6b95b22ff233cd76038b84eb3975182ee744f21431bdebf609464351fd004987"
+          },
+          "sessions": [
+            {
+              "path": "dev_logs/robomemarena/demo_interaction_50/T14_CookiesChocolateDrawers/tasks/T14_CookiesChocolateDrawers/logs/session_000/events.jsonl",
+              "sha256": "123f41680a28aa7e97d14597af9b732dafff2e55a5e192eef07166f79a649a27",
+              "reported_cost_usd": 12.606167599999996,
+              "final_session_count": 1
+            }
+          ],
+          "program_hash": "c7d46dc9b156fadec8d5aacc6fa1d59de670928b62fb90abd2e8fc767f4ab847",
+          "evaluation_root": "dev_logs/robomemarena/demo_interaction_50/T14_CookiesChocolateDrawers",
+          "evaluation": {
+            "successes": 50,
+            "episodes": 50,
+            "api_calls": 0,
+            "api_cost_usd": 0,
+            "records_sha256": "dc5efb7c55b4f48021bb2f00f2cd018521748fd82c007dd7e3cce22e4bee95b0"
+          }
+        },
+        {
+          "task": "T15_ButterFrypanPourMilkTwice",
+          "development_api_cost_usd": 9.776296400000001,
+          "report": {
+            "path": "dev_logs/robomemarena/demo_interaction_50/T15_ButterFrypanPourMilkTwice/reports/summary.json",
+            "sha256": "6166b40e2cb48665492ece0436812472e8eb1e985e4d93e9270cda28dbfc1bcd"
+          },
+          "sessions": [
+            {
+              "path": "dev_logs/robomemarena/demo_interaction_50/T15_ButterFrypanPourMilkTwice/tasks/T15_ButterFrypanPourMilkTwice/logs/session_000/events.jsonl",
+              "sha256": "207184bc39de07caadf7b417546d276cd2114a0f5c681800909d778bd22a7cfc",
+              "reported_cost_usd": 9.776296400000001,
+              "final_session_count": 1
+            }
+          ],
+          "program_hash": "943f032d7dbf868d9a2cadb7f7581e66f72a20f262c25ffc35b912610d5eef67",
+          "evaluation_root": "dev_logs/robomemarena/demo_interaction_50/T15_ButterFrypanPourMilkTwice",
+          "evaluation": {
+            "successes": 50,
+            "episodes": 50,
+            "api_calls": 0,
+            "api_cost_usd": 0,
+            "records_sha256": "05158b7cbfd3ca3fe966c6efe9912313054a436cb39b7eebd5dfe0a15e7a00ac"
+          }
+        },
+        {
+          "task": "T16_PourMilkMugTwice",
+          "development_api_cost_usd": 10.002146800000002,
+          "report": {
+            "path": "dev_logs/robomemarena/demo_interaction_50/T16_PourMilkMugTwice/reports/summary.json",
+            "sha256": "1dee337c9f05d82a5ae6a50382f96c9e18b6ce0a32f516559d964e9973587620"
+          },
+          "sessions": [
+            {
+              "path": "dev_logs/robomemarena/demo_interaction_50/T16_PourMilkMugTwice/tasks/T16_PourMilkMugTwice/logs/session_000/events.jsonl",
+              "sha256": "95ba025d6e9936a5b510e26bb3bba0c2eb132326996639c3b869a137709ccf37",
+              "reported_cost_usd": 10.002146800000002,
+              "final_session_count": 1
+            }
+          ],
+          "program_hash": "1650434cb023131821a8e887569a82af3d557497acb5cc4a41e5b6fe24003b1c",
+          "evaluation_root": "dev_logs/robomemarena/demo_interaction_50/T16_PourMilkMugTwice",
+          "evaluation": {
+            "successes": 50,
+            "episodes": 50,
+            "api_calls": 0,
+            "api_cost_usd": 0,
+            "records_sha256": "2ddc05cc7b3f2988b5a59c5d56a1829b6f1b49bb0d467085c7b87c555a2c0d51"
+          }
+        },
+        {
+          "task": "T17_ButterChocolateMiddleDrawer",
+          "development_api_cost_usd": 6.547179600000001,
+          "report": {
+            "path": "dev_logs/robomemarena/demo_interaction_50/T17_ButterChocolateMiddleDrawer/reports/summary.json",
+            "sha256": "c7f893de2c8f3022daed083669b3740b90bca45a63c852d94ee471998b392a84"
+          },
+          "sessions": [
+            {
+              "path": "dev_logs/robomemarena/demo_interaction_50/T17_ButterChocolateMiddleDrawer/tasks/T17_ButterChocolateMiddleDrawer/logs/session_000/events.jsonl",
+              "sha256": "411df5f4642b9cf3df69b6a44e62164ca22cfd571d2a3ad7fa819f2a837127bf",
+              "reported_cost_usd": 6.547179600000001,
+              "final_session_count": 1
+            }
+          ],
+          "program_hash": "1dd37bc791e340a4b50b94f85aba4619cc05b8d19f7120bd39554d40070fecf4",
+          "evaluation_root": "dev_logs/robomemarena/demo_interaction_50/T17_ButterChocolateMiddleDrawer",
+          "evaluation": {
+            "successes": 50,
+            "episodes": 50,
+            "api_calls": 0,
+            "api_cost_usd": 0,
+            "records_sha256": "d961f8256d20d900e8910a6a0d33b4c9569677fbe50056626ac6d9ee20efb8c6"
+          }
+        },
+        {
+          "task": "T18_ChocolateButterCabinet",
+          "development_api_cost_usd": 6.2092416,
+          "report": {
+            "path": "dev_logs/robomemarena/demo_interaction_50/T18_ChocolateButterCabinet/reports/summary.json",
+            "sha256": "844c9db7c033befb98bc25d9708bb6ae5b77fabddfdd0a5f1047a17d59bb0074"
+          },
+          "sessions": [
+            {
+              "path": "dev_logs/robomemarena/demo_interaction_50/T18_ChocolateButterCabinet/tasks/T18_ChocolateButterCabinet/logs/session_000/events.jsonl",
+              "sha256": "fb53c40464c9eaeafe1544c8d884a537c84e83d222bb66d0d443c25945ad1bf9",
+              "reported_cost_usd": 6.2092416,
+              "final_session_count": 1
+            }
+          ],
+          "program_hash": "19d9f98fa942e76069995bd41ffc97974c1655b6abf9e6da1772f99fa96d2885",
+          "evaluation_root": "dev_logs/robomemarena/demo_interaction_50/T18_ChocolateButterCabinet",
+          "evaluation": {
+            "successes": 48,
+            "episodes": 50,
+            "api_calls": 0,
+            "api_cost_usd": 0,
+            "records_sha256": "e0bef57514b2efe64271aa80ea09aa086d5e53d8fae8e6157a2951ab0c1aa703"
+          }
+        },
+        {
+          "task": "T19_SauceMilkJuiceCabinet",
+          "development_api_cost_usd": 13.754354599999997,
+          "report": {
+            "path": "dev_logs/robomemarena/demo_interaction_50/T19_SauceMilkJuiceCabinet/reports/summary.json",
+            "sha256": "31105cbdc5b4c9e967316d35272a003b0f4a763990c82050e495e3089e7ca0e3"
+          },
+          "sessions": [
+            {
+              "path": "dev_logs/robomemarena/demo_interaction_50/T19_SauceMilkJuiceCabinet/tasks/T19_SauceMilkJuiceCabinet/logs/session_000/events.jsonl",
+              "sha256": "31940f63661bba8580967f2ec443a63ffa873b01654edfe985fb1040d4fbde33",
+              "reported_cost_usd": 13.754354599999997,
+              "final_session_count": 1
+            }
+          ],
+          "program_hash": "6e24538342f60917a85d3cb9e13f3fbab2a56fee50f70cc14e265a84934f4ede",
+          "evaluation_root": "dev_logs/robomemarena/demo_interaction_50/T19_SauceMilkJuiceCabinet",
+          "evaluation": {
+            "successes": 25,
+            "episodes": 50,
+            "api_calls": 0,
+            "api_cost_usd": 0,
+            "records_sha256": "b8d828728072f2f56c5d97bc9afe53d7f8dd11099c8d2bcb3188ecc70a238426"
+          }
+        },
+        {
+          "task": "T20_CookiesChocolateMicrowave",
+          "development_api_cost_usd": 12.619928600000001,
+          "report": {
+            "path": "dev_logs/robomemarena/demo_interaction_50/T20_CookiesChocolateMicrowave/reports/summary.json",
+            "sha256": "60f03acc2a1460445a077c9df00867c7896c0d46f26f392bf0f45bb50ccf729f"
+          },
+          "sessions": [
+            {
+              "path": "dev_logs/robomemarena/demo_interaction_50/T20_CookiesChocolateMicrowave/tasks/T20_CookiesChocolateMicrowave/logs/session_000/events.jsonl",
+              "sha256": "f0ddf5e35b6a7b04ef38828e12ca47eb6c8f7bc9d6b12a65d0dc00d2d9ad6b90",
+              "reported_cost_usd": 12.619928600000001,
+              "final_session_count": 1
+            }
+          ],
+          "program_hash": "ac0dbcc9ca7a3a141383493d35259087852dfbb85f9eb617859ffe2d94ee1ea2",
+          "evaluation_root": "dev_logs/robomemarena/demo_interaction_50/T20_CookiesChocolateMicrowave",
+          "evaluation": {
+            "successes": 50,
+            "episodes": 50,
+            "api_calls": 0,
+            "api_cost_usd": 0,
+            "records_sha256": "89417069cd438ba7b564e14aaaf6354c9c6ee003b17d0d7cd083efa8f6e453b8"
+          }
+        },
+        {
+          "task": "T21_ButterChocolateMicrowave",
+          "development_api_cost_usd": 16.058579599999998,
+          "report": {
+            "path": "dev_logs/robomemarena/demo_interaction_50/T21_ButterChocolateMicrowave/reports/summary.json",
+            "sha256": "ecd10cfeaf4b78fdd55151de220ddf83efbece408e28fad6348fb3f5c9eba338"
+          },
+          "sessions": [
+            {
+              "path": "dev_logs/robomemarena/demo_interaction_50/T21_ButterChocolateMicrowave/tasks/T21_ButterChocolateMicrowave/logs/session_000/events.jsonl",
+              "sha256": "93b7be5efcfb7db8f9c914d491cea0481b91e344adcfafb1b7b8c860feb04b47",
+              "reported_cost_usd": 16.058579599999998,
+              "final_session_count": 1
+            }
+          ],
+          "program_hash": "bbe04a529b6e27cad480d6ea573eebb4bd928a2f3ac2985bd4b2469a46cc1e45",
+          "evaluation_root": "dev_logs/robomemarena/demo_interaction_50/T21_ButterChocolateMicrowave",
+          "evaluation": {
+            "successes": 50,
+            "episodes": 50,
+            "api_calls": 0,
+            "api_cost_usd": 0,
+            "records_sha256": "d862167f6e68ae66ab8589df58555577e99e5914ad92d37369f1e9c06414048e"
+          }
+        },
+        {
+          "task": "T22_PourSauceCookiesMicrowave",
+          "development_api_cost_usd": 14.578612400000006,
+          "report": {
+            "path": "dev_logs/robomemarena/demo_interaction_50/T22_PourSauceCookiesMicrowave/reports/summary.json",
+            "sha256": "01b3c2b64c5ac44e72d2b90e82d9901a165b949c329044f8cf5de1983f5e977b"
+          },
+          "sessions": [
+            {
+              "path": "dev_logs/robomemarena/demo_interaction_50/T22_PourSauceCookiesMicrowave/tasks/T22_PourSauceCookiesMicrowave/logs/session_000/events.jsonl",
+              "sha256": "3ba4ba635a0083f3e2280646f6238b888e5692b339592edaad93af09e777259d",
+              "reported_cost_usd": 14.578612400000006,
+              "final_session_count": 1
+            }
+          ],
+          "program_hash": "4c853d73a7ce1609be744f0eef81892eb09fc1d21ecd955b054a5b25e1706a25",
+          "evaluation_root": "dev_logs/robomemarena/demo_interaction_50/T22_PourSauceCookiesMicrowave",
+          "evaluation": {
+            "successes": 50,
+            "episodes": 50,
+            "api_calls": 0,
+            "api_cost_usd": 0,
+            "records_sha256": "eeb93b5954ecc4f181121ceb842d29e5d2b8bf69c80dc404625415735ce134b1"
+          }
+        },
+        {
+          "task": "T23_CreamPopcornMicrowave",
+          "development_api_cost_usd": 11.733746800000004,
+          "report": {
+            "path": "dev_logs/robomemarena/demo_interaction_50/T23_CreamPopcornMicrowave/reports/summary.json",
+            "sha256": "b7cbb02cd0ba928ea04cd19b14f5a4c8675b4be7b196b610da23db2f0ed1eab6"
+          },
+          "sessions": [
+            {
+              "path": "dev_logs/robomemarena/demo_interaction_50/T23_CreamPopcornMicrowave/tasks/T23_CreamPopcornMicrowave/logs/session_000/events.jsonl",
+              "sha256": "62649eb7a49dafcdf5d98031aef648d3b00dd4564fcf272815d9b062f45b9f8f",
+              "reported_cost_usd": 11.733746800000004,
+              "final_session_count": 1
+            }
+          ],
+          "program_hash": "0ad35627bf64740fb6129356382c347917281867f502cbc01fbf3a9020c3daab",
+          "evaluation_root": "dev_logs/robomemarena/demo_interaction_50/T23_CreamPopcornMicrowave",
+          "evaluation": {
+            "successes": 50,
+            "episodes": 50,
+            "api_calls": 0,
+            "api_cost_usd": 0,
+            "records_sha256": "43e39d16adf3a6fbe3b12d8b636922368a2ec1e9903658316f4dd5e85a76f72d"
+          }
+        },
+        {
+          "task": "T24_CookiesPopcornMicrowave",
+          "development_api_cost_usd": 11.048199400000001,
+          "report": {
+            "path": "dev_logs/robomemarena/demo_interaction_50/T24_CookiesPopcornMicrowave/reports/summary.json",
+            "sha256": "944c7b8cd408e99ab911f9c9eb031fdde2607f18c10070a5525c970f413d2ffa"
+          },
+          "sessions": [
+            {
+              "path": "dev_logs/robomemarena/demo_interaction_50/T24_CookiesPopcornMicrowave/tasks/T24_CookiesPopcornMicrowave/logs/session_000/events.jsonl",
+              "sha256": "fd95e9ac81001a2fae5d2474ae0d38e96a64966528a8e282ad62e09ca330113c",
+              "reported_cost_usd": 11.048199400000001,
+              "final_session_count": 1
+            }
+          ],
+          "program_hash": "97e14029e28fb9008f757b2aed07b144b577c56444ea090b61e56f46ea0d684e",
+          "evaluation_root": "dev_logs/robomemarena/demo_interaction_50/T24_CookiesPopcornMicrowave",
+          "evaluation": {
+            "successes": 50,
+            "episodes": 50,
+            "api_calls": 0,
+            "api_cost_usd": 0,
+            "records_sha256": "bfefbbffe7f3b11b1637a8203e0157a901138e600c605e1142ab6f6c1593e4cb"
+          }
+        },
+        {
+          "task": "T25_ButterCreamPlate",
+          "development_api_cost_usd": 11.226417599999998,
+          "report": {
+            "path": "dev_logs/robomemarena/demo_interaction_50/T25_ButterCreamPlate/reports/summary.json",
+            "sha256": "47295d822cc7161a23503135ddefb26cfca04618dcdec826f0ffa14aaa099996"
+          },
+          "sessions": [
+            {
+              "path": "dev_logs/robomemarena/demo_interaction_50/T25_ButterCreamPlate/tasks/T25_ButterCreamPlate/logs/session_000/events.jsonl",
+              "sha256": "0cc935139ba04a0712af6f0bf47c90d23e229ca22f94dd66dfb0df776af85fb2",
+              "reported_cost_usd": 11.226417599999998,
+              "final_session_count": 1
+            }
+          ],
+          "program_hash": "28538b22b6495043241da5dec86d726e81732ecf5bf911a9ec296ece414119b0",
+          "evaluation_root": "dev_logs/robomemarena/demo_interaction_50/T25_ButterCreamPlate",
+          "evaluation": {
+            "successes": 48,
+            "episodes": 50,
+            "api_calls": 0,
+            "api_cost_usd": 0,
+            "records_sha256": "b55717a5a83cb68673f99460ece094fc4f915709fa2b1a4643bd5a2b2c72e027"
+          }
+        },
+        {
+          "task": "T26_ChocolateCreamPlate",
+          "development_api_cost_usd": 15.010118199999996,
+          "report": {
+            "path": "dev_logs/robomemarena/demo_interaction_50/T26_ChocolateCreamPlate/reports/summary.json",
+            "sha256": "6efd484814af60994f3959c1bbf3195a83fdc9666fbdf544910d3bd5f58c1386"
+          },
+          "sessions": [
+            {
+              "path": "dev_logs/robomemarena/demo_interaction_50/T26_ChocolateCreamPlate/tasks/T26_ChocolateCreamPlate/logs/session_000/events.jsonl",
+              "sha256": "84c6ccb44b0c215cff7cb75e19301bd4a77adbc8a7886e345cd2a983196ef69f",
+              "reported_cost_usd": 15.010118199999996,
+              "final_session_count": 1
+            }
+          ],
+          "program_hash": "3de5b9f87cb28df39e2c4535d37e4ff2ed83f6197f8fbd753febb57cac6e28c9",
+          "evaluation_root": "dev_logs/robomemarena/demo_interaction_50/T26_ChocolateCreamPlate",
+          "evaluation": {
+            "successes": 50,
+            "episodes": 50,
+            "api_calls": 0,
+            "api_cost_usd": 0,
+            "records_sha256": "f59aac4d9879f2461aa0aa155641c9ae086be1ef959880b9f01f1e59b3c84c4c"
+          }
+        }
+      ]
+    }
+  }
+}
