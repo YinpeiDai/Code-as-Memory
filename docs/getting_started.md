@@ -11,7 +11,7 @@ Install the shared Python 3.11 harness from the repository root:
 git clone https://github.com/YinpeiDai/Code-as-Memory.git
 cd Code-as-Memory
 git submodule update --init
-uv sync --locked --inexact --extra dev
+uv sync --locked --inexact --extra dev --extra data
 source .venv/bin/activate
 ```
 

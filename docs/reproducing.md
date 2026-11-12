@@ -25,6 +25,11 @@ Normal preparation reads released manifests without replaying demonstrations.
 
 Authenticate your coding client and set the configuration's `coding` object.
 The supplied plans select Claude Code / Opus 5.5 and start from blank policies.
+Published RMBench and RoboMemArena development used Claude Code **2.1.319**,
+Opus 5.5, and high reasoning effort. The coding CLI is installed
+separately and is not pinned by `uv.lock`; check it with `claude --version`.
+For historical comparisons, match the archived run's composed prompt, demo
+assignment and source snapshot: current prompts and interfaces have changed.
 
 | Benchmark | Plan under `configs/` | Published settings |
 |---|---|---|
