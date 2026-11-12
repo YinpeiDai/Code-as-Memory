@@ -25,6 +25,8 @@ Normal preparation reads released manifests without replaying demonstrations.
 
 Authenticate your coding client and set the configuration's `coding` object.
 The supplied plans select Claude Code / Opus 5.5 and start from blank policies.
+Public configs inherit routing and authentication from your client environment;
+see [coding settings](../configs/README.md).
 Published RMBench and RoboMemArena development used Claude Code **2.1.319**,
 Opus 5.5, and high reasoning effort. The coding CLI is installed
 separately and is not pinned by `uv.lock`; check it with `claude --version`.

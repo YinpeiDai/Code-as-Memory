@@ -125,7 +125,7 @@ def test_robomemarena_demo_seed_plan_uses_actual_demos_once_each():
     assert item["interaction_counts"] == item["demo_counts"] == {"T04_ButterNonEmptyDrawer": 32}
     assert config["budget"] == config["training_seed_count"] == 50
     assert config["training_seed_policy"] == "demo_cycle" and batch_protocol(config) == "demo_first"
-    assert config["coding"]["model"] == "us.anthropic.claude-opus-5-5"
+    assert config["coding"]["model"] == "claude-opus-5-5"
 
 
 

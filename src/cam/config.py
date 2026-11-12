@@ -47,11 +47,11 @@ def learning_setting(mode, both_protocol=None):
 @dataclass(frozen=True)
 class CodingConfig:
     agent: str = "claude_code"
-    model: str = "us.anthropic.claude-opus-5-5"
-    provider: str = "bedrock"
+    model: str = "claude-opus-5-5"
+    provider: str = "client"
     reasoning_effort: str = "high"
-    aws_profile: str = "sagemaker"
-    aws_region: str = "us-east-1"
+    aws_profile: str | None = None
+    aws_region: str | None = None
     timeout: int = 21600
     model_catalog: str | None = None
 
@@ -59,7 +59,7 @@ class CodingConfig:
         if self.agent not in ("claude_code", "codex"):
             raise ValueError("Supported coding agents: claude_code, codex")
         allowed = (
-            ("bedrock", "anthropic") if self.agent == "claude_code" else ("openai",)
+            ("client", "bedrock", "anthropic") if self.agent == "claude_code" else ("openai",)
         )
         if self.provider not in allowed or not self.model or self.timeout < 1:
             raise ValueError("Invalid coding model/provider configuration")

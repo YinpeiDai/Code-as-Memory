@@ -29,7 +29,7 @@ def test_three_arms_have_exact_tasks_model_and_budgets():
         assert item["tasks"] == spec["tasks"]
         assert item["demo_count"] == expected["demo_count"]
         assert cfg.budget == expected["interaction_count"]
-        assert cfg.coding.model == "us.anthropic.claude-opus-5-5"
+        assert cfg.coding.model == "claude-opus-5-5"
         assert cfg.physics_backend == "cpu" and cfg.depth and not cfg.builtin_demo
         assert cfg.training_seed_count == (50 if cfg.mode == "both" else None)
         if cfg.mode == "both":

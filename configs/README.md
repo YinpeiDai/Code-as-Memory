@@ -25,7 +25,8 @@ These are two scopes of one benchmark, sharing its environment and demo package.
 [MIKASA results](../docs/results/mikasa_robo.md)
 
 Only final Python programs and setting READMEs belong in `solutions/`.
-Historical imports and catalog hashes remain unchanged. RMBench's
+Historical imports remain unchanged. Public coding metadata names the model
+without account settings; original launch metadata stays in archived runs. RMBench's
 `*_observed_motion.json` catalogs target the current public interface; original
 catalogs remain provenance for historical scores.
 
@@ -34,3 +35,10 @@ inside a configuration to choose your client, model, provider and account settin
 separate copies of every mode for each client are unnecessary. For a custom run,
 copy the configuration to a local JSON file and edit that object before preparation.
 Resolved client/model settings are still pinned in each run for reproducibility.
+
+Public presets select Opus 5.5 (`claude-opus-5-5`) with `provider: "client"`.
+This inherits routing and authentication from the client's process environment;
+export the settings required by your account before starting development. If your
+endpoint requires a different identifier for Opus 5.5, set `coding.model` in your
+local configuration. Client settings files remain disabled to keep prompts and
+tools isolated.

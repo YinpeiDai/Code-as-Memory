@@ -69,20 +69,20 @@ def invocation(config, root, task, gpu, session):
         env["MCP_TIMEOUT"] = "120000"
         env["MCP_CONNECT_TIMEOUT_MS"] = "120000"
         if config.provider == "bedrock":
-            env.update(
-                CLAUDE_CODE_USE_BEDROCK="1",
-                AWS_PROFILE=config.aws_profile,
-                AWS_REGION=config.aws_region,
-                AWS_DEFAULT_REGION=config.aws_region,
-            )
+            env["CLAUDE_CODE_USE_BEDROCK"] = "1"
+            if config.aws_profile is not None:
+                env["AWS_PROFILE"] = config.aws_profile
+            if config.aws_region is not None:
+                env["AWS_REGION"] = env["AWS_DEFAULT_REGION"] = config.aws_region
             for name in (
                 "ANTHROPIC_API_KEY",
                 "ANTHROPIC_AUTH_TOKEN",
                 "ANTHROPIC_BASE_URL",
             ):
                 env.pop(name, None)
-        else:
+        elif config.provider == "anthropic":
             env.pop("CLAUDE_CODE_USE_BEDROCK", None)
+        # provider="client" inherits the caller's routing and authentication.
         argv = [
             "claude",
             "-p",

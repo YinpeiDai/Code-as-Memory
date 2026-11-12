@@ -9,12 +9,10 @@
   "policy_timeout": 1800,
   "coding": {
     "agent": "claude_code",
-    "model": "us.anthropic.claude-opus-5-5",
-    "provider": "bedrock",
+    "model": "claude-opus-5-5",
+    "provider": "client",
     "reasoning_effort": "high",
-    "timeout": 21600,
-    "aws_profile": "sagemaker",
-    "aws_region": "us-east-1"
+    "timeout": 21600
   },
   "training_seed_count": null,
   "physics_backend": "cpu",

@@ -9,6 +9,62 @@ from cam.providers.clients import TOOL_NAMES, invocation, unexpected_tool
 from cam.providers.usage import summarize_sessions
 
 
+@pytest.mark.parametrize("routing", [
+    {"ANTHROPIC_API_KEY": "test-api-key", "ANTHROPIC_BASE_URL": "https://example.invalid"},
+    {"CLAUDE_CODE_USE_BEDROCK": "1", "AWS_PROFILE": "test-profile", "AWS_REGION": "test-region"},
+    {"CLAUDE_CODE_USE_VERTEX": "1", "CLOUD_ML_REGION": "test-region"},
+])
+def test_default_client_routing_preserves_environment(tmp_path, monkeypatch, routing):
+    for key, value in routing.items():
+        monkeypatch.setenv(key, value)
+    config = CodingConfig()
+    assert config.model == "claude-opus-5-5" and config.provider == "client"
+    assert config.aws_profile is config.aws_region is None
+    call = invocation(config, tmp_path, "Example", 0, tmp_path)
+    assert all(call.environment[key] == value for key, value in routing.items())
+    assert call.argv[call.argv.index("--model") + 1] == "claude-opus-5-5"
+    assert "--bare" in call.argv and "--strict-mcp-config" in call.argv
+    assert not set(routing) & read(tmp_path / "mcp.json")["mcpServers"]["cam"]["env"].keys()
+
+
+@pytest.mark.parametrize("explicit", [False, True])
+def test_explicit_provider_supports_optional_account_settings(tmp_path, monkeypatch, explicit):
+    monkeypatch.setenv("AWS_PROFILE", "inherited-profile")
+    monkeypatch.setenv("AWS_REGION", "inherited-region")
+    monkeypatch.setenv("ANTHROPIC_API_KEY", "test-api-key")
+    config = CodingConfig(provider="bedrock", model="custom-model",
+                          aws_profile="configured-profile" if explicit else None,
+                          aws_region="configured-region" if explicit else None)
+    call = invocation(config, tmp_path, "Example", 0, tmp_path)
+    assert call.environment["CLAUDE_CODE_USE_BEDROCK"] == "1"
+    assert call.environment["AWS_PROFILE"] == ("configured-profile" if explicit else "inherited-profile")
+    assert call.environment["AWS_REGION"] == ("configured-region" if explicit else "inherited-region")
+    assert "ANTHROPIC_API_KEY" not in call.environment
+    assert all(isinstance(value, str) for value in call.environment.values())
+
+
+def test_direct_provider_still_overrides_inherited_cloud_route(tmp_path, monkeypatch):
+    monkeypatch.setenv("CLAUDE_CODE_USE_BEDROCK", "1")
+    monkeypatch.setenv("ANTHROPIC_API_KEY", "test-api-key")
+    call = invocation(CodingConfig(provider="anthropic"), tmp_path, "Example", 0, tmp_path)
+    assert "CLAUDE_CODE_USE_BEDROCK" not in call.environment
+    assert call.environment["ANTHROPIC_API_KEY"] == "test-api-key"
+
+
+def test_public_presets_do_not_select_an_account_or_provider():
+    from cam.config import RunConfig
+
+    root = Path(__file__).resolve().parents[1]
+    presets = [read(path) for path in (root / "configs").glob("*/*.json")]
+    coding = [preset for preset in presets if "coding" in preset]
+    assert coding
+    for preset in coding:
+        config = RunConfig.from_dict(preset).coding
+        assert config.provider == "client" and config.model == "claude-opus-5-5"
+        assert config.aws_profile is config.aws_region is None
+        assert "aws_profile" not in preset["coding"] and "aws_region" not in preset["coding"]
+
+
 @pytest.mark.parametrize("status", ["pending", "failed", "connected"])
 def test_claude_rejects_empty_tools_even_when_server_claims_connected(status):
     assert "missing" in unexpected_tool("claude_code", {
