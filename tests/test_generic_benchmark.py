@@ -269,7 +269,8 @@ def test_broker_generic_actions_metrics_and_leak(tmp_path):
 
 
 @pytest.mark.isolation
-def test_results_recording_preserves_execution_without_large_artifacts(tmp_path):
+@pytest.mark.parametrize("recording", [{"recording": "results"}, {"evaluation_recording": "results"}])
+def test_results_recording_preserves_execution_without_large_artifacts(tmp_path, recording):
     from cam.harness.broker import execute
     from cam.harness.prepare import make_runtime
 
@@ -280,7 +281,7 @@ def test_results_recording_preserves_execution_without_large_artifacts(tmp_path)
     full_adapter, light_adapter = Toy(), Toy()
     full = execute(full_adapter, tmp_path, TASK, 0, "test", program, runtime, tmp_path / "full", config)
     light = execute(light_adapter, tmp_path, TASK, 0, "test", program, runtime,
-                    tmp_path / "light", {**config, "recording": "results"})
+                    tmp_path / "light", {**config, **recording})
     for key in ("status", "success", "scorable", "steps", "step_calls", "decisions", "native_metrics", "program_hash"):
         assert full[key] == light[key]
     assert full_adapter.sent == light_adapter.sent
@@ -289,6 +290,14 @@ def test_results_recording_preserves_execution_without_large_artifacts(tmp_path)
     assert not any(p.suffix in (".h5", ".mp4", ".npy", ".strace") for p in (tmp_path / "light").iterdir())
     assert (tmp_path / "light/result.json").is_file()
     assert (tmp_path / "light/decisions.jsonl").is_file()
+    assert light["recording"] == "results"
+    if "evaluation_recording" in recording:
+        train = execute(Toy(), tmp_path, TASK, 0, "train", program, runtime,
+                        tmp_path / "train", {**config, **recording})
+        assert train["status"] == "success" and train["recording"] == "full"
+        assert train["video_frames"] == 4
+        assert (tmp_path / "train/observations.h5").is_file()
+        assert "native_metrics" not in train
 
 
 @pytest.mark.isolation

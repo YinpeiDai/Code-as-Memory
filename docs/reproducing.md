@@ -128,6 +128,8 @@ rollouts. Batch output keeps `batches/` and `dev_logs/` under the selected root.
 - Set `recording: "results"` in a new configuration, or pass `--recording results`
   when importing a solution, to retain logs/JSON without videos and observation
   arrays. Scoring and policy inputs remain unchanged.
+  To retain training recordings while saving only evaluation results, set
+  `evaluation_recording: "results"` in the development configuration instead.
 
 The [five-episode sanity check](getting_started.md#sanity-checks) uses results-only
 recording and ten workers per GPU. It checks execution rather than full benchmark

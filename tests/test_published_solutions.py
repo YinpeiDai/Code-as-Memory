@@ -62,6 +62,7 @@ def test_prepare_frozen_evaluation_without_data_or_model(published, tmp_path, mo
     plan = validate_run(root, full_data=True)
     assert plan["evaluation_only"] and not plan["fresh_policy"]
     assert plan["dataset_reference"] is None
+    assert plan["raw_data_reference"] is None
     assert plan["demonstrations_per_task"] == {"BinFill": 0}
     assert plan["test_episodes"] == {"BinFill": [0, 1, 2]}
     task = root / "tasks/BinFill"

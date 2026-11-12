@@ -82,6 +82,7 @@ class RunConfig:
     both_protocol: str | None = None
     physics_backend: str | None = None
     recording: str = "full"
+    evaluation_recording: str | None = None
     suite: str | None = None
 
     def __post_init__(self):
@@ -91,6 +92,8 @@ class RunConfig:
                 raise ValueError("Unknown comparison suite or mismatched benchmark")
         if self.recording not in ("full", "results"):
             raise ValueError("recording must be full or results")
+        if self.evaluation_recording not in (None, "full", "results"):
+            raise ValueError("evaluation_recording must be full, results or null")
         if self.benchmark in DEMO_FIRST_BENCHMARKS and self.mode == "both":
             if self.both_protocol in (None, "v2"):
                 object.__setattr__(self, "both_protocol", "demo_first")

@@ -76,7 +76,10 @@ def execute(
     metrics = None
     goal = error = None
     stage = "environment_creation"
-    record_media = config.get("recording", "full") == "full"
+    recording = config.get("recording", "full")
+    if split == "test":
+        recording = config.get("evaluation_recording") or recording
+    record_media = recording == "full"
     try:
         environment_options = {}
         if config.get("physics_backend") is not None:
@@ -325,7 +328,7 @@ def execute(
             "observation_fields": list(sensors),
             "video_frames": capture.n if capture and record_media else 0,
             "observation_frames": capture.n if capture else 0,
-            "recording": config.get("recording", "full"),
+            "recording": recording,
             "program_hash": program_hash(program),
         }
         if metrics is not None:

@@ -476,7 +476,7 @@ if __name__ == "__main__":
             "h5_scanned": bool(validate_data and not published),
             "hashes_checked": bool(validate_data and not published),
         },
-        "raw_data_reference": raw_data_reference(selected),
+        "raw_data_reference": None if published else raw_data_reference(selected),
         "benchmark_package": adapter.package,
         "benchmark_hash": tree_hash(benchmark),
         "benchmark_source_reference": str(adapter.source),
