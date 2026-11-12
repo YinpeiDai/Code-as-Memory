@@ -96,11 +96,11 @@
         },
         {
           "method": "CaM",
-          "success_percent": 100.0,
-          "successes": 900,
+          "success_percent": 99.77777777777777,
+          "successes": 898,
           "episodes": 900,
           "task_count": 9,
-          "source": "cam_published_archive",
+          "source": "cam_rmbench_released_20261111",
           "setting": "demo_only_50",
           "per_task": {
             "battery_try": {
@@ -119,7 +119,7 @@
               "demonstrations": 50
             },
             "observe_and_pickup": {
-              "successes": 100,
+              "successes": 98,
               "episodes": 100,
               "demonstrations": 48
             },
@@ -1014,6 +1014,11 @@
       "evidence": "benchmark_costs.json",
       "note": "All 26 frozen policies and 1,300 held-out results verified from original reports and result.json files. CSR uses saved native stage scores, including partial progress on failed episodes.",
       "results": "docs/results/robomemarena.md"
+    },
+    "cam_rmbench_released_20261111": {
+      "path": "validate_runs/released_solutions_20261111T205029_024815Z/comparison.json",
+      "sha256": "d05ac79e5c28beec4a822b3a6b61209f3ebadf50844f8795f4b8f27891d848f8",
+      "note": "Full held-out evaluation of unchanged released policies: 998/1000 across ten tasks; 898/900 for the nine-task figure. Historical records remain unchanged."
     }
   }
 }

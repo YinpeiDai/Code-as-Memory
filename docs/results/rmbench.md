@@ -18,20 +18,21 @@ Successful/total held-out episodes.
 | `battery_try` | 100/100 | 100/100 |
 | `blocks_ranking_try` | 100/100 | 100/100 |
 | `cover_blocks` | 28/100 | 100/100 |
-| `observe_and_pickup` | 99/100 | 100/100 |
+| `observe_and_pickup` | 99/100 | 98/100 |
 | `place_block_mat` | 100/100 | 100/100 |
 | `press_button` | 100/100 | 100/100 |
 | `put_back_block` | 100/100 | 100/100 |
 | `rearrange_blocks` | 100/100 | 100/100 |
 | `swap_T` | 100/100 | 100/100 |
 | `swap_blocks` | 100/100 | 100/100 |
-| **Total** | **927/1,000 (92.70%)** | **1,000/1,000 (100.00%)** |
+| **Total** | **927/1,000 (92.70%)** | **998/1,000 (99.80%)** |
 
 ## Evidence
 
-Counts were checked against the original `result.json` records under
-`public_runs/eval/rmbench/`.
+The 50-demo column reports the complete November 11 held-out evaluation of the
+unchanged released policies: 998/1,000, with two `observe_and_pickup` failures.
+Its records are under `validate_runs/released_solutions_20261111T205029_024815Z/`.
+The 25-demo results and original 50-demo records remain under `public_runs/eval/rmbench/`.
 Catalogs under `configs/solutions/rmbench/` retain code hashes and source provenance.
-New sanity checks and current-interface reruns do not replace these outcomes.
 
 [Run or develop this benchmark](../benchmarks/rmbench.md) · [All benchmark results](../results.md)

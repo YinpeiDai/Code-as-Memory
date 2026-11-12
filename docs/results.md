@@ -3,7 +3,7 @@
 Results are reported separately for each benchmark, setting and evaluation scope.
 Tables report **successful/total** held-out episodes; every listed evaluation is complete. Per-task
 tables, solution links and evidence limitations are on each benchmark's result page.
-New sanity checks and current-interface reruns never replace original scores.
+Original records are preserved; benchmark pages identify any newer evaluations used here.
 API costs are recorded **Opus 5.5 development estimates in USD**, summed across
 all tasks in each setting. They exclude compute and data preparation; evaluation
 makes zero API calls. **—** means complete development-cost records are unavailable.
@@ -49,7 +49,7 @@ CaM uses **25 or 50/task** with zero interaction; the larger assignment has
 | Setting | Successful/total | Success rate | API cost (Opus 5.5) |
 |---|---:|---:|---:|
 | 25 demos only | 927/1,000 | 92.70% | $20.59 |
-| 50 demos only | 1,000/1,000 | 100.00% | $22.72 |
+| 50 demos only | 998/1,000 | 99.80% | $22.72 |
 
 [All ten tasks, exact demo counts and interface provenance](results/rmbench.md).
 

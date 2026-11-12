@@ -24,7 +24,7 @@ interaction budgets follow. RoboMemArena's CSR is in its [results table](../resu
 
 | Benchmark | CaM setting (per task) | Successful/total | Development API cost |
 |---|---|---:|---:|
-| RMBench | Up to 50 demos only | 900/900 | $22.72 |
+| RMBench | Up to 50 demos only | 898/900 | $22.72 |
 | RoboMME | 25 demos only | 795/800 | $29.44 |
 | MIKASA-Robo | Up to 250 demos only | 197/250 | $20.01 |
 | MIKASA-Robo | 50 demos + 50 attempts | 250/250 | $33.81 |
@@ -38,7 +38,8 @@ Figure 3 / Tables 1 and 3 for RMBench and MIKASA, and the official
 JSON files retain exact counts, per-task measurements and source hashes.
 
 RMBench excludes `place_block_mat` to match the paper's task list; CaM's full
-suite is 1,000/1,000. EventVLA uses the paper's reported 67.8% overall.
+suite is 998/1,000 in the November 11 held-out evaluation of the released policies.
+Both scopes round to 99.8%. EventVLA uses the paper's reported 67.8% overall.
 MIKASA uses ShellGameTouch, InterceptMedium and RememberColor3/5/9; its full-90
 results remain separate. Its demo-only arm uses 237/56/250/250/246 successful RGB-D
 demos, respectively. It differs from the interaction arm in both demo budget and

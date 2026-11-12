@@ -118,8 +118,8 @@ z
    </g>
    <g id="patch_13">
     <path d="M 30.6 396.479239
-L 293.76 396.479239
-L 293.76 379.838224
+L 293.1752 396.479239
+L 293.1752 379.838224
 L 30.6 379.838224
 z
 " clip-path="url(#pb8ebdb7bb9)" style="fill: #3167b2"/>
@@ -158,7 +158,7 @@ z
     <text style="font-weight: 700; font-size: 19px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #3167b2" x="30.6" y="369.924874" transform="rotate(-0 30.6 369.924874)">CaM</text>
    </g>
    <g id="text_12">
-    <text style="font-weight: 700; font-size: 21px; font-family: 'DejaVu Sans'; text-anchor: end; fill: #3167b2" x="293.76" y="369.444405" transform="rotate(-0 293.76 369.444405)">100%</text>
+    <text style="font-weight: 700; font-size: 21px; font-family: 'DejaVu Sans'; text-anchor: end; fill: #3167b2" x="293.76" y="369.444405" transform="rotate(-0 293.76 369.444405)">99.8%</text>
    </g>
    <g id="text_13">
     <text style="font-weight: 700; font-size: 25px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #18273b" x="30.6" y="35.452" transform="rotate(-0 30.6 35.452)">RMBench</text>

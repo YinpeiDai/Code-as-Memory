@@ -13,7 +13,7 @@
         "task_count": 10,
         "development_api_cost_usd": 22.7170456,
         "inference_api_cost_usd": 0,
-        "evaluation_successes": 1000,
+        "evaluation_successes": 998,
         "evaluation_episodes": 1000,
         "tasks": [
           {
@@ -33,14 +33,25 @@
               }
             ],
             "program_hash": "a1da65b5c9347b6c858e768a3d7bf0072221a68b4c7142cd3f3761b47381f102",
-            "evaluation_root": "dev_logs/rmbench/demo_only_50/battery_try",
+            "evaluation_root": "validate_runs/released_solutions_20261111T205029_024815Z/runs/rmbench/battery_try/published/demo_only_50_observed_motion/20261111T205029_024815Z",
             "evaluation": {
               "successes": 100,
               "episodes": 100,
               "api_calls": 0,
               "api_cost_usd": 0,
+              "records_sha256": "5e68ef7872be92e431a3da5e0023357406981928ecc4c6eb6dbbbe3938c35239",
+              "program_hashes": [
+                "55f967ed4a8c13e1d41ecc3d926db9e8c6a87dddf1fdd13959639f4954ad7475"
+              ]
+            },
+            "original_evaluation": {
+              "successes": 100,
+              "episodes": 100,
+              "api_calls": 0,
+              "api_cost_usd": 0,
               "records_sha256": "3524ded323074686e1c3d81cf7bccd1f29ab348ef81cccc5ec58bbbd7f67a8d1"
-            }
+            },
+            "original_evaluation_root": "dev_logs/rmbench/demo_only_50/battery_try"
           },
           {
             "task": "blocks_ranking_try",
@@ -59,14 +70,25 @@
               }
             ],
             "program_hash": "dced17cb2c516c630b792cb2b43f14074b9710bbc6e7b7597b6d16263a905ab2",
-            "evaluation_root": "dev_logs/rmbench/demo_only_50/blocks_ranking_try",
+            "evaluation_root": "validate_runs/released_solutions_20261111T205029_024815Z/runs/rmbench/blocks_ranking_try/published/demo_only_50_observed_motion/20261111T205029_024815Z",
             "evaluation": {
               "successes": 100,
               "episodes": 100,
               "api_calls": 0,
               "api_cost_usd": 0,
+              "records_sha256": "f9c8786c2acc6a1961d468380868cb99d1c74192e1d7f6a2cb1484dade42570e",
+              "program_hashes": [
+                "6dbf3125bc3f30c8fd5269a265d5fcbadf2b394d8efb725a82c4df34f6859ac9"
+              ]
+            },
+            "original_evaluation": {
+              "successes": 100,
+              "episodes": 100,
+              "api_calls": 0,
+              "api_cost_usd": 0,
               "records_sha256": "0687ff887ca27b3e6166701f93681629dff8b96afa64b57b1445dab1c326dbc7"
-            }
+            },
+            "original_evaluation_root": "dev_logs/rmbench/demo_only_50/blocks_ranking_try"
           },
           {
             "task": "cover_blocks",
@@ -85,14 +107,25 @@
               }
             ],
             "program_hash": "d93ca9528e3ad6fbfd3c22638a4f60c70347be685d110aa809613b27bb54c95d",
-            "evaluation_root": "dev_logs/rmbench/demo_only_50/cover_blocks",
+            "evaluation_root": "validate_runs/released_solutions_20261111T205029_024815Z/runs/rmbench/cover_blocks/published/demo_only_50_observed_motion/20261111T205029_024815Z",
             "evaluation": {
               "successes": 100,
               "episodes": 100,
               "api_calls": 0,
               "api_cost_usd": 0,
+              "records_sha256": "66ca0ab366b011afdb2a0567850f2f531d7670ecf9798b626f1db6685a6a156d",
+              "program_hashes": [
+                "dee44cf1e7d4b9054a0f5f97430a3a185647ac49bed30a36427e14201029c10e"
+              ]
+            },
+            "original_evaluation": {
+              "successes": 100,
+              "episodes": 100,
+              "api_calls": 0,
+              "api_cost_usd": 0,
               "records_sha256": "485578c5f3db61a451e68bf124079a3baac5763c8ffbb9680ebc0ba1465bbe7e"
-            }
+            },
+            "original_evaluation_root": "dev_logs/rmbench/demo_only_50/cover_blocks"
           },
           {
             "task": "observe_and_pickup",
@@ -111,14 +144,25 @@
               }
             ],
             "program_hash": "e8815da38726203f58bd0be0f1897afb4d52c08287b0f24d4e3d846c0021c13b",
-            "evaluation_root": "dev_logs/rmbench/demo_only_50/observe_and_pickup",
+            "evaluation_root": "validate_runs/released_solutions_20261111T205029_024815Z/runs/rmbench/observe_and_pickup/published/demo_only_50_observed_motion/20261111T205029_024815Z",
             "evaluation": {
+              "successes": 98,
+              "episodes": 100,
+              "api_calls": 0,
+              "api_cost_usd": 0,
+              "records_sha256": "0e1e4ddc8cbb616b0549c718a93ddb01ace0c495d94c5c222c6c6c761d9ca011",
+              "program_hashes": [
+                "dc4360381d4e5d36480cc93e614dcec192c1effe0f2ab85e9e84d6a11413d2cc"
+              ]
+            },
+            "original_evaluation": {
               "successes": 100,
               "episodes": 100,
               "api_calls": 0,
               "api_cost_usd": 0,
               "records_sha256": "3c4587e6ec7b2be94779f63bda5c63eaafecf0840742c4a0505d91e0cd368923"
-            }
+            },
+            "original_evaluation_root": "dev_logs/rmbench/demo_only_50/observe_and_pickup"
           },
           {
             "task": "place_block_mat",
@@ -137,14 +181,25 @@
               }
             ],
             "program_hash": "b4e6a564036e248f9a6862464c7fae1b9c6ccbc34b80154b26a7c72b859947c8",
-            "evaluation_root": "dev_logs/rmbench/demo_only_50/place_block_mat",
+            "evaluation_root": "validate_runs/released_solutions_20261111T205029_024815Z/runs/rmbench/place_block_mat/published/demo_only_50_observed_motion/20261111T205029_024815Z",
             "evaluation": {
               "successes": 100,
               "episodes": 100,
               "api_calls": 0,
               "api_cost_usd": 0,
+              "records_sha256": "5ec630c6db318ace7021c2095d137587e3c6c843dd96b02ee77b8e6edcb2251b",
+              "program_hashes": [
+                "4a46fab43535c71704a4bbdc3d57004f6b871fcff9beffa7418a7771659c0518"
+              ]
+            },
+            "original_evaluation": {
+              "successes": 100,
+              "episodes": 100,
+              "api_calls": 0,
+              "api_cost_usd": 0,
               "records_sha256": "748573af3f2ba5014d6da9aaea9da88d7ae53cf3f4054d55afff0cec0b4cd226"
-            }
+            },
+            "original_evaluation_root": "dev_logs/rmbench/demo_only_50/place_block_mat"
           },
           {
             "task": "press_button",
@@ -163,14 +218,25 @@
               }
             ],
             "program_hash": "285a4e7c996ec5000ebafd1e18453d8a2f9401e8d5c9f2adf30c01b9f20a75f2",
-            "evaluation_root": "dev_logs/rmbench/demo_only_50/press_button",
+            "evaluation_root": "validate_runs/released_solutions_20261111T205029_024815Z/runs/rmbench/press_button/published/demo_only_50_observed_motion/20261111T205029_024815Z",
             "evaluation": {
               "successes": 100,
               "episodes": 100,
               "api_calls": 0,
               "api_cost_usd": 0,
+              "records_sha256": "0d99565a99817f51239936949310f182a785fe29080c7305cbd22b714852b2b2",
+              "program_hashes": [
+                "9aa2af3488fb441a29f2615a55abfb20c124359624535f4e9f06bd08e54fbff5"
+              ]
+            },
+            "original_evaluation": {
+              "successes": 100,
+              "episodes": 100,
+              "api_calls": 0,
+              "api_cost_usd": 0,
               "records_sha256": "d0eb6c402414ee68d63a2179492425680103a7e52fb771038a5565f67efcab4d"
-            }
+            },
+            "original_evaluation_root": "dev_logs/rmbench/demo_only_50/press_button"
           },
           {
             "task": "put_back_block",
@@ -189,14 +255,25 @@
               }
             ],
             "program_hash": "8b115352266b136558b3e987cbdc61831d8f912222aa888634d0056b16257ab8",
-            "evaluation_root": "dev_logs/rmbench/demo_only_50/put_back_block",
+            "evaluation_root": "validate_runs/released_solutions_20261111T205029_024815Z/runs/rmbench/put_back_block/published/demo_only_50_observed_motion/20261111T205029_024815Z",
             "evaluation": {
               "successes": 100,
               "episodes": 100,
               "api_calls": 0,
               "api_cost_usd": 0,
+              "records_sha256": "2d80fb8779e9daf155b820da07508aabe05df3e9ccf0fa30947d5a0460fc2f36",
+              "program_hashes": [
+                "fd885573518a3a601c9213fc5335326569e8af8eed78532ceb4bc0cdfc755163"
+              ]
+            },
+            "original_evaluation": {
+              "successes": 100,
+              "episodes": 100,
+              "api_calls": 0,
+              "api_cost_usd": 0,
               "records_sha256": "437c9413bd855a0b78cb53ea856b84c57c7f11944137fd088d3ab40b827e9603"
-            }
+            },
+            "original_evaluation_root": "dev_logs/rmbench/demo_only_50/put_back_block"
           },
           {
             "task": "rearrange_blocks",
@@ -215,14 +292,25 @@
               }
             ],
             "program_hash": "ce03c0c3b6c8eb7162be12dca528ade9b22286aaaef64c00984ddb45f7d81abb",
-            "evaluation_root": "dev_logs/rmbench/demo_only_50/rearrange_blocks",
+            "evaluation_root": "validate_runs/released_solutions_20261111T205029_024815Z/runs/rmbench/rearrange_blocks/published/demo_only_50_observed_motion/20261111T205029_024815Z",
             "evaluation": {
               "successes": 100,
               "episodes": 100,
               "api_calls": 0,
               "api_cost_usd": 0,
+              "records_sha256": "10ef8cc522e1783c21957f28ffcb58caece74c36843bd493e2d86c4f643d9c51",
+              "program_hashes": [
+                "85a524cc6591f01d758b6cb67fd39f5f3f4063d68a397c377d5c4a8ef13c135d"
+              ]
+            },
+            "original_evaluation": {
+              "successes": 100,
+              "episodes": 100,
+              "api_calls": 0,
+              "api_cost_usd": 0,
               "records_sha256": "ca9c770370bc1b1867677c75183be09be3136ab2714c80eeb805e27e80d17bc8"
-            }
+            },
+            "original_evaluation_root": "dev_logs/rmbench/demo_only_50/rearrange_blocks"
           },
           {
             "task": "swap_T",
@@ -241,14 +329,25 @@
               }
             ],
             "program_hash": "8dd4e60e4a6e518668e60f1cb85e8b32013fa969d794016bb9223e29dd6423ce",
-            "evaluation_root": "dev_logs/rmbench/demo_only_50/swap_T",
+            "evaluation_root": "validate_runs/released_solutions_20261111T205029_024815Z/runs/rmbench/swap_T/published/demo_only_50_observed_motion/20261111T205029_024815Z",
             "evaluation": {
               "successes": 100,
               "episodes": 100,
               "api_calls": 0,
               "api_cost_usd": 0,
+              "records_sha256": "bdab127b8ef201ae9eb920778e28997a960c6b7087bcde325364342f07ce8ca1",
+              "program_hashes": [
+                "16cf3c97100cc4d5770b6d92831c6af27beaee3877c167acf7c416cfb071f4fc"
+              ]
+            },
+            "original_evaluation": {
+              "successes": 100,
+              "episodes": 100,
+              "api_calls": 0,
+              "api_cost_usd": 0,
               "records_sha256": "89f523389cd01c5a6650943c93683dffeb813d8dabe062ede3ac1ac1ce3d4821"
-            }
+            },
+            "original_evaluation_root": "dev_logs/rmbench/demo_only_50/swap_T"
           },
           {
             "task": "swap_blocks",
@@ -267,16 +366,29 @@
               }
             ],
             "program_hash": "c09ef1d293d96a44081872e118688248f9159c2e7814b13853127ddf3463dadd",
-            "evaluation_root": "dev_logs/rmbench/demo_only_50/swap_blocks",
+            "evaluation_root": "validate_runs/released_solutions_20261111T205029_024815Z/runs/rmbench/swap_blocks/published/demo_only_50_observed_motion/20261111T205029_024815Z",
             "evaluation": {
               "successes": 100,
               "episodes": 100,
               "api_calls": 0,
               "api_cost_usd": 0,
+              "records_sha256": "cf076a24c32692a1989b24e0f36685ef9265abf8cf5bc26ac4eac3c56c4b9635",
+              "program_hashes": [
+                "07ee4c2662ca5f463a79f9ae815e806900c339c761ec195715a2c48497de42c8"
+              ]
+            },
+            "original_evaluation": {
+              "successes": 100,
+              "episodes": 100,
+              "api_calls": 0,
+              "api_cost_usd": 0,
               "records_sha256": "1622aff01f0304212c61c96d0070deb91f6c7fc47622db8409936bcc543709fa"
-            }
+            },
+            "original_evaluation_root": "dev_logs/rmbench/demo_only_50/swap_blocks"
           }
-        ]
+        ],
+        "original_evaluation_successes": 1000,
+        "evaluation_source": "validate_runs/released_solutions_20261111T205029_024815Z"
       }
     },
     "mikasa_robo": {
