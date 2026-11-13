@@ -102,6 +102,11 @@ uses the shared demo-only instructions. See [prompt composition](../src/cam/prom
 Archived runs retain their original prompts; relevant differences are documented
 on the [benchmark result pages](results.md).
 
+Policy development uses assigned demonstrations and public task/interface
+documentation; interaction settings additionally provide budgeted training-rollout
+feedback. The coding agent receives no privileged simulator state, such as
+ground-truth object poses or hidden task state, and no held-out evaluation feedback.
+
 The learner's six tools are `command`, `read_image`, `usage`, `snapshot`,
 `validate` and `rollout`. Its sandbox exposes `/workspace`, assigned
 `/demonstrations`, counted training `/feedback` and public `/runtime` libraries.

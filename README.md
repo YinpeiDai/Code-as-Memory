@@ -92,9 +92,11 @@ are needed for this step.
 
 ## Reproduce development
 
-[Download the development logs and code solutions](https://huggingface.co/datasets/Yinpei/CaM_develop_logs).
+[Download the development logs and code solutions](https://huggingface.co/datasets/Yinpei/CaM_development_logs).
 
 The prepared packages include successful relayed trajectoris, and memory-based code polices development for different settings. Final evaluation uses separate, unseen seeds after the policy is frozen.
+
+**Development access:** The coding agent uses assigned demonstrations, public task/interface documentation, and budgeted training-rollout feedback when interaction is enabled. It has no access to privileged simulator state (ground-truth object poses or hidden task state), simulator source code, held-out evaluation data/results, or prior solutions. See the [development protocol](docs/reproducing.md#prompts-and-isolation).
 
 [Download the demonstrations and configure your coding client](docs/getting_started.md),
 then choose a data path and a directory for development logs:
