@@ -109,4 +109,14 @@ python scripts/develop_batch.py start configs/robomme/experiments/demo_only_25.j
 
 [Benchmark guides](docs/benchmarks/README.md) · [Architecture](docs/architecture.md)
 
+## Citation
+
+```bibtex
+@misc{dai2026cam,
+  title        = {Code-as-Memory: Self-improving Robot Memory via Coding Agents},
+  author       = {Dai, Yinpei and Ryu, Sooyoung and Du, Yilun and Finn, Chelsea and Liu, Yuejiang},
+  year         = {2026},
+  url          = {https://code-as-memory.github.io/}
+}
+```
 Apache-2.0. Benchmark code and assets retain their upstream licenses; see [NOTICE](NOTICE).
