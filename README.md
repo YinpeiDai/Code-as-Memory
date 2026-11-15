@@ -114,7 +114,7 @@ python scripts/develop_batch.py start configs/robomme/experiments/demo_only_25.j
 ```bibtex
 @misc{dai2026cam,
   title        = {Code-as-Memory: Self-improving Robot Memory via Coding Agents},
-  author       = {Dai, Yinpei and Ryu, Sooyoung and Du, Yilun and Finn, Chelsea and Liu, Yuejiang},
+  author       = {Dai, Yinpei and Ryu, Sooyoung and Du, Yilun and Finn, Chelsea and Chai, Joyce and Fazeli, Nima and Liu, Yuejiang},
   year         = {2026},
   url          = {https://code-as-memory.github.io/}
 }
