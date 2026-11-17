@@ -20,8 +20,7 @@ CaM uses only **25/task** with zero interaction.
 On the separate `ood_test` probe, the unchanged CaM solutions achieve
 **305/320 (95.3%)**, compared with **106/320 (33.1%)** for SimpleMemVLA,
 **96/320 (30.0%)** for PonderPounce and **26/320 (8.1%)** for FrameSamp+Modul.
-All methods run without OOD adaptation; execution budgets differ.
-See the [per-task OOD comparison and budgets](results/robomme.md#ood-test-results).
+See the [per-task OOD comparison](results/robomme.md#ood-test-results).
 
 [All 16 tasks and provenance](results/robomme.md).
 

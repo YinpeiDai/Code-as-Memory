@@ -64,11 +64,6 @@ Successful/total episodes; baseline names link to their source repositories.
 | `VideoUnmaskSwap` | 20/20 | 3/20 | 2/20 | 6/20 |
 | **Total** | **305/320 (95.3%)** | **26/320 (8.1%)** | **106/320 (33.1%)** | **96/320 (30.0%)** |
 
-This is an exploratory comparison with different execution-step limits. CaM has
-a 1,300-step limit throughout. SimpleMemVLA has a 1,300-step limit for 217 episodes
-and 1,500 for 103; PonderPounce has 1,300 for 156 and 1,500 for 164. FrameSamp+Modul
-has a 1,500-step limit throughout. All 320 episodes count for each method,
-including four native IK errors counted as CaM failures.
 
 ## Evidence
 
